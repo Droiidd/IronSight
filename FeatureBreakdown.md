@@ -87,10 +87,21 @@ Methods
 - boolean isLeader(string playerId)
 
 Commands
-- /team invite player
-- /team kick player (Leader Only)
-- /team info (Displays team members, green is online red is off)
-- /team info teamName (Displays another teams members)
-- /team leave (Leaves team)
+
+``/team create {teamName}``
+
+``/team leave`` :: (Last to leave disbands)
+
+``/team invite {player}``
+
+``/team accept`` :: Accept an invite
+
+``/team info`` :: Displayes team info
+
+``/team info {player}`` :: Displays other players team info
+
+``/team help``
+
+``/team list`` :: Lists all teams
 
 ### Officer interface / class 

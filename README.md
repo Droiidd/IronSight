@@ -1,39 +1,49 @@
-# West3.0# 3.0  Planning Doc
+# West 3.0 
+# IRON SIGHTS :: Planning Doc
 
-### Precursor: 
-
----
-For any feature exact %, rates, values or anything of the sort will be fully
-detailed in the "Feature Breakdown" Document.
-
-I broke down a bunch of large features for the game and spaced it out into a couple different
-"endpoints", where in theory we could stop the project there and it would still feel like a complete
-game and offer a lot of content.
-
-Timeline:
-
-- Refactor base game
-- Introduce Contract System
-  - Specically the combat contracts!
-- Add in Officer role
-
-**Endpoint A** (The ez goal) ===========
-
-- Add peacemaker contracts
-- Add the citadel combat contract
-- Finally make a texturepack!
-
-**Endpoint B** (The optimal goal) =======
-
-- Add in prison system for bounty
-- New peacemaker quests?
-- Small QOL updates
-
-**Endpoint C** (The stretch goal) ========
+## Table of Contents
 
 ---
 
-## Gameplay: 
+### 1. [Game Explanation](#Gameplay)
+### 1. [How to begin helping](#Setting-up-your-environment)
+
+
+### Precursor
+
+---
+>For any feature exact %, rates, values or anything of the sort will be fully
+>detailed in the "Feature Breakdown" Document.
+
+>I broke down a bunch of large features for the game and spaced it out into a couple different
+>"endpoints", where in theory we could stop the project there and it would still feel like a complete
+>game and offer a lot of content.
+
+>**Timeline:**
+> >*Everything above the endpoint is included*
+>
+>- Refactor base game
+>- Introduce Contract System
+>  - Specically the combat contracts!
+>- Add in Officer role
+>
+>**Endpoint A** (The ez goal) ===========
+>
+>- Add peacemaker contracts
+>- Add the citadel combat contract
+>- Finally make a texturepack!
+>
+>**Endpoint B** (The optimal goal) =======
+>
+>- Add in prison system for bounty
+>- New peacemaker quests?
+>- Small QOL updates
+>
+>**Endpoint C** (The stretch goal) ========
+
+---
+
+## Gameplay
 
 Upon logging in it should be made very clear that towns are the **only** safe zone. A message saying "Talk to the contract manager" is stated on first join
 Players will spawn with the worst pistol, some light armor and a couple heals / food
@@ -46,7 +56,7 @@ Money is to buy expensive items that aren't lootable. You can upgrade your playe
 
 ## Contracts
 
-**New Feature**
+>**New Feature**
 ### Main Jist
 Aside from the player object and it's functionality, this is the main feature
 of the game.
@@ -96,17 +106,17 @@ Always return to the contract manager to get rewards??
 ### Types of contracts:
 Okay so here's the actual juice of the game.
 
-**PeaceMaker**
+>**PeaceMaker Contracts**
 
-Fishing: Every river has 3 generic fish, but specifc rivers throughout the map
+- **Fishing**: Every river has 3 generic fish, but specifc rivers throughout the map
 are named, and have one or two dedicated rare fish. Fishing will often ask for 20
 bass, or 10 trout, but when it asks for the rare fish, it pays huge.
 
-Mining: There's typical bulk orders for 40 unprocessed Iron ore, or gold even.
+- **Mining**: There's typical bulk orders for 40 unprocessed Iron ore, or gold even.
 But on the occasion, someones asking for a jewel, or maybe some of the materials
 you find inside those lucky geodes! Geologist NPCs can crack those open for ya.
 
-Hunting: This one is violent, but the animals won't fight back. Essentially similar to
+- **Hunting**: This one is violent, but the animals won't fight back. Essentially similar to
 how fishing has designated rivers, hunting has designated forests and fields.
 Travel to these to find different groups of herding animals that spawn in the
 area.
@@ -114,22 +124,22 @@ area.
 This is all I have for this one for now. Remember this is all for the base game
 AKA what we know we can finish. Any extra stuff will be added in a later version
 
-**Combat**
+>**Combat Contracts**
 
-Head Hunter: Now these are usually easier combat missions. It gives a location
+- **Head Hunter**: Now these are usually easier combat missions. It gives a location
 and a name. Travel to that location, find the NPC and kill him. Now if it was possible
 It would be cool if you could also get player targets for a much higher difficulty.
 
-Drug Runner: For this you would harvest and process a load of drugs. The instructions
+- **Drug Runner**: For this you would harvest and process a load of drugs. The instructions
 would tell you what field to get the drugs from and what base to process at. Rebel bases
 are where you process drugs, and are usually pretty hostile areas, so naturally, the more you have
 to process, the higher the payout (You have to last longer).
 Rebel bases also naturally spawn bandit NPC's who patrol and attack players.
 
-Stolen Item(s): Go to a location to find a stolen item (Maybe change to steal a
+- **Stolen Item(s)**: Go to a location to find a stolen item (Maybe change to steal a
 stolen item?)
 
-Oil Field: Oil field is a higher stakes, and is in general a harder mission.
+- **Oil Field**: Oil field is a higher stakes, and is in general a harder mission.
 At oil field there are a bunch of gaurds, A timed locked chest will spawn at one
 of the towers. You have to kill your way towards the towers and start the timer.
 When the timer starts, waves of stronger NPC's will come, and an alert to the entire
@@ -140,8 +150,8 @@ however, this is ONLY to start the timer!!! This is to avoid random players from
 it needs to be only on someone who is doing an oil contract. Any player however,
 can get the loot.
 
-Optional:
-Citadel: I quite like this one too. Essentiallty the citadel is a huge military outpost.
+_Optional_:
+- **Citadel**: I quite like this one too. Essentiallty the citadel is a huge military outpost.
 It remains locked and requires a key to enter. When the gates open though, they are public
 to all for 10 minutes. That's because the player has 10 minutes to clear the citadel and find the
 chest with the key out. Once the key bearer leaves the citadel,/opens the exit it announces that you
@@ -190,3 +200,55 @@ killing players increases bounty, doing the hardest combat contracts give bounty
 Bounty is used to determine how worth it is to kill someone. A 10k bounty is a 5k
 bonus check to whoever claims your head.
 
+Rogue / Wanted system
+Going rogue, or when a player is wanted is when a player who is not a officer attacks another player who is **not** already rogue/wanted.
+These results in an immediate bounty increase as well as messages the entire server that the player has gone rogue! Rogue players are trackable by
+close by players. If sheriffs kill rogue players, they gain extra sheriff XP to rank up for "Taking out criminals". 
+
+## Setting up your environment
+
+---
+### [**Back to the top**](#Gameplay)
+
+Download the following apps:
+
+- Filezilla (Connects to the server to send and take files) :: https://filezilla-project.org/download.php
+- Intelliji (Best for minecraft plugins) 
+- Java SDK 17
+
+Before we run any code, let's set up something on Intelliji.
+First you'll need the base plugin, add a plugin called "Minecraft development".
+Restart your ide
+
+1. To get the code up and running, clone the git repo into an appropriate location.
+Then, open the repo in intelliji. Let it download all the extra packages. 
+   2. Then next to your
+   run and debug option, click the 3 dots. Edit your configurations, add new configuration for gradle.
+   Inside the run box, type "build", inside the Gradle project box, type the exact 
+   file path to the Intelliji project (It should be .../IronSight/IronSight)
+
+1. To make sure it's set up correctly, open up the builds package, then the libs package.
+Delete the current IronSight snapshot, then run your build. If it builds correctly,
+a new snapshot should appear.
+1. To test your changes on the plugin, you have two options. Either connect to the production
+server via filezilla and add the snapshot.java file to the plugins folder, then reload.
+ 
+Or create your own local server for development (recommended not necessary).
+1. For this, download a minecraft server from here https://www.minecraft.net/en-us/download/server
+and put it in a folder.
+
+1. Run the jar file, this will begin building the server. After a few seconds it will stop.
+Open the Eula file it creates, and change the eula to true.
+Run the server again.
+
+1. You can get a spigot server here: https://getbukkit.org
+This is what allows you to run our spigot plugin.
+
+1. Drag the java file into your servers folder and run the jar.
+To start the server now, you just need to run the spigot.jar
+
+1. To connect to the server, just open your minecraft multiplayer,
+add server, IP = "localhost"
+
+1. To add plugins to the server, simply add them to the plugins
+folder.
