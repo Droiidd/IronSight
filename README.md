@@ -6,7 +6,7 @@
 ---
 
 ### 1. [Game Explanation](#Gameplay)
-### 1. [How to begin helping](#Setting-up-your-environment)
+### 2. [How to begin helping](#Setting-up-your-environment)
 
 
 ### Precursor
@@ -44,7 +44,7 @@
 ---
 
 ## Gameplay
-
+#### [**Back to the top**](#Table-of-Contents)
 Upon logging in it should be made very clear that towns are the **only** safe zone. A message saying "Talk to the contract manager" is stated on first join
 Players will spawn with the worst pistol, some light armor and a couple heals / food
 Immediately they are introduced to the main money maker mechanic: The contract manager.
@@ -54,10 +54,10 @@ Money is to buy expensive items that aren't lootable. You can upgrade your playe
 
 ---
 
-## Contracts
+### Contracts
 
 >**New Feature**
-### Main Jist
+#### Main Jist
 Aside from the player object and it's functionality, this is the main feature
 of the game.
 
@@ -101,9 +101,10 @@ but combat quests will always yield more rare gear.
 A final but not necessary feature:
 If a player is in a team and completes a contract, all other online players
 will also get money: 50% of the total earned from contract completor.
+
 Always return to the contract manager to get rewards??
 
-### Types of contracts:
+#### Types of contracts:
 Okay so here's the actual juice of the game.
 
 >**PeaceMaker Contracts**
@@ -162,53 +163,56 @@ There are multiple loot rooms within the citadel, 5 to be exact. Each one has a 
 chest, this is where you can find an exit key. If you find one, you must run to the exit
 and leave.
 
-## Misc
-
----
+#### Misc
 
 Ok thats all the jobs there are, if you're now sitting here wondering, well how do I find anything?
 You always spawn with a compass, this is your navigator. It can take you to the clostest
 shop, take you to any river, mine, camp or town. It can even track rogue players.
+- Fast travelling is done at conductors or ferry captains where you can buy a ticket to ride to another city.
+- A player carries a wallet with him at all times, this stores the amount of gold he has on hand. If the player dies,
+they will drop all the gold in their wallet. They can deposit their gold in the bank to keep it safe in town.
 
-Theres a command to whistle for your horses, that makes getting around quicker.
+- **Horses** Theres a command to whistle for your horses, that makes getting around quicker.
 Between towns, theres quite a distance. For that kind of journey consider taking
 the train, or a ferry.
 
-Horses can also be bought, as yours may die if you're not careful. Or maybe you
-just want an upgrade. Purchase up to 3 horses, the quicker the horse, the more
-you pay.
+  - Horses can also be bought, as yours may die if you're not careful. Or maybe you
+  just want an upgrade. Purchase up to 3 horses, the quicker the horse, the more
+  you pay.
 
-NPCs in the town sell general goods and weapons / armor for high dollar. There's
+- **NPCs** in the town sell general goods and weapons / armor for high dollar. There's
 a bank for your money, and in the same building a bank for your items. Item bank
 can be upgraded for a really high dollar. This adds more slots.
 
-Foraging flowers around the map can make useful potions for getting jobs done
+- **Foraging** flowers around the map can make useful potions for getting jobs done
 quicker. Potions for double the ore mined, or quicker pickaxe speed, etc.
 
-Officers: Players all have an option to join the side of the law. With this, they spawn
+- **Officers**: Players all have an option to join the side of the law. With this, they spawn
 with a basic gear set, and if they rank up, can buy upgrades to their guns and armor.
 Ranking up can b done by completing contracts, or killing rogue players.
 You can talk to the chief of police for promotions.
 
-Guns :- Guns are split into 3 types within 3 categories. You have rifles, pistols
+- **Guns** :- Guns are split into 3 types within 3 categories. You have rifles, pistols
 and shotguns. Which are either legal, illegal, or Officer. This makes certain
 guns exclusive to Bandits and or Officers. And within Officers, there are guns exclusive
 to certain levels.
 
-Bounty is a metric that is calculated by how many evil deeds you do. For instance,
+- **Bounty** is a metric that is calculated by how many evil deeds you do. For instance,
 killing players increases bounty, doing the hardest combat contracts give bounty.
-Bounty is used to determine how worth it is to kill someone. A 10k bounty is a 5k
-bonus check to whoever claims your head.
+Bounty is used to determine how worth it is to kill someone. 
+  - A 10k bounty is a 5k
+  bonus check to whoever claims your head.
 
-Rogue / Wanted system
+- **Rogue / Wanted system**
 Going rogue, or when a player is wanted is when a player who is not a officer attacks another player who is **not** already rogue/wanted.
-These results in an immediate bounty increase as well as messages the entire server that the player has gone rogue! Rogue players are trackable by
-close by players. If sheriffs kill rogue players, they gain extra sheriff XP to rank up for "Taking out criminals". 
+These results in an immediate bounty increase as well as messages the entire server that the player has gone rogue! 
+  - Rogue players are trackable by
+  close by players. If sheriffs kill rogue players, they gain extra sheriff XP to rank up for "Taking out criminals". 
 
 ## Setting up your environment
 
 ---
-### [**Back to the top**](#Gameplay)
+### [**Back to the top**](#Table-of-Contents)
 
 Download the following apps:
 
