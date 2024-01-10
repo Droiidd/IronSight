@@ -1,0 +1,4 @@
+name: IronSight
+version: '${version}'
+main: droidco.west3.ironsight.IronSight
+api-version: '1.20'
