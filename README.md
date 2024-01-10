@@ -223,7 +223,7 @@ Download the following apps:
 Before we run any code, let's set up something on Intelliji.
 1. First you'll need the base plugin, add a plugin called "Minecraft development".
 
-  1. Restart your ide
+   1. Restart your ide
 
 1. To get the code up and running, clone the git repo into an appropriate location.
 Then, open the repo in intelliji. Let it download all the extra packages.
