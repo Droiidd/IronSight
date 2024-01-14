@@ -221,14 +221,17 @@ Download the following apps:
 - Java SDK 17
 
 Before we run any code, let's set up something on Intelliji.
-First you'll need the base plugin, add a plugin called "Minecraft development".
-Restart your ide
+1. First you'll need the base plugin, add a plugin called "Minecraft development".
+
+   1. Restart your ide
 
 1. To get the code up and running, clone the git repo into an appropriate location.
-Then, open the repo in intelliji. Let it download all the extra packages. 
-   2. Then next to your
+Then, open the repo in intelliji. Let it download all the extra packages.
+
+   1. Then next to your
    run and debug option, click the 3 dots. Edit your configurations, add new configuration for gradle.
-   Inside the run box, type "build", inside the Gradle project box, type the exact 
+
+   1. Inside the run box, type "build", inside the Gradle project box, type the exact 
    file path to the Intelliji project (It should be .../IronSight/IronSight)
 
 1. To make sure it's set up correctly, open up the builds package, then the libs package.
