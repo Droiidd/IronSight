@@ -105,3 +105,25 @@ Commands
 ``/team list`` :: Lists all teams
 
 ### Officer interface / class 
+
+Officers are going to be a main class that can be reused for 3 subclass officers. A Deputy, Sheriff and Marshall. 
+The only different between the 3, is going to be their display name, and OffixcerTypeID, which differentiates them in hierarchal order.
+So 1 is the sheriff, which is the lowest, 2 is deputy, 3 is marshall the highest. This way we can easily
+differentiate between teh ranks when we need to know if the player is able to use a certain item, or get a certain
+contract.
+
+- String :: officerDisplayName
+- Enum :: officerTypeId
+- int :: xp
+
+### Scoreboard
+
+A scoreboard is going to be essentially a big display of all your rankings and statistics to easily keep track of 
+everything. You'll use getter methods to grab the team name, officer role, bank, wallet etc. (If applicable). Then display
+it all on the scoreboard and refresh every tick thd player is in the game.
+
+### Western Item
+
+These are just easy to create item objects. We'll likely have a util class where we create a list of all of the items
+and use this to create them. It will need a lore line for its description, also it's rarity status. All items are plain
+white text for names.
