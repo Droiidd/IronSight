@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Player;
 
-import droidco.west3.ironsight.IronSightCore;
+import droidco.west3.ironsight.IronSight;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -26,13 +26,13 @@ public class IronPlayer
     private int cmbtContractLvl;
     private Player onlinePlayer;
     private static List<IronPlayer> playerList = new ArrayList<>();
-    private final IronSightCore plugin;
+    private final IronSight plugin;
 
     private int wantedKills;
     private static HashMap<String, IronPlayer> ironPlayers = new HashMap<>();
     //private List<ironHorse> horses;
 
-    public IronPlayer(String pId, IronSightCore plugin)
+    public IronPlayer(String pId, IronSight plugin)
     {
         this.pId = pId;
         this.wallet = 0.0;
@@ -87,12 +87,13 @@ public class IronPlayer
         return playerList;
     }
     public static IronPlayer getPlayer(Player p){
-        if(p.getUniqueId().toString().equalsIgnoreCase(this.onlinePlayer.getUniqueId().toString())){
-            return this;
-        }
-        else{
-            return null;
-        }
+        return ironPlayers.get(p.getUniqueId().toString());
+    }
+    public void updateBank(double deposit){
+        this.bank += deposit;
+    }
+    public void updateWallet(double deposit){
+        this.wallet += deposit;
     }
 
     public String getpId() {

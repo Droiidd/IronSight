@@ -1,17 +1,15 @@
 package droidco.west3.ironsight.Listeners;
 
-import droidco.west3.ironsight.IronSightCore;
+import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Player.IronPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.net.http.WebSocket;
-
 public class JoinServerEvents implements Listener{
-    IronSightCore plugin;
-    public JoinServerEvents(IronSightCore plugin){
+    IronSight plugin;
+    public JoinServerEvents(IronSight plugin){
         this.plugin = plugin;
     }
 
