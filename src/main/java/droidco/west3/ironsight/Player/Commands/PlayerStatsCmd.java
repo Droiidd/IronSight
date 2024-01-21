@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Commands;
+package droidco.west3.ironsight.Player.Commands;
 
 import droidco.west3.ironsight.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.PlayerUtils;

@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Commands;
+package droidco.west3.ironsight.Player.Commands;
 
 import droidco.west3.ironsight.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
@@ -6,10 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.List;
-
-import static droidco.west3.ironsight.Utils.GlobalUtils.checkStrToDErrMsg;
 
 public class AdminCommands implements CommandExecutor {
     @Override

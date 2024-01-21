@@ -1,8 +1,8 @@
 package droidco.west3.ironsight;
 
-import droidco.west3.ironsight.Commands.AdminCommands;
-import droidco.west3.ironsight.Commands.PlayerStatsCmd;
-import droidco.west3.ironsight.Listeners.JoinServerEvents;
+import droidco.west3.ironsight.Player.Commands.AdminCommands;
+import droidco.west3.ironsight.Player.Commands.PlayerStatsCmd;
+import droidco.west3.ironsight.Events.JoinServerEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class IronSight extends JavaPlugin {
