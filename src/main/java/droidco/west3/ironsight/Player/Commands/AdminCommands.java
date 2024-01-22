@@ -19,21 +19,30 @@ public class AdminCommands implements CommandExecutor {
 
             }
             else{
-                if(strings[0].equalsIgnoreCase("gold")){
-                    if(strings.length == 3){
-                        switch(strings[1]){
-                            case "add":
-                                IronPlayer iPlayer =  IronPlayer.getPlayer(p);
-                                double amount = GlobalUtils.checkStrToDErrMsg(strings[2], p);
-                                iPlayer.updateBank(amount);
-                                p.sendMessage("Gold added to account.");
-                                break;
-                            case "remove":
+                switch(strings[0]){
+                    case "gold":
+                        if(strings.length == 3){
+                            switch(strings[1]){
+                                case "add":
+                                    IronPlayer iPlayer =  IronPlayer.getPlayer(p);
+                                    double amount = GlobalUtils.checkStrToDErrMsg(strings[2], p);
+                                    iPlayer.updateBank(amount);
+                                    p.sendMessage("Gold added to account.");
+                                    break;
+                                case "remove":
 
-                                break;
+                                    break;
+                            }
                         }
-                    }
-
+                        break;
+                    case "save":
+                        if(strings[1].equalsIgnoreCase("player")){
+                            //SAVE PLAYER HERE
+                            System.out.println("Player data successfully saved");
+                        }
+                        else{
+                            p.sendMessage("Incorrect usage, try /is save player");
+                        }
                 }
             }
 

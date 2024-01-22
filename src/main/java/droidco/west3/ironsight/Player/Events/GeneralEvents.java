@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.potion.PotionEffect;
@@ -75,7 +76,14 @@ public class GeneralEvents implements Listener {
         }
     }
 
-    //ENVIRONMENT EVENTS
+    @EventHandler
+    public void globalChatEvents(AsyncPlayerChatEvent e){
+        Player p = e.getPlayer();
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        e.setFormat(ChatColor.RED+"Bandit "+ChatColor.RESET+e.getFormat());
+    }
+
+    // >>>===--- ENVIRONMENT EVENTS ---===<<<
     @EventHandler
     public void onBarrelClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
