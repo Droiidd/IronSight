@@ -1,4 +1,4 @@
-# IRON SIGHT :: Planning Doc
+# Iron Sight Planning Doc
 
 ## Table of Contents
 
