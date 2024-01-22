@@ -28,7 +28,10 @@ public class PlayerTask extends BukkitRunnable {
 
         if(tick % 2 == 0){
             //it has been one second.
-            
+            if(iPlayer.isBleeding()){
+                p.damage(1.5);
+            }
+
         }
         tick++;
         if(!p.isOnline()){
