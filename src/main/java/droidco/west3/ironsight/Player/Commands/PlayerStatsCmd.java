@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Commands;
+package droidco.west3.ironsight.Player.Commands;
 
 import droidco.west3.ironsight.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.PlayerUtils;
@@ -19,22 +19,8 @@ public class PlayerStatsCmd implements CommandExecutor
 
         //First check the command is being executed by a player and not something else:
         if(commandSender instanceof Player p){
-            //If they type the command with no arguments, maybe they forgot something, so show them options:
-            if(strings.length == 0){
-                p.sendMessage("Iron Sight Statistic Cmd Options:");
-                p.sendMessage("> Show your own: /is stats");
-                p.sendMessage("> View another players: /is stats playerName");
-            }
-            //There are arguments, let's see if they want statistics
-            if(strings[0].equalsIgnoreCase("stats")){
-                //IronPlayer iP = IronPlayer.getPlayer(p.g);
-                //Display the users statistics
-                //PlayerUtils.displayBasicStats();
-            }
-
-
-
-
+                IronPlayer iPlayer = IronPlayer.getPlayer(p);
+                PlayerUtils.displayBasicStats(iPlayer,p);
         }
 
 

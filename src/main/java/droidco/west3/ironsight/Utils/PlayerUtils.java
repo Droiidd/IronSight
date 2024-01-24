@@ -12,23 +12,18 @@ public class PlayerUtils
         p.sendMessage("Iron Sight Player Stats:");
         p.sendMessage("============");
         p.sendMessage("Bleeding: "+iP.isBleeding());
-        p.sendMessage("Broken Legs: "+iP.isBleeding());
-        p.sendMessage("Bounty: "+iP.isBleeding());
-        p.sendMessage("Bank: "+iP.isBleeding());
-        p.sendMessage("Wallet: "+iP.isBleeding());
+        p.sendMessage("Broken Legs: "+iP.isBrokenLegs());
+        p.sendMessage("Bounty: "+iP.getBounty());
+        p.sendMessage("Bank: "+iP.getBank());
+        p.sendMessage("Wallet: "+iP.getWallet());
         p.sendMessage("EXPERIENCE INFO: ");
-        p.sendMessage("Combat Level: "+iP.isBleeding());
-        p.sendMessage("Peacemaker Level: "+iP.isBleeding());
-        p.sendMessage("Combat XP: "+iP.isBleeding());
-        p.sendMessage("Peacemaker XP: "+iP.isBleeding());
-        p.sendMessage("Wanted Kills: "+iP.isBleeding());
+        p.sendMessage("Combat Level: "+iP.getCmbtContractLvl());
+        p.sendMessage("Peacemaker Level: "+iP.getPceContractLvl());
+        p.sendMessage("Combat XP: "+iP.getCmbtContractXp());
+        p.sendMessage("Peacemaker XP: "+iP.getPceContractXp());
+        p.sendMessage("Wanted Kills: "+iP.getWantedKills());
 
     }
-    public Player getIronPlayer(){
-        List<IronPlayer> players = IronPlayer.getPlayerList();
-        for(IronPlayer player : players){
-            if()
-        }
 
 }
 
