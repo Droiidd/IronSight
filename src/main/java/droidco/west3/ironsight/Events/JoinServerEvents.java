@@ -21,16 +21,22 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-        IronPlayer newPlayer = new IronPlayer(p.getUniqueId().toString(), plugin);
-        newPlayer.setOnlinePlayer(p);
-        PlayerUtils.displayBasicStats(newPlayer, p);
-        PlayerTask playerLifeTracker = new PlayerTask(plugin, newPlayer, p);
+        IronPlayer iPlayer = PlayerConnector.fetchPlayer(p);
+        if(iPlayer == null){
+            System.out.println("New player!");
+            iPlayer = new IronPlayer(p.getUniqueId().toString());
+        }
+
+        iPlayer.setOnlinePlayer(p);
+        PlayerUtils.displayBasicStats(iPlayer, p);
+        PlayerTask playerLifeTracker = new PlayerTask(plugin, iPlayer, p);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e){
         System.out.println("Updating Player...");
-        PlayerConnector.updatePlayer();
+        Player p = e.getPlayer();
+        PlayerConnector.updatePlayer(IronPlayer.getPlayer(p));
     }
 
 }

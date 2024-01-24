@@ -26,13 +26,13 @@ public class IronPlayer
     private int cmbtContractLvl;
     private Player onlinePlayer;
     private static List<IronPlayer> playerList = new ArrayList<>();
-    private final IronSight plugin;
+    //private final IronSight plugin;
 
     private int wantedKills;
     private static HashMap<String, IronPlayer> ironPlayers = new HashMap<>();
     //private List<ironHorse> horses;
 
-    public IronPlayer(String pId, IronSight plugin)
+    public IronPlayer(String pId)
     {
         this.pId = pId;
         this.wallet = 0.0;
@@ -52,8 +52,29 @@ public class IronPlayer
 
         playerList.add(this);
         ironPlayers.put(pId,this);
-        this.plugin = plugin;
+        //this.plugin = plugin;
         this.onlinePlayer = null;
+    }
+    public IronPlayer(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
+                      boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
+                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
+    {
+        this.pId = pId;
+        this.wallet = wallet;
+        this.bank = bank;
+        this.isBleeding = isBleeding;
+        this.isJailed = isJailed;
+        this.isWanted = isWanted;
+        this.isCombatBlocked = isCombatBlocked;
+        this.brokenLegs = brokenLegs;
+
+        this.bounty = bounty;
+        this.wantedKills = wantedKills;
+        this.pceContractLvl = pceContractLvl;
+        this.pceContractXp = pceContractXp;
+        this.cmbtContractLvl = cmbtContractLvl;
+        this.cmbtContractXp = cmbtContractXp;
+
     }
     public void setOnlinePlayer(Player p)
     {
