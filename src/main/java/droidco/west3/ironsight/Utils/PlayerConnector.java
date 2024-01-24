@@ -6,13 +6,10 @@ import org.bukkit.entity.Player;
 import java.sql.*;
 
 public class PlayerConnector {
-
     private static final String jdbcURL = "jdbc:mysql://na02-db.cus.mc-panel.net:3306/db_592480";
     //String jdbcURL = "jdbc:mysql://na02-db.cus.mc-panel.net:3306/mydb";
     private static final String username = "db_592480";
     private static final String password = "13282ce72e";
-
-
     public static void updatePlayer(IronPlayer p){
 
         System.out.println("Connecting");
@@ -30,27 +27,25 @@ public class PlayerConnector {
 //            String sql = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
 //                    "pceContractXP, cmbtContractXp, pceContractLvl, cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 //
-            String sql = "UPDATE iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
-                    "pceContractXp,cmbtContractXp,pceContractLvl,cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "UPDATE iron_player " +
+                    "set wallet ="+p.getWallet() +
+                    "set bank ="+p.getBank() +
+                    "set isBleeding ="+p.isBleeding() +
+                    "set isBrokenLegs ="+p.isBrokenLegs() +
+                    "set isWanted ="+p.isWanted() +
+                    "set isJailed ="+p.isJailed()+
+                    "set isCombatBlocked ="+p.isCombatBlocked() +
+                    "set bounty ="+p.getBounty() +
+                    "set pceContractXp ="+p.getPceContractXp() +
+                    "set pceContractLvl ="+p.getPceContractLvl() +
+                    "set cmbtContractXp ="+p.getCmbtContractXp() +
+                    "set cmbtContractLvl ="+p.getCmbtContractXp() +
+                    "set wantedKills ="+p.getWantedKills()+
+                    "Where iron_player.pId = "+p.getpId();
             PreparedStatement prepedStmt = conn.prepareStatement(sql);
 
-            prepedStmt.setString(1, p.getpId());
-            prepedStmt.setDouble(2,p.getWallet());
-            prepedStmt.setDouble(3,p.getBank());
-            prepedStmt.setBoolean(4, p.isBleeding());
-            prepedStmt.setBoolean(5, p.isBrokenLegs());
-            prepedStmt.setBoolean(6,p.isWanted());
-            prepedStmt.setBoolean(7,p.isJailed());
-            prepedStmt.setBoolean(8,p.isCombatBlocked());
-            prepedStmt.setInt(9,p.getBounty());
-
-            prepedStmt.setInt(10,p.getPceContractXp());
-            prepedStmt.setInt(11,p.getCmbtContractXp());
-            prepedStmt.setInt(12,p.getPceContractLvl());
-            prepedStmt.setInt(13,p.getCmbtContractLvl());
-            prepedStmt.setInt(14,p.getWantedKills());
-            int retVal = prepedStmt.executeUpdate();
-            if(retVal > 0){
+            int updateVal = prepedStmt.executeUpdate();
+            if(updateVal > 0){
                 System.out.println("Updating the player....");
             }else{
                 System.out.println("Could not update player, inserting new columnn.");
@@ -72,8 +67,8 @@ public class PlayerConnector {
                 prepedStmt.setInt(12,p.getPceContractLvl());
                 prepedStmt.setInt(13,p.getCmbtContractLvl());
                 prepedStmt.setInt(14,p.getWantedKills());
-                int retVal2 = prepedStmt.executeUpdate();
-                if(retVal2 > 0){
+                int insertVal = prepedStmt.executeUpdate();
+                if(insertVal > 0){
                     System.out.println("Insertion failed.");
                 }else{
                     System.out.println("Player successfully added.");
