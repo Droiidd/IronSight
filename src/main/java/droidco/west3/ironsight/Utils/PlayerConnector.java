@@ -25,9 +25,13 @@ public class PlayerConnector {
                     jdbcURL,
                     username, password);
 
+
             System.out.println("CONNECTED!!!");
-            String sql = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
-                    "pceContractXP, cmbtContractXp, pceContractLvl, cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+//            String sql = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
+//                    "pceContractXP, cmbtContractXp, pceContractLvl, cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+//
+            String sql = "UPDATE iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
+                    "pceContractXp,cmbtContractXp,pceContractLvl,cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement prepedStmt = conn.prepareStatement(sql);
 
             prepedStmt.setString(1, p.getpId());
@@ -45,10 +49,37 @@ public class PlayerConnector {
             prepedStmt.setInt(12,p.getPceContractLvl());
             prepedStmt.setInt(13,p.getCmbtContractLvl());
             prepedStmt.setInt(14,p.getWantedKills());
-            prepedStmt.execute();
-            conn.close();
-            System.out.println("Sent.");
+            int retVal = prepedStmt.executeUpdate();
+            if(retVal > 0){
+                System.out.println("Updating the player....");
+            }else{
+                System.out.println("Could not update player, inserting new columnn.");
+                            String sqlInsert = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty," +
+                    "pceContractXP, cmbtContractXp, pceContractLvl, cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
+                prepedStmt.setString(1, p.getpId());
+                prepedStmt.setDouble(2,p.getWallet());
+                prepedStmt.setDouble(3,p.getBank());
+                prepedStmt.setBoolean(4, p.isBleeding());
+                prepedStmt.setBoolean(5, p.isBrokenLegs());
+                prepedStmt.setBoolean(6,p.isWanted());
+                prepedStmt.setBoolean(7,p.isJailed());
+                prepedStmt.setBoolean(8,p.isCombatBlocked());
+                prepedStmt.setInt(9,p.getBounty());
 
+                prepedStmt.setInt(10,p.getPceContractXp());
+                prepedStmt.setInt(11,p.getCmbtContractXp());
+                prepedStmt.setInt(12,p.getPceContractLvl());
+                prepedStmt.setInt(13,p.getCmbtContractLvl());
+                prepedStmt.setInt(14,p.getWantedKills());
+                int retVal2 = prepedStmt.executeUpdate();
+                if(retVal2 > 0){
+                    System.out.println("Insertion failed.");
+                }else{
+                    System.out.println("Player successfully added.");
+                }
+            }
+            conn.close();
         }
         catch (Exception exception) {
             System.out.println(exception);
@@ -57,10 +88,6 @@ public class PlayerConnector {
     }
 
     public static IronPlayer fetchPlayer(Player p) {
-        String jdbcURL = "jdbc:mysql://na02-db.cus.mc-panel.net:3306";
-        //String jdbcURL = "jdbc:mysql://na02-db.cus.mc-panel.net:3306/mydb";
-        String username = "db_592480";
-        String password = "13282ce72e";
         System.out.println("Connecting");
         Connection conn = null;
         try {
