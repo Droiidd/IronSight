@@ -88,9 +88,11 @@ public class GeneralEvents implements Listener {
     public void onBarrelClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
-        if (block.getType() == Material.BARREL) {
-            p.sendMessage("SHIT");
-            e.setCancelled(true);
+        if(block != null){
+            if (block.getType() == Material.BARREL) {
+                p.sendMessage("SHIT");
+                e.setCancelled(true);
+            }
         }
     }
     @EventHandler

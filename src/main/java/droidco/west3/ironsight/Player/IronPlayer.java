@@ -75,6 +75,8 @@ public class IronPlayer
         this.cmbtContractLvl = cmbtContractLvl;
         this.cmbtContractXp = cmbtContractXp;
 
+        playerList.add(this);
+        ironPlayers.put(pId,this);
     }
     public void setOnlinePlayer(Player p)
     {
@@ -82,32 +84,14 @@ public class IronPlayer
             onlinePlayer = p;
         }
     }
-    public void loadPlayer(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
-                           boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
-                                   wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
-    {
-        this.pId = pId;
-        this.wallet = wallet;
-        this.bank = bank;
-        this.isBleeding = isBleeding;
-        this.isJailed = isJailed;
-        this.isWanted = isWanted;
-        this.isCombatBlocked = isCombatBlocked;
-        this.brokenLegs = brokenLegs;
-
-        this.bounty = bounty;
-        this.wantedKills = wantedKills;
-        this.pceContractLvl = pceContractLvl;
-        this.pceContractXp = pceContractXp;
-        this.cmbtContractLvl = cmbtContractLvl;
-        this.cmbtContractXp = cmbtContractXp;
-
-    }
     public static List<IronPlayer> getPlayerList()
     {
         return playerList;
     }
     public static IronPlayer getPlayer(Player p){
+        if(ironPlayers.containsKey(p.getUniqueId().toString())){
+
+        }
         return ironPlayers.get(p.getUniqueId().toString());
     }
     public void updateBank(double deposit){
