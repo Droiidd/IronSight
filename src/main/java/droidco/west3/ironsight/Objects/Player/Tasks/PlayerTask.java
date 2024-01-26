@@ -18,6 +18,7 @@ public class PlayerTask extends BukkitRunnable {
     private int tick;
     private final Player p;
     private boolean wildernessFlag;
+    private HashMap<String, Location> locations;
 
     public PlayerTask(IronSight plugin, IronPlayer iPlayer, Player p){
 
@@ -33,17 +34,21 @@ public class PlayerTask extends BukkitRunnable {
     public void run() {
         HashMap<String, Location> locations =  Location.getLocations();
 
-        locations.forEach((s, location) -> {
-            if(location.isPlayerInside(p)){
-                location.displayTitle(p);
-                iPlayer.setCurrentLocation(location.getLocName());
-                wildernessFlag = true;
-            }
-        });
-        if(!wildernessFlag){
-
+        if(Location.isPlayerInWilderness(p)){
+            //Display wilderness
+            Location.displayWilderness(p);
+        }else{
+            //Else check the towns.
+            Location.removeWilderness(p);
+            locations.forEach((s, location) -> {
+                if(location.isPlayerInside(p)){
+                    location.displayTitle(p);
+                }else{
+                    location.removeTitle(p);
+                }
+            });
         }
-
+        
 
         if(tick % 2 == 0){
             //it has been one second.
