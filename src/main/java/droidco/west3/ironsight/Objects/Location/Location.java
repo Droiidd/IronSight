@@ -75,7 +75,39 @@ public class Location {
             maxZ = z1;
         }
         //PLAYER IS WITHIN THE ZONE
-        return (playerX > minX && playerX < maxX) && (playerZ > minZ && playerZ < maxZ);
+        if((playerX > minX && playerX < maxX) && (playerZ > minZ && playerZ < maxZ)){
+            return true;
+        }
+        return false;
+    }
+    public static void increaseIllegalBounty(IronPlayer p,int multiplier){
+        locations.forEach((s, location) -> {
+            if(location.getType().compareTo(LocationType.ILLEGAL) == 0){
+                //In illegal area, increase players bounty
+                p.updateBounty(multiplier);
+            }
+        });
+    }
+    public static void displayLocation(Player p)
+    {
+        locations.forEach((s, location) -> {
+            if(location.isPlayerInside(p)){
+                location.addTitle(p);
+                //p.sendMessage("In zone");
+            }else{
+                //p.sendMessage("not in zone");
+                location.removeTitle(p);
+            }
+
+        });
+        //p.sendMessage(""+locations.get("test").isPlayerInside(p));
+        if(Location.isPlayerInWilderness(p)){
+            //Display wilderness
+            Location.displayWilderness(p);
+        }else{
+            //Else check the towns.
+            Location.removeWilderness(p);
+        }
     }
     public BossBar getTitleBossBar(String title, BarColor color)
     {
@@ -83,7 +115,7 @@ public class Location {
                 color,
                 BarStyle.SOLID);
     }
-    public void displayTitle(Player p){
+    public void addTitle(Player p){
         this.locTitle.setProgress(1);
         this.locTitle.addPlayer(p);
         this.locTitle.setVisible(true);
@@ -105,12 +137,17 @@ public class Location {
         if(type.compareTo(LocationType.EVENT) == 0){
             return BarColor.YELLOW;
         }else if(type.compareTo(LocationType.TOWN) == 0){
-            return BarColor.BLUE;
+            return BarColor.PINK;
         }
         else if(type.compareTo(LocationType.ILLEGAL) ==0){
             return BarColor.RED;
-        }else{
+        }else if(type.compareTo(LocationType.NATURAL) == 0){
+            return BarColor.PURPLE;
+        }else if(type.compareTo(LocationType.River) == 0){
             return BarColor.BLUE;
+        }
+        else{
+            return BarColor.GREEN;
         }
     }
 

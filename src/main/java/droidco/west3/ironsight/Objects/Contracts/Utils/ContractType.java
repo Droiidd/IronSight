@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Objects.Contracts.Utils;
 
-public enum ContractEnum
+public enum ContractType
 {
     HeadHunter,
     Miner,

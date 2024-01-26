@@ -5,5 +5,6 @@ public enum LocationType {
     TOWN,
     NATURAL,
     EVENT,
-    WILDERNESS
+    WILDERNESS,
+    River
 }

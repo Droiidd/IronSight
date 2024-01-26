@@ -32,32 +32,23 @@ public class PlayerTask extends BukkitRunnable {
     }
     @Override
     public void run() {
-        HashMap<String, Location> locations =  Location.getLocations();
-
-        if(Location.isPlayerInWilderness(p)){
-            //Display wilderness
-            Location.displayWilderness(p);
-        }else{
-            //Else check the towns.
-            Location.removeWilderness(p);
-            locations.forEach((s, location) -> {
-                if(location.isPlayerInside(p)){
-                    location.displayTitle(p);
-                }else{
-                    location.removeTitle(p);
-                }
-            });
+        //Titles for locations
+       Location.displayLocation(p);
+        //Roughly 1 second
+        if(tick % 3 == 0){
+            //Check if player is in illegal area and increase their bounty
+            Location.increaseIllegalBounty(iPlayer, 2);
         }
-        
-
+        //it has been less than one second.
         if(tick % 2 == 0){
-            //it has been one second.
+            //Bleeding
             if(iPlayer.isBleeding()){
                 p.damage(1.5);
                 for(int i =0;i<9;i++){
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5,0.5,0.5),1,1,0.1,0.1,0.1, Material.REDSTONE_BLOCK.createBlockData());
                 }
             }
+
 
         }
         tick++;

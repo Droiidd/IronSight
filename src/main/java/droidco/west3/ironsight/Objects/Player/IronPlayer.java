@@ -107,6 +107,7 @@ public class IronPlayer
     public void updateWallet(double deposit){
         this.wallet += deposit;
     }
+    public void updateBounty(int increase){ this.bounty += increase; }
 
     public String getpId() {
         return pId;
