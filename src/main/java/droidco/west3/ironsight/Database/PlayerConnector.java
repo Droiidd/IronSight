@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Database;
 
-import droidco.west3.ironsight.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.entity.Player;
 

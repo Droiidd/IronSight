@@ -1,6 +1,5 @@
-package droidco.west3.ironsight.Player;
+package droidco.west3.ironsight.Objects.Player;
 
-import droidco.west3.ironsight.IronSight;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class IronPlayer
     private int pceContractLvl;
     private int cmbtContractLvl;
     private Player onlinePlayer;
+    private String currentLocation;
     private static List<IronPlayer> playerList = new ArrayList<>();
     //private final IronSight plugin;
 
@@ -93,6 +93,13 @@ public class IronPlayer
 
         }
         return ironPlayers.get(p.getUniqueId().toString());
+    }
+    public void setCurrentLocation(String locName){
+        this.currentLocation = locName;
+    }
+    public String getCurrentLocation()
+    {
+        return this.currentLocation;
     }
     public void updateBank(double deposit){
         this.bank += deposit;

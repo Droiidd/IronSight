@@ -1,6 +1,6 @@
-package droidco.west3.ironsight.Player.Events;
+package droidco.west3.ironsight.Objects.Player.Events;
 
-import droidco.west3.ironsight.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

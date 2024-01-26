@@ -1,6 +1,6 @@
-package droidco.west3.ironsight.Player.Commands;
+package droidco.west3.ironsight.Objects.Player.Commands;
 
-import droidco.west3.ironsight.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

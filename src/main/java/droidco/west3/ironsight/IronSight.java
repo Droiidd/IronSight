@@ -1,9 +1,11 @@
 package droidco.west3.ironsight;
 
-import droidco.west3.ironsight.Player.Commands.AdminCommands;
-import droidco.west3.ironsight.Player.Commands.PlayerStatsCmd;
+import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationType;
+import droidco.west3.ironsight.Objects.Player.Commands.AdminCommands;
+import droidco.west3.ironsight.Objects.Player.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Events.JoinServerEvents;
-import droidco.west3.ironsight.Player.Events.GeneralEvents;
+import droidco.west3.ironsight.Objects.Player.Events.GeneralEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class IronSight extends JavaPlugin {
@@ -18,7 +20,7 @@ public final class IronSight extends JavaPlugin {
         System.out.println("Loading all commands.");
         loadAllCommands();
         System.out.println("Commands loaded!");
-
+        Location testLoc = new Location("test",-40,-64,-2938,-2914,"Welcome to test area!", LocationType.TOWN);
         System.out.println("Iron Sight successfully loaded!");
     }
 
