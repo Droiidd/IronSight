@@ -1,9 +1,11 @@
 package droidco.west3.ironsight.Objects.Contracts.Commands;
 
+import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Objects.Contracts.Contract;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -30,21 +32,17 @@ public class ContractMenu implements CommandExecutor {
     }
     public Inventory getContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.BLUE + "Contracts");
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
 
-        contractUi.setItem(11, getContractSlot(Difficulty.Rookie));
-        contractUi.setItem(13, getContractSlot(Difficulty.Apprentice));
-        contractUi.setItem(15, getContractSlot(Difficulty.Master));
+        contractUi.setItem(11, getContractSlot(iPlayer.getRookieContract()));
+        contractUi.setItem(13, getContractSlot(iPlayer.getApprenticeContract()));
+        contractUi.setItem(15, getContractSlot(iPlayer.getExperiencedContract()));
         return contractUi;
     }
-    public ItemStack getContractSlot(Difficulty difficulty){
-        //Goes through every contract and makes a list of rookie specific
-        List<Contract> contracts = ContractUtils.getContractByDiff(difficulty);
+    public ItemStack getContractSlot(Contract selected){
 
-        //NOW WE CREATE THE ITEM THAT REPRESENTS THE CONTRACT IN THE MENU
-        //Choosing random rookie contract
-        int odds = GlobalUtils.getRandomNumber(contracts.size());
-        Contract selected = contracts.get(odds);
         //Basic item set up
+
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
         /*
         NAME
@@ -58,15 +56,13 @@ public class ContractMenu implements CommandExecutor {
         ArrayList<String> contractLore = new ArrayList<>();
         //Setting up the strings for the lore
         //This string is the name of the selected contract + the difficulty rating
-        String listingName = ChatColor.WHITE+selected.getContractName()+" - "+ ContractUtils.getDifficultyScale(selected.getDifficulty());
-        Location location = selected.getRandomLocation();
-        int reward = ContractUtils.getDifficultyReward(difficulty);
+        String listingName = selected.getListingName();
         //LORE
-        contractMeta.setDisplayName(ChatColor.WHITE + listingName);
-        contractLore.add(ChatColor.GRAY+location.getLocName());
-        contractLore.add(ChatColor.GRAY +""+reward+" g");
+        contractMeta.setDisplayName(listingName);
+        contractLore.add(ChatColor.GRAY+selected.getLocation().getLocName());
+        contractLore.add(ChatColor.GRAY +""+selected.getReward()+" g");
         //This displays the contracts type
-        contractLore.add(ContractUtils.getTypeString(selected.getType()));
+        contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
 
         contractMeta.setLore(contractLore);
         contract.setItemMeta(contractMeta);

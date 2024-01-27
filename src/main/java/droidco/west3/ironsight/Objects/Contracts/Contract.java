@@ -1,8 +1,10 @@
 package droidco.west3.ironsight.Objects.Contracts;
 
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Objects.Location.Location;
+import org.bukkit.ChatColor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,21 +14,27 @@ public class Contract
 {
     private String contractName;
     private int rewardXp;
+    private double reward;
     private ContractType type;
-    private List<Location> contractLoc;
+    private List<Location> contractLocs;
+    private Location location;
     private boolean isActive;
     private Difficulty difficulty;
     private int rarity;
+    private String listingName;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
     public Contract(String contractName, int rewardXp, ContractType type, List<Location> contractLoc, boolean isActive, Difficulty difficulty, int rarity) {
         this.contractName = contractName;
         this.rewardXp = rewardXp;
+        this.reward = ContractUtils.getDifficultyReward(difficulty);
         this.type = type;
-        this.contractLoc = contractLoc;
+        this.contractLocs = contractLoc;
         this.isActive = isActive;
         this.difficulty = difficulty;
         this.rarity = rarity;
+        this.location = getRandomLocation();
+        this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
 
         contracts.put(this.contractName,this);
     }
@@ -36,8 +44,8 @@ public class Contract
     }
     public Location getRandomLocation(){
         Random r = new Random(System.currentTimeMillis());
-        int odds = r.nextInt(contractLoc.size());
-        return contractLoc.get(odds);
+        int odds = r.nextInt(contractLocs.size());
+        return contractLocs.get(odds);
     }
 
     public String getContractName() {
@@ -65,11 +73,11 @@ public class Contract
     }
 
     public List<Location> getContractLoc() {
-        return contractLoc;
+        return contractLocs;
     }
 
     public void setContractLoc(List<Location> contractLoc) {
-        this.contractLoc = contractLoc;
+        this.contractLocs = contractLoc;
     }
 
     public boolean isActive() {
@@ -94,5 +102,15 @@ public class Contract
 
     public void setRarity(int rarity) {
         this.rarity = rarity;
+    }
+    public Location getLocation(){
+        return this.location;
+    }
+    public double getReward(){
+        return this.reward;
+    }
+
+    public String getListingName() {
+        return listingName;
     }
 }

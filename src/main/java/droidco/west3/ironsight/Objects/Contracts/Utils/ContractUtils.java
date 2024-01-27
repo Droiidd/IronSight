@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Objects.Contracts.Utils;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 
 import java.util.ArrayList;
@@ -75,5 +76,38 @@ public class ContractUtils
             }
         }
         return "";
+    }
+    public static void initializeContracts(IronPlayer p){
+        //Goes through every contract and makes a list of rookie specific
+
+        List<Contract> rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
+        List<Contract> apprenticeContracts = ContractUtils.getContractByDiff(Difficulty.Apprentice);
+        List<Contract> experiencedContracts = ContractUtils.getContractByDiff(Difficulty.Experienced);
+        List<Contract> masterContracts = ContractUtils.getContractByDiff(Difficulty.Master);
+
+        //NOW WE CREATE THE ITEM THAT REPRESENTS THE CONTRACT IN THE MENU
+        //Choosing random contract type for each difficulty slot (Rook, Appre, Exper)
+        Contract rook = getSingleContract(rookieContracts);
+        Contract aprnt = getSingleContract(apprenticeContracts);
+        Contract exprn = getSingleContract(experiencedContracts);
+        Contract master = getSingleContract(masterContracts);
+        //Setting the actual slots with the contract
+        p.setRookieContract(rook);
+        p.setApprenticeContract(aprnt);
+        /*
+        Now for the Experienced slot, there's a small chance you can get a master quest
+        for more money and experience.
+         */
+          p.setExperiencedContract(master);
+//        int odds = GlobalUtils.getRandomNumber(101);
+//        if(odds<10){
+//            p.setExperiencedContract(master);
+//        }else{
+//            p.setExperiencedContract(exprn);
+//        }
+    }
+    public static Contract getSingleContract(List<Contract> contracts){
+        int odds = GlobalUtils.getRandomNumber(contracts.size());
+        return contracts.get(odds);
     }
 }

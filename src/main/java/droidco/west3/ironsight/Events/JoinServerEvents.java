@@ -36,6 +36,11 @@ public class JoinServerEvents implements Listener{
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e){
         Player p = e.getPlayer();
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        if(iPlayer.isCombatBlocked()){
+            p.damage(10000.0);
+            iPlayer.setCombatBlocked(false);
+        }
         PlayerConnector.updatePlayer(IronPlayer.getPlayer(p));
     }
 

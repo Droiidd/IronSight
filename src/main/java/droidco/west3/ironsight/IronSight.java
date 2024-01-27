@@ -9,6 +9,7 @@ import droidco.west3.ironsight.Objects.Location.LocationType;
 import droidco.west3.ironsight.Objects.Player.Commands.AdminCommands;
 import droidco.west3.ironsight.Objects.Player.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Events.JoinServerEvents;
+import droidco.west3.ironsight.Objects.Player.Events.CombatEvents;
 import droidco.west3.ironsight.Objects.Player.Events.GeneralEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,6 +43,7 @@ public final class IronSight extends JavaPlugin {
     {
         getServer().getPluginManager().registerEvents(new GeneralEvents(), this);
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
+        getServer().getPluginManager().registerEvents(new CombatEvents(), this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
@@ -57,12 +59,14 @@ public final class IronSight extends JavaPlugin {
         List<Location> test2Locs = new ArrayList<>();
         test2Locs.add(Location.getLocation("North Oil Field"));
         test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("test 2",30, ContractType.HeadHunter , testLocs ,false, Difficulty.Apprentice,1);
+        Contract testC2 = new Contract("test 2",30, ContractType.HeadHunter , test2Locs ,false, Difficulty.Apprentice,1);
 
         List<Location> test3Locs = new ArrayList<>();
         test3Locs.add(Location.getLocation("Storm Point"));
         test3Locs.add(Location.getLocation("New Orleans"));
-        Contract testC3 = new Contract("test 3",30, ContractType.DrugRunner , testLocs ,false, Difficulty.Master,1);
+        Contract testC3 = new Contract("test 3",30, ContractType.DrugRunner , test3Locs ,false, Difficulty.Master,1);
+
+
 
 
     }

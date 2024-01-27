@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Objects.Player;
 
+import droidco.west3.ironsight.Objects.Contracts.Contract;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class IronPlayer
     private boolean isWanted;
     private boolean isJailed;
     private boolean isCombatBlocked;
+    private boolean combatBlockFlag;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -25,6 +27,9 @@ public class IronPlayer
     private int cmbtContractLvl;
     private Player onlinePlayer;
     private String currentLocation;
+    private Contract rookieContract;
+    private Contract apprenticeContract;
+    private Contract experiencedContract;
     private static List<IronPlayer> playerList = new ArrayList<>();
     //private final IronSight plugin;
 
@@ -94,6 +99,19 @@ public class IronPlayer
         }
         return ironPlayers.get(p.getUniqueId().toString());
     }
+
+    public void setRookieContract(Contract rookieContract) {
+        this.rookieContract = rookieContract;
+    }
+
+    public void setApprenticeContract(Contract apprenticeContract) {
+        this.apprenticeContract = apprenticeContract;
+    }
+
+    public void setExperiencedContract(Contract experiencedContract) {
+        this.experiencedContract = experiencedContract;
+    }
+
     public void setCurrentLocation(String locName){
         this.currentLocation = locName;
     }
@@ -165,6 +183,14 @@ public class IronPlayer
         isJailed = jailed;
     }
 
+    public boolean isCombatBlockFlag() {
+        return combatBlockFlag;
+    }
+
+    public void setCombatBlockFlag(boolean combatBlockFlag) {
+        this.combatBlockFlag = combatBlockFlag;
+    }
+
     public boolean isCombatBlocked() {
         return isCombatBlocked;
     }
@@ -226,4 +252,15 @@ public class IronPlayer
         this.wantedKills = wantedKills;
     }
 
+    public Contract getRookieContract() {
+        return rookieContract;
     }
+
+    public Contract getApprenticeContract() {
+        return apprenticeContract;
+    }
+
+    public Contract getExperiencedContract() {
+        return experiencedContract;
+    }
+}
