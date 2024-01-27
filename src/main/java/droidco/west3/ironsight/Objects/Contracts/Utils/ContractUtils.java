@@ -63,16 +63,16 @@ public class ContractUtils
         }
         return 0;
     }
-    public static String getTypeString(ContractType type){
+    public static String getTypeString(CompletionType type){
         switch(type){
-            case DrugRunner -> {
-                return "Drug Runner";
+            case Explorer -> {
+                return "Explorer";
             }
-            case HeadHunter -> {
-                return "Head Hunter";
+            case Hunter -> {
+                return "Hunter";
             }
-            case Miner -> {
-                return "Miner";
+            case Delivery -> {
+                return "Delivery";
             }
         }
         return "";
@@ -87,10 +87,10 @@ public class ContractUtils
 
         //NOW WE CREATE THE ITEM THAT REPRESENTS THE CONTRACT IN THE MENU
         //Choosing random contract type for each difficulty slot (Rook, Appre, Exper)
-        Contract rook = getSingleContract(rookieContracts);
-        Contract aprnt = getSingleContract(apprenticeContracts);
-        Contract exprn = getSingleContract(experiencedContracts);
-        Contract master = getSingleContract(masterContracts);
+        Contract rook = rookieContracts.size() > 0 ? getSingleContract(rookieContracts) : null;
+        Contract aprnt = apprenticeContracts.size() > 0 ? getSingleContract(apprenticeContracts) : null;
+        Contract exprn = experiencedContracts.size() > 0 ? getSingleContract(experiencedContracts) : null;
+        Contract master = masterContracts.size() > 0 ? getSingleContract(masterContracts) : null;
         //Setting the actual slots with the contract
         p.setRookieContract(rook);
         p.setApprenticeContract(aprnt);
@@ -98,15 +98,15 @@ public class ContractUtils
         Now for the Experienced slot, there's a small chance you can get a master quest
         for more money and experience.
          */
-          p.setExperiencedContract(master);
-//        int odds = GlobalUtils.getRandomNumber(101);
-//        if(odds<10){
-//            p.setExperiencedContract(master);
-//        }else{
-//            p.setExperiencedContract(exprn);
-//        }
+        int odds = GlobalUtils.getRandomNumber(101);
+        if(odds<10){
+            p.setExperiencedContract(master);
+        }else{
+            p.setExperiencedContract(exprn);
+        }
     }
     public static Contract getSingleContract(List<Contract> contracts){
+        System.out.println("Size of contract list: "+contracts.size());
         int odds = GlobalUtils.getRandomNumber(contracts.size());
         return contracts.get(odds);
     }

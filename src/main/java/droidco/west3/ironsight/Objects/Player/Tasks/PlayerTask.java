@@ -18,8 +18,10 @@ public class PlayerTask extends BukkitRunnable {
     private final IronSight plugin;
     private final IronPlayer iPlayer;
     private int tick;
-    private int combatLogTimer = 30;
+    private final int combatLogTimer = 30;
     private int combatLogCounter = 0;
+    private final int contractTimer = 30;
+    private int contractCounter = 0;
     //Seconds * ticks/second
     private final Player p;
     private boolean wildernessFlag;
@@ -65,6 +67,12 @@ public class PlayerTask extends BukkitRunnable {
 //                for(int i =0;i<13;i++){
 //                    p.spawnParticle(Particle.REDSTONE, p.getLocation().add(0.5,0.5,0.5),1,1,1,1,1);
 //                }
+                if(contractTimer == contractCounter){
+                    ContractUtils.initializeContracts(iPlayer);
+                    p.sendMessage("Contracts reset!");
+                    contractCounter = 0;
+                }
+                contractCounter++;
             }
 
         }

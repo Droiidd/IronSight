@@ -2,7 +2,7 @@ package droidco.west3.ironsight;
 
 import droidco.west3.ironsight.Objects.Contracts.Commands.ContractMenu;
 import droidco.west3.ironsight.Objects.Contracts.Contract;
-import droidco.west3.ironsight.Objects.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Objects.Contracts.Utils.CompletionType;
 import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Objects.Location.LocationType;
@@ -54,17 +54,19 @@ public final class IronSight extends JavaPlugin {
         List<Location> testLocs = new ArrayList<>();
         testLocs.add(Location.getLocation("Black Spur Mines"));
         testLocs.add(Location.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("test 1",30, ContractType.Miner , testLocs ,false, Difficulty.Rookie,1);
+        Contract testC1 = new Contract("Looking for iron.",30, CompletionType.Delivery , testLocs ,false, Difficulty.Rookie,1);
 
         List<Location> test2Locs = new ArrayList<>();
         test2Locs.add(Location.getLocation("North Oil Field"));
         test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("test 2",30, ContractType.HeadHunter , test2Locs ,false, Difficulty.Apprentice,1);
+        Contract testC2 = new Contract("I need someone gone.",30, CompletionType.Delivery , test2Locs ,false, Difficulty.Apprentice,1);
 
         List<Location> test3Locs = new ArrayList<>();
         test3Locs.add(Location.getLocation("Storm Point"));
         test3Locs.add(Location.getLocation("New Orleans"));
-        Contract testC3 = new Contract("test 3",30, ContractType.DrugRunner , test3Locs ,false, Difficulty.Master,1);
+        Contract testC3 = new Contract("Mule across city borders",30, CompletionType.Delivery , test3Locs ,false, Difficulty.Experienced,1);
+
+        Contract testC4 = new Contract("Big time moves.",30, CompletionType.Delivery , test3Locs ,false, Difficulty.Master,1);
 
 
 

@@ -26,7 +26,17 @@ public class ContractMenu implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player p){
-            p.openInventory(getContractUi(p));
+            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            if(strings.length == 0){
+                p.openInventory(getContractUi(p));
+            }else if(strings[0].equalsIgnoreCase("reset")){
+                ContractUtils.initializeContracts(iPlayer);
+            }
+
+
+//            p.sendMessage(iPlayer.getApprenticeContract().getContractName());
+//            p.sendMessage(iPlayer.getExperiencedContract().getContractName());
+//            p.sendMessage(iPlayer.getRookieContract().getContractName());
         }
         return true;
     }
