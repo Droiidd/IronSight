@@ -1,9 +1,7 @@
 package droidco.west3.ironsight.Utils;
 
-import droidco.west3.ironsight.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import org.bukkit.entity.Player;
-
-import java.util.List;
 
 public class PlayerUtils
 {

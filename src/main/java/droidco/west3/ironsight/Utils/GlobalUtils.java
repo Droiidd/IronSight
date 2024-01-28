@@ -18,6 +18,10 @@ public class GlobalUtils {
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextInt(sizeOfNumberPool);
     }
+    public static int getRandomRange(int low, int high){
+        Random rand = new Random(System.currentTimeMillis());
+        return rand.nextInt(high-low)+low;
+    }
     public static int boolToInt(boolean bool){
         if(bool){
             return 1;

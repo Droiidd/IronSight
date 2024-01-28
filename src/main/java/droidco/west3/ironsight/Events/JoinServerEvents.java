@@ -1,8 +1,8 @@
 package droidco.west3.ironsight.Events;
 
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.Player.IronPlayer;
-import droidco.west3.ironsight.Player.Tasks.PlayerTask;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Tasks.PlayerTask;
 import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.entity.Player;
@@ -36,6 +36,11 @@ public class JoinServerEvents implements Listener{
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e){
         Player p = e.getPlayer();
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        if(iPlayer.isCombatBlocked()){
+            p.damage(10000.0);
+            iPlayer.setCombatBlocked(false);
+        }
         PlayerConnector.updatePlayer(IronPlayer.getPlayer(p));
     }
 
