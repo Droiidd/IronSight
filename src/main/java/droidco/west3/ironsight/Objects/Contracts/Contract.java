@@ -216,6 +216,14 @@ public class Contract
         this.rewardXp = rewardXp;
     }
 
+    public List<String> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<String> description) {
+        this.description = description;
+    }
+
     public CompletionType getType() {
         return completionType;
     }

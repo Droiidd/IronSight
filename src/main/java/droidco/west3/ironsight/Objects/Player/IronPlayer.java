@@ -25,11 +25,14 @@ public class IronPlayer
     private int cmbtContractXp;
     private int pceContractLvl;
     private int cmbtContractLvl;
+    private String playerTitle;
+    private String contractorTitle;
     private Player onlinePlayer;
     private String currentLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
+    private Contract activeContract;
     private static List<IronPlayer> playerList = new ArrayList<>();
     //private final IronSight plugin;
 
@@ -100,6 +103,22 @@ public class IronPlayer
         return ironPlayers.get(p.getUniqueId().toString());
     }
 
+    public String getContractorTitle() {
+        return contractorTitle;
+    }
+
+    public void setContractorTitle(String contractorTitle) {
+        this.contractorTitle = contractorTitle;
+    }
+
+    public Contract getActiveContract() {
+        return activeContract;
+    }
+
+    public void setActiveContract(Contract activeContract) {
+        this.activeContract = activeContract;
+    }
+
     public void setRookieContract(Contract rookieContract) {
         this.rookieContract = rookieContract;
     }
@@ -110,6 +129,14 @@ public class IronPlayer
 
     public void setExperiencedContract(Contract experiencedContract) {
         this.experiencedContract = experiencedContract;
+    }
+
+    public String getPlayerTitle() {
+        return playerTitle;
+    }
+
+    public void setPlayerTitle(String playerTitle) {
+        this.playerTitle = playerTitle;
     }
 
     public void setCurrentLocation(String locName){

@@ -1,0 +1,123 @@
+package droidco.west3.ironsight.Objects.Contracts.Utils;
+
+import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class ContractUI {
+    public static Inventory getActiveContractUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.GRAY+"Active Contract info");
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        contractUi.setItem(7,getResignContractIcon());
+        contractUi.setItem(11,getActiveContractItem(iPlayer));
+        return contractUi;
+    }
+    public static Inventory getContractUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.GRAY + "Available Contracts: (Click to start!)");
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+
+        p.sendMessage(iPlayer.getRookieContract().getContractName());
+        p.sendMessage(iPlayer.getApprenticeContract().getContractName());
+        p.sendMessage(iPlayer.getExperiencedContract().getContractName());
+
+        contractUi.setItem(4,getContractorIcon(p));
+        contractUi.setItem(7,getActiveContractIcon());
+        contractUi.setItem(11, getContractSlot(iPlayer.getRookieContract(),Difficulty.Rookie));
+        contractUi.setItem(13, getContractSlot(iPlayer.getApprenticeContract(),Difficulty.Apprentice));
+        contractUi.setItem(15, getContractSlot(iPlayer.getExperiencedContract(),Difficulty.Experienced));
+        return contractUi;
+    }
+    public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
+        String title = null;
+        switch(difficulty){
+            case Rookie -> {
+                title = "Rookie Contract";
+            }
+            case Apprentice -> {
+                title = "Apprentice Contract";
+            }
+            case Experienced -> {
+                title = "Experienced Contract";
+            }
+        }
+        //Basic item set up
+
+        //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
+        /*
+        NAME
+        ---
+        Location
+        Reward
+        TargetName / Requested Goods (If applicable)
+         */
+        ItemStack contract = new ItemStack(Material.BOOK);
+        ItemMeta contractMeta = contract.getItemMeta();
+        ArrayList<String> contractLore = new ArrayList<>();
+        //Setting up the strings for the lore
+
+        //LORE
+        contractMeta.setDisplayName(title);
+        contractLore.add(ChatColor.GRAY+"Difficulty: "+(ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
+                ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
+        contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
+        contractLore.add(ChatColor.GRAY +"Reward: "+selected.getReward()+" g");
+        //This displays the contracts type
+        contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
+
+        contractMeta.setLore(contractLore);
+        contract.setItemMeta(contractMeta);
+        return contract;
+    }
+
+    public static ItemStack getContractorIcon(Player p) {
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+
+        boolean isNewVersion = Arrays.stream(Material.values())
+                .map(Material::name).collect(Collectors.toList()).contains("PLAYER_HEAD");
+        Material type = Material.matchMaterial(isNewVersion ? "PLAYER_HEAD" : "SKULL_ITEM");
+        ItemStack skull = new ItemStack(type, 1);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        ArrayList<String> skullLore = new ArrayList<>();
+        skullLore.add(ChatColor.RED + "Combat Lvl: "+ChatColor.GRAY+ iPlayer.getCmbtContractLvl()+" ");
+        skullLore.add(ChatColor.GREEN+"Peace maker Lvl: "+ChatColor.GRAY+iPlayer.getPceContractLvl());
+        meta.setLore(skullLore);
+        meta.setOwner(p.getDisplayName());
+        meta.setDisplayName(ChatColor.WHITE + "Contractor Info:");
+        skull.setItemMeta(meta);
+        return skull;
+    }
+    public static ItemStack getActiveContractIcon(){
+        ItemStack item = new ItemStack(Material.COMPASS);
+        ItemMeta iMeta = item.getItemMeta();
+        iMeta.setDisplayName("View Active Contract");
+        item.setItemMeta(iMeta);
+        return item;
+    }
+    public static ItemStack getResignContractIcon(){
+        ItemStack item = new ItemStack(Material.BARRIER);
+        ItemMeta iMeta = item.getItemMeta();
+        iMeta.setDisplayName("Resign Active Contract");
+        item.setItemMeta(iMeta);
+        return item;
+    }
+    public static ItemStack getActiveContractItem(IronPlayer iPlayer){
+        ItemStack item = new ItemStack(Material.BOOK);
+        ItemMeta iMeta = item.getItemMeta();
+        iMeta.setLore(iPlayer.getActiveContract().getDescription());
+        iMeta.setDisplayName("Description");
+        item.setItemMeta(iMeta);
+        return item;
+    }
+
+}
