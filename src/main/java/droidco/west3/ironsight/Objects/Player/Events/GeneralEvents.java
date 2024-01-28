@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.StructureGrowEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -44,25 +45,29 @@ public class GeneralEvents implements Listener {
     public void onMedUse(PlayerInteractEvent e){
         Player p = e.getPlayer();
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
-        if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equalsIgnoreCase(
-                "bandage")) {
-            //They are using a bandage
-            if (iPlayer.isBleeding()) {
-                p.playSound(p.getLocation(), Sound.ENTITY_LEASH_KNOT_PLACE, 1, 1);
-                p.playSound(p.getLocation(), Sound.BLOCK_WOOL_PLACE, 1, 0);
-                iPlayer.setBleeding(false);
-                p.sendMessage("You have patched up your wounds!");
-                //p.getInventory().removeItem(bandage);
+        ItemStack inHand = p.getInventory().getItemInMainHand();
+        if(inHand.hasItemMeta()){
+            if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
+                    "bandage")) {
+                //They are using a bandage
+                if (iPlayer.isBleeding()) {
+                    p.playSound(p.getLocation(), Sound.ENTITY_LEASH_KNOT_PLACE, 1, 1);
+                    p.playSound(p.getLocation(), Sound.BLOCK_WOOL_PLACE, 1, 0);
+                    iPlayer.setBleeding(false);
+                    p.sendMessage("You have patched up your wounds!");
+                    //p.getInventory().removeItem(bandage);
+                }
+            }
+            if(inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
+                    "Splint")){
+                if(iPlayer.isBrokenLegs()){
+                    p.playSound(p.getLocation(), Sound.ITEM_AXE_STRIP, 1, 0);
+                    iPlayer.setBrokenLegs(false);
+                    //remove splint
+                }
             }
         }
-        if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equalsIgnoreCase(
-                "Splint")){
-            if(iPlayer.isBrokenLegs()){
-                p.playSound(p.getLocation(), Sound.ITEM_AXE_STRIP, 1, 0);
-                iPlayer.setBrokenLegs(false);
-                //remove splint
-            }
-        }
+
     }
     @EventHandler
     public void onPlayerBleed(EntityDamageByEntityEvent e){
