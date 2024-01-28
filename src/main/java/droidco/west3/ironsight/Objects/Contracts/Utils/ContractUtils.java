@@ -101,9 +101,19 @@ public class ContractUtils
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<10){
             p.setExperiencedContract(master);
+
         }else{
             p.setExperiencedContract(exprn);
         }
+        System.out.println("CHOOSING CONTRACT INFO:");
+        System.out.println(rookieContracts.size());
+        System.out.println(apprenticeContracts.size());
+        System.out.println(experiencedContracts.size());
+        System.out.println(masterContracts.size());
+        //Generate the contracts
+        p.getRookieContract().generateContracts();
+        p.getApprenticeContract().generateContracts();
+        p.getExperiencedContract().generateContracts();
     }
     public static Contract getSingleContract(List<Contract> contracts){
         System.out.println("Size of contract list: "+contracts.size());

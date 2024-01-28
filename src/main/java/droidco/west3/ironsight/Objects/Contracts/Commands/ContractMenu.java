@@ -44,6 +44,10 @@ public class ContractMenu implements CommandExecutor {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.BLUE + "Contracts");
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
 
+        p.sendMessage(iPlayer.getRookieContract().getContractName());
+        p.sendMessage(iPlayer.getApprenticeContract().getContractName());
+        p.sendMessage(iPlayer.getExperiencedContract().getContractName());
+
         contractUi.setItem(11, getContractSlot(iPlayer.getRookieContract()));
         contractUi.setItem(13, getContractSlot(iPlayer.getApprenticeContract()));
         contractUi.setItem(15, getContractSlot(iPlayer.getExperiencedContract()));
