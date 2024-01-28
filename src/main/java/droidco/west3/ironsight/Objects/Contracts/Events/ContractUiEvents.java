@@ -17,27 +17,36 @@ public class ContractUiEvents implements Listener {
     public void navContractMenu(InventoryClickEvent e)
     {
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Available Contracts:")){
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)")){
             IronPlayer iPlayer = IronPlayer.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
             switch(e.getCurrentItem().getType()){
                 case BOOK -> {
-                    //They selected a contract
-                    //Check what slot they chose.
-                    switch(e.getCurrentItem().getItemMeta().getDisplayName()){
-                        case "Rookie Contract" -> {
-                            iPlayer.setActiveContract(iPlayer.getRookieContract());
+                    //They selected are selecting a contract.
+                    //Check if they are doing one already
+                    if(!iPlayer.isDoingContract()){
+                        //Check what slot they chose.
+                        switch(e.getCurrentItem().getItemMeta().getDisplayName()){
+                            case "Rookie Contract" -> {
+                                iPlayer.setActiveContract(iPlayer.getRookieContract());
+                            }
+                            case "Apprentice Contract" -> {
+                                iPlayer.setActiveContract(iPlayer.getApprenticeContract());
+                            }
+                            case "Experienced Contract" -> {
+                                iPlayer.setActiveContract(iPlayer.getExperiencedContract());
+                            }
                         }
-                        case "Apprentice Contract" -> {
-                            iPlayer.setActiveContract(iPlayer.getApprenticeContract());
-                        }
-                        case "Experienced Contract" -> {
-                            iPlayer.setActiveContract(iPlayer.getExperiencedContract());
-                        }
+                        p.closeInventory();
+                        p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
+                        iPlayer.setDoingContract(true);
+                    }else{
+                        //They are doing a contract!
+                        p.closeInventory();
+                        p.sendMessage("Already doing a contract!");
                     }
-                    p.closeInventory();
-                    p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
+
                 }
                 case OAK_SIGN -> {
                     //They want to change their Contractor Title
@@ -50,7 +59,7 @@ public class ContractUiEvents implements Listener {
                         p.sendMessage("No active contract!");
                     }
                     else {
-                        p.openInventory(ContractUI.getActiveContractUi(p));
+                        p.openInventory(ContractUI.openActiveContractUi(p));
                     }
                 }
                 //Case Skull:
@@ -63,7 +72,7 @@ public class ContractUiEvents implements Listener {
     public void navActiveContractMenu(InventoryClickEvent e)
     {
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.GRAY + "Active Contract info:")){
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Active Contract info:")){
             IronPlayer iPlayer = IronPlayer.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
@@ -73,6 +82,7 @@ public class ContractUiEvents implements Listener {
                     p.closeInventory();
                     p.sendMessage("Resigned current contract.");
                     iPlayer.setActiveContract(null);
+                    iPlayer.setDoingContract(false);
                 }
             }
             e.setCancelled(true);

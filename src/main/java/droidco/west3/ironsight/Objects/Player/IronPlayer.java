@@ -18,6 +18,7 @@ public class IronPlayer
     private boolean isJailed;
     private boolean isCombatBlocked;
     private boolean combatBlockFlag;
+    private boolean doingContract;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -67,6 +68,7 @@ public class IronPlayer
                       boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
     {
+        this.doingContract = false;
         this.pId = pId;
         this.wallet = wallet;
         this.bank = bank;
@@ -121,6 +123,14 @@ public class IronPlayer
 
     public void setRookieContract(Contract rookieContract) {
         this.rookieContract = rookieContract;
+    }
+
+    public boolean isDoingContract() {
+        return doingContract;
+    }
+
+    public void setDoingContract(boolean doingContract) {
+        this.doingContract = doingContract;
     }
 
     public void setApprenticeContract(Contract apprenticeContract) {

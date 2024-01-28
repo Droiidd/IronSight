@@ -16,15 +16,15 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ContractUI {
-    public static Inventory getActiveContractUi(Player p){
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.GRAY+"Active Contract info");
+    public static Inventory openActiveContractUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Active Contract info:");
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
-        contractUi.setItem(7,getResignContractIcon());
-        contractUi.setItem(11,getActiveContractItem(iPlayer));
+        contractUi.setItem(11,getResignContractIcon());
+        contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
     }
-    public static Inventory getContractUi(Player p){
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.GRAY + "Available Contracts: (Click to start!)");
+    public static Inventory openContractUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
 
         p.sendMessage(iPlayer.getRookieContract().getContractName());
@@ -42,13 +42,13 @@ public class ContractUI {
         String title = null;
         switch(difficulty){
             case Rookie -> {
-                title = "Rookie Contract";
+                title = ChatColor.WHITE+"Rookie Contract";
             }
             case Apprentice -> {
-                title = "Apprentice Contract";
+                title = ChatColor.WHITE+"Apprentice Contract";
             }
             case Experienced -> {
-                title = "Experienced Contract";
+                title = ChatColor.RED+"Experienced Contract";
             }
         }
         //Basic item set up
@@ -100,14 +100,14 @@ public class ContractUI {
     public static ItemStack getActiveContractIcon(){
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta iMeta = item.getItemMeta();
-        iMeta.setDisplayName("View Active Contract");
+        iMeta.setDisplayName(ChatColor.WHITE+"View Active Contract");
         item.setItemMeta(iMeta);
         return item;
     }
     public static ItemStack getResignContractIcon(){
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta iMeta = item.getItemMeta();
-        iMeta.setDisplayName("Resign Active Contract");
+        iMeta.setDisplayName(ChatColor.WHITE+"Resign Active Contract");
         item.setItemMeta(iMeta);
         return item;
     }
@@ -115,7 +115,7 @@ public class ContractUI {
         ItemStack item = new ItemStack(Material.BOOK);
         ItemMeta iMeta = item.getItemMeta();
         iMeta.setLore(iPlayer.getActiveContract().getDescription());
-        iMeta.setDisplayName("Description");
+        iMeta.setDisplayName(ChatColor.WHITE+"Description");
         item.setItemMeta(iMeta);
         return item;
     }

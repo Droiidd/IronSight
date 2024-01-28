@@ -1,7 +1,8 @@
 package droidco.west3.ironsight;
 
-import droidco.west3.ironsight.Objects.Contracts.Commands.ContractMenu;
+import droidco.west3.ironsight.Objects.Contracts.Commands.ContractMenuCmd;
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Contracts.Events.ContractUiEvents;
 import droidco.west3.ironsight.Objects.Contracts.Utils.CompletionType;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
@@ -45,11 +46,12 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GeneralEvents(), this);
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
+        getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
         getCommand("ironsight").setExecutor(new AdminCommands());
-        getCommand("contract").setExecutor(new ContractMenu());
+        getCommand("contract").setExecutor(new ContractMenuCmd());
     }
     public void loadContracts(){
         List<Location> testLocs = new ArrayList<>();

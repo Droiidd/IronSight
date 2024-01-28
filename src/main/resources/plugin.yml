@@ -8,3 +8,5 @@ commands:
       - is
   stats:
   contract:
+    aliases:
+      - c
