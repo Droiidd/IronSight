@@ -85,7 +85,7 @@ public class GeneralEvents implements Listener {
     public void globalChatEvents(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
-        e.setFormat(ChatColor.RED+"Bandit "+ChatColor.RESET+e.getFormat());
+        e.setFormat(iPlayer.getRoleTitle()+ChatColor.RESET+e.getFormat());
     }
 
     // >>>===--- ENVIRONMENT EVENTS ---===<<<
