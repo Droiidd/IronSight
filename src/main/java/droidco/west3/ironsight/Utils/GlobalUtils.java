@@ -53,6 +53,6 @@ public class GlobalUtils {
                 ChatColor.DARK_GRAY+"Can be refined or sold", "",Material.GOLD_ORE);
         CustomItem slug = new CustomItem("sea_slug","Slug",Rarity.COMMON,
                 ChatColor.DARK_GRAY+"Reaks of the sea","",Material.SPIDER_EYE);
-
+        
     }
 }
