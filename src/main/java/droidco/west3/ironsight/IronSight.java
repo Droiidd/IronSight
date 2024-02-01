@@ -90,4 +90,6 @@ public final class IronSight extends JavaPlugin {
         Location pearlR = new Location("Pearl River",2599,2083,-2596,-2475,"Good fishing!",LocationType.River);
 
     }
+
+
 }
