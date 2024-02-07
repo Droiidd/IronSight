@@ -6,9 +6,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
 
-run-name: chmod +x ./gradlew
-
-
 name: Java CI with Gradle
 
 on:
@@ -35,4 +32,7 @@ jobs:
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build
+run: chmod +x ./gradlew
+
+
 
