@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.Objects.Player;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Utils.PlayerUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -26,8 +28,8 @@ public class IronPlayer
     private int cmbtContractXp;
     private int pceContractLvl;
     private int cmbtContractLvl;
-    private String playerTitle;
-    private String contractorTitle;
+    private int contractorTitle;
+    private String roleTitle;
     private Player onlinePlayer;
     private String currentLocation;
     private Contract rookieContract;
@@ -51,6 +53,7 @@ public class IronPlayer
         this.isWanted = false;
         this.isCombatBlocked = false;
         this.brokenLegs = false;
+        this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = 0;
         this.wantedKills = 0;
@@ -77,6 +80,7 @@ public class IronPlayer
         this.isWanted = isWanted;
         this.isCombatBlocked = isCombatBlocked;
         this.brokenLegs = brokenLegs;
+        this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
         this.wantedKills = wantedKills;
@@ -100,16 +104,41 @@ public class IronPlayer
     }
     public static IronPlayer getPlayer(Player p){
         if(ironPlayers.containsKey(p.getUniqueId().toString())){
-
+            return ironPlayers.get(p.getUniqueId().toString());
         }
-        return ironPlayers.get(p.getUniqueId().toString());
+        return null;
+    }
+
+    public String getRoleTitle() {
+        return roleTitle;
+    }
+    public String getTitle(){
+        return getContractorTitle().equalsIgnoreCase("") ? roleTitle : getContractorTitle()+" "+roleTitle;
+    }
+
+    public void setRoleTitle(String roleTitle) {
+        this.roleTitle = roleTitle;
     }
 
     public String getContractorTitle() {
-        return contractorTitle;
+        switch(contractorTitle){
+            case 1:
+                return "Cowboy";
+            case 2:
+                return "Tracker";
+            case 3:
+                return "Raider";
+            case 4:
+                return "Miner";
+            case 5:
+                return "Medic";
+            case 6:
+                return "Explorer";
+        }
+        return "";
     }
 
-    public void setContractorTitle(String contractorTitle) {
+    public void setContractorTitle(int contractorTitle) {
         this.contractorTitle = contractorTitle;
     }
 
@@ -136,19 +165,9 @@ public class IronPlayer
     public void setApprenticeContract(Contract apprenticeContract) {
         this.apprenticeContract = apprenticeContract;
     }
-
     public void setExperiencedContract(Contract experiencedContract) {
         this.experiencedContract = experiencedContract;
     }
-
-    public String getPlayerTitle() {
-        return playerTitle;
-    }
-
-    public void setPlayerTitle(String playerTitle) {
-        this.playerTitle = playerTitle;
-    }
-
     public void setCurrentLocation(String locName){
         this.currentLocation = locName;
     }
