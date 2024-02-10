@@ -6,6 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerUtils
 {
     public static void displayBasicStats(IronPlayer iP, Player p)
@@ -40,19 +43,25 @@ public class PlayerUtils
         //Do the same for teams
 
         //Get banking info
-        String wallet = ChatColor.GREEN+"Wallet: "+ChatColor.RESET+iPlayer.getWallet()+"g";
-        String bank = ChatColor.GREEN+"Bank: "+ChatColor.RESET+iPlayer.getBank()+"g";
+        String wallet = ChatColor.GREEN+"Wallet: "+ChatColor.RESET+iPlayer.getWallet()+ChatColor.GOLD+"g";
+        String bank = ChatColor.GREEN+"Bank: "+ChatColor.RESET+iPlayer.getBank()+ChatColor.GOLD+"g";
         String bounty= ChatColor.RED+"Bounty: "+ChatColor.RESET+iPlayer.getBounty();
 
         //Wanted timer
+        List<Integer> singleDigits = new ArrayList<>();
+        for(int x =0;x<10;x++){
+            singleDigits.add(x);
+        }
+        String secWantedStr = singleDigits.contains(secWanted) ? "0"+String.valueOf(secWanted) : String.valueOf(secWanted);
         String wanted = ChatColor.DARK_RED+"< Wanted > " +ChatColor.RESET
-                + minWanted +":"+secWanted;
+                + minWanted +":"+secWantedStr;
         //Combat blocked timer
-        String combatBlock = ChatColor.DARK_PURPLE + "Combat Blocked "+ChatColor.RESET+"0:"+secCombatBlock;
+        String secCmbtStr = singleDigits.contains(secCombatBlock) ? "0"+String.valueOf(secCombatBlock) : String.valueOf(secCombatBlock);
+        String combatBlock = ChatColor.DARK_PURPLE + "Combat Blocked "+ChatColor.RESET+"0:"+secCmbtStr;
 
         String seperator = "---------------";
 
-        Objective objective = sb.registerNewObjective("IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD)+"Iron Sight");
+        Objective objective = sb.registerNewObjective(ChatColor.RED+String.valueOf(ChatColor.BOLD)+"IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD)+"Iron Sight");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Score wantedDis = objective.getScore(wanted);
@@ -68,6 +77,9 @@ public class PlayerUtils
         seperatorDis.setScore(5);
         if(iPlayer.isCombatBlocked()){
             combatDis.setScore(6);
+        }
+        if(iPlayer.isWanted()){
+            wantedDis.setScore(7);
         }
         p.setScoreboard(sb);
     }

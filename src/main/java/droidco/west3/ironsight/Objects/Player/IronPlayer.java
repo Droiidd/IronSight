@@ -28,7 +28,7 @@ public class IronPlayer
     private int cmbtContractXp;
     private int pceContractLvl;
     private int cmbtContractLvl;
-    private String contractorTitle;
+    private int contractorTitle;
     private String roleTitle;
     private Player onlinePlayer;
     private String currentLocation;
@@ -104,13 +104,16 @@ public class IronPlayer
     }
     public static IronPlayer getPlayer(Player p){
         if(ironPlayers.containsKey(p.getUniqueId().toString())){
-
+            return ironPlayers.get(p.getUniqueId().toString());
         }
-        return ironPlayers.get(p.getUniqueId().toString());
+        return null;
     }
 
     public String getRoleTitle() {
         return roleTitle;
+    }
+    public String getTitle(){
+        return getContractorTitle().equalsIgnoreCase("") ? roleTitle : getContractorTitle()+" "+roleTitle;
     }
 
     public void setRoleTitle(String roleTitle) {
@@ -118,10 +121,24 @@ public class IronPlayer
     }
 
     public String getContractorTitle() {
-        return contractorTitle;
+        switch(contractorTitle){
+            case 1:
+                return "Cowboy";
+            case 2:
+                return "Tracker";
+            case 3:
+                return "Raider";
+            case 4:
+                return "Miner";
+            case 5:
+                return "Medic";
+            case 6:
+                return "Explorer";
+        }
+        return "";
     }
 
-    public void setContractorTitle(String contractorTitle) {
+    public void setContractorTitle(int contractorTitle) {
         this.contractorTitle = contractorTitle;
     }
 
