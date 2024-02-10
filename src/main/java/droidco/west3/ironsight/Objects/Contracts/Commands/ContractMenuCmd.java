@@ -21,7 +21,7 @@ public class ContractMenuCmd implements CommandExecutor {
                 if(iPlayer.getActiveContract() == null){
                     p.sendMessage("You do not have an active contract.");
                 }else{
-                    ContractUI.openActiveContractUi(p);
+                    p.openInventory(ContractUI.openActiveContractUi(p));
                 }
             }
 

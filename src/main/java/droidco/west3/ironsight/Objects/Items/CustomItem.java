@@ -5,49 +5,41 @@ import org.bukkit.Material;
 
 import java.util.HashMap;
 
-public class CustomItem {
+public class
+CustomItem {
     private String itemCode;
     private String itemName;
     private String rarityLore;
-    private String loreLine2;
+    private String description;
     private String loreLine3;
+    private boolean isLegal;
+    private boolean isOfficer;
     private Material material;
     private static HashMap<String,CustomItem> items = new HashMap<>();
 
-    public CustomItem(String itemCode, String itemName, Rarity rarity, String loreLine2, String loreLine3, Material material) {
-        this.itemCode = itemCode;
+    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material) {
+        this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
         this.rarityLore = getRarityString(rarity);
-        this.loreLine2 = loreLine2;
-        this.loreLine3 = loreLine3;
+        this.isLegal = isLegal;
+        this.isOfficer = isOfficer;
+        this.description = ChatColor.DARK_GRAY+description;
         this.material = material;
         items.put(this.itemCode, this);
     }
-    public String getRarityString(Rarity rarity){
+    public String getRarityString(int rarity){
         switch(rarity){
-            case COMMON -> {
+            case 1,2 -> {
                 return ChatColor.WHITE+String.valueOf(ChatColor.BOLD)+"Common";
             }
-            case UNCOMMON -> {
+            case 3,4 -> {
                 return ChatColor.DARK_GREEN.toString()+String.valueOf(ChatColor.BOLD)+"Uncommon";
             }
-            case RARE -> {
+            case 5,6-> {
                 return ChatColor.LIGHT_PURPLE.toString()+String.valueOf(ChatColor.BOLD)+"Rare";
             }
-            case LEGENDARY -> {
+            case 7,8 -> {
                 return ChatColor.YELLOW.toString()+String.valueOf(ChatColor.BOLD)+"Legendary";
-            }
-            case FORAGE -> {
-                return ChatColor.GREEN.toString()+String.valueOf(ChatColor.BOLD)+"Forage";
-            }
-            case ILLEGAL -> {
-                return ChatColor.RED.toString()+String.valueOf(ChatColor.BOLD)+"Illegal";
-            }
-            case OFFICER -> {
-                return ChatColor.DARK_AQUA.toString()+String.valueOf(ChatColor.BOLD)+"Officer";
-            }
-            case LEGAL -> {
-                return ChatColor.BLUE.toString()+String.valueOf(ChatColor.BOLD)+"Legal";
             }
         }
         return "";
@@ -58,5 +50,21 @@ public class CustomItem {
             return items.get(itemCode);
         }
         return null;
+    }
+
+    public boolean isLegal() {
+        return isLegal;
+    }
+
+    public void setLegal(boolean legal) {
+        isLegal = legal;
+    }
+
+    public boolean isOfficer() {
+        return isOfficer;
+    }
+
+    public void setOfficer(boolean officer) {
+        isOfficer = officer;
     }
 }

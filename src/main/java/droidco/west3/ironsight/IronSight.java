@@ -6,6 +6,7 @@ import droidco.west3.ironsight.Objects.Contracts.Events.ContractUiEvents;
 import droidco.west3.ironsight.Objects.Contracts.Utils.CompletionType;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.Objects.Items.ItemIcon;
 import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Objects.Location.LocationType;
 import droidco.west3.ironsight.Objects.Player.Commands.AdminCommands;
@@ -13,6 +14,8 @@ import droidco.west3.ironsight.Objects.Player.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Events.JoinServerEvents;
 import droidco.west3.ironsight.Objects.Player.Events.CombatEvents;
 import droidco.west3.ironsight.Objects.Player.Events.GeneralEvents;
+import droidco.west3.ironsight.Utils.GlobalUtils;
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -30,8 +33,9 @@ public final class IronSight extends JavaPlugin {
         System.out.println("Loading all commands.");
         loadAllCommands();
         System.out.println("Commands loaded!");
-
-        loadLocations();
+        GlobalUtils.loadIcons();
+        GlobalUtils.loadLocations();
+        GlobalUtils.loadCustomItems();
         loadContracts();
         System.out.println("Iron Sight successfully loaded!");
     }
@@ -71,25 +75,5 @@ public final class IronSight extends JavaPlugin {
 
         Contract testC4 = new Contract("Big time moves.",30, CompletionType.Delivery,ContractType.Miner , test3Locs ,false, Difficulty.Master,1);
 
-
-
-
     }
-    public void loadLocations(){
-        Location stormpoint = new Location("Storm Point", 26, -157, -2788, -3015, "Drug Base",LocationType.ILLEGAL);
-        Location northoil = new Location("North Oil Field",2827,3041,-2951,-3189,"Illegal area!",LocationType.ILLEGAL);
-        Location sloughcreek = new Location("Slough Creek",2589,2835,799,471,"Scav Town",LocationType.ILLEGAL);
-
-        Location neworleans = new Location("New Orleans", -1230,-1403,-1834,-1664,"PvP disabled!",LocationType.TOWN);
-        Location santafe = new Location("Santa Fe",1119,888,-1755,-2066,"PvP Disabled",LocationType.TOWN);
-        Location texas = new Location("Republic Of Texas",-1197,-831,2628,2214,"Pvp Disabled",LocationType.TOWN);
-
-        Location blackspur = new Location("Black Spur Mines",1542,2248,-2102,-1775,"Be weary of the depths",LocationType.NATURAL);
-
-        Location sloughcreekR = new Location("Slough Creek River", 2545,2698,38,1243,"Fishings good",LocationType.River);
-        Location pearlR = new Location("Pearl River",2599,2083,-2596,-2475,"Good fishing!",LocationType.River);
-
-    }
-
-
 }
