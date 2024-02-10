@@ -1,11 +1,12 @@
 package droidco.west3.ironsight.Utils;
 
 import droidco.west3.ironsight.Objects.Items.CustomItem;
-import droidco.west3.ironsight.Objects.Items.Rarity;
+import droidco.west3.ironsight.Objects.Items.ItemIcon;
+import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.Random;
 
@@ -37,22 +38,48 @@ public class GlobalUtils {
     public static void loadCustomItems()
     {
         //FOODS
-        CustomItem stew = new CustomItem("brown_stew","Brown Stew", Rarity.COMMON,
-                ChatColor.DARK_GRAY + "What's in this..?","", Material.MUSHROOM_STEW);
-        CustomItem charPot = new CustomItem("charred_potato","Charred Potato",Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Cooked on the coals.","",Material.BAKED_POTATO);
-        CustomItem cookFox = new CustomItem("cooked_fox","Cooked Fox", Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Bigger drumstick than chicken!","",Material.COOKED_CHICKEN);
-        CustomItem rabStew = new CustomItem("rabbit_stew","Rabbit Stew",Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Delicious with bread","",Material.RABBIT_STEW);
-        CustomItem iron = new CustomItem("iron_ore","Iron Ore",Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Can be refined or sold","",Material.IRON_ORE);
-        CustomItem copper = new CustomItem("copper_ore","Copper Ore", Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Can be refined or sold","",Material.COPPER_ORE);
-        CustomItem gold = new CustomItem("gold_ore","Gold Ore",Rarity.UNCOMMON,
-                ChatColor.DARK_GRAY+"Can be refined or sold", "",Material.GOLD_ORE);
-        CustomItem slug = new CustomItem("sea_slug","Slug",Rarity.COMMON,
-                ChatColor.DARK_GRAY+"Reaks of the sea","",Material.SPIDER_EYE);
+        CustomItem stew = new CustomItem("Brown Stew", 1, true, false,
+                 "What's in this..?", Material.MUSHROOM_STEW);
+        CustomItem charPot = new CustomItem("Charred Potato",1, true, false,
+                "Cooked on the coals.",Material.BAKED_POTATO);
+        CustomItem cookFox = new CustomItem("Cooked Fox", 1, true, false,
+                "Bigger drumstick than chicken!",Material.COOKED_CHICKEN);
+        CustomItem rabStew = new CustomItem("Rabbit Stew",2, true, false,
+                "Delicious with bread",Material.RABBIT_STEW);
+        CustomItem iron = new CustomItem("Iron Ore",2, true, false,
+                "Can be refined or sold",Material.IRON_ORE);
+        CustomItem copper = new CustomItem("Copper Ore",1, true, false,
+                "Can be refined or sold",Material.COPPER_ORE);
+        CustomItem gold = new CustomItem("Gold Ore",3, true, false,
+                "Can be refined or sold",Material.GOLD_ORE);
+        CustomItem slug = new CustomItem("Slug",3,true, false,
+                "Reaks of the sea",Material.SPIDER_EYE);
 
+    }
+    public static void loadLocations(){
+        Location stormpoint = new Location("Storm Point", 26, -157, -2788, -3015, "Drug Base", LocationType.ILLEGAL);
+        Location northoil = new Location("North Oil Field",2827,3041,-2951,-3189,"Illegal area!",LocationType.ILLEGAL);
+        Location sloughcreek = new Location("Slough Creek",2589,2835,799,471,"Scav Town",LocationType.ILLEGAL);
+
+        Location neworleans = new Location("New Orleans", -1230,-1403,-1834,-1664,"PvP disabled!",LocationType.TOWN);
+        Location santafe = new Location("Santa Fe",1119,888,-1755,-2066,"PvP Disabled",LocationType.TOWN);
+        Location texas = new Location("Republic Of Texas",-1197,-831,2628,2214,"Pvp Disabled",LocationType.TOWN);
+
+        Location blackspur = new Location("Black Spur Mines",1542,2248,-2102,-1775,"Be weary of the depths",LocationType.NATURAL);
+
+        Location sloughcreekR = new Location("Slough Creek River", 2545,2698,38,1243,"Fishings good",LocationType.River);
+        Location pearlR = new Location("Pearl River",2599,2083,-2596,-2475,"Good fishing!",LocationType.River);
+
+    }
+    public static void loadIcons()
+    {
+        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
+
+        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
+        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
+        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
+        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
     }
 }

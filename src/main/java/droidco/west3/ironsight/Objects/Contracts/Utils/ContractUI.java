@@ -1,10 +1,12 @@
 package droidco.west3.ironsight.Objects.Contracts.Utils;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Items.ItemIcon;
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +25,17 @@ public class ContractUI {
         contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
     }
+    public static Inventory openContractorTitleSelectUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        contractUi.setItem(10,ItemIcon.getIcon("Cowboy").getItem());
+        contractUi.setItem(11,ItemIcon.getIcon("Tracker").getItem());
+        contractUi.setItem(12,ItemIcon.getIcon("Raider").getItem());
+        contractUi.setItem(14,ItemIcon.getIcon("Miner").getItem());
+        contractUi.setItem(15,ItemIcon.getIcon("Medic").getItem());
+        contractUi.setItem(16,ItemIcon.getIcon("Explorer").getItem());
+        return contractUi;
+    }
     public static Inventory openContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
@@ -31,6 +44,7 @@ public class ContractUI {
         p.sendMessage(iPlayer.getApprenticeContract().getContractName());
         p.sendMessage(iPlayer.getExperiencedContract().getContractName());
 
+        contractUi.setItem(2,ItemIcon.getIcon("Contractor Title").getItem());
         contractUi.setItem(4,getContractorIcon(p));
         contractUi.setItem(7,getActiveContractIcon());
         contractUi.setItem(11, getContractSlot(iPlayer.getRookieContract(),Difficulty.Rookie));
