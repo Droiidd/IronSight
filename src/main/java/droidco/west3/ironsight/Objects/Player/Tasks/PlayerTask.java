@@ -45,6 +45,7 @@ public class PlayerTask extends BukkitRunnable {
     public void run() {
         //Titles for locations
        Location.displayLocation(p);
+
        //Get time remaining, and mod by 60 to get minutes
 
         PlayerUtils.loadScoreBoard(p, iPlayer, combatLogTimer-combatLogCounter,wantedMin,wantedSec);
@@ -60,9 +61,14 @@ public class PlayerTask extends BukkitRunnable {
                 }
                 if(wantedMin == -1){
                     //Timer is complete!
+                    wantedMin = 2;
                     p.sendMessage(ChatColor.GRAY+"You are no longer wanted.");
                     iPlayer.setWanted(false);
                 }
+            }
+
+            if(iPlayer.isJailed()){
+
             }
 
             if(iPlayer.isCombatBlocked()){
@@ -100,6 +106,9 @@ public class PlayerTask extends BukkitRunnable {
         tick++;
         //CHECK IF PLAYER IS STILL ON
         if(!p.isOnline()){
+            if(iPlayer.isCombatBlocked()){
+                p.damage(100);
+            }
             this.cancel();
             tasks.remove(this);
         }

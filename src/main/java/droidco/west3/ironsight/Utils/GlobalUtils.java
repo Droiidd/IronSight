@@ -57,18 +57,18 @@ public class GlobalUtils {
 
     }
     public static void loadLocations(){
-        Location stormpoint = new Location("Storm Point", 26, -157, -2788, -3015, "Drug Base", LocationType.ILLEGAL);
-        Location northoil = new Location("North Oil Field",2827,3041,-2951,-3189,"Illegal area!",LocationType.ILLEGAL);
-        Location sloughcreek = new Location("Slough Creek",2589,2835,799,471,"Scav Town",LocationType.ILLEGAL);
+        Location stormpoint = new Location("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
+        Location northoil = new Location("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
+        Location sloughcreek = new Location("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
 
-        Location neworleans = new Location("New Orleans", -1230,-1403,-1834,-1664,"PvP disabled!",LocationType.TOWN);
-        Location santafe = new Location("Santa Fe",1119,888,-1755,-2066,"PvP Disabled",LocationType.TOWN);
-        Location texas = new Location("Republic Of Texas",-1197,-831,2628,2214,"Pvp Disabled",LocationType.TOWN);
+        Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664,-1283,86,-1667);
+        Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055,94,-1955);
+        Location texas = new Location("Republic Of Texas","Pvp Disabled",LocationType.TOWN,-1197,-831,2628,2214);
 
-        Location blackspur = new Location("Black Spur Mines",1542,2248,-2102,-1775,"Be weary of the depths",LocationType.NATURAL);
+        Location blackspur = new Location("Black Spur Mines","Be weary of the depths",LocationType.NATURAL,1542,2248,-2102,-1775);
 
-        Location sloughcreekR = new Location("Slough Creek River", 2545,2698,38,1243,"Fishings good",LocationType.River);
-        Location pearlR = new Location("Pearl River",2599,2083,-2596,-2475,"Good fishing!",LocationType.River);
+        Location sloughcreekR = new Location("Slough Creek River","Fishings good",LocationType.River, 2545,2698,38,1243);
+        Location pearlR = new Location("Pearl River","Good fishing!",LocationType.River,2599,2083,-2596,-2475);
 
     }
     public static void loadIcons()
@@ -81,5 +81,10 @@ public class GlobalUtils {
         ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
         ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+
+        ItemIcon santafe = new ItemIcon("Santa Fe","Click to respawn here",Material.NETHER_STAR);
+        ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
+        ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
+
     }
 }
