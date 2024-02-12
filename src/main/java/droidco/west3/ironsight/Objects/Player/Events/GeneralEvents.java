@@ -28,15 +28,18 @@ public class GeneralEvents implements Listener {
     @EventHandler
     public void respawnHandler(PlayerRespawnEvent e){
         Player p = e.getPlayer();
-        Location santafe = Location.getLocation("Santa Fe");
-       // Location neworleans = Location.getLocation("New Orleans");
-        //Location texas = Location.getLocation("Republic of Texas");
-        //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
-        org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
-        //org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
-        //org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
-        p.teleport(sfRespawn);
-        p.openInventory(LocationUI.openContractorTitleSelectUi(p));
+        //p.openInventory(LocationUI.openContractorTitleSelectUi(p));
+//        Location santafe = Location.getLocation("Santa Fe");
+//        Location neworleans = Location.getLocation("New Orleans");
+//        Location texas = Location.getLocation("Republic of Texas");
+//        Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
+//        org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
+//        org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
+//        org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
+//        p.teleport(noRespawn);
+
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        iPlayer.setRespawning(true);
     }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){

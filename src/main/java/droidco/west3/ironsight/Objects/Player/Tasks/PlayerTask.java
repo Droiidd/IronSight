@@ -3,6 +3,7 @@ package droidco.west3.ironsight.Objects.Player.Tasks;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationUI;
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
@@ -46,6 +47,15 @@ public class PlayerTask extends BukkitRunnable {
         //Titles for locations
        Location.displayLocation(p);
 
+       //Respawn menu until they choose a town
+        if(iPlayer.isRespawning()){
+            p.setWalkSpeed(0);
+            p.setFlySpeed(0);
+            p.setSprinting(false);
+            if(p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY+"Choose Town:") != true){
+                p.openInventory(LocationUI.openContractorTitleSelectUi(p));
+            }
+        }
        //Get time remaining, and mod by 60 to get minutes
 
         PlayerUtils.loadScoreBoard(p, iPlayer, combatLogTimer-combatLogCounter,wantedMin,wantedSec);

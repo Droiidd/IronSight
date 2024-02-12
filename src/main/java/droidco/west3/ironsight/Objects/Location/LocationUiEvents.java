@@ -19,24 +19,35 @@ public class LocationUiEvents implements Listener {
             Location santafe = Location.getLocation("Santa Fe");
             Location neworleans = Location.getLocation("New Orleans");
             Location texas = Location.getLocation("Republic of Texas");
+            p.sendMessage(""+santafe.getSpawnX()+santafe.getSpawnY()+santafe.getSpawnZ()+"");
+
             org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
-            org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
-            org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
+            //org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
+            //org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
             switch(e.getCurrentItem().getType()){
                 case NETHER_STAR -> {
-                    p.closeInventory();
-                    p.teleport(sfRespawn);
                     p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"Santa Fe");
+                    p.closeInventory();
+                    iPlayer.setRespawning(false);
+                    p.setWalkSpeed(1);
+                    p.setFlySpeed(1);
+                    p.teleport(sfRespawn);
                 }
                 case CAKE -> {
-                    p.closeInventory();
-                    p.teleport(noRespawn);
                     p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"New Orleans");
+                    p.closeInventory();
+                    iPlayer.setRespawning(false);
+                    p.setWalkSpeed(1);
+                    p.setFlySpeed(1);
+                    //p.teleport(noRespawn);
                 }
                 case DEAD_BUSH -> {
-                    p.closeInventory();
-                    p.teleport(rotRespawn);
                     p.sendMessage(ChatColor.GRAY+"Welcome to the "+ChatColor.YELLOW+"Republic of Texas");
+                    p.closeInventory();
+                    iPlayer.setRespawning(false);
+                    p.setWalkSpeed(1);
+                    p.setFlySpeed(1);
+                    //p.teleport(rotRespawn);
                 }
             }
             e.setCancelled(true);
