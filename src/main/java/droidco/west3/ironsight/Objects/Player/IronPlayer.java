@@ -22,6 +22,7 @@ public class IronPlayer
     private boolean isCombatBlocked;
     private boolean combatBlockFlag;
     private boolean doingContract;
+    private boolean respawning;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -55,6 +56,7 @@ public class IronPlayer
         this.isCombatBlocked = false;
         this.brokenLegs = false;
         this.isJailedFlag = false;
+        this.respawning = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = 0;
@@ -83,6 +85,7 @@ public class IronPlayer
         this.isCombatBlocked = isCombatBlocked;
         this.brokenLegs = brokenLegs;
         this.isJailedFlag = false;
+        this.respawning = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
@@ -139,6 +142,14 @@ public class IronPlayer
                 return "Explorer";
         }
         return "";
+    }
+
+    public boolean isRespawning() {
+        return respawning;
+    }
+
+    public void setRespawning(boolean respawning) {
+        this.respawning = respawning;
     }
 
     public void setContractorTitle(int contractorTitle) {
