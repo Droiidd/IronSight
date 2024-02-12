@@ -18,6 +18,7 @@ public class IronPlayer
     private boolean brokenLegs;
     private boolean isWanted;
     private boolean isJailed;
+    private boolean isJailedFlag;
     private boolean isCombatBlocked;
     private boolean combatBlockFlag;
     private boolean doingContract;
@@ -53,6 +54,7 @@ public class IronPlayer
         this.isWanted = false;
         this.isCombatBlocked = false;
         this.brokenLegs = false;
+        this.isJailedFlag = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = 0;
@@ -80,6 +82,7 @@ public class IronPlayer
         this.isWanted = isWanted;
         this.isCombatBlocked = isCombatBlocked;
         this.brokenLegs = brokenLegs;
+        this.isJailedFlag = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
@@ -182,6 +185,14 @@ public class IronPlayer
         this.wallet += deposit;
     }
     public void updateBounty(int increase){ this.bounty += increase; }
+
+    public boolean isJailedFlag() {
+        return isJailedFlag;
+    }
+
+    public void setJailedFlag(boolean jailedFlag) {
+        isJailedFlag = jailedFlag;
+    }
 
     public String getpId() {
         return pId;

@@ -9,6 +9,7 @@ import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Objects.Items.ItemIcon;
 import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Objects.Location.LocationType;
+import droidco.west3.ironsight.Objects.Location.LocationUiEvents;
 import droidco.west3.ironsight.Objects.Player.Commands.AdminCommands;
 import droidco.west3.ironsight.Objects.Player.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Events.JoinServerEvents;
@@ -51,6 +52,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
+        getServer().getPluginManager().registerEvents(new LocationUiEvents(), this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());

@@ -1,5 +1,7 @@
 package droidco.west3.ironsight.Objects.Player.Events;
 
+import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationUI;
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
@@ -16,12 +18,26 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class GeneralEvents implements Listener {
+    @EventHandler
+    public void respawnHandler(PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        Location santafe = Location.getLocation("Santa Fe");
+       // Location neworleans = Location.getLocation("New Orleans");
+        //Location texas = Location.getLocation("Republic of Texas");
+        //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
+        org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
+        //org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
+        //org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
+        p.teleport(sfRespawn);
+        p.openInventory(LocationUI.openContractorTitleSelectUi(p));
+    }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){

@@ -57,7 +57,7 @@ public class CombatEvents implements Listener
             }
             if(p.getBounty() > 500){
                 //Send em to prison
-
+                p.setJailed(true);
             }
         p.setBounty(0);
     }

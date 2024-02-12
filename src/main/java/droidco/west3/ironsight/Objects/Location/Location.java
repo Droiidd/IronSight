@@ -13,13 +13,14 @@ import java.util.Map;
 public class Location {
     private String locName;
     private double x1,x2,z1,z2;
+    private double spawnX,spawnY,spawnZ;
     private String welcomeMessage;
     private final BossBar locTitle;
     private static final BossBar wildernessTitle =Bukkit.createBossBar("Wilderness", BarColor.GREEN, BarStyle.SOLID);
     private LocationType type;
     private static HashMap<String,Location> locations = new HashMap<>();
 
-    public Location(String locName, double x1, double x2, double z1, double z2, String welcomeMessage, LocationType type){
+    public Location(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2){
         this.locName = locName;
         this.x1= x1;
         this.x2 = x2;
@@ -31,7 +32,23 @@ public class Location {
         this.locTitle = getTitleBossBar(locName,getTitleColor(type));
 
         locations.put(locName,this);
+    }public Location(String locName,String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2,double spawnX, double spawnY, double spawnZ){
+        this.locName = locName;
+        this.x1= x1;
+        this.x2 = x2;
+        this.z1 = z1;
+        this.z2 = z2;
+        this.spawnX = spawnX;
+        this.spawnY = spawnY;
+        this.spawnZ = spawnZ;
+        this.welcomeMessage = welcomeMessage;
+        this.type = type;
+
+        this.locTitle = getTitleBossBar(locName,getTitleColor(type));
+
+        locations.put(locName,this);
     }
+
     public static HashMap<String,Location> getLocations()
     {
         return locations;
@@ -51,6 +68,7 @@ public class Location {
         }
         return null;
     }
+
     public boolean isPlayerInside(Player p)
     {
         double minX;
@@ -93,6 +111,13 @@ public class Location {
         locations.forEach((s, location) -> {
             if(location.isPlayerInside(p)){
                 location.addTitle(p);
+                if(location.getType().equals(LocationType.TOWN)){
+                    p.sendMessage("You cannot damage players in town!");
+                    //p.setLastDamage(0.0);
+
+                }
+
+
                 //p.sendMessage("In zone");
             }else{
                 //p.sendMessage("not in zone");
@@ -152,6 +177,31 @@ public class Location {
     }
 
     // >>>=== GETTERS & SETTERS ===<<<
+
+    public double getSpawnX() {
+        return spawnX;
+    }
+
+    public void setSpawnX(double spawnX) {
+        this.spawnX = spawnX;
+    }
+
+    public double getSpawnY() {
+        return spawnY;
+    }
+
+    public void setSpawnY(double spawnY) {
+        this.spawnY = spawnY;
+    }
+
+    public double getSpawnZ() {
+        return spawnZ;
+    }
+
+    public void setSpawnZ(double spawnZ) {
+        this.spawnZ = spawnZ;
+    }
+
     public String getLocName() {
         return locName;
     }
