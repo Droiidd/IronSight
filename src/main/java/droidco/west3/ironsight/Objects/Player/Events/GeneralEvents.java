@@ -28,18 +28,19 @@ public class GeneralEvents implements Listener {
     @EventHandler
     public void respawnHandler(PlayerRespawnEvent e){
         Player p = e.getPlayer();
-        //p.openInventory(LocationUI.openContractorTitleSelectUi(p));
-//        Location santafe = Location.getLocation("Santa Fe");
-//        Location neworleans = Location.getLocation("New Orleans");
-//        Location texas = Location.getLocation("Republic of Texas");
-//        Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
-//        org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
-//        org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
-//        org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
-//        p.teleport(noRespawn);
-
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
-        iPlayer.setRespawning(true);
+        if(iPlayer.isJailed()){
+            Location prison = Location.getLocation("Prison");
+//        Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
+            org.bukkit.Location pRespawn = new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ());
+
+            p.sendMessage(""+pRespawn.getX()+pRespawn.getY()+pRespawn.getZ()+"");
+            p.teleport(pRespawn);
+            p.sendMessage("You are now in jail!");
+            p.playSound(p.getLocation(),Sound.ENTITY_WITHER_SPAWN,1,1);
+        }else{
+            iPlayer.setRespawning(true);
+        }
     }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
@@ -114,7 +115,7 @@ public class GeneralEvents implements Listener {
         Block block = e.getClickedBlock();
         if(block != null){
             if (block.getType() == Material.BARREL) {
-                p.sendMessage("SHIT");
+                //p.sendMessage("SHIT");
                 e.setCancelled(true);
             }
         }
