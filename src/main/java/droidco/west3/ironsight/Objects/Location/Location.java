@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Objects.Location;
 
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -108,13 +109,23 @@ public class Location {
     }
     public static void displayLocation(Player p)
     {
+        IronPlayer iP = IronPlayer.getPlayer(p);
         locations.forEach((s, location) -> {
             if(location.isPlayerInside(p)){
                 location.addTitle(p);
                 if(location.getType().equals(LocationType.TOWN)){
-                    p.sendMessage("You cannot damage players in town!");
+                    //p.sendMessage("You cannot damage players in town!");
                     //p.setLastDamage(0.0);
 
+                }
+                if(location.getType().equals(LocationType.Prison)){
+                    iP.updateBounty(-1);
+                    if(iP.getBounty() == 0){
+                        iP.setJailed(false);
+                        p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
+                        p.damage(100);
+
+                    }
                 }
 
 

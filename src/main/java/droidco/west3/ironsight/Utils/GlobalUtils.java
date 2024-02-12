@@ -65,6 +65,8 @@ public class GlobalUtils {
         Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055,94,-1955);
         Location texas = new Location("Republic Of Texas","Pvp Disabled",LocationType.TOWN,-1197,-831,2628,2214);
 
+        Location prison = new Location("Prison","JaiL!",LocationType.Prison, 2926,2930,-3071,-3067,2928,97,-3069);
+
         Location blackspur = new Location("Black Spur Mines","Be weary of the depths",LocationType.NATURAL,1542,2248,-2102,-1775);
 
         Location sloughcreekR = new Location("Slough Creek River","Fishings good",LocationType.River, 2545,2698,38,1243);
