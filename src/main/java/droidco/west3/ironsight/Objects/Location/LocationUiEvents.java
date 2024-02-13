@@ -25,37 +25,34 @@ public class LocationUiEvents implements Listener {
             org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
             switch(e.getCurrentItem().getType()){
                 case NETHER_STAR -> {
-                    p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"Santa Fe");
-                    p.closeInventory();
-                    iPlayer.setRespawning(false);
-                    p.setWalkSpeed(1);
-                    p.setFlySpeed(1);
-                    p.teleport(sfRespawn);
-                    p.sendMessage(""+sfRespawn.getBlockX()+" "+sfRespawn.getBlockY()+" "+sfRespawn.getBlockZ());
+                   handleRespawnActions(ChatColor.YELLOW+"Santa Fe",
+                           ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",sfRespawn,iPlayer,p);
+                   break;
                 }
                 case CAKE -> {
-                    p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"New Orleans");
-                    p.closeInventory();
-                    iPlayer.setRespawning(false);
-                    p.setWalkSpeed(1);
-                    p.setFlySpeed(1);
-                    p.teleport(noRespawn);
-                    p.sendMessage(""+noRespawn.getBlockX()+" "+noRespawn.getBlockY()+" "+noRespawn.getBlockZ());
+                    handleRespawnActions(ChatColor.YELLOW+"New Orleans",
+                            ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",noRespawn,iPlayer,p);
+                    break;
 
                 }
                 case DEAD_BUSH -> {
-                    p.sendMessage(ChatColor.GRAY+"Welcome to the "+ChatColor.YELLOW+"Republic of Texas");
-                    p.closeInventory();
-                    iPlayer.setRespawning(false);
-                    p.setWalkSpeed(1);
-                    p.setFlySpeed(1);
-                    p.teleport(rotRespawn);
-                    p.sendMessage(""+rotRespawn.getBlockX()+" "+rotRespawn.getBlockY()+" "+rotRespawn.getBlockZ());
-
+                    handleRespawnActions(ChatColor.YELLOW+"Republic Of Texas",
+                            ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",rotRespawn,iPlayer,p);
+                    break;
                 }
             }
             e.setCancelled(true);
         }
+    }
+
+    public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, IronPlayer iP, Player p){
+      //ADD A RESPAWN SOUND
+        p.sendTitle(locTitle,welcomeMsg);
+        p.closeInventory();
+        iP.setRespawning(false);
+        p.setWalkSpeed(0.2f);
+        p.setFlySpeed(0.2f);
+        p.teleport(respawn);
     }
 
 }

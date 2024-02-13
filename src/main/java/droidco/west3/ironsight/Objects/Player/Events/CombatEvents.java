@@ -60,7 +60,7 @@ public class CombatEvents implements Listener
                 p.setJailed(true);
             }else{
                 p.setJailed(false);
+                p.setBounty(0);
             }
-        p.setBounty(0);
     }
 }
