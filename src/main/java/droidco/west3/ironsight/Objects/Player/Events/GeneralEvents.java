@@ -30,14 +30,7 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         IronPlayer iPlayer = IronPlayer.getPlayer(p);
         if(iPlayer.isJailed()){
-            Location prison = Location.getLocation("Prison");
-//        Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
-            org.bukkit.Location pRespawn = new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ());
-
-            p.sendMessage(""+pRespawn.getX()+pRespawn.getY()+pRespawn.getZ()+"");
-            p.teleport(pRespawn);
-            p.sendMessage("You are now in jail!");
-            p.playSound(p.getLocation(),Sound.ENTITY_WITHER_SPAWN,1,1);
+            iPlayer.setJailedFlag(true);
         }else{
             iPlayer.setRespawning(true);
         }

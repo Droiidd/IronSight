@@ -18,12 +18,11 @@ public class LocationUiEvents implements Listener {
             IronPlayer iPlayer = IronPlayer.getPlayer(p);
             Location santafe = Location.getLocation("Santa Fe");
             Location neworleans = Location.getLocation("New Orleans");
-            Location texas = Location.getLocation("Republic of Texas");
-            p.sendMessage(""+santafe.getSpawnX()+santafe.getSpawnY()+santafe.getSpawnZ()+"");
+            Location texas = Location.getLocation("Republic Of Texas");
 
             org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
-            //org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
-            //org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
+            org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
+            org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
             switch(e.getCurrentItem().getType()){
                 case NETHER_STAR -> {
                     p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"Santa Fe");
@@ -32,6 +31,7 @@ public class LocationUiEvents implements Listener {
                     p.setWalkSpeed(1);
                     p.setFlySpeed(1);
                     p.teleport(sfRespawn);
+                    p.sendMessage(""+sfRespawn.getBlockX()+" "+sfRespawn.getBlockY()+" "+sfRespawn.getBlockZ());
                 }
                 case CAKE -> {
                     p.sendMessage(ChatColor.GRAY+"Welcome to "+ChatColor.YELLOW+"New Orleans");
@@ -39,7 +39,9 @@ public class LocationUiEvents implements Listener {
                     iPlayer.setRespawning(false);
                     p.setWalkSpeed(1);
                     p.setFlySpeed(1);
-                    //p.teleport(noRespawn);
+                    p.teleport(noRespawn);
+                    p.sendMessage(""+noRespawn.getBlockX()+" "+noRespawn.getBlockY()+" "+noRespawn.getBlockZ());
+
                 }
                 case DEAD_BUSH -> {
                     p.sendMessage(ChatColor.GRAY+"Welcome to the "+ChatColor.YELLOW+"Republic of Texas");
@@ -47,7 +49,9 @@ public class LocationUiEvents implements Listener {
                     iPlayer.setRespawning(false);
                     p.setWalkSpeed(1);
                     p.setFlySpeed(1);
-                    //p.teleport(rotRespawn);
+                    p.teleport(rotRespawn);
+                    p.sendMessage(""+rotRespawn.getBlockX()+" "+rotRespawn.getBlockY()+" "+rotRespawn.getBlockZ());
+
                 }
             }
             e.setCancelled(true);
