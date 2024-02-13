@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Objects.Player;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class IronPlayer
     private int contractorTitle;
     private String roleTitle;
     private Player onlinePlayer;
-    private String currentLocation;
+    private Location currentLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -182,10 +183,10 @@ public class IronPlayer
     public void setExperiencedContract(Contract experiencedContract) {
         this.experiencedContract = experiencedContract;
     }
-    public void setCurrentLocation(String locName){
+    public void setCurrentLocation(Location locName){
         this.currentLocation = locName;
     }
-    public String getCurrentLocation()
+    public Location getCurrentLocation()
     {
         return this.currentLocation;
     }

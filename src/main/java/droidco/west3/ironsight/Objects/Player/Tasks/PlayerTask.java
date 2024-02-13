@@ -3,6 +3,7 @@ package droidco.west3.ironsight.Objects.Player.Tasks;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationType;
 import droidco.west3.ironsight.Objects.Location.LocationUI;
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.PlayerUtils;
@@ -26,6 +27,8 @@ public class PlayerTask extends BukkitRunnable {
     private int wantedSec = 0;
     private final int contractTimer = 30;
     private int contractCounter = 0;
+    private int wantedTownCounter = 0;
+    private int wantedTownTimer = 10;
     //Seconds * ticks/second
     private final Player p;
     private boolean wildernessFlag;
@@ -59,6 +62,47 @@ public class PlayerTask extends BukkitRunnable {
        //Get time remaining, and mod by 60 to get minutes
 
         PlayerUtils.loadScoreBoard(p, iPlayer, combatLogTimer-combatLogCounter,wantedMin,wantedSec);
+        //Handle location specific things
+        Location currentLoc = iPlayer.getCurrentLocation();
+        if(currentLoc.getType().equals(LocationType.TOWN)){
+            //p.sendMessage("You cannot damage players in town!");
+            p.setLastDamage(0.0);
+            //NO WANTED PLAYERS IN TOWN!!!
+            //Give them ten seconds to leave before killing them
+            if(iPlayer.isWanted()){
+                if(tick % 3 == 0){
+                    //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
+                    p.sendMessage("Wanted players not allowed in towns, leave or die.");
+                    if(wantedTownCounter == 0){
+                        //TIMER JUST STARTED!
+                        p.sendMessage("Wanted players not allowed in towns, leave or die.");
+                    }
+                    p.sendMessage((wantedTownTimer-wantedTownCounter)+" seconds to leave.");
+                    if(wantedTownCounter == wantedTownTimer){
+                        p.damage(100);
+                    }
+                    wantedTownCounter++;
+                }
+            }
+
+        }
+        if(currentLoc.getType().equals(LocationType.ILLEGAL)){
+            //Increase players bounty in illegal area
+            iPlayer.updateBounty(3);
+        }
+        if(currentLoc.getType().equals(LocationType.Prison)){
+            if(iPlayer.isJailed()){
+                iPlayer.updateBounty(-1);
+                if(iPlayer.getBounty() == 0){
+                    iPlayer.setJailed(false);
+                    p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
+                    p.damage(100);
+
+                }
+            }
+        }
+
+
         //Roughly 1 second
         if(tick % 3 == 0){
             //Check if player is in illegal area and increase their bounty
