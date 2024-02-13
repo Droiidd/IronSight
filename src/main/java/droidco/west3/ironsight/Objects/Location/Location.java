@@ -99,14 +99,7 @@ public class Location {
         }
         return false;
     }
-    public static void increaseIllegalBounty(IronPlayer p,int multiplier){
-        locations.forEach((s, location) -> {
-            if(location.getType().compareTo(LocationType.ILLEGAL) == 0){
-                //In illegal area, increase players bounty
-                p.updateBounty(multiplier);
-            }
-        });
-    }
+
     public static void displayLocation(Player p)
     {
         IronPlayer iP = IronPlayer.getPlayer(p);
@@ -123,6 +116,7 @@ public class Location {
         if(Location.isPlayerInWilderness(p)){
             //Display wilderness
             Location.displayWilderness(p);
+            iP.setCurrentLocation(Location.getLocation("Wilderness"));
         }else{
             //Else check the towns.
             Location.removeWilderness(p);
