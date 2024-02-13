@@ -10,6 +10,7 @@ import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -59,7 +60,17 @@ public class PlayerTask extends BukkitRunnable {
                 p.openInventory(LocationUI.openContractorTitleSelectUi(p));
             }
         }
-       //Get time remaining, and mod by 60 to get minutes
+       //Send player to jail
+        if(iPlayer.isJailedFlag()){
+            iPlayer.setJailedFlag(false);
+            Location prison = Location.getLocation("Prison");
+//        Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
+            org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ());
+
+            p.sendTitle(ChatColor.GRAY+ "You are now in"+ChatColor.DARK_RED+" Prison!",ChatColor.GRAY+"Mine to 0 bounty to leave.");
+            p.teleport(respawn);
+            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN,1,1);
+        }
 
         PlayerUtils.loadScoreBoard(p, iPlayer, combatLogTimer-combatLogCounter,wantedMin,wantedSec);
         //Handle location specific things
