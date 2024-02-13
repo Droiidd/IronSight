@@ -63,7 +63,7 @@ public class GlobalUtils {
 
         Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664,-1283,86,-1667);
         Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055,94,-1955);
-        Location texas = new Location("Republic Of Texas","Pvp Disabled",LocationType.TOWN,-1197,-831,2628,2214);
+        Location texas = new Location("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,1055,97,-1955);
 
         Location prison = new Location("Prison","JaiL!",LocationType.Prison, 2926,2930,-3071,-3067,2928,97,-3069);
 

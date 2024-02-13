@@ -113,25 +113,8 @@ public class Location {
         locations.forEach((s, location) -> {
             if(location.isPlayerInside(p)){
                 location.addTitle(p);
-                if(location.getType().equals(LocationType.TOWN)){
-                    //p.sendMessage("You cannot damage players in town!");
-                    //p.setLastDamage(0.0);
-
-                }
-                if(location.getType().equals(LocationType.Prison)){
-                    iP.updateBounty(-1);
-                    if(iP.getBounty() == 0){
-                        iP.setJailed(false);
-                        p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
-                        p.damage(100);
-
-                    }
-                }
-
-
-                //p.sendMessage("In zone");
+                iP.setCurrentLocation(location);
             }else{
-                //p.sendMessage("not in zone");
                 location.removeTitle(p);
             }
 
