@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -155,18 +156,19 @@ public class PlayerTask extends BukkitRunnable {
 
             }
             //HANDLE CONTRACT TIMER
+            p.setLevel(contractTimer - contractCounter);
             if(contractTimer == contractCounter){
                 ContractUtils.initializeContracts(iPlayer);
-                p.sendMessage("Contracts reset!");
+                p.sendMessage(ChatColor.GOLD+"Contracts"+ChatColor.GREEN+" reset!");
                 contractCounter = 0;
             }
             contractCounter++;
             // HANDLE PLAYER BLEED EFFECT
             if(iPlayer.isBleeding()){
                 p.setHealth(p.getHealth()-1.5);
-//                for(int i =0;i<13;i++){
-//                    p.spawnParticle(Particle.REDSTONE, p.getLocation().add(0.5,0.5,0.5),1,1,1,1,1);
-//                }
+                for(int i =0;i<13;i++){
+                    p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5,0.5,0.5),1,1,1,1,1,new ItemStack(Material.RED_WOOL));
+                }
             }
         }
         //END OF LOOP
