@@ -1,5 +1,4 @@
-# West 3.0 
-# IRON SIGHTS :: Planning Doc
+# Iron Sight Planning Doc
 
 ## Table of Contents
 

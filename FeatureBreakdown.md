@@ -127,3 +127,4 @@ it all on the scoreboard and refresh every tick thd player is in the game.
 These are just easy to create item objects. We'll likely have a util class where we create a list of all of the items
 and use this to create them. It will need a lore line for its description, also it's rarity status. All items are plain
 white text for names.
+Test

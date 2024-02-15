@@ -1,6 +1,8 @@
-package droidco.west3.ironsight.Player;
+package droidco.west3.ironsight.Objects.Player;
 
-import droidco.west3.ironsight.IronSightCore;
+import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Utils.PlayerUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public class IronPlayer
     private boolean isWanted;
     private boolean isJailed;
     private boolean isCombatBlocked;
+    private boolean combatBlockFlag;
+    private boolean doingContract;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -24,15 +28,22 @@ public class IronPlayer
     private int cmbtContractXp;
     private int pceContractLvl;
     private int cmbtContractLvl;
+    private int contractorTitle;
+    private String roleTitle;
     private Player onlinePlayer;
+    private String currentLocation;
+    private Contract rookieContract;
+    private Contract apprenticeContract;
+    private Contract experiencedContract;
+    private Contract activeContract;
     private static List<IronPlayer> playerList = new ArrayList<>();
-    private final IronSightCore plugin;
+    //private final IronSight plugin;
 
     private int wantedKills;
     private static HashMap<String, IronPlayer> ironPlayers = new HashMap<>();
     //private List<ironHorse> horses;
 
-    public IronPlayer(String pId, IronSightCore plugin)
+    public IronPlayer(String pId)
     {
         this.pId = pId;
         this.wallet = 0.0;
@@ -42,6 +53,7 @@ public class IronPlayer
         this.isWanted = false;
         this.isCombatBlocked = false;
         this.brokenLegs = false;
+        this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = 0;
         this.wantedKills = 0;
@@ -52,19 +64,14 @@ public class IronPlayer
 
         playerList.add(this);
         ironPlayers.put(pId,this);
-        this.plugin = plugin;
+        //this.plugin = plugin;
         this.onlinePlayer = null;
     }
-    public void setOnlinePlayer(Player p)
+    public IronPlayer(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
+                      boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
+                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
     {
-        if(pId.equalsIgnoreCase(p.getUniqueId().toString())){
-            onlinePlayer = p;
-        }
-    }
-    public void loadPlayer(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
-                           boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
-                                   wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
-    {
+        this.doingContract = false;
         this.pId = pId;
         this.wallet = wallet;
         this.bank = bank;
@@ -73,6 +80,7 @@ public class IronPlayer
         this.isWanted = isWanted;
         this.isCombatBlocked = isCombatBlocked;
         this.brokenLegs = brokenLegs;
+        this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
         this.wantedKills = wantedKills;
@@ -81,19 +89,99 @@ public class IronPlayer
         this.cmbtContractLvl = cmbtContractLvl;
         this.cmbtContractXp = cmbtContractXp;
 
+        playerList.add(this);
+        ironPlayers.put(pId,this);
+    }
+    public void setOnlinePlayer(Player p)
+    {
+        if(pId.equalsIgnoreCase(p.getUniqueId().toString())){
+            onlinePlayer = p;
+        }
     }
     public static List<IronPlayer> getPlayerList()
     {
         return playerList;
     }
     public static IronPlayer getPlayer(Player p){
-        if(p.getUniqueId().toString().equalsIgnoreCase(this.onlinePlayer.getUniqueId().toString())){
-            return this;
+        if(ironPlayers.containsKey(p.getUniqueId().toString())){
+            return ironPlayers.get(p.getUniqueId().toString());
         }
-        else{
-            return null;
-        }
+        return null;
     }
+
+    public String getRoleTitle() {
+        return roleTitle;
+    }
+    public String getTitle(){
+        return getContractorTitle().equalsIgnoreCase("") ? roleTitle : getContractorTitle()+" "+roleTitle;
+    }
+
+    public void setRoleTitle(String roleTitle) {
+        this.roleTitle = roleTitle;
+    }
+
+    public String getContractorTitle() {
+        switch(contractorTitle){
+            case 1:
+                return "Cowboy";
+            case 2:
+                return "Tracker";
+            case 3:
+                return "Raider";
+            case 4:
+                return "Miner";
+            case 5:
+                return "Medic";
+            case 6:
+                return "Explorer";
+        }
+        return "";
+    }
+
+    public void setContractorTitle(int contractorTitle) {
+        this.contractorTitle = contractorTitle;
+    }
+
+    public Contract getActiveContract() {
+        return activeContract;
+    }
+
+    public void setActiveContract(Contract activeContract) {
+        this.activeContract = activeContract;
+    }
+
+    public void setRookieContract(Contract rookieContract) {
+        this.rookieContract = rookieContract;
+    }
+
+    public boolean isDoingContract() {
+        return doingContract;
+    }
+
+    public void setDoingContract(boolean doingContract) {
+        this.doingContract = doingContract;
+    }
+
+    public void setApprenticeContract(Contract apprenticeContract) {
+        this.apprenticeContract = apprenticeContract;
+    }
+    public void setExperiencedContract(Contract experiencedContract) {
+        this.experiencedContract = experiencedContract;
+    }
+    public void setCurrentLocation(String locName){
+        this.currentLocation = locName;
+    }
+    public String getCurrentLocation()
+    {
+        return this.currentLocation;
+    }
+    public void updateBank(double deposit){
+        this.bank += deposit;
+    }
+    public void updateWallet(double deposit){
+        this.wallet += deposit;
+    }
+    public void updateBounty(int increase){ this.bounty += increase; }
 
     public String getpId() {
         return pId;
@@ -149,6 +237,14 @@ public class IronPlayer
 
     public void setJailed(boolean jailed) {
         isJailed = jailed;
+    }
+
+    public boolean isCombatBlockFlag() {
+        return combatBlockFlag;
+    }
+
+    public void setCombatBlockFlag(boolean combatBlockFlag) {
+        this.combatBlockFlag = combatBlockFlag;
     }
 
     public boolean isCombatBlocked() {
@@ -212,4 +308,15 @@ public class IronPlayer
         this.wantedKills = wantedKills;
     }
 
+    public Contract getRookieContract() {
+        return rookieContract;
     }
+
+    public Contract getApprenticeContract() {
+        return apprenticeContract;
+    }
+
+    public Contract getExperiencedContract() {
+        return experiencedContract;
+    }
+}
