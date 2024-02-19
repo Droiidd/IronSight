@@ -46,14 +46,65 @@ public class GlobalUtils {
                 "Bigger drumstick than chicken!",Material.COOKED_CHICKEN);
         CustomItem rabStew = new CustomItem("Rabbit Stew",2, true, false,
                 "Delicious with bread",Material.RABBIT_STEW);
+        CustomItem cookedRab = new CustomItem("Cooked Rabbit",2,true,false
+        "Get's you through winter",Material.COOKED_RABBIT);
+        CustomItem seaweed = new CustomItem("Seaweed", 1,true,false,
+                "Useless",Material.KELP_PLANT);
+        CustomItem reed = new CustomItem("Reed",1,true,false,
+                "Useless", Material.BAMBOO);
+        CustomItem brokenPick = new CustomItem("Broken Pick",2,true,false,
+                "A good starter pick",Material.STONE_PICKAXE);
+        CustomItem shotAmmo = new CustomItem("Shotgun Ammo",2,true,false,
+                "Buckshot only.",Material.WHEAT_SEEDS);
+        CustomItem pistolAmmo = new CustomItem("Pistol Ammo",1,true,false,
+                "Load your favorite .22",Material.NETHER_WART);
+        CustomItem rifleAmmo = new CustomItem("Rifle Ammo",2,true,false,
+                "Imported from China",Material.CLAY_BALL);
+        CustomItem bandage = new CustomItem("Bandage",2,true,false,
+                "Used to heal bloody wounds",Material.PAPER);
+        CustomItem splint = new CustomItem("Splint",2,true,false,
+                "Used to heal broken bones", Material.STICK);
+        CustomItem tracker = new CustomItem("Tracker",1,true,false,
+                "Track different locations",Material.COMPASS);
+        CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false,
+                "Used for brewing drinks",Material.GLASS_BOTTLE);
+        CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false,
+                "Basic stick and line",Material.FISHING_ROD);
+        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false,
+                "Process to consume",Material.ENDER_PEARL);
+        CustomItem unSpice = new CustomItem("Spice",2,false,false,
+                "Process to consume",Material.HONEY_BOTTLE);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false,
                 "Can be refined or sold",Material.IRON_ORE);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false,
                 "Can be refined or sold",Material.COPPER_ORE);
+
+
+        //UNCOMMON
+        CustomItem cookedSalmon = new CustomItem("Smoked Salmon",3,true,false,
+                "Fresh caught, fresh smoked",Material.COOKED_SALMON);
+        CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false,
+                "Extra kick to any home brew",Material.DRAGON_BREATH);
+        CustomItem crappie = new CustomItem("Poor Man's Crappie",3,true,false,
+                "Skinniest fish",Material.COD);
+        CustomItem grayHerring = new CustomItem("Grey Stonned Herring",3,true,false,
+                "The cheapest of Herring",Material.SALMON);
+        CustomItem chub = new CustomItem("Cactus Pronged Chub",3,true,false,
+                "Too spikey to eat",Material.TROPICAL_FISH);
+        CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false,
+                "Right click to skin",Material.MUSIC_DISC_MALL);
+        CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false,
+                "Right click to skin",Material.MUSIC_DISC_STRAD);
+
+
+
         CustomItem gold = new CustomItem("Gold Ore",3, true, false,
                 "Can be refined or sold",Material.GOLD_ORE);
         CustomItem slug = new CustomItem("Slug",3,true, false,
                 "Reaks of the sea",Material.SPIDER_EYE);
+
+
+
 
     }
     public static void loadLocations(){
