@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Objects.Items;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ CustomItem {
     private boolean isLegal;
     private boolean isOfficer;
     private Material material;
+    private Enchantment enchant1;
     private static HashMap<String,CustomItem> items = new HashMap<>();
 
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material) {
@@ -25,6 +27,18 @@ CustomItem {
         this.isOfficer = isOfficer;
         this.description = ChatColor.DARK_GRAY+description;
         this.material = material;
+        items.put(this.itemCode, this);
+    }
+    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer, String description, Material material,
+                      Enchantment enchant1) {
+        this.itemCode = itemName;
+        this.itemName = ChatColor.WHITE+itemName;
+        this.rarityLore = getRarityString(rarity);
+        this.isLegal = isLegal;
+        this.isOfficer = isOfficer;
+        this.description = ChatColor.DARK_GRAY+description;
+        this.material = material;
+        this.enchant1 = enchant1;
         items.put(this.itemCode, this);
     }
     public String getRarityString(int rarity){
