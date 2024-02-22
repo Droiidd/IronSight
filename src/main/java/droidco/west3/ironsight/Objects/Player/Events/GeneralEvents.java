@@ -1,8 +1,6 @@
 package droidco.west3.ironsight.Objects.Player.Events;
 
-import droidco.west3.ironsight.Objects.Location.Location;
-import droidco.west3.ironsight.Objects.Location.LocationUI;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -28,7 +26,7 @@ public class GeneralEvents implements Listener {
     @EventHandler
     public void respawnHandler(PlayerRespawnEvent e){
         Player p = e.getPlayer();
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         if(iPlayer.isJailed()){
             iPlayer.setJailedFlag(true);
         }else{
@@ -40,7 +38,7 @@ public class GeneralEvents implements Listener {
         if(e.getEntity() instanceof Player p){
             float fall = p.getFallDistance();
             if(fall > 9) {
-                IronPlayer iPlayer = IronPlayer.getPlayer(p);
+                Bandit iPlayer = Bandit.getPlayer(p);
                 if(iPlayer.isBrokenLegs()){
                     //Players legs are already broken, damage harder
                     p.damage(3.0);
@@ -57,7 +55,7 @@ public class GeneralEvents implements Listener {
     @EventHandler
     public void onMedUse(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         ItemStack inHand = p.getInventory().getItemInMainHand();
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
@@ -87,7 +85,7 @@ public class GeneralEvents implements Listener {
         if(e.getEntity() instanceof Player p){
             int odds = GlobalUtils.getRandomNumber(101);
             if(odds < 5){
-                IronPlayer iPlayer = IronPlayer.getPlayer(p);
+                Bandit iPlayer = Bandit.getPlayer(p);
                 iPlayer.setBleeding(true);
                 p.sendMessage(ChatColor.RED+"You are bleeding, you need to bandage your wounds!");
             }
@@ -97,7 +95,7 @@ public class GeneralEvents implements Listener {
     @EventHandler
     public void globalChatEvents(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         e.setFormat(iPlayer.getTitle()+ChatColor.RESET+e.getFormat());
     }
 

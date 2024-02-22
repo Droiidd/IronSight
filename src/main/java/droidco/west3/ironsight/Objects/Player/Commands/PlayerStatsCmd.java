@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Objects.Player.Commands;
 
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,7 +19,7 @@ public class PlayerStatsCmd implements CommandExecutor
 
         //First check the command is being executed by a player and not something else:
         if(commandSender instanceof Player p){
-                IronPlayer iPlayer = IronPlayer.getPlayer(p);
+                Bandit iPlayer = Bandit.getPlayer(p);
                 PlayerUtils.displayBasicStats(iPlayer,p);
         }
 

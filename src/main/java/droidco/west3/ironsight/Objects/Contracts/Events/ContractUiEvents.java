@@ -2,16 +2,12 @@ package droidco.west3.ironsight.Objects.Contracts.Events;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUI;
-import droidco.west3.ironsight.Objects.Items.ItemIcon;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
-
-import java.net.http.WebSocket;
 
 public class ContractUiEvents implements Listener {
 //Nav for navigation :#
@@ -20,7 +16,7 @@ public class ContractUiEvents implements Listener {
     {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)")){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
             switch(e.getCurrentItem().getType()){
@@ -76,7 +72,7 @@ public class ContractUiEvents implements Listener {
     {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Active Contract info:")){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
             switch(e.getCurrentItem().getType()){
@@ -96,7 +92,7 @@ public class ContractUiEvents implements Listener {
     {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Title Select:")){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
             switch(e.getCurrentItem().getType()) {

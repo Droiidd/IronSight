@@ -1,8 +1,7 @@
 package droidco.west3.ironsight.Objects.Location;
 
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -102,7 +101,7 @@ public class Location {
 
     public static void displayLocation(Player p)
     {
-        IronPlayer iP = IronPlayer.getPlayer(p);
+        Bandit iP = Bandit.getPlayer(p);
         locations.forEach((s, location) -> {
             if(location.isPlayerInside(p)){
                 location.addTitle(p);

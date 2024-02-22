@@ -3,14 +3,13 @@ package droidco.west3.ironsight.Objects.Player;
 import droidco.west3.ironsight.Objects.Contracts.Contract;
 import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Utils.PlayerUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class IronPlayer
+public class Bandit
 {
     private String pId;
     private double wallet;
@@ -39,14 +38,14 @@ public class IronPlayer
     private Contract apprenticeContract;
     private Contract experiencedContract;
     private Contract activeContract;
-    private static List<IronPlayer> playerList = new ArrayList<>();
+    private static List<Bandit> playerList = new ArrayList<>();
     //private final IronSight plugin;
 
     private int wantedKills;
-    private static HashMap<String, IronPlayer> ironPlayers = new HashMap<>();
+    private static HashMap<String, Bandit> bandits = new HashMap<>();
     //private List<ironHorse> horses;
 
-    public IronPlayer(String pId)
+    public Bandit(String pId)
     {
         this.pId = pId;
         this.wallet = 0.0;
@@ -68,12 +67,12 @@ public class IronPlayer
         this.cmbtContractXp = 0;
 
         playerList.add(this);
-        ironPlayers.put(pId,this);
+        bandits.put(pId,this);
         //this.plugin = plugin;
         this.onlinePlayer = null;
     }
-    public IronPlayer(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
-                      boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
+    public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
+                  boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
     {
         this.doingContract = false;
@@ -97,7 +96,7 @@ public class IronPlayer
         this.cmbtContractXp = cmbtContractXp;
 
         playerList.add(this);
-        ironPlayers.put(pId,this);
+        bandits.put(pId,this);
     }
     public void setOnlinePlayer(Player p)
     {
@@ -105,13 +104,13 @@ public class IronPlayer
             onlinePlayer = p;
         }
     }
-    public static List<IronPlayer> getPlayerList()
+    public static List<Bandit> getPlayerList()
     {
         return playerList;
     }
-    public static IronPlayer getPlayer(Player p){
-        if(ironPlayers.containsKey(p.getUniqueId().toString())){
-            return ironPlayers.get(p.getUniqueId().toString());
+    public static Bandit getPlayer(Player p){
+        if(bandits.containsKey(p.getUniqueId().toString())){
+            return bandits.get(p.getUniqueId().toString());
         }
         return null;
     }

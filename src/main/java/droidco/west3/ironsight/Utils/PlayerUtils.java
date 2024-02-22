@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Utils;
 
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PlayerUtils
 {
-    public static void displayBasicStats(IronPlayer iP, Player p)
+    public static void displayBasicStats(Bandit iP, Player p)
     {
         p.sendMessage("Iron Sight Player Stats:");
         p.sendMessage("============");
@@ -32,7 +32,7 @@ public class PlayerUtils
     {
         return ChatColor.RED+"Bandit ";
     }
-    public static void loadScoreBoard(Player p, IronPlayer iPlayer, int secCombatBlock, int minWanted, int secWanted)
+    public static void loadScoreBoard(Player p, Bandit iPlayer, int secCombatBlock, int minWanted, int secWanted)
     {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard sb = manager.getNewScoreboard();

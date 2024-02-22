@@ -2,11 +2,10 @@ package droidco.west3.ironsight.Objects.Contracts.Utils;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
 import droidco.west3.ironsight.Objects.Items.ItemIcon;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -20,14 +19,14 @@ import java.util.stream.Collectors;
 public class ContractUI {
     public static Inventory openActiveContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Active Contract info:");
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         contractUi.setItem(11,getResignContractIcon());
         contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
     }
     public static Inventory openContractorTitleSelectUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         contractUi.setItem(10,ItemIcon.getIcon("Cowboy").getItem());
         contractUi.setItem(11,ItemIcon.getIcon("Tracker").getItem());
         contractUi.setItem(12,ItemIcon.getIcon("Raider").getItem());
@@ -38,7 +37,7 @@ public class ContractUI {
     }
     public static Inventory openContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
 
         p.sendMessage(iPlayer.getRookieContract().getContractName());
         p.sendMessage(iPlayer.getApprenticeContract().getContractName());
@@ -95,7 +94,7 @@ public class ContractUI {
     }
 
     public static ItemStack getContractorIcon(Player p) {
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
 
         boolean isNewVersion = Arrays.stream(Material.values())
                 .map(Material::name).collect(Collectors.toList()).contains("PLAYER_HEAD");
@@ -125,7 +124,7 @@ public class ContractUI {
         item.setItemMeta(iMeta);
         return item;
     }
-    public static ItemStack getActiveContractItem(IronPlayer iPlayer){
+    public static ItemStack getActiveContractItem(Bandit iPlayer){
         ItemStack item = new ItemStack(Material.BOOK);
         ItemMeta iMeta = item.getItemMeta();
         iMeta.setLore(iPlayer.getActiveContract().getDescription());

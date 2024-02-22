@@ -1,7 +1,7 @@
 package droidco.west3.ironsight.Objects.Contracts.Utils;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class ContractUtils
         }
         return "";
     }
-    public static void initializeContracts(IronPlayer p){
+    public static void initializeContracts(Bandit p){
         //Goes through every contract and makes a list of rookie specific
 
         List<Contract> rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);

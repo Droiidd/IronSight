@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Database;
 
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.entity.Player;
 
@@ -10,7 +10,7 @@ public class PlayerConnector {
     private static final String user = DbConst.LoginInfo.username;
     private static final String pass = DbConst.LoginInfo.password;
     private static final String url = DbConst.LoginInfo.jdbcURL;
-    public static void updatePlayer(IronPlayer p){
+    public static void updatePlayer(Bandit p){
         System.out.println("Connecting");
         Connection conn = null;
             try{
@@ -82,7 +82,7 @@ public class PlayerConnector {
             }
     }
 
-    public static IronPlayer fetchPlayer(Player p) {
+    public static Bandit fetchPlayer(Player p) {
         System.out.println("Connecting");
         Connection conn = null;
         try {
@@ -114,7 +114,7 @@ public class PlayerConnector {
                 int cmbtContractLvl = rs.getInt("cmbtContractLvl");
                 int cmbtContractXp = rs.getInt("cmbtContractXp");
 
-                IronPlayer player = new IronPlayer(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, pceContractLvl, pceContractXp, cmbtContractLvl, cmbtContractXp);
+                Bandit player = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, pceContractLvl, pceContractXp, cmbtContractLvl, cmbtContractXp);
                 st.close();
                 return player;
             }

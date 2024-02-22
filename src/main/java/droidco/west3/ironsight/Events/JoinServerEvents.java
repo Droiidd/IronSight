@@ -1,8 +1,8 @@
 package droidco.west3.ironsight.Events;
 
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
-import droidco.west3.ironsight.Objects.Player.Tasks.PlayerTask;
+import droidco.west3.ironsight.Objects.Player.Bandit;
+import droidco.west3.ironsight.Objects.Player.Tasks.BanditTask;
 import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.entity.Player;
@@ -21,27 +21,27 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-        IronPlayer iPlayer = PlayerConnector.fetchPlayer(p);
+        Bandit iPlayer = PlayerConnector.fetchPlayer(p);
         if(iPlayer == null){
             System.out.println("New player!");
             p.sendMessage("New player!");
-            iPlayer = new IronPlayer(p.getUniqueId().toString());
+            iPlayer = new Bandit(p.getUniqueId().toString());
         }
 
         iPlayer.setOnlinePlayer(p);
         PlayerUtils.displayBasicStats(iPlayer, p);
-        PlayerTask playerLifeTracker = new PlayerTask(plugin, iPlayer, p);
+        BanditTask playerLifeTracker = new BanditTask(plugin, iPlayer, p);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e){
         Player p = e.getPlayer();
-        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        Bandit iPlayer = Bandit.getPlayer(p);
         if(iPlayer.isCombatBlocked()){
             p.damage(10000.0);
             iPlayer.setCombatBlocked(false);
         }
-        PlayerConnector.updatePlayer(IronPlayer.getPlayer(p));
+        PlayerConnector.updatePlayer(Bandit.getPlayer(p));
     }
 
 }

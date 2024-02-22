@@ -2,7 +2,7 @@ package droidco.west3.ironsight.Objects.Contracts.Commands;
 
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUI;
 import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +12,7 @@ public class ContractMenuCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player p){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             if(strings.length == 0){
                 p.openInventory(ContractUI.openContractUi(p));
             }else if(strings[0].equalsIgnoreCase("reset")){

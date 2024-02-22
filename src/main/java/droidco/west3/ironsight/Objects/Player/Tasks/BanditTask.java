@@ -5,7 +5,7 @@ import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Objects.Location.LocationType;
 import droidco.west3.ironsight.Objects.Location.LocationUI;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,10 +18,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PlayerTask extends BukkitRunnable {
-    private final ArrayList<PlayerTask> tasks = new ArrayList<>();
+public class BanditTask extends BukkitRunnable {
+    private final ArrayList<BanditTask> tasks = new ArrayList<>();
     private final IronSight plugin;
-    private final IronPlayer iPlayer;
+    private final Bandit b;
     private int tick;
     private final int combatLogTimer = 30;
     private int combatLogCounter = 0;
@@ -36,16 +36,16 @@ public class PlayerTask extends BukkitRunnable {
     private boolean wildernessFlag;
     private HashMap<String, Location> locations;
 
-    public PlayerTask(IronSight plugin, IronPlayer iPlayer, Player p){
+    public BanditTask(IronSight plugin, Bandit b, Player p){
 
         this.plugin = plugin;
-        this.iPlayer = iPlayer;
+        this.b = b;
         this.p = p;
         this.wildernessFlag = false;
         tick = 0;
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
-        ContractUtils.initializeContracts(iPlayer);
+        ContractUtils.initializeContracts(b);
     }
     @Override
     public void run() {
@@ -54,9 +54,9 @@ public class PlayerTask extends BukkitRunnable {
         //Titles for locations
         Location.displayLocation(p);
         //Refresh Players siderbar scoreboard
-        PlayerUtils.loadScoreBoard(p, iPlayer, combatLogTimer-combatLogCounter,wantedMin,wantedSec);
+        PlayerUtils.loadScoreBoard(p, b, combatLogTimer-combatLogCounter,wantedMin,wantedSec);
         // HANDLE PLAYER RESPAWN
-        if(iPlayer.isRespawning()){
+        if(b.isRespawning()){
             p.setWalkSpeed(0);
             p.setFlySpeed(0);
             p.setSprinting(false);
@@ -65,8 +65,8 @@ public class PlayerTask extends BukkitRunnable {
             }
         }
        // HANDLE PLAYER SEND TO PRISON
-        if(iPlayer.isJailedFlag()){
-            iPlayer.setJailedFlag(false);
+        if(b.isJailedFlag()){
+            b.setJailedFlag(false);
             Location prison = Location.getLocation("Prison");
             //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
             org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ());
@@ -76,15 +76,15 @@ public class PlayerTask extends BukkitRunnable {
             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN,1,1);
         }
         //HANDLE LOCATION SPECIFIC
-        if(iPlayer.getCurrentLocation() != null){
-            Location currentLoc = iPlayer.getCurrentLocation();
+        if(b.getCurrentLocation() != null){
+            Location currentLoc = b.getCurrentLocation();
             //TOWNS
             if(currentLoc.getType().equals(LocationType.TOWN)){
                 //p.sendMessage("You cannot damage players in town!");
                 p.setLastDamage(0.0);
                 //NO WANTED PLAYERS IN TOWN!!!
                 //Give them ten seconds to leave before killing them
-                if(iPlayer.isWanted()){
+                if(b.isWanted()){
                     if(tick % 3 == 0){
                         //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
                         p.sendMessage("Wanted players not allowed in towns, leave or die.");
@@ -105,17 +105,17 @@ public class PlayerTask extends BukkitRunnable {
             if(currentLoc.getType().equals(LocationType.ILLEGAL)){
                 //Increase players bounty in illegal area
                 if(tick%3==0){
-                    iPlayer.updateBounty(3);
+                    b.updateBounty(3);
                 }
             }
             //PRISON
             if(currentLoc.getType().equals(LocationType.Prison)){
-                if(iPlayer.isJailed()){
+                if(b.isJailed()){
                     if(tick%3==0){
-                        iPlayer.updateBounty(-1);
+                        b.updateBounty(-1);
                     }
-                    if(iPlayer.getBounty() <= 0){
-                        iPlayer.setJailed(false);
+                    if(b.getBounty() <= 0){
+                        b.setJailed(false);
                         p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
                         p.damage(100);
                     }
@@ -127,7 +127,7 @@ public class PlayerTask extends BukkitRunnable {
         //Roughly 1 second
         if(tick % 3 == 0){
             // HANDLE WANTED TIMER
-            if(iPlayer.isWanted()){
+            if(b.isWanted()){
                 wantedSec--;
                 if(wantedSec == -1){
                     wantedSec = 59;
@@ -137,34 +137,34 @@ public class PlayerTask extends BukkitRunnable {
                     //Timer is complete!
                     wantedMin = 2;
                     p.sendMessage(ChatColor.GRAY+"You are no longer "+ChatColor.DARK_RED+"wanted.");
-                    iPlayer.setWanted(false);
+                    b.setWanted(false);
                 }
             }
             // HANDLE COMBAT BLOCK TIMER
-            if(iPlayer.isCombatBlocked()){
-                if(iPlayer.isCombatBlockFlag()){
+            if(b.isCombatBlocked()){
+                if(b.isCombatBlockFlag()){
                     combatLogCounter = 0;
-                    iPlayer.setCombatBlockFlag(false);
+                    b.setCombatBlockFlag(false);
                 }
                 if(combatLogCounter == combatLogTimer){
-                    iPlayer.setCombatBlocked(false);
+                    b.setCombatBlocked(false);
                     p.sendMessage(ChatColor.GRAY+"You are"+ChatColor.GREEN+" safe "+ChatColor.GRAY+"to log off");
                 }
                 combatLogCounter++;
             }
-            if(iPlayer.isWanted()){
+            if(b.isWanted()){
 
             }
             //HANDLE CONTRACT TIMER
             p.setLevel(contractTimer - contractCounter);
             if(contractTimer == contractCounter){
-                ContractUtils.initializeContracts(iPlayer);
+                ContractUtils.initializeContracts(b);
                 p.sendMessage(ChatColor.GOLD+"Contracts"+ChatColor.GREEN+" reset!");
                 contractCounter = 0;
             }
             contractCounter++;
             // HANDLE PLAYER BLEED EFFECT
-            if(iPlayer.isBleeding()){
+            if(b.isBleeding()){
                 p.setHealth(p.getHealth()-1.5);
                 for(int i =0;i<13;i++){
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5,0.5,0.5),1,1,1,1,1,new ItemStack(Material.RED_WOOL));
@@ -175,7 +175,7 @@ public class PlayerTask extends BukkitRunnable {
         tick++;
         //CHECK IF PLAYER IS STILL ON
         if(!p.isOnline()){
-            if(iPlayer.isCombatBlocked()){
+            if(b.isCombatBlocked()){
                 p.damage(100);
             }
             this.cancel();

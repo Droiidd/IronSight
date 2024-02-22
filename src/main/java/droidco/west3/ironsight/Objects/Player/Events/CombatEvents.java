@@ -1,15 +1,13 @@
 package droidco.west3.ironsight.Objects.Player.Events;
 
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class CombatEvents implements Listener
 {
@@ -17,7 +15,7 @@ public class CombatEvents implements Listener
     public void startCombatTimers(EntityDamageByEntityEvent e){
         if(e.getEntity() instanceof Player p){
             //p.sendMessage("You are combat logged!");
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             iPlayer.setCombatBlockFlag(true);
             if(!iPlayer.isCombatBlocked()){
                 iPlayer.setCombatBlocked(true);
@@ -25,7 +23,7 @@ public class CombatEvents implements Listener
 
             }
         }else if(e.getDamager() instanceof Player p){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             iPlayer.setCombatBlockFlag(true);
             if(!iPlayer.isCombatBlocked()){
                 iPlayer.setCombatBlocked(true);
@@ -42,7 +40,7 @@ public class CombatEvents implements Listener
     @EventHandler
 
     public void playerDies(PlayerDeathEvent e){
-            IronPlayer p = IronPlayer.getPlayer(e.getEntity());
+            Bandit p = Bandit.getPlayer(e.getEntity());
             if(p.isCombatBlocked()){
                 p.setCombatBlocked(false);
             }

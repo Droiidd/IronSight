@@ -1,8 +1,6 @@
 package droidco.west3.ironsight.Objects.Location;
 
-import droidco.west3.ironsight.Objects.Contracts.Contract;
-import droidco.west3.ironsight.Objects.Contracts.Utils.ContractUI;
-import droidco.west3.ironsight.Objects.Player.IronPlayer;
+import droidco.west3.ironsight.Objects.Player.Bandit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +13,7 @@ public class LocationUiEvents implements Listener {
     public void respawnMenuSelect(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:")){
-            IronPlayer iPlayer = IronPlayer.getPlayer(p);
+            Bandit iPlayer = Bandit.getPlayer(p);
             Location santafe = Location.getLocation("Santa Fe");
             Location neworleans = Location.getLocation("New Orleans");
             Location texas = Location.getLocation("Republic Of Texas");
@@ -45,7 +43,7 @@ public class LocationUiEvents implements Listener {
         }
     }
 
-    public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, IronPlayer iP, Player p){
+    public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit iP, Player p){
       //ADD A RESPAWN SOUND
         p.sendTitle(locTitle,welcomeMsg);
         p.closeInventory();
