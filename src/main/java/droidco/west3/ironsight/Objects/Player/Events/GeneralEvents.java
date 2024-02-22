@@ -1,5 +1,7 @@
 package droidco.west3.ironsight.Objects.Player.Events;
 
+import droidco.west3.ironsight.Objects.Location.Location;
+import droidco.west3.ironsight.Objects.Location.LocationUI;
 import droidco.west3.ironsight.Objects.Player.IronPlayer;
 import droidco.west3.ironsight.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
@@ -16,12 +18,23 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class GeneralEvents implements Listener {
+    @EventHandler
+    public void respawnHandler(PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        IronPlayer iPlayer = IronPlayer.getPlayer(p);
+        if(iPlayer.isJailed()){
+            iPlayer.setJailedFlag(true);
+        }else{
+            iPlayer.setRespawning(true);
+        }
+    }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){
@@ -95,7 +108,7 @@ public class GeneralEvents implements Listener {
         Block block = e.getClickedBlock();
         if(block != null){
             if (block.getType() == Material.BARREL) {
-                p.sendMessage("SHIT");
+                //p.sendMessage("SHIT");
                 e.setCancelled(true);
             }
         }

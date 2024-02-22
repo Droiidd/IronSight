@@ -61,7 +61,7 @@ public class PlayerUtils
 
         String seperator = "---------------";
 
-        Objective objective = sb.registerNewObjective(ChatColor.RED+String.valueOf(ChatColor.BOLD)+"IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD)+"Iron Sight");
+        Objective objective = sb.registerNewObjective(ChatColor.DARK_RED+String.valueOf(ChatColor.BOLD)+"IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD)+"Iron Sight");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Score wantedDis = objective.getScore(wanted);

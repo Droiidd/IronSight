@@ -55,10 +55,12 @@ public class CombatEvents implements Listener
             if(p.isBrokenLegs()){
                 p.setBrokenLegs(false);
             }
-            if(p.getBounty() > 500){
+            if(p.getBounty() > 200){
                 //Send em to prison
-
+                p.setJailed(true);
+            }else{
+                p.setJailed(false);
+                p.setBounty(0);
             }
-        p.setBounty(0);
     }
 }

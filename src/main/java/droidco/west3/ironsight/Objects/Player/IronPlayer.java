@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Objects.Player;
 
 import droidco.west3.ironsight.Objects.Contracts.Contract;
+import droidco.west3.ironsight.Objects.Location.Location;
 import droidco.west3.ironsight.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,9 +19,11 @@ public class IronPlayer
     private boolean brokenLegs;
     private boolean isWanted;
     private boolean isJailed;
+    private boolean isJailedFlag;
     private boolean isCombatBlocked;
     private boolean combatBlockFlag;
     private boolean doingContract;
+    private boolean respawning;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -31,7 +34,7 @@ public class IronPlayer
     private int contractorTitle;
     private String roleTitle;
     private Player onlinePlayer;
-    private String currentLocation;
+    private Location currentLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -53,6 +56,8 @@ public class IronPlayer
         this.isWanted = false;
         this.isCombatBlocked = false;
         this.brokenLegs = false;
+        this.isJailedFlag = false;
+        this.respawning = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = 0;
@@ -80,6 +85,8 @@ public class IronPlayer
         this.isWanted = isWanted;
         this.isCombatBlocked = isCombatBlocked;
         this.brokenLegs = brokenLegs;
+        this.isJailedFlag = false;
+        this.respawning = false;
         this.roleTitle = PlayerUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
@@ -138,6 +145,14 @@ public class IronPlayer
         return "";
     }
 
+    public boolean isRespawning() {
+        return respawning;
+    }
+
+    public void setRespawning(boolean respawning) {
+        this.respawning = respawning;
+    }
+
     public void setContractorTitle(int contractorTitle) {
         this.contractorTitle = contractorTitle;
     }
@@ -168,10 +183,10 @@ public class IronPlayer
     public void setExperiencedContract(Contract experiencedContract) {
         this.experiencedContract = experiencedContract;
     }
-    public void setCurrentLocation(String locName){
+    public void setCurrentLocation(Location locName){
         this.currentLocation = locName;
     }
-    public String getCurrentLocation()
+    public Location getCurrentLocation()
     {
         return this.currentLocation;
     }
@@ -182,6 +197,14 @@ public class IronPlayer
         this.wallet += deposit;
     }
     public void updateBounty(int increase){ this.bounty += increase; }
+
+    public boolean isJailedFlag() {
+        return isJailedFlag;
+    }
+
+    public void setJailedFlag(boolean jailedFlag) {
+        isJailedFlag = jailedFlag;
+    }
 
     public String getpId() {
         return pId;
