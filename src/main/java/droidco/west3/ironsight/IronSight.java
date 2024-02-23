@@ -1,22 +1,21 @@
 package droidco.west3.ironsight;
 
-import droidco.west3.ironsight.Objects.Contracts.Commands.ContractMenuCmd;
-import droidco.west3.ironsight.Objects.Contracts.Contract;
-import droidco.west3.ironsight.Objects.Contracts.Events.ContractUiEvents;
-import droidco.west3.ironsight.Objects.Contracts.Utils.CompletionType;
-import droidco.west3.ironsight.Objects.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Objects.Contracts.Utils.Difficulty;
-import droidco.west3.ironsight.Objects.Items.ItemIcon;
-import droidco.west3.ironsight.Objects.Location.Location;
-import droidco.west3.ironsight.Objects.Location.LocationType;
-import droidco.west3.ironsight.Objects.Location.LocationUiEvents;
-import droidco.west3.ironsight.Objects.Player.Commands.AdminCommands;
-import droidco.west3.ironsight.Objects.Player.Commands.PlayerStatsCmd;
-import droidco.west3.ironsight.Events.JoinServerEvents;
-import droidco.west3.ironsight.Objects.Player.Events.CombatEvents;
-import droidco.west3.ironsight.Objects.Player.Events.GeneralEvents;
-import droidco.west3.ironsight.Utils.GlobalUtils;
-import org.bukkit.Material;
+import droidco.west3.ironsight.Contracts.ContractMenuCmd;
+import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.ContractUiEvents;
+import droidco.west3.ironsight.Contracts.Utils.CompletionType;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
+import droidco.west3.ironsight.Location.Location;
+import droidco.west3.ironsight.Location.LocationUiEvents;
+import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
+import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
+import droidco.west3.ironsight.Globals.Events.JoinServerEvents;
+import droidco.west3.ironsight.Bandit.Events.CombatEvents;
+import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -34,16 +33,20 @@ public final class IronSight extends JavaPlugin {
         System.out.println("Loading all commands.");
         loadAllCommands();
         System.out.println("Commands loaded!");
-        GlobalUtils.loadIcons();
-        GlobalUtils.loadLocations();
-        GlobalUtils.loadCustomItems();
+        GameContentLoader.loadIcons();
+        GameContentLoader.loadLocations();
+        GameContentLoader.loadCustomItems();
         loadContracts();
+        System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        for(Player p : Bukkit.getOnlinePlayers()){
+            p.kickPlayer("Ironsight server meshing...");
+        }
     }
 
     public void loadAllEvents()
