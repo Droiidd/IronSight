@@ -3,7 +3,7 @@ package droidco.west3.ironsight.Globals.Events;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Bandit.BanditTask;
-import droidco.west3.ironsight.Globals.Database.PlayerConnector;
+import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Location.Location;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -40,6 +41,7 @@ public class CombatEvents implements Listener
     @EventHandler
 
     public void playerDies(PlayerDeathEvent e){
+            Player p = e.getEntity();
             Bandit b = Bandit.getPlayer(e.getEntity());
             if(b.isCombatBlocked()){
                 b.setCombatBlocked(false);
@@ -53,9 +55,12 @@ public class CombatEvents implements Listener
             if(b.isBrokenLegs()){
                 b.setBrokenLegs(false);
             }
-            if(b.getBounty() > 200){
+            if(b.getBounty() > 60){
                 //Send em to prison
                 b.setJailed(true);
+                Location prison = Location.getLocation("Prison");
+                p.setRespawnLocation(new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ()));
+                b.setJailStartTime(System.currentTimeMillis());
             }else{
                 b.setJailed(false);
                 b.setBounty(0);

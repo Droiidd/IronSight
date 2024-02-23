@@ -31,6 +31,7 @@ public class Bandit
     private int pceContractLvl;
     private int cmbtContractLvl;
     private int contractorTitle;
+    private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
     private Location currentLocation;
@@ -73,7 +74,8 @@ public class Bandit
     }
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
-                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp)
+                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp,
+                  long jailStartTime)
     {
         this.doingContract = false;
         this.pId = pId;
@@ -89,6 +91,7 @@ public class Bandit
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
 
         this.bounty = bounty;
+        this.jailStartTime = jailStartTime;
         this.wantedKills = wantedKills;
         this.pceContractLvl = pceContractLvl;
         this.pceContractXp = pceContractXp;
@@ -143,7 +146,12 @@ public class Bandit
         }
         return "";
     }
-
+    public long getJailStartTime() {
+        return jailStartTime;
+    }
+    public void setJailStartTime(long jailStartTime) {
+        this.jailStartTime = jailStartTime;
+    }
     public boolean isRespawning() {
         return respawning;
     }

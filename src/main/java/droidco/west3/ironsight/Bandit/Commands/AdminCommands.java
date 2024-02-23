@@ -46,7 +46,7 @@ public class AdminCommands implements CommandExecutor {
                         }
                         break;
                     case "bounty":
-                        iP.updateBounty(1000);
+                        iP.setBounty(100);
                         break;
                     case "bounty2":
                         iP.setBounty(1);

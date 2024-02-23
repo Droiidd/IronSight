@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.Location.Location;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

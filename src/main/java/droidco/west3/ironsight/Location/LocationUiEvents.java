@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Location;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,6 +52,7 @@ public class LocationUiEvents implements Listener {
         p.setWalkSpeed(0.2f);
         p.setFlySpeed(0.2f);
         p.teleport(respawn);
+        p.playSound(p.getLocation(), Sound.ITEM);
     }
 
 }

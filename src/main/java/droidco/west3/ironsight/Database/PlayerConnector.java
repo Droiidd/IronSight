@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Globals.Database;
+package droidco.west3.ironsight.Database;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -33,7 +33,8 @@ public class PlayerConnector {
                         "pceContractLvl = "+p.getPceContractLvl() +", "+
                         "cmbtContractXp = "+p.getCmbtContractXp() +", "+
                         "cmbtContractLvl = "+p.getCmbtContractXp() +", "+
-                        "wantedKills = "+p.getWantedKills()+" "+
+                        "wantedKills = "+p.getWantedKills()+", "+
+                        "jailStartTime = "+p.getJailStartTime()+" "+
                         "Where iron_player.pId = '"+p.getpId()+"'";
 
                 PreparedStatement prepedStmt = conn.prepareStatement(sql);
@@ -113,8 +114,9 @@ public class PlayerConnector {
                 int pceContractLvl = rs.getInt("pceContractLvl");
                 int cmbtContractLvl = rs.getInt("cmbtContractLvl");
                 int cmbtContractXp = rs.getInt("cmbtContractXp");
+                long jailStartTime = rs.getLong("jailStartTime");
 
-                Bandit player = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, pceContractLvl, pceContractXp, cmbtContractLvl, cmbtContractXp);
+                Bandit player = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, pceContractLvl, pceContractXp, cmbtContractLvl, cmbtContractXp, jailStartTime);
                 st.close();
                 return player;
             }

@@ -127,6 +127,9 @@ public class Location {
                 color,
                 BarStyle.SOLID);
     }
+    public org.bukkit.Location getSpawnLocation(Player p){
+        return new org.bukkit.Location(p.getWorld(),spawnX,spawnY,spawnZ);
+    }
     public void addTitle(Player p){
         this.locTitle.setProgress(1);
         this.locTitle.addPlayer(p);

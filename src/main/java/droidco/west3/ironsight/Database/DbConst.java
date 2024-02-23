@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Globals.Database;
+package droidco.west3.ironsight.Database;
 
 public class DbConst
 {

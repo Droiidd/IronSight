@@ -108,16 +108,29 @@ public class BanditTask extends BukkitRunnable {
                 }
             }
             //PRISON
-            if(currentLoc.getType().equals(LocationType.Prison)){
-                if(b.isJailed()){
+            if(b.isJailed()){
+                if(currentLoc.getType().equals(LocationType.Prison)){
                     if(tick%3==0){
+                        //p.setLevel();
+                        long currentTime = System.currentTimeMillis();
+                        long elapsedTime = currentTime - b.getJailStartTime();
+                        int elap = (int) elapsedTime / 1000;
+
                         b.updateBounty(-1);
+
+                        if(elap >= b.getBounty()){
+                            //Player has waited enough time
+                            releasePrisoner(b);
+                        }
                     }
                     if(b.getBounty() <= 0){
-                        b.setJailed(false);
-                        p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
-                        p.damage(100);
+                        releasePrisoner(b);
                     }
+
+                }
+                if(b.getCurrentLocation() == null || !currentLoc.getType().equals(LocationType.Prison)){
+                    p.damage(100);
+                    p.sendTitle(ChatColor.RED+"Escapee!","You will be hunted.");
                 }
             }
         }
@@ -155,7 +168,8 @@ public class BanditTask extends BukkitRunnable {
 
             }
             //HANDLE CONTRACT TIMER
-            p.setLevel(contractTimer - contractCounter);
+            //NEEEEEED THIS ++===========================================
+            //p.setLevel(contractTimer - contractCounter);
             if(contractTimer == contractCounter){
                 ContractUtils.initializeContracts(b);
                 p.sendMessage(ChatColor.GOLD+"Contracts"+ChatColor.GREEN+" reset!");
@@ -180,5 +194,12 @@ public class BanditTask extends BukkitRunnable {
             this.cancel();
             tasks.remove(this);
         }
+    }
+    public void releasePrisoner(Bandit b)
+    {
+        b.setBounty(0);
+        b.setJailed(false);
+        p.sendMessage(ChatColor.GRAY+ "You are released from"+ ChatColor.RED+" jail!");
+        p.damage(100);
     }
 }
