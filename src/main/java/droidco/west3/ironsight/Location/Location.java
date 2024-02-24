@@ -115,7 +115,7 @@ public class Location {
         if(Location.isPlayerInWilderness(p)){
             //Display wilderness
             Location.displayWilderness(p);
-            b.setCurrentLocation(Location.getLocation("Wilderness"));
+            b.setCurrentLocation(null);
         }else{
             //Else check the towns.
             Location.removeWilderness(p);

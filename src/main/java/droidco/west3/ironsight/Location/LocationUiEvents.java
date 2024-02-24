@@ -52,7 +52,7 @@ public class LocationUiEvents implements Listener {
         p.setWalkSpeed(0.2f);
         p.setFlySpeed(0.2f);
         p.teleport(respawn);
-        p.playSound(p.getLocation(), Sound.ITEM);
+        //p.playSound(p.getLocation(), Sound.ITEM);
     }
 
 }

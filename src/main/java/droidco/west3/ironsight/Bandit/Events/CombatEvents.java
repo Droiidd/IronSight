@@ -63,7 +63,7 @@ public class CombatEvents implements Listener
                 b.setJailStartTime(System.currentTimeMillis());
             }else{
                 b.setJailed(false);
-                b.setBounty(0);
+                //b.setBounty(0);
             }
     }
 }
