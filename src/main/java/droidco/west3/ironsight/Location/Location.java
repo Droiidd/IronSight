@@ -99,6 +99,7 @@ public class Location {
         return false;
     }
 
+
     public static void displayLocation(Player p)
     {
         Bandit b = Bandit.getPlayer(p);
@@ -115,7 +116,7 @@ public class Location {
         if(Location.isPlayerInWilderness(p)){
             //Display wilderness
             Location.displayWilderness(p);
-            b.setCurrentLocation(null);
+            b.setCurrentLocation(getLocation("Wilderness"));
         }else{
             //Else check the towns.
             Location.removeWilderness(p);

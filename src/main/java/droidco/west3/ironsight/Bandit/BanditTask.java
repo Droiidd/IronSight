@@ -82,6 +82,9 @@ public class BanditTask extends BukkitRunnable {
         //HANDLE LOCATION SPECIFIC
 
         Location currentLoc = b.getCurrentLocation();
+        if (currentLoc == null){
+
+        }
         //PRISON
         if (b.isJailed()) {
             if (b.getCurrentLocation() == null || !currentLoc.getType().equals(LocationType.Prison)) {
@@ -151,7 +154,7 @@ public class BanditTask extends BukkitRunnable {
                     int elap = (int) elapsedTime / 1000;
 
                     //b.updateBounty(-1);
-                    p.sendMessage(elap);
+                    p.sendMessage(String.valueOf(elap));
                     if (elap >= b.getBounty()) {
                         //Player has waited enough time
                         p.sendMessage("ELAP");

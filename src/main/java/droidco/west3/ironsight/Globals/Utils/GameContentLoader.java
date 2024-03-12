@@ -152,8 +152,6 @@ public class GameContentLoader {
                 "Stare into the depths of the universe",Material.ECHO_SHARD);
 
 
-
-
     }
     public static void loadLocations(){
         Location stormpoint = new Location("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
@@ -170,6 +168,9 @@ public class GameContentLoader {
 
         Location sloughcreekR = new Location("Slough Creek River","Fishings good",LocationType.River, 2545,2698,38,1243);
         Location pearlR = new Location("Pearl River","Good fishing!",LocationType.River,2599,2083,-2596,-2475);
+
+        //Change location message
+        Location wilderness = new Location("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
 
     }
     public static void loadIcons()

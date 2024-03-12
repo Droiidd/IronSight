@@ -40,7 +40,11 @@ public final class IronSight extends JavaPlugin {
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
+    public static IronSight instance;
 
+    public void onLoad(){
+        instance = this;
+    }
     @Override
     public void onDisable() {
         // Plugin shutdown logic

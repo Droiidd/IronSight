@@ -2,19 +2,25 @@ package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Location.Location;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -22,6 +28,7 @@ import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 
 public class GeneralEvents implements Listener {
     @EventHandler
@@ -112,6 +119,8 @@ public class GeneralEvents implements Listener {
             }
         }
     }
+
+
     @EventHandler
     public void onTreeGrow(StructureGrowEvent e) {e.setCancelled(true);}
     @EventHandler
@@ -120,4 +129,49 @@ public class GeneralEvents implements Listener {
     public void onBlockGrow(BlockGrowEvent e) {e.setCancelled(true);}
     @EventHandler
     public void onBlockBurn(BlockBurnEvent e){ e.setCancelled(true);}
+
+    // ------------Crafting Events--------------
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void potionItemPlacer(final InventoryClickEvent e) {
+        if (e.getClickedInventory() == null)
+            return;
+        if (e.getClickedInventory().getType() != InventoryType.BREWING)
+            return;
+        if (!(e.getClick() == ClickType.LEFT)) //Make sure we are placing an item
+            return;
+        final ItemStack is = e.getCurrentItem(); //We want to get the item in the slot
+        final ItemStack is2 = e.getCursor().clone(); //And the item in the cursor
+        if(is2 == null) //We make sure we got something in the cursor
+            return;
+        if(is2.getType() == Material.AIR)
+            return;
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(IronSight.instance, new Runnable() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public void run() {
+                e.setCursor(is);//Now we make the switch
+                e.getClickedInventory().setItem(e.getSlot(), is2);
+            }
+        }, 1L);//(Delay in 1 tick)
+        ((Player)e.getView().getPlayer()).updateInventory();//And we update the inventory
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void PotionListener(InventoryClickEvent e){
+        if(e.getClickedInventory() == null)
+            return;
+        if(e.getClickedInventory().getType() != InventoryType.BREWING)
+            return;
+        System.out.println("IN");
+        /*
+        if(((BrewerInventory)e.getInventory()).getIngredient() == null)
+            return;
+        BrewingRecipe recipe = BrewingRecipe.getRecipe((BrewerInventory) e.getClickedInventory());
+        if(recipe == null)
+            return;
+        recipe.startBrewing((BrewerInventory) e.getClickedInventory());
+    */
+    }
 }
