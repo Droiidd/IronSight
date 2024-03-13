@@ -28,7 +28,6 @@ public class ContractUiEvents implements Listener {
 
                         switch(name.split("§f")[1]){
                             case "Rookie Contract" -> {
-                                System.out.println("set rookie");
                                 iPlayer.setActiveContract(iPlayer.getRookieContract());
                             }
                             case "Apprentice Contract" -> {
