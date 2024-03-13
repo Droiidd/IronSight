@@ -220,3 +220,14 @@ Caused by: java.lang.NullPointerException: Cannot invoke "org.bukkit.inventory.I
 [17:43:44] [Server thread/INFO]: 1
 [17:43:44] [Server thread/INFO]: 1
 [17:43:44] [Server thread/INFO]: Elightning issued server command: /contract active
+[17:44:29] [Server thread/INFO]: Size of contract list: 1
+[17:44:29] [Server thread/INFO]: Size of contract list: 1
+[17:44:29] [Server thread/INFO]: Size of contract list: 1
+[17:44:29] [Server thread/INFO]: Size of contract list: 1
+[17:44:29] [Server thread/INFO]: CHOOSING CONTRACT INFO:
+[17:44:29] [Server thread/INFO]: 1
+[17:44:29] [Server thread/INFO]: 1
+[17:44:29] [Server thread/INFO]: 1
+[17:44:29] [Server thread/INFO]: 1
+[17:44:49] [Thread-2/INFO]: Stopping server
+[17:44:49] [Thread-2/INFO]: Elightning lost connection: Ironsight server meshing...
