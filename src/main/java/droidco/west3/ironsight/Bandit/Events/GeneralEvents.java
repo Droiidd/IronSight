@@ -3,6 +3,7 @@ package droidco.west3.ironsight.Bandit.Events;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
+import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.Location.Location;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,6 +26,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.StructureGrowEvent;
+import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -153,11 +155,27 @@ public class GeneralEvents implements Listener {
             public void run() {
                 e.setCursor(is);//Now we make the switch
                 e.getClickedInventory().setItem(e.getSlot(), is2);
+                if(((BrewerInventory)e.getInventory()).isEmpty()) {
+                    System.out.println("IN ingredient null");
+                    return;
+                }
+                System.out.println("before recipe");
+
+                BrewingRecipe recipe = BrewingRecipe.getRecipe((BrewerInventory) e.getClickedInventory());
+                System.out.println("after recipesssss");
+                if(recipe == null) {
+                    System.out.println("Null Recipe");
+                    return;
+                }
+                recipe.startBrewing((BrewerInventory) e.getClickedInventory());
+                System.out.println("after start brewing");
             }
         }, 1L);//(Delay in 1 tick)
         ((Player)e.getView().getPlayer()).updateInventory();//And we update the inventory
-    }
 
+
+    }
+/*
     @EventHandler(priority = EventPriority.NORMAL)
     public void PotionListener(InventoryClickEvent e){
         if(e.getClickedInventory() == null)
@@ -165,13 +183,23 @@ public class GeneralEvents implements Listener {
         if(e.getClickedInventory().getType() != InventoryType.BREWING)
             return;
         System.out.println("IN");
-        /*
-        if(((BrewerInventory)e.getInventory()).getIngredient() == null)
+
+        //is empty when not empty >:|
+        if(((BrewerInventory)e.getInventory()).isEmpty()) {
+            System.out.println("IN ingredient null");
             return;
+        }
+        System.out.println("before recipe");
+
         BrewingRecipe recipe = BrewingRecipe.getRecipe((BrewerInventory) e.getClickedInventory());
-        if(recipe == null)
+        System.out.println("after recipesssss");
+        if(recipe == null) {
+            System.out.println("Null Recipe");
             return;
+        }
         recipe.startBrewing((BrewerInventory) e.getClickedInventory());
-    */
+        System.out.println("after start brewing");
     }
+    */
+
 }

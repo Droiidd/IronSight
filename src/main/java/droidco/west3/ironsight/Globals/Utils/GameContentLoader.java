@@ -2,9 +2,11 @@ package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Location.LocationType;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class GameContentLoader {
     public static void loadCustomItems()
@@ -188,5 +190,13 @@ public class GameContentLoader {
         ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
         ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
 
+    }
+
+    public static void loadBrewing(){
+        System.out.println("In Load Brewing");
+        new BrewingRecipe(Material.BOWL, (inventory, ingredient) -> {//Some lambda magic
+            return new ItemStack(Material.BEACON);
+
+        });
     }
 }

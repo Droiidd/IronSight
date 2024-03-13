@@ -36,15 +36,19 @@ public final class IronSight extends JavaPlugin {
         GameContentLoader.loadIcons();
         GameContentLoader.loadLocations();
         GameContentLoader.loadCustomItems();
+        GameContentLoader.loadBrewing();
         loadContracts();
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
+    //Allows bukkit scheduling, i.e offsetting actions by one tick
     public static IronSight instance;
 
     public void onLoad(){
         instance = this;
     }
+
+
     @Override
     public void onDisable() {
         // Plugin shutdown logic
