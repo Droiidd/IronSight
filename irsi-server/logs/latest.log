@@ -1,0 +1,222 @@
+[17:42:42] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[17:42:43] [ServerMain/INFO]: Loaded 7 recipes
+[17:42:43] [Server thread/INFO]: Starting minecraft server version 1.20.4
+[17:42:43] [Server thread/INFO]: Loading properties
+[17:42:44] [Server thread/INFO]: This server is running CraftBukkit version 4055-Spigot-e9ec548-ee685bd (MC: 1.20.4) (Implementing API version 1.20.4-R0.1-SNAPSHOT)
+[17:42:44] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[17:42:44] [Server thread/INFO]: Using 4 threads for Netty based IO
+[17:42:44] [Server thread/INFO]: Debug logging is disabled
+[17:42:44] [Server thread/INFO]: Default game type: SURVIVAL
+[17:42:44] [Server thread/INFO]: Generating keypair
+[17:42:44] [Server thread/INFO]: Starting Minecraft server on *:25565
+[17:42:44] [Server thread/INFO]: Using epoll channel type
+[17:42:44] [Server thread/INFO]: [IronSight] Loading IronSight v1.0-SNAPSHOT
+[17:42:44] [Server thread/INFO]: Preparing level "world"
+[17:42:44] [Server thread/INFO]: -------- World Settings For [world] --------
+[17:42:44] [Server thread/INFO]: Experience Merge Radius: 3.0
+[17:42:44] [Server thread/INFO]: Mob Spawn Range: 6
+[17:42:44] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Cane Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Melon Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Potato Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Vine Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: TwistingVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: WeepingVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: CaveVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Nether: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[17:42:44] [Server thread/INFO]: Max TNT Explosions: 100
+[17:42:44] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[17:42:44] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true / Isa false
+[17:42:44] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Di 128 / Other 64
+[17:42:44] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1 Hopper Can Load Chunks: false
+[17:42:44] [Server thread/INFO]: View Distance: 10
+[17:42:44] [Server thread/INFO]: Simulation Distance: 10
+[17:42:44] [Server thread/INFO]: Item Despawn Rate: 6000
+[17:42:44] [Server thread/INFO]: Item Merge Radius: 2.5
+[17:42:44] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[17:42:44] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[17:42:44] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[17:42:44] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[17:42:44] [Server thread/INFO]: -------- World Settings For [world_nether] --------
+[17:42:44] [Server thread/INFO]: Experience Merge Radius: 3.0
+[17:42:44] [Server thread/INFO]: Mob Spawn Range: 6
+[17:42:44] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Cane Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Melon Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Potato Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Vine Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: TwistingVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: WeepingVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: CaveVines Growth Modifier: 100%
+[17:42:44] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Nether: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[17:42:44] [Server thread/INFO]: Max TNT Explosions: 100
+[17:42:44] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[17:42:44] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true / Isa false
+[17:42:44] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Di 128 / Other 64
+[17:42:44] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1 Hopper Can Load Chunks: false
+[17:42:44] [Server thread/INFO]: View Distance: 10
+[17:42:44] [Server thread/INFO]: Simulation Distance: 10
+[17:42:44] [Server thread/INFO]: Item Despawn Rate: 6000
+[17:42:44] [Server thread/INFO]: Item Merge Radius: 2.5
+[17:42:44] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[17:42:44] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[17:42:44] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[17:42:44] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[17:42:45] [Server thread/INFO]: -------- World Settings For [world_the_end] --------
+[17:42:45] [Server thread/INFO]: Experience Merge Radius: 3.0
+[17:42:45] [Server thread/INFO]: Mob Spawn Range: 6
+[17:42:45] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Cane Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Melon Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Potato Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Vine Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: TwistingVines Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: WeepingVines Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: CaveVines Growth Modifier: 100%
+[17:42:45] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Nether: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[17:42:45] [Server thread/INFO]: Max TNT Explosions: 100
+[17:42:45] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[17:42:45] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true / Isa false
+[17:42:45] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Di 128 / Other 64
+[17:42:45] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1 Hopper Can Load Chunks: false
+[17:42:45] [Server thread/INFO]: View Distance: 10
+[17:42:45] [Server thread/INFO]: Simulation Distance: 10
+[17:42:45] [Server thread/INFO]: Item Despawn Rate: 6000
+[17:42:45] [Server thread/INFO]: Item Merge Radius: 2.5
+[17:42:45] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[17:42:45] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[17:42:45] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[17:42:45] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[17:42:45] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[17:42:47] [Worker-Main-1/INFO]: Preparing spawn area: 0%
+[17:42:47] [Worker-Main-8/INFO]: Preparing spawn area: 0%
+[17:42:47] [Worker-Main-6/INFO]: Preparing spawn area: 0%
+[17:42:47] [Worker-Main-6/INFO]: Preparing spawn area: 0%
+[17:42:47] [Worker-Main-6/INFO]: Preparing spawn area: 0%
+[17:42:48] [Worker-Main-4/INFO]: Preparing spawn area: 32%
+[17:42:48] [Server thread/INFO]: Time elapsed: 2883 ms
+[17:42:48] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[17:42:49] [Worker-Main-9/INFO]: Preparing spawn area: 0%
+[17:42:49] [Worker-Main-9/INFO]: Preparing spawn area: 0%
+[17:42:49] [Worker-Main-3/INFO]: Preparing spawn area: 0%
+[17:42:50] [Worker-Main-4/INFO]: Preparing spawn area: 54%
+[17:42:50] [Worker-Main-11/INFO]: Preparing spawn area: 68%
+[17:42:51] [Worker-Main-4/INFO]: Preparing spawn area: 71%
+[17:42:51] [Worker-Main-5/INFO]: Preparing spawn area: 78%
+[17:42:52] [Worker-Main-8/INFO]: Preparing spawn area: 84%
+[17:42:52] [Worker-Main-4/INFO]: Preparing spawn area: 88%
+[17:42:53] [Worker-Main-9/INFO]: Preparing spawn area: 98%
+[17:42:53] [Server thread/INFO]: Time elapsed: 4565 ms
+[17:42:53] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[17:42:53] [Worker-Main-9/INFO]: Preparing spawn area: 0%
+[17:42:53] [Worker-Main-6/INFO]: Preparing spawn area: 0%
+[17:42:54] [Worker-Main-8/INFO]: Preparing spawn area: 48%
+[17:42:54] [Worker-Main-5/INFO]: Preparing spawn area: 86%
+[17:42:54] [Server thread/INFO]: Time elapsed: 1604 ms
+[17:42:54] [Server thread/INFO]: [IronSight] Enabling IronSight v1.0-SNAPSHOT
+[17:42:54] [Server thread/INFO]: Iron Sight plugin starting....
+[17:42:54] [Server thread/INFO]: Loading all Events.
+[17:42:54] [Server thread/INFO]: Events loaded!
+[17:42:54] [Server thread/INFO]: Loading all commands.
+[17:42:54] [Server thread/INFO]: Commands loaded!
+[17:42:54] [Server thread/INFO]: Contracts loaded!
+[17:42:54] [Server thread/INFO]: Iron Sight successfully loaded!
+[17:42:54] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[17:42:54] [Server thread/INFO]: Done (10.253s)! For help, type "help"
+[17:42:59] [User Authenticator #1/INFO]: UUID of player Elightning is 7edbdea3-86da-44c4-9b34-5382d7b87558
+[17:42:59] [Server thread/INFO]: Connecting
+[17:42:59] [Server thread/INFO]: CONNECTED!!!
+[17:42:59] [Server thread/INFO]: New player!
+[17:42:59] [Server thread/INFO]: Size of contract list: 1
+[17:42:59] [Server thread/INFO]: Size of contract list: 1
+[17:42:59] [Server thread/INFO]: Size of contract list: 1
+[17:42:59] [Server thread/INFO]: Size of contract list: 1
+[17:42:59] [Server thread/INFO]: CHOOSING CONTRACT INFO:
+[17:42:59] [Server thread/INFO]: 1
+[17:42:59] [Server thread/INFO]: 1
+[17:42:59] [Server thread/INFO]: 1
+[17:42:59] [Server thread/INFO]: 1
+[17:42:59] [Server thread/INFO]: Elightning joined the game
+[17:42:59] [Server thread/INFO]: Elightning[/127.0.0.1:33728] logged in with entity id 627 at ([world]-75.87672248354085, 75.49390748022948, -32.0331492368063)
+[17:43:02] [Server thread/INFO]: Elightning issued server command: /ironsight:contract
+[17:43:02] [Netty Epoll Server IO #1/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[17:43:03] [Server thread/INFO]: §fRookie Contract
+[17:43:03] [Server thread/INFO]: set rookie
+[17:43:29] [Server thread/INFO]: Elightning issued server command: /contract active
+[17:43:32] [Server thread/ERROR]: Could not pass event InventoryClickEvent to IronSight v1.0-SNAPSHOT
+org.bukkit.event.EventException: null
+	at org.bukkit.plugin.java.JavaPluginLoader$1.execute(JavaPluginLoader.java:310) ~[spigot-api-1.20.4-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:70) ~[spigot-api-1.20.4-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.plugin.SimplePluginManager.fireEvent(SimplePluginManager.java:589) ~[spigot-api-1.20.4-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:576) ~[spigot-api-1.20.4-R0.1-SNAPSHOT.jar:?]
+	at net.minecraft.server.network.PlayerConnection.a(PlayerConnection.java:2669) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.network.protocol.game.PacketPlayInWindowClick.a(SourceFile:58) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.network.protocol.game.PacketPlayInWindowClick.a(SourceFile:13) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.network.protocol.PlayerConnectionUtils.lambda$0(PlayerConnectionUtils.java:33) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.TickTask.run(SourceFile:18) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.util.thread.IAsyncTaskHandler.d(SourceFile:156) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.util.thread.IAsyncTaskHandlerReentrant.d(SourceFile:23) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.b(MinecraftServer.java:1191) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.d(MinecraftServer.java:1) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.util.thread.IAsyncTaskHandler.x(SourceFile:130) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.bl(MinecraftServer.java:1170) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.x(MinecraftServer.java:1163) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.util.thread.IAsyncTaskHandler.c(SourceFile:139) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.w_(MinecraftServer.java:1147) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.w(MinecraftServer.java:1060) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at net.minecraft.server.MinecraftServer.lambda$0(MinecraftServer.java:304) ~[spigot-1.20.4-R0.1-SNAPSHOT.jar:4055-Spigot-e9ec548-ee685bd]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+Caused by: java.lang.NullPointerException: Cannot invoke "org.bukkit.inventory.ItemStack.getType()" because the return value of "org.bukkit.event.inventory.InventoryClickEvent.getCurrentItem()" is null
+	at droidco.west3.ironsight.Contracts.ContractUiEvents.navActiveContractMenu(ContractUiEvents.java:80) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.bukkit.plugin.java.JavaPluginLoader$1.execute(JavaPluginLoader.java:306) ~[spigot-api-1.20.4-R0.1-SNAPSHOT.jar:?]
+	... 20 more
+[17:43:35] [Server thread/INFO]: Elightning issued server command: /contract active
+[17:43:38] [Server thread/INFO]: Elightning issued server command: /ironsight:contract
+[17:43:42] [Server thread/INFO]: §fApprentice Contract
+[17:43:44] [Server thread/INFO]: Size of contract list: 1
+[17:43:44] [Server thread/INFO]: Size of contract list: 1
+[17:43:44] [Server thread/INFO]: Size of contract list: 1
+[17:43:44] [Server thread/INFO]: Size of contract list: 1
+[17:43:44] [Server thread/INFO]: CHOOSING CONTRACT INFO:
+[17:43:44] [Server thread/INFO]: 1
+[17:43:44] [Server thread/INFO]: 1
+[17:43:44] [Server thread/INFO]: 1
+[17:43:44] [Server thread/INFO]: 1
+[17:43:44] [Server thread/INFO]: Elightning issued server command: /contract active

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DroidCo.west3.IronSight.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DroidCo.west3.IronSight.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/IronSight.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IronSight.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/school-projects.IronSight.main.iml" filepath="$PROJECT_DIR$/.idea/modules/school-projects.IronSight.main.iml" />
     </modules>
   </component>
 </project>
