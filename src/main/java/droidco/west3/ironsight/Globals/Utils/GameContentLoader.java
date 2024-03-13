@@ -2,9 +2,11 @@ package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Location.LocationType;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class GameContentLoader {
     public static void loadCustomItems()
@@ -152,8 +154,6 @@ public class GameContentLoader {
                 "Stare into the depths of the universe",Material.ECHO_SHARD);
 
 
-
-
     }
     public static void loadLocations(){
         Location stormpoint = new Location("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
@@ -171,6 +171,10 @@ public class GameContentLoader {
         Location sloughcreekR = new Location("Slough Creek River","Fishings good",LocationType.River, 2545,2698,38,1243);
         Location pearlR = new Location("Pearl River","Good fishing!",LocationType.River,2599,2083,-2596,-2475);
 
+<<<<<<< HEAD
+        //Change location message
+=======
+>>>>>>> main
         Location wilderness = new Location("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
 
     }
@@ -189,5 +193,13 @@ public class GameContentLoader {
         ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
         ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
 
+    }
+
+    public static void loadBrewing(){
+        System.out.println("In Load Brewing");
+        new BrewingRecipe(Material.BOWL, (inventory, ingredient) -> {//Some lambda magic
+            return new ItemStack(Material.BEACON);
+
+        });
     }
 }

@@ -99,6 +99,7 @@ public class Location {
         return false;
     }
 
+
     public static void displayLocation(Player p)
     {
         Bandit b = Bandit.getPlayer(p);
