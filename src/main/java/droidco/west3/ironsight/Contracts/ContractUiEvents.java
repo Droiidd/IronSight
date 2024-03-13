@@ -23,8 +23,12 @@ public class ContractUiEvents implements Listener {
                     //Check if they are doing one already
                     if(!iPlayer.isDoingContract()){
                         //Check what slot they chose.
-                        switch(e.getCurrentItem().getItemMeta().getDisplayName()){
+                        System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
+                        String name = e.getCurrentItem().getItemMeta().getDisplayName();
+
+                        switch(name.split("§f")[1]){
                             case "Rookie Contract" -> {
+                                System.out.println("set rookie");
                                 iPlayer.setActiveContract(iPlayer.getRookieContract());
                             }
                             case "Apprentice Contract" -> {
