@@ -151,7 +151,7 @@ public class BanditTask extends BukkitRunnable {
                     int elap = (int) elapsedTime / 1000;
 
                     //b.updateBounty(-1);
-                    p.sendMessage(elap);
+                    p.sendMessage(String.valueOf(elap));
                     if (elap >= b.getBounty()) {
                         //Player has waited enough time
                         p.sendMessage("ELAP");
