@@ -15,6 +15,7 @@ CustomItem {
     private String loreLine3;
     private boolean isLegal;
     private boolean isOfficer;
+    private int rarity;
     private Material material;
     private Enchantment enchant1;
     private static HashMap<String,CustomItem> items = new HashMap<>();
@@ -22,12 +23,14 @@ CustomItem {
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
+        this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
         this.isLegal = isLegal;
         this.isOfficer = isOfficer;
         this.description = ChatColor.DARK_GRAY+description;
         this.material = material;
         items.put(this.itemCode, this);
+        ItemTable.addItem(this);
     }
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer, String description, Material material,
                       Enchantment enchant1) {
@@ -81,4 +84,7 @@ CustomItem {
     public void setOfficer(boolean officer) {
         isOfficer = officer;
     }
+    public int getRarity(){return rarity; }
+
+    public Material getMaterial(){return material;}
 }
