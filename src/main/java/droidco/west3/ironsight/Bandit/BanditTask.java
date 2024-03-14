@@ -79,37 +79,8 @@ public class BanditTask extends BukkitRunnable {
             p.teleport(respawn);
             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
         }
-        //HANDLE LOCATION SPECIFIC
-
+        //HANDLE LOCATION SPECIFIc
         Location currentLoc = b.getCurrentLocation();
-        if (currentLoc == null){
-
-        }
-        //PRISON
-        if (b.isJailed()) {
-            if (b.getCurrentLocation() == null || !currentLoc.getType().equals(LocationType.Prison)) {
-                escaping = true;
-                if (!this.prisonEscapeTimer.containsKey(p.getUniqueId().toString())) {
-                    //Player has not gotten a timer, add them
-                    this.prisonEscapeTimer.put(p.getUniqueId().toString(), Long.valueOf(System.currentTimeMillis()));
-                } else if (this.prisonEscapeTimer.get(p.getUniqueId().toString()) == null) {
-                    this.prisonEscapeTimer.replace(p.getUniqueId().toString(), Long.valueOf(System.currentTimeMillis()));
-                } else {
-                    //Player has a timer, see if they have waited long enough
-                    //check current time
-                    long currentTime = System.currentTimeMillis();
-                    long eTime = currentTime - this.prisonEscapeTimer.get(p.getUniqueId().toString()).longValue();
-                    int elapsed = (int) eTime / 1000;
-                    p.sendMessage(ChatColor.RED+"Escapee! You have " + (escapeTimer - elapsed) + "s to return.");
-                    if (elapsed >= escapeTimer) {
-                        //They escaped for too long, kill them
-                        p.damage(100);
-                        p.sendTitle(ChatColor.RED + "+1000 bounty", "Returning to jail");
-                        this.prisonEscapeTimer.replace(p.getUniqueId().toString(), null);
-                    }
-                }
-            }
-        }
 
         //TOWNS
         if (currentLoc.getType().equals(LocationType.TOWN)) {
@@ -141,6 +112,13 @@ public class BanditTask extends BukkitRunnable {
             }
         }
         if (b.isJailed()) {
+            if (b.getCurrentLocation() == null || !currentLoc.getType().equals(LocationType.Prison)) {
+                escaping = true;
+                //Player is escaping! PUT LOGIC HERE
+                p.sendMessage("escapee");
+            }
+        }
+        if (b.isJailed()) {
             if (currentLoc.getType().equals(LocationType.Prison)) {
                 if (tick % 3 == 0) {
                     //Player is jailed and in prison
@@ -154,7 +132,7 @@ public class BanditTask extends BukkitRunnable {
                     int elap = (int) elapsedTime / 1000;
 
                     //b.updateBounty(-1);
-                    p.sendMessage(String.valueOf(elap));
+                    //p.sendMessage(elap);
                     if (elap >= b.getBounty()) {
                         //Player has waited enough time
                         p.sendMessage("ELAP");
