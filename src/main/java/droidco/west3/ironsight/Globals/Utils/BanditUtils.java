@@ -11,21 +11,19 @@ import java.util.List;
 
 public class BanditUtils
 {
-    public static void displayBasicStats(Bandit iP, Player p)
+    public static void displayBasicStats(Bandit b, Player p)
     {
         p.sendMessage("Iron Sight Player Stats:");
         p.sendMessage("============");
-        p.sendMessage("Bleeding: "+iP.isBleeding());
-        p.sendMessage("Broken Legs: "+iP.isBrokenLegs());
-        p.sendMessage("Bounty: "+iP.getBounty());
-        p.sendMessage("Bank: "+iP.getBank());
-        p.sendMessage("Wallet: "+iP.getWallet());
+        p.sendMessage("Bleeding: "+b.isBleeding());
+        p.sendMessage("Broken Legs: "+b.isBrokenLegs());
+        p.sendMessage("In Prison: "+b.isJailed());
         p.sendMessage("EXPERIENCE INFO: ");
-        p.sendMessage("Combat Level: "+iP.getCmbtContractLvl());
-        p.sendMessage("Peacemaker Level: "+iP.getPceContractLvl());
-        p.sendMessage("Combat XP: "+iP.getCmbtContractXp());
-        p.sendMessage("Peacemaker XP: "+iP.getPceContractXp());
-        p.sendMessage("Wanted Kills: "+iP.getWantedKills());
+        p.sendMessage("Combat Level: "+b.getCmbtContractLvl());
+        p.sendMessage("Peacemaker Level: "+b.getPceContractLvl());
+        p.sendMessage("Combat XP: "+b.getCmbtContractXp());
+        p.sendMessage("Peacemaker XP: "+b.getPceContractXp());
+        p.sendMessage("Wanted Kills: "+b.getWantedKills());
 
     }
     public static String getPlayerRoleTitle()
