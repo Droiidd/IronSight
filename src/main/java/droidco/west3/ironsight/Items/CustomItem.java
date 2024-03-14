@@ -85,4 +85,6 @@ CustomItem {
         isOfficer = officer;
     }
     public int getRarity(){return rarity; }
+
+    public Material getMaterial(){return material;}
 }

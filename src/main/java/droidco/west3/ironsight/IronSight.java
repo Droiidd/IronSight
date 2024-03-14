@@ -1,5 +1,6 @@
 package droidco.west3.ironsight;
 
+import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.ContractUiEvents;
@@ -69,6 +70,7 @@ public final class IronSight extends JavaPlugin {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
         getCommand("ironsight").setExecutor(new AdminCommands());
         getCommand("contract").setExecutor(new ContractMenuCmd());
+        getCommand("give_common").setExecutor(new TestItemCommand());
     }
     public void loadContracts(){
         List<Location> testLocs = new ArrayList<>();

@@ -10,3 +10,6 @@ commands:
   contract:
     aliases:
       - c
+  give_common:
+    aliase:
+      - g_c
