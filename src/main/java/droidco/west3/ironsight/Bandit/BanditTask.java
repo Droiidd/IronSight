@@ -18,23 +18,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BanditTask extends BukkitRunnable {
-    private final ArrayList<BanditTask> tasks = new ArrayList<>();
+    private ArrayList<BanditTask> tasks = new ArrayList<>();
     private final IronSight plugin;
     private final Bandit b;
-    private int tick;
+    private int tick = 0;
     private final int combatLogTimer = 30;
-    private final int escapeTimer = 10;
-    private boolean escaping = false;
     private int combatLogCounter = 0;
     private int wantedMin = 2;
     private int wantedSec = 0;
     private final int contractTimer = 30;
     private int contractCounter = 0;
     private int wantedTownCounter = 0;
-    private HashMap<String, Long> prisonEscapeTimer = new HashMap<>();
     private int wantedTownTimer = 10;
-
-    //Seconds * ticks/second
+    private boolean escapeFlag = false;
     private final Player p;
     private boolean wildernessFlag;
     private HashMap<String, Location> locations;
@@ -45,7 +41,6 @@ public class BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
-        tick = 0;
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
         ContractUtils.initializeContracts(b);
@@ -62,16 +57,18 @@ public class BanditTask extends BukkitRunnable {
         // HANDLE PLAYER RESPAWN
         if (b.isRespawning()) {
             // HANDLE PLAYER SEND TO PRISON
+            b.setRespawning(false);
             if (b.isJailedFlag()) {
+                //REPSAWN IN PRISON
                 b.setJailedFlag(false);
                 Location prison = Location.getLocation("Prison");
                 //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
                 org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(), prison.getSpawnX(), prison.getSpawnY(), prison.getSpawnZ());
-
                 p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
                 p.teleport(respawn);
                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
             }else{
+                //RESPAWNING IN A TOWN
                 p.setWalkSpeed(0);
                 p.setFlySpeed(0);
                 p.setSprinting(false);
@@ -83,6 +80,23 @@ public class BanditTask extends BukkitRunnable {
 
         //HANDLE LOCATION SPECIFIc
         Location currentLoc = b.getCurrentLocation();
+
+        if (b.isJailed()) {
+            if (!currentLoc.getType().equals(LocationType.Prison)) {
+                //Player is escaping! PUT LOGIC HERE
+                b.setEscaping(true);
+                if(!escapeFlag){
+                    escapeFlag = true;
+                    PrisonEscapeTask escapee = new PrisonEscapeTask(plugin,p);
+                }
+            }else{
+                //They are in prison!
+                escapeFlag = false;
+                b.setEscaping(false);
+            }
+        }
+
+
 //
 //        //TOWNS
 //        if (currentLoc.getType().equals(LocationType.TOWN)) {
@@ -113,13 +127,7 @@ public class BanditTask extends BukkitRunnable {
 //                b.updateBounty(3);
 //            }
 //        }
-//        if (b.isJailed()) {
-//            if (b.getCurrentLocation() == null || !currentLoc.getType().equals(LocationType.Prison)) {
-//                escaping = true;
-//                //Player is escaping! PUT LOGIC HERE
-//                p.sendMessage("escapee");
-//            }
-//        }
+
 
 //        if (b.isJailed()) {
 //            p.sendMessage("JAILED");
@@ -155,11 +163,7 @@ public class BanditTask extends BukkitRunnable {
 
         //Roughly 1 second
         if (tick % 3 == 0) {
-            if(b.isJailed()){
-                p.sendMessage("jailed");
-            }else{
-                p.sendMessage("not jailed?");
-            }
+
             // HANDLE WANTED TIMER
 //            if (b.isWanted()) {
 //                wantedSec--;
