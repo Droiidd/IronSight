@@ -39,9 +39,10 @@ public class GeneralEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         if(b.isJailed()){
             b.setJailedFlag(true);
-        }else{
-            b.setRespawning(true);
+            p.sendMessage("Jail flag is true");
         }
+            b.setRespawning(true);
+
     }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
