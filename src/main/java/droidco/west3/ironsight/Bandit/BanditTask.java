@@ -88,6 +88,7 @@ public class BanditTask extends BukkitRunnable {
                 if(!escapeFlag){
                     escapeFlag = true;
                     PrisonEscapeTask escapee = new PrisonEscapeTask(plugin,p);
+                    p.sendTitle(ChatColor.RED+String.valueOf(ChatColor.BOLD)+"Escapee!",ChatColor.GRAY+"Return to jail or gain bounty",1,2,1);
                 }
             }else{
                 //They are in prison!
