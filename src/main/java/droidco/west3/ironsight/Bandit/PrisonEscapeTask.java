@@ -1,6 +1,9 @@
 package droidco.west3.ironsight.Bandit;
 
 import droidco.west3.ironsight.IronSight;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,9 +34,13 @@ public class PrisonEscapeTask extends BukkitRunnable {
         if(tick % 3 == 0){
             escapeTime++;
             if(b.isEscaping()){
-                p.sendMessage((maxTime - escapeTime)+" seconds remaining.");
+                p.spigot().sendMessage(
+                        ChatMessageType.ACTION_BAR,
+                        new TextComponent(ChatColor.RED + ""+(maxTime - escapeTime)+ChatColor.RESET+ " seconds remaining."));
                 if(escapeTime == maxTime){
-                    p.sendMessage("DIE");
+                    b.updateBounty(1000);
+                    p.sendMessage(ChatColor.GRAY+"Attempted to escape "+ChatColor.DARK_RED+"+1000 bounty");
+                    p.damage(100);
                 }
             }else{
                 //NO LONGER ESCAPING, CANCEL TIMER
