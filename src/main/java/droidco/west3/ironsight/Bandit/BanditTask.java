@@ -6,6 +6,8 @@ import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Location.LocationType;
 import droidco.west3.ironsight.Location.LocationUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -108,9 +110,11 @@ public class BanditTask extends BukkitRunnable {
                     //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
                     if (wantedTownCounter == 0) {
                         //TIMER JUST STARTED!
-                        p.sendMessage("Wanted players not allowed in towns, leave or die.");
+                        p.sendTitle(ChatColor.DARK_RED+"Wanted!",ChatColor.GRAY+"Leave town or die.",1,2,1);
                     }
-                    p.sendMessage((wantedTownTimer - wantedTownCounter) + " seconds to leave.");
+                    p.spigot().sendMessage(
+                            ChatMessageType.ACTION_BAR,
+                            new TextComponent(ChatColor.RED + ""+(wantedTownTimer - wantedTownCounter)+ChatColor.RESET+ " seconds remaining."));
                     if (wantedTownCounter == wantedTownTimer) {
                         p.damage(100);
                     }
