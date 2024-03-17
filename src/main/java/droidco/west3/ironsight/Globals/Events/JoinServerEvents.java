@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Globals.Events;
 
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Bandit.BanditTask;
@@ -31,6 +32,17 @@ public class JoinServerEvents implements Listener{
         b.setOnlinePlayer(p);
         BanditUtils.displayBasicStats(b, p);
         BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
+
+        //check if the player is in prison, and can be released
+        if(b.isJailed()){
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - b.getJailStartTime();
+            int elap = (int) elapsedTime / 1000;
+            if (elap >= b.getBounty()) {
+                //Player has waited enough time
+                BanditUtils.releasePrisoner(p,b);
+            }
+        }
     }
 
     @EventHandler
