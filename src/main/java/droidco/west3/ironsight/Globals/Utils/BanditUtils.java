@@ -26,6 +26,14 @@ public class BanditUtils
         p.sendMessage("Wanted Kills: "+b.getWantedKills());
 
     }
+    public static void releasePrisoner(Player p, Bandit b) {
+        b.setBounty(0);
+        b.setJailed(false);
+        b.setEscaping(false);
+        b.setJailedFlag(false);
+        p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " jail!","Good luck...",1,2,1);
+        b.setRespawning(true);
+    }
     public static String getPlayerRoleTitle()
     {
         return ChatColor.RED+"Bandit ";
