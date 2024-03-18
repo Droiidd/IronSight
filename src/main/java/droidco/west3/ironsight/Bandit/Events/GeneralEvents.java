@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,6 +20,7 @@ import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -39,9 +41,8 @@ public class GeneralEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         if(b.isJailed()){
             b.setJailedFlag(true);
-        }else{
-            b.setRespawning(true);
         }
+            b.setRespawning(true);
     }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
@@ -69,7 +70,7 @@ public class GeneralEvents implements Listener {
         ItemStack inHand = p.getInventory().getItemInMainHand();
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
-                    "bandage")) {
+                    "Bandage")) {
                 //They are using a bandage
                 if (b.isBleeding()) {
                     p.playSound(p.getLocation(), Sound.ENTITY_LEASH_KNOT_PLACE, 1, 1);
@@ -84,6 +85,7 @@ public class GeneralEvents implements Listener {
                 if(b.isBrokenLegs()){
                     p.playSound(p.getLocation(), Sound.ITEM_AXE_STRIP, 1, 0);
                     b.setBrokenLegs(false);
+                    p.removePotionEffect(PotionEffectType.SLOW);
                     //remove splint
                 }
             }
@@ -119,6 +121,12 @@ public class GeneralEvents implements Listener {
                 //p.sendMessage("SHIT");
                 e.setCancelled(true);
             }
+        }
+    }
+    @EventHandler
+    public void enderPearlUse(ProjectileLaunchEvent e) {
+        if (e.getEntity() instanceof EnderPearl) {
+            e.setCancelled(true);
         }
     }
 

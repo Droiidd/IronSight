@@ -48,7 +48,6 @@ public class LocationUiEvents implements Listener {
       //ADD A RESPAWN SOUND
         p.sendTitle(locTitle,welcomeMsg);
         p.closeInventory();
-        iP.setRespawning(false);
         p.setWalkSpeed(0.2f);
         p.setFlySpeed(0.2f);
         p.teleport(respawn);

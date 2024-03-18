@@ -23,6 +23,7 @@ public class Bandit
     private boolean combatBlockFlag;
     private boolean doingContract;
     private boolean respawning;
+    private boolean escaping;
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
@@ -178,6 +179,14 @@ public class Bandit
 
     public boolean isDoingContract() {
         return doingContract;
+    }
+
+    public boolean isEscaping() {
+        return escaping;
+    }
+
+    public void setEscaping(boolean escaping) {
+        this.escaping = escaping;
     }
 
     public void setDoingContract(boolean doingContract) {
