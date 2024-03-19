@@ -302,4 +302,3 @@ public class GameContentLoader {
         System.out.println("Contracts loaded!");
     }
 }
-
