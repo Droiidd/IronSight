@@ -5,6 +5,7 @@ import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
@@ -65,6 +66,7 @@ public class GameContentLoader {
                 "Can be refined or sold",Material.IRON_ORE,0.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false,
                 "Can be refined or sold",Material.COPPER_ORE,0.0,0.0);
+
 
         //UNCOMMON
         CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false,
