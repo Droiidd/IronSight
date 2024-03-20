@@ -4,7 +4,6 @@ import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.ContractUiEvents;
-import droidco.west3.ironsight.Contracts.Utils.CompletionType;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;

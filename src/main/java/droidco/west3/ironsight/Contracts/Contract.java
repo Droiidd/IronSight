@@ -1,6 +1,6 @@
 package droidco.west3.ironsight.Contracts;
 
-import droidco.west3.ironsight.Contracts.Utils.CompletionType;
+import droidco.west3.ironsight.Contracts.Utils.BountyTargetType;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
@@ -21,7 +21,6 @@ public class Contract
     private String contractName;
     private int rewardXp;
     private double reward;
-    private CompletionType completionType;
     private ContractType contractType;
     private List<Location> contractLocs;
     private Location location;
@@ -35,11 +34,10 @@ public class Contract
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
-    public Contract(String contractName, int rewardXp, CompletionType completionType, ContractType type, List<Location> contractLocs, boolean isActive, Difficulty difficulty, int rarity) {
+    public Contract(String contractName, int rewardXp, ContractType type, List<Location> contractLocs, boolean isActive, Difficulty difficulty, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
         this.contractName = contractName;
         this.rewardXp = rewardXp;
-        this.completionType = completionType;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.isActive = isActive;
@@ -76,11 +74,11 @@ public class Contract
             Some contracts may have different completion requirements than others, this handles
             that.
          */
-        switch(this.completionType){
+        switch(this.contractType){
             case Delivery -> {
                 generateNewDelivery();
             }
-            case Hunter -> {
+            case Bounty -> {
                 //generateNewHunter();
             }
         }
@@ -159,34 +157,42 @@ public class Contract
 
 
     }
-    public void generateNewHunter(Player p){
+    public void generateNewBountyHunter(Player p){
         //Check if player gets a PLAYER or NPC contract
         int odds = GlobalUtils.getRandomNumber(101);
+        BountyTargetType targetType = null;
         if(odds<50){
-            //Player-based contract
-            Player target = null;
-            //Make a list of online players OTHER THAN the person taking the contract
-            List<Player> playerPool = new ArrayList<>();
-            for(Player p2 : Bukkit.getServer().getOnlinePlayers()){
-                //Avoid contractee, add others
-                if(!p2.getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString())){
-                    playerPool.add(p2);
-                }
-            }
-            //Check if we could find any other online players
-            if(playerPool.size() > 0){
-                //FOUND PLAYERS!
-                int playerIndex = GlobalUtils.getRandomNumber(playerPool.size());
-                target = playerPool.get(playerIndex);
-            }else{
-                //NO players
-                //Try again
-                generateNewHunter(p);
-            }
-            String targetName = target.getDisplayName();
-            p.sendMessage(targetName);
+            targetType = BountyTargetType.PLAYER;
         }else{
-            //NPC-based contract
+            targetType = BountyTargetType.NPC;
+        }
+        switch(targetType){
+            case PLAYER -> {
+                Player target = null;
+                //Make a list of online players OTHER THAN the person taking the contract
+                List<Player> playerPool = new ArrayList<>();
+                for(Player p2 : Bukkit.getServer().getOnlinePlayers()){
+                    //Avoid contractee, add others
+                    if(!p2.getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString())){
+                        playerPool.add(p2);
+                    }
+                }
+                //Check if we could find any other online players
+                if(playerPool.size() > 0){
+                    //FOUND PLAYERS!
+                    int playerIndex = GlobalUtils.getRandomNumber(playerPool.size());
+                    target = playerPool.get(playerIndex);
+                }else{
+                    //NO players
+                    //Try again
+                    generateNewBountyHunter(p);
+                }
+                String targetName = target.getDisplayName();
+                p.sendMessage(targetName);
+            }
+            case NPC -> {
+
+            }
         }
     }
     public static HashMap<String, Contract> getContracts()
@@ -221,14 +227,6 @@ public class Contract
 
     public void setDescription(List<String> description) {
         this.description = description;
-    }
-
-    public CompletionType getType() {
-        return completionType;
-    }
-
-    public void setType(CompletionType type) {
-        this.completionType = type;
     }
 
     public List<Location> getContractLoc() {

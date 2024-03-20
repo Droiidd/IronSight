@@ -3,6 +3,8 @@ package droidco.west3.ironsight.Contracts.Utils;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,13 +65,13 @@ public class ContractUtils
         }
         return 0;
     }
-    public static String getTypeString(CompletionType type){
+    public static String getTypeString(ContractType type){
         switch(type){
-            case Explorer -> {
-                return "Explorer";
+            case OilField -> {
+                return "Oil Field Raid";
             }
-            case Hunter -> {
-                return "Hunter";
+            case Bounty -> {
+                return "Bounty Hunter";
             }
             case Delivery -> {
                 return "Delivery";
@@ -105,19 +107,27 @@ public class ContractUtils
         }else{
             p.setExperiencedContract(exprn);
         }
-        System.out.println("CHOOSING CONTRACT INFO:");
-        System.out.println(rookieContracts.size());
-        System.out.println(apprenticeContracts.size());
-        System.out.println(experiencedContracts.size());
-        System.out.println(masterContracts.size());
         //Generate the contracts
         p.getRookieContract().generateContracts();
         p.getApprenticeContract().generateContracts();
         p.getExperiencedContract().generateContracts();
     }
     public static Contract getSingleContract(List<Contract> contracts){
-        System.out.println("Size of contract list: "+contracts.size());
         int odds = GlobalUtils.getRandomNumber(contracts.size());
         return contracts.get(odds);
+    }
+    public static ItemStack getContractOptionIcon(ContractType type){
+        ItemStack item = new ItemStack(Material.BOOK);
+        switch (type){
+            case OilField -> {
+
+            }
+            case Bounty -> {
+
+            }
+            case Delivery -> {
+
+            }
+        }
     }
 }
