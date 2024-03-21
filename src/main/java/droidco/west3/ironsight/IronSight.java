@@ -37,7 +37,7 @@ public final class IronSight extends JavaPlugin {
         GameContentLoader.loadLocations();
         GameContentLoader.loadCustomItems();
         GameContentLoader.loadBrewing();
-        loadContracts();
+        GameContentLoader.loadContracts();
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
@@ -70,24 +70,5 @@ public final class IronSight extends JavaPlugin {
         getCommand("ironsight").setExecutor(new AdminCommands());
         getCommand("contract").setExecutor(new ContractMenuCmd());
         getCommand("give_common").setExecutor(new TestItemCommand());
-    }
-    public void loadContracts(){
-        List<Location> testLocs = new ArrayList<>();
-        testLocs.add(Location.getLocation("Black Spur Mines"));
-        testLocs.add(Location.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("Looking for iron.",30, CompletionType.Delivery, ContractType.Miner, testLocs ,false, Difficulty.Rookie,1);
-
-        List<Location> test2Locs = new ArrayList<>();
-        test2Locs.add(Location.getLocation("North Oil Field"));
-        test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("I need fish caught.",30, CompletionType.Delivery ,ContractType.Fisher, test2Locs ,false, Difficulty.Apprentice,1);
-
-        List<Location> test3Locs = new ArrayList<>();
-        test3Locs.add(Location.getLocation("Storm Point"));
-        test3Locs.add(Location.getLocation("New Orleans"));
-        Contract testC3 = new Contract("Mule across city borders",30, CompletionType.Delivery,ContractType.Fisher , test3Locs ,false, Difficulty.Experienced,1);
-
-        Contract testC4 = new Contract("Big time moves.",30, CompletionType.Delivery,ContractType.Miner , test3Locs ,false, Difficulty.Master,1);
-
     }
 }

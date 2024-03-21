@@ -1,5 +1,8 @@
 package droidco.west3.ironsight.Globals.Utils;
 
+import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
@@ -7,6 +10,9 @@ import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Location.LocationType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameContentLoader {
     public static void loadCustomItems()
@@ -197,5 +203,24 @@ public class GameContentLoader {
             return new ItemStack(Material.BEACON);
 
         });
+    }
+    public static void loadContracts(){
+        List<Location> testLocs = new ArrayList<>();
+        testLocs.add(Location.getLocation("Black Spur Mines"));
+        testLocs.add(Location.getLocation("Santa Fe"));
+        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,false, Difficulty.Rookie,1);
+
+        List<Location> test2Locs = new ArrayList<>();
+        test2Locs.add(Location.getLocation("North Oil Field"));
+        test2Locs.add(Location.getLocation("Slough Creek"));
+        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,false, Difficulty.Apprentice,1);
+
+        List<Location> test3Locs = new ArrayList<>();
+        test3Locs.add(Location.getLocation("Storm Point"));
+        test3Locs.add(Location.getLocation("New Orleans"));
+        Contract testC3 = new Contract("Mule across city borders",ContractType.Delivery , test3Locs ,false, Difficulty.Experienced,1);
+
+        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,false, Difficulty.Master,1);
+
     }
 }

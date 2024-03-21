@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Contracts;
 
+import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.Utils.BountyTargetType;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
@@ -21,6 +22,9 @@ public class Contract
     private String contractName;
     private int rewardXp;
     private double reward;
+
+    private List<OilFieldCrate> crates;
+    private int reinforcementCount;
     private ContractType contractType;
     private List<Location> contractLocs;
     private Location location;
@@ -34,10 +38,9 @@ public class Contract
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
-    public Contract(String contractName, int rewardXp, ContractType type, List<Location> contractLocs, boolean isActive, Difficulty difficulty, int rarity) {
+    public Contract(String contractName, ContractType type, List<Location> contractLocs, boolean isActive, Difficulty difficulty, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
         this.contractName = contractName;
-        this.rewardXp = rewardXp;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.isActive = isActive;
@@ -50,16 +53,32 @@ public class Contract
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
         generateContracts();
     }
+    public void setRewardXp()
+    {
+        switch(difficulty){
+            case Rookie -> {
+                this.rewardXp = 25;
+            }
+            case Apprentice -> {
+                this.rewardXp = 45;
+            }
+            case Experienced -> {
+                this.rewardXp = 60;
+            }
+            case Master -> {
+                this.rewardXp = 100;
+            }
+        }
+    }
+
     public void generateContracts()
     {
         /*
-        Contract generation is really scuffed for now so until we change it this is how it works
         First the contract is instanciated when the plugin loads. This gives the contract it's type, title,
         list of possible locations, the most basic info.
         New contracts can then be generated from this type.
          */
         this.location = getRandomLocation();
-        this.reward = ContractUtils.getDifficultyReward(difficulty);
         //Check if it's a bulk order delivery
         int bulkOdds = GlobalUtils.getRandomNumber(101);
         if(bulkOdds < 35){
@@ -81,6 +100,9 @@ public class Contract
             case Bounty -> {
                 //generateNewHunter();
             }
+            case OilField -> {
+                //generateOilField();
+            }
         }
     }
     public List<String> createDescription(String line1, String line2, String line3, String line4)
@@ -91,6 +113,18 @@ public class Contract
         tmpDesc.add(line3);
         tmpDesc.add(line4);
         return tmpDesc;
+    }
+    public int getReinforcementMultiplier(){
+        double multiplier = 1.0;
+        if(difficulty == Difficulty.Master){
+            multiplier = 1.5;
+        }
+        int val = (int) Math.round(reinforcementCount*multiplier);
+        return val;
+    }
+    public void generateNewOilField(int reinforcementCount){
+        this.crates = OilFieldCrate.getCratesByLocation(location);
+        this.reinforcementCount = reinforcementCount;
     }
 
     public void generateNewDelivery(){

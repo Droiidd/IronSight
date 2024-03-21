@@ -9,6 +9,7 @@ import java.util.List;
 public class OilFieldContract
 {
     private List<OilFieldCrate> crates;
+    private int reinforcementCount;
     private Location location;
     private String iconDescription;
     private int reinforcementCount;
