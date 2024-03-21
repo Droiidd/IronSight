@@ -68,6 +68,7 @@ public class GameContentLoader {
                 "Can be refined or sold",Material.COPPER_ORE,0.0,0.0);
 
 
+
         //UNCOMMON
         CustomItem cookedSalmon = new CustomItem("Smoked Salmon",3,true,false,
                 "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,0.0);
@@ -177,7 +178,7 @@ public class GameContentLoader {
 
         Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        Location texas = new Location("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        Location texas = new Location("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
         Location prison = new Location("Prison","JaiL!",LocationType.Prison, 47,52,1271,1277,50,67,1273);
 
