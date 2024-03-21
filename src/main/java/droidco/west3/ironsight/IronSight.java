@@ -2,8 +2,12 @@ package droidco.west3.ironsight;
 
 import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
+import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.ContractUiEvents;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationUiEvents;
 import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
 import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
@@ -12,9 +16,13 @@ import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
 import droidco.west3.ironsight.Items.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterListEvents;
+import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class IronSight extends JavaPlugin {
 
@@ -59,6 +67,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
         getServer().getPluginManager().registerEvents(new LocationUiEvents(), this);
+        getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
     }
     public void loadAllCommands() {

@@ -56,11 +56,22 @@ public class BanditTask extends BukkitRunnable {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
         if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
             p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-        }
+            Double distance = FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
+            int distanceMsg = distance.intValue();
+            p.spigot().sendMessage(
+                    ChatMessageType.ACTION_BAR,
+                    new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+        } else {
+            if (b.getTargetedPlayer() != null) {
+                if (b.getTargetedPlayer().isOnline()) {
+                    p.setCompassTarget(b.getTargetedPlayer().getLocation());
+                    Double distance = b.getTargetedPlayer().getLocation().distance(p.getLocation());
+                    int distanceMsg = distance.intValue();
+                    p.spigot().sendMessage(
+                            ChatMessageType.ACTION_BAR,
+                            new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
 
-        else {
-            if (b.getTargetedPlayer().isOnline()) {
-                p.setCompassTarget(b.getTargetedPlayer().getLocation());
+                }
             }
 
         }

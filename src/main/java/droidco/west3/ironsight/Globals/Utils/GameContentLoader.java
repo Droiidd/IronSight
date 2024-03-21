@@ -4,17 +4,14 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.IronSight;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import org.bukkit.Bukkit;
-<<<<<<< HEAD
 import org.bukkit.Color;
-=======
->>>>>>> 8d97370ec1fe4477699b66d39d0b5670ced665be
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +19,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class GameContentLoader {
     public static void loadCustomItems()
@@ -143,10 +139,6 @@ public class GameContentLoader {
                 "Still in the frozen north",Material.MUSIC_DISC_13,0.0,0.0);
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field",
                 Material.TRIPWIRE_HOOK,0.0,0.0);
-<<<<<<< HEAD
-=======
-
->>>>>>> 8d97370ec1fe4477699b66d39d0b5670ced665be
 
 
         //LEGENDARY
@@ -276,17 +268,9 @@ public class GameContentLoader {
             ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.KELP);
 
-
-
-
-        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
-
-        ItemIcon santafe = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleans = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
-        ItemIcon texas = new ItemIcon("Republic Of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
+        ItemIcon santafeRE = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
+        ItemIcon neworleansRE = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
+        ItemIcon texasRE = new ItemIcon("Republic of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
 
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
         ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
@@ -307,6 +291,7 @@ public class GameContentLoader {
         new BrewingRecipe("Whiskey", new ItemStack(Material.GLOW_INK_SAC), false, PotionEffectType.DAMAGE_RESISTANCE, 0, 60, Color.fromRGB(135, 99, 38), "empty");
         new BrewingRecipe("Morphine", new ItemStack(Material.PUMPKIN_SEEDS), false, PotionEffectType.REGENERATION, 0, 60, Color.fromRGB(20, 151, 163), "empty");
         System.out.println("Brewing load complete.");
+
     }
     public static void loadContracts(){
         System.out.println("Loading contracts!");
