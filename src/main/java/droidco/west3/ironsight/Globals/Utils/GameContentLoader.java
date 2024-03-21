@@ -215,15 +215,15 @@ public class GameContentLoader {
                 ItemIcon barron = new ItemIcon("Barron's Canyon", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines", "Find the Half Dome Mines", Material.STONE);
             ItemIcon rivers = new ItemIcon("Rivers", "Find Rivers", Material.WATER_BUCKET);
-                ItemIcon pearl = new ItemIcon("Pearl River", "Find Pearl River", Material.WATER_BUCKET);
-                ItemIcon threeForks = new ItemIcon("Three Forks Delta", "Find Three Forks Delta", Material.WATER_BUCKET);
-                ItemIcon lowerGuada = new ItemIcon("Lower Guadalupe River", "Find Guadalupe River", Material.WATER_BUCKET);
-                ItemIcon slough = new ItemIcon("Slough Creek", "Find Slough Creek", Material.WATER_BUCKET);
+                ItemIcon pearl = new ItemIcon("Pearl River", "Find Pearl River", Material.MUSIC_DISC_CAT);
+                ItemIcon threeForks = new ItemIcon("Three Forks Delta", "Find Three Forks Delta", Material.MUSIC_DISC_CHIRP);
+                ItemIcon lowerGuada = new ItemIcon("Lower Guadalupe River", "Find Guadalupe River", Material.MUSIC_DISC_BLOCKS);
+                ItemIcon slough = new ItemIcon("Slough Creek", "Find Slough Creek", Material.MUSIC_DISC_FAR);
             ItemIcon forestReserves = new ItemIcon("Forest Reserves", "Find Forest Reserves", Material.OAK_SAPLING);
                 ItemIcon grizzly = new ItemIcon("Grizzly Ridge", "Find Grizzly Ridge", Material.OAK_SAPLING);
-                ItemIcon marston = new ItemIcon("Marston Glacier", "Find Marston Glacier", Material.OAK_SAPLING);
-                ItemIcon hawkRidge = new ItemIcon("Hawk Ridge Forest", "Find Hawk Ridge Forest", Material.OAK_SAPLING);
-                ItemIcon sentinel = new ItemIcon("Sentinel Rock", "Find Sentinel Rock", Material.OAK_SAPLING);
+                ItemIcon marston = new ItemIcon("Marston Glacier", "Find Marston Glacier", Material.BIRCH_SAPLING);
+                ItemIcon hawkRidge = new ItemIcon("Hawk Ridge Forest", "Find Hawk Ridge Forest", Material.ACACIA_SAPLING);
+                ItemIcon sentinel = new ItemIcon("Sentinel Rock", "Find Sentinel Rock", Material.QUARTZ);
             ItemIcon banditCamps = new ItemIcon("Bandit Camps", "Find Bandit Camps", Material.SKELETON_SKULL);
                 ItemIcon redAsh = new ItemIcon("Red Ash Camp", "Find Red Ash Camp", Material.REDSTONE);
                 ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base", "Find Storm Point", Material.ITEM_FRAME);
@@ -231,10 +231,10 @@ public class GameContentLoader {
                 ItemIcon florence = new ItemIcon("Florence Peak", "Find Florence Peak", Material.ACACIA_DOOR);
                 ItemIcon washington = new ItemIcon("Washington Column", "Find Washington Column", Material.SPRUCE_DOOR);
                 ItemIcon sierra = new ItemIcon("Sierra Gorge", "Find Sierra Gorge", Material.BIRCH_DOOR);
-            ItemIcon oilFields = new ItemIcon("Oil Fields", "Find Oil Fields", Material.COAL);
-                ItemIcon northMoraine = new ItemIcon("North Moraine Oil Field", "Find North Moraine Oil Field", Material.COAL_BLOCK);
-            ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.SPRUCE_SAPLING);
-                ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.SPRUCE_SAPLING);
+            ItemIcon oilFields = new ItemIcon("Oil Fields", "Find Oil Fields", Material.BUCKET);
+                ItemIcon northMoraine = new ItemIcon("North Moraine Oil Field", "Find North Moraine Oil Field", Material.BUCKET);
+            ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.KELP);
+                ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.KELP);
 
 
 
