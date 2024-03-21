@@ -41,8 +41,8 @@ public class Bandit
 
     private Location trackingLocation;
 
-    private boolean isTrackingLocation;
-    private boolean isTrackingPlayer;
+    private static boolean isTrackingLocation;
+    private static boolean isTrackingPlayer;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
