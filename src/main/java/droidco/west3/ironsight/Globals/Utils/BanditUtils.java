@@ -95,21 +95,25 @@ public class BanditUtils {
         Player target = null;
 
         for (Entity e : p.getNearbyEntities(4096, 4096, 4096)) {
-            if (!(e instanceof Player))
+            if (!(e instanceof Player)) {
                 continue;
-            if (e == p) continue;
-            double distanceTo = p.getLocation().distance(e.getLocation());
-            if (distanceTo > distance)
-                continue;
-            distance = distanceTo;
-            target = (Player) e;
-        }
-        Bandit b = Bandit.getPlayer(target);
-        if (Bandit.getPlayer(target).isWanted()) {
-            return target;
+            } else {
+                target = (Player) e;
+                double distanceTo = p.getLocation().distance(target.getLocation());
+                if (distanceTo > distance) {
+                    continue;
+                } else {
+                    Bandit b = Bandit.getPlayer(target);
+                    if (b.isWanted()) {
+                        return target;
+                    }
+                }
+                distance = distanceTo;
+
+            }
         }
 
-        else return null;
+        return null;
 
     }
 }

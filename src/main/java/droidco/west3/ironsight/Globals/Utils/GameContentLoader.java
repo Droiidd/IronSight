@@ -164,7 +164,7 @@ public class GameContentLoader {
 
         Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        Location texas = new Location("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        Location texas = new Location("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
         Location prison = new Location("Prison","JaiL!",LocationType.Prison, 47,52,1271,1277,50,67,1273);
 
@@ -244,9 +244,9 @@ public class GameContentLoader {
         ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
-        ItemIcon santafe = new ItemIcon("Santa Fe","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
-        ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
+        ItemIcon santafeRespawn = new ItemIcon("Respawn: Santa Fe","Click to respawn here",Material.WHITE_BANNER);
+        ItemIcon neworleansRespawn = new ItemIcon("Respawn: New Orleans","Click to respawn here",Material.YELLOW_BANNER);
+        ItemIcon texasRespawn = new ItemIcon("Respawn: Republic of Texas", "Click to respawn here",Material.BLUE_BANNER);
 
     }
 
