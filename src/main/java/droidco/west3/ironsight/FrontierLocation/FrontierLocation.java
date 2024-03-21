@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Frog;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -13,8 +12,8 @@ import java.util.Map;
 
 public class FrontierLocation {
     private String locName;
-    private double x1, x2, z1, z2;
-    private double spawnX, spawnY, spawnZ;
+    private double x1,x2,z1,z2;
+    private double spawnX,spawnY,spawnZ;
     private String welcomeMessage;
     private final BossBar locTitle;
     private static final BossBar wildernessTitle = Bukkit.createBossBar("Wilderness", BarColor.GREEN, BarStyle.SOLID);
@@ -23,7 +22,7 @@ public class FrontierLocation {
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
         this.locName = locName;
-        this.x1 = x1;
+        this.x1= x1;
         this.x2 = x2;
         this.z1 = z1;
         this.z2 = z2;
@@ -37,7 +36,7 @@ public class FrontierLocation {
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2, double spawnX, double spawnY, double spawnZ) {
         this.locName = locName;
-        this.x1 = x1;
+        this.x1= x1;
         this.x2 = x2;
         this.z1 = z1;
         this.z2 = z2;
@@ -72,7 +71,8 @@ public class FrontierLocation {
         return null;
     }
 
-    public boolean isPlayerInside(Player p) {
+    public boolean isPlayerInside(Player p)
+    {
         double minX;
         double maxX;
         double minZ;
@@ -95,20 +95,21 @@ public class FrontierLocation {
             maxZ = z1;
         }
         //PLAYER IS WITHIN THE ZONE
-        if ((playerX > minX && playerX < maxX) && (playerZ > minZ && playerZ < maxZ)) {
+        if((playerX > minX && playerX < maxX) && (playerZ > minZ && playerZ < maxZ)){
             return true;
         }
         return false;
     }
 
 
-    public static void displayLocation(Player p) {
+    public static void displayLocation(Player p)
+    {
         Bandit b = Bandit.getPlayer(p);
         locations.forEach((s, location) -> {
-            if (location.isPlayerInside(p)) {
+            if(location.isPlayerInside(p)){
                 location.addTitle(p);
                 b.setCurrentLocation(location);
-            } else {
+            }else{
                 location.removeTitle(p);
             }
 
@@ -118,40 +119,35 @@ public class FrontierLocation {
             //Display wilderness
             FrontierLocation.displayWilderness(p);
             b.setCurrentLocation(getLocation("Wilderness"));
-        } else {
+        }else{
             //Else check the towns.
             FrontierLocation.removeWilderness(p);
         }
     }
-
-    public BossBar getTitleBossBar(String title, BarColor color) {
+    public BossBar getTitleBossBar(String title, BarColor color)
+    {
         return Bukkit.createBossBar(title,
                 color,
                 BarStyle.SOLID);
     }
-
-    public org.bukkit.Location getSpawnLocation(Player p) {
-        return new org.bukkit.Location(p.getWorld(), spawnX, spawnY, spawnZ);
+    public org.bukkit.Location getSpawnLocation(Player p){
+        return new org.bukkit.Location(p.getWorld(),spawnX,spawnY,spawnZ);
     }
-
-    public void addTitle(Player p) {
+    public void addTitle(Player p){
         this.locTitle.setProgress(1);
         this.locTitle.addPlayer(p);
         this.locTitle.setVisible(true);
     }
-
-    public void removeTitle(Player p) {
+    public void removeTitle(Player p){
         this.locTitle.removePlayer(p);
         this.locTitle.setVisible(false);
     }
-
-    public static void displayWilderness(Player p) {
+    public static void displayWilderness(Player p){
         wildernessTitle.setProgress(1);
         wildernessTitle.addPlayer(p);
         wildernessTitle.setVisible(true);
     }
-
-    public static void removeWilderness(Player p) {
+    public static void removeWilderness(Player p){
         wildernessTitle.removePlayer(p);
         wildernessTitle.setVisible(false);
     }
