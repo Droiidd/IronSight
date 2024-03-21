@@ -244,9 +244,9 @@ public class GameContentLoader {
         ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
-        ItemIcon santafeRespawn = new ItemIcon("Respawn: Santa Fe","Click to respawn here",Material.WHITE_BANNER);
-        ItemIcon neworleansRespawn = new ItemIcon("Respawn: New Orleans","Click to respawn here",Material.YELLOW_BANNER);
-        ItemIcon texasRespawn = new ItemIcon("Respawn: Republic of Texas", "Click to respawn here",Material.BLUE_BANNER);
+        ItemIcon santafeRespawn = new ItemIcon("Santa Fe Town Hall","Click to respawn here",Material.WHITE_BANNER);
+        ItemIcon neworleansRespawn = new ItemIcon("New Orleans Town Hall","Click to respawn here",Material.YELLOW_BANNER);
+        ItemIcon texasRespawn = new ItemIcon("Texas Town Hall", "Click to respawn here",Material.BLUE_BANNER);
 
     }
 
