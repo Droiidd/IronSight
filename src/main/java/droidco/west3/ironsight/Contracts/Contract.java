@@ -38,13 +38,12 @@ public class Contract
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
-    public Contract(String contractName, ContractType type, List<Location> contractLocs, boolean isActive, Difficulty difficulty, int rarity) {
+    public Contract(String contractName, ContractType type, List<Location> contractLocs, boolean isActive, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
         this.contractName = contractName;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.isActive = isActive;
-        this.difficulty = difficulty;
         this.rarity = rarity;
 
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
@@ -79,14 +78,6 @@ public class Contract
         New contracts can then be generated from this type.
          */
         this.location = getRandomLocation();
-        //Check if it's a bulk order delivery
-        int bulkOdds = GlobalUtils.getRandomNumber(101);
-        if(bulkOdds < 35){
-            this.bulkOrder = true;
-            this.bulkMultiplier = GlobalUtils.getRandomRange(3,5);
-        }else {
-        this.bulkOrder = false;
-        }
         /*
             After all the default random contract variables are set up,
             it's time to separate the contracts to load them by completion type
@@ -101,94 +92,18 @@ public class Contract
                 //generateNewHunter();
             }
             case OilField -> {
-                //generateOilField();
+                generateNewOilField();
             }
         }
     }
-    public List<String> createDescription(String line1, String line2, String line3, String line4)
-    {
-        List<String> tmpDesc = new ArrayList<>();
-        tmpDesc.add(line1);
-        tmpDesc.add(line2);
-        tmpDesc.add(line3);
-        tmpDesc.add(line4);
-        return tmpDesc;
-    }
-    public int getReinforcementMultiplier(){
-        double multiplier = 1.0;
-        if(difficulty == Difficulty.Master){
-            multiplier = 1.5;
-        }
-        int val = (int) Math.round(reinforcementCount*multiplier);
-        return val;
-    }
+
     public void generateNewOilField(int reinforcementCount){
         this.crates = OilFieldCrate.getCratesByLocation(location);
         this.reinforcementCount = reinforcementCount;
+        this.location = getRandomLocation();
     }
 
     public void generateNewDelivery(){
-        /*
-        In order:
-        -Figure out what item list is associated with the job.
-        -Randomly choose an item, and give it a regular amount * bulkMultiplier
-        -Create the description
-         */
-        //Choose which item is requested from the jobs list of requestable items
-
-        //Determine amount of requested items.
-        ItemStack requestedItem = null;
-//        switch(contractType){
-//            case Miner -> {
-//                int minerLow = 25;
-//                int minerHigh = 45;
-//                if (bulkOrder) {
-//                    requestedItem.setAmount(GlobalUtils.getRandomRange(minerLow, minerHigh) * bulkMultiplier);
-//                } else {
-//                    requestedItem.setAmount(GlobalUtils.getRandomRange(minerLow, minerHigh));
-//                }
-//            }
-//            case Fisher -> {
-//                int fisherLow = 25;
-//                int fisherHigh = 45;
-//                if (bulkOrder) {
-//                    requestedItem.setAmount(GlobalUtils.getRandomRange(fisherLow, fisherHigh) * bulkMultiplier);
-//                } else {
-//                    requestedItem.setAmount(GlobalUtils.getRandomRange(fisherLow, fisherHigh));
-//                }
-//            }
-            //Add new contracts here
-        //}
-
-        //Set up the description.
-//        switch(contractType){
-//            case Miner -> {
-//                if(bulkOrder){
-//                    //Add bulk items
-//                    this.description = createDescription("I'm looking for", requestedItem.getAmount()+" "+requestedItem.getItemMeta().getDisplayName()+"'s",
-//                            "Raw ore is fine.","");
-//                }else{
-//                    this.description = createDescription("I'm looking for", requestedItem.getAmount()+" "+requestedItem.getItemMeta().getDisplayName()+"'s",
-//                            "I'll pay well","for good gems.");
-//                }
-//            }
-//            case Fisher -> {
-//                if(bulkOrder){
-//                    //Add bulk items
-//                    this.description = createDescription("I'm requesting a","bulk order of",
-//                            requestedItem.getAmount()+" "+requestedItem.getItemMeta().getDisplayName(),
-//                            "");
-//                }else{
-//                    this.description = createDescription("Looking for a couple of", requestedItem.getAmount()+" "+requestedItem.getItemMeta().getDisplayName(),
-//                            "Just need food for home.","");
-//                }
-//            }
-//            //ADD MORE CONTRACTS HERE
-//        }
-
-
-
-
 
     }
     public void generateNewBountyHunter(Player p){
@@ -229,16 +144,33 @@ public class Contract
             }
         }
     }
-    public static HashMap<String, Contract> getContracts()
-    {
-        return contracts;
-    }
     public Location getRandomLocation(){
         Random r = new Random(System.currentTimeMillis());
         int odds = r.nextInt(contractLocs.size());
         return contractLocs.get(odds);
     }
+    public List<String> createDescription(String line1, String line2, String line3, String line4)
+    {
+        List<String> tmpDesc = new ArrayList<>();
+        tmpDesc.add(line1);
+        tmpDesc.add(line2);
+        tmpDesc.add(line3);
+        tmpDesc.add(line4);
+        return tmpDesc;
+    }
+    public int getReinforcementMultiplier(){
+        double multiplier = 1.0;
+        if(difficulty == Difficulty.Master){
+            multiplier = 1.5;
+        }
+        int val = (int) Math.round(reinforcementCount*multiplier);
+        return val;
+    }
 
+    public static HashMap<String, Contract> getContracts()
+    {
+        return contracts;
+    }
     public String getContractName() {
         return contractName;
     }

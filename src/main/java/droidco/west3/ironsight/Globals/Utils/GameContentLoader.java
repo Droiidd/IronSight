@@ -182,18 +182,22 @@ public class GameContentLoader {
     }
     public static void loadIcons()
     {
-        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
+        ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
 
-        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+        ItemIcon miner = new ItemIcon("Miner","MinerPrefix","Choose miner!",Material.STONE_PICKAXE);
+        ItemIcon medic = new ItemIcon("Medic","MedicPrefix","Choose medic!",Material.PAPER);
+        ItemIcon explorer = new ItemIcon("Explorer","ExplorerPrefix","Choose explorer!",Material.SPYGLASS);
+        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
-        ItemIcon santafe = new ItemIcon("Santa Fe","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
-        ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
+        ItemIcon santafe = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
+        ItemIcon neworleans = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
+        ItemIcon texas = new ItemIcon("Republic Of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
+
+        ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
+        ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.GOLD_NUGGET);
+        ItemIcon contractDesc = new ItemIcon("Description","ContractDesc","What to do:",Material.MOJANG_BANNER_PATTERN);
 
     }
 

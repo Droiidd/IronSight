@@ -22,8 +22,11 @@ public class ContractUI {
     public static Inventory openActiveContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Active Contract info:");
         Bandit iPlayer = Bandit.getPlayer(p);
+        contractUi.setItem(2,ItemIcon.getIcon("contractLoc").getItem());
+        contractUi.setItem(4,ItemIcon.getIcon("contractReq").getItem());
+        contractUi.setItem(6,ItemIcon.getIcon("contractDesc").getItem());
         contractUi.setItem(11,getResignContractIcon());
-        contractUi.setItem(13,getActiveContractItem(iPlayer));
+        //contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
     }
     public static Inventory openContractorTitleSelectUi(Player p){
@@ -88,8 +91,7 @@ public class ContractUI {
         contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
         contractLore.add(ChatColor.GRAY +"Reward: "+selected.getReward()+" g");
         //This displays the contracts type
-        contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
-
+        //contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
         contractMeta.setLore(contractLore);
         contract.setItemMeta(contractMeta);
         return contract;

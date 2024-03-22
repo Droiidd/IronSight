@@ -16,12 +16,12 @@ public class ItemIcon
     private String description;
     private Material material;
     private static HashMap<String, ItemIcon> icons = new HashMap<>();
-    public ItemIcon(String iconName, String description,Material material){
-        this.iconCode = iconName;
+    public ItemIcon(String iconName, String iconCode, String description,Material material){
+        this.iconCode = iconCode;
         this.displayName = ChatColor.WHITE+iconName;
         this.description = description;
         this.material = material;
-        icons.put(iconName, this);
+        icons.put(iconCode, this);
     }
     public ItemStack getItem(){
         ItemStack item = new ItemStack(this.material);
