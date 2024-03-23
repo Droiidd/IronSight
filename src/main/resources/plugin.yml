@@ -11,5 +11,8 @@ commands:
     aliases:
       - c
   give_common:
-    aliase:
+    aliases:
       - g_c
+  get_item:
+    aliases:
+      - g_i

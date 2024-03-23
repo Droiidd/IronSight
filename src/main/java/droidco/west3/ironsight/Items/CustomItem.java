@@ -3,7 +3,10 @@ package droidco.west3.ironsight.Items;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class
@@ -24,7 +27,7 @@ CustomItem {
 
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
                       double salePrice, double purchasePrice) {
-        this.itemCode = itemName;
+        this.itemCode = itemName.toLowerCase().replace(" ", "_");
         this.itemName = ChatColor.WHITE+itemName;
         this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
@@ -67,7 +70,7 @@ CustomItem {
         return "";
     }
 
-    public CustomItem getCustomItem(String itemCode){
+    public static CustomItem getCustomItem(String itemCode){
         if(items.containsKey(itemCode)){
             return items.get(itemCode);
         }
@@ -92,4 +95,18 @@ CustomItem {
     public int getRarity(){return rarity; }
 
     public Material getMaterial(){return material;}
+
+    public ItemStack getItemStack(int amount){
+        ItemStack stack = new ItemStack(this.material, amount);
+        ItemMeta meta = stack.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        meta.setDisplayName(this.itemName);
+        lore.add(this.rarityLore);
+        lore.add(this.description);
+        lore.add(loreLine3);
+        meta.setLore(lore);
+        meta.setLore(lore);
+        stack.setItemMeta(meta);
+        return stack;
+    }
 }
