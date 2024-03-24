@@ -56,10 +56,7 @@ public class ContractUtils
     public static void initializeContracts(Bandit p){
         //Goes through every contract and makes a list of rookie specific
 
-        List<Contract> rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
-        List<Contract> apprenticeContracts = ContractUtils.getContractByDiff(Difficulty.Apprentice);
-        List<Contract> experiencedContracts = ContractUtils.getContractByDiff(Difficulty.Experienced);
-        List<Contract> masterContracts = ContractUtils.getContractByDiff(Difficulty.Master);
+
 
         //NOW WE CREATE THE ITEM THAT REPRESENTS THE CONTRACT IN THE MENU
         //Choosing random contract type for each difficulty slot (Rook, Appre, Exper)
@@ -82,27 +79,13 @@ public class ContractUtils
             p.setExperiencedContract(exprn);
         }
         //Generate the contracts
-        p.getRookieContract().generateContracts();
-        p.getApprenticeContract().generateContracts();
-        p.getExperiencedContract().generateContracts();
+
+//        p.getRookieContract();
+//        p.getApprenticeContract();
+//        p.getExperiencedContract();
     }
     public static Contract getSingleContract(List<Contract> contracts){
         int odds = GlobalUtils.getRandomNumber(contracts.size());
         return contracts.get(odds);
-    }
-    public static ItemStack getContractOptionIcon(ContractType type){
-        ItemStack item = new ItemStack(Material.BOOK);
-        switch (type){
-            case OilField -> {
-
-            }
-            case Bounty -> {
-
-            }
-            case Delivery -> {
-
-            }
-        }
-        return null;
     }
 }

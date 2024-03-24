@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Contracts;
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.Location.Location;
@@ -9,10 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Contract
 {
@@ -25,7 +23,6 @@ public class Contract
     private ContractType contractType;
     private List<Location> contractLocs;
     private Location location;
-    private boolean isActive;
     private Difficulty difficulty;
     private int rarity;
     private int bulkMultiplier;
@@ -36,12 +33,11 @@ public class Contract
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
-    public Contract(String contractName, ContractType type, List<Location> contractLocs, boolean isActive, int rarity) {
+    public Contract(String contractName, ContractType type, List<Location> contractLocs, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
         this.contractName = contractName;
         this.contractType = type;
         this.contractLocs = contractLocs;
-        this.isActive = isActive;
         this.rarity = rarity;
 
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
@@ -67,12 +63,40 @@ public class Contract
             }
         }
     }
+    public static void initializeContracts(){
+        for (Map.Entry<String,Contract> mapElement : contracts.entrySet()) {
+            // Adding some bonus marks to all the students
+            Contract value = mapElement.getValue();
+            value.generateContract();
+        }
+    }
+    public static void assignPlayerContracts(Player p, Bandit b){
+        initializeContracts();
+        List<Contract> rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
+        while(rookieContracts.isEmpty()){
+            initializeContracts();
+            rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
+        }
+        List<Contract> apprenticeContracts = ContractUtils.getContractByDiff(Difficulty.Apprentice);
+        List<Contract> experiencedContracts = ContractUtils.getContractByDiff(Difficulty.Experienced);
+        List<Contract> masterContracts = ContractUtils.getContractByDiff(Difficulty.Master);
 
+
+    }
+    public List<Contract> getContractByDiff(Difficulty difficulty){
+        List<Contract> targeted = new ArrayList<>();
+        contracts.forEach((key, contract) -> {
+            if(contract.getDifficulty().compareTo(difficulty) == 0){
+                targeted.add(contract);
+            }
+        });
+        return targeted;
+    }
     public void addCompletionStep(String stepKey, int stepNumber, List<String> taskDesc, ItemStack requestedGoods,String locationDesc){
         CompletionStep step = new CompletionStep(stepKey,stepNumber,taskDesc,requestedGoods,locationDesc);
         steps.add(step);
     }
-    public void generateContracts()
+    public void generateContract()
     {
         /*
         First the contract is instanciated when the plugin loads. This gives the contract it's type, title,
@@ -182,7 +206,6 @@ public class Contract
     public List<CompletionStep> getSteps() {
         return steps;
     }
-
     public static HashMap<String, Contract> getContracts()
     {
         return contracts;
@@ -190,55 +213,36 @@ public class Contract
     public String getContractName() {
         return contractName;
     }
-
     public void setContractName(String contractName) {
         this.contractName = contractName;
     }
-
     public int getRewardXp() {
         return rewardXp;
     }
-
     public void setRewardXp(int rewardXp) {
         this.rewardXp = rewardXp;
     }
-
     public List<String> getDescription() {
         return description;
     }
-
     public void setDescription(List<String> description) {
         this.description = description;
     }
-
     public List<Location> getContractLoc() {
         return contractLocs;
     }
-
     public void setContractLoc(List<Location> contractLoc) {
         this.contractLocs = contractLoc;
     }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     public Difficulty getDifficulty() {
         return difficulty;
     }
-
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
-
     public int getRarity() {
         return rarity;
     }
-
     public void setRarity(int rarity) {
         this.rarity = rarity;
     }
@@ -248,7 +252,6 @@ public class Contract
     public double getReward(){
         return this.reward;
     }
-
     public String getListingName() {
         return listingName;
     }

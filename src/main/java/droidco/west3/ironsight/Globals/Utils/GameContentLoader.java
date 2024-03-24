@@ -224,7 +224,7 @@ public class GameContentLoader {
         test3Locs.add(Location.getLocation("New Orleans"));
         ;
 
-        Contract testC3 = new Contract("Mule across city borders",ContractType.Delivery , test3Locs ,false,1);
+        Contract testC3 = new Contract("Mule across city borders",ContractType.OilField , test3Locs ,false,1);
 
         Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,false,1);
 
