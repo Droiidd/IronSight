@@ -6,30 +6,51 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import droidco.west3.ironsight.IronSight;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BrewingRecipe {
     private static List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
     private ItemStack ingredient;
-    private BrewAction action;
     private boolean perfect;
-
-    public BrewingRecipe(ItemStack ingredient , BrewAction action , boolean perfect) {
+    private String name;
+    private PotionEffect effect;
+    private Color color;
+    String description;
+    public BrewingRecipe(String name, ItemStack ingredient,  boolean perfect, PotionEffectType type, int amplifier, int duration_secs, Color color, String description) {
         this.ingredient = ingredient;
-        this.action = action;
+        this.name = name;
+        this.effect = new PotionEffect(type, duration_secs * 20, amplifier);
         this.perfect = perfect;
+        this.color = color;
+        this.description = description;
         recipes.add(this);
     }
 
-    public BrewingRecipe(Material ingredient , BrewAction action)
-    {
-        this(new ItemStack(ingredient), action, false);
-    }
+    public ItemStack Brew(){
+        {//Some lambda magic
+            ItemStack potion = new ItemStack(Material.POTION);
+            PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+            potionMeta.setDisplayName(this.name);
+            // set potion data:
+            potionMeta.addCustomEffect(this.effect, true);
+            potionMeta.setColor(this.color);
+            ArrayList<String> list = new ArrayList<>();
+            list.add(this.description);
+            potionMeta.setLore(list);
+            // set potion meta:
+            potion.setItemMeta(potionMeta);
+            return potion;
 
+        }
+    }
     public boolean isPerfect() {
         return perfect;
     }
@@ -39,8 +60,6 @@ public class BrewingRecipe {
         if (inventory.getIngredient() == null) return null;
         for(BrewingRecipe recipe : recipes)
         {
-            System.out.println("in getrecipe");
-            System.out.println(recipe.getIngredient().getType());
             if(!recipe.isPerfect() && inventory.getIngredient().getType() == recipe.getIngredient().getType())
             {
                 return recipe;
@@ -56,9 +75,6 @@ public class BrewingRecipe {
         return ingredient;
     }
 
-    public BrewAction getAction() {
-        return action;
-    }
     public void startBrewing(BrewerInventory inventory)
     {
         new BrewClock(this, inventory);
@@ -73,7 +89,6 @@ public class BrewingRecipe {
         private int time = 400; //Like I said the starting time is 400
 
         public BrewClock(BrewingRecipe recipe , BrewerInventory inventory) {
-            System.out.println("BrewClock Created");
             this.recipe = recipe;
             this.inventory = inventory;
             this.ingredients = inventory.getIngredient();
@@ -83,18 +98,23 @@ public class BrewingRecipe {
 
         @Override
         public void run() {
-            System.out.println("Time: " + time);
             if(time == 0)
             {
-                System.out.println("In time 0");
-
-                inventory.setItem(0, recipe.getAction().brew(inventory, inventory.getIngredient()));
-                inventory.setIngredient(new ItemStack(Material.AIR));
-                System.out.println("before cancel");
+                ItemStack[] contents = inventory.getContents();
+                boolean made = false;
+                for (int i = 0; i < 3; i++) {
+                    if (contents[i] != null && contents[i].getType() == Material.POTION) {
+                        inventory.setItem(i, recipe.Brew());
+                        made = true;
+                    }
+                }
+                if (made){
+                    inventory.setIngredient(new ItemStack(Material.AIR));
+                }
                 cancel();
                 return;
             }
-            if(!inventory.getIngredient().isSimilar(ingredients))
+            if(inventory.getIngredient() == null)
             {
                 stand.setBrewingTime(400); //Reseting everything
                 cancel();
