@@ -39,32 +39,6 @@ public class ContractUtils
         });
         return targeted;
     }
-    public static int getDifficultyReward(Difficulty difficulty){
-        switch(difficulty){
-            case Rookie -> {
-                int rewardLow = 750;
-                int rewardHigh = 1500;
-                return GlobalUtils.getRandomRange(rewardLow,rewardHigh);
-            }
-            case Apprentice -> {
-                int rewardLow = 1750;
-                int rewardHigh = 2500;
-                return GlobalUtils.getRandomRange(rewardLow,rewardHigh);
-            }
-            case Experienced -> {
-                int rewardLow = 2750;
-                int rewardHigh = 4500;
-                return GlobalUtils.getRandomRange(rewardLow,rewardHigh);
-            }
-            case Master -> {
-                int rewardLow = 5550;
-                int rewardHigh = 8500;
-                return GlobalUtils.getRandomRange(rewardLow,rewardHigh);
-            }
-
-        }
-        return 0;
-    }
     public static String getTypeString(ContractType type){
         switch(type){
             case OilField -> {
@@ -129,5 +103,6 @@ public class ContractUtils
 
             }
         }
+        return null;
     }
 }

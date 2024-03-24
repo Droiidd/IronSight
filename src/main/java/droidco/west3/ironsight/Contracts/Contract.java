@@ -1,10 +1,7 @@
 package droidco.west3.ironsight.Contracts;
 
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
-import droidco.west3.ironsight.Contracts.Utils.BountyTargetType;
-import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
-import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import org.bukkit.Bukkit;
@@ -35,6 +32,7 @@ public class Contract
     private boolean bulkOrder;
     private String listingName;
     private List<String> description;
+    public List<CompletionStep> steps = new ArrayList<>();
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
@@ -70,6 +68,10 @@ public class Contract
         }
     }
 
+    public void addCompletionStep(String stepKey, int stepNumber, List<String> taskDesc, ItemStack requestedGoods,String locationDesc){
+        CompletionStep step = new CompletionStep(stepKey,stepNumber,taskDesc,requestedGoods,locationDesc);
+        steps.add(step);
+    }
     public void generateContracts()
     {
         /*
@@ -92,7 +94,7 @@ public class Contract
                 //generateNewHunter();
             }
             case OilField -> {
-                generateNewOilField();
+                generateNewOilField(20);
             }
         }
     }
@@ -101,6 +103,16 @@ public class Contract
         this.crates = OilFieldCrate.getCratesByLocation(location);
         this.reinforcementCount = reinforcementCount;
         this.location = getRandomLocation();
+
+        List<String> desc = new ArrayList<>();
+        desc.add("Arrive at oilfield. Find");
+        desc.add("and unlock the main crate.");
+        addCompletionStep("steptest",1,desc,null,"Ride to "+location.getLocName());
+        List<String> desc2 = new ArrayList<>();
+        desc2.add("Guard off all enemies.");
+        desc2.add("Survive until crate unlocks.");
+        addCompletionStep("steptest2",1,desc,null,"Ride to "+location.getLocName());
+
     }
 
     public void generateNewDelivery(){
@@ -165,6 +177,10 @@ public class Contract
         }
         int val = (int) Math.round(reinforcementCount*multiplier);
         return val;
+    }
+
+    public List<CompletionStep> getSteps() {
+        return steps;
     }
 
     public static HashMap<String, Contract> getContracts()

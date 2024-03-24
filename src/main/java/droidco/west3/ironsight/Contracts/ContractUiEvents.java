@@ -14,32 +14,32 @@ public class ContractUiEvents implements Listener {
     {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)")){
-            Bandit iPlayer = Bandit.getPlayer(p);
+            Bandit b = Bandit.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
             switch(e.getCurrentItem().getType()){
                 case BOOK -> {
                     //They selected are selecting a contract.
                     //Check if they are doing one already
-                    if(!iPlayer.isDoingContract()){
+                    if(!b.isDoingContract()){
                         //Check what slot they chose.
                         System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
                         String name = e.getCurrentItem().getItemMeta().getDisplayName();
 
                         switch(name.split("§f")[1]){
                             case "Rookie Contract" -> {
-                                iPlayer.setActiveContract(iPlayer.getRookieContract());
+                                b.setActiveContract(b.getRookieContract());
                             }
                             case "Apprentice Contract" -> {
-                                iPlayer.setActiveContract(iPlayer.getApprenticeContract());
+                                b.setActiveContract(b.getApprenticeContract());
                             }
                             case "Experienced Contract" -> {
-                                iPlayer.setActiveContract(iPlayer.getExperiencedContract());
+                                b.setActiveContract(b.getExperiencedContract());
                             }
                         }
                         p.closeInventory();
                         p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
-                        iPlayer.setDoingContract(true);
+                        b.setDoingContract(true);
                     }else{
                         //They are doing a contract!
                         p.closeInventory();
@@ -53,13 +53,13 @@ public class ContractUiEvents implements Listener {
                 }
                 case COMPASS -> {
                     //They want to view their active contract information
-                    Contract active = iPlayer.getActiveContract();
+                    Contract active = b.getActiveContract();
                     if(active == null){
                         p.closeInventory();
                         p.sendMessage("No active contract!");
                     }
                     else {
-                        p.openInventory(ContractUI.openActiveContractUi(p));
+                        p.openInventory(OpenContractUI.openActiveContractUi(p,active));
                     }
                 }
                 //Case Skull:

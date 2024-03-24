@@ -196,7 +196,7 @@ public class GameContentLoader {
         ItemIcon texas = new ItemIcon("Republic Of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
 
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
-        ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.GOLD_NUGGET);
+        ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
         ItemIcon contractDesc = new ItemIcon("Description","ContractDesc","What to do:",Material.MOJANG_BANNER_PATTERN);
 
     }
@@ -212,19 +212,21 @@ public class GameContentLoader {
         List<Location> testLocs = new ArrayList<>();
         testLocs.add(Location.getLocation("Black Spur Mines"));
         testLocs.add(Location.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,false, Difficulty.Rookie,1);
+        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,false,1);
 
         List<Location> test2Locs = new ArrayList<>();
         test2Locs.add(Location.getLocation("North Oil Field"));
         test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,false, Difficulty.Apprentice,1);
+        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,false,1);
 
         List<Location> test3Locs = new ArrayList<>();
         test3Locs.add(Location.getLocation("Storm Point"));
         test3Locs.add(Location.getLocation("New Orleans"));
-        Contract testC3 = new Contract("Mule across city borders",ContractType.Delivery , test3Locs ,false, Difficulty.Experienced,1);
+        ;
 
-        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,false, Difficulty.Master,1);
+        Contract testC3 = new Contract("Mule across city borders",ContractType.Delivery , test3Locs ,false,1);
+
+        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,false,1);
 
     }
 }

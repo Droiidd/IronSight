@@ -19,16 +19,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ContractUI {
-    public static Inventory openActiveContractUi(Player p){
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Active Contract info:");
-        Bandit iPlayer = Bandit.getPlayer(p);
-        contractUi.setItem(2,ItemIcon.getIcon("contractLoc").getItem());
-        contractUi.setItem(4,ItemIcon.getIcon("contractReq").getItem());
-        contractUi.setItem(6,ItemIcon.getIcon("contractDesc").getItem());
-        contractUi.setItem(11,getResignContractIcon());
-        //contractUi.setItem(13,getActiveContractItem(iPlayer));
-        return contractUi;
-    }
+
     public static Inventory openContractorTitleSelectUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
         Bandit iPlayer = Bandit.getPlayer(p);
