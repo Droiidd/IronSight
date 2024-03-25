@@ -46,6 +46,8 @@ public class BanditTask extends BukkitRunnable {
         this.wildernessFlag = false;
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
+
+        b.setDoingContract(false);
         //Contract.assignPlayerContracts(p,b);
     }
 

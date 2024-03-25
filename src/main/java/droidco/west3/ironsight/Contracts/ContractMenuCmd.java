@@ -20,7 +20,7 @@ public class ContractMenuCmd implements CommandExecutor {
                 if(b.getActiveContract() == null){
                     p.sendMessage("You do not have an active contract.");
                 }else{
-                    p.openInventory(OpenContractUI.openActiveContractUi(p,b.getActiveContract()));
+                    p.openInventory(ContractUI.openContractUi(p));
                 }
             }
 
