@@ -26,7 +26,6 @@ public class OpenContractUI
         int locColumn = 2;
         int descColumn = 6;
 
-
         contractUi.setItem(locColumn, ItemIcon.getIcon("contractLoc").getItem());
         contractUi.setItem(reqColumn,ItemIcon.getIcon("contractReq").getItem());
         contractUi.setItem(descColumn,ItemIcon.getIcon("contractDesc").getItem());
@@ -44,7 +43,6 @@ public class OpenContractUI
             contractUi.setItem(reqColumn,ItemIcon.getIcon("contractReq").getItem());
             contractUi.setItem(descColumn,ItemIcon.getIcon("contractDesc").getItem());
         }
-
         //contractUi.setItem(11,getResignContractIcon());
         //contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
