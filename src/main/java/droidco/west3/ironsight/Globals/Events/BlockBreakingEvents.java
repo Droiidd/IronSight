@@ -108,7 +108,7 @@ public class BlockBreakingEvents implements Listener {
         }
         if (block.getType() == Material.RAW_GOLD_BLOCK) {
             BlockHarvestTask changeBlock = new BlockHarvestTask(plugin, p, block, BlockType.MINERALS);
-            ItemStack goldCluster = new ItemStack(Material.GLOW_INK_SAC, 9*dropMultiplier);
+            ItemStack goldCluster = new ItemStack(Material.GOLD_ORE, 9*dropMultiplier);
             block.getWorld().dropItemNaturally(block.getLocation(), goldCluster);
         }
         if (block.getType() == Material.DEAD_BUSH) {
