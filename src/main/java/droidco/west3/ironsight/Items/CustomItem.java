@@ -3,8 +3,12 @@ package droidco.west3.ironsight.Items;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class
 CustomItem {
@@ -12,7 +16,6 @@ CustomItem {
     private String itemName;
     private String rarityLore;
     private String description;
-    private String loreLine3;
     private double salePrice;
     private double purchasePrice;
     private boolean isLegal;
@@ -70,6 +73,34 @@ CustomItem {
     public CustomItem getCustomItem(String itemCode){
         if(items.containsKey(itemCode)){
             return items.get(itemCode);
+        }
+        return null;
+    }
+    public ItemStack getItemStack(){
+        ItemStack item = new ItemStack(this.material);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(this.itemName);
+        List<String> lore = new ArrayList<>();
+        lore.add(this.rarityLore);
+        String legalityTrait = getLegalityTrait();
+        int test = 0;
+        if(legalityTrait != null){
+            lore.add(legalityTrait);
+        }
+        lore.add(description);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
+    public String getLegalityTrait()
+    {
+        String trait;
+        if(!this.isLegal){
+            //IS NOT LEGAL
+            trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.DARK_RED)+"Illegal";
+        }
+        if(this.isOfficer){
+            trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.BLUE)+"Officer";
         }
         return null;
     }

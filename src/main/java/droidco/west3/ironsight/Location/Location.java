@@ -68,7 +68,6 @@ public class Location {
         }
         return null;
     }
-
     public boolean isPlayerInside(Player p)
     {
         double minX;
