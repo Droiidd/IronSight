@@ -1,7 +1,8 @@
-package droidco.west3.ironsight.FrontierLocation;
+package droidco.west3.ironsight.FrontierLocation.;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class LocationUiEvents implements Listener {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:")){
             Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
             FrontierLocation santafe = FrontierLocation.getLocation("Santa Fe");
             FrontierLocation neworleans = FrontierLocation.getLocation("New Orleans");
             FrontierLocation texas = FrontierLocation.getLocation("Republic Of Texas");
