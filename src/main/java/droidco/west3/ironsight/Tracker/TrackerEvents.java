@@ -87,6 +87,7 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ZOMBIE_HEAD -> {
+
                     b.setIsTrackingLocation(false);
                     Player target = BanditUtils.getNearest(p, 14000.0);
                     if (target == null) {

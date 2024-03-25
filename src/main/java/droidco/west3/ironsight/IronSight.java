@@ -6,6 +6,7 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.ContractUiEvents;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.Globals.Events.BlockBreakingEvents;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
 import droidco.west3.ironsight.Location.Location;
 import droidco.west3.ironsight.Location.LocationUiEvents;
@@ -66,6 +67,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
         getServer().getPluginManager().registerEvents(new LocationUiEvents(), this);
         getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
 
 
     }
