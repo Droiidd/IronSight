@@ -15,9 +15,10 @@ public class LocationUiEvents implements Listener {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:")){
             Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
             Location santafe = Location.getLocation("Santa Fe");
             Location neworleans = Location.getLocation("New Orleans");
-            Location texas = Location.getLocation("Republic Of Texas");
+            Location texas = Location.getLocation("Republic of Texas");
 
             org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
             org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
