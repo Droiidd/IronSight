@@ -22,18 +22,18 @@ public class LocationUiEvents implements Listener {
             org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
             org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
             switch(e.getCurrentItem().getType()){
-                case NETHER_STAR -> {
+                case WHITE_BANNER -> {
                    handleRespawnActions(ChatColor.YELLOW+"Santa Fe",
                            ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",sfRespawn,b,p);
                    break;
                 }
-                case CAKE -> {
+                case YELLOW_BANNER -> {
                     handleRespawnActions(ChatColor.YELLOW+"New Orleans",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",noRespawn,b,p);
                     break;
 
                 }
-                case DEAD_BUSH -> {
+                case BLUE_BANNER -> {
                     handleRespawnActions(ChatColor.YELLOW+"Republic Of Texas",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",rotRespawn,b,p);
                     break;
