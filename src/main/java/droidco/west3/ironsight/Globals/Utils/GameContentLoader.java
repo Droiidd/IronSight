@@ -17,6 +17,7 @@ import java.util.List;
 public class GameContentLoader {
     public static void loadCustomItems()
     {
+        System.out.println("Loading custom items");
         //COMMONS
         CustomItem stew = new CustomItem("Brown Stew", 1, true, false,
                 "What's in this..?", Material.MUSHROOM_STEW,0.0,0.0);
@@ -158,10 +159,11 @@ public class GameContentLoader {
                 "An old king was fond of these",Material.EMERALD,0.0,0.0);
         CustomItem voidopal = new CustomItem("Void Opal",8,true,false,
                 "Stare into the depths of the universe",Material.ECHO_SHARD,0.0,0.0);
-
+        System.out.println("custom items loaded");
 
     }
     public static void loadLocations(){
+        System.out.println("Loading all locations");
         Location stormpoint = new Location("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
         Location northoil = new Location("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         Location sloughcreek = new Location("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
@@ -178,10 +180,11 @@ public class GameContentLoader {
         Location pearlR = new Location("Pearl River","Good fishing!",LocationType.River,2599,2083,-2596,-2475);
 
         Location wilderness = new Location("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
-
+        System.out.println("Locations loaded");
     }
     public static void loadIcons()
     {
+        System.out.println("loading all icons");
         ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
         ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
         ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
@@ -198,7 +201,7 @@ public class GameContentLoader {
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
         ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
         ItemIcon contractDesc = new ItemIcon("Description","ContractDesc","What to do:",Material.MOJANG_BANNER_PATTERN);
-
+        System.out.println("Icons loaded");
     }
 
     public static void loadBrewing(){
@@ -207,26 +210,28 @@ public class GameContentLoader {
             return new ItemStack(Material.BEACON);
 
         });
+        System.out.println("Brewing load complete.");
     }
     public static void loadContracts(){
+        System.out.println("Loading contracts!");
         List<Location> testLocs = new ArrayList<>();
         testLocs.add(Location.getLocation("Black Spur Mines"));
         testLocs.add(Location.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,false,1);
+        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,1);
 
         List<Location> test2Locs = new ArrayList<>();
         test2Locs.add(Location.getLocation("North Oil Field"));
         test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,false,1);
+        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,1);
 
         List<Location> test3Locs = new ArrayList<>();
         test3Locs.add(Location.getLocation("Storm Point"));
         test3Locs.add(Location.getLocation("New Orleans"));
-        ;
 
-        Contract testC3 = new Contract("Mule across city borders",ContractType.OilField , test3Locs ,false,1);
 
-        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,false,1);
+        Contract testC3 = new Contract("Mule across city borders",ContractType.OilField , test3Locs ,1);
 
+        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
+        System.out.println("Contracts loaded!");
     }
 }

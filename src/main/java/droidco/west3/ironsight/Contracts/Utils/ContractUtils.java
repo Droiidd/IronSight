@@ -37,7 +37,12 @@ public class ContractUtils
                 targeted.add(contract);
             }
         });
-        return targeted;
+        System.out.println("target:"+targeted);
+        if(targeted.isEmpty()){
+            return new ArrayList<>();
+        }else{
+            return targeted;
+        }
     }
     public static String getTypeString(ContractType type){
         switch(type){
@@ -53,37 +58,7 @@ public class ContractUtils
         }
         return "";
     }
-    public static void initializeContracts(Bandit p){
-        //Goes through every contract and makes a list of rookie specific
 
-
-
-        //NOW WE CREATE THE ITEM THAT REPRESENTS THE CONTRACT IN THE MENU
-        //Choosing random contract type for each difficulty slot (Rook, Appre, Exper)
-        Contract rook = rookieContracts.size() > 0 ? getSingleContract(rookieContracts) : null;
-        Contract aprnt = apprenticeContracts.size() > 0 ? getSingleContract(apprenticeContracts) : null;
-        Contract exprn = experiencedContracts.size() > 0 ? getSingleContract(experiencedContracts) : null;
-        Contract master = masterContracts.size() > 0 ? getSingleContract(masterContracts) : null;
-        //Setting the actual slots with the contract
-        p.setRookieContract(rook);
-        p.setApprenticeContract(aprnt);
-        /*
-        Now for the Experienced slot, there's a small chance you can get a master quest
-        for more money and experience.
-         */
-        int odds = GlobalUtils.getRandomNumber(101);
-        if(odds<10){
-            p.setExperiencedContract(master);
-
-        }else{
-            p.setExperiencedContract(exprn);
-        }
-        //Generate the contracts
-
-//        p.getRookieContract();
-//        p.getApprenticeContract();
-//        p.getExperiencedContract();
-    }
     public static Contract getSingleContract(List<Contract> contracts){
         int odds = GlobalUtils.getRandomNumber(contracts.size());
         return contracts.get(odds);

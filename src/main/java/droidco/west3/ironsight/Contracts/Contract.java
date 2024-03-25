@@ -40,11 +40,8 @@ public class Contract
         this.contractLocs = contractLocs;
         this.rarity = rarity;
 
-        this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
-
         contracts.put(this.contractName,this);
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
-        generateContracts();
     }
     public void setRewardXp()
     {
@@ -63,27 +60,64 @@ public class Contract
             }
         }
     }
-    public static void initializeContracts(){
+    public static void refreshContracts(){
+        System.out.println("REFRESH");
+        System.out.println("contracts" + contracts);
         for (Map.Entry<String,Contract> mapElement : contracts.entrySet()) {
             // Adding some bonus marks to all the students
             Contract value = mapElement.getValue();
+            System.out.println(value.getContractName());
             value.generateContract();
         }
     }
     public static void assignPlayerContracts(Player p, Bandit b){
-        initializeContracts();
-        List<Contract> rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
-        while(rookieContracts.isEmpty()){
-            initializeContracts();
-            rookieContracts = ContractUtils.getContractByDiff(Difficulty.Rookie);
+        System.out.println("cck1");
+        refreshContracts();
+        System.out.println("check2");
+        List<Contract> rookieContracts = new ArrayList<>();
+        List<Contract> experiencedContracts = new ArrayList<>();
+        List<Contract> apprenticeContracts = new ArrayList<>();
+        List<Contract> masterContracts = new ArrayList<>();
+        System.out.println("check3");
+        rookieContracts = initializeContracts(rookieContracts,Difficulty.Rookie);
+        System.out.println("check4");
+        apprenticeContracts = initializeContracts(apprenticeContracts,Difficulty.Apprentice);
+        System.out.println("check5");
+        experiencedContracts = initializeContracts(experiencedContracts,Difficulty.Experienced);
+        System.out.println("check6");
+        masterContracts = initializeContracts(masterContracts,Difficulty.Master);
+        System.out.println("check7");
+        b.setRookieContract(ContractUtils.getSingleContract(rookieContracts));
+        b.setApprenticeContract(ContractUtils.getSingleContract(apprenticeContracts));
+        int masterOdds = GlobalUtils.getRandomNumber(101);
+        if(masterOdds<50){
+            b.setExperiencedContract(ContractUtils.getSingleContract(masterContracts));
+        }else{
+            b.setExperiencedContract(ContractUtils.getSingleContract(experiencedContracts));
         }
-        List<Contract> apprenticeContracts = ContractUtils.getContractByDiff(Difficulty.Apprentice);
-        List<Contract> experiencedContracts = ContractUtils.getContractByDiff(Difficulty.Experienced);
-        List<Contract> masterContracts = ContractUtils.getContractByDiff(Difficulty.Master);
-
 
     }
-    public List<Contract> getContractByDiff(Difficulty difficulty){
+    public static List<Contract> initializeContracts(List<Contract> allContracts, Difficulty targetDiff){
+        allContracts = ContractUtils.getContractByDiff(targetDiff);
+        System.out.println(" ALL " + allContracts);
+
+        if(allContracts == null){
+            allContracts = new ArrayList<>();
+        }
+        System.out.println("init check1");
+        while(allContracts.isEmpty() || allContracts == null){
+            if(allContracts == null){
+                System.out.println("OUCHIE??");
+            }
+            System.out.println("init while check");
+            System.out.println("while check contracts: "+allContracts);
+            refreshContracts();
+            allContracts = ContractUtils.getContractByDiff(targetDiff);
+        }
+        return allContracts;
+    }
+
+    public static List<Contract> getContractByDiff(Difficulty difficulty){
         List<Contract> targeted = new ArrayList<>();
         contracts.forEach((key, contract) -> {
             if(contract.getDifficulty().compareTo(difficulty) == 0){
@@ -103,21 +137,25 @@ public class Contract
         list of possible locations, the most basic info.
         New contracts can then be generated from this type.
          */
+        System.out.println("generation check 1");
         this.location = getRandomLocation();
         /*
             After all the default random contract variables are set up,
-            it's time to separate the contracts to load them by completion type
+            it's time to separate the contracts to load them by contract type
             Some contracts may have different completion requirements than others, this handles
             that.
          */
+        System.out.println("generation check 2");
         switch(this.contractType){
             case Delivery -> {
+                System.out.println("NEW DELIVERY");
                 generateNewDelivery();
             }
             case Bounty -> {
                 //generateNewHunter();
             }
             case OilField -> {
+                System.out.println("NEW OILFIELD");
                 generateNewOilField(20);
             }
         }
@@ -127,7 +165,13 @@ public class Contract
         this.crates = OilFieldCrate.getCratesByLocation(location);
         this.reinforcementCount = reinforcementCount;
         this.location = getRandomLocation();
-
+        int odds = GlobalUtils.getRandomNumber(101);
+        if(odds<=20){
+            this.difficulty = Difficulty.Master;
+        }else {
+            this.difficulty = Difficulty.Experienced;
+        }
+        this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
         List<String> desc = new ArrayList<>();
         desc.add("Arrive at oilfield. Find");
         desc.add("and unlock the main crate.");
@@ -140,7 +184,13 @@ public class Contract
     }
 
     public void generateNewDelivery(){
-
+        int odds = GlobalUtils.getRandomNumber(101);
+        if(odds>=50){
+            this.difficulty = Difficulty.Rookie;
+        }else {
+            this.difficulty = Difficulty.Apprentice;
+        }
+        this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
     }
     public void generateNewBountyHunter(Player p){
         //Check if player gets a PLAYER or NPC contract

@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Bandit;
 
+import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Location.Location;
@@ -45,7 +46,7 @@ public class BanditTask extends BukkitRunnable {
         this.wildernessFlag = false;
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
-        ContractUtils.initializeContracts(b);
+        //Contract.assignPlayerContracts(p,b);
     }
 
     @Override

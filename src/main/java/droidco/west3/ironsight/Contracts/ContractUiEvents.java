@@ -53,14 +53,14 @@ public class ContractUiEvents implements Listener {
                 }
                 case COMPASS -> {
                     //They want to view their active contract information
-                    Contract active = b.getActiveContract();
-                    if(active == null){
-                        p.closeInventory();
-                        p.sendMessage("No active contract!");
-                    }
-                    else {
-                        p.openInventory(OpenContractUI.openActiveContractUi(p,active));
-                    }
+//                    Contract active = b.getActiveContract();
+//                    if(active == null){
+//                        p.closeInventory();
+//                        p.sendMessage("No active contract!");
+//                    }
+//                    else {
+//                        p.openInventory(OpenContractUI.openActiveContractUi(p,active));
+//                    }
                 }
                 //Case Skull:
                 //Can view what you get from leveling up??

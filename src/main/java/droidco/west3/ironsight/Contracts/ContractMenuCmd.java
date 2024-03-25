@@ -15,7 +15,7 @@ public class ContractMenuCmd implements CommandExecutor {
             if(strings.length == 0){
                 p.openInventory(ContractUI.openContractUi(p));
             }else if(strings[0].equalsIgnoreCase("reset")){
-                ContractUtils.initializeContracts(b);
+                Contract.assignPlayerContracts(p,b);
             }else if(strings[0].equalsIgnoreCase("active")){
                 if(b.getActiveContract() == null){
                     p.sendMessage("You do not have an active contract.");
