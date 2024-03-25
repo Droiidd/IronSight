@@ -73,6 +73,8 @@ public class BanditTask extends BukkitRunnable {
 
         }
 
+
+
         //Titles for locations
         Location.displayLocation(p);
         //Refresh Players siderbar scoreboard
