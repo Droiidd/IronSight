@@ -69,13 +69,13 @@ public class ContractUiEvents implements Listener {
                         p.sendMessage("No active contract!");
                     }
                     else {
+                        p.sendMessage(active.getContractName());
                         p.openInventory(OpenContractUI.openActiveContractUi(p,active));
                     }
                 }
                 //Case Skull:
                 //Can view what you get from leveling up??
             }
-            e.setCancelled(true);
         }
     }
     @EventHandler

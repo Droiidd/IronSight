@@ -165,6 +165,7 @@ public class Contract
         this.crates = OilFieldCrate.getCratesByLocation(location);
         this.reinforcementCount = reinforcementCount;
         this.location = getRandomLocation();
+        this.steps = new ArrayList<>();
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<=20){
             this.difficulty = Difficulty.Master;
@@ -179,8 +180,7 @@ public class Contract
         List<String> desc2 = new ArrayList<>();
         desc2.add("Guard off all enemies.");
         desc2.add("Survive until crate unlocks.");
-        addCompletionStep("steptest2",1,desc,null,"Ride to "+location.getLocName());
-
+        addCompletionStep("steptest2",2,desc2,null,"Hold down "+location.getLocName());
     }
 
     public void generateNewDelivery(){

@@ -28,7 +28,7 @@ public class ItemIcon
         ItemMeta iMeta = item.getItemMeta();
         iMeta.setDisplayName(this.displayName);
         List<String> lore = new ArrayList<>();
-        lore.add(description);
+        lore.add(ChatColor.GRAY+description);
         iMeta.setLore(lore);
         item.setItemMeta(iMeta);
         return item;
