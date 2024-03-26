@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Location;
+package droidco.west3.ironsight.FrontierLocation;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.Bukkit;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Location {
+public class FrontierLocation {
     private String locName;
     private double x1,x2,z1,z2;
     private double spawnX,spawnY,spawnZ;
@@ -18,9 +18,9 @@ public class Location {
     private final BossBar locTitle;
     private static final BossBar wildernessTitle =Bukkit.createBossBar("Wilderness", BarColor.GREEN, BarStyle.SOLID);
     private LocationType type;
-    private static HashMap<String,Location> locations = new HashMap<>();
+    private static HashMap<String, FrontierLocation> locations = new HashMap<>();
 
-    public Location(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2){
+    public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2){
         this.locName = locName;
         this.x1= x1;
         this.x2 = x2;
@@ -32,7 +32,7 @@ public class Location {
         this.locTitle = getTitleBossBar(locName,getTitleColor(type));
 
         locations.put(locName,this);
-    }public Location(String locName,String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2,double spawnX, double spawnY, double spawnZ){
+    }public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2, double spawnX, double spawnY, double spawnZ){
         this.locName = locName;
         this.x1= x1;
         this.x2 = x2;
@@ -49,20 +49,20 @@ public class Location {
         locations.put(locName,this);
     }
 
-    public static HashMap<String,Location> getLocations()
+    public static HashMap<String, FrontierLocation> getLocations()
     {
         return locations;
     }
     public static boolean isPlayerInWilderness(Player p)
     {
-        for (Map.Entry<String,Location> mapE : locations.entrySet()) {
+        for (Map.Entry<String, FrontierLocation> mapE : locations.entrySet()) {
             if(mapE.getValue().isPlayerInside(p)){
                 return false;
             }
         }
         return true;
     }
-    public static Location getLocation(String locationName){
+    public static FrontierLocation getLocation(String locationName){
         if(locations.containsKey(locationName)){
             return locations.get(locationName);
         }
@@ -112,13 +112,13 @@ public class Location {
 
         });
         //p.sendMessage(""+locations.get("test").isPlayerInside(p));
-        if(Location.isPlayerInWilderness(p)){
+        if(FrontierLocation.isPlayerInWilderness(p)){
             //Display wilderness
-            Location.displayWilderness(p);
+            FrontierLocation.displayWilderness(p);
             b.setCurrentLocation(getLocation("Wilderness"));
         }else{
             //Else check the towns.
-            Location.removeWilderness(p);
+            FrontierLocation.removeWilderness(p);
         }
     }
     public BossBar getTitleBossBar(String title, BarColor color)
@@ -149,21 +149,24 @@ public class Location {
         wildernessTitle.setVisible(false);
     }
     public BarColor getTitleColor(LocationType type){
-        if(type.compareTo(LocationType.EVENT) == 0){
-            return BarColor.YELLOW;
-        }else if(type.compareTo(LocationType.TOWN) == 0){
-            return BarColor.PINK;
+        switch(type){
+            case EVENT, MINE -> {
+                return BarColor.YELLOW;
+            }
+            case TOWN -> {
+                return BarColor.PINK;
+            }
+            case ILLEGAL, OIL_FIELD -> {
+                return BarColor.RED;
+            }
+            case NATURAL, WILDERNESS -> {
+                return BarColor.GREEN;
+            }
+            case RIVER -> {
+                return BarColor.BLUE;
+            }
         }
-        else if(type.compareTo(LocationType.ILLEGAL) ==0){
-            return BarColor.RED;
-        }else if(type.compareTo(LocationType.NATURAL) == 0){
-            return BarColor.PURPLE;
-        }else if(type.compareTo(LocationType.River) == 0){
-            return BarColor.BLUE;
-        }
-        else{
-            return BarColor.GREEN;
-        }
+        return BarColor.GREEN;
     }
 
     // >>>=== GETTERS & SETTERS ===<<<

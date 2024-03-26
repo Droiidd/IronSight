@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Location;
+package droidco.west3.ironsight.FrontierLocation;
 
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;

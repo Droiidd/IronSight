@@ -3,7 +3,7 @@ package droidco.west3.ironsight.Contracts;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.Utils.*;
-import droidco.west3.ironsight.Location.Location;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,8 +21,8 @@ public class Contract
     private List<OilFieldCrate> crates;
     private int reinforcementCount;
     private ContractType contractType;
-    private List<Location> contractLocs;
-    private Location location;
+    private List<FrontierLocation> contractLocs;
+    private FrontierLocation frontierLocation;
     private Difficulty difficulty;
     private int rarity;
     private int bulkMultiplier;
@@ -33,7 +33,7 @@ public class Contract
     private List<ItemStack> requestedItems;
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
-    public Contract(String contractName, ContractType type, List<Location> contractLocs, int rarity) {
+    public Contract(String contractName, ContractType type, List<FrontierLocation> contractLocs, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
         this.contractName = contractName;
         this.contractType = type;
@@ -138,7 +138,7 @@ public class Contract
         New contracts can then be generated from this type.
          */
         System.out.println("generation check 1");
-        this.location = getRandomLocation();
+        this.frontierLocation = getRandomLocation();
         /*
             After all the default random contract variables are set up,
             it's time to separate the contracts to load them by contract type
@@ -162,9 +162,9 @@ public class Contract
     }
 
     public void generateNewOilField(int reinforcementCount){
-        this.crates = OilFieldCrate.getCratesByLocation(location);
+        this.crates = OilFieldCrate.getCratesByLocation(frontierLocation);
         this.reinforcementCount = reinforcementCount;
-        this.location = getRandomLocation();
+        this.frontierLocation = getRandomLocation();
         this.steps = new ArrayList<>();
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<=20){
@@ -176,11 +176,11 @@ public class Contract
         List<String> desc = new ArrayList<>();
         desc.add("Arrive at oilfield. Find");
         desc.add("and unlock the main crate.");
-        addCompletionStep("steptest",1,desc,null,"Ride to "+location.getLocName());
+        addCompletionStep("steptest",1,desc,null,"Ride to "+ frontierLocation.getLocName());
         List<String> desc2 = new ArrayList<>();
         desc2.add("Guard off all enemies.");
         desc2.add("Survive until crate unlocks.");
-        addCompletionStep("steptest2",2,desc2,null,"Hold down "+location.getLocName());
+        addCompletionStep("steptest2",2,desc2,null,"Hold down "+ frontierLocation.getLocName());
     }
 
     public void generateNewDelivery(){
@@ -230,7 +230,7 @@ public class Contract
             }
         }
     }
-    public Location getRandomLocation(){
+    public FrontierLocation getRandomLocation(){
         Random r = new Random(System.currentTimeMillis());
         int odds = r.nextInt(contractLocs.size());
         return contractLocs.get(odds);
@@ -251,6 +251,14 @@ public class Contract
         }
         int val = (int) Math.round(reinforcementCount*multiplier);
         return val;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
     }
 
     public List<CompletionStep> getSteps() {
@@ -278,10 +286,10 @@ public class Contract
     public void setDescription(List<String> description) {
         this.description = description;
     }
-    public List<Location> getContractLoc() {
+    public List<FrontierLocation> getContractLoc() {
         return contractLocs;
     }
-    public void setContractLoc(List<Location> contractLoc) {
+    public void setContractLoc(List<FrontierLocation> contractLoc) {
         this.contractLocs = contractLoc;
     }
     public Difficulty getDifficulty() {
@@ -296,8 +304,8 @@ public class Contract
     public void setRarity(int rarity) {
         this.rarity = rarity;
     }
-    public Location getLocation(){
-        return this.location;
+    public FrontierLocation getLocation(){
+        return this.frontierLocation;
     }
     public double getReward(){
         return this.reward;

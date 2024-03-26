@@ -1,25 +1,25 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
+import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
-import droidco.west3.ironsight.Location.Location;
-import droidco.west3.ironsight.Location.LocationType;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
-<<<<<<< HEAD
-
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> bb31908ffd04c927f83d97cc03d3c9291b3e7c0c
+
 
 public class GameContentLoader {
     public static void loadCustomItems()
@@ -66,7 +66,6 @@ public class GameContentLoader {
                 "Can be refined or sold",Material.IRON_ORE,0.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false,
                 "Can be refined or sold",Material.COPPER_ORE,0.0,0.0);
-
 
         //UNCOMMON
         CustomItem cookedSalmon = new CustomItem("Smoked Salmon",3,true,false,
@@ -140,7 +139,6 @@ public class GameContentLoader {
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false,
                 "Still in the frozen north",Material.MUSIC_DISC_13,0.0,0.0);
 
-
         //LEGENDARY
         CustomItem alligator = new CustomItem("Alligator",8,true,false,
                 "Crikey!",Material.MUSIC_DISC_CHIRP,0.0,0.0);
@@ -169,24 +167,39 @@ public class GameContentLoader {
         System.out.println("custom items loaded");
 
     }
-    public static void loadLocations(){
+    public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
-        Location stormpoint = new Location("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
-        Location northoil = new Location("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
-        Location sloughcreek = new Location("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
+        FrontierLocation stormpoint = new FrontierLocation("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
+        FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
+        FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
-        Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
-        Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        Location texas = new Location("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3408);
+        OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
+        OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
+        OilFieldCrate crate4 = new OilFieldCrate(4,northoil,2936,101,-2988);
+        OilFieldCrate crate5 = new OilFieldCrate(5,northoil,2959,101,-3037);
+        OilFieldCrate crate6 = new OilFieldCrate(6,northoil,2992,101,-3087);
+        OilFieldCrate crate7 = new OilFieldCrate(7,northoil,2984,101,-3154);
 
-        Location prison = new Location("Prison","JaiL!",LocationType.Prison, 47,52,1271,1277,50,67,1273);
+        OilFieldTask oil1 = new OilFieldTask(plugin, northoil);
+        //OilFieldTask oil2 = new OilFieldTask(southoil);
 
-        Location blackspur = new Location("Black Spur Mines","Be weary of the depths",LocationType.NATURAL,1542,2248,-2102,-1775);
+        FrontierLocation sloughcreek = new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
 
-        Location sloughcreekR = new Location("Slough Creek River","Fishings good",LocationType.River, 2545,2698,38,1243);
-        Location pearlR = new Location("Pearl River","Good fishing!",LocationType.River,2599,2083,-2596,-2475);
+        FrontierLocation neworleans = new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
+        FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
+        FrontierLocation texas = new FrontierLocation("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
-        Location wilderness = new Location("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
+        FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 47,52,1271,1277,50,67,1273);
+
+        FrontierLocation blackspur = new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
+
+        FrontierLocation sloughcreekR = new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2545,2698,38,1243);
+        FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
+        FrontierLocation threeForks = new FrontierLocation("Three Forks River","A thick and nasty swamp",LocationType.RIVER,-1330,-1100,-2100,2955);
+        FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1876,-1681,1160,341);
+
+        FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
         System.out.println("Locations loaded");
     }
     public static void loadIcons()
@@ -222,29 +235,27 @@ public class GameContentLoader {
         new BrewingRecipe("Whiskey", new ItemStack(Material.GLOW_INK_SAC), false, PotionEffectType.DAMAGE_RESISTANCE, 0, 60, Color.fromRGB(135, 99, 38), "empty");
         new BrewingRecipe("Morphine", new ItemStack(Material.PUMPKIN_SEEDS), false, PotionEffectType.REGENERATION, 0, 60, Color.fromRGB(20, 151, 163), "empty");
         System.out.println("Brewing load complete.");
-
     }
     public static void loadContracts(){
         System.out.println("Loading contracts!");
-        List<Location> testLocs = new ArrayList<>();
-        testLocs.add(Location.getLocation("Black Spur Mines"));
-        testLocs.add(Location.getLocation("Santa Fe"));
+        List<FrontierLocation> testLocs = new ArrayList<>();
+        testLocs.add(FrontierLocation.getLocation("Black Spur Mines"));
+        testLocs.add(FrontierLocation.getLocation("Santa Fe"));
         Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,1);
 
-        List<Location> test2Locs = new ArrayList<>();
-        test2Locs.add(Location.getLocation("North Oil Field"));
-        test2Locs.add(Location.getLocation("Slough Creek"));
+        List<FrontierLocation> test2Locs = new ArrayList<>();
+        test2Locs.add(FrontierLocation.getLocation("North Oil Field"));
+        test2Locs.add(FrontierLocation.getLocation("Slough Creek"));
         Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,1);
 
-        List<Location> test3Locs = new ArrayList<>();
-        test3Locs.add(Location.getLocation("Storm Point"));
-        test3Locs.add(Location.getLocation("New Orleans"));
+        List<FrontierLocation> test3Locs = new ArrayList<>();
+        test3Locs.add(FrontierLocation.getLocation("Storm Point"));
+        test3Locs.add(FrontierLocation.getLocation("New Orleans"));
 
 
-        Contract testC3 = new Contract("Mule across city borders",ContractType.OilField , test3Locs ,1);
+        Contract testC3 = new Contract("Raid northern Oil Field",ContractType.OilField , test3Locs ,1);
 
         Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
     }
 }
-

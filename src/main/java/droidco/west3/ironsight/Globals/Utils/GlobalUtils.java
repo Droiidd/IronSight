@@ -1,11 +1,6 @@
 package droidco.west3.ironsight.Globals.Utils;
 
-import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.Location.Location;
-import droidco.west3.ironsight.Location.LocationType;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.Random;

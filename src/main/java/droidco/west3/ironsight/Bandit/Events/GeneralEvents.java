@@ -4,7 +4,6 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
-import droidco.west3.ironsight.Location.Location;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
