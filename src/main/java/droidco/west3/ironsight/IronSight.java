@@ -16,6 +16,7 @@ import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Globals.Events.JoinServerEvents;
 import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
+import droidco.west3.ironsight.NPC.NPCEvents;
 import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -69,6 +70,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LocationUiEvents(), this);
         getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
+        getServer().getPluginManager().registerEvents(new NPCEvents(), this);
 
 
     }
