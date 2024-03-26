@@ -1,7 +1,10 @@
 package droidco.west3.ironsight.Contracts.OilField;
 
-import droidco.west3.ironsight.Contracts.Utils.Difficulty;
-import droidco.west3.ironsight.Location.Location;
+import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,31 +15,54 @@ public class OilFieldCrate {
     private int crateX;
     private int crateZ;
     private int crateY;
-    private Location location;
+    private FrontierLocation frontierLocation;
     private int crateNumber;
     private String crateKey;
+    private boolean isUnlocked;
     private static HashMap<String,OilFieldCrate> crates = new HashMap<>();
-    public OilFieldCrate(int crateNumber, Location location, int crateX,int crateY,int crateZ){
+    public OilFieldCrate(int crateNumber, FrontierLocation frontierLocation, int crateX, int crateY, int crateZ){
         this.crateNumber = crateNumber;
-        this.location = location;
+        this.frontierLocation = frontierLocation;
         this.crateX = crateX;
         this.crateY = crateY;
         this.crateZ = crateZ;
-        this.crateKey = location.getLocName()+crateNumber;
+        this.crateKey = frontierLocation.getLocName()+crateNumber;
         crates.put(crateKey,this);
+        this.isUnlocked = false;
     }
 
-    public static List<OilFieldCrate> getCratesByLocation(Location targetLoc){
+    public static List<OilFieldCrate> getCratesByLocation(FrontierLocation targetLoc){
         List<OilFieldCrate> crateList = new ArrayList<>();
         for (Map.Entry<String,OilFieldCrate> crate : crates.entrySet()) {
             String key = crate.getKey();
             OilFieldCrate val = crate.getValue();
-            if(val.location.getLocName().equalsIgnoreCase(targetLoc.getLocName())){
+            if(val.frontierLocation.getLocName().equalsIgnoreCase(targetLoc.getLocName())){
                 crateList.add(val);
             }
         }
         return crateList;
     }
+    public static void initializeCrates(){
+        HashMap<String, Contract> contracts = Contract.getContracts();
+        for(Map.Entry<String, Contract> entry : contracts.entrySet()){
+
+        }
+    }
+
+    public static OilFieldCrate getRandomCrate(FrontierLocation targetLoc){
+        List<OilFieldCrate> crates = getCratesByLocation(targetLoc);
+        int ran = GlobalUtils.getRandomNumber(crates.size());
+        return crates.get(ran);
+    }
+
+    public boolean isUnlocked() {
+        return isUnlocked;
+    }
+
+    public void setUnlocked(boolean unlocked) {
+        isUnlocked = unlocked;
+    }
+
     public int getCrateX() {
         return crateX;
     }
@@ -61,12 +87,12 @@ public class OilFieldCrate {
         this.crateY = crateY;
     }
 
-    public Location getLocation() {
-        return location;
+    public FrontierLocation getLocation() {
+        return frontierLocation;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(FrontierLocation frontierLocation) {
+        this.frontierLocation = frontierLocation;
     }
 
     public int getCrateNumber() {

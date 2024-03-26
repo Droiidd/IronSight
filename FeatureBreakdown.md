@@ -47,14 +47,14 @@ have to buy a new one.
 Getters and Setters
 
 Commands
-- call //Calls horse to location (Opens menu to choose horses)
+- call //Calls horse to frontierLocation (Opens menu to choose horses)
 - gethorse (ADMIN COMMAND)
 
 ### Location class
 
 Locations can give characteristics to certain areas, and help with events. They can
 be used to determine if a player is inside them, then disable their PvP to create
-a safezone, or spawn enemies if its in a PvP location, or fish special fish if at a river
+a safezone, or spawn enemies if its in a PvP frontierLocation, or fish special fish if at a river
 etc. This is all achieved with safezones
 
 - string :: locName

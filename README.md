@@ -125,8 +125,8 @@ AKA what we know we can finish. Any extra stuff will be added in a later version
 
 >**Combat Contracts**
 
-- **Head Hunter**: Now these are usually easier combat missions. It gives a location
-and a name. Travel to that location, find the NPC and kill him. Now if it was possible
+- **Head Hunter**: Now these are usually easier combat missions. It gives a frontierLocation
+and a name. Travel to that frontierLocation, find the NPC and kill him. Now if it was possible
 It would be cool if you could also get player targets for a much higher difficulty.
 
 - **Drug Runner**: For this you would harvest and process a load of drugs. The instructions
@@ -135,7 +135,7 @@ are where you process drugs, and are usually pretty hostile areas, so naturally,
 to process, the higher the payout (You have to last longer).
 Rebel bases also naturally spawn bandit NPC's who patrol and attack players.
 
-- **Stolen Item(s)**: Go to a location to find a stolen item (Maybe change to steal a
+- **Stolen Item(s)**: Go to a frontierLocation to find a stolen item (Maybe change to steal a
 stolen item?)
 
 - **Oil Field**: Oil field is a higher stakes, and is in general a harder mission.
@@ -223,7 +223,7 @@ Before we run any code, let's set up something on Intelliji.
 
    1. Restart your ide
 
-1. To get the code up and running, clone the git repo into an appropriate location.
+1. To get the code up and running, clone the git repo into an appropriate frontierLocation.
 Then, open the repo in intelliji. Let it download all the extra packages.
 
    1. Then next to your
