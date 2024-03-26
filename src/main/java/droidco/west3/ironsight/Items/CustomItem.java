@@ -70,7 +70,7 @@ CustomItem {
         return "";
     }
 
-    public CustomItem getCustomItem(String itemCode){
+    public static CustomItem getCustomItem(String itemCode){
         if(items.containsKey(itemCode)){
             return items.get(itemCode);
         }

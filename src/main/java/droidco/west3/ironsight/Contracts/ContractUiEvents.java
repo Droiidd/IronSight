@@ -34,12 +34,14 @@ public class ContractUiEvents implements Listener {
                             b.setActiveContract(b.getRookieContract());
                             b.setDoingContract(true);
                             p.closeInventory();
+                            b.getActiveContract().startContract(p);
                             p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
                         } else if(ChatColor.stripColor(name).equalsIgnoreCase("Apprentice Contract")){
                             p.sendMessage("Apprentice");
                             b.setActiveContract(b.getApprenticeContract());
                             b.setDoingContract(true);
                             p.closeInventory();
+                            b.getActiveContract().startContract(p);
                             p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
                         }
                         else if(ChatColor.stripColor(name).equalsIgnoreCase("Experienced Contract")){
@@ -47,6 +49,7 @@ public class ContractUiEvents implements Listener {
                             b.setActiveContract(b.getExperiencedContract());
                             b.setDoingContract(true);
                             p.closeInventory();
+                            b.getActiveContract().startContract(p);
                             p.sendMessage("Contract selected. View your contract by typing \"/contract active\" or \"/c a");
                         }
 

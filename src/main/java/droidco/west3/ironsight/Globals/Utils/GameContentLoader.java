@@ -135,6 +135,9 @@ public class GameContentLoader {
                 "Migrated south through the tributaries",Material.MUSIC_DISC_FAR,0.0,0.0);
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false,
                 "Still in the frozen north",Material.MUSIC_DISC_13,0.0,0.0);
+        CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field",
+                Material.TRIPWIRE_HOOK,0.0,0.0);
+
 
 
         //LEGENDARY
@@ -171,7 +174,7 @@ public class GameContentLoader {
         FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
-        OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3408);
+        OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
         OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
         OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
         OilFieldCrate crate4 = new OilFieldCrate(4,northoil,2936,101,-2988);
@@ -243,13 +246,14 @@ public class GameContentLoader {
         Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,1);
 
         List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("Storm Point"));
-        test3Locs.add(FrontierLocation.getLocation("New Orleans"));
+        //test3Locs.add(FrontierLocation.getLocation("Storm Point"));
+        //test3Locs.add(FrontierLocation.getLocation("New Orleans"));
+        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
 
 
         Contract testC3 = new Contract("Raid northern Oil Field",ContractType.OilField , test3Locs ,1);
 
-        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
+        //Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
     }
 }
