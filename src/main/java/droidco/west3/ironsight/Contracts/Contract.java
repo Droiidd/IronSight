@@ -5,6 +5,7 @@ import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -253,6 +254,14 @@ public class Contract
         return val;
     }
 
+    public void startContract(Player p){
+        switch(this.contractType){
+            case OilField -> {
+                p.getInventory().addItem(CustomItem.getCustomItem("Crate Key").getItemStack());
+            }
+        }
+
+    }
     public ContractType getContractType() {
         return contractType;
     }

@@ -24,13 +24,14 @@ public class OilFieldTask extends BukkitRunnable {
     private List<OilFieldTask> tasks = new ArrayList<>();
     private FrontierLocation frontierLocation;
     private boolean firstPlayerJoin;
+    private boolean isCrateSpawned;
     private IronSight plugin;
     public OilFieldTask(IronSight plugin, FrontierLocation frontierLocation){
         this.frontierLocation = frontierLocation;
         this.crates =  OilFieldCrate.getCratesByLocation(frontierLocation);
-        this.activeCrate = OilFieldCrate.getRandomCrate(frontierLocation);
         this.firstPlayerJoin = false;
         this.plugin = plugin;
+        this.isCrateSpawned = false;
         this.tasks.add(this);
         this.runTaskTimer(plugin,0,10);
         //this.runTaskTimer(plugin, 0, 10);
@@ -43,43 +44,44 @@ public class OilFieldTask extends BukkitRunnable {
     public void spawnCrate(World world, FrontierLocation frontierLocation)
     {
         System.out.println("spawning crate");
+        this.activeCrate = OilFieldCrate.getRandomCrate(frontierLocation);
         Location location = new Location(world,activeCrate.getCrateX(),activeCrate.getCrateY(),activeCrate.getCrateZ());
         List<OilFieldCrate> cratesByLoc = OilFieldCrate.getCratesByLocation(frontierLocation);
         for(int i =0;i<cratesByLoc.size();i++){
             if(cratesByLoc.get(i).equals(this.activeCrate)){
-                List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-                for(Player player : players){
-                    player.teleport(location);
-                }
+//                List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+//                for(Player player : players){
+//                    player.teleport(location);
+//                }
                 Bukkit.broadcastMessage(location.getX()+" "+location.getY()+" "+location.getZ());
 
                 location.getBlock().setType(Material.LIGHT_GRAY_SHULKER_BOX);
                 Bukkit.getServer().broadcastMessage("A crate has spawned at "+frontierLocation.getLocName());
             }else{
-                location.getBlock().setType(Material.AIR);
+                //location.getBlock().setType(Material.AIR);
             }
         }
     }
-    public void crateInitialization()
-    {
-        System.out.println("Init crates");
-        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-        boolean contractorMarker = false;
-        for(Player player : players){
-            Bandit b = Bandit.getPlayer(player);
-            if(b.getActiveContract() != null){
-                if(b.getActiveContract().getContractType().compareTo(ContractType.OilField)==0){
-                    //Ignore timer
-                    contractorMarker = true;
-                }
-            }
-        }
-        if(contractorMarker){
-            //players with the contract active, spawn the crate
-            //RESET THE CHEST, THERES NO ACTIVE CONTRACTORS
-            spawnCrate(players.get(0).getWorld(),frontierLocation);
-        }
-    }
+//    public void crateInitialization()
+//    {
+//        System.out.println("Init crates");
+//        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+//        boolean contractorMarker = false;
+//        for(Player player : players){
+//            Bandit b = Bandit.getPlayer(player);
+//            if(b.getActiveContract() != null){
+//                if(b.getActiveContract().getContractType().compareTo(ContractType.OilField)==0){
+//                    //Ignore timer
+//                    contractorMarker = true;
+//                }
+//            }
+//        }
+//        if(contractorMarker){
+//            //players with the contract active, spawn the crate
+//            //RESET THE CHEST, THERES NO ACTIVE CONTRACTORS
+//            spawnCrate(players.get(0).getWorld(),frontierLocation);
+//        }
+//    }
     public boolean checkForCrateStartUp()
     {
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
@@ -97,20 +99,33 @@ public class OilFieldTask extends BukkitRunnable {
 
         if(tick %2==0){
             second++;
-            //System.out.println("Actively mining");
-            if(checkForCrateStartUp()){
-                crateInitialization();
-            }
-            List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-            for(Player player : players){
-                Bandit b = Bandit.getPlayer(player);
-                if(b.getCurrentLocation().getLocName().equalsIgnoreCase(this.frontierLocation.getLocName())){
-                      crateInitialization();
+            if(!this.isCrateSpawned){
+                List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+                for(Player player : players){
+                    Bandit b = Bandit.getPlayer(player);
+                    if(b.getCurrentLocation().getLocName().equalsIgnoreCase(this.frontierLocation.getLocName())){
+                        if(b.getActiveContract() != null){
+                            // PLAYER HAS THE ACTIVE CONTRACT, AND IS INSIDE THE LOCATION
+                            if(b.getActiveContract().getLocation().getLocName().equalsIgnoreCase(this.frontierLocation.getLocName())){
+                                spawnCrate(player.getWorld(), this.frontierLocation);
+                                this.isCrateSpawned = true;
+                            }
+                        }
+                    }
+                }
+            }else{
+                List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+                for(Player player : players){
+                    Bandit b = Bandit.getPlayer(player);
+                    if(!b.getCurrentLocation().getLocName().equalsIgnoreCase(this.frontierLocation.getLocName())){
+                        this.isCrateSpawned = false;
+                    }
                 }
             }
         }
         if(second == 60){
             //crateInitialization();
+
             minute++;
             second = 0;
         }
