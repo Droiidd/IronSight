@@ -201,7 +201,7 @@ public class GameContentLoader {
         ItemIcon town = new ItemIcon("Towns", "Find town", Material.DARK_OAK_HANGING_SIGN);
             ItemIcon santaFe = new ItemIcon("Santa Fe", "Directions to Santa Fe", Material.WHITE_BANNER);
             ItemIcon newOrleans = new ItemIcon("New Orleans", "Directions to New Orleans", Material.YELLOW_BANNER);
-            ItemIcon texas = new ItemIcon("Republic of Texas", "Directions to the Republic of Texas", Material.BLUE_BANNER);
+            ItemIcon texas = new ItemIcon("Republic of0 Texas", "Directions to the Republic of Texas", Material.BLUE_BANNER);
         ItemIcon player = new ItemIcon("Players", "Find players", Material.PLAYER_HEAD);
             ItemIcon wantedPlayer = new ItemIcon("Nearest Wanted Player", "Nearest wanted player", Material.ZOMBIE_HEAD);
         ItemIcon contracts = new ItemIcon("Contracts", "Contract location", Material.BOOK);
