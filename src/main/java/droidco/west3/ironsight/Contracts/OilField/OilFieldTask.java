@@ -62,26 +62,6 @@ public class OilFieldTask extends BukkitRunnable {
             }
         }
     }
-//    public void crateInitialization()
-//    {
-//        System.out.println("Init crates");
-//        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-//        boolean contractorMarker = false;
-//        for(Player player : players){
-//            Bandit b = Bandit.getPlayer(player);
-//            if(b.getActiveContract() != null){
-//                if(b.getActiveContract().getContractType().compareTo(ContractType.OilField)==0){
-//                    //Ignore timer
-//                    contractorMarker = true;
-//                }
-//            }
-//        }
-//        if(contractorMarker){
-//            //players with the contract active, spawn the crate
-//            //RESET THE CHEST, THERES NO ACTIVE CONTRACTORS
-//            spawnCrate(players.get(0).getWorld(),frontierLocation);
-//        }
-//    }
     public boolean checkForCrateStartUp()
     {
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());

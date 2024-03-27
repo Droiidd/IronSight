@@ -65,7 +65,7 @@ public class GameContentLoader {
 
 
         //UNCOMMON
-        CustomItem cookedSalmon = new CustomItem("Smoked Salmon",3,true,false,
+        CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false,
                 "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,0.0);
         CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false,
                 "Extra kick to any home brew",Material.DRAGON_BREATH,0.0,0.0);
