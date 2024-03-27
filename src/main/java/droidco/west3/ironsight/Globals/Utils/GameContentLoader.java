@@ -301,4 +301,9 @@ public class GameContentLoader {
         Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
     }
+
+    public static void loadNPCs(){
+        System.out.println("Loading NPCs");
+
+    }
 }

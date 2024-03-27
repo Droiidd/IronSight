@@ -70,12 +70,24 @@ CustomItem {
         return "";
     }
 
-    public CustomItem getCustomItem(String itemCode){
+    public static CustomItem getCustomItem(String itemCode){
         if(items.containsKey(itemCode)){
             return items.get(itemCode);
         }
         return null;
     }
+    public ItemStack getItemForSale(){
+        ItemStack item = getItemStack();
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        String price = String.valueOf(ChatColor.GRAY)+this.salePrice +"g";
+        lore.add(ChatColor.GRAY+"Click to purchase!");
+        lore.add(price);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public ItemStack getItemStack(){
         ItemStack item = new ItemStack(this.material);
         ItemMeta meta = item.getItemMeta();

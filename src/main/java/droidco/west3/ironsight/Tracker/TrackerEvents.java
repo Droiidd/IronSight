@@ -20,6 +20,24 @@ import org.checkerframework.checker.units.qual.A;
 
 public class TrackerEvents implements Listener {
 
+    @EventHandler
+    public void trackerMovement(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+
+    }
+
+    @EventHandler
+    public void trackerRightClick(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+        if (p.getInventory().getItemInMainHand().getType().compareTo(Material.COMPASS) == 0) {
+            if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                p.openInventory(TrackerUIs.openTrackerUI(p));
+            }
+
+        }
+    }
 
     @EventHandler
     public void trackerMenuSelect(InventoryClickEvent e) {
@@ -295,25 +313,6 @@ public class TrackerEvents implements Listener {
                     p.closeInventory();
                 }
             }
-        }
-    }
-
-    @EventHandler
-    public void trackerMovement(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-
-    }
-
-    @EventHandler
-    public void trackerRightClick(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-        if (p.getInventory().getItemInMainHand().getType().compareTo(Material.COMPASS) == 0) {
-            if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                p.openInventory(TrackerUIs.openTrackerUI(p));
-            }
-
         }
     }
 
