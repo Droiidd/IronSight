@@ -252,13 +252,9 @@ public class GameContentLoader {
         ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
-<<<<<<< HEAD
-=======
         ItemIcon santafeRespawn = new ItemIcon("Respawn: Santa Fe","Click to respawn here",Material.WHITE_BANNER);
         ItemIcon neworleansRespawn = new ItemIcon("Respawn: New Orleans","Click to respawn here",Material.YELLOW_BANNER);
         ItemIcon texasRespawn = new ItemIcon("Respawn: Republic of Texas", "Click to respawn here",Material.BLUE_BANNER);
->>>>>>> 39cce54f4768ce7c8d25572ba068ff03b282ef11
-
 
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
         ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
@@ -295,5 +291,10 @@ public class GameContentLoader {
 
         Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
+    }
+
+    public static void loadNPCs(){
+        System.out.println("Loading NPCs");
+
     }
 }
