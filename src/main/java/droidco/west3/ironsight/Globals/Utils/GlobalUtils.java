@@ -2,8 +2,12 @@ package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+<<<<<<< HEAD
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
+=======
+import droidco.west3.ironsight.Location.LocationType;
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

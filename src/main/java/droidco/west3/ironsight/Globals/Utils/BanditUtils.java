@@ -10,37 +10,36 @@ import org.bukkit.scoreboard.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BanditUtils
-{
-    public static void displayBasicStats(Bandit b, Player p)
-    {
+public class BanditUtils {
+    public static void displayBasicStats(Bandit b, Player p) {
         p.sendMessage("Iron Sight Player Stats:");
         p.sendMessage("============");
-        p.sendMessage("Bleeding: "+b.isBleeding());
-        p.sendMessage("Broken Legs: "+b.isBrokenLegs());
-        p.sendMessage("In Prison: "+b.isJailed());
+        p.sendMessage("Bleeding: " + b.isBleeding());
+        p.sendMessage("Broken Legs: " + b.isBrokenLegs());
+        p.sendMessage("In Prison: " + b.isJailed());
         p.sendMessage("EXPERIENCE INFO: ");
-        p.sendMessage("Combat Level: "+b.getCmbtContractLvl());
-        p.sendMessage("Peacemaker Level: "+b.getPceContractLvl());
-        p.sendMessage("Combat XP: "+b.getCmbtContractXp());
-        p.sendMessage("Peacemaker XP: "+b.getPceContractXp());
-        p.sendMessage("Wanted Kills: "+b.getWantedKills());
+        p.sendMessage("Combat Level: " + b.getCmbtContractLvl());
+        p.sendMessage("Peacemaker Level: " + b.getPceContractLvl());
+        p.sendMessage("Combat XP: " + b.getCmbtContractXp());
+        p.sendMessage("Peacemaker XP: " + b.getPceContractXp());
+        p.sendMessage("Wanted Kills: " + b.getWantedKills());
 
     }
+
     public static void releasePrisoner(Player p, Bandit b) {
         b.setBounty(0);
         b.setJailed(false);
         b.setEscaping(false);
         b.setJailedFlag(false);
-        p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " jail!","Good luck...",1,2,1);
+        p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " jail!", "Good luck...", 1, 2, 1);
         b.setRespawning(true);
     }
-    public static String getPlayerRoleTitle()
-    {
-        return ChatColor.RED+"Bandit ";
+
+    public static String getPlayerRoleTitle() {
+        return ChatColor.RED + "Bandit ";
     }
-    public static void loadScoreBoard(Player p, Bandit b, int secCombatBlock, int minWanted, int secWanted)
-    {
+
+    public static void loadScoreBoard(Player p, Bandit b, int secCombatBlock, int minWanted, int secWanted) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard sb = manager.getNewScoreboard();
 
@@ -50,25 +49,25 @@ public class BanditUtils
         //Do the same for teams
 
         //Get banking info
-        String wallet = ChatColor.GREEN+"Wallet: "+ChatColor.RESET+b.getWallet()+ChatColor.GOLD+"g";
-        String bank = ChatColor.GREEN+"Bank: "+ChatColor.RESET+b.getBank()+ChatColor.GOLD+"g";
-        String bounty= ChatColor.RED+"Bounty: "+ChatColor.RESET+b.getBounty();
+        String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
+        String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
+        String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
 
         //Wanted timer
         List<Integer> singleDigits = new ArrayList<>();
-        for(int x =0;x<10;x++){
+        for (int x = 0; x < 10; x++) {
             singleDigits.add(x);
         }
-        String secWantedStr = singleDigits.contains(secWanted) ? "0"+String.valueOf(secWanted) : String.valueOf(secWanted);
-        String wanted = ChatColor.DARK_RED+"< Wanted > " +ChatColor.RESET
-                + minWanted +":"+secWantedStr;
+        String secWantedStr = singleDigits.contains(secWanted) ? "0" + String.valueOf(secWanted) : String.valueOf(secWanted);
+        String wanted = ChatColor.DARK_RED + "< Wanted > " + ChatColor.RESET
+                + minWanted + ":" + secWantedStr;
         //Combat blocked timer
-        String secCmbtStr = singleDigits.contains(secCombatBlock) ? "0"+String.valueOf(secCombatBlock) : String.valueOf(secCombatBlock);
-        String combatBlock = ChatColor.DARK_PURPLE + "Combat Blocked "+ChatColor.RESET+"0:"+secCmbtStr;
+        String secCmbtStr = singleDigits.contains(secCombatBlock) ? "0" + String.valueOf(secCombatBlock) : String.valueOf(secCombatBlock);
+        String combatBlock = ChatColor.DARK_PURPLE + "Combat Blocked " + ChatColor.RESET + "0:" + secCmbtStr;
 
         String seperator = "---------------";
 
-        Objective objective = sb.registerNewObjective(ChatColor.DARK_RED+String.valueOf(ChatColor.BOLD)+"IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD)+"Iron Sight");
+        Objective objective = sb.registerNewObjective(ChatColor.DARK_RED + String.valueOf(ChatColor.BOLD) + "IronSight", ChatColor.GRAY + String.valueOf(ChatColor.BOLD) + "Iron Sight");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Score wantedDis = objective.getScore(wanted);
@@ -82,10 +81,10 @@ public class BanditUtils
         bankDis.setScore(3);
         bountyDis.setScore(4);
         seperatorDis.setScore(5);
-        if(b.isCombatBlocked()){
+        if (b.isCombatBlocked()) {
             combatDis.setScore(6);
         }
-        if(b.isWanted()){
+        if (b.isWanted()) {
             wantedDis.setScore(7);
         }
         p.setScoreboard(sb);

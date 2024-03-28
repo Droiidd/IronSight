@@ -177,6 +177,7 @@ public class GameContentLoader {
         FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
+<<<<<<< HEAD
         OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
         OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
         OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
@@ -184,6 +185,11 @@ public class GameContentLoader {
         OilFieldCrate crate5 = new OilFieldCrate(5,northoil,2959,101,-3037);
         OilFieldCrate crate6 = new OilFieldCrate(6,northoil,2992,101,-3087);
         OilFieldCrate crate7 = new OilFieldCrate(7,northoil,2984,101,-3154);
+=======
+        Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
+        Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
+        Location texas = new Location("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
 
         OilFieldTask oil1 = new OilFieldTask(plugin, northoil);
         //OilFieldTask oil2 = new OilFieldTask(southoil);
@@ -208,15 +214,17 @@ public class GameContentLoader {
     }
     public static void loadIcons()
     {
-        System.out.println("loading all icons");
-        ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
+        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
 
+<<<<<<< HEAD
         ItemIcon miner = new ItemIcon("Miner","MinerPrefix","Choose miner!",Material.STONE_PICKAXE);
         ItemIcon medic = new ItemIcon("Medic","MedicPrefix","Choose medic!",Material.PAPER);
         ItemIcon explorer = new ItemIcon("Explorer","ExplorerPrefix","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+=======
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
         //These are icons for the tracker system
         ItemIcon town = new ItemIcon("Towns", "Find town", Material.DARK_OAK_HANGING_SIGN);
             ItemIcon santaFe = new ItemIcon("Santa Fe", "Directions to Santa Fe", Material.WHITE_BANNER);
@@ -270,6 +278,7 @@ public class GameContentLoader {
             ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.KELP);
 
+<<<<<<< HEAD
         ItemIcon santafeRE = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
         ItemIcon neworleansRE = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
         ItemIcon texasRE = new ItemIcon("Republic of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
@@ -280,13 +289,28 @@ public class GameContentLoader {
 
         ItemIcon nextPage = new ItemIcon("Next Page","NextPage","Click to go to next page",Material.MAGENTA_GLAZED_TERRACOTTA);
         System.out.println("Icons loaded");
+=======
+
+
+
+        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
+        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
+        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
+        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+
+        ItemIcon santafe = new ItemIcon("Santa Fe","Click to respawn here",Material.NETHER_STAR);
+        ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
+        ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
+
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 
     public static void loadBrewing(){
-        new BrewingRecipe("Miner's Double Spade Brew", new ItemStack(Material.FROGSPAWN), false, PotionEffectType.LUCK, 0, 120, Color.YELLOW, "empty");
-        new BrewingRecipe("Green Thumb Brew", new ItemStack(Material.HONEYCOMB), false, PotionEffectType.LUCK, 1, 120, Color.GREEN, "empty");
-        new BrewingRecipe("Double Hook Brew", new ItemStack(Material.SUNFLOWER), false, PotionEffectType.LUCK, 2, 60, Color.BLUE, "empty");
+        System.out.println("In Load Brewing");
+        new BrewingRecipe(Material.BOWL, (inventory, ingredient) -> {//Some lambda magic
+            return new ItemStack(Material.BEACON);
 
+<<<<<<< HEAD
         new BrewingRecipe("Miner's Frenzy Brew", new ItemStack(Material.FIRE_CORAL), false, PotionEffectType.FAST_DIGGING, 0, 60, Color.BLACK, "empty");
 
         new BrewingRecipe("Instant Health", new ItemStack(Material.SWEET_BERRIES), false, PotionEffectType.HEAL, 0, 0, Color.fromRGB(253, 94, 94), "empty");
@@ -317,5 +341,8 @@ public class GameContentLoader {
 
         //Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
+=======
+        });
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 }

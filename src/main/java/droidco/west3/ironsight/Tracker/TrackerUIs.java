@@ -11,7 +11,11 @@ public class TrackerUIs {
 
     public static Inventory openTrackerUI(Player p) {
         Inventory trackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");
+<<<<<<< HEAD
         Bandit b = Bandit.getPlayer(p);
+=======
+        Bandit iPlayer = Bandit.getPlayer(p);
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
         trackerUi.setItem(10, ItemIcon.getIcon("Towns").getItem());
         trackerUi.setItem(11, ItemIcon.getIcon("Players").getItem());
         trackerUi.setItem(12, ItemIcon.getIcon("Contracts").getItem());

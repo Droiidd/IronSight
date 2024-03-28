@@ -37,10 +37,19 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
+<<<<<<< HEAD
     private FrontierLocation trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
     private FrontierLocation currentFrontierLocation;
+=======
+    private Location currentLocation;
+
+    private Location trackingLocation;
+
+    private static boolean isTrackingLocation;
+    private static boolean isTrackingPlayer;
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -287,11 +296,19 @@ public class Bandit
         return isTrackingPlayer;
     }
 
+<<<<<<< HEAD
     public void setIsTrackingPlayer(boolean trackingPlayer) {
         isTrackingPlayer = trackingPlayer;
     }
 
     public void setIsTrackingLocation(boolean trackingLocation) {
+=======
+    public static void setIsTrackingPlayer(boolean trackingPlayer) {
+        isTrackingPlayer = trackingPlayer;
+    }
+
+    public static void setIsTrackingLocation(boolean trackingLocation) {
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
         isTrackingLocation = trackingLocation;
     }
 
@@ -339,6 +356,7 @@ public class Bandit
         this.pceContractXp = pceContractXp;
     }
 
+<<<<<<< HEAD
     public FrontierLocation getTrackingLocation() {
         return trackingLocation;
     }
@@ -347,6 +365,16 @@ public class Bandit
         setIsTrackingPlayer(false);
         this.trackingLocation = trackingLocation;
         setIsTrackingLocation(true);
+=======
+    public Location getTrackingLocation() {
+        return trackingLocation;
+    }
+
+    public void setTrackingLocation(Location trackingLocation) {
+        Bandit.setIsTrackingPlayer(false);
+        this.trackingLocation = trackingLocation;
+        Bandit.setIsTrackingLocation(true);
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 
     public int getCmbtContractXp() {
