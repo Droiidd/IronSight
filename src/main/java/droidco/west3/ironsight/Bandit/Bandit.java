@@ -27,6 +27,8 @@ public class Bandit
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
+
+    private Player targetedPlayer;
     private int pceContractXp;
     private int cmbtContractXp;
     private int pceContractLvl;
@@ -35,6 +37,9 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
+    private FrontierLocation trackingLocation;
+    private boolean isTrackingLocation;
+    private boolean isTrackingPlayer;
     private FrontierLocation currentFrontierLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
@@ -193,6 +198,14 @@ public class Bandit
         this.doingContract = doingContract;
     }
 
+    public Player getTargetedPlayer() {
+        return targetedPlayer;
+    }
+
+    public void setTargetedPlayer(Player targetedPlayer) {
+        this.targetedPlayer = targetedPlayer;
+    }
+
     public void setApprenticeContract(Contract apprenticeContract) {
         this.apprenticeContract = apprenticeContract;
     }
@@ -266,6 +279,22 @@ public class Bandit
         return isWanted;
     }
 
+    public boolean isTrackingLocation() {
+        return isTrackingLocation;
+    }
+
+    public boolean isTrackingPlayer() {
+        return isTrackingPlayer;
+    }
+
+    public void setIsTrackingPlayer(boolean trackingPlayer) {
+        isTrackingPlayer = trackingPlayer;
+    }
+
+    public void setIsTrackingLocation(boolean trackingLocation) {
+        isTrackingLocation = trackingLocation;
+    }
+
     public void setWanted(boolean wanted) {
         isWanted = wanted;
     }
@@ -308,6 +337,16 @@ public class Bandit
 
     public void setPceContractXp(int pceContractXp) {
         this.pceContractXp = pceContractXp;
+    }
+
+    public FrontierLocation getTrackingLocation() {
+        return trackingLocation;
+    }
+
+    public void setTrackingLocation(FrontierLocation trackingLocation) {
+        setIsTrackingPlayer(false);
+        this.trackingLocation = trackingLocation;
+        setIsTrackingLocation(true);
     }
 
     public int getCmbtContractXp() {

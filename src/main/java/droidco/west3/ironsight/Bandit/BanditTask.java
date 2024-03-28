@@ -54,6 +54,16 @@ public class BanditTask extends BukkitRunnable {
     @Override
     public void run() {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
+        if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
+            p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+        }
+
+        else {
+            if (b.getTargetedPlayer().isOnline()) {
+                p.setCompassTarget(b.getTargetedPlayer().getLocation());
+            }
+
+        }
 
         //Titles for locations
         FrontierLocation.displayLocation(p);

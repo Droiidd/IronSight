@@ -10,15 +10,15 @@ import org.bukkit.inventory.Inventory;
 public class TrackerUIs {
 
     public static Inventory openTrackerUI(Player p) {
-        Inventory TrackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");
+        Inventory trackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");
         Bandit iPlayer = Bandit.getPlayer(p);
-        TrackerUi.setItem(10, ItemIcon.getIcon("Towns").getItem());
-        TrackerUi.setItem(11, ItemIcon.getIcon("Players").getItem());
-        TrackerUi.setItem(12, ItemIcon.getIcon("Contracts").getItem());
-        TrackerUi.setItem(14, ItemIcon.getIcon("Merchants").getItem());
-        TrackerUi.setItem(15, ItemIcon.getIcon("NPCs").getItem());
-        TrackerUi.setItem(16, ItemIcon.getIcon("Locations").getItem());
-        return TrackerUi;
+        trackerUi.setItem(10, ItemIcon.getIcon("Towns").getItem());
+        trackerUi.setItem(11, ItemIcon.getIcon("Players").getItem());
+        trackerUi.setItem(12, ItemIcon.getIcon("Contracts").getItem());
+        trackerUi.setItem(14, ItemIcon.getIcon("Merchants").getItem());
+        trackerUi.setItem(15, ItemIcon.getIcon("NPCs").getItem());
+        trackerUi.setItem(16, ItemIcon.getIcon("Locations").getItem());
+        return trackerUi;
     }
 
     public static Inventory openTownsUi(Player p) {
