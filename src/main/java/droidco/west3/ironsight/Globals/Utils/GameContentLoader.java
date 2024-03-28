@@ -11,7 +11,10 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import org.bukkit.Bukkit;
+<<<<<<< HEAD
 import org.bukkit.Color;
+=======
+>>>>>>> 8d97370ec1fe4477699b66d39d0b5670ced665be
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -140,6 +143,10 @@ public class GameContentLoader {
                 "Still in the frozen north",Material.MUSIC_DISC_13,0.0,0.0);
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field",
                 Material.TRIPWIRE_HOOK,0.0,0.0);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8d97370ec1fe4477699b66d39d0b5670ced665be
 
 
         //LEGENDARY
