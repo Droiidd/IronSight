@@ -1,7 +1,7 @@
 package droidco.west3.ironsight.Bandit;
 
 import droidco.west3.ironsight.Contracts.Contract;
-import droidco.west3.ironsight.Location.Location;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.entity.Player;
 
@@ -35,7 +35,7 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
-    private Location currentLocation;
+    private FrontierLocation currentFrontierLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -199,12 +199,12 @@ public class Bandit
     public void setExperiencedContract(Contract experiencedContract) {
         this.experiencedContract = experiencedContract;
     }
-    public void setCurrentLocation(Location locName){
-        this.currentLocation = locName;
+    public void setCurrentLocation(FrontierLocation locName){
+        this.currentFrontierLocation = locName;
     }
-    public Location getCurrentLocation()
+    public FrontierLocation getCurrentLocation()
     {
-        return this.currentLocation;
+        return this.currentFrontierLocation;
     }
     public void updateBank(double deposit){
         this.bank += deposit;

@@ -33,7 +33,7 @@ CustomItem {
         this.rarityLore = getRarityString(rarity);
         this.isLegal = isLegal;
         this.isOfficer = isOfficer;
-        this.description = ChatColor.DARK_GRAY+description;
+        this.description = ChatColor.GRAY+description;
         this.material = material;
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
@@ -69,8 +69,11 @@ CustomItem {
         }
         return "";
     }
-
-    public CustomItem getCustomItem(String itemCode){
+    public static HashMap<String,CustomItem> getItems()
+    {
+        return items;
+    }
+    public static CustomItem getCustomItem(String itemCode){
         if(items.containsKey(itemCode)){
             return items.get(itemCode);
         }
@@ -98,9 +101,11 @@ CustomItem {
         if(!this.isLegal){
             //IS NOT LEGAL
             trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.DARK_RED)+"Illegal";
+            return trait;
         }
         if(this.isOfficer){
             trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.BLUE)+"Officer";
+            return trait;
         }
         return null;
     }

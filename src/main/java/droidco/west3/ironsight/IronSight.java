@@ -2,24 +2,19 @@ package droidco.west3.ironsight;
 
 import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
-import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.ContractUiEvents;
-import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
-import droidco.west3.ironsight.Location.Location;
-import droidco.west3.ironsight.Location.LocationUiEvents;
+import droidco.west3.ironsight.FrontierLocation.LocationUiEvents;
 import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
 import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Globals.Events.JoinServerEvents;
 import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
+import droidco.west3.ironsight.Items.MasterListCmd;
+import droidco.west3.ironsight.Items.MasterListEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class IronSight extends JavaPlugin {
 
@@ -34,7 +29,7 @@ public final class IronSight extends JavaPlugin {
         loadAllCommands();
         System.out.println("Commands loaded!");
         GameContentLoader.loadIcons();
-        GameContentLoader.loadLocations();
+        GameContentLoader.loadLocations(this);
         GameContentLoader.loadCustomItems();
         GameContentLoader.loadBrewing();
         GameContentLoader.loadContracts();
@@ -64,11 +59,13 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
         getServer().getPluginManager().registerEvents(new LocationUiEvents(), this);
+        getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
         getCommand("ironsight").setExecutor(new AdminCommands());
         getCommand("contract").setExecutor(new ContractMenuCmd());
         getCommand("give_common").setExecutor(new TestItemCommand());
+        getCommand("masterlist").setExecutor(new MasterListCmd());
     }
 }

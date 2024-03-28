@@ -13,3 +13,6 @@ commands:
   give_common:
     aliase:
       - g_c
+  masterlist:
+    aliases:
+      - list

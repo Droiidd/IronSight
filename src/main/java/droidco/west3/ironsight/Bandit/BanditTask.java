@@ -2,10 +2,9 @@ package droidco.west3.ironsight.Bandit;
 
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
-import droidco.west3.ironsight.Location.Location;
-import droidco.west3.ironsight.Location.LocationType;
-import droidco.west3.ironsight.Location.LocationUI;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
+import droidco.west3.ironsight.FrontierLocation.LocationUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -36,7 +35,7 @@ public class BanditTask extends BukkitRunnable {
     private boolean escapeFlag = false;
     private final Player p;
     private boolean wildernessFlag;
-    private HashMap<String, Location> locations;
+    private HashMap<String, FrontierLocation> locations;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
 
@@ -44,6 +43,7 @@ public class BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
+        Contract.assignPlayerContracts(p,b);
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
 
@@ -56,7 +56,7 @@ public class BanditTask extends BukkitRunnable {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
 
         //Titles for locations
-        Location.displayLocation(p);
+        FrontierLocation.displayLocation(p);
         //Refresh Players siderbar scoreboard
         BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
         // PLAYER RESPAWN STUFF
@@ -66,7 +66,7 @@ public class BanditTask extends BukkitRunnable {
             if (b.isJailedFlag()) {
                 //REPSAWN IN PRISON
                 b.setJailedFlag(false);
-                Location prison = Location.getLocation("Prison");
+                FrontierLocation prison = FrontierLocation.getLocation("Prison");
                 //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
                 org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(), prison.getSpawnX(), prison.getSpawnY(), prison.getSpawnZ());
                 p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
@@ -84,10 +84,10 @@ public class BanditTask extends BukkitRunnable {
         }
 
         //  LOCATION SPECIFIC
-        Location currentLoc = b.getCurrentLocation();
+        FrontierLocation currentLoc = b.getCurrentLocation();
 
         if (b.isJailed()) {
-            if (!currentLoc.getType().equals(LocationType.Prison)) {
+            if (!currentLoc.getType().equals(LocationType.PRISON)) {
                 //Player is escaping! PUT LOGIC HERE
                 b.setEscaping(true);
                 if(!escapeFlag){
@@ -126,7 +126,7 @@ public class BanditTask extends BukkitRunnable {
             }
         }
         //ILLEGAL
-        if (currentLoc.getType().equals(LocationType.ILLEGAL)) {
+        if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
             //Increase players bounty in illegal area
             if (tick % 3 == 0) {
                 b.updateBounty(2);
