@@ -55,7 +55,7 @@ public class BanditTask extends BukkitRunnable {
     public void run() {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
         if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
-            p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+            p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
         }
 
         else {
