@@ -68,7 +68,6 @@ public class GameContentLoader {
                 "Can be refined or sold",Material.COPPER_ORE,0.0,0.0);
 
 
-
         //UNCOMMON
         CustomItem cookedSalmon = new CustomItem("Smoked Salmon",3,true,false,
                 "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,0.0);
@@ -178,7 +177,7 @@ public class GameContentLoader {
 
         Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        Location texas = new Location("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        Location texas = new Location("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
         Location prison = new Location("Prison","JaiL!",LocationType.Prison, 47,52,1271,1277,50,67,1273);
 
@@ -192,15 +191,10 @@ public class GameContentLoader {
     }
     public static void loadIcons()
     {
-        System.out.println("loading all icons");
-        ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
+        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
 
-        ItemIcon miner = new ItemIcon("Miner","MinerPrefix","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","MedicPrefix","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","ExplorerPrefix","Choose explorer!",Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
         //These are icons for the tracker system
         ItemIcon town = new ItemIcon("Towns", "Find town", Material.DARK_OAK_HANGING_SIGN);
             ItemIcon santaFe = new ItemIcon("Santa Fe", "Directions to Santa Fe", Material.WHITE_BANNER);
@@ -266,45 +260,13 @@ public class GameContentLoader {
         ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
         ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
 
-        ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
-        ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
-        ItemIcon contractDesc = new ItemIcon("Description","ContractDesc","What to do:",Material.MOJANG_BANNER_PATTERN);
-        System.out.println("Icons loaded");
     }
 
     public static void loadBrewing(){
-        new BrewingRecipe("Miner's Double Spade Brew", new ItemStack(Material.FROGSPAWN), false, PotionEffectType.LUCK, 0, 120, Color.YELLOW, "empty");
-        new BrewingRecipe("Green Thumb Brew", new ItemStack(Material.HONEYCOMB), false, PotionEffectType.LUCK, 1, 120, Color.GREEN, "empty");
-        new BrewingRecipe("Double Hook Brew", new ItemStack(Material.SUNFLOWER), false, PotionEffectType.LUCK, 2, 60, Color.BLUE, "empty");
+        System.out.println("In Load Brewing");
+        new BrewingRecipe(Material.BOWL, (inventory, ingredient) -> {//Some lambda magic
+            return new ItemStack(Material.BEACON);
 
-        new BrewingRecipe("Miner's Frenzy Brew", new ItemStack(Material.FIRE_CORAL), false, PotionEffectType.FAST_DIGGING, 0, 60, Color.BLACK, "empty");
-
-        new BrewingRecipe("Instant Health", new ItemStack(Material.SWEET_BERRIES), false, PotionEffectType.HEAL, 0, 0, Color.fromRGB(253, 94, 94), "empty");
-        new BrewingRecipe("Whiskey", new ItemStack(Material.GLOW_INK_SAC), false, PotionEffectType.DAMAGE_RESISTANCE, 0, 60, Color.fromRGB(135, 99, 38), "empty");
-        new BrewingRecipe("Morphine", new ItemStack(Material.PUMPKIN_SEEDS), false, PotionEffectType.REGENERATION, 0, 60, Color.fromRGB(20, 151, 163), "empty");
-        System.out.println("Brewing load complete.");
-
-    }
-    public static void loadContracts(){
-        System.out.println("Loading contracts!");
-        List<Location> testLocs = new ArrayList<>();
-        testLocs.add(Location.getLocation("Black Spur Mines"));
-        testLocs.add(Location.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,1);
-
-        List<Location> test2Locs = new ArrayList<>();
-        test2Locs.add(Location.getLocation("North Oil Field"));
-        test2Locs.add(Location.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,1);
-
-        List<Location> test3Locs = new ArrayList<>();
-        test3Locs.add(Location.getLocation("Storm Point"));
-        test3Locs.add(Location.getLocation("New Orleans"));
-
-
-        Contract testC3 = new Contract("Mule across city borders",ContractType.OilField , test3Locs ,1);
-
-        Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
-        System.out.println("Contracts loaded!");
+        });
     }
 }

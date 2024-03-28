@@ -71,8 +71,7 @@ public class Location {
         return null;
     }
 
-    public boolean isPlayerInside(Player p)
-    {
+    public boolean isPlayerInside(Player p) {
         double minX;
         double maxX;
         double minZ;
@@ -263,3 +262,11 @@ public class Location {
         double z3 = (this.z1 + this.z2) / 2;
         return new org.bukkit.Location(p.getWorld(), x3, 100.0, z3);
     }
+
+
+
+
+
+}
+
+
