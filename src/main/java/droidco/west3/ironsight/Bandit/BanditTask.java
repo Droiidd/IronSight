@@ -108,6 +108,7 @@ public class BanditTask extends BukkitRunnable {
 
         //  LOCATION SPECIFIC
         Location currentLoc = b.getCurrentLocation();
+        if (currentLoc.is)
 
         if (b.isJailed()) {
             if (!currentLoc.getType().equals(LocationType.Prison)) {

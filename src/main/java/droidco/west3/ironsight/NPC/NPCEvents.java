@@ -1,15 +1,27 @@
 package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.IronSight;
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Tracker.TrackerUIs;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 
 import java.net.http.WebSocket;
@@ -21,12 +33,9 @@ public class NPCEvents implements Listener {
         String clickedNPCname = e.getRightClicked().getCustomName();
         NPC clickedNPC = NPC.getNPC(clickedNPCname);
         Bandit b = Bandit.getPlayer(p);
-        switch (clickedNPC.getType()){
+        switch (clickedNPC.getType()) {
             case ARMORER -> {
                 p.openInventory(NPCUI.armorerUI(p));
-                e.setCancelled(true);
-
-
                 break;
             }
             case ILLEGAL_ARMORER -> {
@@ -92,5 +101,80 @@ public class NPCEvents implements Listener {
             }
 
         }
+
+
+    }
+
+    public void traderMenuSelect(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
+        Bandit b = Bandit.getPlayer(p);
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Shopkeeper")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Smoked Salmon").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Smoked Salmon").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Smoked Salmon").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Charred Potato").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Charred Potato").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Charred Potato").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Brown Stew").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Brown Stew").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Brown Stew").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Fox").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Fox").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Fox").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Rabbit Stew").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Rabbit Stew").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Rabbit Stew").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Rabbit").getMaterial()) == 0) {
+                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Rabbit").getSalePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Rabbit").getSalePrice());
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("Not enough funds!");
+                }
+
+            }
+
+
+        }
+
+
     }
 }

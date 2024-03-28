@@ -121,6 +121,14 @@ CustomItem {
         return isLegal;
     }
 
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
+    }
+
     public void setLegal(boolean legal) {
         isLegal = legal;
     }
