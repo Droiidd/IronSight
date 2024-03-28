@@ -1,6 +1,10 @@
 package droidco.west3.ironsight.NPC;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Villager;
 
 import java.util.HashMap;
 
@@ -32,6 +36,10 @@ public class NPC {
 
     }
 
+    public void spawnNPC(Location location) {
+        Villager shopkeeper = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
+        shopkeeper.setAI(false);
+    }
     public static NPC getNPC(String displayName) {
         return npcs.get(displayName);
     }
