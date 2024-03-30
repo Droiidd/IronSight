@@ -1,10 +1,12 @@
 package droidco.west3.ironsight.Items;
 
+import droidco.west3.ironsight.FrontierLocation.LocationType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ItemTable {
 
@@ -29,27 +31,37 @@ public class ItemTable {
     public ArrayList<CustomItem> six = new ArrayList<>();
     public ArrayList<CustomItem> sev = new ArrayList<>();
     public ArrayList<CustomItem> eig = new ArrayList<>();
+    private HashMap<String, Quantity> quantities;
     private static HashMap<String, ItemTable> tables = new HashMap<String, ItemTable>() {
     };
-    public ItemTable(String items[], String name){
-
-        for (int i = 0; i < items.length; i++){
+    public ItemTable(HashMap<String, Quantity> items_map, String name){
+        String[] items = items_map.keySet().toArray(new String[0]);
+        for (int i = 0; i < items.length; i++) {
             CustomItem item = CustomItem.getCustomItem(items[i]);
-            if (item == null){
+            if (item == null) {
                 System.out.println("\nItemTables init" + items[i] + " is not in CustomItems.items\n");
+            } else {
+                switch (item.getRarity()) {
+                    case 1:
+                        one.add(item);
+                    case 2:
+                        two.add(item);
+                    case 3:
+                        thr.add(item);
+                    case 4:
+                        fou.add(item);
+                    case 5:
+                        fiv.add(item);
+                    case 6:
+                        six.add(item);
+                    case 7:
+                        sev.add(item);
+                    case 8:
+                        eig.add(item);
+                }
             }
-            else{
-            switch (item.getRarity()){
-                case 1: one.add(item);
-                case 2: two.add(item);
-                case 3: thr.add(item);
-                case 4: fou.add(item);
-                case 5: fiv.add(item);
-                case 6: six.add(item);
-                case 7: sev.add(item);
-                case 8: eig.add(item);
-            }}
         }
+        this.quantities = items_map;
         tables.put(name, this);
     }
 
@@ -96,18 +108,28 @@ public class ItemTable {
 
         for (int i = 0; i < num_items; i++){
             int rand = (int)(Math.random() * 100);
+            CustomItem item;
             if (rand < common){
-                out.add(getItem(0).getItemStack());
+                item = getItem(0);
             }
             else if (rand < uncommon){
-                out.add(getItem(1).getItemStack());
+                item = getItem(1);
             }
             else if (rand < rare){
-                out.add(getItem(2).getItemStack());
+                item = getItem(2);
             }
             else{
-                out.add(getItem(3).getItemStack());
+                item = getItem(3);
             }
+            int quant = quantities.get(item.getItemCode()).getNum();
+            if (quant != 1){
+                out.add(item.getItemStack(quant));
+                continue;
+            }
+            else {
+                out.add(item.getItemStack());
+            }
+
         }
         return out;
     }

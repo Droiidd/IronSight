@@ -265,9 +265,6 @@ public class FrontierLocation {
         double z3 = (this.z1 + this.z2) / 2;
         return new org.bukkit.Location(p.getWorld(), x3, 100.0, z3);
     }
-    public void setItemTableString(String[] items){
-        this.itemTable = new ItemTable(items, this.locName);
-    }
     public void setItemTable(ItemTable table) {
         this.itemTable = table;
     }

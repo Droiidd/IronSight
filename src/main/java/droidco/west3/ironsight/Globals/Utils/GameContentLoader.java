@@ -12,6 +12,7 @@ import droidco.west3.ironsight.Items.ItemTable;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
+import droidco.west3.ironsight.Items.Quantity;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -176,46 +178,102 @@ public class GameContentLoader {
         System.out.println("custom items loaded");
 
     }
+    public static void loadItemTables(){
+        //add "Health Potions
+        Quantity ones = new Quantity(1, 1);
+        HashMap<String, Quantity> oilfield = new HashMap<>();
+        oilfield.put("Glass Bottle", ones);
+        oilfield.put("Charred Potato", ones);
+        oilfield.put("Brown Stew", ones);
+        oilfield.put("Splint", ones);
+        oilfield.put("Bandage", ones);
+        oilfield.put("Rifle Ammo", new Quantity(4, 8));
+        oilfield.put("Shotgun Ammo", new Quantity(2, 4));
+        ItemTable oilfield_table = new ItemTable(oilfield, "Oil Field");
+
+        HashMap<String, Quantity> hunting_gr = new HashMap<>();
+        hunting_gr.put("Shotgun Ammo", ones);
+        hunting_gr.put("Rifle Ammo", ones);
+        hunting_gr.put("Cooked Fox", ones);
+        hunting_gr.put("Bandage", ones);
+        hunting_gr.put("Splint", ones);
+        hunting_gr.put("Glass Bottle", ones);
+        hunting_gr.put("Boar Hide", ones);
+        hunting_gr.put("Cow Hide", ones);
+
+        ItemTable hunting_gr_table = new ItemTable(hunting_gr, "Hunting Grounds");
+
+        //Add Huntsman's Boots/Hat
+        HashMap<String, Quantity> mines = new HashMap<>();
+        mines.put("Gold Ore", ones);
+        mines.put("Iron Ore", ones);
+        mines.put("Copper Ore", ones);
+        mines.put("Charred Potato", ones);
+        mines.put("Rabbit Stew", ones);
+        mines.put("Splint", ones);
+        mines.put("Old Miner's Pick", ones);
+        mines.put("Mole's Breath Spores", ones);
+        ItemTable mines_table = new ItemTable(mines, "Mines");
+
+        //add farmhand set
+        HashMap<String, Quantity> drugbase = new HashMap<>();
+        drugbase.put("Glass Bottle", ones);
+        drugbase.put("Rifle Ammo", ones);
+        drugbase.put("Cooked Rabbit", ones);
+        drugbase.put("Brown Stew", ones);
+        drugbase.put("Bandage", ones);
+        drugbase.put("Splint", ones);
+        drugbase.put("Slug", ones);
+        drugbase.put("Fermented Liquor", ones);
+        ItemTable drug_base_table = new ItemTable(drugbase, "Drug Base");
+
+        //add gold, huntsman's jacket/trousers, Winchester 1873, Colt Navy
+        HashMap<String, Quantity> scavtown = new HashMap<>();
+        scavtown.put("Slug", ones);
+        scavtown.put("Shotgun Ammo", ones);
+        scavtown.put("Pistol Ammo", ones);
+        scavtown.put("Rifle Ammo", ones);
+        scavtown.put("Rabbit Stew", ones);
+        scavtown.put("Charred Potato", ones);
+        scavtown.put("Bandage", ones);
+        scavtown.put("Splint", ones);
+        scavtown.put("Rabbit Hide", ones);
+        scavtown.put("Fermented Liquor", ones);
+        ItemTable scav_town_table = new ItemTable(scavtown, "Scavenger Town");
+
+
+        //Crates
+        //Journeyman's hat/duster, frontier set, sawed off, colt navy, 66 winchester, henry model 3, explorer's pick
+        //green thumb brew
+        HashMap<String, Quantity> oilfield_crate = new HashMap<>();
+        ItemTable oilfield_create_table = new ItemTable(oilfield_crate, "Oil Field Crate");
+        //add health potions, gold, colt patterson
+        HashMap<String, Quantity> lt_milcrate = new HashMap<>();
+        lt_milcrate.put("Shotgun Ammo", new Quantity(18, 28));
+        lt_milcrate.put("Pistol Ammo", new Quantity(18, 28));
+        lt_milcrate.put("Rifle Ammo", new Quantity(18, 28));
+        lt_milcrate.put("Slugs", new Quantity(8, 18));
+        lt_milcrate.put("Fermented Liquor", new Quantity(6, 15));
+        lt_milcrate.put("Amethyst Bud", new Quantity(1, 5));
+        lt_milcrate.put("Smoked Salmon", new Quantity(9, 19));
+        lt_milcrate.put("Steel Lined Rod", ones);
+        ItemTable lt_milcrate_table = new ItemTable(lt_milcrate, "Low-Tier Military Crate");
+
+        //add all
+        //journeyman pants/boots, sharps rifle, winchester 1873, frontier set, double spade brew
+        String[] hightier_military_crate = {};
+    }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
         //Item tables
 
         //Locations
-        //add "Health Potions
-        String[] oilfield = {"Rifle Ammo", "Shotgun Ammo", "Glass Bottle", "Charred Potato", "Brown Stew", "Splint", "Bandage"};
-        ItemTable oilfield_table = new ItemTable(oilfield, "Oil Field");
 
-        String[] hunting_gr = {"Shotgun Ammo", "Rifle Ammo", "Cooked Fox", "Bandage", "Splint", "Glass Bottle", "Boar Hide", "Cow Hide"};
-        ItemTable hunting_gr_table = new ItemTable(hunting_gr, "Hunting Grounds");
-        //Add Huntsman's Boots/Hat
-        String[] mines = {"Gold Ore", "Iron Ore", "Copper Ore", "Charred Potato", "Rabbit Stew", "Splint", "Old Miner's Pick", "Moles Breath Spores"};
-        ItemTable mines_table = new ItemTable(mines, "Mines");
-        //add farmhand set
-        String[] drug_base = {"Slug", "Glass Bottle", "Rifle Ammo", "Cooked Rabbit", "Brown Stew", "Bandage", "Splint", "Fermented Liquor"};
-        ItemTable drug_base_table = new ItemTable(drug_base, "Drug Base");
-        //add gold, huntsman's jacket/trousers, Winchester 1873, Colt Navy
-        String[] scav_town = {"Slug", "Shotgun Ammo", "Pistol Ammo", "Rifle Ammo", "Rabbit Stew", "Charred Potato", "Bandage", "Splint",
-                    "Rabbit Hide", "Fermented Liquor"};
-        ItemTable scav_town_table = new ItemTable(scav_town, "Scavenger Town");
-        //Crates
-        //Journeyman's hat/duster, frontier set, sawed off, colt navy, 66 winchester, henry model 3, explorer's pick
-        //green thumb brew
-        String[] oilfield_crate = {"Hermit Crab", "Fermented Liquor", "Unrefined Oil", "Oil Barrel"};
-        ItemTable oilfield_create_table = new ItemTable(oilfield_crate, "Oil Field Crate");
-        //add health potions, gold, colt patterson
-        String[] lowtier_military_crate = {"Shotgun Ammo", "Pistol Ammo", "Rifle Ammo", "Steel Lined Rod", "Smoked Salmon",
-                            "Amethyst Bud"};
-        ItemTable lt_milcrate_table = new ItemTable(lowtier_military_crate, "Low-Tier Military Crate");
-
-        //add all
-        //journeyman pants/boots, sharps rifle, winchester 1873, frontier set, double spade brew
-        String[] hightier_military_crate = {};
         FrontierLocation stormpoint = new FrontierLocation("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
 
         FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
-        northoil.setItemTable(oilfield_table);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
-        southoil.setItemTable(oilfield_table);
+
         OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
         OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
         OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
@@ -228,8 +286,6 @@ public class GameContentLoader {
         //OilFieldTask oil2 = new OilFieldTask(southoil);
 
         FrontierLocation sloughcreek = new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
-        sloughcreek.setItemTable(scav_town_table);
-
         FrontierLocation neworleans = new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
         FrontierLocation texas = new FrontierLocation("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
@@ -237,7 +293,6 @@ public class GameContentLoader {
         FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 47,52,1271,1277,50,67,1273);
 
         FrontierLocation blackspur = new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
-        blackspur.setItemTable(mines_table);
 
         FrontierLocation sloughcreekR = new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2545,2698,38,1243);
         FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
