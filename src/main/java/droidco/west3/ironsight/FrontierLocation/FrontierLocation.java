@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.FrontierLocation;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Items.ItemTable;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -18,6 +19,7 @@ public class FrontierLocation {
     private final BossBar locTitle;
     private static final BossBar wildernessTitle = Bukkit.createBossBar("Wilderness", BarColor.GREEN, BarStyle.SOLID);
     private LocationType type;
+    private ItemTable itemTable;
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
@@ -262,5 +264,14 @@ public class FrontierLocation {
         double x3 = (this.x1 + this.x2) / 2;
         double z3 = (this.z1 + this.z2) / 2;
         return new org.bukkit.Location(p.getWorld(), x3, 100.0, z3);
+    }
+    public void setItemTableString(String[] items){
+        this.itemTable = new ItemTable(items, this.locName);
+    }
+    public void setItemTable(ItemTable table) {
+        this.itemTable = table;
+    }
+    public ItemTable getItemTable(){
+        return this.itemTable;
     }
 }

@@ -1,16 +1,13 @@
 package droidco.west3.ironsight.Items;
 
+import org.bukkit.inventory.ItemStack;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemTable {
-    private static ArrayList<CustomItem> one = new ArrayList<>();
-    private static ArrayList<CustomItem> two = new ArrayList<>();
-    private static ArrayList<CustomItem> thr = new ArrayList<>();
-    private static ArrayList<CustomItem> fou = new ArrayList<>();
-    private static ArrayList<CustomItem> fiv = new ArrayList<>();
-    private static ArrayList<CustomItem> six = new ArrayList<>();
-    private static ArrayList<CustomItem> sev = new ArrayList<>();
-    private static ArrayList<CustomItem> eig = new ArrayList<>();
+
     //Sum to 100
     //Rarities relative to other rarities
     private static int common = 30;
@@ -24,104 +21,99 @@ public class ItemTable {
     private static int unc_split = 50;
     private static int rare_split = 50;
     private static int leg_split = 50;
-    public static CustomItem getItem(String rarity){
+    public ArrayList<CustomItem> one = new ArrayList<>();
+    public ArrayList<CustomItem> two = new ArrayList<>();
+    public ArrayList<CustomItem> thr = new ArrayList<>();
+    public ArrayList<CustomItem> fou = new ArrayList<>();
+    public ArrayList<CustomItem> fiv = new ArrayList<>();
+    public ArrayList<CustomItem> six = new ArrayList<>();
+    public ArrayList<CustomItem> sev = new ArrayList<>();
+    public ArrayList<CustomItem> eig = new ArrayList<>();
+    private static HashMap<String, ItemTable> tables = new HashMap<String, ItemTable>() {
+    };
+    public ItemTable(String items[], String name){
+
+        for (int i = 0; i < items.length; i++){
+            CustomItem item = CustomItem.getCustomItem(items[i]);
+            if (item == null){
+                System.out.println("\nItemTables init" + items[i] + " is not in CustomItems.items\n");
+            }
+            else{
+            switch (item.getRarity()){
+                case 1: one.add(item);
+                case 2: two.add(item);
+                case 3: thr.add(item);
+                case 4: fou.add(item);
+                case 5: fiv.add(item);
+                case 6: six.add(item);
+                case 7: sev.add(item);
+                case 8: eig.add(item);
+            }}
+        }
+        tables.put(name, this);
+    }
+
+    public CustomItem getItem(int rarity){
         int split = (int)(Math.random() * 100);
-        switch (rarity) {
-            case "Common":{
-                if (split < com_split){
+        if (rarity == 0){
+                if (!one.isEmpty() && split < com_split ){
                     return one.get((int)(Math.random()*one.size()));
                 }
-                else{
+                else if (!two.isEmpty()){
                     return two.get((int)(Math.random()*two.size()));
                 }
             }
-            case "Uncommon":{
-                if (split < unc_split){
+        if (rarity <= 1){
+                if (!thr.isEmpty() && split < unc_split){
                     return thr.get((int)(Math.random()*thr.size()));
                 }
-                else{
+                else if (!fou.isEmpty()){
                     return fou.get((int)(Math.random()*fou.size()));
                 }
             }
-            case "Rare":{
-                if (split < rare_split) {
+        if (rarity <= 2){
+                if (!fiv.isEmpty() && split < rare_split) {
                     return fiv.get((int)(Math.random()*fiv.size()));
                 }
-                else{
+                else if (!six.isEmpty()){
                     return six.get((int)(Math.random()*six.size()));
                 }
             }
-            case "Legendary":{
-                if (split < leg_split){
+        if (rarity <= 3){
+                if (!sev.isEmpty() && split < leg_split){
                     return sev.get((int)(Math.random()*sev.size()));
                 }
-                else{
+                else if (!eig.isEmpty()){
                     return eig.get((int)(Math.random()*eig.size()));
                 }
             }
-        }
         return null;
     }
 
-    public static void addItem(CustomItem item){
-        int rarity = item.getRarity();
-        switch (rarity) {
-            case 1: one.add(item);
-            case 2: two.add(item);
-            case 3: thr.add(item);
-            case 4: fou.add(item);
-            case 5: fiv.add(item);
-            case 6: six.add(item);
-            case 7: sev.add(item);
-            case 8: eig.add(item);
-        }
-    }
 
-    public static ArrayList<CustomItem> getNumItems(int num_items){
-        ArrayList<CustomItem> out = new ArrayList<>();
+    public ArrayList<ItemStack> getNumItems(int num_items){
+        ArrayList<ItemStack> out = new ArrayList<>();
 
         for (int i = 0; i < num_items; i++){
             int rand = (int)(Math.random() * 100);
             if (rand < common){
-                out.add(getItem("Common"));
+                out.add(getItem(0).getItemStack());
             }
             else if (rand < uncommon){
-                out.add(getItem("Uncommon"));
+                out.add(getItem(1).getItemStack());
             }
             else if (rand < rare){
-                out.add(getItem("Rare"));
+                out.add(getItem(2).getItemStack());
             }
             else{
-                out.add(getItem("Legendary"));
+                out.add(getItem(3).getItemStack());
             }
-
         }
         return out;
     }
 
-    public static ArrayList<CustomItem> getCommonList(){
-        ArrayList<CustomItem> out = new ArrayList<>();
-        out.addAll(one);
-        out.addAll(two);
-        return out;
+    public static ItemTable getTable(String name){
+        return tables.get(name);
     }
 
-    public static ArrayList<CustomItem> getUncommonList(){
-        ArrayList<CustomItem> out = new ArrayList<>();
-        out.addAll(thr);
-        out.addAll(fou);
-        return out;
-    }
-    public static ArrayList<CustomItem> getRareList(){
-        ArrayList<CustomItem> out = new ArrayList<>();
-        out.addAll(fiv);
-        out.addAll(six);
-        return out;
-    }
-    public static ArrayList<CustomItem> getLegendaryList(){
-        ArrayList<CustomItem> out = new ArrayList<>();
-        out.addAll(sev);
-        out.addAll(eig);
-        return out;
-    }
 }
