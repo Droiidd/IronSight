@@ -21,6 +21,7 @@ import org.bukkit.potion.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameContentLoader {
     public static void loadCustomItems()
     {
@@ -66,7 +67,6 @@ public class GameContentLoader {
                 "Can be refined or sold",Material.IRON_ORE,0.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false,
                 "Can be refined or sold",Material.COPPER_ORE,0.0,0.0);
-
 
         //UNCOMMON
         CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false,
@@ -141,9 +141,12 @@ public class GameContentLoader {
                 "Still in the frozen north",Material.MUSIC_DISC_13,0.0,0.0);
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field",
                 Material.TRIPWIRE_HOOK,0.0,0.0);
-
+        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!",
+                Material.FISHING_ROD,0.0,0.0, Enchantment.LURE,1);
 
         //LEGENDARY
+        CustomItem expaditionRod = new CustomItem("Expedition Rod",8,true, false, "A proper line.",
+        Material.FISHING_ROD,0.0,9950.0, Enchantment.LURE,5);
         CustomItem alligator = new CustomItem("Alligator",8,true,false,
                 "Crikey!",Material.MUSIC_DISC_CHIRP,0.0,0.0);
         CustomItem sunkenCatfish = new CustomItem("Sunken Catfish",8,true,false,
@@ -177,7 +180,6 @@ public class GameContentLoader {
         FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
-<<<<<<< HEAD
         OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
         OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
         OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
@@ -185,11 +187,6 @@ public class GameContentLoader {
         OilFieldCrate crate5 = new OilFieldCrate(5,northoil,2959,101,-3037);
         OilFieldCrate crate6 = new OilFieldCrate(6,northoil,2992,101,-3087);
         OilFieldCrate crate7 = new OilFieldCrate(7,northoil,2984,101,-3154);
-=======
-        Location neworleans = new Location("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
-        Location santafe = new Location("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        Location texas = new Location("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
 
         OilFieldTask oil1 = new OilFieldTask(plugin, northoil);
         //OilFieldTask oil2 = new OilFieldTask(southoil);
@@ -214,17 +211,16 @@ public class GameContentLoader {
     }
     public static void loadIcons()
     {
-        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
+        System.out.println("loading all icons");
+        ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
 
-<<<<<<< HEAD
         ItemIcon miner = new ItemIcon("Miner","MinerPrefix","Choose miner!",Material.STONE_PICKAXE);
         ItemIcon medic = new ItemIcon("Medic","MedicPrefix","Choose medic!",Material.PAPER);
         ItemIcon explorer = new ItemIcon("Explorer","ExplorerPrefix","Choose explorer!",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
-=======
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
+
         //These are icons for the tracker system
         ItemIcon town = new ItemIcon("Towns", "Find town", Material.DARK_OAK_HANGING_SIGN);
             ItemIcon santaFe = new ItemIcon("Santa Fe", "Directions to Santa Fe", Material.WHITE_BANNER);
@@ -278,10 +274,9 @@ public class GameContentLoader {
             ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.KELP);
 
-<<<<<<< HEAD
-        ItemIcon santafeRE = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleansRE = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
-        ItemIcon texasRE = new ItemIcon("Republic of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
+        ItemIcon santafe = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
+        ItemIcon neworleans = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
+        ItemIcon texas = new eItmIcon("Republic Of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
 
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
         ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
@@ -289,35 +284,19 @@ public class GameContentLoader {
 
         ItemIcon nextPage = new ItemIcon("Next Page","NextPage","Click to go to next page",Material.MAGENTA_GLAZED_TERRACOTTA);
         System.out.println("Icons loaded");
-=======
-
-
-
-        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
-
-        ItemIcon santafe = new ItemIcon("Santa Fe","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleans = new ItemIcon("New Orleans","Click to respawn here",Material.CAKE);
-        ItemIcon texas = new ItemIcon("Republic of Texas", "Click to respawn here",Material.DEAD_BUSH);
-
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 
     public static void loadBrewing(){
-        System.out.println("In Load Brewing");
-        new BrewingRecipe(Material.BOWL, (inventory, ingredient) -> {//Some lambda magic
-            return new ItemStack(Material.BEACON);
+        new BrewingRecipe("Miner's Double Spade Brew", new ItemStack(Material.FROGSPAWN), false, PotionEffectType.LUCK, 0, 120, Color.YELLOW, "empty");
+        new BrewingRecipe("Green Thumb Brew", new ItemStack(Material.HONEYCOMB), false, PotionEffectType.LUCK, 1, 120, Color.GREEN, "empty");
+        new BrewingRecipe("Double Hook Brew", new ItemStack(Material.SUNFLOWER), false, PotionEffectType.LUCK, 2, 60, Color.BLUE, "empty");
 
-<<<<<<< HEAD
         new BrewingRecipe("Miner's Frenzy Brew", new ItemStack(Material.FIRE_CORAL), false, PotionEffectType.FAST_DIGGING, 0, 60, Color.BLACK, "empty");
 
         new BrewingRecipe("Instant Health", new ItemStack(Material.SWEET_BERRIES), false, PotionEffectType.HEAL, 0, 0, Color.fromRGB(253, 94, 94), "empty");
         new BrewingRecipe("Whiskey", new ItemStack(Material.GLOW_INK_SAC), false, PotionEffectType.DAMAGE_RESISTANCE, 0, 60, Color.fromRGB(135, 99, 38), "empty");
         new BrewingRecipe("Morphine", new ItemStack(Material.PUMPKIN_SEEDS), false, PotionEffectType.REGENERATION, 0, 60, Color.fromRGB(20, 151, 163), "empty");
         System.out.println("Brewing load complete.");
-
     }
     public static void loadContracts(){
         System.out.println("Loading contracts!");
@@ -341,8 +320,5 @@ public class GameContentLoader {
 
         //Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
-=======
-        });
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 }
