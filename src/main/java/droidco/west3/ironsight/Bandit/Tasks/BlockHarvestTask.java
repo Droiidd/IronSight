@@ -1,11 +1,9 @@
-package droidco.west3.ironsight.Bandit;
+package droidco.west3.ironsight.Bandit.Tasks;
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BlockType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -14,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-
-import static droidco.west3.ironsight.Globals.Utils.GlobalUtils.displayParticles;
 
 public class BlockHarvestTask extends BukkitRunnable {
     private ArrayList<BlockHarvestTask> tasks = new ArrayList<>();
@@ -61,13 +57,13 @@ public class BlockHarvestTask extends BukkitRunnable {
 
     public void stopTask() {
         int chance = GlobalUtils.getRandomNumber(1000);
-        displayParticles(block.getLocation(), Particle.GLOW, Particle.TOTEM, 8);
         switch (blockType) {
             case FOLIAGE -> {
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.ENTITY_GLOW_SQUID_AMBIENT, 1, 1);
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 2, 1);
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.BLOCK_SWEET_BERRY_BUSH_PLACE, 1, 1);
+                GlobalUtils.displayParticles(block.getLocation(), Particle.GLOW, Particle.TOTEM, 8);
             }
             case MINERALS -> {
 
@@ -76,7 +72,8 @@ public class BlockHarvestTask extends BukkitRunnable {
                 } else {
                     block.getLocation().getWorld().playSound(block.getLocation(), Sound.ENTITY_VILLAGER_WORK_MASON, 1, 0);
                 }
-                displayParticles(block.getLocation(), Particle.CRIT, Particle.CLOUD, 8);
+
+                GlobalUtils.displayParticles(block.getLocation(), Particle.CRIT, Particle.CLOUD, 8);
             }
         }
         block.setType(originalBlock);

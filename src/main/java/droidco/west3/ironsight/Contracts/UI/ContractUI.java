@@ -22,29 +22,29 @@ public class ContractUI {
 
     public static Inventory openContractorTitleSelectUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
-        Bandit iPlayer = Bandit.getPlayer(p);
-        contractUi.setItem(10,ItemIcon.getIcon("Cowboy").getItem());
-        contractUi.setItem(11,ItemIcon.getIcon("Tracker").getItem());
-        contractUi.setItem(12,ItemIcon.getIcon("Raider").getItem());
-        contractUi.setItem(14,ItemIcon.getIcon("Miner").getItem());
-        contractUi.setItem(15,ItemIcon.getIcon("Medic").getItem());
-        contractUi.setItem(16,ItemIcon.getIcon("Explorer").getItem());
+        Bandit b = Bandit.getPlayer(p);
+        contractUi.setItem(10,ItemIcon.getIcon("cowboy_prefix").getItem());
+        contractUi.setItem(11,ItemIcon.getIcon("tracker_prefix").getItem());
+        contractUi.setItem(12,ItemIcon.getIcon("raider_prefix").getItem());
+        contractUi.setItem(14,ItemIcon.getIcon("miner_prefix").getItem());
+        contractUi.setItem(15,ItemIcon.getIcon("medic_prefix").getItem());
+        contractUi.setItem(16,ItemIcon.getIcon("explorer_prefix").getItem());
         return contractUi;
     }
     public static Inventory openContractUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Bandit b = Bandit.getPlayer(p);
 
-        p.sendMessage(iPlayer.getRookieContract().getContractName());
-        p.sendMessage(iPlayer.getApprenticeContract().getContractName());
-        p.sendMessage(iPlayer.getExperiencedContract().getContractName());
+        p.sendMessage(b.getRookieContract().getContractName());
+        p.sendMessage(b.getApprenticeContract().getContractName());
+        p.sendMessage(b.getExperiencedContract().getContractName());
 
-        contractUi.setItem(2,ItemIcon.getIcon("Contractor Title").getItem());
+        contractUi.setItem(2,ItemIcon.getIcon("contractor_title").getItem());
         contractUi.setItem(4,getContractorIcon(p));
         contractUi.setItem(7,getActiveContractIcon());
-        contractUi.setItem(11, getContractSlot(iPlayer.getRookieContract(), Difficulty.Rookie));
-        contractUi.setItem(13, getContractSlot(iPlayer.getApprenticeContract(),Difficulty.Apprentice));
-        contractUi.setItem(15, getContractSlot(iPlayer.getExperiencedContract(),Difficulty.Experienced));
+        contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.Rookie));
+        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(),Difficulty.Apprentice));
+        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(),Difficulty.Experienced));
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){

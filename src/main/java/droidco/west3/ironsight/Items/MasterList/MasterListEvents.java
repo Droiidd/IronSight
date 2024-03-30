@@ -13,7 +13,7 @@ public class MasterListEvents implements Listener {
     public void onItemClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY+"Master List 1")){
-            if(e.getCurrentItem().getType().compareTo(ItemIcon.getIcon("NextPage").getItem().getType())==0){
+            if(e.getCurrentItem().getType().compareTo(ItemIcon.getIcon("next_page").getItem().getType())==0){
                 e.setCancelled(true);
                 p.openInventory(MasterItemListUI.openMasterListPage2(p));
             }

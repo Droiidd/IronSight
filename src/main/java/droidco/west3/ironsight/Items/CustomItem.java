@@ -95,8 +95,8 @@ CustomItem {
         if(legalityTrait != null){
             lore.add(legalityTrait);
         }
-        if(enchant1 != null){
-            meta.addEnchant(enchant1,enchantMultiplier,true);
+        if(enchant != null){
+            meta.addEnchant(enchant,enchantMultiplier,true);
         }
         lore.add(description);
         meta.setLore(lore);

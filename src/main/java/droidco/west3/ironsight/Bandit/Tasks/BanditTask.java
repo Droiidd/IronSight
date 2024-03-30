@@ -1,10 +1,11 @@
-package droidco.west3.ironsight.Bandit;
+package droidco.west3.ironsight.Bandit.Tasks;
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
-import droidco.west3.ironsight.FrontierLocation.LocationUI;
+import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -55,13 +56,8 @@ public class BanditTask extends BukkitRunnable {
     public void run() {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
         if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
-<<<<<<< HEAD
             p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
             Double distance = FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
-=======
-            p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-            Double distance = Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
             int distanceMsg = distance.intValue();
             p.spigot().sendMessage(
                     ChatMessageType.ACTION_BAR,
@@ -106,7 +102,7 @@ public class BanditTask extends BukkitRunnable {
                 p.setFlySpeed(0);
                 p.setSprinting(false);
                 if (p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:") != true) {
-                    p.openInventory(LocationUI.openContractorTitleSelectUi(p));
+                    p.openInventory(RespawnUI.openRespawnSelect(p));
                 }
             }
         }

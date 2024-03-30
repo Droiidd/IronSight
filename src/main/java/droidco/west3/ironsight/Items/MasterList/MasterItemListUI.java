@@ -24,7 +24,7 @@ public class MasterItemListUI {
             }
             counter++;
         }
-        itemUi.setItem(53, ItemIcon.getIcon("NextPage").getItem());
+        itemUi.setItem(53, ItemIcon.getIcon("next_page").getItem());
         return itemUi;
 
     }
@@ -40,7 +40,7 @@ public class MasterItemListUI {
             }
             counter++;
         }
-        itemUi.setItem(53,ItemIcon.getIcon("NextPage").getItem());
+        itemUi.setItem(53,ItemIcon.getIcon("next_page").getItem());
         return itemUi;
 
     }

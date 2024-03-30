@@ -18,15 +18,9 @@ public class FrontierLocation {
     private final BossBar locTitle;
     private static final BossBar wildernessTitle = Bukkit.createBossBar("Wilderness", BarColor.GREEN, BarStyle.SOLID);
     private LocationType type;
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
-=======
-    private static HashMap<String, Location> locations = new HashMap<>();
-
-    public Location(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         this.locName = locName;
         this.x1 = x1;
         this.x2 = x2;
@@ -39,12 +33,7 @@ public class FrontierLocation {
 
         locations.put(locName, this);
     }
-
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2, double spawnX, double spawnY, double spawnZ) {
-=======
-    public Location(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2, double spawnX, double spawnY, double spawnZ) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         this.locName = locName;
         this.x1 = x1;
         this.x2 = x2;
@@ -60,45 +49,26 @@ public class FrontierLocation {
 
         locations.put(locName, this);
     }
-
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
     public static HashMap<String, FrontierLocation> getLocations() {
-=======
-    public static HashMap<String, Location> getLocations() {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         return locations;
     }
 
     public static boolean isPlayerInWilderness(Player p) {
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
         for (Map.Entry<String, FrontierLocation> mapE : locations.entrySet()) {
-=======
-        for (Map.Entry<String, Location> mapE : locations.entrySet()) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
             if (mapE.getValue().isPlayerInside(p)) {
                 return false;
             }
         }
         return true;
     }
-
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
     public static FrontierLocation getLocation(String locationName) {
-=======
-    public static Location getLocation(String locationName) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         if (locations.containsKey(locationName)) {
             return locations.get(locationName);
         }
         return null;
     }
-
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
     public boolean isPlayerInside(Player p)
     {
-=======
-    public boolean isPlayerInside(Player p) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         double minX;
         double maxX;
         double minZ;
@@ -139,12 +109,7 @@ public class FrontierLocation {
             }
 
         });
-        //p.sendMessage(""+locations.get("test").isPlayerInside(p));
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
         if (FrontierLocation.isPlayerInWilderness(p)) {
-=======
-        if (Location.isPlayerInWilderness(p)) {
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
             //Display wilderness
             FrontierLocation.displayWilderness(p);
             b.setCurrentLocation(getLocation("Wilderness"));
@@ -187,7 +152,6 @@ public class FrontierLocation {
     }
 
     public BarColor getTitleColor(LocationType type) {
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
         switch (type) {
             case EVENT, MINE -> {
                 return BarColor.YELLOW;
@@ -204,20 +168,6 @@ public class FrontierLocation {
             case RIVER -> {
                 return BarColor.BLUE;
             }
-=======
-        if (type.compareTo(LocationType.EVENT) == 0) {
-            return BarColor.YELLOW;
-        } else if (type.compareTo(LocationType.TOWN) == 0) {
-            return BarColor.PINK;
-        } else if (type.compareTo(LocationType.ILLEGAL) == 0) {
-            return BarColor.RED;
-        } else if (type.compareTo(LocationType.NATURAL) == 0) {
-            return BarColor.PURPLE;
-        } else if (type.compareTo(LocationType.River) == 0) {
-            return BarColor.BLUE;
-        } else {
-            return BarColor.GREEN;
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java
         }
         return BarColor.GREEN;
     }
@@ -313,15 +263,4 @@ public class FrontierLocation {
         double z3 = (this.z1 + this.z2) / 2;
         return new org.bukkit.Location(p.getWorld(), x3, 100.0, z3);
     }
-<<<<<<< HEAD:src/main/java/droidco/west3/ironsight/FrontierLocation/FrontierLocation.java
-    }
-=======
-
-
-
-
-
 }
-
-
->>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93:src/main/java/droidco/west3/ironsight/Location/Location.java

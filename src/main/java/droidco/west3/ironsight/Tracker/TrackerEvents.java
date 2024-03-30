@@ -4,7 +4,7 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.Location.Location;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,6 +21,24 @@ import org.checkerframework.checker.units.qual.A;
 public class TrackerEvents implements Listener {
 
 
+    @EventHandler
+    public void trackerMovement(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+
+    }
+
+    @EventHandler
+    public void trackerRightClick(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+        if (p.getInventory().getItemInMainHand().getType().compareTo(Material.COMPASS) == 0) {
+            if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                p.openInventory(TrackerUIs.openTrackerUI(p));
+            }
+
+        }
+    }
     @EventHandler
     public void trackerMenuSelect(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
@@ -65,18 +83,18 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case WHITE_BANNER -> {
-                    b.setTrackingLocation(Location.getLocation("Santa Fe"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Santa Fe"));
                     p.closeInventory();
                     break;
 
                 }
                 case YELLOW_BANNER -> {
-                    b.setTrackingLocation(Location.getLocation("New Orleans"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("New Orleans"));
                     p.closeInventory();
                     break;
                 }
                 case BLUE_BANNER -> {
-                    b.setTrackingLocation(Location.getLocation("Republic of Texas"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Republic of Texas"));
                     p.closeInventory();
                     break;
                 }
@@ -87,7 +105,6 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ZOMBIE_HEAD -> {
-
                     b.setIsTrackingLocation(false);
                     Player target = BanditUtils.getNearest(p, 14000.0);
                     if (target == null) {
@@ -107,7 +124,6 @@ public class TrackerEvents implements Listener {
                 case FISHING_ROD -> {
                     //something
                     p.closeInventory();
-                    break;
                 }
                 case PAPER -> {
                     p.closeInventory();
@@ -193,17 +209,17 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case FLINT -> {
-                    b.setTrackingLocation(Location.getLocation("Black Spur Mines"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines"));
                     p.closeInventory();
                     break;
                 }
                 case TERRACOTTA -> {
-                    b.setTrackingLocation(Location.getLocation("Barron's Canyon"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Barron's Canyon"));
                     p.closeInventory();
                     break;
                 }
                 case STONE -> {
-                    b.setTrackingLocation(Location.getLocation("Half Dome Mines"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Half Dome Mines"));
                     p.closeInventory();
                     break;
                 }
@@ -212,19 +228,19 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case MUSIC_DISC_CAT -> {
-                    b.setTrackingLocation(Location.getLocation("Pearl Mines"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Pearl Mines"));
                     p.closeInventory();
                 }
                 case MUSIC_DISC_CHIRP -> {
-                    b.setTrackingLocation(Location.getLocation("Three Forks Delta"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta"));
                     p.closeInventory();
                 }
                 case MUSIC_DISC_BLOCKS -> {
-                    b.setTrackingLocation(Location.getLocation("Lower Guadalupe River"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
                     p.closeInventory();
                 }
                 case MUSIC_DISC_FAR -> {
-                    b.setTrackingLocation(Location.getLocation("Slough Creek"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek"));
                     p.closeInventory();
                 }
             }
@@ -233,19 +249,19 @@ public class TrackerEvents implements Listener {
 
             switch (e.getCurrentItem().getType()) {
                 case OAK_SAPLING -> {
-                    b.setTrackingLocation(Location.getLocation("Grizzly Ridge"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Grizzly Ridge"));
                     p.closeInventory();
                 }
                 case BIRCH_SAPLING -> {
-                    b.setTrackingLocation(Location.getLocation("Marston Glacier"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Marston Glacier"));
                     p.closeInventory();
                 }
                 case ACACIA_SAPLING -> {
-                    b.setTrackingLocation(Location.getLocation("Hawk Ridge Forest"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Hawk Ridge Forest"));
                     p.closeInventory();
                 }
                 case QUARTZ -> {
-                    b.setTrackingLocation(Location.getLocation("Sentinel Rock"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Sentinel Rock"));
                     p.closeInventory();
                 }
             }
@@ -253,11 +269,11 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case REDSTONE -> {
-                    b.setTrackingLocation(Location.getLocation("Red Ash Camp"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
                     p.closeInventory();
                 }
                 case ITEM_FRAME -> {
-                    b.setTrackingLocation(Location.getLocation("Storm Point"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
                     p.closeInventory();
                 }
 
@@ -266,15 +282,15 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ACACIA_DOOR -> {
-                    b.setTrackingLocation(Location.getLocation("Florence Peak"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Florence Peak"));
                     p.closeInventory();
                 }
                 case SPRUCE_DOOR -> {
-                    b.setTrackingLocation(Location.getLocation("Washington Column"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Washington Column"));
                     p.closeInventory();
                 }
                 case BIRCH_DOOR -> {
-                    b.setTrackingLocation(Location.getLocation("Sierra Gorge"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Sierra Gorge"));
                     p.closeInventory();
                 }
             }
@@ -283,7 +299,7 @@ public class TrackerEvents implements Listener {
 
             switch (e.getCurrentItem().getType()) {
                 case BUCKET -> {
-                    b.setTrackingLocation(Location.getLocation("North Moraine Oil Field"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
                     p.closeInventory();
                 }
             }
@@ -291,31 +307,11 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case KELP -> {
-                    b.setTrackingLocation(Location.getLocation("Smokeleaf Drug Field"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Drug Field"));
                     p.closeInventory();
                 }
             }
         }
     }
-
-    @EventHandler
-    public void trackerMovement(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-
-    }
-
-    @EventHandler
-    public void trackerRightClick(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-        if (p.getInventory().getItemInMainHand().getType().compareTo(Material.COMPASS) == 0) {
-            if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                p.openInventory(TrackerUIs.openTrackerUI(p));
-            }
-
-        }
-    }
-
 
 }

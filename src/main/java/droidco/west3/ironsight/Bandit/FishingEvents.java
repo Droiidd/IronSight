@@ -4,6 +4,8 @@ import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.ChatColor;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,9 +41,10 @@ public class FishingEvents implements Listener {
         if(p.getInventory().containsAtLeast(hermitBait,1)){
             p.getInventory().removeItem(hermitBait);
         }
-        else if(p.getInventory().containsAtLeast(slugBait,1){
+        else if(p.getInventory().containsAtLeast(slugBait,1)){
             p.getInventory().removeItem(slugBait);
-        }else{
+        }
+        else{
             e.setCancelled(true);
             p.sendMessage(ChatColor.GRAY + "Seems I need bait...");
         }

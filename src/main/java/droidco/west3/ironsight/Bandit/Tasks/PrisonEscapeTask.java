@@ -1,5 +1,6 @@
-package droidco.west3.ironsight.Bandit;
+package droidco.west3.ironsight.Bandit.Tasks;
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.IronSight;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
