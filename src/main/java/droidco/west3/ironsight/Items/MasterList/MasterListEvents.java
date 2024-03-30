@@ -1,13 +1,11 @@
-package droidco.west3.ironsight.Items;
+package droidco.west3.ironsight.Items.MasterList;
 
+import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-
-import java.net.http.WebSocket;
 
 public class MasterListEvents implements Listener {
 
