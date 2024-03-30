@@ -22,7 +22,8 @@ CustomItem {
     private boolean isOfficer;
     private int rarity;
     private Material material;
-    private Enchantment enchant1;
+    private Enchantment enchant;
+    private int enchantMultiplier;
     private static HashMap<String,CustomItem> items = new HashMap<>();
 
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
@@ -40,17 +41,21 @@ CustomItem {
         items.put(this.itemCode, this);
         ItemTable.addItem(this);
     }
-    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer, String description, Material material,
-                      Enchantment enchant1) {
+    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
+                      double salePrice, double purchasePrice,Enchantment enchant, int enchantMultiplier) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
+        this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
         this.isLegal = isLegal;
         this.isOfficer = isOfficer;
-        this.description = ChatColor.DARK_GRAY+description;
+        this.description = ChatColor.GRAY+description;
         this.material = material;
-        this.enchant1 = enchant1;
+        this.salePrice = salePrice;
+        this.enchant = enchant;
+        this.enchantMultiplier = enchantMultiplier;
         items.put(this.itemCode, this);
+        ItemTable.addItem(this);
     }
     public String getRarityString(int rarity){
         switch(rarity){
@@ -89,6 +94,9 @@ CustomItem {
         int test = 0;
         if(legalityTrait != null){
             lore.add(legalityTrait);
+        }
+        if(enchant != null){
+            meta.addEnchant(enchant,enchantMultiplier,true);
         }
         lore.add(description);
         meta.setLore(lore);

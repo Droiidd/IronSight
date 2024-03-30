@@ -1,11 +1,10 @@
 package droidco.west3.ironsight.Globals.Events;
 
-import droidco.west3.ironsight.Bandit.BlockHarvestTask;
+import droidco.west3.ironsight.Bandit.Tasks.BlockHarvestTask;
 import droidco.west3.ironsight.Globals.Utils.BlockType;
 import droidco.west3.ironsight.IronSight;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
