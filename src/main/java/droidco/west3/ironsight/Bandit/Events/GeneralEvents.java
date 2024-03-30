@@ -214,7 +214,7 @@ public class GeneralEvents implements Listener {
     }
     */
     // >>>===--- LOOTING EVENTS ---===<<<
-    @EventHandler
+  /*  @EventHandler
     public void onOpenChest(InventoryOpenEvent e) {
         if (e.getInventory().getHolder() instanceof Chest){
             ItemTable table = Location.getLocation("North Oil Field").getItemTable();
@@ -226,4 +226,6 @@ public class GeneralEvents implements Listener {
 
         }
     }
+
+   */
 }

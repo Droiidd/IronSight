@@ -39,7 +39,6 @@ CustomItem {
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
         items.put(this.itemCode, this);
-        ItemTable.addItem(this);
     }
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
                       double salePrice, double purchasePrice,Enchantment enchant, int enchantMultiplier) {
@@ -55,7 +54,6 @@ CustomItem {
         this.enchant = enchant;
         this.enchantMultiplier = enchantMultiplier;
         items.put(this.itemCode, this);
-        ItemTable.addItem(this);
     }
     public String getRarityString(int rarity){
         switch(rarity){

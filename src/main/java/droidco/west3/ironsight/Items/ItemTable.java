@@ -35,6 +35,10 @@ public class ItemTable {
 
         for (int i = 0; i < items.length; i++){
             CustomItem item = CustomItem.getCustomItem(items[i]);
+            if (item == null){
+                System.out.println("\nItemTables init" + items[i] + " is not in CustomItems.items\n");
+            }
+            else{
             switch (item.getRarity()){
                 case 1: one.add(item);
                 case 2: two.add(item);
@@ -44,47 +48,45 @@ public class ItemTable {
                 case 6: six.add(item);
                 case 7: sev.add(item);
                 case 8: eig.add(item);
-            }
+            }}
         }
         tables.put(name, this);
     }
 
-    public CustomItem getItem(String rarity){
+    public CustomItem getItem(int rarity){
         int split = (int)(Math.random() * 100);
-        switch (rarity) {
-            case "Common":{
-                if (split < com_split){
+        if (rarity == 0){
+                if (!one.isEmpty() && split < com_split ){
                     return one.get((int)(Math.random()*one.size()));
                 }
-                else{
+                else if (!two.isEmpty()){
                     return two.get((int)(Math.random()*two.size()));
                 }
             }
-            case "Uncommon":{
-                if (split < unc_split){
+        if (rarity <= 1){
+                if (!thr.isEmpty() && split < unc_split){
                     return thr.get((int)(Math.random()*thr.size()));
                 }
-                else{
+                else if (!fou.isEmpty()){
                     return fou.get((int)(Math.random()*fou.size()));
                 }
             }
-            case "Rare":{
-                if (split < rare_split) {
+        if (rarity <= 2){
+                if (!fiv.isEmpty() && split < rare_split) {
                     return fiv.get((int)(Math.random()*fiv.size()));
                 }
-                else{
+                else if (!six.isEmpty()){
                     return six.get((int)(Math.random()*six.size()));
                 }
             }
-            case "Legendary":{
-                if (split < leg_split){
+        if (rarity <= 3){
+                if (!sev.isEmpty() && split < leg_split){
                     return sev.get((int)(Math.random()*sev.size()));
                 }
-                else{
+                else if (!eig.isEmpty()){
                     return eig.get((int)(Math.random()*eig.size()));
                 }
             }
-        }
         return null;
     }
 
@@ -95,18 +97,17 @@ public class ItemTable {
         for (int i = 0; i < num_items; i++){
             int rand = (int)(Math.random() * 100);
             if (rand < common){
-                out.add(getItem("Common").getItemStack());
+                out.add(getItem(0).getItemStack());
             }
             else if (rand < uncommon){
-                out.add(getItem("Uncommon").getItemStack());
+                out.add(getItem(1).getItemStack());
             }
             else if (rand < rare){
-                out.add(getItem("Rare").getItemStack());
+                out.add(getItem(2).getItemStack());
             }
             else{
-                out.add(getItem("Legendary").getItemStack());
+                out.add(getItem(3).getItemStack());
             }
-
         }
         return out;
     }
