@@ -101,6 +101,25 @@ CustomItem {
         item.setItemMeta(meta);
         return item;
     }
+    public ItemStack getItemStack(int num){
+        ItemStack item = new ItemStack(this.material, num);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(this.itemName);
+        List<String> lore = new ArrayList<>();
+        lore.add(this.rarityLore);
+        String legalityTrait = getLegalityTrait();
+        int test = 0;
+        if(legalityTrait != null){
+            lore.add(legalityTrait);
+        }
+        if(enchant != null){
+            meta.addEnchant(enchant,enchantMultiplier,true);
+        }
+        lore.add(description);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
     public String getLegalityTrait()
     {
         String trait;
@@ -134,4 +153,7 @@ CustomItem {
     public int getRarity(){return rarity; }
 
     public Material getMaterial(){return material;}
+    public String getItemCode(){
+        return this.itemCode;
+    }
 }
