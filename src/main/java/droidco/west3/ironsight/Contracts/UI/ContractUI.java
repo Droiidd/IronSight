@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Contracts;
+package droidco.west3.ironsight.Contracts.UI;
 
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;

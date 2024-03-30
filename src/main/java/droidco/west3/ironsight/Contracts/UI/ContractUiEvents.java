@@ -1,6 +1,7 @@
-package droidco.west3.ironsight.Contracts;
+package droidco.west3.ironsight.Contracts.UI;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Contracts.Contract;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -73,7 +74,7 @@ public class ContractUiEvents implements Listener {
                     }
                     else {
                         p.sendMessage(active.getContractName());
-                        p.openInventory(OpenContractUI.openActiveContractUi(p,active));
+                        p.openInventory(ActiveContractUI.openActiveContractUi(p,active));
                     }
                 }
                 //Case Skull:

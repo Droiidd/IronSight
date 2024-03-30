@@ -1,12 +1,11 @@
-package droidco.west3.ironsight.Contracts;
+package droidco.west3.ironsight.Contracts.UI;
 
-import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.Utils.CompletionStep;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OpenContractUI
+public class ActiveContractUI
 {
     public static Inventory openActiveContractUi(Player p, Contract contract){
         Inventory contractUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"Active Contract info:");

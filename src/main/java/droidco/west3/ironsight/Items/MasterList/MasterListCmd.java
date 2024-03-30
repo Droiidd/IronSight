@@ -1,8 +1,6 @@
-package droidco.west3.ironsight.Items;
+package droidco.west3.ironsight.Items.MasterList;
 
 import droidco.west3.ironsight.Bandit.Bandit;
-import droidco.west3.ironsight.Contracts.Contract;
-import droidco.west3.ironsight.Contracts.ContractUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
