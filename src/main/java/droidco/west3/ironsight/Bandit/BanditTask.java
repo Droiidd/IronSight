@@ -54,6 +54,34 @@ public class BanditTask extends BukkitRunnable {
     @Override
     public void run() {
         //LESS THAN ONE-SECOND PLAYER EVENTS:
+        if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
+<<<<<<< HEAD
+            p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+            Double distance = FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
+=======
+            p.setCompassTarget(Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
+            Double distance = Location.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
+            int distanceMsg = distance.intValue();
+            p.spigot().sendMessage(
+                    ChatMessageType.ACTION_BAR,
+                    new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+        } else {
+            if (b.getTargetedPlayer() != null) {
+                if (b.getTargetedPlayer().isOnline()) {
+                    p.setCompassTarget(b.getTargetedPlayer().getLocation());
+                    Double distance = b.getTargetedPlayer().getLocation().distance(p.getLocation());
+                    int distanceMsg = distance.intValue();
+                    p.spigot().sendMessage(
+                            ChatMessageType.ACTION_BAR,
+                            new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+
+                }
+            }
+
+        }
+
+
 
         //Titles for locations
         FrontierLocation.displayLocation(p);
@@ -72,7 +100,7 @@ public class BanditTask extends BukkitRunnable {
                 p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
                 p.teleport(respawn);
                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
-            }else{
+            } else {
                 //RESPAWNING IN A TOWN
                 p.setWalkSpeed(0);
                 p.setFlySpeed(0);
@@ -90,12 +118,12 @@ public class BanditTask extends BukkitRunnable {
             if (!currentLoc.getType().equals(LocationType.PRISON)) {
                 //Player is escaping! PUT LOGIC HERE
                 b.setEscaping(true);
-                if(!escapeFlag){
+                if (!escapeFlag) {
                     escapeFlag = true;
-                    PrisonEscapeTask escapee = new PrisonEscapeTask(plugin,p);
-                    p.sendTitle(ChatColor.RED+String.valueOf(ChatColor.BOLD)+"Escapee!",ChatColor.GRAY+"Return to jail or gain bounty",1,2,1);
+                    PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
+                    p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty", 1, 2, 1);
                 }
-            }else{
+            } else {
                 //They are in prison!
                 escapeFlag = false;
                 b.setEscaping(false);
@@ -113,11 +141,11 @@ public class BanditTask extends BukkitRunnable {
                     //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
                     if (wantedTownCounter == 0) {
                         //TIMER JUST STARTED!
-                        p.sendTitle(ChatColor.DARK_RED+"Wanted!",ChatColor.GRAY+"Leave town or die.",1,2,1);
+                        p.sendTitle(ChatColor.DARK_RED + "Wanted!", ChatColor.GRAY + "Leave town or die.", 1, 2, 1);
                     }
                     p.spigot().sendMessage(
                             ChatMessageType.ACTION_BAR,
-                            new TextComponent(ChatColor.RED + ""+(wantedTownTimer - wantedTownCounter)+ChatColor.RESET+ " seconds remaining."));
+                            new TextComponent(ChatColor.RED + "" + (wantedTownTimer - wantedTownCounter) + ChatColor.RESET + " seconds remaining."));
                     if (wantedTownCounter == wantedTownTimer) {
                         p.damage(100);
                     }
@@ -138,11 +166,11 @@ public class BanditTask extends BukkitRunnable {
         //Roughly 1 second
         if (tick % 3 == 0) {
             //  UPDATE JAILTIME
-            if(b.isJailed()){
+            if (b.isJailed()) {
                 //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
                 b.updateBounty(-1);
                 if (b.getBounty() <= 0) {
-                    BanditUtils.releasePrisoner(p,b);
+                    BanditUtils.releasePrisoner(p, b);
                 }
             }
 

@@ -27,6 +27,8 @@ public class Bandit
     //private Sheriff sheriffType;
     //private Team team;
     private int bounty;
+
+    private Player targetedPlayer;
     private int pceContractXp;
     private int cmbtContractXp;
     private int pceContractLvl;
@@ -35,7 +37,19 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
+<<<<<<< HEAD
+    private FrontierLocation trackingLocation;
+    private boolean isTrackingLocation;
+    private boolean isTrackingPlayer;
     private FrontierLocation currentFrontierLocation;
+=======
+    private Location currentLocation;
+
+    private Location trackingLocation;
+
+    private static boolean isTrackingLocation;
+    private static boolean isTrackingPlayer;
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -193,6 +207,14 @@ public class Bandit
         this.doingContract = doingContract;
     }
 
+    public Player getTargetedPlayer() {
+        return targetedPlayer;
+    }
+
+    public void setTargetedPlayer(Player targetedPlayer) {
+        this.targetedPlayer = targetedPlayer;
+    }
+
     public void setApprenticeContract(Contract apprenticeContract) {
         this.apprenticeContract = apprenticeContract;
     }
@@ -266,6 +288,30 @@ public class Bandit
         return isWanted;
     }
 
+    public boolean isTrackingLocation() {
+        return isTrackingLocation;
+    }
+
+    public boolean isTrackingPlayer() {
+        return isTrackingPlayer;
+    }
+
+<<<<<<< HEAD
+    public void setIsTrackingPlayer(boolean trackingPlayer) {
+        isTrackingPlayer = trackingPlayer;
+    }
+
+    public void setIsTrackingLocation(boolean trackingLocation) {
+=======
+    public static void setIsTrackingPlayer(boolean trackingPlayer) {
+        isTrackingPlayer = trackingPlayer;
+    }
+
+    public static void setIsTrackingLocation(boolean trackingLocation) {
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
+        isTrackingLocation = trackingLocation;
+    }
+
     public void setWanted(boolean wanted) {
         isWanted = wanted;
     }
@@ -308,6 +354,27 @@ public class Bandit
 
     public void setPceContractXp(int pceContractXp) {
         this.pceContractXp = pceContractXp;
+    }
+
+<<<<<<< HEAD
+    public FrontierLocation getTrackingLocation() {
+        return trackingLocation;
+    }
+
+    public void setTrackingLocation(FrontierLocation trackingLocation) {
+        setIsTrackingPlayer(false);
+        this.trackingLocation = trackingLocation;
+        setIsTrackingLocation(true);
+=======
+    public Location getTrackingLocation() {
+        return trackingLocation;
+    }
+
+    public void setTrackingLocation(Location trackingLocation) {
+        Bandit.setIsTrackingPlayer(false);
+        this.trackingLocation = trackingLocation;
+        Bandit.setIsTrackingLocation(true);
+>>>>>>> 0e87fc57c114b06cd9c7f60b73793cabdd0d6e93
     }
 
     public int getCmbtContractXp() {
