@@ -27,8 +27,9 @@ public class BanditTask extends BukkitRunnable {
     private final IronSight plugin;
     private final Bandit b;
     private int tick = 0;
-    private int second = 0;
+    private int seconds = 0;
     private final int combatLogTimer = 30;
+    private int mobRespawnTime = 30;
     private int combatLogCounter = 0;
     private int wantedMin = 2;
     private int wantedSec = 0;
@@ -61,9 +62,10 @@ public class BanditTask extends BukkitRunnable {
     @Override
     public void run() {
         if(tick % 3 == 0){
-            second++;
-        }
-        if(second % 1 == 0){
+            seconds++;
+            p.spigot().sendMessage(
+                    ChatMessageType.ACTION_BAR,
+                    new TextComponent(ChatColor.GRAY+"" +seconds+ " seconds"));
             //      ===--- COMPASS TRACKER ---===
             if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
@@ -204,11 +206,11 @@ public class BanditTask extends BukkitRunnable {
             }
         }
         //      ===--- MOB SPAWNING ---===
-        if(second % 30 == 0){
+        if(tick % mobRespawnTime == 0){
+            p.sendMessage("30 seconds passed.");
             FrontierLocation currentLoc = b.getCurrentLocation();
             //      ===--- MINES ---===
             if(currentLoc.getType().equals(LocationType.MINE)){
-
                 undeadMiner.spawnUndead(p,b.getCurrentLocation());
                 p.sendMessage("undead spawned!");
             }

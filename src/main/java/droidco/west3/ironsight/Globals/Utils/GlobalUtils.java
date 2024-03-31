@@ -1,12 +1,10 @@
 package droidco.west3.ironsight.Globals.Utils;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GlobalUtils {
@@ -50,26 +48,46 @@ public class GlobalUtils {
         return b;
     }
     public static Block getRandomCaveBlock(Player p){
-        double x = getRandomCord(p.getLocation().getX()-45.0,p.getLocation().getX()+45.0);
-        double y = getRandomCord(p.getLocation().getY()-20.0,p.getLocation().getY()+20.0);
-        double z = getRandomCord(p.getLocation().getZ()-45.0,p.getLocation().getZ()+45.0);
-        Location blockLoc = new Location(p.getWorld(),x,y,z);
-        Location blockLocUp1 = new Location(p.getWorld(),x,y+1.0,z);
-        Location blockLocUp2 = new Location(p.getWorld(),x,y+2.0,z);
-        Block b = p.getWorld().getBlockAt(blockLoc);
-        Block b1 = p.getWorld().getBlockAt(blockLocUp1);
-        Block b2 = p.getWorld().getBlockAt(blockLocUp2);
-        switch(b.getType()){
-            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,AIR,LAVA -> {
-                return null;
+        double x = 0.0;
+        double y = 0.0;
+        double z = 0.0;
+        boolean safeSpawn = false;
+        boolean mainBlock = false;
+        boolean upperBlocks = false;
+        Block b = null;
+        Block b1 = null;
+        Block b2 = null;
+        Location blockLoc = null;
+        ArrayList<Material> unsafeBlocks = new ArrayList<>();
+        unsafeBlocks.add(Material.OAK_LEAVES);
+        unsafeBlocks.add(Material.AIR);
+        unsafeBlocks.add(Material.LAVA);
+        unsafeBlocks.add(Material.JUNGLE_LEAVES);
+        unsafeBlocks.add(Material.SPRUCE_LEAVES);
+        unsafeBlocks.add(Material.BIRCH_LEAVES);
+        unsafeBlocks.add(Material.ACACIA_LEAVES);
+        unsafeBlocks.add(Material.WATER);
+
+        while(safeSpawn == false){
+            x=getRandomCord(p.getLocation().getX()-30.0,p.getLocation().getX()+30.0);
+            y=getRandomCord(p.getLocation().getY()-20.0,p.getLocation().getY()+20.0);
+            z=getRandomCord(p.getLocation().getZ()-30.0,p.getLocation().getZ()+30.0);
+            blockLoc = new Location(p.getWorld(),x,y,z);
+            b = p.getWorld().getBlockAt(blockLoc);
+            b1 = p.getWorld().getBlockAt(blockLoc.add(0.0,1.0,0.0));
+            b2 = p.getWorld().getBlockAt(blockLoc.add(0.0,2.0,0.0));
+            if(!unsafeBlocks.contains(b.getType())){
+                mainBlock = true;
             }
+            if(b1.getType().isAir() && b2.getType().isAir()){
+                upperBlocks = true;
+            }
+            if(upperBlocks && mainBlock){
+                safeSpawn = true;
+            }
+
         }
-        if(b1.getType().isAir() && b2.getType().isAir()){
-            p.sendMessage("NOT INSIDE BLOCK");
-            return b;
-        }
-        p.sendMessage("INSIDE BLOCK");
-        return null;
+        return b;
     }
     public static int boolToInt(boolean bool){
         if(bool){

@@ -37,12 +37,8 @@ public class FrontierMob {
 
     }
     public void spawnUndead(Player p,FrontierLocation location){
-
         this.location = location;
-        Block spawnBlock = null;
-        while(spawnBlock == null){
-            spawnBlock = GlobalUtils.getRandomCaveBlock(p);
-        }
+        Block spawnBlock = GlobalUtils.getRandomCaveBlock(p);
         p.sendMessage("X: "+spawnBlock.getX()+" Y: "+spawnBlock.getY()+" Z: "+spawnBlock.getZ());
 
         Location spawnLoc = new Location(p.getWorld(),spawnBlock.getX(),spawnBlock.getY(),spawnBlock.getZ());

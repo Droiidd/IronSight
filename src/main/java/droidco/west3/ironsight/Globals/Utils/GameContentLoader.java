@@ -308,9 +308,9 @@ public class GameContentLoader {
     {
         System.out.println("loading all icons");
         //      ===--- RESPAWN UI ICONS ---===
-        ItemIcon santafeRespawn = new ItemIcon("Santa Fe","santa_fe_respawn","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleansRespawn = new ItemIcon("New Orleans","new_orleans_respawn","Click to respawn here",Material.CAKE);
-        ItemIcon texasRespawn = new ItemIcon("Republic Of Texas", "republic_of_texas_respawn","Click to respawn here",Material.DEAD_BUSH);
+        ItemIcon santafeRespawn = new ItemIcon("Santa Fe","santa_fe_respawn","Click to respawn here",Material.WHITE_BANNER);
+        ItemIcon neworleansRespawn = new ItemIcon("New Orleans","new_orleans_respawn","Click to respawn here",Material.BLUE_BANNER);
+        ItemIcon texasRespawn = new ItemIcon("Republic Of Texas", "republic_of_texas_respawn","Click to respawn here",Material.YELLOW_BANNER);
 
         //      ===--- CONTRACT UI ICONS ---===
         ItemIcon contractLoc = new ItemIcon("Locations:","contract_location","Go here to complete.",Material.COMPASS);
