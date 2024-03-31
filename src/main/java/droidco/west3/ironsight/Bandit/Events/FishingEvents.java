@@ -1,5 +1,6 @@
-package droidco.west3.ironsight.Bandit;
+package droidco.west3.ironsight.Bandit.Events;
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
@@ -11,10 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.units.qual.C;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class FishingEvents implements Listener {
 

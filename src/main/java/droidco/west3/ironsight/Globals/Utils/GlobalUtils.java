@@ -1,13 +1,10 @@
 package droidco.west3.ironsight.Globals.Utils;
 
-import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
-import droidco.west3.ironsight.FrontierLocation.LocationType;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
@@ -28,6 +25,29 @@ public class GlobalUtils {
     public static int getRandomRange(int low, int high){
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextInt(high-low)+low;
+    }
+    public static double getRandomCord(double min, double max){
+        double val = 0.0;
+        if(max < min ){
+            double tmp = max;
+            max = min;
+            min = tmp;
+        }
+        Random rand = new Random(System.currentTimeMillis());
+        if(Double.valueOf(max - min).isInfinite() == false ){
+            val = min + (max - min) * rand.nextDouble();
+        }
+        return val;
+    }
+    public static Block getSurfaceYVal(World w, double x, double z){
+       // double y = w.getHighestBlockYAt((int) x,(int) z);
+        Block b = w.getHighestBlockAt((int) x,(int) z);
+        switch(b.getType()){
+            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES ->{
+                return null;
+            }
+        }
+        return b;
     }
     public static int boolToInt(boolean bool){
         if(bool){

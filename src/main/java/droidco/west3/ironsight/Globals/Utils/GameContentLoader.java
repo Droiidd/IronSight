@@ -4,7 +4,8 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.FrontierMobs.FrontierMob;
+import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
@@ -13,13 +14,10 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Quantity;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +25,10 @@ import java.util.List;
 
 
 public class GameContentLoader {
+    public static void loadCustomMobs()
+    {
+
+    }
     public static void loadCustomItems()
     {
         System.out.println("Loading custom items");

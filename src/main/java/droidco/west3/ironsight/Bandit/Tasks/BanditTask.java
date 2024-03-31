@@ -2,6 +2,8 @@ package droidco.west3.ironsight.Bandit.Tasks;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.FrontierMobs.FrontierMob;
+import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
@@ -154,6 +156,11 @@ public class BanditTask extends BukkitRunnable {
             //Increase players bounty in illegal area
             if (tick % 3 == 0) {
                 b.updateBounty(2);
+            }
+            if(tick % 5 == 0){
+                FrontierMob undeadMiner = new FrontierMob(b.getCurrentLocation(), LocationType.ILLEGAL, FrontierMobType.UNDEAD_MINER);
+                undeadMiner.spawnUndead(p);
+                p.sendMessage("undead spawned!");
             }
         }
 

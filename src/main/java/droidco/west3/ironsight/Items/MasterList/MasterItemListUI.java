@@ -1,16 +1,13 @@
 package droidco.west3.ironsight.Items.MasterList;
 
-import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MasterItemListUI {
