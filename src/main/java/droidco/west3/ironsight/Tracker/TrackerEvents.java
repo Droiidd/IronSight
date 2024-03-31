@@ -14,16 +14,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class TrackerEvents implements Listener {
-
-
-    @EventHandler
-    public void trackerMovement(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-
-    }
-
     @EventHandler
     public void trackerRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();

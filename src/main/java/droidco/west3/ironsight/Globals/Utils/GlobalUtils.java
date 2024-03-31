@@ -39,26 +39,37 @@ public class GlobalUtils {
         }
         return val;
     }
-    public static Block getSurfaceYVal(World w, double x, double z){
+    public static Block getRandomSurfaceBlock(World w, double x, double z){
        // double y = w.getHighestBlockYAt((int) x,(int) z);
         Block b = w.getHighestBlockAt((int) x,(int) z);
         switch(b.getType()){
-            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER ->{
+            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER,AIR,CAVE_AIR ->{
                 return null;
             }
         }
         return b;
     }
-    public static Block getCaveYVal(Player p, double x, double z){
-        double y = getRandomCord(p.getLocation().getY()-20,p.getLocation().getY()+20);
+    public static Block getRandomCaveBlock(Player p){
+        double x = getRandomCord(p.getLocation().getX()-45.0,p.getLocation().getX()+45.0);
+        double y = getRandomCord(p.getLocation().getY()-20.0,p.getLocation().getY()+20.0);
+        double z = getRandomCord(p.getLocation().getZ()-45.0,p.getLocation().getZ()+45.0);
         Location blockLoc = new Location(p.getWorld(),x,y,z);
+        Location blockLocUp1 = new Location(p.getWorld(),x,y+1.0,z);
+        Location blockLocUp2 = new Location(p.getWorld(),x,y+2.0,z);
         Block b = p.getWorld().getBlockAt(blockLoc);
+        Block b1 = p.getWorld().getBlockAt(blockLocUp1);
+        Block b2 = p.getWorld().getBlockAt(blockLocUp2);
         switch(b.getType()){
-            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER ->{
+            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,AIR,LAVA -> {
                 return null;
             }
         }
-        return b;
+        if(b1.getType().isAir() && b2.getType().isAir()){
+            p.sendMessage("NOT INSIDE BLOCK");
+            return b;
+        }
+        p.sendMessage("INSIDE BLOCK");
+        return null;
     }
     public static int boolToInt(boolean bool){
         if(bool){

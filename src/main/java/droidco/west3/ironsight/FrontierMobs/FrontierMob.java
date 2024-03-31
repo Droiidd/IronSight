@@ -21,11 +21,10 @@ public class FrontierMob {
     private FrontierMobType type;
     private UUID mobId;
     private static HashMap<UUID, FrontierMob> mobs = new HashMap<>();
-    public FrontierMob(FrontierLocation location, LocationType locationType,FrontierMobType type)
+    public FrontierMob(LocationType locationType,FrontierMobType type)
     {
         this.type = type;
         this.locationType = locationType;
-        this.location = location;
     }
 
 
@@ -37,18 +36,16 @@ public class FrontierMob {
     public void spawnRaider(){
 
     }
-    public void spawnUndead(Player p){
-        Block test = null;
-        double x = 0.0;
-        double z = 0.0;
-       while(test == null){
-            x = GlobalUtils.getRandomCord(location.getX1(),location.getX2());
-            z = GlobalUtils.getRandomCord(location.getZ1(),location.getZ2());
-            test = GlobalUtils.getSurfaceYVal(p.getWorld(),x,z);
-       }
-        p.sendMessage("X: "+x+" Y: "+test.getY()+" Z: "+z);
+    public void spawnUndead(Player p,FrontierLocation location){
 
-        Location spawnLoc = new Location(p.getWorld(),x,test.getY(),z);
+        this.location = location;
+        Block spawnBlock = null;
+        while(spawnBlock == null){
+            spawnBlock = GlobalUtils.getRandomCaveBlock(p);
+        }
+        p.sendMessage("X: "+spawnBlock.getX()+" Y: "+spawnBlock.getY()+" Z: "+spawnBlock.getZ());
+
+        Location spawnLoc = new Location(p.getWorld(),spawnBlock.getX(),spawnBlock.getY(),spawnBlock.getZ());
 
         switch(type){
             case UNDEAD_MINER -> {
