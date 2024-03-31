@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
@@ -116,9 +117,17 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
         if(block != null){
-            if (block.getType() == Material.BARREL) {
-                //p.sendMessage("SHIT");
-                e.setCancelled(true);
+            switch(block.getType()){
+                case BARREL,OAK_TRAPDOOR,SPRUCE_TRAPDOOR,ARMOR_STAND,ITEM_FRAME,GLOW_ITEM_FRAME,
+                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR->{
+                    e.setCancelled(true);
+                }
+                case CHEST -> {
+                    Bandit b = Bandit.getPlayer(p);
+                    if(b.getCurrentLocation().getType().compareTo(LocationType.TOWN)==0){
+                        e.setCancelled(true);
+                    }
+                }
             }
         }
     }

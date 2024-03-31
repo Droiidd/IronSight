@@ -43,7 +43,18 @@ public class GlobalUtils {
        // double y = w.getHighestBlockYAt((int) x,(int) z);
         Block b = w.getHighestBlockAt((int) x,(int) z);
         switch(b.getType()){
-            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES ->{
+            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER ->{
+                return null;
+            }
+        }
+        return b;
+    }
+    public static Block getCaveYVal(Player p, double x, double z){
+        double y = getRandomCord(p.getLocation().getY()-20,p.getLocation().getY()+20);
+        Location blockLoc = new Location(p.getWorld(),x,y,z);
+        Block b = p.getWorld().getBlockAt(blockLoc);
+        switch(b.getType()){
+            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER ->{
                 return null;
             }
         }
