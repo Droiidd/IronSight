@@ -23,23 +23,12 @@ public class FrontierMob {
     private LivingEntity entity;
     private static HashMap<UUID, FrontierMob> mobs = new HashMap<>();
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
-    public FrontierMob(LocationType locationType,FrontierMobType type)
+    public FrontierMob(FrontierMobType type)
     {
         this.type = type;
-        this.locationType = locationType;
     }
 
-
-    public void spawnAnimal(Player p){
-
-
-
-    }
-    public void spawnRaider(){
-
-    }
-    public void spawnUndead(Player p,FrontierLocation location){
-        this.location = location;
+    public void spawnMob(Player p){
         Block spawnBlock = GlobalUtils.getRandomSurfaceBlock(p);
         p.sendMessage("X: "+spawnBlock.getX()+" Y: "+spawnBlock.getY()+" Z: "+spawnBlock.getZ());
 

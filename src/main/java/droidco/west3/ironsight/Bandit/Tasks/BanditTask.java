@@ -4,6 +4,7 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
@@ -15,12 +16,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BanditTask extends BukkitRunnable {
     private ArrayList<BanditTask> tasks = new ArrayList<>();
@@ -42,6 +45,19 @@ public class BanditTask extends BukkitRunnable {
     private final Player p;
     private boolean wildernessFlag;
     private FrontierMob undeadMiner;
+    private FrontierMob berserkerMiner;
+    private FrontierMob corrodedMiner;
+    private FrontierMob raider;
+    private FrontierMob ranger;
+    private FrontierMob wolf;
+    private FrontierMob raiderBrute;
+    private FrontierMob rabbit;
+    private FrontierMob fox;
+    private FrontierMob boar;
+    private FrontierMob cow;
+    private List<FrontierMob> miners = new ArrayList<>();
+    private List<FrontierMob> animals = new ArrayList<>();
+    private List<FrontierMob> raiders = new ArrayList<>();
     private HashMap<String, FrontierLocation> locations;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
@@ -56,8 +72,30 @@ public class BanditTask extends BukkitRunnable {
 
         b.setDoingContract(false);
 
-        this.undeadMiner = new FrontierMob(LocationType.MINE, FrontierMobType.UNDEAD_MINER);
-        //Contract.assignPlayerContracts(p,b);
+        this.undeadMiner = new FrontierMob(FrontierMobType.UNDEAD_MINER);
+        this.berserkerMiner = new FrontierMob(FrontierMobType.BERSERKER_MINER);
+        this.corrodedMiner = new FrontierMob(FrontierMobType.CORRODED_MINER);
+        this.miners.add(undeadMiner);
+        this.miners.add(berserkerMiner);
+        this.miners.add(corrodedMiner);
+
+        this.rabbit = new FrontierMob(FrontierMobType.RABBIT);
+        this.cow = new FrontierMob(FrontierMobType.WILD_COW);
+        this.boar = new FrontierMob(FrontierMobType.BOAR);
+        this.fox = new FrontierMob(FrontierMobType.RED_FOX);
+        this.animals.add(rabbit);
+        this.animals.add(boar);
+        this.animals.add(fox);
+        this.animals.add(cow);
+
+        this.raider = new FrontierMob(FrontierMobType.RAIDER);
+        this.raiderBrute = new FrontierMob(FrontierMobType.RAIDER_BRUTE);
+        this.ranger = new FrontierMob(FrontierMobType.RANGER);
+        this.wolf = new FrontierMob(FrontierMobType.WILD_DOG);
+        this.raiders.add(raider);
+        this.raiders.add(ranger);
+        this.raiders.add(wolf);
+        this.raiders.add(raiderBrute);
     }
 
     @Override
@@ -208,15 +246,32 @@ public class BanditTask extends BukkitRunnable {
             //      ===--- MOB SPAWNING ---===
             if(seconds == mobRespawnTime){
                 p.sendMessage("30 seconds passed.");
-                //      ===--- MINES ---===
-                if(currentLoc.getType().equals(LocationType.MINE)){
-                    undeadMiner.spawnUndead(p,b.getCurrentLocation());
-                    undeadMiner.spawnUndead(p,b.getCurrentLocation());
-                    p.sendMessage("undead spawned!");
+                switch(currentLoc.getType()){
+                    case MINE -> {
+                        spawnGroupOfMobs(this.miners);
+                    }
+                    case ILLEGAL,EVENT -> {
+                        spawnGroupOfMobs(this.raiders);
+                    }
+                    case OIL_FIELD -> {
+                        spawnGroupOfMobs(this.raiders);
+                    }
+                    case NATURAL -> {
+                        if(currentLoc.getLocName().equalsIgnoreCase("Florence Plains")){
+                            spawnSpecificMobs(fox);
+                        }else if(currentLoc.getLocName().equalsIgnoreCase("Marston Glacier")){
+                            spawnSpecificMobs(rabbit);
+                        }
+                        else if(currentLoc.getLocName().equalsIgnoreCase("Grizzly Ridge")){
+                            spawnSpecificMobs(cow);
+                        }
+                        else if(currentLoc.getLocName().equalsIgnoreCase("Three Forks Marshland")){
+                            spawnSpecificMobs(boar);
+                        }
+                    }
                 }
                 seconds = 0;
             }
-
         }
 
 
@@ -242,6 +297,20 @@ public class BanditTask extends BukkitRunnable {
             }
             this.cancel();
             tasks.remove(this);
+        }
+    }
+    public void spawnGroupOfMobs(List<FrontierMob> mobList){
+        int selection = GlobalUtils.getRandomNumber(mobList.size());
+        int amount = GlobalUtils.getRandomNumber(4);
+        for(int i=0; i < amount; i++){
+            mobList.get(selection).spawnMob(p);
+            selection = GlobalUtils.getRandomNumber(mobList.size());
+        }
+    }
+    public void spawnSpecificMobs(FrontierMob mob){
+        int amount = GlobalUtils.getRandomNumber(4);
+        for(int i=0; i < amount; i++){
+            mob.spawnMob(p);
         }
     }
 }
