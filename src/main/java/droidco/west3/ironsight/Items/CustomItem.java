@@ -96,7 +96,9 @@ CustomItem {
         if(enchant != null){
             meta.addEnchant(enchant,enchantMultiplier,true);
         }
-        lore.add(description);
+        if(description.length() > 0){
+            lore.add(description);
+        }
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
@@ -115,7 +117,9 @@ CustomItem {
         if(enchant != null){
             meta.addEnchant(enchant,enchantMultiplier,true);
         }
-        lore.add(description);
+        if(description.length() > 0){
+            lore.add(description);
+        }
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;

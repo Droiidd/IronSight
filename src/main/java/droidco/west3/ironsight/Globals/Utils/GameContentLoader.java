@@ -125,10 +125,10 @@ public class GameContentLoader {
         CustomItem huntsmenChest = new CustomItem("Huntsmen Jacket",4,true,false,"Made with boar hide",Material.IRON_CHESTPLATE,0.0,1320.0);
         CustomItem huntsmenHelm = new CustomItem("Huntsmen Hat",3,true,false,"Fox fur cap",Material.IRON_HELMET,0.0,858.0);
 
-        CustomItem frontierBoots = new CustomItem("Frontier Boots",5,false,false,"Steeled leather",Material.IRON_BOOTS,0.0,2156.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1,);
-        CustomItem frontierLegs = new CustomItem("Frontier Pants",6,false,false,"With knee pads!",Material.IRON_LEGGINGS,0.0,2772.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1,);
-        CustomItem frontierChest = new CustomItem("Frontier Duster",6,false,false,"Made with beast hide",Material.IRON_CHESTPLATE,0.0,3080.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1,);
-        CustomItem frontierHelm = new CustomItem("Frontier Hat",5,false,false,"Steeled leather hat",Material.IRON_HELMET,0.0,2002.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1,);
+        CustomItem frontierBoots = new CustomItem("Frontier Boots",5,false,false,"Steeled leather",Material.IRON_BOOTS,0.0,2156.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierLegs = new CustomItem("Frontier Pants",6,false,false,"With knee pads!",Material.IRON_LEGGINGS,0.0,2772.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierChest = new CustomItem("Frontier Duster",6,false,false,"Made with beast hide",Material.IRON_CHESTPLATE,0.0,3080.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierHelm = new CustomItem("Frontier Hat",5,false,false,"Steeled leather hat",Material.IRON_HELMET,0.0,2002.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 
         CustomItem journeyBoots = new CustomItem("Journeymen Boots",7,false,false,"Silver spurs",Material.NETHERITE_BOOTS,0.0,0.0);
         CustomItem journeyLegs = new CustomItem("Journeymen Pants",8,false,false,"Plenty of pockets",Material.NETHERITE_LEGGINGS,0.0,0.0);
@@ -139,17 +139,19 @@ public class GameContentLoader {
         CustomItem sheriffBoots = new CustomItem("Sheriff Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,924.0);
         CustomItem sheriffLegs = new CustomItem("Sheriff Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,1188.0);
         CustomItem sheriffChest = new CustomItem("Sheriff Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,1320.0);
-        CustomItem sheriffHelm = new CustomItem("Sheriff Hat",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,858.0);
+        CustomItem sheriffHelm = new CustomItem("Sheriff Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,858.0);
 
-        CustomItem deputyBoots = new CustomItem("Deputy Boots",3,true,true,"",Material.IRON_BOOTS,0.0,2730.0);
-        CustomItem deputyLegs = new CustomItem("Deputy Pants",4,true,true,"",Material.IRON_LEGGINGS,0.0,3510.0);
-        CustomItem deputyChest = new CustomItem("Deputy Jacket",4,true,true,"",Material.IRON_CHESTPLATE,0.0,3900.0);
-        CustomItem deputyHelm = new CustomItem("Deputy Hat",3,true,true,"",Material.IRON_HELMET,0.0,2335.0);
+        CustomItem deputyBoots = new CustomItem("Deputy Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,2730.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyLegs = new CustomItem("Deputy Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,3510.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyChest = new CustomItem("Deputy Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,3900.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyHelm = new CustomItem("Deputy Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,2335.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 
         CustomItem marshallBoots = new CustomItem("Marshall Boots",3,true,true,"Freshly shined",Material.DIAMOND_BOOTS,0.0,5950.0);
         CustomItem marshallLegs = new CustomItem("Marshall Pants",4,true,true,"",Material.DIAMOND_LEGGINGS,0.0,7650.0);
         CustomItem marshallChest = new CustomItem("Marshall Jacket",4,true,true,"Boys in blue!",Material.DIAMOND_CHESTPLATE,0.0,8500.0);
         CustomItem marshallHelm = new CustomItem("Marshall Hat",3,true,true,"The true officer.",Material.DIAMOND_HELMET,0.0,5525.0);
+
+        CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_FIRE,2);
 
 
 
