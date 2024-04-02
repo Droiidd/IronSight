@@ -29,7 +29,8 @@ public class BanditTask extends BukkitRunnable {
     private int tick = 0;
     private int seconds = 0;
     private final int combatLogTimer = 30;
-    private int mobRespawnTime = 30;
+    //IN SECONDS
+    private int mobRespawnTime = 60;
     private int combatLogCounter = 0;
     private int wantedMin = 2;
     private int wantedSec = 0;
@@ -209,6 +210,7 @@ public class BanditTask extends BukkitRunnable {
                 p.sendMessage("30 seconds passed.");
                 //      ===--- MINES ---===
                 if(currentLoc.getType().equals(LocationType.MINE)){
+                    undeadMiner.spawnUndead(p,b.getCurrentLocation());
                     undeadMiner.spawnUndead(p,b.getCurrentLocation());
                     p.sendMessage("undead spawned!");
                 }

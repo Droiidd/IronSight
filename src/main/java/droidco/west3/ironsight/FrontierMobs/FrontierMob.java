@@ -7,12 +7,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class FrontierMob {
@@ -20,7 +22,9 @@ public class FrontierMob {
     private LocationType locationType;
     private FrontierMobType type;
     private UUID mobId;
+    private LivingEntity entity;
     private static HashMap<UUID, FrontierMob> mobs = new HashMap<>();
+    private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     public FrontierMob(LocationType locationType,FrontierMobType type)
     {
         this.type = type;
@@ -48,16 +52,25 @@ public class FrontierMob {
                 Skeleton miner = p.getWorld().spawn(spawnLoc,Skeleton.class);
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION.INCREASE_DAMAGE, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000000, 1, false, false));
-                miner.setCustomName(ChatColor.DARK_GRAY + "Corroded Miner");
+                miner.setCustomName(ChatColor.GRAY + "Undead Miner");
                 miner.setCustomNameVisible(true);
 
                 this.mobId = miner.getUniqueId();
                 mobs.put(mobId,this);
+                entities.put(mobId,miner);
+            }
+            case BERSERKER_MINER -> {
+
+            }case CORRODED_MINER -> {
+
             }
         }
-
-
-
+    }
+    public static HashMap<UUID,FrontierMob> getMobs(){
+        return mobs;
+    }
+    public static HashMap<UUID,LivingEntity> getEntities(){
+        return entities;
     }
 
 
