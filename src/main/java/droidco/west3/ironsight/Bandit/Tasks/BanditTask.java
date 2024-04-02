@@ -204,17 +204,19 @@ public class BanditTask extends BukkitRunnable {
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
                 }
             }
-        }
-        //      ===--- MOB SPAWNING ---===
-        if(tick % mobRespawnTime == 0){
-            p.sendMessage("30 seconds passed.");
-            FrontierLocation currentLoc = b.getCurrentLocation();
-            //      ===--- MINES ---===
-            if(currentLoc.getType().equals(LocationType.MINE)){
-                undeadMiner.spawnUndead(p,b.getCurrentLocation());
-                p.sendMessage("undead spawned!");
+            //      ===--- MOB SPAWNING ---===
+            if(seconds == mobRespawnTime){
+                p.sendMessage("30 seconds passed.");
+                //      ===--- MINES ---===
+                if(currentLoc.getType().equals(LocationType.MINE)){
+                    undeadMiner.spawnUndead(p,b.getCurrentLocation());
+                    p.sendMessage("undead spawned!");
+                }
+                seconds = 0;
             }
+
         }
+
 
         //      ===--- MISC TIMED EVENTS ---===
 

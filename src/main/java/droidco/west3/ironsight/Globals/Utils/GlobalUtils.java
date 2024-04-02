@@ -37,15 +37,30 @@ public class GlobalUtils {
         }
         return val;
     }
-    public static Block getRandomSurfaceBlock(World w, double x, double z){
+    public static Block getRandomSurfaceBlock(Player p){
        // double y = w.getHighestBlockYAt((int) x,(int) z);
-        Block b = w.getHighestBlockAt((int) x,(int) z);
-        switch(b.getType()){
-            case OAK_LEAVES,DARK_OAK_LEAVES,BIRCH_LEAVES,SPRUCE_LEAVES,ACACIA_LEAVES,JUNGLE_LEAVES,LAVA,WATER,AIR,CAVE_AIR ->{
-                return null;
+        Block b = null;
+        double x = 0.0;
+        double z = 0.0;
+        boolean safeSpawn = false;
+        ArrayList<Material> unsafeBlocks = new ArrayList<>();
+        unsafeBlocks.add(Material.OAK_LEAVES);
+        unsafeBlocks.add(Material.AIR);
+        unsafeBlocks.add(Material.LAVA);
+        unsafeBlocks.add(Material.JUNGLE_LEAVES);
+        unsafeBlocks.add(Material.SPRUCE_LEAVES);
+        unsafeBlocks.add(Material.BIRCH_LEAVES);
+        unsafeBlocks.add(Material.ACACIA_LEAVES);
+        unsafeBlocks.add(Material.WATER);
+        while(!safeSpawn){
+            x = getRandomCord(p.getLocation().getX()-30.0,p.getLocation().getX()+30.0);
+            z = getRandomCord(p.getLocation().getZ()-30.0,p.getLocation().getZ()+30.0);
+            b = p.getWorld().getHighestBlockAt((int) x,(int) z);
+            if(!unsafeBlocks.contains(b.getType())){
+                safeSpawn = true;
             }
         }
-        return b;
+        return b = b.getWorld().getBlockAt(b.getLocation().add(0.0,1.0 ,0.0));
     }
     public static Block getRandomCaveBlock(Player p){
         double x = 0.0;

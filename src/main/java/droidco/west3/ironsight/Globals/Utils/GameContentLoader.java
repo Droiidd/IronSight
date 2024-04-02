@@ -93,6 +93,7 @@ public class GameContentLoader {
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0);
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field", Material.TRIPWIRE_HOOK,0.0,0.0);
         CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,1150.0,0.0, Enchantment.LURE,1);
+        CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND,0.0,1450.0, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY
         CustomItem alligator = new CustomItem("Alligator",8,true,false, "Crikey!",Material.MUSIC_DISC_CHIRP,425.0,0.0);
