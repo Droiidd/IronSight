@@ -85,10 +85,61 @@ public class FrontierMob {
                 int chance = GlobalUtils.getRandomNumber(101);
                 if (chance % 7 == 0) {
                     miner.getEquipment().setItemInMainHand(CustomItem.getCustomItem("Flame Bow").getItemStack());
+                }else{
+                    miner.getEquipment().setItemInMainHand(CustomItem.getCustomItem("Hard Bow").getItemStack());
                 }
                 this.mobId = miner.getUniqueId();
                 mobs.put(mobId,this);
                 entities.put(mobId,miner);
+            }
+            case WILD_DOG -> {
+                Wolf wolf = p.getWorld().spawn(spawnLoc, Wolf.class);
+                mobId = wolf.getUniqueId();
+                wolf.setAngry(true);
+                //wolf.setAware(true);
+                wolf.setCustomName(ChatColor.GRAY + "Rabid Hound");
+                wolf.setCustomNameVisible(true);
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,wolf);
+            }
+            case RANGER -> {
+                Pillager raider = p.getWorld().spawn(spawnLoc, Pillager.class);
+                mobId = raider.getUniqueId();
+                raider.setCustomName(ChatColor.GRAY + "Raider");
+                raider.setCustomNameVisible(true);
+                raider.setCanJoinRaid(false);
+                raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
+                int chance = GlobalUtils.getRandomNumber(101);
+                if (chance % 7 == 0) {
+                    raider.getEquipment().setItemInMainHand(CustomItem.getCustomItem("Flame Bow").getItemStack());
+                }else{
+                    raider.getEquipment().setItemInMainHand(CustomItem.getCustomItem("Hard Bow").getItemStack());
+                }
+                mobs.put(mobId,this);
+                entities.put(mobId,raider);
+            }
+            case RAIDER -> {
+                Vindicator raider = p.getWorld().spawn(spawnLoc, Vindicator.class);
+                mobId = raider.getUniqueId();
+                raider.setCustomName(ChatColor.GRAY + "Raider");
+                raider.setCustomNameVisible(true);
+                raider.setCanJoinRaid(false);
+                raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,raider);
+            }
+            case RAIDER_BRUTE -> {
+                PiglinBrute raider = p.getWorld().spawn(spawnLoc, PiglinBrute.class);
+                mobId = raider.getUniqueId();
+                raider.setCustomName(ChatColor.GRAY + "Brute Raider");
+                raider.setCustomNameVisible(true);
+                raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
+                raider.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,raider);
             }
         }
     }

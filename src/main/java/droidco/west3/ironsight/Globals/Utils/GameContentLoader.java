@@ -152,6 +152,7 @@ public class GameContentLoader {
         CustomItem marshallHelm = new CustomItem("Marshall Hat",3,true,true,"The true officer.",Material.DIAMOND_HELMET,0.0,5525.0);
 
         CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_FIRE,2);
+        CustomItem bow2 = new CustomItem("Hard Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_DAMAGE,6);
 
 
 

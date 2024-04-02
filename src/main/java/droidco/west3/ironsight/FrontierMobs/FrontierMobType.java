@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.FrontierMobs;
 
 public enum FrontierMobType {
+    RANGER,
     RAIDER,
     RAIDER_BRUTE,
     WILD_DOG,
