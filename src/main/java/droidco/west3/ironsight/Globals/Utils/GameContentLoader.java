@@ -58,7 +58,7 @@ public class GameContentLoader {
         CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false, "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,10.0);
         CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false, "Extra kick to any home brew",Material.DRAGON_BREATH,16.0,0.0);
         CustomItem crappie = new CustomItem("Poor Man's Crappie",3,true,false, "Skinniest fish",Material.COD,10.0,0.0);
-        CustomItem grayHerring = new CustomItem("Grey Stonned Herring",3,true,false, "The cheapest of Herring",Material.SALMON,13.0,0.0);
+        CustomItem grayHerring = new CustomItem("Grey Stoned Herring",3,true,false, "The cheapest of Herring",Material.SALMON,13.0,0.0);
         CustomItem chub = new CustomItem("Cactus Pronged Chub",3,true,false, "Too spikey to eat",Material.TROPICAL_FISH,16.0,0.0);
         CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_MALL,55.0,0.0);
         CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_STRAD,40.0,0.0);
@@ -98,7 +98,7 @@ public class GameContentLoader {
         //LEGENDARY
         CustomItem alligator = new CustomItem("Alligator",8,true,false, "Crikey!",Material.MUSIC_DISC_CHIRP,425.0,0.0);
         CustomItem sunkenCatfish = new CustomItem("Sunken Catfish",8,true,false, "Evolved in the low-lands",Material.MUSIC_DISC_BLOCKS,400.0,0.0);
-        CustomItem goldstonnedherring = new CustomItem("Gold Stonned Herring",7,true,false, "The rare mutation of the gray herring",Material.MUSIC_DISC_MELLOHI,250.0,0.0);
+        CustomItem goldstonnedherring = new CustomItem("Gold Stoned Herring",7,true,false, "The rare mutation of the gray herring",Material.MUSIC_DISC_MELLOHI,250.0,0.0);
         CustomItem pearlrivertrout = new CustomItem("Pearl River Trout",7,true,false, "Alluring rainbow scales",Material.MUSIC_DISC_CAT,275.0,0.0);
         CustomItem expaditionRod = new CustomItem("Expedition Rod",8,true, false, "A proper line.", Material.FISHING_ROD,0.0,5950.0, Enchantment.LURE,5);
 

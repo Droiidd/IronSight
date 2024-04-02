@@ -18,20 +18,22 @@ public class Contract
     private String contractName;
     private int rewardXp;
     private double reward;
-
+    private ItemStack requestedItem;
     private List<OilFieldCrate> crates;
     private int reinforcementCount;
     private ContractType contractType;
     private List<FrontierLocation> contractLocs;
     private FrontierLocation frontierLocation;
     private Difficulty difficulty;
+    private DeliveryType deliveryType;
     private int rarity;
     private int bulkMultiplier;
     private boolean bulkOrder;
     private String listingName;
     private List<String> description;
     public List<CompletionStep> steps = new ArrayList<>();
-    private List<ItemStack> requestedItems;
+    public List<ItemStack> requestedItemsNormal = new ArrayList<>();
+    public List<ItemStack> requestedItemsRare = new ArrayList<>();
     private static HashMap<String, Contract> contracts = new HashMap<>();
 
     public Contract(String contractName, ContractType type, List<FrontierLocation> contractLocs, int rarity) {
@@ -40,6 +42,17 @@ public class Contract
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.rarity = rarity;
+
+        contracts.put(this.contractName,this);
+        //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
+    }
+    public Contract(String contractName, ContractType type, List<FrontierLocation> contractLocs, int rarity,DeliveryType deliveryType) {
+        //THESE ARE UNIVERSAL FOR THE CONTRACT
+        this.contractName = contractName;
+        this.contractType = type;
+        this.contractLocs = contractLocs;
+        this.rarity = rarity;
+        this.deliveryType = deliveryType;
 
         contracts.put(this.contractName,this);
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
@@ -60,6 +73,14 @@ public class Contract
                 this.rewardXp = 100;
             }
         }
+    }
+    public void addRequestedItemNormal(ItemStack item)
+    {
+        this.requestedItemsNormal.add(item);
+    }
+    public void addRequestedItemRare(ItemStack item)
+    {
+        this.requestedItemsRare.add(item);
     }
     public static void refreshContracts(){
         System.out.println("REFRESH");
@@ -169,12 +190,97 @@ public class Contract
     }
 
     public void generateNewDelivery(){
-        int odds = GlobalUtils.getRandomNumber(101);
-        if(odds>=50){
-            this.difficulty = Difficulty.Rookie;
-        }else {
-            this.difficulty = Difficulty.Apprentice;
+        //      HANDLE BULK AND RARE ORDERS:
+        int amount = 0;
+        boolean rareRequest = false;
+        int rareRequestOdds = GlobalUtils.getRandomNumber(101);
+        if(rareRequestOdds < 15){
+            rareRequest = true;
         }
+        switch(deliveryType){
+            case FISHER,HUNTER,DRUG_RUNNER -> {
+                if(rareRequest){
+                    amount = GlobalUtils.getRandomRange(3,9);
+                }else{
+                    amount = GlobalUtils.getRandomRange(11,29);
+                }
+            }
+            case MINER -> {
+                if(rareRequest){
+                    amount = GlobalUtils.getRandomRange(1,4);
+                }else{
+                    amount = GlobalUtils.getRandomRange(22,46);
+                }
+            }
+        }
+        bulkMultiplier = GlobalUtils.getRandomNumber(5);
+        int bulkOdds = GlobalUtils.getRandomNumber(101);
+        if(bulkOdds < 10){
+            amount = amount * bulkMultiplier;
+        }
+        //      CHOOSE THE ITEM
+        this.frontierLocation = getRandomLocation();
+        switch (deliveryType){
+            case FISHER -> {
+                if(rareRequest){
+                    if(frontierLocation.getLocName().equalsIgnoreCase("Three Forks Delta")){
+                        requestedItem = CustomItem.getCustomItem("Alligator").getItemStack();
+                    }
+                    else if(frontierLocation.getLocName().equalsIgnoreCase("Pearl River")){
+                        int fishOdds = GlobalUtils.getRandomNumber(101);
+                        if(fishOdds < 40){
+                            requestedItem = CustomItem.getCustomItem("Pearl River Trout").getItemStack();
+                        }else{
+                            requestedItem = CustomItem.getCustomItem("Arctic Salmon").getItemStack();
+                        }
+                    }
+                    else if(frontierLocation.getLocName().equalsIgnoreCase("Lower Guadalupe River")){
+                        requestedItem = CustomItem.getCustomItem("Sunken Catfish").getItemStack();
+                    }
+                    else if(frontierLocation.getLocName().equalsIgnoreCase("Slough Creek River")){
+                        int fishOdds = GlobalUtils.getRandomNumber(101);
+                        if(fishOdds < 40){
+                            requestedItem = CustomItem.getCustomItem("Gold Stoned Herring").getItemStack();
+                        }else{
+                            requestedItem = CustomItem.getCustomItem("Southern Salmon").getItemStack();
+                        }
+                    }
+                }else{
+                 List<ItemStack> fish = new ArrayList<>();
+                 fish.add(CustomItem.getCustomItem("Poor Man's Crappie").getItemStack());
+                 fish.add(CustomItem.getCustomItem("Gray Stoned Herring").getItemStack());
+                 fish.add(CustomItem.getCustomItem("Cactus Pronged Chub").getItemStack());
+                 int fishChoice = GlobalUtils.getRandomNumber(fish.size());
+                 requestedItem = fish.get(fishChoice);
+                }
+            }
+        }
+
+        requestedItem.setAmount(amount);
+
+        //      SELECT DIFFICULTY BASED OFF REQUEST AMOUNT
+        if(rareRequest){
+            if(amount < 16){
+                //MEDIUM
+                difficulty = Difficulty.Apprentice;
+            }else{
+                //HARD
+                difficulty = Difficulty.Experienced;
+            }
+
+        }else{
+            if(amount < 29){
+                //EASY
+                difficulty = Difficulty.Rookie;
+            }else if(amount < 44){
+                //MEDIUM
+                difficulty = Difficulty.Apprentice;
+            }else{
+                //HARD?
+                difficulty = Difficulty.Experienced;
+            }
+        }
+
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
     }
     public void generateNewBountyHunter(Player p){
