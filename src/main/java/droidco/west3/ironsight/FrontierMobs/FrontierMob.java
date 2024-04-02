@@ -141,6 +141,51 @@ public class FrontierMob {
                 mobs.put(mobId,this);
                 entities.put(mobId,raider);
             }
+            case BOAR -> {
+                Hoglin animal = p.getWorld().spawn(spawnLoc, Hoglin.class);
+                mobId = animal.getUniqueId();
+                animal.setAdult();
+                animal.setCustomName(ChatColor.GRAY + "Brute Raider");
+                animal.setCustomNameVisible(true);
+                //animal.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2, false, false));
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,animal);
+
+            }
+            case RABBIT -> {
+                Hoglin animal = p.getWorld().spawn(spawnLoc, Hoglin.class);
+                mobId = animal.getUniqueId();
+                animal.setAdult();
+                animal.setCustomName(ChatColor.GRAY + "Brute Raider");
+                animal.setCustomNameVisible(true);
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,animal);
+            }
+            case RED_FOX -> {
+                Hoglin animal = p.getWorld().spawn(spawnLoc, Hoglin.class);
+                mobId = animal.getUniqueId();
+                animal.setAdult();
+                animal.setCustomName(ChatColor.GRAY + "Brute Raider");
+                animal.setCustomNameVisible(true);
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,animal);
+            }
+            case WILD_COW -> {
+                Hoglin animal = p.getWorld().spawn(spawnLoc, Hoglin.class);
+                mobId = animal.getUniqueId();
+                animal.setAdult();
+                animal.setCustomName(ChatColor.GRAY + "Brute Raider");
+                animal.setCustomNameVisible(true);
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
+                animal.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                mobs.put(mobId,this);
+                entities.put(mobId,animal);
+            }
         }
     }
     public static HashMap<UUID,FrontierMob> getMobs(){
