@@ -4,6 +4,7 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
@@ -57,8 +58,8 @@ public class GameContentLoader {
         //UNCOMMON
         CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false, "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,10.0);
         CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false, "Extra kick to any home brew",Material.DRAGON_BREATH,16.0,0.0);
-        CustomItem crappie = new CustomItem("Poor Man's Crappie",3,true,false, "Skinniest fish",Material.COD,10.0,0.0);
-        CustomItem grayHerring = new CustomItem("Grey Stoned Herring",3,true,false, "The cheapest of Herring",Material.SALMON,13.0,0.0);
+        CustomItem crappie = new CustomItem("Poor Mans Crappie",3,true,false, "Skinniest fish",Material.COD,10.0,0.0);
+        CustomItem grayHerring = new CustomItem("Gray Stoned Herring",3,true,false, "The cheapest of Herring",Material.SALMON,13.0,0.0);
         CustomItem chub = new CustomItem("Cactus Pronged Chub",3,true,false, "Too spikey to eat",Material.TROPICAL_FISH,16.0,0.0);
         CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_MALL,55.0,0.0);
         CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_STRAD,40.0,0.0);
@@ -381,24 +382,17 @@ public class GameContentLoader {
     public static void loadContracts(){
         System.out.println("Loading contracts!");
         List<FrontierLocation> testLocs = new ArrayList<>();
-        testLocs.add(FrontierLocation.getLocation("Black Spur Mines"));
-        testLocs.add(FrontierLocation.getLocation("Santa Fe"));
-        Contract testC1 = new Contract("Looking for iron.", ContractType.Delivery, testLocs ,1);
+        testLocs.add(FrontierLocation.getLocation("Pearl River"));
+        testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
+        testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
+        testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
+        Contract testC1 = new Contract("In need of some fish", ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
 
-        List<FrontierLocation> test2Locs = new ArrayList<>();
-        test2Locs.add(FrontierLocation.getLocation("North Oil Field"));
-        test2Locs.add(FrontierLocation.getLocation("Slough Creek"));
-        Contract testC2 = new Contract("I need fish caught.",ContractType.Delivery, test2Locs ,1);
 
         List<FrontierLocation> test3Locs = new ArrayList<>();
-        //test3Locs.add(FrontierLocation.getLocation("Storm Point"));
-        //test3Locs.add(FrontierLocation.getLocation("New Orleans"));
         test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
-
-
         Contract testC3 = new Contract("Raid northern Oil Field",ContractType.OilField , test3Locs ,1);
 
-        //Contract testC4 = new Contract("Big time moves.",ContractType.Delivery , test3Locs ,1);
         System.out.println("Contracts loaded!");
     }
 }

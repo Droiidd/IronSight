@@ -29,6 +29,7 @@ public class Contract
     private int rarity;
     private int bulkMultiplier;
     private boolean bulkOrder;
+    private int requestedAmount;
     private String listingName;
     private List<String> description;
     public List<CompletionStep> steps = new ArrayList<>();
@@ -170,7 +171,6 @@ public class Contract
     public void generateNewOilField(int reinforcementCount){
         this.crates = OilFieldCrate.getCratesByLocation(frontierLocation);
         this.reinforcementCount = reinforcementCount;
-        this.frontierLocation = getRandomLocation();
         this.steps = new ArrayList<>();
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<=20){
@@ -218,6 +218,7 @@ public class Contract
         if(bulkOdds < 10){
             amount = amount * bulkMultiplier;
         }
+        this.requestedAmount = amount;
         //      CHOOSE THE ITEM
         this.frontierLocation = getRandomLocation();
         switch (deliveryType){
@@ -246,17 +247,18 @@ public class Contract
                         }
                     }
                 }else{
-                 List<ItemStack> fish = new ArrayList<>();
-                 fish.add(CustomItem.getCustomItem("Poor Man's Crappie").getItemStack());
-                 fish.add(CustomItem.getCustomItem("Gray Stoned Herring").getItemStack());
-                 fish.add(CustomItem.getCustomItem("Cactus Pronged Chub").getItemStack());
-                 int fishChoice = GlobalUtils.getRandomNumber(fish.size());
-                 requestedItem = fish.get(fishChoice);
+//                 List<ItemStack> fish = new ArrayList<>();
+//                 fish.add(CustomItem.getCustomItem("Poor Mans Crappie").getItemStack());
+//                 fish.add(CustomItem.getCustomItem("Gray Stoned Herring").getItemStack());
+//                 fish.add(CustomItem.getCustomItem("Cactus Pronged Chub").getItemStack());
+//                 int fishChoice = GlobalUtils.getRandomNumber(fish.size());
+//                 requestedItem = fish.get(fishChoice);
+                    requestedItem = CustomItem.getCustomItem("Southern Salmon").getItemStack();
                 }
             }
         }
 
-        requestedItem.setAmount(amount);
+        //requestedItem.setAmount(amount);
 
         //      SELECT DIFFICULTY BASED OFF REQUEST AMOUNT
         if(rareRequest){
@@ -280,7 +282,22 @@ public class Contract
                 difficulty = Difficulty.Experienced;
             }
         }
-
+        //      COMPLETION STEPS
+        this.steps = new ArrayList<>();
+        switch (deliveryType){
+            case FISHER -> {
+                List<String> desc = new ArrayList<>();
+                desc.add("Arrive at "+frontierLocation.getLocName());
+                desc.add("Fish until you have requested amount");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ frontierLocation.getLocName());
+            }
+        }
+        List<String> desc = new ArrayList<>();
+        desc.add("Return to town");
+        desc.add("for reward.");
+        addCompletionStep("steptest",2,desc,null,"Ride to any town");
+        System.out.println(requestedItem.getItemMeta().getDisplayName());
+        this.reward = amount * CustomItem.getCustomItem(ChatColor.stripColor(requestedItem.getItemMeta().getDisplayName())).getSalePrice();
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
     }
     public void generateNewBountyHunter(Player p){
