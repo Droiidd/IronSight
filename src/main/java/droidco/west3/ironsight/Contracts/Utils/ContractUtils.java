@@ -37,7 +37,6 @@ public class ContractUtils
                 targeted.add(contract);
             }
         });
-        System.out.println("target:"+targeted);
         if(targeted.isEmpty()){
             return new ArrayList<>();
         }else{

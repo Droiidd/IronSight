@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class TrackerUIs {
+public class TrackerUI {
 
     public static Inventory openTrackerUI(Player p) {
         Inventory trackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");

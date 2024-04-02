@@ -72,22 +72,15 @@ public class Contract
         }
     }
     public static void assignPlayerContracts(Player p, Bandit b){
-        System.out.println("cck1");
         refreshContracts();
-        System.out.println("check2");
         List<Contract> rookieContracts = new ArrayList<>();
         List<Contract> experiencedContracts = new ArrayList<>();
         List<Contract> apprenticeContracts = new ArrayList<>();
         List<Contract> masterContracts = new ArrayList<>();
-        System.out.println("check3");
         rookieContracts = initializeContracts(rookieContracts,Difficulty.Rookie);
-        System.out.println("check4");
         apprenticeContracts = initializeContracts(apprenticeContracts,Difficulty.Apprentice);
-        System.out.println("check5");
         experiencedContracts = initializeContracts(experiencedContracts,Difficulty.Experienced);
-        System.out.println("check6");
         masterContracts = initializeContracts(masterContracts,Difficulty.Master);
-        System.out.println("check7");
         b.setRookieContract(ContractUtils.getSingleContract(rookieContracts));
         b.setApprenticeContract(ContractUtils.getSingleContract(apprenticeContracts));
         int masterOdds = GlobalUtils.getRandomNumber(101);
@@ -100,18 +93,13 @@ public class Contract
     }
     public static List<Contract> initializeContracts(List<Contract> allContracts, Difficulty targetDiff){
         allContracts = ContractUtils.getContractByDiff(targetDiff);
-        System.out.println(" ALL " + allContracts);
-
         if(allContracts == null){
             allContracts = new ArrayList<>();
         }
-        System.out.println("init check1");
         while(allContracts.isEmpty() || allContracts == null){
             if(allContracts == null){
                 System.out.println("OUCHIE??");
             }
-            System.out.println("init while check");
-            System.out.println("while check contracts: "+allContracts);
             refreshContracts();
             allContracts = ContractUtils.getContractByDiff(targetDiff);
         }
@@ -138,7 +126,6 @@ public class Contract
         list of possible locations, the most basic info.
         New contracts can then be generated from this type.
          */
-        System.out.println("generation check 1");
         this.frontierLocation = getRandomLocation();
         /*
             After all the default random contract variables are set up,
@@ -146,17 +133,14 @@ public class Contract
             Some contracts may have different completion requirements than others, this handles
             that.
          */
-        System.out.println("generation check 2");
         switch(this.contractType){
             case Delivery -> {
-                System.out.println("NEW DELIVERY");
                 generateNewDelivery();
             }
             case Bounty -> {
                 //generateNewHunter();
             }
             case OilField -> {
-                System.out.println("NEW OILFIELD");
                 generateNewOilField(20);
             }
         }

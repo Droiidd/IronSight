@@ -1,16 +1,15 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.Items.ItemTable;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +23,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -34,8 +32,6 @@ import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
 
 
 public class GeneralEvents implements Listener {
@@ -121,9 +117,17 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
         if(block != null){
-            if (block.getType() == Material.BARREL) {
-                //p.sendMessage("SHIT");
-                e.setCancelled(true);
+            switch(block.getType()){
+                case BARREL,OAK_TRAPDOOR,SPRUCE_TRAPDOOR,ARMOR_STAND,ITEM_FRAME,GLOW_ITEM_FRAME,
+                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR->{
+                    e.setCancelled(true);
+                }
+                case CHEST -> {
+                    Bandit b = Bandit.getPlayer(p);
+                    if(b.getCurrentLocation().getType().compareTo(LocationType.TOWN)==0){
+                        e.setCancelled(true);
+                    }
+                }
             }
         }
     }

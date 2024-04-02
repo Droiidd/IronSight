@@ -2,13 +2,9 @@ package droidco.west3.ironsight.Tracker;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
-import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
-import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
-import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,25 +12,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.checkerframework.checker.units.qual.A;
 
 public class TrackerEvents implements Listener {
-
-
-    @EventHandler
-    public void trackerMovement(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-
-    }
-
     @EventHandler
     public void trackerRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if (p.getInventory().getItemInMainHand().getType().compareTo(Material.COMPASS) == 0) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                p.openInventory(TrackerUIs.openTrackerUI(p));
+                p.openInventory(TrackerUI.openTrackerUI(p));
             }
 
         }
@@ -47,12 +32,12 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case DARK_OAK_HANGING_SIGN -> {
-                    p.openInventory(TrackerUIs.openTownsUi(p));
+                    p.openInventory(TrackerUI.openTownsUi(p));
                     break;
                 }
 
                 case PLAYER_HEAD -> {
-                    p.openInventory(TrackerUIs.openPlayersUi(p));
+                    p.openInventory(TrackerUI.openPlayersUi(p));
                     break;
                 }
 
@@ -62,17 +47,17 @@ public class TrackerEvents implements Listener {
                 }
 
                 case BELL -> {
-                    p.openInventory(TrackerUIs.openMerchantsUi(p));
+                    p.openInventory(TrackerUI.openMerchantsUi(p));
                     break;
                 }
 
                 case BOOKSHELF -> {
-                    p.openInventory(TrackerUIs.openNPCsUi(p));
+                    p.openInventory(TrackerUI.openNPCsUi(p));
                     break;
                 }
 
                 case COMPASS -> {
-                    p.openInventory(TrackerUIs.openLocationsUi(p));
+                    p.openInventory(TrackerUI.openLocationsUi(p));
                     break;
                 }
 
@@ -177,31 +162,31 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case COBBLESTONE -> {
-                    p.openInventory(TrackerUIs.openMinesUi(p));
+                    p.openInventory(TrackerUI.openMinesUi(p));
                     break;
                 }
                 case WATER_BUCKET -> {
-                    p.openInventory(TrackerUIs.openRiversUi(p));
+                    p.openInventory(TrackerUI.openRiversUi(p));
                     break;
                 }
                 case OAK_SAPLING -> {
-                    p.openInventory(TrackerUIs.openForestReservesUi(p));
+                    p.openInventory(TrackerUI.openForestReservesUi(p));
                     break;
                 }
                 case SKELETON_SKULL -> {
-                    p.openInventory(TrackerUIs.openBanditCampsUi(p));
+                    p.openInventory(TrackerUI.openBanditCampsUi(p));
                     break;
                 }
                 case OAK_DOOR -> {
-                    p.openInventory(TrackerUIs.openScavTownsUi(p));
+                    p.openInventory(TrackerUI.openScavTownsUi(p));
                     break;
                 }
                 case COAL -> {
-                    p.openInventory(TrackerUIs.openOilFieldsUi(p));
+                    p.openInventory(TrackerUI.openOilFieldsUi(p));
                     break;
                 }
                 case SPRUCE_SAPLING -> {
-                    p.openInventory(TrackerUIs.openDrugFieldsUi(p));
+                    p.openInventory(TrackerUI.openDrugFieldsUi(p));
                     break;
                 }
             }

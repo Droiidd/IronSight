@@ -1,15 +1,10 @@
 package droidco.west3.ironsight.Globals.Utils;
 
-import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
-import droidco.west3.ironsight.FrontierLocation.LocationType;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GlobalUtils {
@@ -28,6 +23,86 @@ public class GlobalUtils {
     public static int getRandomRange(int low, int high){
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextInt(high-low)+low;
+    }
+    public static double getRandomCord(double min, double max){
+        double val = 0.0;
+        if(max < min ){
+            double tmp = max;
+            max = min;
+            min = tmp;
+        }
+        Random rand = new Random(System.currentTimeMillis());
+        if(Double.valueOf(max - min).isInfinite() == false ){
+            val = min + (max - min) * rand.nextDouble();
+        }
+        return val;
+    }
+    public static Block getRandomSurfaceBlock(Player p){
+       // double y = w.getHighestBlockYAt((int) x,(int) z);
+        Block b = null;
+        double x = 0.0;
+        double z = 0.0;
+        boolean safeSpawn = false;
+        ArrayList<Material> unsafeBlocks = new ArrayList<>();
+        unsafeBlocks.add(Material.OAK_LEAVES);
+        unsafeBlocks.add(Material.AIR);
+        unsafeBlocks.add(Material.LAVA);
+        unsafeBlocks.add(Material.JUNGLE_LEAVES);
+        unsafeBlocks.add(Material.SPRUCE_LEAVES);
+        unsafeBlocks.add(Material.BIRCH_LEAVES);
+        unsafeBlocks.add(Material.ACACIA_LEAVES);
+        unsafeBlocks.add(Material.WATER);
+        while(!safeSpawn){
+            x = getRandomCord(p.getLocation().getX()-30.0,p.getLocation().getX()+30.0);
+            z = getRandomCord(p.getLocation().getZ()-30.0,p.getLocation().getZ()+30.0);
+            b = p.getWorld().getHighestBlockAt((int) x,(int) z);
+            if(!unsafeBlocks.contains(b.getType())){
+                safeSpawn = true;
+            }
+        }
+        return b = b.getWorld().getBlockAt(b.getLocation().add(0.0,1.0 ,0.0));
+    }
+    public static Block getRandomCaveBlock(Player p){
+        double x = 0.0;
+        double y = 0.0;
+        double z = 0.0;
+        boolean safeSpawn = false;
+        boolean mainBlock = false;
+        boolean upperBlocks = false;
+        Block b = null;
+        Block b1 = null;
+        Block b2 = null;
+        Location blockLoc = null;
+        ArrayList<Material> unsafeBlocks = new ArrayList<>();
+        unsafeBlocks.add(Material.OAK_LEAVES);
+        unsafeBlocks.add(Material.AIR);
+        unsafeBlocks.add(Material.LAVA);
+        unsafeBlocks.add(Material.JUNGLE_LEAVES);
+        unsafeBlocks.add(Material.SPRUCE_LEAVES);
+        unsafeBlocks.add(Material.BIRCH_LEAVES);
+        unsafeBlocks.add(Material.ACACIA_LEAVES);
+        unsafeBlocks.add(Material.WATER);
+
+        while(safeSpawn == false){
+            x=getRandomCord(p.getLocation().getX()-30.0,p.getLocation().getX()+30.0);
+            y=getRandomCord(p.getLocation().getY()-20.0,p.getLocation().getY()+20.0);
+            z=getRandomCord(p.getLocation().getZ()-30.0,p.getLocation().getZ()+30.0);
+            blockLoc = new Location(p.getWorld(),x,y,z);
+            b = p.getWorld().getBlockAt(blockLoc);
+            b1 = p.getWorld().getBlockAt(blockLoc.add(0.0,1.0,0.0));
+            b2 = p.getWorld().getBlockAt(blockLoc.add(0.0,2.0,0.0));
+            if(!unsafeBlocks.contains(b.getType())){
+                mainBlock = true;
+            }
+            if(b1.getType().isAir() && b2.getType().isAir()){
+                upperBlocks = true;
+            }
+            if(upperBlocks && mainBlock){
+                safeSpawn = true;
+            }
+
+        }
+        return b;
     }
     public static int boolToInt(boolean bool){
         if(bool){

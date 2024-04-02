@@ -1,12 +1,9 @@
 package droidco.west3.ironsight.Items;
 
-import droidco.west3.ironsight.FrontierLocation.LocationType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 public class ItemTable {
 
