@@ -36,26 +36,28 @@ public class Contract
     public List<ItemStack> requestedItemsNormal = new ArrayList<>();
     public List<ItemStack> requestedItemsRare = new ArrayList<>();
     private static HashMap<String, Contract> contracts = new HashMap<>();
+    private static HashMap<String, Contract> playerContracts = new HashMap<>();
+    private String playerId;
 
-    public Contract(String contractName, ContractType type, List<FrontierLocation> contractLocs, int rarity) {
+    public Contract(String playerId, ContractType type, List<FrontierLocation> contractLocs, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
-        this.contractName = contractName;
+        this.playerId = playerId;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.rarity = rarity;
-
-        contracts.put(this.contractName,this);
+        playerContracts.put(playerId,this);
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
-    public Contract(String contractName, ContractType type, List<FrontierLocation> contractLocs, int rarity,DeliveryType deliveryType) {
+    public Contract(String playerId,ContractType type, List<FrontierLocation> contractLocs, int rarity,DeliveryType deliveryType) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
-        this.contractName = contractName;
+        this.playerId = playerId;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.rarity = rarity;
         this.deliveryType = deliveryType;
 
-        contracts.put(this.contractName,this);
+        playerContracts.put(playerId,this);
+        contracts.put()
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
     public void setRewardXp()
@@ -100,11 +102,11 @@ public class Contract
         List<Contract> apprenticeContracts = new ArrayList<>();
         List<Contract> masterContracts = new ArrayList<>();
         rookieContracts = initializeContracts(rookieContracts,Difficulty.Rookie);
-        apprenticeContracts = initializeContracts(apprenticeContracts,Difficulty.Apprentice);
+        b.setRookieContract(ContractUtils.getSingleContract(rookieContracts));
+        apprenticeContracts =  initializeContracts(apprenticeContracts,Difficulty.Apprentice);
+        b.setApprenticeContract(ContractUtils.getSingleContract(apprenticeContracts));
         experiencedContracts = initializeContracts(experiencedContracts,Difficulty.Experienced);
         masterContracts = initializeContracts(masterContracts,Difficulty.Master);
-        b.setRookieContract(ContractUtils.getSingleContract(rookieContracts));
-        b.setApprenticeContract(ContractUtils.getSingleContract(apprenticeContracts));
         int masterOdds = GlobalUtils.getRandomNumber(101);
         if(masterOdds<50){
             b.setExperiencedContract(ContractUtils.getSingleContract(masterContracts));
@@ -247,13 +249,12 @@ public class Contract
                         }
                     }
                 }else{
-//                 List<ItemStack> fish = new ArrayList<>();
-//                 fish.add(CustomItem.getCustomItem("Poor Mans Crappie").getItemStack());
-//                 fish.add(CustomItem.getCustomItem("Gray Stoned Herring").getItemStack());
-//                 fish.add(CustomItem.getCustomItem("Cactus Pronged Chub").getItemStack());
-//                 int fishChoice = GlobalUtils.getRandomNumber(fish.size());
-//                 requestedItem = fish.get(fishChoice);
-                    requestedItem = CustomItem.getCustomItem("Southern Salmon").getItemStack();
+                 List<ItemStack> fish = new ArrayList<>();
+                 fish.add(CustomItem.getCustomItem("Poor Mans Crappie").getItemStack());
+                 fish.add(CustomItem.getCustomItem("Gray Stoned Herring").getItemStack());
+                 fish.add(CustomItem.getCustomItem("Cactus Pronged Chub").getItemStack());
+                 int fishChoice = GlobalUtils.getRandomNumber(fish.size());
+                 requestedItem = fish.get(fishChoice);
                 }
             }
         }
@@ -274,7 +275,7 @@ public class Contract
             if(amount < 29){
                 //EASY
                 difficulty = Difficulty.Rookie;
-            }else if(amount < 44){
+            }else if(amount < 44 && amount >= 29){
                 //MEDIUM
                 difficulty = Difficulty.Apprentice;
             }else{
@@ -298,7 +299,15 @@ public class Contract
         addCompletionStep("steptest",2,desc,null,"Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
         this.reward = amount * CustomItem.getCustomItem(ChatColor.stripColor(requestedItem.getItemMeta().getDisplayName())).getSalePrice();
-        this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
+        String listing = "";
+        if(rareRequest){
+            listing.concat("Rare ");
+        }
+        if(bulkOrder){
+            listing.concat("Bulk ");
+        }
+        listing.concat("Order!");
+        this.listingName = ChatColor.WHITE+ contractName +listing;
     }
     public void generateNewBountyHunter(Player p){
         //Check if player gets a PLAYER or NPC contract
@@ -369,6 +378,27 @@ public class Contract
         }
 
     }
+
+    public int getRequestedAmount() {
+        return requestedAmount;
+    }
+
+    public void setRequestedAmount(int requestedAmount) {
+        this.requestedAmount = requestedAmount;
+    }
+
+    public void setReward(double reward) {
+        this.reward = reward;
+    }
+
+    public ItemStack getRequestedItem() {
+        return requestedItem;
+    }
+
+    public void setRequestedItem(ItemStack requestedItem) {
+        this.requestedItem = requestedItem;
+    }
+
     public ContractType getContractType() {
         return contractType;
     }

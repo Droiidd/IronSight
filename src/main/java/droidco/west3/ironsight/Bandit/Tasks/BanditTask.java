@@ -2,6 +2,8 @@ package droidco.west3.ironsight.Bandit.Tasks;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -66,7 +68,6 @@ public class BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
-        Contract.assignPlayerContracts(p,b);
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
 
@@ -96,6 +97,18 @@ public class BanditTask extends BukkitRunnable {
         this.raiders.add(ranger);
         this.raiders.add(wolf);
         this.raiders.add(raiderBrute);
+
+        List<FrontierLocation> testLocs = new ArrayList<>();
+        testLocs.add(FrontierLocation.getLocation("Pearl River"));
+        testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
+        testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
+        testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
+        Contract testC1 = new Contract(p.getUniqueId().toString(), ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
+        List<FrontierLocation> test3Locs = new ArrayList<>();
+        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
+        Contract testC3 = new Contract(p.getUniqueId().toString(),ContractType.OilField , test3Locs ,1);
+
+        Contract.assignPlayerContracts(p,b);
     }
 
     @Override

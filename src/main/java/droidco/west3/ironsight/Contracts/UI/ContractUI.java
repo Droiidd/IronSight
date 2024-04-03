@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Contracts.UI;
 
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Items.ItemIcon;
@@ -48,18 +49,18 @@ public class ContractUI {
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
-        String title = null;
-        switch(difficulty){
-            case Rookie -> {
-                title = ChatColor.WHITE+"Rookie Contract";
-            }
-            case Apprentice -> {
-                title = ChatColor.WHITE+"Apprentice Contract";
-            }
-            case Experienced -> {
-                title = ChatColor.RED+"Experienced Contract";
-            }
-        }
+        String title = selected.getListingName();
+//        switch(difficulty){
+//            case Rookie -> {
+//                title = ChatColor.GREEN+"Rookie Contract";
+//            }
+//            case Apprentice -> {
+//                title = ChatColor.YELLOW+"Apprentice Contract";
+//            }
+//            case Experienced -> {
+//                title = ChatColor.RED+"Experienced Contract";
+//            }
+//        }
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
@@ -80,6 +81,9 @@ public class ContractUI {
         contractLore.add(ChatColor.GRAY+"Difficulty: "+(ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
                 ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
         contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
+        if(selected.getContractType().equals(ContractType.Delivery)){
+            contractLore.add(String.valueOf(ChatColor.GRAY)+ selected.getRequestedAmount()+" "+ selected.getRequestedItem().getItemMeta().getDisplayName());
+        }
         contractLore.add(ChatColor.GRAY +"Reward: "+selected.getReward()+" g");
         //This displays the contracts type
         //contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
@@ -116,14 +120,6 @@ public class ContractUI {
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta iMeta = item.getItemMeta();
         iMeta.setDisplayName(ChatColor.WHITE+"Resign Active Contract");
-        item.setItemMeta(iMeta);
-        return item;
-    }
-    public static ItemStack getActiveContractItem(Bandit iPlayer){
-        ItemStack item = new ItemStack(Material.BOOK);
-        ItemMeta iMeta = item.getItemMeta();
-        iMeta.setLore(iPlayer.getActiveContract().getDescription());
-        iMeta.setDisplayName(ChatColor.WHITE+"Description");
         item.setItemMeta(iMeta);
         return item;
     }

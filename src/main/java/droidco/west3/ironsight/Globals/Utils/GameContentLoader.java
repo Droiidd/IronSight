@@ -381,17 +381,7 @@ public class GameContentLoader {
     }
     public static void loadContracts(){
         System.out.println("Loading contracts!");
-        List<FrontierLocation> testLocs = new ArrayList<>();
-        testLocs.add(FrontierLocation.getLocation("Pearl River"));
-        testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
-        testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
-        testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
-        Contract testC1 = new Contract("In need of some fish", ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
 
-
-        List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
-        Contract testC3 = new Contract("Raid northern Oil Field",ContractType.OilField , test3Locs ,1);
 
         System.out.println("Contracts loaded!");
     }

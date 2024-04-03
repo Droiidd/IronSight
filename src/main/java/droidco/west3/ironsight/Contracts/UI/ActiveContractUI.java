@@ -37,7 +37,9 @@ public class ActiveContractUI
             ItemStack descSlot = getStepDescIcon(stepNum,step.getTaskDesc());
             ItemStack reqSlot = getStepRequesteditem(stepNum,step.getRequestedGoods());
             contractUi.setItem(locColumn, locSlot);
-            contractUi.setItem(reqColumn,reqSlot);
+            if(reqSlot != null){
+                contractUi.setItem(reqColumn,reqSlot);
+            }
             contractUi.setItem(descColumn,descSlot);
         }
         contractUi.setItem(0,ContractUI.getResignContractIcon());
@@ -59,7 +61,7 @@ public class ActiveContractUI
     public static ItemStack getStepLocationIcon(int stepNumber, String stepLoc){
         ItemStack item = new ItemStack(Material.WHITE_WOOL);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("Step "+stepNumber);
+        meta.setDisplayName(ChatColor.WHITE+"Step "+stepNumber);
         List<String> lore = new ArrayList<>();
         lore.add(String.valueOf(ChatColor.GRAY)+stepLoc);
         meta.setLore(lore);
@@ -70,19 +72,16 @@ public class ActiveContractUI
         ItemStack item = null;
         if(requestedItem != null){
             item = requestedItem;
-        }else{
-            item = new ItemStack(Material.LIGHT_GRAY_WOOL);
-        }
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("Step "+stepNumber);
-        List<String> lore = new ArrayList<>();
-        if(requestedItem != null){
+            ItemMeta meta = item.getItemMeta();
+            List<String> lore = new ArrayList<>();
+            meta.setDisplayName(requestedItem.getItemMeta().getDisplayName());
             int amount = requestedItem.getAmount();
-            String requestMessage = String.valueOf(ChatColor.GRAY)+"Aqcuire "+amount+requestedItem.getItemMeta().getDisplayName();
+            String requestMessage = String.valueOf(ChatColor.GRAY)+"Aqcuire "+amount;
             lore.add(requestMessage);
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
-        meta.setLore(lore);
-        item.setItemMeta(meta);
+
         return item;
     }
 }
