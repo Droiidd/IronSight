@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.Bandit;
 
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.entity.Player;
@@ -46,6 +48,7 @@ public class Bandit
     private Contract experiencedContract;
     private Contract activeContract;
     private static List<Bandit> playerList = new ArrayList<>();
+    private List<Contract> contracts = new ArrayList<>();
     //private final IronSight plugin;
 
     private int wantedKills;
@@ -107,6 +110,22 @@ public class Bandit
         playerList.add(this);
         bandits.put(pId,this);
     }
+    public void loadContracts()
+    {
+
+        List<FrontierLocation> testLocs = new ArrayList<>();
+        testLocs.add(FrontierLocation.getLocation("Pearl River"));
+        testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
+        testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
+        testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
+        Contract testC1 = new Contract( ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
+        List<FrontierLocation> test3Locs = new ArrayList<>();
+        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
+        Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
+
+        contracts.add(testC1);
+        contracts.add(testC3);
+    }
     public void setOnlinePlayer(Player p)
     {
         if(pId.equalsIgnoreCase(p.getUniqueId().toString())){
@@ -152,6 +171,15 @@ public class Bandit
         }
         return "";
     }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
     public long getJailStartTime() {
         return jailStartTime;
     }

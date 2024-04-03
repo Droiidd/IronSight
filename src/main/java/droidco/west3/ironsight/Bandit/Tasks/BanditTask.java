@@ -72,6 +72,7 @@ public class BanditTask extends BukkitRunnable {
         this.runTaskTimer(plugin, 0, 10);
 
         b.setDoingContract(false);
+        b.loadContracts();
 
         this.undeadMiner = new FrontierMob(FrontierMobType.UNDEAD_MINER);
         this.berserkerMiner = new FrontierMob(FrontierMobType.BERSERKER_MINER);
@@ -97,16 +98,6 @@ public class BanditTask extends BukkitRunnable {
         this.raiders.add(ranger);
         this.raiders.add(wolf);
         this.raiders.add(raiderBrute);
-
-        List<FrontierLocation> testLocs = new ArrayList<>();
-        testLocs.add(FrontierLocation.getLocation("Pearl River"));
-        testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
-        testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
-        testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
-        Contract testC1 = new Contract(p.getUniqueId().toString(), ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
-        List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
-        Contract testC3 = new Contract(p.getUniqueId().toString(),ContractType.OilField , test3Locs ,1);
 
         Contract.assignPlayerContracts(p,b);
     }

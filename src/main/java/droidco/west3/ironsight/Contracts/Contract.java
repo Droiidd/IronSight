@@ -35,29 +35,21 @@ public class Contract
     public List<CompletionStep> steps = new ArrayList<>();
     public List<ItemStack> requestedItemsNormal = new ArrayList<>();
     public List<ItemStack> requestedItemsRare = new ArrayList<>();
-    private static HashMap<String, Contract> contracts = new HashMap<>();
-    private static HashMap<String, Contract> playerContracts = new HashMap<>();
-    private String playerId;
 
-    public Contract(String playerId, ContractType type, List<FrontierLocation> contractLocs, int rarity) {
+    public Contract( ContractType type, List<FrontierLocation> contractLocs, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
-        this.playerId = playerId;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.rarity = rarity;
-        playerContracts.put(playerId,this);
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
-    public Contract(String playerId,ContractType type, List<FrontierLocation> contractLocs, int rarity,DeliveryType deliveryType) {
+    public Contract(ContractType type, List<FrontierLocation> contractLocs, int rarity,DeliveryType deliveryType) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
-        this.playerId = playerId;
         this.contractType = type;
         this.contractLocs = contractLocs;
         this.rarity = rarity;
         this.deliveryType = deliveryType;
 
-        playerContracts.put(playerId,this);
-        contracts.put()
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
     public void setRewardXp()
@@ -85,60 +77,61 @@ public class Contract
     {
         this.requestedItemsRare.add(item);
     }
-    public static void refreshContracts(){
-        System.out.println("REFRESH");
-        System.out.println("contracts" + contracts);
-        for (Map.Entry<String,Contract> mapElement : contracts.entrySet()) {
-            // Adding some bonus marks to all the students
-            Contract value = mapElement.getValue();
-            System.out.println(value.getContractName());
-            value.generateContract();
-        }
-    }
     public static void assignPlayerContracts(Player p, Bandit b){
-        refreshContracts();
-        List<Contract> rookieContracts = new ArrayList<>();
-        List<Contract> experiencedContracts = new ArrayList<>();
-        List<Contract> apprenticeContracts = new ArrayList<>();
-        List<Contract> masterContracts = new ArrayList<>();
-        rookieContracts = initializeContracts(rookieContracts,Difficulty.Rookie);
-        b.setRookieContract(ContractUtils.getSingleContract(rookieContracts));
-        apprenticeContracts =  initializeContracts(apprenticeContracts,Difficulty.Apprentice);
-        b.setApprenticeContract(ContractUtils.getSingleContract(apprenticeContracts));
-        experiencedContracts = initializeContracts(experiencedContracts,Difficulty.Experienced);
-        masterContracts = initializeContracts(masterContracts,Difficulty.Master);
-        int masterOdds = GlobalUtils.getRandomNumber(101);
-        if(masterOdds<50){
-            b.setExperiencedContract(ContractUtils.getSingleContract(masterContracts));
-        }else{
+        List<Contract> contractPool = b.getContracts();
+        refreshContracts(contractPool);
+
+        //GET CONTRACTS
+        List<Contract> rookieContracts = initializeContracts(Difficulty.Rookie,contractPool);
+        Contract rookie = ContractUtils.getSingleContract(rookieContracts);
+        contractPool.remove(rookie);
+        b.setRookieContract(rookie);
+
+        List<Contract> apprenticeContracts = initializeContracts(Difficulty.Apprentice,contractPool);
+        Contract apprentice = ContractUtils.getSingleContract(apprenticeContracts);
+        contractPool.remove(apprentice);
+        b.setApprenticeContract(apprentice);
+
+        List<Contract> experiencedContracts = initializeContracts(Difficulty.Experienced,contractPool);
+        Contract experienced = ContractUtils.getSingleContract(experiencedContracts);
+        contractPool.remove(experienced);
+        b.setRookieContract(experienced);
+
+        //int masterOdds = GlobalUtils.getRandomNumber(101);
+        //if(masterOdds<50){
+        //    b.setExperiencedContract(ContractUtils.getSingleContract(masterContracts));
+        //}else{
             b.setExperiencedContract(ContractUtils.getSingleContract(experiencedContracts));
-        }
+        //}
 
     }
-    public static List<Contract> initializeContracts(List<Contract> allContracts, Difficulty targetDiff){
-        allContracts = ContractUtils.getContractByDiff(targetDiff);
+    public static List<Contract> initializeContracts(Difficulty targetDiff,List<Contract> contractPool){
+        List<Contract> allContracts = getContractByDiff(targetDiff, contractPool);
         if(allContracts == null){
             allContracts = new ArrayList<>();
         }
         while(allContracts.isEmpty() || allContracts == null){
-            if(allContracts == null){
-                System.out.println("OUCHIE??");
-            }
-            refreshContracts();
-            allContracts = ContractUtils.getContractByDiff(targetDiff);
+            refreshContracts(contractPool);
+            allContracts = getContractByDiff(targetDiff,contractPool);
         }
         return allContracts;
     }
-
-    public static List<Contract> getContractByDiff(Difficulty difficulty){
+    public static void refreshContracts(List<Contract> contractPool){
+        System.out.println("REFRESHING");
+        for(Contract contract : contractPool){
+            contract.generateContract();
+        }
+    }
+    public static List<Contract> getContractByDiff(Difficulty difficulty, List<Contract> contractPool){
         List<Contract> targeted = new ArrayList<>();
-        contracts.forEach((key, contract) -> {
-            if(contract.getDifficulty().compareTo(difficulty) == 0){
+        for(Contract contract : contractPool){
+            if(contract.getDifficulty().equals(difficulty)){
                 targeted.add(contract);
             }
-        });
+        }
         return targeted;
     }
+
     public void addCompletionStep(String stepKey, int stepNumber, List<String> taskDesc, ItemStack requestedGoods,String locationDesc){
         CompletionStep step = new CompletionStep(stepKey,stepNumber,taskDesc,requestedGoods,locationDesc);
         steps.add(step);
@@ -412,7 +405,7 @@ public class Contract
     }
     public static HashMap<String, Contract> getContracts()
     {
-        return contracts;
+        return playerContracts;
     }
     public String getContractName() {
         return contractName;
