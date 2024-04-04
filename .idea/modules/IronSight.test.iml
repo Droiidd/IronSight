@@ -7,7 +7,7 @@
     <content url="file://$MODULE_DIR$/../../src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Documents.Iron Sight.IronSight.main" />
+    <orderEntry type="module" module-name="Documents.IronSight.main" />
   </component>
   <component name="TestModuleProperties" production-module="IronSight.main" />
 </module>

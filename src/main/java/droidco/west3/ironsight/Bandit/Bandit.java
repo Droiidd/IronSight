@@ -42,6 +42,9 @@ public class Bandit
     private FrontierLocation trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
+
+    private boolean isDepositing;
+    private boolean isWithdrawing;
     private FrontierLocation currentFrontierLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
@@ -110,6 +113,23 @@ public class Bandit
         playerList.add(this);
         bandits.put(pId,this);
     }
+
+    public boolean isDepositing() {
+        return isDepositing;
+    }
+
+    public void setDepositing(boolean depositing) {
+        isDepositing = depositing;
+    }
+
+    public boolean isWithdrawing() {
+        return isWithdrawing;
+    }
+
+    public void setWithdrawing(boolean withdrawing) {
+        isWithdrawing = withdrawing;
+    }
+
     public void loadContracts()
     {
         List<FrontierLocation> testLocs = new ArrayList<>();

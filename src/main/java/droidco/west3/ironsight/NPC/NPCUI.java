@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.NPC;
 
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
@@ -117,6 +118,9 @@ public class NPCUI {
     public static Inventory bankerUI(Player p) {
         Inventory bankerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Bank Teller");
         Bandit iPlayer = Bandit.getPlayer(p);
+        bankerUI.setItem(10, ItemIcon.getIcon("bank_deposit").getItem());
+        bankerUI.setItem(11, ItemIcon.getIcon("bank_withdraw").getItem());
+
 
         return bankerUI;
 
@@ -129,13 +133,6 @@ public class NPCUI {
 
     }
 
-    public static Inventory contractorUI(Player p) {
-        Inventory contractorUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Contractor");
-        Bandit iPlayer = Bandit.getPlayer(p);
-
-        return contractorUI;
-
-    }
 
     public static Inventory chiefUI(Player p) {
         Inventory chiefUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Chief of Police");

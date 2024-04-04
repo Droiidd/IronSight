@@ -1,6 +1,6 @@
 package droidco.west3.ironsight;
 
-import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
+
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
@@ -43,6 +43,7 @@ public final class IronSight extends JavaPlugin {
         GameContentLoader.loadBrewing();
         GameContentLoader.loadItemTables();
         GameContentLoader.loadContracts();
+        GameContentLoader.loadNPCs();
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
@@ -76,6 +77,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
+        getServer().getPluginManager().registerEvents(new NPCEvents(), this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());

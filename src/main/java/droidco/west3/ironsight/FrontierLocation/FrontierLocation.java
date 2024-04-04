@@ -22,6 +22,8 @@ public class FrontierLocation {
     private ItemTable itemTable;
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
 
+    private boolean newArrival;
+
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
         this.locName = locName;
         this.x1 = x1;
@@ -30,6 +32,7 @@ public class FrontierLocation {
         this.z2 = z2;
         this.welcomeMessage = welcomeMessage;
         this.type = type;
+        this.newArrival = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -46,6 +49,7 @@ public class FrontierLocation {
         this.spawnZ = spawnZ;
         this.welcomeMessage = welcomeMessage;
         this.type = type;
+        this.newArrival = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -99,6 +103,13 @@ public class FrontierLocation {
         return false;
     }
 
+    public boolean isNewArrival() {
+        return newArrival;
+    }
+
+    public void setNewArrival(boolean newArrival) {
+        this.newArrival = newArrival;
+    }
 
     public static void displayLocation(Player p) {
         Bandit b = Bandit.getPlayer(p);
