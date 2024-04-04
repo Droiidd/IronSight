@@ -1,5 +1,6 @@
 package droidco.west3.ironsight;
 
+import droidco.west3.ironsight.Bandit.Commands.TestItemCommand;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
@@ -13,6 +14,7 @@ import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
+import droidco.west3.ironsight.NPC.NPCEvents;
 import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;

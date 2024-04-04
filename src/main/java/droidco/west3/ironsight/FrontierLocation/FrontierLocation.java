@@ -272,3 +272,5 @@ public class FrontierLocation {
         return this.itemTable;
     }
 }
+
+

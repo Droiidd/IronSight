@@ -385,4 +385,7 @@ public class GameContentLoader {
 
         System.out.println("Contracts loaded!");
     }
-}
+
+    public static void loadNPCs() {
+        System.out.println("Loading NPCs");
+
