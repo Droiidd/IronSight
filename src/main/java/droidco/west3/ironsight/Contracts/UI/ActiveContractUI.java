@@ -78,7 +78,6 @@ public class ActiveContractUI
             meta.setDisplayName(requestMessage);
             item.setItemMeta(meta);
         }
-
         return item;
     }
 }
