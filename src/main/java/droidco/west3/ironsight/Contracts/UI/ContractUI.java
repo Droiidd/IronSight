@@ -49,18 +49,18 @@ public class ContractUI {
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
-        String title = "";
-        switch(difficulty){
-            case Rookie -> {
-                title = ChatColor.GREEN+"Rookie Contract";
-            }
-            case Apprentice -> {
-                title = ChatColor.YELLOW+"Apprentice Contract";
-            }
-            case Experienced -> {
-                title = ChatColor.RED+"Experienced Contract";
-            }
-        }
+//        String title = "";
+//        switch(difficulty){
+//            case Rookie -> {
+//                title = ChatColor.GREEN+"Rookie Contract";
+//            }
+//            case Apprentice -> {
+//                title = ChatColor.YELLOW+"Apprentice Contract";
+//            }
+//            case Experienced -> {
+//                title = ChatColor.RED+"Experienced Contract";
+//            }
+//        }
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
@@ -71,14 +71,13 @@ public class ContractUI {
         Reward
         TargetName / Requested Goods (If applicable)
          */
-        ItemStack contract = new ItemStack(Material.BOOK);
+        ItemStack contract = selected.getContractIcon();
         ItemMeta contractMeta = contract.getItemMeta();
         ArrayList<String> contractLore = new ArrayList<>();
         //Setting up the strings for the lore
 
         //LORE
-        contractMeta.setDisplayName(title);
-        contractLore.add(ChatColor.GRAY+"Difficulty: "+(ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
+        contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
                 ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
         contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
         if(selected.getContractType().equals(ContractType.Delivery)){

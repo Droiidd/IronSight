@@ -20,43 +20,19 @@ public class ContractUiEvents implements Listener {
             //In the contract UI menu
             //Find what they clicked on
             if(e.getCurrentItem().getType() != null){
+                Contract selected = null;
+                if(e.getCurrentItem().getType().equals(b.getRookieContract().getContractIcon().getType())){
+                    selected = b.getRookieContract();
+                    setActiveContract(b,p,selected);
+                }else if(e.getCurrentItem().getType().equals(b.getApprenticeContract().getContractIcon().getType())){
+                    selected = b.getApprenticeContract();
+                    setActiveContract(b,p,selected);
+                } else if(e.getCurrentItem().getType().equals(b.getExperiencedContract().getContractIcon().getType())){
+                    selected = b.getExperiencedContract();
+                    setActiveContract(b,p,selected);
+                }
                 switch(e.getCurrentItem().getType()){
-                    case BOOK -> {
-                        //They selected are selecting a contract.
-                        //Check if they are doing one already
-                        if(!b.isDoingContract()){
-                            //Check what slot they chose.
-                            System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
-                            String name = e.getCurrentItem().getItemMeta().getDisplayName();
-                            System.out.println(ChatColor.stripColor(name));
-                            if(ChatColor.stripColor(name).equalsIgnoreCase("Rookie Contract")){
-                                b.setActiveContract(b.getRookieContract());
-                                b.setDoingContract(true);
-                                p.closeInventory();
-                                b.getActiveContract().startContract(p);
-                                p.sendMessage("Contract selected. View your contract by typing \"/contract active\"");
-                            } else if(ChatColor.stripColor(name).equalsIgnoreCase("Apprentice Contract")){
-                                b.setActiveContract(b.getApprenticeContract());
-                                b.setDoingContract(true);
-                                p.closeInventory();
-                                b.getActiveContract().startContract(p);
-                                p.sendMessage("Contract selected. View your contract by typing \"/contract active\"");
-                            }
-                            else if(ChatColor.stripColor(name).equalsIgnoreCase("Experienced Contract")){
-                                b.setActiveContract(b.getExperiencedContract());
-                                b.setDoingContract(true);
-                                p.closeInventory();
-                                b.getActiveContract().startContract(p);
-                                p.sendMessage("Contract selected. View your contract by typing \"/contract active\"");
-                            }
 
-                        }else{
-                            //They are doing a contract!
-                            p.closeInventory();
-                            p.sendMessage(ChatColor.RED+ "Already doing a contract!");
-                        }
-
-                    }
                     case SPRUCE_HANGING_SIGN -> {
                         //They want to change their Contractor Title
                         p.openInventory(ContractUI.openContractorTitleSelectUi(p));
@@ -105,66 +81,83 @@ public class ContractUiEvents implements Listener {
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Title Select:")){
             Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
             //In the contract UI menu
             //Find what they clicked on
-            switch(e.getCurrentItem().getType()) {
-                case HAY_BLOCK -> {
-                    if(b.getCmbtContractLvl() >= 3){
-                        b.setContractorTitle(1);
+            if(e.getCurrentItem().getType() != null){
+                switch(e.getCurrentItem().getType()) {
+                    case HAY_BLOCK -> {
+                        if(b.getCmbtContractLvl() >= 3){
+                            b.setContractorTitle(1);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
                     }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                    case LEATHER_BOOTS -> {
+                        if(b.getCmbtContractLvl() >= 6){
+                            b.setContractorTitle(2);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
+                    }
+                    case SKELETON_SKULL -> {
+                        if(b.getCmbtContractLvl() >= 9){
+                            b.setContractorTitle(3);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
+                    }
+                    case STONE_PICKAXE -> {
+                        if(b.getCmbtContractLvl() >= 4){
+                            b.setContractorTitle(4);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
+                    }
+                    case PAPER -> {
+                        if(b.getCmbtContractLvl() >= 6){
+                            b.setContractorTitle(5);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
+                    }
+                    case SPYGLASS -> {
+                        if(b.getCmbtContractLvl() >= 10){
+                            b.setContractorTitle(6);
+                        }
+                        else{
+                            p.closeInventory();
+                            p.sendMessage(ChatColor.RED+ "Not a high enough level!");
+                        }
                     }
                 }
-                case LEATHER_BOOTS -> {
-                    if(b.getCmbtContractLvl() >= 6){
-                        b.setContractorTitle(2);
-                    }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
-                    }
-                }
-                case SKELETON_SKULL -> {
-                    if(b.getCmbtContractLvl() >= 9){
-                        b.setContractorTitle(3);
-                    }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
-                    }
-                }
-                case STONE_PICKAXE -> {
-                    if(b.getCmbtContractLvl() >= 4){
-                        b.setContractorTitle(4);
-                    }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
-                    }
-                }
-                case PAPER -> {
-                    if(b.getCmbtContractLvl() >= 6){
-                        b.setContractorTitle(5);
-                    }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
-                    }
-                }
-                case SPYGLASS -> {
-                    if(b.getCmbtContractLvl() >= 10){
-                        b.setContractorTitle(6);
-                    }
-                    else{
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.RED+ "Not a high enough level!");
-                    }
-                }
-
             }
-            e.setCancelled(true);
+        }
+    }
+    public void setActiveContract(Bandit b, Player p, Contract selected){
+        if(!b.isDoingContract()){
+            //Check what slot they chose.
+            if(selected != null){
+                b.setActiveContract(selected);
+                b.setDoingContract(true);
+                p.closeInventory();
+                b.getActiveContract().startContract(p);
+                p.sendMessage("Contract selected. View your contract by typing \"/contract active\"");
+            }
+        }else{
+            //They are doing a contract!
+            p.closeInventory();
+            p.sendMessage(ChatColor.RED+ "Already doing a contract!");
         }
     }
 }

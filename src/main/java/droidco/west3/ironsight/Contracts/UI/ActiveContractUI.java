@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Contracts.UI;
 
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.Utils.CompletionStep;
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,7 +36,7 @@ public class ActiveContractUI
             int stepNum = step.getStepNumber();
             ItemStack locSlot = getStepLocationIcon(stepNum,step.getLocationDesc());
             ItemStack descSlot = getStepDescIcon(stepNum,step.getTaskDesc());
-            ItemStack reqSlot = getStepRequesteditem(stepNum,step.getRequestedGoods());
+            ItemStack reqSlot = getStepRequestedItem(stepNum,step.getRequestedGoods(),contract.getRequestedAmount());
             contractUi.setItem(locColumn, locSlot);
             if(reqSlot != null){
                 contractUi.setItem(reqColumn,reqSlot);
@@ -68,20 +69,15 @@ public class ActiveContractUI
         item.setItemMeta(meta);
         return item;
     }
-    public static ItemStack getStepRequesteditem(int stepNumber, ItemStack requestedItem){
+    public static ItemStack getStepRequestedItem(int stepNumber, ItemStack requestedItem,int requestAmount){
         ItemStack item = null;
         if(requestedItem != null){
             item = requestedItem;
             ItemMeta meta = item.getItemMeta();
-            List<String> lore = new ArrayList<>();
-            meta.setDisplayName(requestedItem.getItemMeta().getDisplayName());
-            int amount = requestedItem.getAmount();
-            String requestMessage = String.valueOf(ChatColor.GRAY)+"Aqcuire "+amount;
-            lore.add(requestMessage);
-            meta.setLore(lore);
+            String requestMessage = String.valueOf(ChatColor.GRAY)+"Aqcuire "+requestAmount+" "+requestedItem.getItemMeta().getDisplayName();
+            meta.setDisplayName(requestMessage);
             item.setItemMeta(meta);
         }
-
         return item;
     }
 }
