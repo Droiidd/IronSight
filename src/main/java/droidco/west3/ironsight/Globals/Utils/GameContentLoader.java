@@ -279,7 +279,7 @@ public class GameContentLoader {
         FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
         FrontierLocation texas = new FrontierLocation("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
-        FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 47,52,1271,1277,50,67,1273);
+        FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 2079,1794,-799,-959,1987,94,-920);
 
         FrontierLocation blackspur = new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
 

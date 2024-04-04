@@ -12,6 +12,9 @@ import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Globals.Events.JoinServerEvents;
 import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
+import droidco.west3.ironsight.Horse.AdminGetHorseCmd;
+import droidco.west3.ironsight.Horse.CallHorseCommand;
+import droidco.west3.ironsight.Horse.HorseEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
 import droidco.west3.ironsight.NPC.NPCEvents;
@@ -77,12 +80,15 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
         getServer().getPluginManager().registerEvents(new NPCEvents(), this);
+        getServer().getPluginManager().registerEvents(new HorseEvents(), this);
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
         getCommand("ironsight").setExecutor(new AdminCommands());
         getCommand("contract").setExecutor(new ContractMenuCmd());
         getCommand("masterlist").setExecutor(new MasterListCmd());
+        getCommand("gethorse").setExecutor(new AdminGetHorseCmd());
+        getCommand("call").setExecutor(new CallHorseCommand());
     }
     public void killAllMobs()
     {

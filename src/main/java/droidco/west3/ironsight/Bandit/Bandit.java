@@ -6,6 +6,7 @@ import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.Horse.FrontierHorse;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -20,6 +21,7 @@ public class Bandit
     private String pId;
     private double wallet;
     private double bank;
+    private final int maxHorseLimit = 3;
     private boolean isBleeding;
     private boolean brokenLegs;
     private boolean isWanted;
@@ -44,7 +46,8 @@ public class Bandit
     private FrontierLocation trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
-
+private boolean summoningHorse;
+private FrontierHorse horseBeingSummoned;
     private boolean isDepositing;
     private boolean isWithdrawing;
     private FrontierLocation currentFrontierLocation;
@@ -54,6 +57,7 @@ public class Bandit
     private Contract activeContract;
     private static List<Bandit> playerList = new ArrayList<>();
     private List<Contract> contracts = new ArrayList<>();
+    private List<FrontierHorse> horses = new ArrayList<>();
     //private final IronSight plugin;
 
     private int wantedKills;
@@ -73,7 +77,7 @@ public class Bandit
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-
+this.summoningHorse = false;
         this.bounty = 0;
         this.wantedKills = 0;
         this.contractorLvl =0;
@@ -101,7 +105,7 @@ public class Bandit
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-
+        this.summoningHorse = false;
         this.bounty = bounty;
         this.jailStartTime = jailStartTime;
         this.wantedKills = wantedKills;
@@ -111,23 +115,6 @@ public class Bandit
         playerList.add(this);
         bandits.put(pId,this);
     }
-
-    public boolean isDepositing() {
-        return isDepositing;
-    }
-
-    public void setDepositing(boolean depositing) {
-        isDepositing = depositing;
-    }
-
-    public boolean isWithdrawing() {
-        return isWithdrawing;
-    }
-
-    public void setWithdrawing(boolean withdrawing) {
-        isWithdrawing = withdrawing;
-    }
-
     public void loadContracts()
     {
         List<FrontierLocation> testLocs = new ArrayList<>();
@@ -173,6 +160,14 @@ public class Bandit
         return BanditUtils.getContractorTitle(this).equalsIgnoreCase("") ? roleTitle : BanditUtils.getContractorTitle(this)+" "+roleTitle;
     }
 
+    public FrontierHorse getHorseBeingSummoned() {
+        return horseBeingSummoned;
+    }
+
+    public void setHorseBeingSummoned(FrontierHorse horseBeingSummoned) {
+        this.horseBeingSummoned = horseBeingSummoned;
+    }
+
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
     }
@@ -191,6 +186,18 @@ public class Bandit
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public int getMaxHorseLimit() {
+        return maxHorseLimit;
+    }
+
+    public boolean isSummoningHorse() {
+        return summoningHorse;
+    }
+
+    public void setSummoningHorse(boolean summoningHorse) {
+        this.summoningHorse = summoningHorse;
     }
 
     public long getJailStartTime() {
@@ -229,6 +236,30 @@ public class Bandit
 
     public boolean isEscaping() {
         return escaping;
+    }
+
+    public boolean isDepositing() {
+        return isDepositing;
+    }
+
+    public void setDepositing(boolean depositing) {
+        isDepositing = depositing;
+    }
+
+    public boolean isWithdrawing() {
+        return isWithdrawing;
+    }
+
+    public void setWithdrawing(boolean withdrawing) {
+        isWithdrawing = withdrawing;
+    }
+
+    public List<FrontierHorse> getHorses() {
+        return horses;
+    }
+
+    public void setHorses(List<FrontierHorse> horses) {
+        this.horses = horses;
     }
 
     public void setEscaping(boolean escaping) {

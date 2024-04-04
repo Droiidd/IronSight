@@ -39,10 +39,12 @@ public class    BanditTask extends BukkitRunnable {
     //IN SECONDS
     private int mobRespawnTime = 60;
     private int combatLogCounter = 0;
+    private int horseFullCallTime = 10;
     private int wantedMin = 2;
     private int wantedSec = 0;
     private final int contractTimer = 600;
     private int contractCounter = 0;
+    private int horseTimer = 0;
     private int wantedTownCounter = 0;
     private int wantedTownTimer = 10;
     private boolean escapeFlag = false;
@@ -99,7 +101,7 @@ public class    BanditTask extends BukkitRunnable {
         this.raiders.add(raider);
         this.raiders.add(ranger);
         this.raiders.add(wolf);
-        this.raiders.add(raiderBrute);
+        //this.raiders.add(raiderBrute);
         Contract.assignPlayerContracts(p,b);
     }
 
@@ -208,9 +210,6 @@ public class    BanditTask extends BukkitRunnable {
                     wantedTownCounter++;
                 }
 
-                //      ===--- CHECK FOR SUCCESSFUL DELIVERY ---===
-
-
             }
             //      ===--- ILLEGAL / OIL FIELD ---===
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
@@ -258,6 +257,20 @@ public class    BanditTask extends BukkitRunnable {
                 p.setHealth(p.getHealth() - 1.5);
                 for (int i = 0; i < 13; i++) {
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
+                }
+            }
+            //      ===--- SUMMONING HORSE ---===
+            if(b.isSummoningHorse()){
+                horseTimer ++;
+                p.sendMessage(ChatColor.GRAY+"Horse arrives in "+(horseFullCallTime-horseTimer)+" seconds.");
+                if(horseTimer == horseFullCallTime){
+                    b.setSummoningHorse(false);
+                    horseTimer = 0;
+                    b.getHorseBeingSummoned().summonHorse(p);
+                    p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
+                    p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
+                    p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
+                    p.sendMessage(ChatColor.AQUA +b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
@@ -317,7 +330,7 @@ public class    BanditTask extends BukkitRunnable {
     }
     public void spawnGroupOfMobs(List<FrontierMob> mobList){
         int selection = GlobalUtils.getRandomNumber(mobList.size());
-        int amount = GlobalUtils.getRandomNumber(4);
+        int amount = GlobalUtils.getRandomRange(2,6);
         for(int i=0; i < amount; i++){
             mobList.get(selection).spawnMob(p);
             selection = GlobalUtils.getRandomNumber(mobList.size());
