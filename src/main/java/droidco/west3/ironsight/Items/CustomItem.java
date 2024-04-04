@@ -39,7 +39,7 @@ CustomItem {
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
         items.put(this.itemCode, this);
-        ItemTable.addItem(this);
+       // ItemTable.addItem(this);
     }
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
                       double salePrice, double purchasePrice,Enchantment enchant, int enchantMultiplier) {
@@ -87,7 +87,7 @@ CustomItem {
         ItemStack item = getItemStack();
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
-        String price = String.valueOf(ChatColor.GRAY)+this.salePrice +"g";
+        String price = String.valueOf(ChatColor.GRAY)+this.purchasePrice +"g";
         lore.add(ChatColor.GRAY+"Click to purchase!");
         lore.add(price);
         meta.setLore(lore);

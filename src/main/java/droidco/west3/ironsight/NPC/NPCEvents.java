@@ -16,10 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
@@ -33,7 +30,7 @@ public class NPCEvents implements Listener {
     public void npcRightClick(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
         String clickedNPCname = e.getRightClicked().getCustomName();
-        NPC clickedNPC = NPC.getNPC(clickedNPCname);
+        NPC clickedNPC = NPC.getNPC(ChatColor.stripColor(clickedNPCname));
         Bandit b = Bandit.getPlayer(p);
         switch (clickedNPC.getType()) {
             case ARMORER -> {
@@ -106,16 +103,17 @@ public class NPCEvents implements Listener {
 
 
     }
-
+    @EventHandler
     public void traderMenuSelect(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Bandit b = Bandit.getPlayer(p);
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Shopkeeper")) {
             e.setCancelled(true);
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Smoked Salmon").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Smoked Salmon").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Smoked Salmon").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Smoked Salmon").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Smoked Salmon").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Smoked Salmon").getItemStack());
                 } else {
                     p.closeInventory();
                     p.sendMessage("Not enough funds!");
@@ -123,9 +121,10 @@ public class NPCEvents implements Listener {
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Charred Potato").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Charred Potato").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Charred Potato").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Charred Potato").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Charred Potato").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Charred Potato").getItemStack());
                 } else {
                     p.closeInventory();
                     p.sendMessage("Not enough funds!");
@@ -133,9 +132,10 @@ public class NPCEvents implements Listener {
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Brown Stew").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Brown Stew").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Brown Stew").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Brown Stew").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Brown Stew").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Brown Stew").getItemStack());
                 } else {
                     p.closeInventory();
                     p.sendMessage("Not enough funds!");
@@ -143,9 +143,10 @@ public class NPCEvents implements Listener {
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Fox").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Fox").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Fox").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Fox").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Fox").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Cooked Fox").getItemStack());
                 } else {
                     p.closeInventory();
                     p.sendMessage("Not enough funds!");
@@ -153,9 +154,10 @@ public class NPCEvents implements Listener {
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Rabbit Stew").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Rabbit Stew").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Rabbit Stew").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Rabbit Stew").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Rabbit Stew").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Rabbit Stew").getItemStack());
                 } else {
                     p.closeInventory();
                     p.sendMessage("Not enough funds!");
@@ -163,9 +165,10 @@ public class NPCEvents implements Listener {
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Rabbit").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Rabbit").getSalePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Rabbit").getSalePrice());
+                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Rabbit").getPurchasePrice()) {
+                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Rabbit").getPurchasePrice());
                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
+                    p.getInventory().addItem(CustomItem.getCustomItem("Cooked Rabbit").getItemStack());
 
                 } else {
                     p.closeInventory();
@@ -180,15 +183,19 @@ public class NPCEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case EMERALD -> {
+                    b.setDepositing(true);
+                    p.closeInventory();
                     NPC.getNPC("Bank Teller").addShoppingPlayer(p);
                     p.sendMessage("How much money do you want to deposit?");
-                    b.setDepositing(true);
+
                 }
 
                 case EMERALD_BLOCK -> {
+                    b.setWithdrawing(true);
+                    p.closeInventory();
                     NPC.getNPC("Bank Teller").addShoppingPlayer(p);
                     p.sendMessage("How much money do you want to withdraw?");
-                    b.setWithdrawing(true);
+
                 }
             }
 
@@ -197,7 +204,7 @@ public class NPCEvents implements Listener {
         }
     }
     @EventHandler
-    public void bankInteraction(AsyncPlayerChatEvent e) {
+    public void bankInteraction(PlayerChatEvent e) {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         if (NPC.getShoppingPlayers().containsKey(p.getUniqueId().toString())) {
@@ -209,12 +216,12 @@ public class NPCEvents implements Listener {
             if (shop.getType() == NPCType.BANKER) {
                 if (b.isDepositing()) {
                     if (d > b.getWallet()) {
-                        p.closeInventory();
+
                         p.sendMessage("You don't have that much money in your wallet!");
                     }
 
                     else {
-                        p.closeInventory();
+
                         p.sendMessage("You have deposited " + d + "g!");
                         b.updateWallet(-1 * d);
                         b.updateBank(d);
@@ -223,12 +230,12 @@ public class NPCEvents implements Listener {
                 }
                 if (b.isWithdrawing()) {
                     if (d > b.getBank()) {
-                        p.closeInventory();
+
                         p.sendMessage("You don't have that much money in your bank!");
                     }
 
                     else {
-                        p.closeInventory();
+
                         p.sendMessage("You have made a withdrawal of " + d + "g!");
                         b.updateBank(-1 * d);
                         b.updateWallet(d);

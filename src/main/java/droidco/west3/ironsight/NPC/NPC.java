@@ -25,7 +25,7 @@ public class NPC {
     private boolean isOfficer;
     private FrontierLocation frontierLocation;
 
-    private static HashMap<String, NPC> shoppingPlayers;
+    private static HashMap<String, NPC> shoppingPlayers = new HashMap<>();
 
     public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer, FrontierLocation frontierLocation) {
 
@@ -56,6 +56,7 @@ public class NPC {
         npc.setAI(false);
         npc.setCustomName(displayName);
         npc.setCustomNameVisible(true);
+        npc.setInvulnerable(true);
 
     }
     public static NPC getNPC(String displayName) {

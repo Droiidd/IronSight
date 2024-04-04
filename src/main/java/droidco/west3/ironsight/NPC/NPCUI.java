@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.NPC;
 
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
@@ -117,9 +118,9 @@ public class NPCUI {
     public static Inventory bankerUI(Player p) {
         Inventory bankerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Bank Teller");
         Bandit iPlayer = Bandit.getPlayer(p);
-        bankerUI.setItem(10, CustomItem.getCustomItem("Smoked Salmon").getItemForSale());
-        bankerUI.setItem(11, CustomItem.getCustomItem("Charred Potato").getItemForSale());
-        bankerUI.setItem(12, CustomItem.getCustomItem("Brown Stew").getItemForSale());
+        bankerUI.setItem(10, ItemIcon.getIcon("bank_deposit").getItem());
+        bankerUI.setItem(11, ItemIcon.getIcon("bank_withdraw").getItem());
+
 
         return bankerUI;
 

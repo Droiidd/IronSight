@@ -401,4 +401,5 @@ public class GameContentLoader {
         NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
 
 
-    }
+
+    }}

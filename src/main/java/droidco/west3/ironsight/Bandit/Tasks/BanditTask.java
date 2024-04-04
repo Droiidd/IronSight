@@ -186,11 +186,11 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.TOWN)) {
                 p.setLastDamage(0.0);
                 //SPAWN NPCS
-                if (currentLoc.isNewArrival()) {
+                if (!currentLoc.isNewArrival()) {
+                    currentLoc.setNewArrival(true);
                     HashMap<String, NPC> npcs = NPC.getNPCs();
                     for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
                         NPC npc = entryNPC.getValue();
-
                         npc.spawnNPC(p);
 
                     }
