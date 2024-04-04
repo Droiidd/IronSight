@@ -328,6 +328,12 @@ public class Contract
                 desc.add("Fish until you have requested amount");
                 addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
+            case MINER -> {
+                List<String> desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
+                desc.add("Mine ores until you have requested amount");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+            }
         }
         List<String> desc = new ArrayList<>();
         desc.add("Return to any "+ChatColor.YELLOW+"Contractor");

@@ -137,6 +137,9 @@ public class Bandit
         testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
         Contract testC1 = new Contract( ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
         Contract testC2 = new Contract( ContractType.Delivery, testLocs ,2, DeliveryType.FISHER);
+        List<FrontierLocation> test4Locs = new ArrayList<>();
+        test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
+        Contract testC4 = new Contract( ContractType.Delivery, test4Locs ,2, DeliveryType.MINER);
         List<FrontierLocation> test3Locs = new ArrayList<>();
         test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
         Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
@@ -144,6 +147,7 @@ public class Bandit
         contracts.add(testC1);
         contracts.add(testC2);
         contracts.add(testC3);
+        contracts.add(testC4);
     }
     public void setOnlinePlayer(Player p)
     {

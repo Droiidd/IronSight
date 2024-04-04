@@ -56,8 +56,8 @@ public class GameContentLoader {
         CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0);
         CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.ENDER_PEARL,0.0,0.0);
         CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
-        CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.IRON_ORE,10.0,0.0);
-        CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.COPPER_ORE,14.0,0.0);
+        CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
+        CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
 
         //UNCOMMON
         CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false, "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,10.0);
@@ -67,7 +67,7 @@ public class GameContentLoader {
         CustomItem chub = new CustomItem("Cactus Pronged Chub",3,true,false, "Too spikey to eat",Material.TROPICAL_FISH,16.0,0.0);
         CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_MALL,55.0,0.0);
         CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_STRAD,40.0,0.0);
-        CustomItem gold = new CustomItem("Gold Ore",3, true, false, "Can be refined or sold",Material.GOLD_ORE,19.0,0.0);
+        CustomItem gold = new CustomItem("Gold Ore",3, true, false, "Can be refined or sold",Material.RAW_GOLD,19.0,0.0);
         CustomItem slug = new CustomItem("Slug",3,true, false, "Reaks of the sea",Material.SPIDER_EYE,4.0,8.0);
         CustomItem boarmeat = new CustomItem("Boar Meat",3,true,false, "Closest thing to bacon",Material.PORKCHOP,7.0,0.0);
         CustomItem cowmeat = new CustomItem("Cow Meat",3,true,false, "Prime beef",Material.BEEF,9.0,0.0);
@@ -88,11 +88,14 @@ public class GameContentLoader {
         CustomItem fermentliquorrecipe = new CustomItem("Fermented Liquor Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,225.0,0.0);
 
         //RARE ITEMS
+        new CustomItem("Life Seeds",7,true,false,"Brews into a slow heal",Material.PUMPKIN_SEEDS, 0.0,0.0);
+        CustomItem frenziedStems = new CustomItem("Frenzied Stems",5,true,false, "Used on workers for productivity",Material.FIRE_CORAL,0.0,0.0);
+        CustomItem heartFruit = new CustomItem("Heart Fruit",5,true,false, "Still beating",Material.SWEET_BERRIES,0.0,0.0);
+
+
         CustomItem amethystBud = new CustomItem("Amethyst Bud",6, true,false, "Like a blossoming rose",Material.AMETHYST_SHARD,85.0,0.0);
         CustomItem mossyJade = new CustomItem("Mossy Jade",5,true,false, "Look's alive under light",Material.SLIME_BALL,65.0,0.0);
         CustomItem hermitCrab = new CustomItem("Hermit Crab",5,true,false, "Fish love it",Material.NAUTILUS_SHELL,8.0,15.0);
-        CustomItem frenziedStems = new CustomItem("Frenzied Stems",5,true,false, "Used on workers for productivity",Material.FIRE_CORAL,0.0,0.0);
-        CustomItem heartFruit = new CustomItem("Heart Fruit",5,true,false, "Still beating",Material.SWEET_BERRIES,0.0,0.0);
         CustomItem refinedOil = new CustomItem("Refined Oil",6,false,false, "Highly sought after",Material.LAVA_BUCKET,90.0,0.0);
         CustomItem southernsalmon = new CustomItem("Southern Salmon",6,true,false, "Migrated south through southern tributaries",Material.MUSIC_DISC_FAR,175.0,0.0);
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0);
@@ -109,12 +112,11 @@ public class GameContentLoader {
 
         CustomItem piratesBooty = new CustomItem("Pirates booty",8,true,false, "Richest dabloon",Material.SUNFLOWER,0.0,0.0);
         CustomItem oilBarrel = new CustomItem("Oil Barrel",7,false,false, "A large amount of refined oil",Material.WATER_BUCKET,650.0,0.0);
-
         CustomItem goldengamble = new CustomItem("Golden Gamble Petal",7,true,false, "Said to be lucky!",Material.HONEYCOMB,0.0,0.0);
         CustomItem molesbreath = new CustomItem("Moles Breath Spores",7,true,false, "Moles use it to dig quicker",Material.FROGSPAWN,0.0,0.0);
-
         CustomItem maltpetal = new CustomItem("Blue Malt Petal",7,true,false, "It smell makes dreams come true",Material.GLOW_INK_SAC,0.0,0.0);
 
+        new CustomItem("Crystalized Geode",8,true,false,"Crystals explode out of the sides",Material.MUSIC_DISC_11,0.0,0.0);
         CustomItem riverdiamond = new CustomItem("River Diamond",7,true,false, "The root of many wars",Material.DIAMOND,555.0,0.0);
         CustomItem barronsemerald = new CustomItem("Barron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
         CustomItem voidopal = new CustomItem("Void Opal",8,true,false, "Stare into the depths of the universe",Material.ECHO_SHARD,635.0,0.0);
