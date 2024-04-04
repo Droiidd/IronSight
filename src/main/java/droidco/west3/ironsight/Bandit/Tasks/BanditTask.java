@@ -41,7 +41,7 @@ public class    BanditTask extends BukkitRunnable {
     private int combatLogCounter = 0;
     private int wantedMin = 2;
     private int wantedSec = 0;
-    private final int contractTimer = 30;
+    private final int contractTimer = 600;
     private int contractCounter = 0;
     private int wantedTownCounter = 0;
     private int wantedTownTimer = 10;
@@ -107,9 +107,6 @@ public class    BanditTask extends BukkitRunnable {
     public void run() {
         if(tick % 3 == 0){
             seconds++;
-            p.spigot().sendMessage(
-                    ChatMessageType.ACTION_BAR,
-                    new TextComponent(ChatColor.GRAY+"" +seconds+ " seconds"));
             //      ===--- COMPASS TRACKER ---===
             if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
@@ -263,12 +260,21 @@ public class    BanditTask extends BukkitRunnable {
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
                 }
             }
+            //      ===--- CONRTACT RESET TIMER ---===
+
+            p.setLevel(contractTimer - contractCounter);
+            if (contractTimer == contractCounter) {
+                Contract.assignPlayerContracts(p,b);
+                p.sendMessage(ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
+                contractCounter = 0;
+            }
+            contractCounter++;
             //      ===--- MOB SPAWNING ---===
             if(seconds == mobRespawnTime){
-                p.sendMessage("30 seconds passed.");
+                //p.sendMessage("30 seconds passed.");
                 switch(currentLoc.getType()){
                     case MINE -> {
-                        spawnGroupOfMobs(this.miners);
+                        //spawnGroupOfMobs(this.miners);
                     }
                     case ILLEGAL,EVENT -> {
                         spawnGroupOfMobs(this.raiders);
@@ -295,17 +301,7 @@ public class    BanditTask extends BukkitRunnable {
         }
 
 
-        //      ===--- MISC TIMED EVENTS ---===
 
-//            //HANDLE CONTRACT TIMER
-//
-//            p.setLevel(contractTimer - contractCounter);
-//            if (contractTimer == contractCounter) {
-//                ContractUtils.initializeContracts(b);
-//                p.sendMessage(ChatColor.GOLD + "Contracts" + ChatColor.GREEN + " reset!");
-//                contractCounter = 0;
-//            }
-//            contractCounter++;
 //
 
         //END OF LOOP

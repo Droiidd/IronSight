@@ -161,7 +161,7 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Locations")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case COBBLESTONE -> {
+                case IRON_PICKAXE -> {
                     p.openInventory(TrackerUI.openMinesUi(p));
                     break;
                 }
@@ -193,7 +193,7 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Mines")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case FLINT -> {
+                case IRON_ORE -> {
                     b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines"));
                     p.closeInventory();
                     break;

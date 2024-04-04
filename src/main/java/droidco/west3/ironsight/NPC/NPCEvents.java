@@ -110,91 +110,45 @@ public class NPCEvents implements Listener {
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Shopkeeper")) {
             e.setCancelled(true);
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Smoked Salmon").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Smoked Salmon").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Smoked Salmon").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Smoked Salmon").getItemStack());
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
+                purchaseItem(b,p,CustomItem.getCustomItem("Smoked Salmon"),NPC.getNPC("Shopkeeper"));
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Charred Potato").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Charred Potato").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Charred Potato").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Charred Potato").getItemStack());
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
+                purchaseItem(b,p,CustomItem.getCustomItem("Charred Potato"),NPC.getNPC("Shopkeeper"));
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Brown Stew").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Brown Stew").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Brown Stew").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Brown Stew").getItemStack());
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
+                purchaseItem(b,p,CustomItem.getCustomItem("Brown Stew"),NPC.getNPC("Shopkeeper"));
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Fox").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Fox").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Fox").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Cooked Fox").getItemStack());
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
+                purchaseItem(b,p,CustomItem.getCustomItem("Cooked Fox"),NPC.getNPC("Shopkeeper"));
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Rabbit Stew").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Rabbit Stew").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Rabbit Stew").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Rabbit Stew").getItemStack());
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
+                purchaseItem(b,p,CustomItem.getCustomItem("Rabbit Stew"),NPC.getNPC("Shopkeeper"));
 
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Rabbit").getMaterial()) == 0) {
-                if (b.getWallet() >= CustomItem.getCustomItem("Cooked Rabbit").getPurchasePrice()) {
-                    b.updateWallet(-1 * CustomItem.getCustomItem("Cooked Rabbit").getPurchasePrice());
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "Purchased!"));
-                    p.getInventory().addItem(CustomItem.getCustomItem("Cooked Rabbit").getItemStack());
-
-                } else {
-                    p.closeInventory();
-                    p.sendMessage("Not enough funds!");
-                }
-
+                purchaseItem(b,p,CustomItem.getCustomItem("Cooked Rabbit"),NPC.getNPC("Shopkeeper"));
             }
-
-
         }
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Bank Teller")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case EMERALD -> {
+                case EMERALD_BLOCK -> {
                     b.setDepositing(true);
                     p.closeInventory();
                     NPC.getNPC("Bank Teller").addShoppingPlayer(p);
-                    p.sendMessage("How much money do you want to deposit?");
+                    p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": How much money do you want to deposit?");
 
                 }
 
-                case EMERALD_BLOCK -> {
+                case REDSTONE_BLOCK -> {
                     b.setWithdrawing(true);
                     p.closeInventory();
                     NPC.getNPC("Bank Teller").addShoppingPlayer(p);
-                    p.sendMessage("How much money do you want to withdraw?");
+                    p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": How much money do you want to withdraw?");
 
                 }
             }
@@ -208,43 +162,50 @@ public class NPCEvents implements Listener {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         if (NPC.getShoppingPlayers().containsKey(p.getUniqueId().toString())) {
-
             NPC shop = NPC.getShoppingPlayers().get(p.getUniqueId().toString());
-
             double d = Double.parseDouble(e.getMessage());
 
             if (shop.getType() == NPCType.BANKER) {
+                NPC.getShoppingPlayers().remove(p.getUniqueId().toString());
+                if(NPC.getShoppingPlayers().containsKey(p.getUniqueId().toString())){
+                    p.sendMessage("ERROR");
+                }
                 if (b.isDepositing()) {
+                    b.setDepositing(false);
                     if (d > b.getWallet()) {
-
-                        p.sendMessage("You don't have that much money in your wallet!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
                     }
-
                     else {
-
-                        p.sendMessage("You have deposited " + d + "g!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have deposited "+ d + "g!");
                         b.updateWallet(-1 * d);
                         b.updateBank(d);
                     }
-                    b.setDepositing(false);
                 }
                 if (b.isWithdrawing()) {
+                    b.setWithdrawing(false);
                     if (d > b.getBank()) {
-
-                        p.sendMessage("You don't have that much money in your bank!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
                     }
-
                     else {
-
-                        p.sendMessage("You have made a withdrawal of " + d + "g!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have withdrew "+ d + "g!");
                         b.updateBank(-1 * d);
                         b.updateWallet(d);
                     }
                 }
 
-                NPC.getShoppingPlayers().remove(p.getUniqueId().toString());
             }
 
+        }
+    }
+    public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc )
+    {
+        if (b.getWallet() >= item.getPurchasePrice()) {
+            b.updateWallet(-1 * item.getPurchasePrice());
+            p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
+            p.getInventory().addItem(item.getItemStack());
+        } else {
+            p.closeInventory();
+            p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
         }
     }
 }

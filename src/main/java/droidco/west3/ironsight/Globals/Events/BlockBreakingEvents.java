@@ -17,8 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 public class BlockBreakingEvents implements Listener {
     private IronSight plugin;
     private int dropMultiplier = 1;
-
-
     public BlockBreakingEvents(IronSight plugin) {
         this.plugin = plugin;
     }

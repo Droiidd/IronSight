@@ -340,8 +340,8 @@ public class GameContentLoader {
             ItemIcon chief = new ItemIcon("Chief of Police","chief_of_police_tracker", "Find Chief", Material.PIGLIN_HEAD);
         //      ===--- TRACKER LOCATION ---===
             ItemIcon locations = new ItemIcon("Locations","location_tracker", "Find locations", Material.COMPASS);
-            ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.COBBLESTONE);
-                ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.FLINT);
+            ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.IRON_PICKAXE);
+                ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.IRON_ORE);
                 ItemIcon barron = new ItemIcon("Barron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines","half_dome_tracker", "Find the Half Dome Mines", Material.STONE);
             ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);
@@ -368,8 +368,8 @@ public class GameContentLoader {
 
                 new ItemIcon("Complete Contract","complete_contract","Click if all steps are complete", Material.EMERALD_BLOCK);
                 //      ===--- BANKER ITEMS ---===
-            ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD );
-            ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.EMERALD_BLOCK );
+            ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD_BLOCK );
+            ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.REDSTONE_BLOCK );
 
 
         System.out.println("Icons loaded");
@@ -387,10 +387,13 @@ public class GameContentLoader {
         new BrewingRecipe("Morphine", new ItemStack(Material.PUMPKIN_SEEDS), false, PotionEffectType.REGENERATION, 0, 60, Color.fromRGB(20, 151, 163), "empty");
         System.out.println("Brewing load complete.");
     }
-    public static void loadContracts(){
-        System.out.println("Loading contracts!");
 
+    public static void loadNPCs() {
+        System.out.println("Loading NPCs");
 
-        System.out.println("Contracts loaded!");
+        NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        NPC contractor = new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+
     }
 }

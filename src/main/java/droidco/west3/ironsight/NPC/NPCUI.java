@@ -118,8 +118,8 @@ public class NPCUI {
     public static Inventory bankerUI(Player p) {
         Inventory bankerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Bank Teller");
         Bandit iPlayer = Bandit.getPlayer(p);
-        bankerUI.setItem(10, ItemIcon.getIcon("bank_deposit").getItem());
-        bankerUI.setItem(11, ItemIcon.getIcon("bank_withdraw").getItem());
+        bankerUI.setItem(11, ItemIcon.getIcon("bank_deposit").getItem());
+        bankerUI.setItem(15, ItemIcon.getIcon("bank_withdraw").getItem());
 
 
         return bankerUI;

@@ -57,6 +57,16 @@ public class NPC {
         npc.setCustomName(displayName);
         npc.setCustomNameVisible(true);
         npc.setInvulnerable(true);
+        switch (this.type){
+            case BANKER -> {
+                npc.setProfession(Villager.Profession.CARTOGRAPHER);
+                npc.setVillagerType(Villager.Type.SAVANNA);
+            }
+            case CONTRACTOR -> {
+                npc.setProfession(Villager.Profession.WEAPONSMITH);
+                npc.setVillagerType(Villager.Type.SNOW);
+            }
+        }
 
     }
     public static NPC getNPC(String displayName) {
