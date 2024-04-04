@@ -6,7 +6,6 @@ import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -60,12 +59,10 @@ public class Contract
     {
         switch(difficulty){
             case Rookie -> {
-                //this.rewardXp = 25;
-                this.rewardXp = 11;
+                this.rewardXp = 25;
             }
             case Apprentice -> {
-                //this.rewardXp = 45;
-                this.rewardXp = 19;
+                this.rewardXp = 45;
             }
             case Experienced -> {
                 this.rewardXp = 60;
@@ -182,10 +179,8 @@ public class Contract
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<=20){
             this.difficulty = Difficulty.Master;
-            this.reward = 3150.0;
         }else {
             this.difficulty = Difficulty.Experienced;
-            this.reward = 2500.0;
         }
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
         List<String> desc = new ArrayList<>();
@@ -204,7 +199,6 @@ public class Contract
         ItemMeta iconMeta = this.contractIcon.getItemMeta();
         iconMeta.setDisplayName(listingName);
         this.contractIcon.setItemMeta(iconMeta);
-        setRewardXp();
     }
 
     public void generateNewDelivery(){
@@ -324,13 +318,13 @@ public class Contract
         switch (deliveryType){
             case FISHER -> {
                 List<String> desc = new ArrayList<>();
-                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
+                desc.add("Arrive at "+frontierLocation.getLocName());
                 desc.add("Fish until you have requested amount");
-                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ frontierLocation.getLocName());
             }
         }
         List<String> desc = new ArrayList<>();
-        desc.add("Return to any "+ChatColor.YELLOW+"Contractor");
+        desc.add("Return to town");
         desc.add("for reward.");
         addCompletionStep("steptest",2,desc,null,"Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
@@ -350,7 +344,6 @@ public class Contract
         ItemMeta iconMeta = this.contractIcon.getItemMeta();
         iconMeta.setDisplayName(listing);
         this.contractIcon.setItemMeta(iconMeta);
-        setRewardXp();
     }
     public void generateNewBountyHunter(Player p){
         //Check if player gets a PLAYER or NPC contract
