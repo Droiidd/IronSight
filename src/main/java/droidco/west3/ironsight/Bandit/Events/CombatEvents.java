@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class CombatEvents implements Listener
             }
             if(!b.isWanted()){
                 b.setWanted(true);
-                Bukkit.getServer().broadcastMessage(b.getTitle()+ChatColor.RESET+p.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
+                Bukkit.getServer().broadcastMessage(b.getTitle() +ChatColor.RESET+p.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
             }
         }
     }
