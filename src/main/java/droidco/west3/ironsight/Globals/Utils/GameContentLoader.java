@@ -191,19 +191,73 @@ public class GameContentLoader {
     }
     public static void loadIcons()
     {
-        System.out.println("loading all icons");
-        ItemIcon cowboy = new ItemIcon("Cowboy","CowboyPrefix","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker","TrackerPrefix", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","RaiderPrefix","Choose raider!",Material.SKELETON_SKULL);
+        // These are player prefixes
+        ItemIcon cowboy = new ItemIcon("Cowboy","Choose cowboy!", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker", "Choose tracker!",Material.LEATHER_BOOTS);
+        ItemIcon raider = new ItemIcon("Raider","Choose raider!",Material.SKELETON_SKULL);
 
-        ItemIcon miner = new ItemIcon("Miner","MinerPrefix","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","MedicPrefix","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","ExplorerPrefix","Choose explorer!",Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+        //These are icons for the tracker system
+        ItemIcon town = new ItemIcon("Towns", "Find town", Material.DARK_OAK_HANGING_SIGN);
+            ItemIcon santaFe = new ItemIcon("Santa Fe", "Directions to Santa Fe", Material.WHITE_BANNER);
+            ItemIcon newOrleans = new ItemIcon("New Orleans", "Directions to New Orleans", Material.YELLOW_BANNER);
+            ItemIcon texas = new ItemIcon("Republic of Texas", "Directions to the Republic of Texas", Material.BLUE_BANNER);
+        ItemIcon player = new ItemIcon("Players", "Find players", Material.PLAYER_HEAD);
+            ItemIcon wantedPlayer = new ItemIcon("Nearest Wanted Player", "Nearest wanted player", Material.ZOMBIE_HEAD);
+        ItemIcon contracts = new ItemIcon("Contracts", "Contract location", Material.BOOK);
+            // contract icons ???
+        ItemIcon merchants = new ItemIcon("Merchants", "Find Merchants", Material.BELL);
+            ItemIcon fisherman = new ItemIcon("Fisherman", "Find Fisherman", Material.FISHING_ROD);
+            ItemIcon pharmacist = new ItemIcon("Pharmacist", "Find Pharmacist", Material.PAPER);
+            ItemIcon armsDealer = new ItemIcon("Arms Dealer", "Find Arms Dealer", Material.STONE_AXE);
+            ItemIcon illegalArms = new ItemIcon("Illegal Arms Dealer", "Illegal Arms Dealer", Material.IRON_AXE);
+            ItemIcon armorer = new ItemIcon("Armorer", "Find Armorer", Material.LEATHER_CHESTPLATE);
+            ItemIcon illegalArmor = new ItemIcon("Illegal Armorer", "Find Illegal Armorer", Material.NETHERITE_CHESTPLATE);
+            ItemIcon generalStore = new ItemIcon("General Store", "Find General Store", Material.COOKED_BEEF);
+            ItemIcon geologist = new ItemIcon("Geologist", "Find Geologist", Material.STONE);
+            ItemIcon stableManager = new ItemIcon("Stable Manager", "Find Stable Manager", Material.SADDLE);
+        ItemIcon npc =  new ItemIcon("NPCs", "Find NPCs", Material.BOOKSHELF);
+            ItemIcon conductor = new ItemIcon("Conductor", "Find Conductor", Material.RAIL);
+            ItemIcon ferryCaptain = new ItemIcon("Ferry Captain", "Find Ferry Captain", Material.BIRCH_BOAT);
+            ItemIcon bankTeller = new ItemIcon("Banker Teller", "Find Bank Teller", Material.GOLD_INGOT);
+            ItemIcon itemVault = new ItemIcon("Item Vault Manager", "Find Vault Manager", Material.DIAMOND);
+            ItemIcon contractor = new ItemIcon("Contractor", "Find Contractor", Material.FILLED_MAP);
+            ItemIcon chief = new ItemIcon("Chief of Police", "Find Chief", Material.PIGLIN_HEAD);
+        ItemIcon locations = new ItemIcon("Locations", "Find locations", Material.COMPASS);
+            ItemIcon mines = new ItemIcon("Mines", "Find Mines", Material.COBBLESTONE);
+                ItemIcon blackSpur = new ItemIcon("Black Spur Mines", "Find the Black Spur Mines", Material.FLINT);
+                ItemIcon barron = new ItemIcon("Barron's Canyon", "Find Barron's Canyon", Material.TERRACOTTA);
+                ItemIcon halfDome = new ItemIcon("Half Dome Mines", "Find the Half Dome Mines", Material.STONE);
+            ItemIcon rivers = new ItemIcon("Rivers", "Find Rivers", Material.WATER_BUCKET);
+                ItemIcon pearl = new ItemIcon("Pearl River", "Find Pearl River", Material.WATER_BUCKET);
+                ItemIcon threeForks = new ItemIcon("Three Forks Delta", "Find Three Forks Delta", Material.WATER_BUCKET);
+                ItemIcon lowerGuada = new ItemIcon("Lower Guadalupe River", "Find Guadalupe River", Material.WATER_BUCKET);
+                ItemIcon slough = new ItemIcon("Slough Creek", "Find Slough Creek", Material.WATER_BUCKET);
+            ItemIcon forestReserves = new ItemIcon("Forest Reserves", "Find Forest Reserves", Material.OAK_SAPLING);
+                ItemIcon grizzly = new ItemIcon("Grizzly Ridge", "Find Grizzly Ridge", Material.OAK_SAPLING);
+                ItemIcon marston = new ItemIcon("Marston Glacier", "Find Marston Glacier", Material.OAK_SAPLING);
+                ItemIcon hawkRidge = new ItemIcon("Hawk Ridge Forest", "Find Hawk Ridge Forest", Material.OAK_SAPLING);
+                ItemIcon sentinel = new ItemIcon("Sentinel Rock", "Find Sentinel Rock", Material.OAK_SAPLING);
+            ItemIcon banditCamps = new ItemIcon("Bandit Camps", "Find Bandit Camps", Material.SKELETON_SKULL);
+                ItemIcon redAsh = new ItemIcon("Red Ash Camp", "Find Red Ash Camp", Material.REDSTONE);
+                ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base", "Find Storm Point", Material.ITEM_FRAME);
+            ItemIcon scavTowns = new ItemIcon("Scav Towns", "Find Scav Towns", Material.OAK_DOOR);
+                ItemIcon florence = new ItemIcon("Florence Peak", "Find Florence Peak", Material.ACACIA_DOOR);
+                ItemIcon washington = new ItemIcon("Washington Column", "Find Washington Column", Material.SPRUCE_DOOR);
+                ItemIcon sierra = new ItemIcon("Sierra Gorge", "Find Sierra Gorge", Material.BIRCH_DOOR);
+            ItemIcon oilFields = new ItemIcon("Oil Fields", "Find Oil Fields", Material.COAL);
+                ItemIcon northMoraine = new ItemIcon("North Moraine Oil Field", "Find North Moraine Oil Field", Material.COAL_BLOCK);
+            ItemIcon drugFields = new ItemIcon("Drug Fields", "Find Drug Fields", Material.SPRUCE_SAPLING);
+                ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "Find Smokeleaf Drug Field", Material.SPRUCE_SAPLING);
 
-        ItemIcon santafe = new ItemIcon("Santa Fe","RespawnSF","Click to respawn here",Material.NETHER_STAR);
-        ItemIcon neworleans = new ItemIcon("New Orleans","RespawnNO","Click to respawn here",Material.CAKE);
-        ItemIcon texas = new ItemIcon("Republic Of Texas", "RespawnRoT","Click to respawn here",Material.DEAD_BUSH);
+
+
+
+        ItemIcon miner = new ItemIcon("Miner","Choose miner!",Material.STONE_PICKAXE);
+        ItemIcon medic = new ItemIcon("Medic","Choose medic!",Material.PAPER);
+        ItemIcon explorer = new ItemIcon("Explorer","Choose explorer!",Material.SPYGLASS);
+        ItemIcon contractorTitle = new ItemIcon("Contractor Title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+
+
 
         ItemIcon contractLoc = new ItemIcon("Locations:","ContractLoc","Go here to complete.",Material.COMPASS);
         ItemIcon contractReq = new ItemIcon("Request:","ContractReq","Requested items:",Material.DIAMOND);
