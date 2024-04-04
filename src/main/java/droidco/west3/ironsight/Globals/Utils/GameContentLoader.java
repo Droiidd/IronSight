@@ -15,6 +15,7 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Quantity;
+import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCType;
 import org.bukkit.ChatColor;
@@ -297,18 +298,17 @@ public class GameContentLoader {
         ItemIcon texasRespawn = new ItemIcon("Republic Of Texas", "republic_of_texas_respawn","Click to respawn here",Material.YELLOW_BANNER);
 
         //      ===--- CONTRACT UI ICONS ---===
-        ItemIcon contractLoc = new ItemIcon("Locations:","contract_location","Go here to complete.",Material.COMPASS);
-        ItemIcon contractReq = new ItemIcon("Request:","contract_req","Requested items:",Material.DIAMOND);
-        ItemIcon contractDesc = new ItemIcon("Description","contract_desc","What to do:",Material.MOJANG_BANNER_PATTERN);
+        ItemIcon contractLoc = new ItemIcon(String.valueOf(ChatColor.BOLD)+ "Locations:","contract_location","Go here to complete.",Material.COMPASS);
+        ItemIcon contractReq = new ItemIcon(String.valueOf(ChatColor.BOLD)+"Request:","contract_req","Requested items:",Material.DIAMOND);
+        ItemIcon contractDesc = new ItemIcon(String.valueOf(ChatColor.BOLD)+"Description","contract_desc","What to do:",Material.MOJANG_BANNER_PATTERN);
 
         ItemIcon nextPage = new ItemIcon("Next Page","next_page","Click to go to next page",Material.MAGENTA_GLAZED_TERRACOTTA);
-        ItemIcon cowboy = new ItemIcon("Cowboy","cowboy_prefix","Choose cowboy!", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker","tracker_prefix", "Choose tracker!",Material.LEATHER_BOOTS);
-        ItemIcon raider = new ItemIcon("Raider","raider_prefix","Choose raider!",Material.SKELETON_SKULL);
-
-        ItemIcon miner = new ItemIcon("Miner","miner_prefix","Choose miner!",Material.STONE_PICKAXE);
-        ItemIcon medic = new ItemIcon("Medic","medic_prefix","Choose medic!",Material.PAPER);
-        ItemIcon explorer = new ItemIcon("Explorer","explorer_prefix","Choose explorer!",Material.SPYGLASS);
+        ItemIcon miner = new ItemIcon("Miner","miner_prefix","Choose miner (Level 3)",Material.STONE_PICKAXE);
+        ItemIcon cowboy = new ItemIcon("Cowboy","cowboy_prefix","Choose cowboy (Level 4)", Material.HAY_BLOCK);
+        ItemIcon tracker = new ItemIcon("Tracker","tracker_prefix", "Choose tracker (Level 5)",Material.LEATHER_BOOTS);
+        ItemIcon medic = new ItemIcon("Medic","medic_prefix","Choose medic (Level 7)",Material.PAPER);
+        ItemIcon raider = new ItemIcon("Raider","raider_prefix","Choose raider (Level 9)",Material.SKELETON_SKULL);
+        ItemIcon explorer = new ItemIcon("Explorer","explorer_prefix","Choose explorer (Level 10)",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","contractor_title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
         //      ===--- TRACKER UI ICONS ---===
@@ -366,6 +366,7 @@ public class GameContentLoader {
             ItemIcon drugFields = new ItemIcon("Drug Fields","drug_field_tracker", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.KELP);
 
+                new ItemIcon("Complete Contract","complete_contract","Click if all steps are complete", Material.EMERALD_BLOCK);
         //      ===--- BANKER ITEMS ---===
             ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD );
             ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.EMERALD_BLOCK );
