@@ -324,13 +324,13 @@ public class Contract
         switch (deliveryType){
             case FISHER -> {
                 List<String> desc = new ArrayList<>();
-                desc.add("Arrive at "+frontierLocation.getLocName());
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
                 desc.add("Fish until you have requested amount");
-                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ frontierLocation.getLocName());
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
         }
         List<String> desc = new ArrayList<>();
-        desc.add("Return to town");
+        desc.add("Return to any "+ChatColor.YELLOW+"Contractor");
         desc.add("for reward.");
         addCompletionStep("steptest",2,desc,null,"Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
