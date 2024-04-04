@@ -98,7 +98,6 @@ public class BanditTask extends BukkitRunnable {
         this.raiders.add(ranger);
         this.raiders.add(wolf);
         this.raiders.add(raiderBrute);
-
         Contract.assignPlayerContracts(p,b);
     }
 
@@ -171,7 +170,7 @@ public class BanditTask extends BukkitRunnable {
                     if (!escapeFlag) {
                         escapeFlag = true;
                         PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
-                        p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty", 1, 2, 1);
+                        p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty");
                     }
                 } else {
                     //They are in prison!
@@ -198,6 +197,10 @@ public class BanditTask extends BukkitRunnable {
                     }
                     wantedTownCounter++;
                 }
+
+                //      ===--- CHECK FOR SUCCESSFUL DELIVERY ---===
+
+
             }
             //      ===--- ILLEGAL / OIL FIELD ---===
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {

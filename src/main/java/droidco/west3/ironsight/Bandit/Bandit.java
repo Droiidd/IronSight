@@ -5,6 +5,10 @@ import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -31,10 +35,8 @@ public class Bandit
     private int bounty;
 
     private Player targetedPlayer;
-    private int pceContractXp;
-    private int cmbtContractXp;
-    private int pceContractLvl;
-    private int cmbtContractLvl;
+    private int contractorLvl;
+    private int contractorXp;
     private int contractorTitle;
     private long jailStartTime;
     private String roleTitle;
@@ -71,10 +73,8 @@ public class Bandit
 
         this.bounty = 0;
         this.wantedKills = 0;
-        this.pceContractXp = 0;
-        this.pceContractLvl = 0;
-        this.cmbtContractLvl =0;
-        this.cmbtContractXp = 0;
+        this.contractorLvl =0;
+        this.contractorXp =0;
 
         playerList.add(this);
         bandits.put(pId,this);
@@ -83,7 +83,7 @@ public class Bandit
     }
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
-                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp,
+                              wantedKills, int contractorLvl, int contractorXp,
                   long jailStartTime)
     {
         this.doingContract = false;
@@ -102,10 +102,8 @@ public class Bandit
         this.bounty = bounty;
         this.jailStartTime = jailStartTime;
         this.wantedKills = wantedKills;
-        this.pceContractLvl = pceContractLvl;
-        this.pceContractXp = pceContractXp;
-        this.cmbtContractLvl = cmbtContractLvl;
-        this.cmbtContractXp = cmbtContractXp;
+        this.contractorXp = contractorXp;
+        this.contractorLvl = contractorLvl;
 
         playerList.add(this);
         bandits.put(pId,this);
@@ -148,29 +146,19 @@ public class Bandit
         return roleTitle;
     }
     public String getTitle(){
-        return getContractorTitle().equalsIgnoreCase("") ? roleTitle : getContractorTitle()+" "+roleTitle;
+        return BanditUtils.getContractorTitle(this).equalsIgnoreCase("") ? roleTitle : BanditUtils.getContractorTitle(this)+" "+roleTitle;
     }
 
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
     }
 
-    public String getContractorTitle() {
-        switch(contractorTitle){
-            case 1:
-                return "Cowboy";
-            case 2:
-                return "Tracker";
-            case 3:
-                return "Raider";
-            case 4:
-                return "Miner";
-            case 5:
-                return "Medic";
-            case 6:
-                return "Explorer";
-        }
-        return "";
+    public int getContractorTitle() {
+        return contractorTitle;
+    }
+
+    public void updateContractorXp(int xp){
+        this.contractorXp += xp;
     }
 
     public List<Contract> getContracts() {
@@ -358,14 +346,6 @@ public class Bandit
     public void setBounty(int bounty) {
         this.bounty = bounty;
     }
-
-    public int getPceContractXp() {
-        return pceContractXp;
-    }
-
-    public void setPceContractXp(int pceContractXp) {
-        this.pceContractXp = pceContractXp;
-    }
     public FrontierLocation getTrackingLocation() {
         return trackingLocation;
     }
@@ -376,28 +356,20 @@ public class Bandit
         setIsTrackingLocation(true);
     }
 
-    public int getCmbtContractXp() {
-        return cmbtContractXp;
+    public int getContractorLvl() {
+        return contractorLvl;
     }
 
-    public void setCmbtContractXp(int cmbtContractXp) {
-        this.cmbtContractXp = cmbtContractXp;
+    public void setContractorLvl(int contractorLvl) {
+        this.contractorLvl = contractorLvl;
     }
 
-    public int getPceContractLvl() {
-        return pceContractLvl;
+    public int getContractorXp() {
+        return contractorXp;
     }
 
-    public void setPceContractLvl(int pceContractLvl) {
-        this.pceContractLvl = pceContractLvl;
-    }
-
-    public int getCmbtContractLvl() {
-        return cmbtContractLvl;
-    }
-
-    public void setCmbtContractLvl(int cmbtContractLvl) {
-        this.cmbtContractLvl = cmbtContractLvl;
+    public void setContractorXp(int contractorXp) {
+        this.contractorXp = contractorXp;
     }
 
     public Player getOnlinePlayer() {

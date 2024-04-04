@@ -18,10 +18,8 @@ public class BanditUtils {
         p.sendMessage("Broken Legs: " + b.isBrokenLegs());
         p.sendMessage("In Prison: " + b.isJailed());
         p.sendMessage("EXPERIENCE INFO: ");
-        p.sendMessage("Combat Level: " + b.getCmbtContractLvl());
-        p.sendMessage("Peacemaker Level: " + b.getPceContractLvl());
-        p.sendMessage("Combat XP: " + b.getCmbtContractXp());
-        p.sendMessage("Peacemaker XP: " + b.getPceContractXp());
+        p.sendMessage("Contractor Lvl " + b.getContractorLvl());
+        p.sendMessage("Contractor XP: " + b.getContractorXp());
         p.sendMessage("Wanted Kills: " + b.getWantedKills());
 
     }
@@ -45,7 +43,7 @@ public class BanditUtils {
 
         //Set titles to blank strings if they do not have one selected.
         String playerTitle = b.getRoleTitle() == null ? "" : b.getRoleTitle();
-        String contractTitle = b.getContractorTitle() == null ? "" : b.getContractorTitle();
+        String contractTitle = BanditUtils.getContractorTitle(b) == null ? "" : BanditUtils.getContractorTitle(b);
         //Do the same for teams
 
         //Get banking info
@@ -115,6 +113,23 @@ public class BanditUtils {
 
         return null;
 
+    }
+    public static String getContractorTitle(Bandit b) {
+        switch(b.getContractorTitle()){
+            case 1:
+                return String.valueOf(ChatColor.GRAY)+"Miner";
+            case 2:
+                return String.valueOf(ChatColor.GRAY)+"Cowboy";
+            case 3:
+                return String.valueOf(ChatColor.DARK_GREEN)+"Tracker";
+            case 4:
+                return String.valueOf(ChatColor.GREEN)+"Medic";
+            case 5:
+                return String.valueOf(ChatColor.DARK_RED)+ "Raider";
+            case 6:
+                return String.valueOf(ChatColor.YELLOW)+ "Explorer";
+        }
+        return "";
     }
 }
 

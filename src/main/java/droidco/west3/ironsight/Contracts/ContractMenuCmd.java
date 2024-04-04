@@ -27,11 +27,6 @@ public class ContractMenuCmd implements CommandExecutor {
                     p.openInventory(ContractUI.openContractUi(p));
                 }
             }
-
-
-//            p.sendMessage(iPlayer.getApprenticeContract().getContractName());
-//            p.sendMessage(iPlayer.getExperiencedContract().getContractName());
-//            p.sendMessage(iPlayer.getRookieContract().getContractName());
         }
         return true;
     }

@@ -29,10 +29,8 @@ public class PlayerConnector {
                         "isJailed = "+p.isJailed()+", "+
                         "isCombatBlocked = "+p.isCombatBlocked() +", "+
                         "bounty = "+p.getBounty() +", "+
-                        "pceContractXp = "+p.getPceContractXp() +", "+
-                        "pceContractLvl = "+p.getPceContractLvl() +", "+
-                        "cmbtContractXp = "+p.getCmbtContractXp() +", "+
-                        "cmbtContractLvl = "+p.getCmbtContractXp() +", "+
+                        "contractorLvl = "+p.getContractorLvl()+", "+
+                        "contractorXp = "+p.getContractorXp()+", "+
                         "wantedKills = "+p.getWantedKills()+", "+
                         "jailStartTime = "+p.getJailStartTime()+" "+
                         "Where iron_player.pId = '"+p.getpId()+"'";
@@ -47,7 +45,7 @@ public class PlayerConnector {
                     //Update was not successful
                     System.out.println("Could not update player, inserting new columnn.");
                     try{
-                        String sqlInsert = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, pceContractXP, cmbtContractXp, pceContractLvl, cmbtContractLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                        String sqlInsert = "insert into iron_player (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl,wantedKills) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
                         PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                         prepedStmt.setString(1, p.getpId());
                         prepedStmt.setDouble(2,p.getWallet());
@@ -59,11 +57,9 @@ public class PlayerConnector {
                         prepedStmt.setBoolean(8,p.isCombatBlocked());
                         prepedStmt.setInt(9,p.getBounty());
 
-                        prepedStmt.setInt(10,p.getPceContractXp());
-                        prepedStmt.setInt(11,p.getCmbtContractXp());
-                        prepedStmt.setInt(12,p.getPceContractLvl());
-                        prepedStmt.setInt(13,p.getCmbtContractLvl());
-                        prepedStmt.setInt(14,p.getWantedKills());
+                        prepedStmt.setInt(10,p.getContractorXp());
+                        prepedStmt.setInt(11,p.getContractorLvl());
+                        prepedStmt.setInt(12,p.getWantedKills());
                         int insertVal = prepedStmt.executeUpdate();
 //                        if(insertVal > 0){
 //                            System.out.println("Insertion failed.");
@@ -110,13 +106,11 @@ public class PlayerConnector {
                 boolean isCmbtBlocked = rs.getBoolean("isCombatBlocked");
                 int bounty = rs.getInt("bounty");
                 int wantedKills = rs.getInt("wantedKills");
-                int pceContractXp = rs.getInt("pceContractXp");
-                int pceContractLvl = rs.getInt("pceContractLvl");
-                int cmbtContractLvl = rs.getInt("cmbtContractLvl");
-                int cmbtContractXp = rs.getInt("cmbtContractXp");
+                int contractorXp = rs.getInt("contractorXp");
+                int contractorLvl = rs.getInt("contractorLvl");
                 long jailStartTime = rs.getLong("jailStartTime");
 
-                Bandit player = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, pceContractLvl, pceContractXp, cmbtContractLvl, cmbtContractXp, jailStartTime);
+                Bandit player = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp, jailStartTime);
                 st.close();
                 return player;
             }
