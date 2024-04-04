@@ -42,13 +42,6 @@ public class OilFieldCrate {
         }
         return crateList;
     }
-    public static void initializeCrates(){
-        HashMap<String, Contract> contracts = Contract.getContracts();
-        for(Map.Entry<String, Contract> entry : contracts.entrySet()){
-
-        }
-    }
-
     public static OilFieldCrate getRandomCrate(FrontierLocation targetLoc){
         List<OilFieldCrate> crates = getCratesByLocation(targetLoc);
         int ran = GlobalUtils.getRandomNumber(crates.size());

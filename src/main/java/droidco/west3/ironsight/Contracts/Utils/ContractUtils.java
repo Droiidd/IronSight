@@ -29,20 +29,6 @@ public class ContractUtils
         }
         return "";
     }
-    public static List<Contract> getContractByDiff(Difficulty difficulty){
-        HashMap<String, Contract> contracts = Contract.getContracts();
-        List<Contract> targeted = new ArrayList<>();
-        contracts.forEach((key, contract) -> {
-            if(contract.getDifficulty().compareTo(difficulty) == 0){
-                targeted.add(contract);
-            }
-        });
-        if(targeted.isEmpty()){
-            return new ArrayList<>();
-        }else{
-            return targeted;
-        }
-    }
     public static String getTypeString(ContractType type){
         switch(type){
             case OilField -> {

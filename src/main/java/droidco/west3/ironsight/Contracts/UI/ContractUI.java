@@ -36,9 +36,9 @@ public class ContractUI {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
         Bandit b = Bandit.getPlayer(p);
 
-        p.sendMessage(b.getRookieContract().getContractName());
-        p.sendMessage(b.getApprenticeContract().getContractName());
-        p.sendMessage(b.getExperiencedContract().getContractName());
+//        p.sendMessage(b.getRookieContract().getContractName());
+//        p.sendMessage(b.getApprenticeContract().getContractName());
+//        p.sendMessage(b.getExperiencedContract().getContractName());
 
         contractUi.setItem(2,ItemIcon.getIcon("contractor_title").getItem());
         contractUi.setItem(4,getContractorIcon(p));
@@ -49,18 +49,18 @@ public class ContractUI {
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
-        String title = selected.getListingName();
-//        switch(difficulty){
-//            case Rookie -> {
-//                title = ChatColor.GREEN+"Rookie Contract";
-//            }
-//            case Apprentice -> {
-//                title = ChatColor.YELLOW+"Apprentice Contract";
-//            }
-//            case Experienced -> {
-//                title = ChatColor.RED+"Experienced Contract";
-//            }
-//        }
+        String title = "";
+        switch(difficulty){
+            case Rookie -> {
+                title = ChatColor.GREEN+"Rookie Contract";
+            }
+            case Apprentice -> {
+                title = ChatColor.YELLOW+"Apprentice Contract";
+            }
+            case Experienced -> {
+                title = ChatColor.RED+"Experienced Contract";
+            }
+        }
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:

@@ -78,30 +78,35 @@ public class Contract
         this.requestedItemsRare.add(item);
     }
     public static void assignPlayerContracts(Player p, Bandit b){
-        List<Contract> contractPool = b.getContracts();
+        List<Contract> mainPool = b.getContracts();
+        List<Contract> contractPool = new ArrayList<>();
+        contractPool.addAll(mainPool);
         refreshContracts(contractPool);
 
         //GET CONTRACTS
+        System.out.println("INITIALIZING ROOKIES");
         List<Contract> rookieContracts = initializeContracts(Difficulty.Rookie,contractPool);
         Contract rookie = ContractUtils.getSingleContract(rookieContracts);
         contractPool.remove(rookie);
         b.setRookieContract(rookie);
 
+        System.out.println("INITIALIZING APPRENTICE");
         List<Contract> apprenticeContracts = initializeContracts(Difficulty.Apprentice,contractPool);
         Contract apprentice = ContractUtils.getSingleContract(apprenticeContracts);
         contractPool.remove(apprentice);
         b.setApprenticeContract(apprentice);
 
+        System.out.println("INITIALIZING EXPERIENCED");
         List<Contract> experiencedContracts = initializeContracts(Difficulty.Experienced,contractPool);
         Contract experienced = ContractUtils.getSingleContract(experiencedContracts);
         contractPool.remove(experienced);
-        b.setRookieContract(experienced);
+        b.setExperiencedContract(experienced);
 
         //int masterOdds = GlobalUtils.getRandomNumber(101);
         //if(masterOdds<50){
         //    b.setExperiencedContract(ContractUtils.getSingleContract(masterContracts));
         //}else{
-            b.setExperiencedContract(ContractUtils.getSingleContract(experiencedContracts));
+
         //}
 
     }
@@ -117,7 +122,7 @@ public class Contract
         return allContracts;
     }
     public static void refreshContracts(List<Contract> contractPool){
-        System.out.println("REFRESHING");
+        //System.out.println("REFRESHING");
         for(Contract contract : contractPool){
             contract.generateContract();
         }
@@ -126,6 +131,7 @@ public class Contract
         List<Contract> targeted = new ArrayList<>();
         for(Contract contract : contractPool){
             if(contract.getDifficulty().equals(difficulty)){
+                System.out.println("Difficult matched.");
                 targeted.add(contract);
             }
         }
@@ -402,10 +408,6 @@ public class Contract
 
     public List<CompletionStep> getSteps() {
         return steps;
-    }
-    public static HashMap<String, Contract> getContracts()
-    {
-        return playerContracts;
     }
     public String getContractName() {
         return contractName;
