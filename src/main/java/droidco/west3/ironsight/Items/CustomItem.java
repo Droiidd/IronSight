@@ -156,6 +156,46 @@ CustomItem {
     }
     public int getRarity(){return rarity; }
 
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public void setRarity(int rarity) {
+        this.rarity = rarity;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Enchantment getEnchant() {
+        return enchant;
+    }
+
+    public void setEnchant(Enchantment enchant) {
+        this.enchant = enchant;
+    }
+
+    public int getEnchantMultiplier() {
+        return enchantMultiplier;
+    }
+
+    public void setEnchantMultiplier(int enchantMultiplier) {
+        this.enchantMultiplier = enchantMultiplier;
+    }
+
     public Material getMaterial(){return material;}
     public String getItemCode(){
         return this.itemCode;

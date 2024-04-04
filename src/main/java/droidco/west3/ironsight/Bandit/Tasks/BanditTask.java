@@ -2,6 +2,8 @@ package droidco.west3.ironsight.Bandit.Tasks;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -66,11 +68,11 @@ public class BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
-        Contract.assignPlayerContracts(p,b);
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
 
         b.setDoingContract(false);
+        b.loadContracts();
 
         this.undeadMiner = new FrontierMob(FrontierMobType.UNDEAD_MINER);
         this.berserkerMiner = new FrontierMob(FrontierMobType.BERSERKER_MINER);
@@ -96,6 +98,8 @@ public class BanditTask extends BukkitRunnable {
         this.raiders.add(ranger);
         this.raiders.add(wolf);
         this.raiders.add(raiderBrute);
+
+        Contract.assignPlayerContracts(p,b);
     }
 
     @Override
