@@ -74,7 +74,7 @@ public class ActiveContractUI
         if(requestedItem != null){
             item = requestedItem;
             ItemMeta meta = item.getItemMeta();
-            String requestMessage = String.valueOf(ChatColor.WHITE)+"Aqcuire "+ChatColor.GREEN +requestAmount+" "+requestedItem.getItemMeta().getDisplayName();
+            String requestMessage = String.valueOf(ChatColor.GRAY)+"Aqcuire "+requestAmount+" "+requestedItem.getItemMeta().getDisplayName();
             meta.setDisplayName(requestMessage);
             item.setItemMeta(meta);
         }

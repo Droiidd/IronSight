@@ -72,7 +72,7 @@ public class ContractUiEvents implements Listener {
                         Contract active = b.getActiveContract();
                         if(active == null){
                             p.closeInventory();
-                            p.sendMessage(ChatColor.RED+"No active contract!");
+                            p.sendMessage("No active contract!");
                         }
                         else {
                             //p.sendMessage(active.getContractName());

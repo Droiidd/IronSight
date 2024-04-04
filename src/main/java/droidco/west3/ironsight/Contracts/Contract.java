@@ -204,6 +204,14 @@ public class Contract
         ItemMeta iconMeta = this.contractIcon.getItemMeta();
         iconMeta.setDisplayName(listingName);
         this.contractIcon.setItemMeta(iconMeta);
+
+        this.listingName = ChatColor.WHITE+"Oil Field Crate Heist";
+        this.contractIcon = new ItemStack(Material.MILK_BUCKET);
+        this.contractIcon.getItemMeta().setDisplayName(listingName);
+
+        ItemMeta iconMeta = this.contractIcon.getItemMeta();
+        iconMeta.setDisplayName(listingName);
+        this.contractIcon.setItemMeta(iconMeta);
         setRewardXp();
     }
 
