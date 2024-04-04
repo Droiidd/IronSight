@@ -53,7 +53,8 @@ public class AdminGetHorseCmd implements CommandExecutor
             if(sameNameFlag){
                 p.sendMessage("Horse exists with that name already!!");
             }else{
-                new FrontierHorse(p.getUniqueId().toString(),horseName,horseType);
+                b.getHorses().add(new FrontierHorse(p.getUniqueId().toString(),horseName,horseType));
+                p.sendMessage("New horse!");
             }
         }
     }

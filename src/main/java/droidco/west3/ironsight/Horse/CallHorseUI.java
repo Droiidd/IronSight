@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CallHorseUI {
     public static Inventory callHorseGui(Player p) {
-        Inventory playerHorses = Bukkit.createInventory(p, 9, ChatColor.AQUA + p.getDisplayName() + ChatColor.GRAY + "'s horses");
+        Inventory playerHorses = Bukkit.createInventory(p, 9, ChatColor.DARK_RED + ChatColor.stripColor(p.getDisplayName())  + ChatColor.DARK_GRAY + "'s horses");
         Bandit b = Bandit.getPlayer(p);
         List<FrontierHorse> horses = b.getHorses();
         int count = 0;
@@ -34,7 +34,7 @@ public class CallHorseUI {
                 count++;
             }
         }
-        for (int i = 2; i < 9; i++) {
+        for (int i = 3; i < 9; i++) {
             ItemStack item = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName("");

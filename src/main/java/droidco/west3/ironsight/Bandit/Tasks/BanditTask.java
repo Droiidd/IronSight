@@ -267,6 +267,7 @@ public class    BanditTask extends BukkitRunnable {
                     b.setSummoningHorse(false);
                     horseTimer = 0;
                     b.getHorseBeingSummoned().summonHorse(p);
+                    b.setHorseBeingSummoned(null);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
