@@ -15,6 +15,9 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Quantity;
+import droidco.west3.ironsight.NPC.NPC;
+import droidco.west3.ironsight.NPC.NPCType;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -363,6 +366,10 @@ public class GameContentLoader {
             ItemIcon drugFields = new ItemIcon("Drug Fields","drug_field_tracker", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.KELP);
 
+        //      ===--- BANKER ITEMS ---===
+            ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD );
+            ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.EMERALD_BLOCK );
+
 
         System.out.println("Icons loaded");
     }
@@ -389,3 +396,9 @@ public class GameContentLoader {
     public static void loadNPCs() {
         System.out.println("Loading NPCs");
 
+        NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1908, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        NPC contractor = new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+
+
+    }

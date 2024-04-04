@@ -20,7 +20,7 @@ public enum NPCType {
     CHIEF_OF_POLICE,
     DRUG_PROCESSOR,
     SUPER_PROCESSOR,
-    GEODE_BREAKER,
+
 
     OIL_PROCESSOR,
 

@@ -12,6 +12,7 @@ import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.NPC.NPC;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -26,8 +27,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class BanditTask extends BukkitRunnable {
+public class    BanditTask extends BukkitRunnable {
     private ArrayList<BanditTask> tasks = new ArrayList<>();
     private final IronSight plugin;
     private final Bandit b;
@@ -183,6 +185,17 @@ public class BanditTask extends BukkitRunnable {
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
                 p.setLastDamage(0.0);
+                //SPAWN NPCS
+                if (currentLoc.isNewArrival()) {
+                    HashMap<String, NPC> npcs = NPC.getNPCs();
+                    for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
+                        NPC npc = entryNPC.getValue();
+
+                        npc.spawnNPC(p);
+
+                    }
+                }
+
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
                     //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM

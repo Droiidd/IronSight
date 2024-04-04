@@ -117,6 +117,9 @@ public class NPCUI {
     public static Inventory bankerUI(Player p) {
         Inventory bankerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Bank Teller");
         Bandit iPlayer = Bandit.getPlayer(p);
+        bankerUI.setItem(10, CustomItem.getCustomItem("Smoked Salmon").getItemForSale());
+        bankerUI.setItem(11, CustomItem.getCustomItem("Charred Potato").getItemForSale());
+        bankerUI.setItem(12, CustomItem.getCustomItem("Brown Stew").getItemForSale());
 
         return bankerUI;
 
@@ -129,13 +132,6 @@ public class NPCUI {
 
     }
 
-    public static Inventory contractorUI(Player p) {
-        Inventory contractorUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Contractor");
-        Bandit iPlayer = Bandit.getPlayer(p);
-
-        return contractorUI;
-
-    }
 
     public static Inventory chiefUI(Player p) {
         Inventory chiefUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Chief of Police");

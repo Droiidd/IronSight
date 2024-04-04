@@ -1,9 +1,10 @@
 package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Contracts.UI.ContractUI;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Tracker.TrackerUIs;
+import droidco.west3.ironsight.Tracker.TrackerUI;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -15,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -92,7 +94,7 @@ public class NPCEvents implements Listener {
                 break;
             }
             case CONTRACTOR -> {
-                p.openInventory(NPCUI.contractorUI(p));
+                p.openInventory(ContractUI.openContractUi(p));
                 break;
             }
             case CHIEF_OF_POLICE -> {
@@ -174,7 +176,68 @@ public class NPCEvents implements Listener {
 
 
         }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Bank Teller")) {
+            e.setCancelled(true);
+            switch (e.getCurrentItem().getType()) {
+                case EMERALD -> {
+                    NPC.getNPC("Bank Teller").addShoppingPlayer(p);
+                    p.sendMessage("How much money do you want to deposit?");
+                    b.setDepositing(true);
+                }
+
+                case EMERALD_BLOCK -> {
+                    NPC.getNPC("Bank Teller").addShoppingPlayer(p);
+                    p.sendMessage("How much money do you want to withdraw?");
+                    b.setWithdrawing(true);
+                }
+            }
 
 
+
+        }
+    }
+    @EventHandler
+    public void bankInteraction(AsyncPlayerChatEvent e) {
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        if (NPC.getShoppingPlayers().containsKey(p.getUniqueId().toString())) {
+
+            NPC shop = NPC.getShoppingPlayers().get(p.getUniqueId().toString());
+
+            double d = Double.parseDouble(e.getMessage());
+
+            if (shop.getType() == NPCType.BANKER) {
+                if (b.isDepositing()) {
+                    if (d > b.getWallet()) {
+                        p.closeInventory();
+                        p.sendMessage("You don't have that much money in your wallet!");
+                    }
+
+                    else {
+                        p.closeInventory();
+                        p.sendMessage("You have deposited " + d + "g!");
+                        b.updateWallet(-1 * d);
+                        b.updateBank(d);
+                    }
+                    b.setDepositing(false);
+                }
+                if (b.isWithdrawing()) {
+                    if (d > b.getBank()) {
+                        p.closeInventory();
+                        p.sendMessage("You don't have that much money in your bank!");
+                    }
+
+                    else {
+                        p.closeInventory();
+                        p.sendMessage("You have made a withdrawal of " + d + "g!");
+                        b.updateBank(-1 * d);
+                        b.updateWallet(d);
+                    }
+                }
+
+                NPC.getShoppingPlayers().remove(p.getUniqueId().toString());
+            }
+
+        }
     }
 }

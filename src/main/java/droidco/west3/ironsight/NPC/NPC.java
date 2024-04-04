@@ -1,9 +1,11 @@
 package droidco.west3.ironsight.NPC;
 
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
 import java.util.HashMap;
@@ -21,8 +23,11 @@ public class NPC {
 
     private boolean isLegal;
     private boolean isOfficer;
+    private FrontierLocation frontierLocation;
 
-    public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer) {
+    private static HashMap<String, NPC> shoppingPlayers;
+
+    public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer, FrontierLocation frontierLocation) {
 
         this.type = type;
         this.x = x;
@@ -33,19 +38,44 @@ public class NPC {
         this.isOfficer = isOfficer;
         npcs.put(displayName, this);
         this.displayName = String.valueOf(nameColor) + displayName;
+        this.frontierLocation = frontierLocation;
 
     }
 
-    public void spawnNPC(Location location) {
-        Villager shopkeeper = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
-        shopkeeper.setAI(false);
+    public void addShoppingPlayer(Player p) {
+        if (shoppingPlayers.containsKey(p.getUniqueId().toString())) {
+            shoppingPlayers.replace(p.getUniqueId().toString(), this);
+        }
+        else {
+            shoppingPlayers.put(p.getUniqueId().toString(), this);
+        }
+    }
+
+    public void spawnNPC(Player p) {
+        Villager npc = (Villager) p.getWorld().spawnEntity(new Location(p.getWorld(), this.x, this.y, this.z), EntityType.VILLAGER);
+        npc.setAI(false);
+        npc.setCustomName(displayName);
+        npc.setCustomNameVisible(true);
+
     }
     public static NPC getNPC(String displayName) {
         return npcs.get(displayName);
     }
 
+    public static HashMap<String, NPC> getNPCs() {
+        return npcs;
+    }
+
     public String getDisplayName() {
         return displayName;
+    }
+
+    public static HashMap<String, NPC> getShoppingPlayers() {
+        return shoppingPlayers;
+    }
+
+    public static void setShoppingPlayers(HashMap<String, NPC> shoppingPlayers) {
+        NPC.shoppingPlayers = shoppingPlayers;
     }
 
     public void setDisplayName(String displayName) {
