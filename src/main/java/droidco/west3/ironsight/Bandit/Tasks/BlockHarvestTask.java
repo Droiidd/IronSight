@@ -84,7 +84,7 @@ public class BlockHarvestTask extends BukkitRunnable {
                 }
                 int clusterChance = GlobalUtils.getRandomNumber(101);
                 if(clusterChance < 5){
-                    block.setType(getCluster(this.originalBlock));
+                    block.setType(getCluster(this.originalBlock) != null ? getCluster(this.originalBlock) : Material.RAW_IRON);
                 }
                 GlobalUtils.displayParticles(block.getLocation(), Particle.CRIT, Particle.CLOUD, 8);
             }

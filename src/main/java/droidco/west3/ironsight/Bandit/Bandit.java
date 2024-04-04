@@ -141,7 +141,7 @@ public class Bandit
         test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
         Contract testC4 = new Contract( ContractType.Delivery, test4Locs ,2, DeliveryType.MINER);
         List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
+        test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
         Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
 
         contracts.add(testC1);

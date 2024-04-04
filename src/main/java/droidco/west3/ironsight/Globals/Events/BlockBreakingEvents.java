@@ -42,7 +42,6 @@ public class BlockBreakingEvents implements Listener {
 
         if (block.getType() == Material.LILY_OF_THE_VALLEY) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Life Seeds"),1);
-
         }
 
         if (block.getType() == Material.BLUE_ORCHID) {
@@ -51,19 +50,15 @@ public class BlockBreakingEvents implements Listener {
 
         if (block.getType() == Material.SWEET_BERRY_BUSH) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Heart Fruit"),1);
-
         }
         if (block.getType() == Material.TORCHFLOWER) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Frenzied Stems"),1);
-
         }
         if (block.getType() == Material.WARPED_FUNGUS) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Moles Breath"),1);
-
         }
         if (block.getType() == Material.IRON_ORE) {
             breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),1);
-
         }
         if (block.getType() == Material.COPPER_ORE) {
             breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),1);
@@ -93,13 +88,14 @@ public class BlockBreakingEvents implements Listener {
         BlockHarvestTask changeBlock = new BlockHarvestTask(plugin, p, block, BlockType.MINERALS);
         if(type.equals(BlockType.MINERALS)){
             int geodeOdds = GlobalUtils.getRandomNumber(101);
-            if(geodeOdds < 1){
+            if(geodeOdds < 3){
                 item = CustomItem.getCustomItem("Geode");
-            }else if (geodeOdds < 6){
+            }else if (geodeOdds < 10){
                 item = CustomItem.getCustomItem("Crystalized Geode");
             }
         }
-        item.getItemStack().setAmount(amount);
-        block.getWorld().dropItemNaturally(block.getLocation(),item.getItemStack());
+        ItemStack tmp = item.getItemStack();
+        tmp.setAmount(amount);
+        block.getWorld().dropItemNaturally(block.getLocation(),tmp);
     }
 }

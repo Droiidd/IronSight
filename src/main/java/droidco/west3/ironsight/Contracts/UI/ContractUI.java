@@ -50,18 +50,6 @@ public class ContractUI {
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
-//        String title = "";
-//        switch(difficulty){
-//            case Rookie -> {
-//                title = ChatColor.GREEN+"Rookie Contract";
-//            }
-//            case Apprentice -> {
-//                title = ChatColor.YELLOW+"Apprentice Contract";
-//            }
-//            case Experienced -> {
-//                title = ChatColor.RED+"Experienced Contract";
-//            }
-//        }
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:

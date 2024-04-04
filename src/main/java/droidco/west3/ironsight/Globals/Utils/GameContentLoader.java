@@ -260,7 +260,7 @@ public class GameContentLoader {
 
         FrontierLocation stormpoint = new FrontierLocation("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
 
-        FrontierLocation northoil = new FrontierLocation("North Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
+        FrontierLocation northoil = new FrontierLocation("North Moraine Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
         OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
@@ -305,6 +305,8 @@ public class GameContentLoader {
         ItemIcon contractDesc = new ItemIcon(String.valueOf(ChatColor.BOLD)+"Description","contract_desc","What to do:",Material.MOJANG_BANNER_PATTERN);
 
         ItemIcon nextPage = new ItemIcon("Next Page","next_page","Click to go to next page",Material.MAGENTA_GLAZED_TERRACOTTA);
+        new ItemIcon("Previous Page","previous_page","Click to go to previous page",Material.MAGENTA_GLAZED_TERRACOTTA);
+
         ItemIcon miner = new ItemIcon("Miner","miner_prefix","Choose miner (Level 3)",Material.STONE_PICKAXE);
         ItemIcon cowboy = new ItemIcon("Cowboy","cowboy_prefix","Choose cowboy (Level 4)", Material.HAY_BLOCK);
         ItemIcon tracker = new ItemIcon("Tracker","tracker_prefix", "Choose tracker (Level 5)",Material.LEATHER_BOOTS);
@@ -342,19 +344,23 @@ public class GameContentLoader {
             ItemIcon chief = new ItemIcon("Chief of Police","chief_of_police_tracker", "Find Chief", Material.PIGLIN_HEAD);
         //      ===--- TRACKER LOCATION ---===
             ItemIcon locations = new ItemIcon("Locations","location_tracker", "Find locations", Material.COMPASS);
+
             ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.IRON_PICKAXE);
                 ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.IRON_ORE);
                 ItemIcon barron = new ItemIcon("Barron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines","half_dome_tracker", "Find the Half Dome Mines", Material.STONE);
-            ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);
+
+                ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);
                 ItemIcon pearl = new ItemIcon("Pearl River","pearl_river_tracker", "Find Pearl River", Material.MUSIC_DISC_CAT);
                 ItemIcon threeForks = new ItemIcon("Three Forks Delta", "three_forks_delta_tracker","Find Three Forks Delta", Material.MUSIC_DISC_CHIRP);
                 ItemIcon lowerGuada = new ItemIcon("Lower Guadalupe River","lower_guadalupe_tracker", "Find Guadalupe River", Material.MUSIC_DISC_BLOCKS);
                 ItemIcon slough = new ItemIcon("Slough Creek River","slough_creek_river_tracker", "Find Slough Creek", Material.MUSIC_DISC_FAR);
-            ItemIcon forestReserves = new ItemIcon("Forest Reserves","forest_reserves_tracker", "Find Forest Reserves", Material.OAK_SAPLING);
+
+                ItemIcon forestReserves = new ItemIcon("Forest Reserves","forest_reserves_tracker", "Find Forest Reserves", Material.OAK_SAPLING);
                 ItemIcon grizzly = new ItemIcon("Grizzly Ridge","grizzly_ridge_tracker", "Find Grizzly Ridge", Material.OAK_SAPLING);
                 ItemIcon marston = new ItemIcon("Marston Glacier", "marston_glacier_tracker","Find Marston Glacier", Material.BIRCH_SAPLING);
                 ItemIcon hawkRidge = new ItemIcon("Hawk Ridge Forest","hawk_ridge_forest_tracker", "Find Hawk Ridge Forest", Material.ACACIA_SAPLING);
+
                 ItemIcon sentinel = new ItemIcon("Sentinel Rock","sentinel_rock_tracker", "Find Sentinel Rock", Material.QUARTZ);
             ItemIcon banditCamps = new ItemIcon("Bandit Camps", "bandit_camp_tracker","Find Bandit Camps", Material.SKELETON_SKULL);
                 ItemIcon redAsh = new ItemIcon("Red Ash Camp", "red_ash_camp_tracker","Find Red Ash Camp", Material.REDSTONE);
