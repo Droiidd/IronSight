@@ -367,8 +367,7 @@ public class GameContentLoader {
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.KELP);
 
                 new ItemIcon("Complete Contract","complete_contract","Click if all steps are complete", Material.EMERALD_BLOCK);
-                new ItemIcon("Complete Contract","complete_contract","Click if all steps are complete", Material.EMERALD_BLOCK);
-        //      ===--- BANKER ITEMS ---===
+                //      ===--- BANKER ITEMS ---===
             ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD );
             ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.EMERALD_BLOCK );
 
