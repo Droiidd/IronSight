@@ -9,6 +9,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -29,75 +30,81 @@ public class NPCEvents implements Listener {
     @EventHandler
     public void npcRightClick(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
-        String clickedNPCname = e.getRightClicked().getCustomName();
-        NPC clickedNPC = NPC.getNPC(ChatColor.stripColor(clickedNPCname));
-        Bandit b = Bandit.getPlayer(p);
-        switch (clickedNPC.getType()) {
-            case ARMORER -> {
-                p.openInventory(NPCUI.armorerUI(p));
-                break;
-            }
-            case ILLEGAL_ARMORER -> {
-                p.openInventory(NPCUI.illegalArmorerUI(p));
-                break;
-            }
-            case SHOPKEEPER -> {
-                p.openInventory(NPCUI.shopkeeperUI(p));
-                break;
-            }
-            case FISHERMAN -> {
-                p.openInventory(NPCUI.fishermanUI(p));
-                break;
-            }
-            case PHARMACIST -> {
-                p.openInventory(NPCUI.pharmacistUI(p));
-                break;
-            }
-            case OFFICER_ARMS_DEALER -> {
-                p.openInventory(NPCUI.officerArmsUI(p));
-                break;
-            }
-            case ARMS_DEALER -> {
-                p.openInventory(NPCUI.armsDealerUI(p));
-                break;
-            }
-            case ILL_ARMS_DEALER -> {
-                p.openInventory(NPCUI.illegalArmsUI(p));
-                break;
-            }
-            case GEOLOGIST -> {
-                p.openInventory(NPCUI.geologistUI(p));
-                break;
-            }
-            case STABLE_MANAGER -> {
-                p.openInventory(NPCUI.stableManagerUI(p));
-                break;
-            }
-            case CONDUCTOR -> {
-                p.openInventory(NPCUI.conductorUI(p));
-                break;
-            }
-            case FERRY_CAPTAIN -> {
-                p.openInventory(NPCUI.ferryCaptainUI(p));
-                break;
-            }
-            case BANKER -> {
-                p.openInventory(NPCUI.bankerUI(p));
-                break;
+        if(e.getRightClicked().getType().equals(EntityType.VILLAGER)){
+            String clickedNPCname = e.getRightClicked().getCustomName();
+            NPC clickedNPC = NPC.getNPC(ChatColor.stripColor(clickedNPCname));
+            if(clickedNPC != null){
+                e.setCancelled(true);
+                Bandit b = Bandit.getPlayer(p);
+                switch (clickedNPC.getType()) {
+                    case ARMORER -> {
+                        p.openInventory(NPCUI.armorerUI(p));
+                        break;
+                    }
+                    case ILLEGAL_ARMORER -> {
+                        p.openInventory(NPCUI.illegalArmorerUI(p));
+                        break;
+                    }
+                    case SHOPKEEPER -> {
+                        p.openInventory(NPCUI.shopkeeperUI(p));
+                        break;
+                    }
+                    case FISHERMAN -> {
+                        p.openInventory(NPCUI.fishermanUI(p));
+                        break;
+                    }
+                    case PHARMACIST -> {
+                        p.openInventory(NPCUI.pharmacistUI(p));
+                        break;
+                    }
+                    case OFFICER_ARMS_DEALER -> {
+                        p.openInventory(NPCUI.officerArmsUI(p));
+                        break;
+                    }
+                    case ARMS_DEALER -> {
+                        p.openInventory(NPCUI.armsDealerUI(p));
+                        break;
+                    }
+                    case ILL_ARMS_DEALER -> {
+                        p.openInventory(NPCUI.illegalArmsUI(p));
+                        break;
+                    }
+                    case GEOLOGIST -> {
+                        p.openInventory(NPCUI.geologistUI(p));
+                        break;
+                    }
+                    case STABLE_MANAGER -> {
+                        p.openInventory(NPCUI.stableManagerUI(p));
+                        break;
+                    }
+                    case CONDUCTOR -> {
+                        p.openInventory(NPCUI.conductorUI(p));
+                        break;
+                    }
+                    case FERRY_CAPTAIN -> {
+                        p.openInventory(NPCUI.ferryCaptainUI(p));
+                        break;
+                    }
+                    case BANKER -> {
+                        p.openInventory(NPCUI.openBankerUI(p));
+                        break;
 
+                    }
+                    case VAULT_KEEPER -> {
+                        p.openInventory(NPCUI.vaultKeeperUI(p));
+                        break;
+                    }
+                    case CONTRACTOR -> {
+                        p.openInventory(ContractUI.openContractUi(p));
+                        break;
+                    }
+                    case CHIEF_OF_POLICE -> {
+                        p.openInventory(NPCUI.chiefUI(p));
+                        break;
+                    }
             }
-            case VAULT_KEEPER -> {
-                p.openInventory(NPCUI.vaultKeeperUI(p));
-                break;
-            }
-            case CONTRACTOR -> {
-                p.openInventory(ContractUI.openContractUi(p));
-                break;
-            }
-            case CHIEF_OF_POLICE -> {
-                p.openInventory(NPCUI.chiefUI(p));
-                break;
-            }
+        }
+
 
         }
 

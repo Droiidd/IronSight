@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,15 +33,18 @@ public class CombatEvents implements Listener
         }else if(e.getDamager() instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
             b.setCombatBlockFlag(true);
-            if(!b.isCombatBlocked()){
-                b.setCombatBlocked(true);
-                p.sendMessage(ChatColor.GRAY+"You are "+ChatColor.RED+"combat blocked "+ChatColor.GRAY+"don't log-out!");
+            if(!b.getCurrentLocation().getType().equals(LocationType.TOWN)){
+                if(!b.isCombatBlocked()){
+                    b.setCombatBlocked(true);
+                    p.sendMessage(ChatColor.GRAY+"You are "+ChatColor.RED+"combat blocked "+ChatColor.GRAY+"don't log-out!");
 
+                }
+                if(!b.isWanted()){
+                    b.setWanted(true);
+                    Bukkit.getServer().broadcastMessage(b.getTitle() +ChatColor.RESET+p.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
+                }
             }
-            if(!b.isWanted()){
-                b.setWanted(true);
-                Bukkit.getServer().broadcastMessage(b.getTitle() +ChatColor.RESET+p.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
-            }
+
         }
     }
 

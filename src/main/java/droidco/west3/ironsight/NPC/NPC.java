@@ -1,14 +1,17 @@
 package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class NPC {
     private String displayName;
@@ -26,6 +29,7 @@ public class NPC {
     private FrontierLocation frontierLocation;
 
     private static HashMap<String, NPC> shoppingPlayers = new HashMap<>();
+    private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
 
     public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer, FrontierLocation frontierLocation) {
 
@@ -36,10 +40,10 @@ public class NPC {
         this.nameColor = nameColor;
         this.isLegal = isLegal;
         this.isOfficer = isOfficer;
-        npcs.put(displayName, this);
         this.displayName = String.valueOf(nameColor) + displayName;
+        System.out.println("Display: "+displayName);
         this.frontierLocation = frontierLocation;
-
+        npcs.put(displayName, this);
     }
 
     public void addShoppingPlayer(Player p) {
@@ -67,10 +71,18 @@ public class NPC {
                 npc.setVillagerType(Villager.Type.SNOW);
             }
         }
-
+        entities.put(npc.getUniqueId(), npc);
     }
     public static NPC getNPC(String displayName) {
         return npcs.get(displayName);
+    }
+
+    public static HashMap<UUID, LivingEntity> getEntities() {
+        return entities;
+    }
+
+    public static void setEntities(HashMap<UUID, LivingEntity> entities) {
+        NPC.entities = entities;
     }
 
     public static HashMap<String, NPC> getNPCs() {

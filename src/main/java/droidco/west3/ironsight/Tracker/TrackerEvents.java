@@ -60,6 +60,34 @@ public class TrackerEvents implements Listener {
                     p.openInventory(TrackerUI.openLocationsUi(p));
                     break;
                 }
+                case IRON_PICKAXE -> {
+                    p.openInventory(TrackerUI.openMinesUi(p));
+                    break;
+                }
+                case WATER_BUCKET -> {
+                    p.openInventory(TrackerUI.openRiversUi(p));
+                    break;
+                }
+                case OAK_SAPLING -> {
+                    p.openInventory(TrackerUI.openForestReservesUi(p));
+                    break;
+                }
+                case SKELETON_SKULL -> {
+                    p.openInventory(TrackerUI.openBanditCampsUi(p));
+                    break;
+                }
+                case OAK_DOOR -> {
+                    p.openInventory(TrackerUI.openScavTownsUi(p));
+                    break;
+                }
+                case COAL -> {
+                    p.openInventory(TrackerUI.openOilFieldsUi(p));
+                    break;
+                }
+                case SPRUCE_SAPLING -> {
+                    p.openInventory(TrackerUI.openDrugFieldsUi(p));
+                    break;
+                }
 
 
             }

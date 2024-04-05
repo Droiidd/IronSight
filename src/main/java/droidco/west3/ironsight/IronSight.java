@@ -17,6 +17,7 @@ import droidco.west3.ironsight.Horse.CallHorseCommand;
 import droidco.west3.ironsight.Horse.HorseEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
+import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCEvents;
 import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
@@ -97,5 +98,11 @@ public final class IronSight extends JavaPlugin {
             mob.getValue().damage(100);
             System.out.println("Mob killed.");
         }
+        HashMap<UUID, LivingEntity> npcs = NPC.getEntities();
+        for(Map.Entry<UUID,LivingEntity> npc : npcs.entrySet()){
+            npc.getValue().damage(100);
+            System.out.println("NPC killed.");
+        }
+
     }
 }
