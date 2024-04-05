@@ -61,6 +61,7 @@ public class    BanditTask extends BukkitRunnable {
     private FrontierMob fox;
     private FrontierMob boar;
     private FrontierMob cow;
+    private int mobSec = 0;
     private List<FrontierMob> miners = new ArrayList<>();
     private List<FrontierMob> animals = new ArrayList<>();
     private List<FrontierMob> raiders = new ArrayList<>();
@@ -131,6 +132,10 @@ public class    BanditTask extends BukkitRunnable {
                         }
                     }
                 }
+            }
+            //      ===--- HELPFUL TIPS ---===
+            if(seconds % 300 == 0){
+                p.sendMessage(BanditUtils.getRandomTip());
             }
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
             FrontierLocation.displayLocation(p);
@@ -272,6 +277,7 @@ public class    BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
                     p.sendMessage(ChatColor.AQUA +b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    p.sendMessage(ChatColor.GRAY+"Shift + right-click to open it's inventory.");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
@@ -284,7 +290,7 @@ public class    BanditTask extends BukkitRunnable {
             }
             contractCounter++;
             //      ===--- MOB SPAWNING ---===
-            if(seconds == mobRespawnTime){
+            if(mobSec == mobRespawnTime){
                 //p.sendMessage("30 seconds passed.");
                 switch(currentLoc.getType()){
                     case MINE -> {
@@ -310,7 +316,7 @@ public class    BanditTask extends BukkitRunnable {
                         }
                     }
                 }
-                seconds = 0;
+                mobSec = 0;
             }
         }
 

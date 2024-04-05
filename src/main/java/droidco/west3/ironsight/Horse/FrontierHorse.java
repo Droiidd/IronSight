@@ -1,15 +1,13 @@
 package droidco.west3.ironsight.Horse;
 
+import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Donkey;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Bukkit;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class FrontierHorse {
@@ -20,9 +18,10 @@ public class FrontierHorse {
     private Donkey donkey;
     private SkeletonHorse skeleHorse;
     private boolean isSummoned;
-    private UUID horseUUID;
-    private UUID donkeyUUID;
+    private UUID iD;
     private ItemStack[] inventory = new ItemStack[0];
+    private static HashMap<UUID,FrontierHorse> horses = new HashMap<>();
+    private static HashMap<UUID, LivingEntity> summonedHorses = new HashMap<>();
 
 
     public FrontierHorse(String ownerId, String horseName, FrontierHorseType horseType) {
@@ -45,7 +44,7 @@ public class FrontierHorse {
         switch(horseType){
             case DONKEY -> {
                 donkey = p.getWorld().spawn(p.getLocation(), Donkey.class);
-                donkeyUUID = donkey.getUniqueId();
+                iD = donkey.getUniqueId();
                 donkey.setAdult();
                 donkey.setOwner(p);
                 donkey.setTamed(true);
@@ -55,34 +54,37 @@ public class FrontierHorse {
                 donkey.setCustomNameVisible(true);
                 donkey.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2);
                 donkey.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
-            }case SPEEDY -> {
+                horses.put(iD,this);
+                summonedHorses.put(iD, donkey);
+            }case SPEEDY,DEFAULT -> {
                 horse = p.getWorld().spawn(p.getLocation(), Horse.class);
-                horseUUID = horse.getUniqueId();
+                iD = horse.getUniqueId();
                 horse.setOwner(p);
                 horse.setAdult();
                 horse.setTamed(true);
                 horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                 horse.setCustomName(horseName);
                 horse.setCustomNameVisible(true);
+                horses.put(iD,this);
+                summonedHorses.put(iD, horse);
 
-                horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.45);
-                horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
-                horse.setStyle(Horse.Style.WHITEFIELD);
-
-            }case DEFAULT -> {
-                horse = p.getWorld().spawn(p.getLocation(), Horse.class);
-                horseUUID = horse.getUniqueId();
-                horse.setOwner(p);
-                horse.setAdult();
-                horse.setTamed(true);
-                horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                horse.setCustomName(horseName);
-                horse.setCustomNameVisible(true);
-                horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
-                horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
+                if(horseType.equals(FrontierHorseType.DEFAULT)){
+                    horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
+                    horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
+                }else if(horseType.equals(FrontierHorseType.SPEEDY)){
+                    horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.45);
+                    horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
+                    horse.setStyle(Horse.Style.WHITEFIELD);
+                }
             }
         }
 
+    }
+    public static FrontierHorse getHorse(UUID horseId){
+        return horses.get(horseId);
+    }
+    public static LivingEntity getSummonedHorse(UUID horseId){
+        return summonedHorses.get(horseId);
     }
 
     public UUID getHorseId() {
@@ -106,12 +108,9 @@ public class FrontierHorse {
     }
 
     public UUID getHorseUUID() {
-        return horseUUID;
+        return iD;
     }
 
-    public UUID getDonkeyUUID() {
-        return donkeyUUID;
-    }
 
     public FrontierHorseType getHorseType() {
         return this.horseType;

@@ -5,10 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.List;
 
@@ -36,8 +40,73 @@ public class HorseEvents implements Listener {
             }
         }
     }
+    @EventHandler
+    public void playerMountingHorse(PlayerInteractEntityEvent e){
+        Player p = e.getPlayer();
+        boolean isHorseOwner = false;
+        if(e.getRightClicked().getType().equals(EntityType.HORSE) || e.getRightClicked().getType().equals(EntityType.DONKEY)){
+            FrontierHorse horse = FrontierHorse.getHorse(e.getRightClicked().getUniqueId());
+            if(horse != null){
+                if(p.getUniqueId().toString().equalsIgnoreCase(horse.getOwnerId())){
+                    isHorseOwner = true;
+                }
+            }
+        }
+        if(!isHorseOwner){
+            e.setCancelled(true);
+            p.sendMessage(ChatColor.RED+ "This is not your horse!");
+        }else{
+            if(p.isSneaking()){
+                e.setCancelled(true);
+                p.openInventory(HorseUI.openHorseMenu(p,FrontierHorse.getHorse(e.getRightClicked().getUniqueId())));
+            }
+        }
 
+    }
 
+    @EventHandler
+    public void disconnectedHorsesSummoned(PlayerQuitEvent e){
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        List<FrontierHorse> horses = b.getHorses();
+        for(FrontierHorse horse : horses){
+            if(horse.isSummoned()){
+                horse.setSummoned(false);
+                FrontierHorse.getSummonedHorse(horse.getHorseId()).remove();
+            }
+        }
+    }
+    @EventHandler
+    public void horseInventoryListener(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        Bandit b = Bandit.getPlayer(p);
+        FrontierHorse targetHorse = null;
+        List<FrontierHorse> horses = b.getHorses();
+        for(FrontierHorse horse : horses){
+            String invTitle = horse.getHorseName()+"'s saddle-pack";
+            if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
+                targetHorse = horse;
+            }
+        }
+        if(targetHorse != null){
+            e.setCancelled(true);
+            switch(e.getCurrentItem().getType()){
+                case HAY_BLOCK -> {
+                    FrontierHorse.getSummonedHorse(targetHorse.getHorseId()).remove();
+                    targetHorse.setSummoned(false);
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.GRAY+"Sent "+ChatColor.GREEN+targetHorse.getHorseName()+ChatColor.GRAY+" back to the stable");
+                }
+                case BARRIER -> {
+                    p.closeInventory();
+                }
+                case CHEST -> {
+                    targetHorse.openHorseInventory(p);
+                }
+            }
+        }
+
+    }
 
 }
 

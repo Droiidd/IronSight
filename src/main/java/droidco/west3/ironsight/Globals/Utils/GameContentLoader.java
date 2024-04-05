@@ -364,7 +364,7 @@ public class GameContentLoader {
                 ItemIcon sentinel = new ItemIcon("Sentinel Rock","sentinel_rock_tracker", "Find Sentinel Rock", Material.QUARTZ);
             ItemIcon banditCamps = new ItemIcon("Bandit Camps", "bandit_camp_tracker","Find Bandit Camps", Material.SKELETON_SKULL);
                 ItemIcon redAsh = new ItemIcon("Red Ash Camp", "red_ash_camp_tracker","Find Red Ash Camp", Material.REDSTONE);
-                ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base","storm_point_tracker", "Find Storm Point", Material.ITEM_FRAME);
+                ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base","storm_point_tracker", "Find Storm Point", Material.WITHER_SKELETON_SKULL);
             ItemIcon scavTowns = new ItemIcon("Scav Towns","scav_town_tracker", "Find Scav Towns", Material.OAK_DOOR);
                 ItemIcon florence = new ItemIcon("Florence Peak", "florence_peak_tracker", "Find Florence Peak", Material.ACACIA_DOOR);
                 ItemIcon washington = new ItemIcon("Washington Column", "washington_column_tracker","Find Washington Column", Material.SPRUCE_DOOR);

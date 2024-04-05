@@ -1,6 +1,8 @@
-package droidco.west3.ironsight.Horse;
+package droidco.west3.ironsight.Horse.Commands;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Horse.FrontierHorse;
+import droidco.west3.ironsight.Horse.FrontierHorseType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

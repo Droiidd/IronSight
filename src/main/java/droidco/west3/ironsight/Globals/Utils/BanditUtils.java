@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,14 @@ public class BanditUtils {
                 return String.valueOf(ChatColor.YELLOW)+ "Explorer";
         }
         return "";
+    }
+    public static String getRandomTip()
+    {
+        ArrayList<String> tips = new ArrayList<>();
+        tips.add(ChatColor.YELLOW+"Don't forget to send your horse back to the stable when you arrive at your destination");
+
+        int tip = GlobalUtils.getRandomNumber(tips.size());
+        return tips.get(tip);
     }
 }
 

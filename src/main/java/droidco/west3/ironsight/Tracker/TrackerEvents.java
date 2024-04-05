@@ -3,6 +3,7 @@ package droidco.west3.ironsight.Tracker;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -239,23 +240,22 @@ public class TrackerEvents implements Listener {
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Rivers")) {
             e.setCancelled(true);
-            switch (e.getCurrentItem().getType()) {
-                case MUSIC_DISC_CAT -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Pearl Mines"));
-                    p.closeInventory();
-                }
-                case MUSIC_DISC_CHIRP -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta"));
-                    p.closeInventory();
-                }
-                case MUSIC_DISC_BLOCKS -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
-                    p.closeInventory();
-                }
-                case MUSIC_DISC_FAR -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek"));
-                    p.closeInventory();
-                }
+            Material targetType = e.getCurrentItem().getType();
+            if(targetType.equals(ItemIcon.getIcon("pearl_river_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Pearl River"));
+                p.closeInventory();
+            }
+            else if(targetType.equals(ItemIcon.getIcon("slough_creek_river_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek River"));
+                p.closeInventory();
+            }
+            else if(targetType.equals(ItemIcon.getIcon("three_forks_delta_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta"));
+                p.closeInventory();
+            }
+            else if(targetType.equals(ItemIcon.getIcon("lower_guadalupe_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
+                p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Forest Reserves")) {
             e.setCancelled(true);
@@ -280,16 +280,14 @@ public class TrackerEvents implements Listener {
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Bandit Camps")) {
             e.setCancelled(true);
-            switch (e.getCurrentItem().getType()) {
-                case REDSTONE -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
-                    p.closeInventory();
-                }
-                case ITEM_FRAME -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
-                    p.closeInventory();
-                }
-
+            Material targetType = e.getCurrentItem().getType();
+            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
+                p.closeInventory();
+            }
+            else if(targetType.equals(ItemIcon.getIcon("storm_point_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
+                p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Scav Towns")) {
             e.setCancelled(true);
@@ -309,12 +307,10 @@ public class TrackerEvents implements Listener {
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Oil Fields")) {
             e.setCancelled(true);
-
-            switch (e.getCurrentItem().getType()) {
-                case BUCKET -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
-                    p.closeInventory();
-                }
+            Material targetType = e.getCurrentItem().getType();
+            if(targetType.equals(ItemIcon.getIcon("north_moraine_oil_field_tracker"))){
+                b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
+                p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Drug Fields")) {
             e.setCancelled(true);
