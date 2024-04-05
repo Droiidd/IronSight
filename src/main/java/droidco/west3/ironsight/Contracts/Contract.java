@@ -6,10 +6,13 @@ import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
+import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
@@ -32,9 +35,10 @@ public class Contract
     private int requestedAmount;
     private String listingName;
     private List<String> description;
-    public List<CompletionStep> steps = new ArrayList<>();
-    public List<ItemStack> requestedItemsNormal = new ArrayList<>();
-    public List<ItemStack> requestedItemsRare = new ArrayList<>();
+    private List<CompletionStep> steps = new ArrayList<>();
+    private List<ItemStack> requestedItemsNormal = new ArrayList<>();
+    private List<ItemStack> requestedItemsRare = new ArrayList<>();
+    private ItemStack contractIcon;
 
     public Contract( ContractType type, List<FrontierLocation> contractLocs, int rarity) {
         //THESE ARE UNIVERSAL FOR THE CONTRACT
@@ -56,10 +60,12 @@ public class Contract
     {
         switch(difficulty){
             case Rookie -> {
-                this.rewardXp = 25;
+                //this.rewardXp = 25;
+                this.rewardXp = 11;
             }
             case Apprentice -> {
-                this.rewardXp = 45;
+                //this.rewardXp = 45;
+                this.rewardXp = 19;
             }
             case Experienced -> {
                 this.rewardXp = 60;
@@ -176,8 +182,10 @@ public class Contract
         int odds = GlobalUtils.getRandomNumber(101);
         if(odds<=20){
             this.difficulty = Difficulty.Master;
+            this.reward = 3150.0;
         }else {
             this.difficulty = Difficulty.Experienced;
+            this.reward = 2500.0;
         }
         this.listingName = ChatColor.WHITE+ contractName +" - "+ ContractUtils.getDifficultyScale(difficulty);
         List<String> desc = new ArrayList<>();
@@ -188,6 +196,15 @@ public class Contract
         desc2.add("Guard off all enemies.");
         desc2.add("Survive until crate unlocks.");
         addCompletionStep("steptest2",2,desc2,null,"Hold down "+ frontierLocation.getLocName());
+
+        this.listingName = ChatColor.WHITE+"Oil Field Crate Heist";
+        this.contractIcon = new ItemStack(Material.MILK_BUCKET);
+        this.contractIcon.getItemMeta().setDisplayName(listingName);
+
+        ItemMeta iconMeta = this.contractIcon.getItemMeta();
+        iconMeta.setDisplayName(listingName);
+        this.contractIcon.setItemMeta(iconMeta);
+        setRewardXp();
     }
 
     public void generateNewDelivery(){
@@ -214,10 +231,11 @@ public class Contract
                 }
             }
         }
-        bulkMultiplier = GlobalUtils.getRandomNumber(5);
+        bulkMultiplier = GlobalUtils.getRandomRange (2,5);
         int bulkOdds = GlobalUtils.getRandomNumber(101);
         if(bulkOdds < 10){
             amount = amount * bulkMultiplier;
+            bulkOrder = true;
         }
         this.requestedAmount = amount;
         //      CHOOSE THE ITEM
@@ -255,6 +273,25 @@ public class Contract
                  int fishChoice = GlobalUtils.getRandomNumber(fish.size());
                  requestedItem = fish.get(fishChoice);
                 }
+
+            }case MINER -> {
+                if(rareRequest){
+                    List<ItemStack> gems = new ArrayList<>();
+                    gems.add(CustomItem.getCustomItem("Amethyst Bud").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Mossy Jade").getItemStack());
+                    gems.add(CustomItem.getCustomItem("River Diamond").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Void Opal").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Barron's Emerald").getItemStack());
+                    int gemChoice = GlobalUtils.getRandomNumber(gems.size());
+                    requestedItem = gems.get(gemChoice);
+                }else{
+                    List<ItemStack> gems = new ArrayList<>();
+                    gems.add(CustomItem.getCustomItem("Gold Ore").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Iron Ore").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Copper Ore").getItemStack());
+                    int gemChoice = GlobalUtils.getRandomNumber(gems.size());
+                    requestedItem = gems.get(gemChoice);
+                }
             }
         }
 
@@ -287,26 +324,39 @@ public class Contract
         switch (deliveryType){
             case FISHER -> {
                 List<String> desc = new ArrayList<>();
-                desc.add("Arrive at "+frontierLocation.getLocName());
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
                 desc.add("Fish until you have requested amount");
-                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ frontierLocation.getLocName());
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+            }
+            case MINER -> {
+                List<String> desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
+                desc.add("Mine ores until you have requested amount");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
         }
         List<String> desc = new ArrayList<>();
-        desc.add("Return to town");
+        desc.add("Return to any "+ChatColor.YELLOW+"Contractor");
         desc.add("for reward.");
         addCompletionStep("steptest",2,desc,null,"Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
         this.reward = amount * CustomItem.getCustomItem(ChatColor.stripColor(requestedItem.getItemMeta().getDisplayName())).getSalePrice();
         String listing = "";
         if(rareRequest){
-            listing.concat("Rare ");
+            listing += (String.valueOf(ChatColor.LIGHT_PURPLE)+ "Rare ");
+        }else{
+            listing += (String.valueOf(ChatColor.WHITE)+ "Normal ");
         }
         if(bulkOrder){
-            listing.concat("Bulk ");
+            listing += (String.valueOf(ChatColor.WHITE)+String.valueOf(ChatColor.BOLD)+ "Bulk ");;
         }
-        listing.concat("Order!");
-        this.listingName = ChatColor.WHITE+ contractName +listing;
+        listing +=(String.valueOf(ChatColor.WHITE)+"Order!");
+        this.listingName = listing;
+        this.contractIcon = new ItemStack(requestedItem.getType());
+        ItemMeta iconMeta = this.contractIcon.getItemMeta();
+        iconMeta.setDisplayName(listing);
+        this.contractIcon.setItemMeta(iconMeta);
+        setRewardXp();
     }
     public void generateNewBountyHunter(Player p){
         //Check if player gets a PLAYER or NPC contract
@@ -376,6 +426,14 @@ public class Contract
             }
         }
 
+    }
+
+    public ItemStack getContractIcon() {
+        return contractIcon;
+    }
+
+    public void setContractIcon(ItemStack contractIcon) {
+        this.contractIcon = contractIcon;
     }
 
     public int getRequestedAmount() {

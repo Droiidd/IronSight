@@ -2,6 +2,7 @@ package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;

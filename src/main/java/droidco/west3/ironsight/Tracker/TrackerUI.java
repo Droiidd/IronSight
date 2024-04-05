@@ -13,11 +13,18 @@ public class TrackerUI {
         Inventory trackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");
         Bandit b = Bandit.getPlayer(p);
         trackerUi.setItem(10, ItemIcon.getIcon("town_tracker").getItem());
-        trackerUi.setItem(11, ItemIcon.getIcon("santa_fe_tracker").getItem());
-        trackerUi.setItem(12, ItemIcon.getIcon("contract_tracker").getItem());
-        trackerUi.setItem(14, ItemIcon.getIcon("merchant_tracker").getItem());
+        //trackerUi.setItem(11, ItemIcon.getIcon("santa_fe_tracker").getItem());
+        //trackerUi.setItem(12, ItemIcon.getIcon("contract_tracker").getItem());
+        //trackerUi.setItem(14, ItemIcon.getIcon("merchant_tracker").getItem());
         trackerUi.setItem(15, ItemIcon.getIcon("npc_tracker").getItem());
         trackerUi.setItem(16, ItemIcon.getIcon("location_tracker").getItem());
+        trackerUi.setItem(21, ItemIcon.getIcon("mine_tracker").getItem());
+        trackerUi.setItem(11, ItemIcon.getIcon("river_tracker").getItem());
+        trackerUi.setItem(12, ItemIcon.getIcon("forest_reserves_tracker").getItem());
+        trackerUi.setItem(20, ItemIcon.getIcon("bandit_camp_tracker").getItem());
+        //trackerUi.setItem(19, ItemIcon.getIcon("scav_town_tracker").getItem());
+        trackerUi.setItem(23, ItemIcon.getIcon("oil_field_tracker").getItem());
+        trackerUi.setItem(24, ItemIcon.getIcon("drug_field_tracker").getItem());
         return trackerUi;
     }
 
@@ -85,20 +92,18 @@ public class TrackerUI {
 
     public static Inventory openMinesUi(Player p) {
         Inventory minesUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Mines");
-        Bandit iPlayer = Bandit.getPlayer(p);
         minesUi.setItem(10, ItemIcon.getIcon("black_spur_mines_tracker").getItem());
-        minesUi.setItem(11, ItemIcon.getIcon("barrons_canyon_tracker").getItem());
-        minesUi.setItem(12, ItemIcon.getIcon("half_dome_tracker").getItem());
+       // minesUi.setItem(11, ItemIcon.getIcon("barrons_canyon_tracker").getItem());
+       // minesUi.setItem(12, ItemIcon.getIcon("half_dome_tracker").getItem());
         return minesUi;
     }
 
     public static Inventory openRiversUi(Player p) {
         Inventory riversUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Rivers");
-        Bandit iPlayer = Bandit.getPlayer(p);
         riversUi.setItem(10, ItemIcon.getIcon("pearl_river_tracker").getItem());
         riversUi.setItem(11, ItemIcon.getIcon("three_forks_delta_tracker").getItem());
-        riversUi.setItem(12, ItemIcon.getIcon("lower_guadalupe_river_tracker").getItem());
-        riversUi.setItem(12, ItemIcon.getIcon("slough_creek_river_tracker").getItem());
+        riversUi.setItem(12, ItemIcon.getIcon("lower_guadalupe_tracker").getItem());
+        riversUi.setItem(13, ItemIcon.getIcon("slough_creek_river_tracker").getItem());
         return riversUi;
     }
     public static Inventory openForestReservesUi(Player p) {
@@ -106,15 +111,13 @@ public class TrackerUI {
         Bandit iPlayer = Bandit.getPlayer(p);
         forestsUi.setItem(10, ItemIcon.getIcon("grizzly_ridge_tracker").getItem());
         forestsUi.setItem(11, ItemIcon.getIcon("marston_glacier_tracker").getItem());
-        forestsUi.setItem(12, ItemIcon.getIcon("hawk_ridge_forest_tracker").getItem());
-        forestsUi.setItem(12, ItemIcon.getIcon("sentinel_rock_tracker").getItem());
         return forestsUi;
     }
 
     public static Inventory openBanditCampsUi(Player p) {
         Inventory banditCampsUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Forest Reserves");
         Bandit iPlayer = Bandit.getPlayer(p);
-        banditCampsUi.setItem(10, ItemIcon.getIcon("red_ash_tracker").getItem());
+        banditCampsUi.setItem(10, ItemIcon.getIcon("red_ash_camp_tracker").getItem());
         banditCampsUi.setItem(11, ItemIcon.getIcon("storm_point_tracker").getItem());
         return banditCampsUi;
     }

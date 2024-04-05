@@ -24,11 +24,11 @@ public class ContractUI {
     public static Inventory openContractorTitleSelectUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
         Bandit b = Bandit.getPlayer(p);
-        contractUi.setItem(10,ItemIcon.getIcon("cowboy_prefix").getItem());
-        contractUi.setItem(11,ItemIcon.getIcon("tracker_prefix").getItem());
-        contractUi.setItem(12,ItemIcon.getIcon("raider_prefix").getItem());
-        contractUi.setItem(14,ItemIcon.getIcon("miner_prefix").getItem());
-        contractUi.setItem(15,ItemIcon.getIcon("medic_prefix").getItem());
+        contractUi.setItem(11,ItemIcon.getIcon("cowboy_prefix").getItem());
+        contractUi.setItem(12,ItemIcon.getIcon("tracker_prefix").getItem());
+        contractUi.setItem(15,ItemIcon.getIcon("raider_prefix").getItem());
+        contractUi.setItem(10,ItemIcon.getIcon("miner_prefix").getItem());
+        contractUi.setItem(14,ItemIcon.getIcon("medic_prefix").getItem());
         contractUi.setItem(16,ItemIcon.getIcon("explorer_prefix").getItem());
         return contractUi;
     }
@@ -46,21 +46,10 @@ public class ContractUI {
         contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.Rookie));
         contractUi.setItem(13, getContractSlot(b.getApprenticeContract(),Difficulty.Apprentice));
         contractUi.setItem(15, getContractSlot(b.getExperiencedContract(),Difficulty.Experienced));
+        contractUi.setItem(22,ItemIcon.getIcon("complete_contract").getItem());
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
-        String title = "";
-        switch(difficulty){
-            case Rookie -> {
-                title = ChatColor.GREEN+"Rookie Contract";
-            }
-            case Apprentice -> {
-                title = ChatColor.YELLOW+"Apprentice Contract";
-            }
-            case Experienced -> {
-                title = ChatColor.RED+"Experienced Contract";
-            }
-        }
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
@@ -71,14 +60,13 @@ public class ContractUI {
         Reward
         TargetName / Requested Goods (If applicable)
          */
-        ItemStack contract = new ItemStack(Material.BOOK);
+        ItemStack contract = selected.getContractIcon();
         ItemMeta contractMeta = contract.getItemMeta();
         ArrayList<String> contractLore = new ArrayList<>();
         //Setting up the strings for the lore
 
         //LORE
-        contractMeta.setDisplayName(title);
-        contractLore.add(ChatColor.GRAY+"Difficulty: "+(ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
+        contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
                 ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
         contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
         if(selected.getContractType().equals(ContractType.Delivery)){
@@ -93,7 +81,7 @@ public class ContractUI {
     }
 
     public static ItemStack getContractorIcon(Player p) {
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Bandit b = Bandit.getPlayer(p);
 
         boolean isNewVersion = Arrays.stream(Material.values())
                 .map(Material::name).collect(Collectors.toList()).contains("PLAYER_HEAD");
@@ -101,8 +89,8 @@ public class ContractUI {
         ItemStack skull = new ItemStack(type, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         ArrayList<String> skullLore = new ArrayList<>();
-        skullLore.add(ChatColor.RED + "Combat Lvl: "+ChatColor.GRAY+ iPlayer.getCmbtContractLvl()+" ");
-        skullLore.add(ChatColor.GREEN+"Peace maker Lvl: "+ChatColor.GRAY+iPlayer.getPceContractLvl());
+        skullLore.add(ChatColor.RED + "Coontractor Lvl: "+ChatColor.GRAY+ b.getContractorLvl()+" ");
+        skullLore.add(ChatColor.AQUA+"Contractor Lvl XP: "+ChatColor.GRAY+b.getContractorXp());
         meta.setLore(skullLore);
         meta.setOwner(p.getDisplayName());
         meta.setDisplayName(ChatColor.WHITE + "Contractor Info:");

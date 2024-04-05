@@ -5,6 +5,11 @@ import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.Horse.FrontierHorse;
+import org.bukkit.ChatColor;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -16,6 +21,7 @@ public class Bandit
     private String pId;
     private double wallet;
     private double bank;
+    private final int maxHorseLimit = 3;
     private boolean isBleeding;
     private boolean brokenLegs;
     private boolean isWanted;
@@ -31,10 +37,8 @@ public class Bandit
     private int bounty;
 
     private Player targetedPlayer;
-    private int pceContractXp;
-    private int cmbtContractXp;
-    private int pceContractLvl;
-    private int cmbtContractLvl;
+    private int contractorLvl;
+    private int contractorXp;
     private int contractorTitle;
     private long jailStartTime;
     private String roleTitle;
@@ -42,7 +46,8 @@ public class Bandit
     private FrontierLocation trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
-
+private boolean summoningHorse;
+private FrontierHorse horseBeingSummoned;
     private boolean isDepositing;
     private boolean isWithdrawing;
     private FrontierLocation currentFrontierLocation;
@@ -52,6 +57,7 @@ public class Bandit
     private Contract activeContract;
     private static List<Bandit> playerList = new ArrayList<>();
     private List<Contract> contracts = new ArrayList<>();
+    private List<FrontierHorse> horses = new ArrayList<>();
     //private final IronSight plugin;
 
     private int wantedKills;
@@ -71,13 +77,11 @@ public class Bandit
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-
+this.summoningHorse = false;
         this.bounty = 0;
         this.wantedKills = 0;
-        this.pceContractXp = 0;
-        this.pceContractLvl = 0;
-        this.cmbtContractLvl =0;
-        this.cmbtContractXp = 0;
+        this.contractorLvl =0;
+        this.contractorXp =0;
 
         playerList.add(this);
         bandits.put(pId,this);
@@ -86,7 +90,7 @@ public class Bandit
     }
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
-                              wantedKills, int pceContractLvl, int pceContractXp, int cmbtContractLvl, int cmbtContractXp,
+                              wantedKills, int contractorLvl, int contractorXp,
                   long jailStartTime)
     {
         this.doingContract = false;
@@ -101,35 +105,16 @@ public class Bandit
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-
+        this.summoningHorse = false;
         this.bounty = bounty;
         this.jailStartTime = jailStartTime;
         this.wantedKills = wantedKills;
-        this.pceContractLvl = pceContractLvl;
-        this.pceContractXp = pceContractXp;
-        this.cmbtContractLvl = cmbtContractLvl;
-        this.cmbtContractXp = cmbtContractXp;
+        this.contractorXp = contractorXp;
+        this.contractorLvl = contractorLvl;
 
         playerList.add(this);
         bandits.put(pId,this);
     }
-
-    public boolean isDepositing() {
-        return isDepositing;
-    }
-
-    public void setDepositing(boolean depositing) {
-        isDepositing = depositing;
-    }
-
-    public boolean isWithdrawing() {
-        return isWithdrawing;
-    }
-
-    public void setWithdrawing(boolean withdrawing) {
-        isWithdrawing = withdrawing;
-    }
-
     public void loadContracts()
     {
         List<FrontierLocation> testLocs = new ArrayList<>();
@@ -139,13 +124,17 @@ public class Bandit
         testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
         Contract testC1 = new Contract( ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
         Contract testC2 = new Contract( ContractType.Delivery, testLocs ,2, DeliveryType.FISHER);
+        List<FrontierLocation> test4Locs = new ArrayList<>();
+        test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
+        Contract testC4 = new Contract( ContractType.Delivery, test4Locs ,2, DeliveryType.MINER);
         List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("North Oil Field"));
+        test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
         Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
 
         contracts.add(testC1);
         contracts.add(testC2);
         contracts.add(testC3);
+        contracts.add(testC4);
     }
     public void setOnlinePlayer(Player p)
     {
@@ -168,29 +157,27 @@ public class Bandit
         return roleTitle;
     }
     public String getTitle(){
-        return getContractorTitle().equalsIgnoreCase("") ? roleTitle : getContractorTitle()+" "+roleTitle;
+        return BanditUtils.getContractorTitle(this).equalsIgnoreCase("") ? roleTitle : BanditUtils.getContractorTitle(this)+" "+roleTitle;
+    }
+
+    public FrontierHorse getHorseBeingSummoned() {
+        return horseBeingSummoned;
+    }
+
+    public void setHorseBeingSummoned(FrontierHorse horseBeingSummoned) {
+        this.horseBeingSummoned = horseBeingSummoned;
     }
 
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
     }
 
-    public String getContractorTitle() {
-        switch(contractorTitle){
-            case 1:
-                return "Cowboy";
-            case 2:
-                return "Tracker";
-            case 3:
-                return "Raider";
-            case 4:
-                return "Miner";
-            case 5:
-                return "Medic";
-            case 6:
-                return "Explorer";
-        }
-        return "";
+    public int getContractorTitle() {
+        return contractorTitle;
+    }
+
+    public void updateContractorXp(int xp){
+        this.contractorXp += xp;
     }
 
     public List<Contract> getContracts() {
@@ -199,6 +186,18 @@ public class Bandit
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public int getMaxHorseLimit() {
+        return maxHorseLimit;
+    }
+
+    public boolean isSummoningHorse() {
+        return summoningHorse;
+    }
+
+    public void setSummoningHorse(boolean summoningHorse) {
+        this.summoningHorse = summoningHorse;
     }
 
     public long getJailStartTime() {
@@ -237,6 +236,30 @@ public class Bandit
 
     public boolean isEscaping() {
         return escaping;
+    }
+
+    public boolean isDepositing() {
+        return isDepositing;
+    }
+
+    public void setDepositing(boolean depositing) {
+        isDepositing = depositing;
+    }
+
+    public boolean isWithdrawing() {
+        return isWithdrawing;
+    }
+
+    public void setWithdrawing(boolean withdrawing) {
+        isWithdrawing = withdrawing;
+    }
+
+    public List<FrontierHorse> getHorses() {
+        return horses;
+    }
+
+    public void setHorses(List<FrontierHorse> horses) {
+        this.horses = horses;
     }
 
     public void setEscaping(boolean escaping) {
@@ -378,14 +401,6 @@ public class Bandit
     public void setBounty(int bounty) {
         this.bounty = bounty;
     }
-
-    public int getPceContractXp() {
-        return pceContractXp;
-    }
-
-    public void setPceContractXp(int pceContractXp) {
-        this.pceContractXp = pceContractXp;
-    }
     public FrontierLocation getTrackingLocation() {
         return trackingLocation;
     }
@@ -396,28 +411,20 @@ public class Bandit
         setIsTrackingLocation(true);
     }
 
-    public int getCmbtContractXp() {
-        return cmbtContractXp;
+    public int getContractorLvl() {
+        return contractorLvl;
     }
 
-    public void setCmbtContractXp(int cmbtContractXp) {
-        this.cmbtContractXp = cmbtContractXp;
+    public void setContractorLvl(int contractorLvl) {
+        this.contractorLvl = contractorLvl;
     }
 
-    public int getPceContractLvl() {
-        return pceContractLvl;
+    public int getContractorXp() {
+        return contractorXp;
     }
 
-    public void setPceContractLvl(int pceContractLvl) {
-        this.pceContractLvl = pceContractLvl;
-    }
-
-    public int getCmbtContractLvl() {
-        return cmbtContractLvl;
-    }
-
-    public void setCmbtContractLvl(int cmbtContractLvl) {
-        this.cmbtContractLvl = cmbtContractLvl;
+    public void setContractorXp(int contractorXp) {
+        this.contractorXp = contractorXp;
     }
 
     public Player getOnlinePlayer() {

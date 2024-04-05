@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Contracts;
 
+import droidco.west3.ironsight.Contracts.UI.ActiveContractUI;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.command.Command;
@@ -13,21 +14,19 @@ public class ContractMenuCmd implements CommandExecutor {
         if(commandSender instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
             if(strings.length == 0){
-                p.openInventory(ContractUI.openContractUi(p));
+                p.openInventory(ActiveContractUI.openActiveContractUi(p,b.getActiveContract()));
             }else if(strings[0].equalsIgnoreCase("reset")){
                 Contract.assignPlayerContracts(p,b);
-            }else if(strings[0].equalsIgnoreCase("active")){
+            }else if(strings[0].equalsIgnoreCase("menu")){
+                    p.openInventory(ContractUI.openContractUi(p));
+            }
+            else if(strings[0].equalsIgnoreCase("active")){
                 if(b.getActiveContract() == null){
                     p.sendMessage("You do not have an active contract.");
                 }else{
                     p.openInventory(ContractUI.openContractUi(p));
                 }
             }
-
-
-//            p.sendMessage(iPlayer.getApprenticeContract().getContractName());
-//            p.sendMessage(iPlayer.getExperiencedContract().getContractName());
-//            p.sendMessage(iPlayer.getRookieContract().getContractName());
         }
         return true;
     }

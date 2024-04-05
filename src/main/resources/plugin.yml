@@ -16,3 +16,6 @@ commands:
   masterlist:
     aliases:
       - list
+  call:
+  gethorse:
+

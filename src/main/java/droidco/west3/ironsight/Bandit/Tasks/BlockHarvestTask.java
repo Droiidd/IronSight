@@ -64,6 +64,7 @@ public class BlockHarvestTask extends BukkitRunnable {
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                 block.getLocation().getWorld().playSound(block.getLocation(), Sound.BLOCK_SWEET_BERRY_BUSH_PLACE, 1, 1);
                 GlobalUtils.displayParticles(block.getLocation(), Particle.GLOW, Particle.TOTEM, 8);
+                block.setType(originalBlock);
             }
             case MINERALS -> {
 
@@ -73,10 +74,22 @@ public class BlockHarvestTask extends BukkitRunnable {
                     block.getLocation().getWorld().playSound(block.getLocation(), Sound.ENTITY_VILLAGER_WORK_MASON, 1, 0);
                 }
 
+                int oreOdds = GlobalUtils.getRandomNumber(101);
+                if(oreOdds < 10){
+                    this.originalBlock = Material.GOLD_ORE;
+                } else if(oreOdds >= 10 && oreOdds < 50){
+                    this.originalBlock = Material.COPPER_ORE;
+                } else{
+                    this.originalBlock = Material.IRON_ORE;
+                }
+                int clusterChance = GlobalUtils.getRandomNumber(101);
+                if(clusterChance < 5){
+                    block.setType(getCluster(this.originalBlock) != null ? getCluster(this.originalBlock) : Material.RAW_IRON);
+                }
                 GlobalUtils.displayParticles(block.getLocation(), Particle.CRIT, Particle.CLOUD, 8);
             }
         }
-        block.setType(originalBlock);
+
         this.cancel();
         tasks.remove(this);
     }
@@ -92,5 +105,19 @@ public class BlockHarvestTask extends BukkitRunnable {
         }
 
         tick++;
+    }
+    public Material getCluster(Material oreType){
+        switch(oreType){
+            case IRON_ORE -> {
+                return Material.RAW_IRON_BLOCK;
+            }
+            case COPPER_ORE -> {
+                return Material.RAW_COPPER_BLOCK;
+            }
+            case GOLD_ORE -> {
+                return Material.RAW_GOLD_BLOCK;
+            }
+        }
+        return null;
     }
 }

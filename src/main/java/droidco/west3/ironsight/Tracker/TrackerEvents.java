@@ -60,6 +60,34 @@ public class TrackerEvents implements Listener {
                     p.openInventory(TrackerUI.openLocationsUi(p));
                     break;
                 }
+                case IRON_PICKAXE -> {
+                    p.openInventory(TrackerUI.openMinesUi(p));
+                    break;
+                }
+                case WATER_BUCKET -> {
+                    p.openInventory(TrackerUI.openRiversUi(p));
+                    break;
+                }
+                case OAK_SAPLING -> {
+                    p.openInventory(TrackerUI.openForestReservesUi(p));
+                    break;
+                }
+                case SKELETON_SKULL -> {
+                    p.openInventory(TrackerUI.openBanditCampsUi(p));
+                    break;
+                }
+                case OAK_DOOR -> {
+                    p.openInventory(TrackerUI.openScavTownsUi(p));
+                    break;
+                }
+                case COAL -> {
+                    p.openInventory(TrackerUI.openOilFieldsUi(p));
+                    break;
+                }
+                case SPRUCE_SAPLING -> {
+                    p.openInventory(TrackerUI.openDrugFieldsUi(p));
+                    break;
+                }
 
 
             }
@@ -161,7 +189,7 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Locations")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case COBBLESTONE -> {
+                case IRON_PICKAXE -> {
                     p.openInventory(TrackerUI.openMinesUi(p));
                     break;
                 }
@@ -193,7 +221,7 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Mines")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case FLINT -> {
+                case IRON_ORE -> {
                     b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines"));
                     p.closeInventory();
                     break;
