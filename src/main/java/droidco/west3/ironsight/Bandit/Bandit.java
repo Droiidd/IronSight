@@ -77,7 +77,7 @@ private FrontierHorse horseBeingSummoned;
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-this.summoningHorse = false;
+        this.summoningHorse = false;
         this.bounty = 0;
         this.wantedKills = 0;
         this.contractorLvl =0;
@@ -91,7 +91,7 @@ this.summoningHorse = false;
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int contractorLvl, int contractorXp,
-                  long jailStartTime)
+                  long jailStartTime,int contractorTitle)
     {
         this.doingContract = false;
         this.pId = pId;
@@ -111,6 +111,7 @@ this.summoningHorse = false;
         this.wantedKills = wantedKills;
         this.contractorXp = contractorXp;
         this.contractorLvl = contractorLvl;
+        this.contractorTitle = contractorTitle;
 
         playerList.add(this);
         bandits.put(pId,this);

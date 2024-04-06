@@ -18,7 +18,7 @@ public boolean onCommand(CommandSender commandSender, Command command, String s,
             p.sendMessage("To summon horse:");
             p.sendMessage("/call");
         } else {
-            p.openInventory(HorseUI.callHorseGui(p));
+            p.openInventory(HorseUI.openAvailableHorses(p));
         }
 
     }

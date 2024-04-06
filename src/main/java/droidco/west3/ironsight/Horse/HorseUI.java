@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HorseUI {
-    public static Inventory callHorseGui(Player p) {
+    public static Inventory openAvailableHorses(Player p) {
         Inventory playerHorses = Bukkit.createInventory(p, 9, ChatColor.DARK_RED + ChatColor.stripColor(p.getDisplayName())  + ChatColor.DARK_GRAY + "'s horses");
         Bandit b = Bandit.getPlayer(p);
         List<FrontierHorse> horses = b.getHorses();

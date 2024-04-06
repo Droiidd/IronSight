@@ -21,7 +21,7 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-        Bandit b = PlayerConnector.fetchPlayer(p);
+        Bandit b = PlayerConnector.fetchAllPlayerData(p);
         if(b == null){
             System.out.println("New player!");
             p.sendMessage("New player!");
@@ -52,7 +52,7 @@ public class JoinServerEvents implements Listener{
             p.damage(10000.0);
             iPlayer.setCombatBlocked(false);
         }
-        PlayerConnector.updatePlayer(Bandit.getPlayer(p));
+        PlayerConnector.updatePlayer(Bandit.getPlayer(p),p);
     }
 
 }

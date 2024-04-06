@@ -10,10 +10,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class HorseEvents implements Listener {
@@ -44,11 +50,13 @@ public class HorseEvents implements Listener {
     public void playerMountingHorse(PlayerInteractEntityEvent e){
         Player p = e.getPlayer();
         boolean isHorseOwner = false;
+        boolean isInvLoaded = false;
         if(e.getRightClicked().getType().equals(EntityType.HORSE) || e.getRightClicked().getType().equals(EntityType.DONKEY)){
             FrontierHorse horse = FrontierHorse.getHorse(e.getRightClicked().getUniqueId());
             if(horse != null){
                 if(p.getUniqueId().toString().equalsIgnoreCase(horse.getOwnerId())){
                     isHorseOwner = true;
+                    isInvLoaded = horse.isInventoryLoaded();
                 }
             }
         }
@@ -58,7 +66,7 @@ public class HorseEvents implements Listener {
         }else{
             if(p.isSneaking()){
                 e.setCancelled(true);
-                p.openInventory(HorseUI.openHorseMenu(p,FrontierHorse.getHorse(e.getRightClicked().getUniqueId())));
+                    p.openInventory(HorseUI.openHorseMenu(p,FrontierHorse.getHorse(e.getRightClicked().getUniqueId())));
             }
         }
 
@@ -107,6 +115,26 @@ public class HorseEvents implements Listener {
         }
 
     }
+    @EventHandler
+    public void saveHorseInventory(InventoryCloseEvent e){
+        Player p = (Player) e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        FrontierHorse targetHorse = null;
+        List<FrontierHorse> horses = b.getHorses();
+        for(FrontierHorse horse : horses){
+            String invTitle = horse.getHorseName()+"'s saddle-pack storage";
+
+            if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
+                targetHorse = horse;
+                p.sendMessage("Nice!");
+            }
+        }
+        if(targetHorse != null){
+            p.sendMessage("Nice22!");
+            targetHorse.setHorseInv(e.getInventory().getContents());
+        }
+    }
+
 
 }
 

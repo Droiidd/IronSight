@@ -19,6 +19,7 @@ public class FrontierHorse {
     private SkeletonHorse skeleHorse;
     private boolean isSummoned;
     private UUID iD;
+    private boolean isInventoryLoaded;
     private ItemStack[] inventory = new ItemStack[0];
     private static HashMap<UUID,FrontierHorse> horses = new HashMap<>();
     private static HashMap<UUID, LivingEntity> summonedHorses = new HashMap<>();
@@ -29,16 +30,8 @@ public class FrontierHorse {
         this.ownerId = ownerId;
         this.horseType = horseType;
         this.isSummoned = false;
+        this.isInventoryLoaded = false;
     }
-
-    public FrontierHorse(String ownerId, String horseName,  FrontierHorseType horseType, ItemStack[] inventory) {
-        this.horseName = horseName;
-        this.ownerId = ownerId;
-        this.horseType = horseType;
-        this.inventory = inventory;
-        this.isSummoned = false;
-    }
-
     public void summonHorse(Player p) {
         isSummoned = true;
         switch(horseType){
@@ -95,6 +88,10 @@ public class FrontierHorse {
         return ownerId;
     }
 
+    public boolean isInventoryLoaded() {
+        return isInventoryLoaded;
+    }
+
     public String getHorseName() {
         return horseName;
     }
@@ -114,6 +111,18 @@ public class FrontierHorse {
 
     public FrontierHorseType getHorseType() {
         return this.horseType;
+    }
+    public String getHorseTypeString(){
+        switch(this.horseType){
+            case DONKEY -> {
+                return "donkey";
+            }case SPEEDY -> {
+                return "speedy";
+            }case DEFAULT -> {
+                return "default";
+            }
+        }
+        return null;
     }
 
     public void openHorseInventory(Player p) {
@@ -141,5 +150,6 @@ public class FrontierHorse {
 
     public void setHorseInv(ItemStack[] items) {
         inventory = items;
+        this.isInventoryLoaded = true;
     }
 }
