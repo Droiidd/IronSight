@@ -418,6 +418,8 @@ public class GameContentLoader {
         NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         NPC contractor = new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-
+        new NPC("Arms Dealer", NPCType.ARMS_DEALER, 973, 94, -1951, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
     }
 }

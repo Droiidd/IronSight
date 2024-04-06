@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.NPC;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Items.ItemIcon;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import droidco.west3.ironsight.Items.CustomItem;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class NPCUI {
@@ -64,7 +66,33 @@ public class NPCUI {
         return shop;
 
     }
+    public static Inventory openSmokeleafProcessor(Player p, int processorNumber) {
+        Inventory processor = Bukkit.createInventory(p, 18, ChatColor.RED + "Smoke Leaf Processor "+processorNumber);
+        ItemStack exit = getExitButton();
 
+        ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack smokeLeaf = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+        smokeLeaf.setAmount(8);
+        ItemMeta meta = blank.getItemMeta();
+        meta.setDisplayName("");
+        for (int i = 0; i < 18; i++) {
+            if (i == 0) {
+                processor.setItem(0, exit);
+            } else if (i == 13) {
+                processor.setItem(13, smokeLeaf);
+            } else {
+                processor.setItem(i, blank);
+            }
+        }
+        return processor;
+    }
+    public static ItemStack getExitButton() {
+        ItemStack exit = new ItemStack(Material.BARRIER);
+        ItemMeta exitMeta = exit.getItemMeta();
+        exitMeta.setDisplayName(ChatColor.WHITE + "Leave");
+        exit.setItemMeta(exitMeta);
+        return exit;
+    }
     public static Inventory fishermanUI(Player p) {
         Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Fisherman");
         shop.setItem(10,CustomItem.getCustomItem("Wooden Fishing Rod").getItemForSale());
