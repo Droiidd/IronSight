@@ -161,7 +161,12 @@ public class GameContentLoader {
         CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_FIRE,2);
         CustomItem bow2 = new CustomItem("Hard Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_DAMAGE,6);
 
+        new CustomItem("Colt Patterson",2,true,false,"",Material.STONE_SHOVEL,0.0,650.0);
+        new CustomItem("Sharps Rifle",7,true,false,"",Material.STONE_AXE,0.0,2450.0);
+        new CustomItem("66 Winchester",5,true,false,"",Material.DIAMOND_HOE,0.0,1800.0);
+        new CustomItem("Henry Model 3",5,true,false,"",Material.STONE_HOE,0.0,2800.0);
 
+        new CustomItem("Winchester 1873",6,false,false,"",Material.IRON_AXE,0.0,2950.0);
 
         System.out.println("custom items loaded");
 

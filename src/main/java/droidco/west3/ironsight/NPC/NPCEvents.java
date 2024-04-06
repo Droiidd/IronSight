@@ -9,8 +9,10 @@ import droidco.west3.ironsight.Items.ItemTable;
 import droidco.west3.ironsight.Tracker.TrackerUI;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -229,19 +231,22 @@ public class NPCEvents implements Listener {
                 purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Hat"),NPC.getNPC("Shopkeeper"));
             }
         }
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Armorer")){
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Arms Dealer")){
             e.setCancelled(true);
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Boots").getMaterial()) ) {
-                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Boots"),NPC.getNPC("Shopkeeper"));
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Colt Patterson").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Colt Patterson"),NPC.getNPC("Arms Dealer"),"coltpatterson");
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Shirt").getMaterial()) ) {
-                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Shirt"),NPC.getNPC("Shopkeeper"));
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Sharps Rifle").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Sharps Rifle"),NPC.getNPC("Arms Dealer"),"sharps");
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Chaps").getMaterial()) ) {
-                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Chaps"),NPC.getNPC("Shopkeeper"));
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("66 Winchester").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("66 Winchester"),NPC.getNPC("Arms Dealer"),"winchester");
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Boots").getMaterial()) ) {
-                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Boots"),NPC.getNPC("Shopkeeper"));
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Henry Model 3").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Henry Model 3"),NPC.getNPC("Arms Dealer"),"henry");
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Winchester 1873").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Winchester 1873"),NPC.getNPC("Arms Dealer"),"winchesterillegal");
             }
         }
     }
@@ -291,6 +296,21 @@ public class NPCEvents implements Listener {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
             p.getInventory().addItem(item.getItemStack());
+        } else {
+            p.closeInventory();
+            p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
+        }
+    }
+    public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
+    {
+
+        if (b.getWallet() >= item.getPurchasePrice()) {
+            b.updateWallet(-1 * item.getPurchasePrice());
+            p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
+            String weapon = "shot give " + p.getDisplayName() + " " + gunName;
+
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, weapon);
         } else {
             p.closeInventory();
             p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
