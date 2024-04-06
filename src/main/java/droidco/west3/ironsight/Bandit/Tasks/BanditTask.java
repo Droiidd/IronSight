@@ -13,6 +13,8 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.NPC.NPC;
+import droidco.west3.ironsight.Processors.LoadProcessor;
+import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -169,6 +171,8 @@ public class    BanditTask extends BukkitRunnable {
 
             //      ===--- LOCATION SPECIFIC ---===
             FrontierLocation currentLoc = b.getCurrentLocation();
+
+            b.getCurrentLocation().addTitle(p);
             //      ===--- PRISON ---===
             if (b.isJailed()) {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
@@ -221,6 +225,12 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
+            }
+            if(currentLoc.getLocName().equalsIgnoreCase("Storm Point")){
+                if (!currentLoc.isNewArrival()) {
+                    currentLoc.setNewArrival(true);
+                    LoadProcessor.spawnProcessors(p);
+                }
             }
 
             if(currentLoc.getType().equals(LocationType.PRISON)){

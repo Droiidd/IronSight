@@ -293,6 +293,9 @@ public class Contract
                     requestedItem = gems.get(gemChoice);
                 }
             }
+            case DRUG_RUNNER -> {
+                requestedItem = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+            }
         }
 
         //requestedItem.setAmount(amount);
@@ -332,6 +335,16 @@ public class Contract
                 List<String> desc = new ArrayList<>();
                 desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
                 desc.add("Mine ores until you have requested amount");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+            }
+            case DRUG_RUNNER -> {
+                List<String> desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +FrontierLocation.getLocation("Smokeleaf Field").getLocName());
+                desc.add("Harvest unprocessed drugs from field");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +FrontierLocation.getLocation("Smokeleaf Field").getLocName());
+                desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
+                desc.add("Process the drugs at a processor inside");
                 addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
         }
