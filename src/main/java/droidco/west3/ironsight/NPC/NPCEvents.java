@@ -4,6 +4,8 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
+import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.Items.ItemTable;
 import droidco.west3.ironsight.Tracker.TrackerUI;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -19,12 +21,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 
 import java.net.http.WebSocket;
+import java.util.ArrayList;
 
 public class NPCEvents implements Listener {
     @EventHandler
@@ -118,26 +122,30 @@ public class NPCEvents implements Listener {
             e.setCancelled(true);
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Smoked Salmon").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Smoked Salmon"),NPC.getNPC("Shopkeeper"));
-
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Charred Potato").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Charred Potato"),NPC.getNPC("Shopkeeper"));
-
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Brown Stew").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Brown Stew"),NPC.getNPC("Shopkeeper"));
-
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Fox").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Cooked Fox"),NPC.getNPC("Shopkeeper"));
-
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Rabbit Stew").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Rabbit Stew"),NPC.getNPC("Shopkeeper"));
-
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Cooked Rabbit").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Cooked Rabbit"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Bandage").getMaterial()) == 0) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Bandage"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Splint").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Splint"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Tracker").getMaterial())) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Tracker"),NPC.getNPC("Shopkeeper"));
             }
         }
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Bank Teller")) {
@@ -159,9 +167,82 @@ public class NPCEvents implements Listener {
 
                 }
             }
+        }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Geologist")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Broken Pick").getMaterial()) == 0) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Broken Pick"),NPC.getNPC("Geologist"));
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Old Miner's Pick").getMaterial()) == 0) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Old Miner's Pick"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Explorer's Pick").getMaterial()) == 0) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Brown Stew"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().compareTo(ItemIcon.getIcon("open_geode").getItem().getType()) == 0) {
+                openGeode(75,p,b);
+            }
 
-
-
+        }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Fisherman")){
+                e.setCancelled(true);
+                if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Sea Slug").getMaterial()) ) {
+                    purchaseItem(b,p,CustomItem.getCustomItem("Sea Slug"),NPC.getNPC("Shopkeeper"));
+                }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Hermit Crab").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Hermit Crab"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Wooden Fishing Rod").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Wooden Fishing Rod"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Steel Lined Rod").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Steel Lined Rod"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Expedition Rod").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Expedition Rod"),NPC.getNPC("Shopkeeper"));
+            }
+        }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Armorer")){
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Boots"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Shirt").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Shirt"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Chaps").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Chaps"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Boots"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Jacket").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Jacket"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Trousers").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Trousers"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Hat").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Hat"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Hat").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Hat"),NPC.getNPC("Shopkeeper"));
+            }
+        }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Armorer")){
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Boots"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Shirt").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Shirt"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Farm Hand Chaps").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Farm Hand Chaps"),NPC.getNPC("Shopkeeper"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Huntsmen Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Boots"),NPC.getNPC("Shopkeeper"));
+            }
         }
     }
     @EventHandler
@@ -215,4 +296,19 @@ public class NPCEvents implements Listener {
             p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
         }
     }
+    public void openGeode(double geodeCost, Player p, Bandit b)
+    {
+        if(b.getWallet() >= geodeCost){
+            b.updateWallet(-1* geodeCost);
+            ItemStack item = ItemTable.getTable("Geode").getItem(3).getItemStack();
+            p.getInventory().addItem(item);
+            p.sendMessage(ChatColor.GRAY+"Geode opened... "+ChatColor.WHITE+"+"+item.getAmount()+ item.getItemMeta().getDisplayName());
+        }else{
+            p.sendMessage( ChatColor.GRAY+ ": Not enough funds!");
+            p.closeInventory();
+        }
+
+    }
+
+
 }

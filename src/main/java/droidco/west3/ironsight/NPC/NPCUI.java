@@ -16,6 +16,10 @@ public class NPCUI {
     public static Inventory shopkeeperUI(Player p) {
         Inventory shopkeeperUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Shopkeeper");
         Bandit iPlayer = Bandit.getPlayer(p);
+        shopkeeperUI.setItem(19,CustomItem.getCustomItem("Bandage").getItemForSale());
+        shopkeeperUI.setItem(20,CustomItem.getCustomItem("Splint").getItemForSale());
+        shopkeeperUI.setItem(21,CustomItem.getCustomItem("Tracker").getItemForSale());
+        shopkeeperUI.setItem(10, CustomItem.getCustomItem("Smoked Salmon").getItemForSale());
         shopkeeperUI.setItem(10, CustomItem.getCustomItem("Smoked Salmon").getItemForSale());
         shopkeeperUI.setItem(11, CustomItem.getCustomItem("Charred Potato").getItemForSale());
         shopkeeperUI.setItem(12, CustomItem.getCustomItem("Brown Stew").getItemForSale());
@@ -28,16 +32,15 @@ public class NPCUI {
     }
 
     public static Inventory armsDealerUI(Player p) {
-        Inventory armsDealerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Arms Dealer");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Arms Dealer");
 
-        return armsDealerUI;
+        return shop;
 
     }
 
     public static Inventory officerArmsUI(Player p) {
         Inventory officerArmsUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Officer Arms Dealer");
-        Bandit iPlayer = Bandit.getPlayer(p);
+
 
         return officerArmsUI;
 
@@ -52,34 +55,49 @@ public class NPCUI {
     }
 
     public static Inventory geologistUI(Player p) {
-        Inventory geologistUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Geologist");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Geologist");
+        shop.setItem(10,CustomItem.getCustomItem("Broken Pick").getItemForSale());
+        shop.setItem(11,CustomItem.getCustomItem("Old Miner's Pick").getItemForSale());
+        shop.setItem(12,CustomItem.getCustomItem("Explorer's Pick").getItemForSale());
+        shop.setItem(16,ItemIcon.getIcon("open_geode").getItem());
 
-        return geologistUI;
+        return shop;
 
     }
 
     public static Inventory fishermanUI(Player p) {
-        Inventory fishermanUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Fisherman");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Fisherman");
+        shop.setItem(10,CustomItem.getCustomItem("Wooden Fishing Rod").getItemForSale());
+        shop.setItem(11,CustomItem.getCustomItem("Steel Lined Rod").getItemForSale());
+        shop.setItem(12,CustomItem.getCustomItem("Expedition Rod").getItemForSale());
+        shop.setItem(1,CustomItem.getCustomItem("Sea Slug").getItemForSale());
+        shop.setItem(2,CustomItem.getCustomItem("Hermit Crab").getItemForSale());
 
-        return fishermanUI;
+        return shop;
 
     }
 
     public static Inventory pharmacistUI(Player p) {
         Inventory pharmacistUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Pharmacist");
-        Bandit iPlayer = Bandit.getPlayer(p);
 
         return pharmacistUI;
 
     }
 
     public static Inventory armorerUI(Player p) {
-        Inventory armorerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Armorer");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Armorer");
 
-        return armorerUI;
+        shop.setItem(1,CustomItem.getCustomItem("Farm Hand Hat").getItemForSale());
+        shop.setItem(2,CustomItem.getCustomItem("Farm Hand Shirt").getItemForSale());
+        shop.setItem(3,CustomItem.getCustomItem("Farm Hand Chaps").getItemForSale());
+        shop.setItem(4,CustomItem.getCustomItem("Farm Hand Boots").getItemForSale());
+
+        shop.setItem(10,CustomItem.getCustomItem("Huntsmen Hat").getItemForSale());
+        shop.setItem(11,CustomItem.getCustomItem("Huntsmen Jacket").getItemForSale());
+        shop.setItem(12,CustomItem.getCustomItem("Huntsmen Trousers").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Huntsmen Boots").getItemForSale());
+
+        return shop;
 
     }
 

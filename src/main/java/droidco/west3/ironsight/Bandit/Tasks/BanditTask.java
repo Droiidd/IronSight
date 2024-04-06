@@ -110,6 +110,7 @@ public class    BanditTask extends BukkitRunnable {
     public void run() {
         if(tick % 3 == 0){
             seconds++;
+            mobSec++;
             //      ===--- COMPASS TRACKER ---===
             if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
@@ -118,7 +119,7 @@ public class    BanditTask extends BukkitRunnable {
                     int distanceMsg = distance.intValue();
                     p.spigot().sendMessage(
                             ChatMessageType.ACTION_BAR,
-                            new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                            new TextComponent(b.getTrackingLocation().getLocName()+" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
                 } else {
                     if (b.getTargetedPlayer() != null) {
                         if (b.getTargetedPlayer().isOnline()) {
@@ -145,7 +146,6 @@ public class    BanditTask extends BukkitRunnable {
 
             if (b.isRespawning()) {
                 // SEND PLAYER TO PRISON
-                b.setRespawning(false);
                 if (b.isJailedFlag()) {
                     //REPSAWN IN PRISON
                     b.setJailedFlag(false);
@@ -164,6 +164,7 @@ public class    BanditTask extends BukkitRunnable {
                         p.openInventory(RespawnUI.openRespawnSelect(p));
                     }
                 }
+                b.setRespawning(false);
             }
 
             //      ===--- LOCATION SPECIFIC ---===
@@ -173,7 +174,7 @@ public class    BanditTask extends BukkitRunnable {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
                     //Player is escaping! PUT LOGIC HERE
                     b.setEscaping(true);
-                    if (!escapeFlag) {
+                    if (!escapeFlag && !b.isRespawning()) {
                         escapeFlag = true;
                         PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
                         p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty");

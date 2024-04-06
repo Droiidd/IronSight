@@ -241,19 +241,19 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Rivers")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
-            if(targetType.equals(ItemIcon.getIcon("pearl_river_tracker"))){
+            if(targetType.equals(ItemIcon.getIcon("pearl_river_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("Pearl River"));
                 p.closeInventory();
             }
-            else if(targetType.equals(ItemIcon.getIcon("slough_creek_river_tracker"))){
+            else if(targetType.equals(ItemIcon.getIcon("slough_creek_river_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek River"));
                 p.closeInventory();
             }
-            else if(targetType.equals(ItemIcon.getIcon("three_forks_delta_tracker"))){
+            else if(targetType.equals(ItemIcon.getIcon("three_forks_delta_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta"));
                 p.closeInventory();
             }
-            else if(targetType.equals(ItemIcon.getIcon("lower_guadalupe_tracker"))){
+            else if(targetType.equals(ItemIcon.getIcon("lower_guadalupe_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
                 p.closeInventory();
             }
@@ -281,11 +281,12 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Bandit Camps")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
-            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker"))){
-                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
-                p.closeInventory();
-            }
-            else if(targetType.equals(ItemIcon.getIcon("storm_point_tracker"))){
+//            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker").getItem().getType())){
+//                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
+//                p.closeInventory();
+//            }
+            //else
+            if(targetType.equals(ItemIcon.getIcon("storm_point_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
                 p.closeInventory();
             }
@@ -308,7 +309,7 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Oil Fields")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
-            if(targetType.equals(ItemIcon.getIcon("north_moraine_oil_field_tracker"))){
+            if(targetType.equals(ItemIcon.getIcon("north_moraine_oil_field_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
                 p.closeInventory();
             }

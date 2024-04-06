@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class RespawnUIEvents implements Listener {
 
@@ -43,6 +44,19 @@ public class RespawnUIEvents implements Listener {
             }
             e.setCancelled(true);
         }
+    }
+    @EventHandler
+    public void playerRespawn(PlayerRespawnEvent e){
+
+    }
+    @EventHandler
+    public void respawnHandler(PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        if(b.isJailed()){
+            b.setJailedFlag(true);
+        }
+        b.setRespawning(true);
     }
 
     public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit iP, Player p){

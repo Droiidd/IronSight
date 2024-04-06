@@ -12,15 +12,15 @@ public class TrackerUI {
     public static Inventory openTrackerUI(Player p) {
         Inventory trackerUi = Bukkit.createInventory(p, 27, ChatColor.DARK_BLUE + "Tracker");
         Bandit b = Bandit.getPlayer(p);
-        trackerUi.setItem(10, ItemIcon.getIcon("town_tracker").getItem());
+        trackerUi.setItem(12, ItemIcon.getIcon("town_tracker").getItem());
         //trackerUi.setItem(11, ItemIcon.getIcon("santa_fe_tracker").getItem());
         //trackerUi.setItem(12, ItemIcon.getIcon("contract_tracker").getItem());
         //trackerUi.setItem(14, ItemIcon.getIcon("merchant_tracker").getItem());
         trackerUi.setItem(15, ItemIcon.getIcon("npc_tracker").getItem());
-        trackerUi.setItem(16, ItemIcon.getIcon("location_tracker").getItem());
+        //trackerUi.setItem(16, ItemIcon.getIcon("location_tracker").getItem());
         trackerUi.setItem(21, ItemIcon.getIcon("mine_tracker").getItem());
         trackerUi.setItem(11, ItemIcon.getIcon("river_tracker").getItem());
-        trackerUi.setItem(12, ItemIcon.getIcon("forest_reserves_tracker").getItem());
+        //trackerUi.setItem(12, ItemIcon.getIcon("forest_reserves_tracker").getItem());
         trackerUi.setItem(20, ItemIcon.getIcon("bandit_camp_tracker").getItem());
         //trackerUi.setItem(19, ItemIcon.getIcon("scav_town_tracker").getItem());
         trackerUi.setItem(23, ItemIcon.getIcon("oil_field_tracker").getItem());

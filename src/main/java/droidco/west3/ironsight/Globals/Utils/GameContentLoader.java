@@ -251,6 +251,17 @@ public class GameContentLoader {
         //add all
         //journeyman pants/boots, sharps rifle, winchester 1873, frontier set, double spade brew
         String[] hightier_military_crate = {};
+
+        //      ===--- GEODES ---===
+        HashMap<String, Quantity> geodeMap = new HashMap<>();
+        geodeMap.put("Amethyst Bud", ones);
+        geodeMap.put("Mossy Jade", ones);
+        geodeMap.put("Baron's Emerald", ones);
+        geodeMap.put("Iron Ore", new Quantity(1,8));
+        geodeMap.put("Copper Ore", new Quantity(1,8));
+        geodeMap.put("Gold Ore", new Quantity(1,8));
+
+        ItemTable geodeTable = new ItemTable(geodeMap, "Geode");
     }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
@@ -277,7 +288,7 @@ public class GameContentLoader {
         FrontierLocation sloughcreek = new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
         FrontierLocation neworleans = new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        FrontierLocation texas = new FrontierLocation("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        FrontierLocation texas = new FrontierLocation("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
         FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 2079,1794,-799,-959,1987,94,-920);
 

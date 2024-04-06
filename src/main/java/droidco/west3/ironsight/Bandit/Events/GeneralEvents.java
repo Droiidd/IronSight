@@ -37,15 +37,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class GeneralEvents implements Listener {
     @EventHandler
-    public void respawnHandler(PlayerRespawnEvent e){
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        if(b.isJailed()){
-            b.setJailedFlag(true);
-        }
-            b.setRespawning(true);
-    }
-    @EventHandler
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){
             float fall = p.getFallDistance();
