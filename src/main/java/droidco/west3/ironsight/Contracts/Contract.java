@@ -216,12 +216,15 @@ public class Contract
             rareRequest = true;
         }
         switch(deliveryType){
-            case FISHER,HUNTER,DRUG_RUNNER -> {
+            case FISHER,HUNTER -> {
                 if(rareRequest){
                     amount = GlobalUtils.getRandomRange(3,9);
                 }else{
                     amount = GlobalUtils.getRandomRange(11,29);
                 }
+            }
+            case DRUG_RUNNER -> {
+                amount = GlobalUtils.getRandomRange(22,46);
             }
             case MINER -> {
                 if(rareRequest){

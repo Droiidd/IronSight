@@ -85,7 +85,7 @@ public class TrackerEvents implements Listener {
                     p.openInventory(TrackerUI.openOilFieldsUi(p));
                     break;
                 }
-                case SPRUCE_SAPLING -> {
+                case KELP -> {
                     p.openInventory(TrackerUI.openDrugFieldsUi(p));
                     break;
                 }
@@ -164,7 +164,7 @@ public class TrackerEvents implements Listener {
                     p.closeInventory();
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "NPC")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "NPCs")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case RAIL -> {
@@ -317,7 +317,7 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case KELP -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Drug Field"));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Field"));
                     p.closeInventory();
                 }
             }

@@ -19,7 +19,7 @@ public class RespawnUIEvents implements Listener {
             e.setCancelled(true);
             FrontierLocation santafe = FrontierLocation.getLocation("Santa Fe");
             FrontierLocation neworleans = FrontierLocation.getLocation("New Orleans");
-            FrontierLocation texas = FrontierLocation.getLocation("Republic Of Texas");
+            FrontierLocation texas = FrontierLocation.getLocation("Republic of Texas");
 
             org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
             org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
@@ -37,7 +37,7 @@ public class RespawnUIEvents implements Listener {
 
                 }
                 case BLUE_BANNER -> {
-                    handleRespawnActions(ChatColor.YELLOW+"Republic Of Texas",
+                    handleRespawnActions(ChatColor.YELLOW+"Republic of Texas",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",rotRespawn,b,p);
                     break;
                 }

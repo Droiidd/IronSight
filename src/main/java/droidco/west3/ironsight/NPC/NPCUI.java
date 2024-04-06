@@ -35,7 +35,11 @@ public class NPCUI {
 
     public static Inventory armsDealerUI(Player p) {
         Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Arms Dealer");
-
+        shop.setItem(10,CustomItem.getCustomItem("Colt Patterson").getItemForSale());
+        shop.setItem(11,CustomItem.getCustomItem("66 Winchester").getItemForSale());
+        shop.setItem(12,CustomItem.getCustomItem("Henry Model 3").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Sharps Rifle").getItemForSale());
+        shop.setItem(14,CustomItem.getCustomItem("Winchester 1863").getItemForSale());
         return shop;
 
     }

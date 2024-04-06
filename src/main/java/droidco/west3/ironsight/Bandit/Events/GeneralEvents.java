@@ -111,7 +111,9 @@ public class GeneralEvents implements Listener {
         if(block != null){
             switch(block.getType()){
                 case BARREL,OAK_TRAPDOOR,SPRUCE_TRAPDOOR,ARMOR_STAND,ITEM_FRAME,GLOW_ITEM_FRAME,
-                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR->{
+                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR,OAK_SIGN,
+                        DARK_OAK_SIGN,SPRUCE_SIGN,BIRCH_SIGN,DISPENSER,STONECUTTER
+                        ->{
                     e.setCancelled(true);
                 }
                 case CHEST -> {

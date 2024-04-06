@@ -61,8 +61,10 @@ public class HorseEvents implements Listener {
             }
         }
         if(!isHorseOwner){
-            e.setCancelled(true);
-            p.sendMessage(ChatColor.RED+ "This is not your horse!");
+            if(e.getRightClicked().getType().equals(EntityType.HORSE) || e.getRightClicked().getType().equals(EntityType.DONKEY)){
+                e.setCancelled(true);
+                p.sendMessage(ChatColor.RED+ "This is not your horse!");
+            }
         }else{
             if(p.isSneaking()){
                 e.setCancelled(true);
@@ -126,11 +128,9 @@ public class HorseEvents implements Listener {
 
             if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
                 targetHorse = horse;
-                p.sendMessage("Nice!");
             }
         }
         if(targetHorse != null){
-            p.sendMessage("Nice22!");
             targetHorse.setHorseInv(e.getInventory().getContents());
         }
     }

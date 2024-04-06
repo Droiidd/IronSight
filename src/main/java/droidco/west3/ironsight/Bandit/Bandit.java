@@ -129,7 +129,7 @@ private FrontierHorse horseBeingSummoned;
         test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
         List<FrontierLocation> test2Locs = new ArrayList<>();
         test2Locs.add(FrontierLocation.getLocation("Storm Point"));
-        Contract testC4 = new Contract( ContractType.Delivery, test2Locs ,2, DeliveryType.DRUG_RUNNER);
+        Contract testC4 = new Contract(ContractType.Delivery, test2Locs ,2, DeliveryType.DRUG_RUNNER);
         List<FrontierLocation> test3Locs = new ArrayList<>();
         test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
         Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);

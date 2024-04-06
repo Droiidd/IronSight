@@ -76,16 +76,16 @@ public class BlockBreakingEvents implements Listener {
             breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),9);
         }
         if (block.getType() == Material.DEAD_BUSH) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
+            //breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
         }
-        if (block.getType() == Material.JUNGLE_SAPLING) {
+        if (block.getType() == Material.SEA_PICKLE) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),1);
         }
 
 
     }
     public void breakCustomBlock(Player p, Block block, BlockType type, CustomItem item,int amount){
-        BlockHarvestTask changeBlock = new BlockHarvestTask(plugin, p, block, BlockType.MINERALS);
+        BlockHarvestTask changeBlock = new BlockHarvestTask(plugin, p, block, type);
         if(type.equals(BlockType.MINERALS)){
             int geodeOdds = GlobalUtils.getRandomNumber(101);
             if(geodeOdds < 3){
