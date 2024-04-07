@@ -93,15 +93,16 @@ public class GameContentLoader {
         CustomItem frenziedStems = new CustomItem("Frenzied Stems",5,true,false, "Used on workers for productivity",Material.FIRE_CORAL,0.0,0.0);
         CustomItem heartFruit = new CustomItem("Heart Fruit",5,true,false, "Still beating",Material.SWEET_BERRIES,0.0,0.0);
 
-
         CustomItem amethystBud = new CustomItem("Amethyst Bud",6, true,false, "Like a blossoming rose",Material.AMETHYST_SHARD,85.0,0.0);
         CustomItem mossyJade = new CustomItem("Mossy Jade",5,true,false, "Look's alive under light",Material.SLIME_BALL,65.0,0.0);
+
         CustomItem hermitCrab = new CustomItem("Hermit Crab",5,true,false, "Fish love it",Material.NAUTILUS_SHELL,8.0,15.0);
         CustomItem refinedOil = new CustomItem("Refined Oil",6,false,false, "Highly sought after",Material.LAVA_BUCKET,90.0,0.0);
         CustomItem southernsalmon = new CustomItem("Southern Salmon",6,true,false, "Migrated south through southern tributaries",Material.MUSIC_DISC_FAR,175.0,0.0);
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0);
+
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field", Material.TRIPWIRE_HOOK,0.0,0.0);
-        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,1150.0,0.0, Enchantment.LURE,1);
+        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,0.0,1950.0, Enchantment.LURE,1);
         CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND_PICKAXE,0.0,1450.0, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY

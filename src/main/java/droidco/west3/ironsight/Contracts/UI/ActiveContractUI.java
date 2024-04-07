@@ -23,7 +23,7 @@ public class ActiveContractUI
         int reqColumn = 4;
         int locColumn = 2;
         int descColumn = 6;
-        ItemStack blank = getBlankIcon(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemStack blank = getBlankIcon(Material.GRAY_STAINED_GLASS_PANE);
         ItemStack blankReq = getBlankIcon(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
         ItemStack blankDesc = getBlankIcon(Material.GREEN_STAINED_GLASS_PANE);
         ItemStack blankLoc = getBlankIcon(Material.RED_STAINED_GLASS_PANE);
@@ -53,7 +53,7 @@ public class ActiveContractUI
         contractUi.setItem(8,ContractUI.getResignContractIcon());
         contractUi.setItem(0,ItemIcon.getIcon("previous_page").getItem());
         for(int i =0;i< contractUi.getSize();i++){
-            if(contractUi.getItem(i).getType() == null){
+            if(contractUi.getItem(i) == null){
                 if(i % 9 == 2){
                     contractUi.setItem(i,blankLoc);
                 }else if(i % 9 == 4){
@@ -94,13 +94,14 @@ public class ActiveContractUI
     public static ItemStack getBlankIcon(Material mat){
         ItemStack item = new ItemStack(mat);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("");
+        meta.setDisplayName(" ");
         item.setItemMeta(meta);
         return item;
     }
     public static ItemStack getStepRequestedItem(int stepNumber, ItemStack requestedItem,int requestAmount){
-        ItemStack item = new ItemStack(requestedItem.getType());
+        ItemStack item = null;
         if(requestedItem != null){
+            item = new ItemStack(requestedItem.getType());
             ItemMeta meta = item.getItemMeta();
             String requestMessage = String.valueOf(ChatColor.WHITE)+"Aqcuire "+ChatColor.GREEN +requestAmount+" "+requestedItem.getItemMeta().getDisplayName();
             meta.setDisplayName(requestMessage);

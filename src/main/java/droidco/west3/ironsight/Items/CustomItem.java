@@ -52,6 +52,7 @@ CustomItem {
         this.description = ChatColor.GRAY+description;
         this.material = material;
         this.salePrice = salePrice;
+        this.purchasePrice = purchasePrice;
         this.enchant = enchant;
         this.enchantMultiplier = enchantMultiplier;
         items.put(this.itemCode, this);
