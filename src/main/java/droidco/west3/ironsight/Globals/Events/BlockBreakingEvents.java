@@ -30,6 +30,34 @@ public class BlockBreakingEvents implements Listener {
         e.setCancelled(true);
         Block block = (Block) e.getBlock();
         e.setDropItems(false);
+        Bandit b = Bandit.getPlayer(p);
+        if(b.isJailed()){
+            if (block.getType() == Material.IRON_ORE) {
+                b.updateBounty(-2);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),0);
+            }
+            if (block.getType() == Material.COPPER_ORE) {
+                b.updateBounty(-4);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),0);
+            }
+            if (block.getType() == Material.GOLD_ORE) {
+                b.updateBounty(-8);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),0);
+            }
+            if (block.getType() == Material.RAW_IRON_BLOCK) {
+                b.updateBounty(-18);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),0);
+            }
+            if (block.getType() == Material.RAW_COPPER_BLOCK) {
+                b.updateBounty(-36);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),0);
+            }
+            if (block.getType() == Material.RAW_GOLD_BLOCK) {
+                b.updateBounty(-72);
+                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),0);
+            }
+        }
+
 
         if (p.hasPotionEffect(PotionEffectType.LUCK)) {
             dropMultiplier = 2;

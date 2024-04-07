@@ -39,7 +39,7 @@ public class NPCUI {
         shop.setItem(11,CustomItem.getCustomItem("66 Winchester").getItemForSale());
         shop.setItem(12,CustomItem.getCustomItem("Henry Model 3").getItemForSale());
         shop.setItem(13,CustomItem.getCustomItem("Sharps Rifle").getItemForSale());
-        shop.setItem(14,CustomItem.getCustomItem("Winchester 1863").getItemForSale());
+        shop.setItem(14,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
         return shop;
 
     }

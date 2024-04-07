@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,6 +22,7 @@ import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -53,6 +55,14 @@ public class GeneralEvents implements Listener {
                     p.sendMessage("You broke your legs!");
                 }
             }
+        }
+    }
+    @EventHandler
+    public void specialBlockHandling(EntityDamageEvent e){
+        if(e.getEntity().getType().equals(EntityType.ITEM_FRAME)){
+            e.setCancelled(true);
+        }else if(e.getEntity().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+            e.setCancelled(true);
         }
     }
     @EventHandler

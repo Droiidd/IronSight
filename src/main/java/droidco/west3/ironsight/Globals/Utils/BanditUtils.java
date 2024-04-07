@@ -135,7 +135,8 @@ public class BanditUtils {
     public static String getRandomTip()
     {
         ArrayList<String> tips = new ArrayList<>();
-        tips.add(ChatColor.YELLOW+"Don't forget to send your horse back to the stable when you arrive at your destination");
+        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Don't forget to send your horse back to the stable when you arrive at your destination");
+        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Do /c to quickly view active contracts!");
 
         int tip = GlobalUtils.getRandomNumber(tips.size());
         return tips.get(tip);

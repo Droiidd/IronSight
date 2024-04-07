@@ -23,6 +23,10 @@ public class ActiveContractUI
         int reqColumn = 4;
         int locColumn = 2;
         int descColumn = 6;
+        ItemStack blank = getBlankIcon(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemStack blankReq = getBlankIcon(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        ItemStack blankDesc = getBlankIcon(Material.GREEN_STAINED_GLASS_PANE);
+        ItemStack blankLoc = getBlankIcon(Material.RED_STAINED_GLASS_PANE);
 
         contractUi.setItem(locColumn, ItemIcon.getIcon("contract_location").getItem());
         contractUi.setItem(reqColumn,ItemIcon.getIcon("contract_req").getItem());
@@ -48,6 +52,20 @@ public class ActiveContractUI
         }
         contractUi.setItem(8,ContractUI.getResignContractIcon());
         contractUi.setItem(0,ItemIcon.getIcon("previous_page").getItem());
+        for(int i =0;i< contractUi.getSize();i++){
+            if(contractUi.getItem(i).getType() == null){
+                if(i % 9 == 2){
+                    contractUi.setItem(i,blankLoc);
+                }else if(i % 9 == 4){
+                    contractUi.setItem(i,blankReq);
+                }else if(i % 9 == 6){
+                    contractUi.setItem(i,blankDesc);
+                }else{
+                    contractUi.setItem(i,blank);
+                }
+            }
+        }
+
         //contractUi.setItem(13,getActiveContractItem(iPlayer));
         return contractUi;
     }
@@ -73,10 +91,16 @@ public class ActiveContractUI
         item.setItemMeta(meta);
         return item;
     }
+    public static ItemStack getBlankIcon(Material mat){
+        ItemStack item = new ItemStack(mat);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("");
+        item.setItemMeta(meta);
+        return item;
+    }
     public static ItemStack getStepRequestedItem(int stepNumber, ItemStack requestedItem,int requestAmount){
-        ItemStack item = null;
+        ItemStack item = new ItemStack(requestedItem.getType());
         if(requestedItem != null){
-            item = requestedItem;
             ItemMeta meta = item.getItemMeta();
             String requestMessage = String.valueOf(ChatColor.WHITE)+"Aqcuire "+ChatColor.GREEN +requestAmount+" "+requestedItem.getItemMeta().getDisplayName();
             meta.setDisplayName(requestMessage);

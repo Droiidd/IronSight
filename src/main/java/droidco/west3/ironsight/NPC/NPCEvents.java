@@ -292,6 +292,7 @@ public class NPCEvents implements Listener {
                     p.sendMessage("ERROR");
                 }
                 if (b.isDepositing()) {
+                    e.setCancelled(true);
                     b.setDepositing(false);
                     if (d > b.getWallet()) {
                         p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
@@ -304,6 +305,7 @@ public class NPCEvents implements Listener {
                 }
                 if (b.isWithdrawing()) {
                     b.setWithdrawing(false);
+                    e.setCancelled(true);
                     if (d > b.getBank()) {
                         p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
                     }
