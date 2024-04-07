@@ -57,6 +57,11 @@ public class GlobalUtils {
         unsafeBlocks.add(Material.SPRUCE_LEAVES);
         unsafeBlocks.add(Material.BIRCH_LEAVES);
         unsafeBlocks.add(Material.ACACIA_LEAVES);
+        unsafeBlocks.add(Material.DARK_OAK_LEAVES);
+        unsafeBlocks.add(Material.MANGROVE_LEAVES);
+        unsafeBlocks.add(Material.CHERRY_LEAVES);
+        unsafeBlocks.add(Material.AZALEA_LEAVES);
+        unsafeBlocks.add(Material.OAK_LEAVES);
         unsafeBlocks.add(Material.WATER);
         while(!safeSpawn){
             x = getRandomCord(p.getLocation().getX()-30.0,p.getLocation().getX()+30.0);
