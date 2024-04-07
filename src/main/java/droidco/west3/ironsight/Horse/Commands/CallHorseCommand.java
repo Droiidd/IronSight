@@ -1,6 +1,7 @@
-package droidco.west3.ironsight.Horse;
+package droidco.west3.ironsight.Horse.Commands;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Horse.HorseUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +18,7 @@ public boolean onCommand(CommandSender commandSender, Command command, String s,
             p.sendMessage("To summon horse:");
             p.sendMessage("/call");
         } else {
-            p.openInventory(CallHorseUI.callHorseGui(p));
+            p.openInventory(HorseUI.openAvailableHorses(p));
         }
 
     }

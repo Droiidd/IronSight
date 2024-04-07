@@ -1,9 +1,15 @@
 package droidco.west3.ironsight.Globals.Utils;
 
+import droidco.west3.ironsight.Horse.FrontierHorseType;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -103,6 +109,35 @@ public class GlobalUtils {
 
         }
         return b;
+    }
+    public static void saveBackpack(ItemStack[] items) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+            dataOutput.writeInt(items.length);
+                for(ItemStack item : items) {
+                    dataOutput.writeObject(item);
+
+                }
+            dataOutput.close();
+            String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static FrontierHorseType getHorseTypeFromStr(String type ){
+        switch(type){
+            case "speedy" -> {
+                return FrontierHorseType.SPEEDY;
+            }
+            case "default" -> {
+                return FrontierHorseType.DEFAULT;
+            }
+            case "donkey" -> {
+                return FrontierHorseType.DONKEY;
+            }
+        }
+        return null;
     }
     public static int boolToInt(boolean bool){
         if(bool){

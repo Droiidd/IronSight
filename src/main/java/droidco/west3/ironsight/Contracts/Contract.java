@@ -216,12 +216,15 @@ public class Contract
             rareRequest = true;
         }
         switch(deliveryType){
-            case FISHER,HUNTER,DRUG_RUNNER -> {
+            case FISHER,HUNTER -> {
                 if(rareRequest){
                     amount = GlobalUtils.getRandomRange(3,9);
                 }else{
                     amount = GlobalUtils.getRandomRange(11,29);
                 }
+            }
+            case DRUG_RUNNER -> {
+                amount = GlobalUtils.getRandomRange(22,46);
             }
             case MINER -> {
                 if(rareRequest){
@@ -293,6 +296,9 @@ public class Contract
                     requestedItem = gems.get(gemChoice);
                 }
             }
+            case DRUG_RUNNER -> {
+                requestedItem = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+            }
         }
 
         //requestedItem.setAmount(amount);
@@ -332,6 +338,16 @@ public class Contract
                 List<String> desc = new ArrayList<>();
                 desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
                 desc.add("Mine ores until you have requested amount");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+            }
+            case DRUG_RUNNER -> {
+                List<String> desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +FrontierLocation.getLocation("Smokeleaf Field").getLocName());
+                desc.add("Harvest unprocessed drugs from field");
+                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +FrontierLocation.getLocation("Smokeleaf Field").getLocName());
+                desc = new ArrayList<>();
+                desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
+                desc.add("Process the drugs at a processor inside");
                 addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
         }

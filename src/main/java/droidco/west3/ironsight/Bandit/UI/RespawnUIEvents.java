@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class RespawnUIEvents implements Listener {
 
@@ -18,7 +19,7 @@ public class RespawnUIEvents implements Listener {
             e.setCancelled(true);
             FrontierLocation santafe = FrontierLocation.getLocation("Santa Fe");
             FrontierLocation neworleans = FrontierLocation.getLocation("New Orleans");
-            FrontierLocation texas = FrontierLocation.getLocation("Republic Of Texas");
+            FrontierLocation texas = FrontierLocation.getLocation("Republic of Texas");
 
             org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
             org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
@@ -36,13 +37,26 @@ public class RespawnUIEvents implements Listener {
 
                 }
                 case BLUE_BANNER -> {
-                    handleRespawnActions(ChatColor.YELLOW+"Republic Of Texas",
+                    handleRespawnActions(ChatColor.YELLOW+"Republic of Texas",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",rotRespawn,b,p);
                     break;
                 }
             }
             e.setCancelled(true);
         }
+    }
+    @EventHandler
+    public void playerRespawn(PlayerRespawnEvent e){
+
+    }
+    @EventHandler
+    public void respawnHandler(PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+        if(b.isJailed()){
+            b.setJailedFlag(true);
+        }
+        b.setRespawning(true);
     }
 
     public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit iP, Player p){

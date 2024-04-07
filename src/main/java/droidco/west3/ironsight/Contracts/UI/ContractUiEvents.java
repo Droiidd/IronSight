@@ -146,7 +146,7 @@ public class ContractUiEvents implements Listener {
                 b.setDoingContract(true);
                 p.closeInventory();
                 b.getActiveContract().startContract(p);
-                p.sendMessage("Contract selected. View your contract by typing \"/contract active\"");
+                p.sendMessage(ChatColor.GREEN+"Contract selected."+ChatColor.GRAY+" View your contract by typing"+ChatColor.WHITE+"\"/contract \"" +ChatColor.GRAY+"or "+ChatColor.WHITE+"/c");
             }
         }else{
             //They are doing a contract!

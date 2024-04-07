@@ -77,7 +77,7 @@ private FrontierHorse horseBeingSummoned;
         this.isJailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
-this.summoningHorse = false;
+        this.summoningHorse = false;
         this.bounty = 0;
         this.wantedKills = 0;
         this.contractorLvl =0;
@@ -91,7 +91,7 @@ this.summoningHorse = false;
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int contractorLvl, int contractorXp,
-                  long jailStartTime)
+                  long jailStartTime,int contractorTitle)
     {
         this.doingContract = false;
         this.pId = pId;
@@ -111,6 +111,7 @@ this.summoningHorse = false;
         this.wantedKills = wantedKills;
         this.contractorXp = contractorXp;
         this.contractorLvl = contractorLvl;
+        this.contractorTitle = contractorTitle;
 
         playerList.add(this);
         bandits.put(pId,this);
@@ -126,7 +127,9 @@ this.summoningHorse = false;
         Contract testC2 = new Contract( ContractType.Delivery, testLocs ,2, DeliveryType.FISHER);
         List<FrontierLocation> test4Locs = new ArrayList<>();
         test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
-        Contract testC4 = new Contract( ContractType.Delivery, test4Locs ,2, DeliveryType.MINER);
+        List<FrontierLocation> test2Locs = new ArrayList<>();
+        test2Locs.add(FrontierLocation.getLocation("Storm Point"));
+        Contract testC4 = new Contract(ContractType.Delivery, test2Locs ,2, DeliveryType.DRUG_RUNNER);
         List<FrontierLocation> test3Locs = new ArrayList<>();
         test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
         Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);

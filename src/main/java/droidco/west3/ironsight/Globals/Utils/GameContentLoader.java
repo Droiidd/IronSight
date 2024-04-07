@@ -22,6 +22,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class GameContentLoader {
         CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_MALL,55.0,0.0);
         CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_STRAD,40.0,0.0);
         CustomItem gold = new CustomItem("Gold Ore",3, true, false, "Can be refined or sold",Material.RAW_GOLD,19.0,0.0);
-        CustomItem slug = new CustomItem("Slug",3,true, false, "Reaks of the sea",Material.SPIDER_EYE,4.0,8.0);
+        CustomItem slug = new CustomItem("Sea Slug",3,true, false, "Reaks of the sea",Material.SPIDER_EYE,4.0,8.0);
         CustomItem boarmeat = new CustomItem("Boar Meat",3,true,false, "Closest thing to bacon",Material.PORKCHOP,7.0,0.0);
         CustomItem cowmeat = new CustomItem("Cow Meat",3,true,false, "Prime beef",Material.BEEF,9.0,0.0);
         CustomItem rabbitmeat = new CustomItem("Rabbit Meat",3,true,false, "Not too gamey",Material.RABBIT,6.0,0.0);
@@ -101,7 +102,7 @@ public class GameContentLoader {
         CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0);
         CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field", Material.TRIPWIRE_HOOK,0.0,0.0);
         CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,1150.0,0.0, Enchantment.LURE,1);
-        CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND,0.0,1450.0, Enchantment.DIG_SPEED, 1);
+        CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND_PICKAXE,0.0,1450.0, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY
         CustomItem alligator = new CustomItem("Alligator",8,true,false, "Crikey!",Material.MUSIC_DISC_CHIRP,425.0,0.0);
@@ -161,7 +162,12 @@ public class GameContentLoader {
         CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_FIRE,2);
         CustomItem bow2 = new CustomItem("Hard Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_DAMAGE,6);
 
+        new CustomItem("Colt Patterson",2,true,false,"",Material.STONE_SHOVEL,0.0,650.0);
+        new CustomItem("Sharps Rifle",7,true,false,"",Material.STONE_AXE,0.0,2450.0);
+        new CustomItem("66 Winchester",5,true,false,"",Material.DIAMOND_HOE,0.0,1800.0);
+        new CustomItem("Henry Model 3",5,true,false,"",Material.STONE_HOE,0.0,2800.0);
 
+        new CustomItem("Winchester 1873",6,false,false,"",Material.IRON_AXE,0.0,2950.0);
 
         System.out.println("custom items loaded");
 
@@ -251,6 +257,17 @@ public class GameContentLoader {
         //add all
         //journeyman pants/boots, sharps rifle, winchester 1873, frontier set, double spade brew
         String[] hightier_military_crate = {};
+
+        //      ===--- GEODES ---===
+        HashMap<String, Quantity> geodeMap = new HashMap<>();
+        geodeMap.put("Amethyst Bud", ones);
+        geodeMap.put("Mossy Jade", ones);
+        geodeMap.put("Baron's Emerald", ones);
+        geodeMap.put("Iron Ore", new Quantity(1,8));
+        geodeMap.put("Copper Ore", new Quantity(1,8));
+        geodeMap.put("Gold Ore", new Quantity(1,8));
+
+        ItemTable geodeTable = new ItemTable(geodeMap, "Geode");
     }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
@@ -277,7 +294,7 @@ public class GameContentLoader {
         FrontierLocation sloughcreek = new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
         FrontierLocation neworleans = new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
         FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        FrontierLocation texas = new FrontierLocation("Republic Of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
+        FrontierLocation texas = new FrontierLocation("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
 
         FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 2079,1794,-799,-959,1987,94,-920);
 
@@ -287,6 +304,7 @@ public class GameContentLoader {
         FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
         FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1330,-1100,-2100,2955);
         FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1876,-1681,1160,341);
+        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,-1009,-947,-2857,-2778);
 
         FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
         System.out.println("Locations loaded");
@@ -364,12 +382,12 @@ public class GameContentLoader {
                 ItemIcon sentinel = new ItemIcon("Sentinel Rock","sentinel_rock_tracker", "Find Sentinel Rock", Material.QUARTZ);
             ItemIcon banditCamps = new ItemIcon("Bandit Camps", "bandit_camp_tracker","Find Bandit Camps", Material.SKELETON_SKULL);
                 ItemIcon redAsh = new ItemIcon("Red Ash Camp", "red_ash_camp_tracker","Find Red Ash Camp", Material.REDSTONE);
-                ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base","storm_point_tracker", "Find Storm Point", Material.ITEM_FRAME);
+                ItemIcon stormPoint = new ItemIcon("Storm Point Rebel Base","storm_point_tracker", "Find Storm Point", Material.WITHER_SKELETON_SKULL);
             ItemIcon scavTowns = new ItemIcon("Scav Towns","scav_town_tracker", "Find Scav Towns", Material.OAK_DOOR);
                 ItemIcon florence = new ItemIcon("Florence Peak", "florence_peak_tracker", "Find Florence Peak", Material.ACACIA_DOOR);
                 ItemIcon washington = new ItemIcon("Washington Column", "washington_column_tracker","Find Washington Column", Material.SPRUCE_DOOR);
                 ItemIcon sierra = new ItemIcon("Sierra Gorge","sierra_gorge_tracker", "Find Sierra Gorge", Material.BIRCH_DOOR);
-            ItemIcon oilFields = new ItemIcon("Oil Fields","oil_field_tracker", "Find Oil Fields", Material.BUCKET);
+            ItemIcon oilFields = new ItemIcon("Oil Fields","oil_field_tracker", "Find Oil Fields", Material.COAL);
                 ItemIcon northMoraine = new ItemIcon("North Moraine Oil Field","north_moraine_oil_field_tracker", "Find North Moraine Oil Field", Material.BUCKET);
             ItemIcon drugFields = new ItemIcon("Drug Fields","drug_field_tracker", "Find Drug Fields", Material.KELP);
                 ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.KELP);
@@ -378,7 +396,7 @@ public class GameContentLoader {
                 //      ===--- BANKER ITEMS ---===
             ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD_BLOCK );
             ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.REDSTONE_BLOCK );
-
+            ItemIcon geode = new ItemIcon("Open Geode","open_geode","Click to crack open a geode", Material.IRON_PICKAXE);
 
         System.out.println("Icons loaded");
     }
@@ -402,6 +420,9 @@ public class GameContentLoader {
         NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         NPC contractor = new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-
+        new NPC("Arms Dealer", NPCType.ARMS_DEALER, 973, 94, -1951, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
     }
 }

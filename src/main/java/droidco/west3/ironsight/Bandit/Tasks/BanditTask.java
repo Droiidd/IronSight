@@ -13,6 +13,8 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.NPC.NPC;
+import droidco.west3.ironsight.Processors.LoadProcessor;
+import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -61,6 +63,7 @@ public class    BanditTask extends BukkitRunnable {
     private FrontierMob fox;
     private FrontierMob boar;
     private FrontierMob cow;
+    private int mobSec = 0;
     private List<FrontierMob> miners = new ArrayList<>();
     private List<FrontierMob> animals = new ArrayList<>();
     private List<FrontierMob> raiders = new ArrayList<>();
@@ -109,6 +112,7 @@ public class    BanditTask extends BukkitRunnable {
     public void run() {
         if(tick % 3 == 0){
             seconds++;
+            mobSec++;
             //      ===--- COMPASS TRACKER ---===
             if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
@@ -117,7 +121,7 @@ public class    BanditTask extends BukkitRunnable {
                     int distanceMsg = distance.intValue();
                     p.spigot().sendMessage(
                             ChatMessageType.ACTION_BAR,
-                            new TextComponent(String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                            new TextComponent(b.getTrackingLocation().getLocName()+" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
                 } else {
                     if (b.getTargetedPlayer() != null) {
                         if (b.getTargetedPlayer().isOnline()) {
@@ -132,6 +136,10 @@ public class    BanditTask extends BukkitRunnable {
                     }
                 }
             }
+            //      ===--- HELPFUL TIPS ---===
+            if(seconds % 300 == 0){
+                p.sendMessage(BanditUtils.getRandomTip());
+            }
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
             FrontierLocation.displayLocation(p);
             //      ===--- DISPLAYS SCOREBOARD / STATS ---===
@@ -140,7 +148,6 @@ public class    BanditTask extends BukkitRunnable {
 
             if (b.isRespawning()) {
                 // SEND PLAYER TO PRISON
-                b.setRespawning(false);
                 if (b.isJailedFlag()) {
                     //REPSAWN IN PRISON
                     b.setJailedFlag(false);
@@ -159,16 +166,19 @@ public class    BanditTask extends BukkitRunnable {
                         p.openInventory(RespawnUI.openRespawnSelect(p));
                     }
                 }
+                b.setRespawning(false);
             }
 
             //      ===--- LOCATION SPECIFIC ---===
             FrontierLocation currentLoc = b.getCurrentLocation();
+
+            b.getCurrentLocation().addTitle(p);
             //      ===--- PRISON ---===
             if (b.isJailed()) {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
                     //Player is escaping! PUT LOGIC HERE
                     b.setEscaping(true);
-                    if (!escapeFlag) {
+                    if (!escapeFlag && !b.isRespawning()) {
                         escapeFlag = true;
                         PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
                         p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty");
@@ -215,6 +225,12 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
+            }
+            if(currentLoc.getLocName().equalsIgnoreCase("Storm Point")){
+                if (!currentLoc.isNewArrival()) {
+                    currentLoc.setNewArrival(true);
+                    LoadProcessor.spawnProcessors(p);
+                }
             }
 
             if(currentLoc.getType().equals(LocationType.PRISON)){
@@ -272,6 +288,7 @@ public class    BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
                     p.sendMessage(ChatColor.AQUA +b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    p.sendMessage(ChatColor.GRAY+"Shift + right-click to open it's inventory.");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
@@ -284,7 +301,7 @@ public class    BanditTask extends BukkitRunnable {
             }
             contractCounter++;
             //      ===--- MOB SPAWNING ---===
-            if(seconds == mobRespawnTime){
+            if(mobSec == mobRespawnTime){
                 //p.sendMessage("30 seconds passed.");
                 switch(currentLoc.getType()){
                     case MINE -> {
@@ -310,7 +327,7 @@ public class    BanditTask extends BukkitRunnable {
                         }
                     }
                 }
-                seconds = 0;
+                mobSec = 0;
             }
         }
 

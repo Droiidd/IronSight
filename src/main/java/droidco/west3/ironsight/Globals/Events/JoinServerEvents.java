@@ -1,15 +1,20 @@
 package droidco.west3.ironsight.Globals.Events;
 
+import droidco.west3.ironsight.Horse.FrontierHorse;
+import droidco.west3.ironsight.Horse.FrontierHorseType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Bandit.Tasks.BanditTask;
 import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.List;
 
 public class JoinServerEvents implements Listener{
     IronSight plugin;
@@ -21,11 +26,15 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-        Bandit b = PlayerConnector.fetchPlayer(p);
+        Bandit b = PlayerConnector.fetchAllPlayerData(p);
         if(b == null){
             System.out.println("New player!");
             p.sendMessage("New player!");
             b = new Bandit(p.getUniqueId().toString());
+            List<FrontierHorse> horses = b.getHorses();
+            horses.add( new FrontierHorse(p.getUniqueId().toString(),"Starter", FrontierHorseType.DEFAULT));
+            p.teleport(new Location(p.getWorld(),1055,94,-1950));
+            p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
         }
 
         b.setOnlinePlayer(p);
@@ -52,7 +61,7 @@ public class JoinServerEvents implements Listener{
             p.damage(10000.0);
             iPlayer.setCombatBlocked(false);
         }
-        PlayerConnector.updatePlayer(Bandit.getPlayer(p));
+        PlayerConnector.updatePlayer(Bandit.getPlayer(p),p);
     }
 
 }
