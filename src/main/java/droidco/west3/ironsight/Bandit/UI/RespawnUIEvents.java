@@ -3,6 +3,7 @@ package droidco.west3.ironsight.Bandit.UI;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,15 +47,14 @@ public class RespawnUIEvents implements Listener {
         }
     }
     @EventHandler
-    public void playerRespawn(PlayerRespawnEvent e){
-
-    }
-    @EventHandler
     public void respawnHandler(PlayerRespawnEvent e){
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         if(b.isJailed()){
             b.setJailedFlag(true);
+            p.setRespawnLocation(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
+        }else{
+            p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
         }
         b.setRespawning(true);
     }

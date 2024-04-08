@@ -17,10 +17,7 @@ import droidco.west3.ironsight.Processors.LoadProcessor;
 import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -67,7 +64,8 @@ public class    BanditTask extends BukkitRunnable {
     private List<FrontierMob> miners = new ArrayList<>();
     private List<FrontierMob> animals = new ArrayList<>();
     private List<FrontierMob> raiders = new ArrayList<>();
-    private HashMap<String, FrontierLocation> locations;
+
+    List<FrontierLocation> locations;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
 
@@ -77,6 +75,8 @@ public class    BanditTask extends BukkitRunnable {
         this.wildernessFlag = false;
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
+
+        locations = FrontierLocation.getLocationList();
 
         b.setDoingContract(false);
         b.loadContracts();
@@ -140,10 +140,6 @@ public class    BanditTask extends BukkitRunnable {
             if(seconds % 300 == 0){
                 p.sendMessage(BanditUtils.getRandomTip());
             }
-            //      ===--- DISPLAYS LOCATION BOSSBAR ---===
-            FrontierLocation.displayLocation(p);
-            //      ===--- DISPLAYS SCOREBOARD / STATS ---===
-            BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
             //      ===--- HANDLES PLAYER RESPAWN ---===
 
             if (b.isRespawning()) {
@@ -151,11 +147,7 @@ public class    BanditTask extends BukkitRunnable {
                 if (b.isJailedFlag()) {
                     //REPSAWN IN PRISON
                     b.setJailedFlag(false);
-                    FrontierLocation prison = FrontierLocation.getLocation("Prison");
-                    //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
-                    org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(), prison.getSpawnX(), prison.getSpawnY(), prison.getSpawnZ());
                     p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
-                    p.teleport(respawn);
                     p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
                 } else {
                     //RESPAWNING IN A TOWN
@@ -169,10 +161,22 @@ public class    BanditTask extends BukkitRunnable {
                 b.setRespawning(false);
             }
 
+            //      ===--- DISPLAYS LOCATION BOSSBAR ---===
+            updatePlayerLocation(p);
+            //      ===--- DISPLAYS SCOREBOARD / STATS ---===
+            BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
+
+
             //      ===--- LOCATION SPECIFIC ---===
             FrontierLocation currentLoc = b.getCurrentLocation();
-
             b.getCurrentLocation().addTitle(p);
+            for(FrontierLocation location : locations){
+                if(!location.getLocName().equalsIgnoreCase(b.getCurrentLocation().getLocName())){
+                    location.removeTitle(p);
+                    p.resetTitle();
+                }
+            }
+
             //      ===--- PRISON ---===
             if (b.isJailed()) {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
@@ -358,6 +362,25 @@ public class    BanditTask extends BukkitRunnable {
         int amount = GlobalUtils.getRandomNumber(4);
         for(int i=0; i < amount; i++){
             mob.spawnMob(p);
+        }
+    }
+    public void updatePlayerLocation(Player p) {
+        Bandit b = Bandit.getPlayer(p);
+        boolean wildMarker = true;
+        for(FrontierLocation location : locations){
+            if (location.isPlayerInside(p)) {
+                //location.addTitle(p);
+                b.setCurrentLocation(location);
+                if(!location.getPlayersInside().isEmpty()){
+                    for(Player activePlayer : location.getPlayersInside()){
+                        Bukkit.broadcastMessage(location.getLocName()+": "+ activePlayer.getDisplayName());
+                    }
+                }
+                wildMarker = false;
+            }
+        }
+        if(wildMarker){
+            b.setCurrentLocation(FrontierLocation.getLocation("Wilderness"));
         }
     }
 }
