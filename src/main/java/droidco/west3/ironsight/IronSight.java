@@ -2,6 +2,7 @@ package droidco.west3.ironsight;
 
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
@@ -83,6 +84,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
         getServer().getPluginManager().registerEvents(new NPCEvents(this), this);
         getServer().getPluginManager().registerEvents(new HorseEvents(), this);
+        getServer().getPluginManager().registerEvents(new FishingEvents(), this);
         getServer().getPluginManager().registerEvents(new VaultEvents(), this);
     }
     public void loadAllCommands() {
