@@ -3,6 +3,8 @@ package droidco.west3.ironsight.NPC;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
+import droidco.west3.ironsight.Horse.FrontierHorse;
+import droidco.west3.ironsight.Horse.FrontierHorseType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
@@ -284,6 +286,18 @@ public class NPCEvents implements Listener {
                 purchaseFirearm(b,p,CustomItem.getCustomItem("Winchester 1873"),NPC.getNPC("Arms Dealer"),"winchesterillegal");
             }
         }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Stable Manager")){
+            e.setCancelled(true);
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Standard").getItemStack().getItemMeta().getDisplayName())) {
+                purchaseHorse(b,p,CustomItem.getCustomItem("Standard"),NPC.getNPC("Stable Manager"),FrontierHorseType.STANDARD);
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Thoroughbred").getItemStack().getItemMeta().getDisplayName())) {
+                purchaseHorse(b,p,CustomItem.getCustomItem("Thoroughbred"),NPC.getNPC("Stable Manager"),FrontierHorseType.THOROUGHBRED);
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Donkey").getMaterial()) ) {
+                purchaseHorse(b,p,CustomItem.getCustomItem("Donkey"),NPC.getNPC("Stable Manager"),FrontierHorseType.DONKEY);
+            }
+        }
     }
     @EventHandler
     public void bankInteraction(PlayerChatEvent e) {
@@ -494,7 +508,6 @@ public class NPCEvents implements Listener {
     }
     public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc )
     {
-        p.sendMessage("Purchase price: "+item.getPurchasePrice());
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
@@ -506,7 +519,6 @@ public class NPCEvents implements Listener {
     }
     public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
     {
-
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
@@ -514,6 +526,22 @@ public class NPCEvents implements Listener {
 
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Bukkit.dispatchCommand(console, weapon);
+        } else {
+            p.closeInventory();
+            p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
+        }
+    }
+    public void purchaseHorse(Bandit b, Player p, CustomItem item, NPC npc, FrontierHorseType type)
+    {
+        if (b.getWallet() >= item.getPurchasePrice()) {
+            if(b.getHorses().size() <3){
+                b.updateWallet(-1 * item.getPurchasePrice());
+                p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
+                b.getHorses().add(new FrontierHorse(p.getUniqueId().toString(),GlobalUtils.getHorseTypeString(type),type));
+            }else{
+                p.closeInventory();
+                p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": You have the "+ChatColor.RED+"max amount"+ChatColor.GRAY+" of horses!");
+            }
         } else {
             p.closeInventory();
             p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");

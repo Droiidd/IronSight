@@ -142,11 +142,12 @@ public class NPCUI {
     }
 
     public static Inventory stableManagerUI(Player p) {
-        Inventory stableManagerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Stable Manager");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Stable Manager");
+        shop.setItem(10,CustomItem.getCustomItem("Standard").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Thoroughbred").getItemForSale());
+        shop.setItem(16,CustomItem.getCustomItem("Donkey").getItemForSale());
 
-        return stableManagerUI;
-
+        return shop;
     }
 
     public static Inventory conductorUI(Player p) {
