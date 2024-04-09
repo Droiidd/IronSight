@@ -2,16 +2,25 @@ package droidco.west3.ironsight.Bandit.UI;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.IronSight;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class RespawnUIEvents implements Listener {
+    private IronSight plugin;
+    public RespawnUIEvents(IronSight plugin){
+        this.plugin = plugin;
+    }
 
-    @EventHandler
+                           @EventHandler
     public void respawnMenuSelect(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:")){
@@ -45,28 +54,15 @@ public class RespawnUIEvents implements Listener {
             e.setCancelled(true);
         }
     }
-    @EventHandler
-    public void playerRespawn(PlayerRespawnEvent e){
 
-    }
-    @EventHandler
-    public void respawnHandler(PlayerRespawnEvent e){
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        if(b.isJailed()){
-            b.setJailedFlag(true);
-        }
-        b.setRespawning(true);
-    }
-
-    public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit iP, Player p){
+    public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit b, Player p){
       //ADD A RESPAWN SOUND
         p.sendTitle(locTitle,welcomeMsg);
         p.closeInventory();
         p.setWalkSpeed(0.2f);
         p.setFlySpeed(0.2f);
         p.teleport(respawn);
-        //p.playSound(p.getLocation(), Sound.ITEM);
+        b.setRespawning(false);
     }
 
 }

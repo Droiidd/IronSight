@@ -8,7 +8,9 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FrontierLocation {
@@ -21,8 +23,10 @@ public class FrontierLocation {
     private LocationType type;
     private ItemTable itemTable;
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
-
+private static List<FrontierLocation> locationList = new ArrayList<>();
     private boolean newArrival;
+    private boolean mobsSpawned;
+    private List<Player> playersInside = new ArrayList<>();
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
         this.locName = locName;
@@ -33,10 +37,12 @@ public class FrontierLocation {
         this.welcomeMessage = welcomeMessage;
         this.type = type;
         this.newArrival = false;
+        this.mobsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
         locations.put(locName, this);
+        locationList.add(this);
     }
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2, double spawnX, double spawnY, double spawnZ) {
         this.locName = locName;
@@ -50,23 +56,17 @@ public class FrontierLocation {
         this.welcomeMessage = welcomeMessage;
         this.type = type;
         this.newArrival = false;
+        this.mobsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
         locations.put(locName, this);
+        locationList.add(this);
     }
     public static HashMap<String, FrontierLocation> getLocations() {
         return locations;
     }
 
-    public static boolean isPlayerInWilderness(Player p) {
-        for (Map.Entry<String, FrontierLocation> mapE : locations.entrySet()) {
-            if (mapE.getValue().isPlayerInside(p)) {
-                return false;
-            }
-        }
-        return true;
-    }
     public static FrontierLocation getLocation(String locationName) {
         if (locations.containsKey(locationName)) {
             return locations.get(locationName);
@@ -98,7 +98,16 @@ public class FrontierLocation {
         }
         //PLAYER IS WITHIN THE ZONE
         if ((playerX > minX && playerX < maxX) && (playerZ > minZ && playerZ < maxZ)) {
+            if(!playersInside.contains(p)){
+                playersInside.add(p);
+            }
             return true;
+        }
+        if(playersInside.contains(p)){
+            playersInside.remove(p);
+        }
+        if(!p.isOnline()){
+            playersInside.remove(p);
         }
         return false;
     }
@@ -109,27 +118,6 @@ public class FrontierLocation {
 
     public void setNewArrival(boolean newArrival) {
         this.newArrival = newArrival;
-    }
-
-    public static void displayLocation(Player p) {
-        Bandit b = Bandit.getPlayer(p);
-        locations.forEach((s, location) -> {
-            if (location.isPlayerInside(p)) {
-                location.addTitle(p);
-                b.setCurrentLocation(location);
-            } else {
-                location.removeTitle(p);
-            }
-
-        });
-        if (FrontierLocation.isPlayerInWilderness(p)) {
-            //Display wilderness
-            FrontierLocation.displayWilderness(p);
-            b.setCurrentLocation(getLocation("Wilderness"));
-        } else {
-            //Else check the towns.
-            FrontierLocation.removeWilderness(p);
-        }
     }
 
     public BossBar getTitleBossBar(String title, BarColor color) {
@@ -153,16 +141,16 @@ public class FrontierLocation {
         this.locTitle.setVisible(false);
     }
 
-    public static void displayWilderness(Player p) {
-        wildernessTitle.setProgress(1);
-        wildernessTitle.addPlayer(p);
-        wildernessTitle.setVisible(true);
-    }
-
-    public static void removeWilderness(Player p) {
-        wildernessTitle.removePlayer(p);
-        wildernessTitle.setVisible(false);
-    }
+//    public static void displayWilderness(Player p) {
+//        wildernessTitle.setProgress(1);
+//        wildernessTitle.addPlayer(p);
+//        wildernessTitle.setVisible(true);
+//    }
+//
+//    public static void removeWilderness(Player p) {
+//        wildernessTitle.removePlayer(p);
+//        wildernessTitle.setVisible(false);
+//    }
 
     public BarColor getTitleColor(LocationType type) {
         switch (type) {
@@ -172,7 +160,7 @@ public class FrontierLocation {
             case TOWN -> {
                 return BarColor.PINK;
             }
-            case ILLEGAL, OIL_FIELD -> {
+            case ILLEGAL, OIL_FIELD,PRISON -> {
                 return BarColor.RED;
             }
             case NATURAL, WILDERNESS -> {
@@ -186,6 +174,14 @@ public class FrontierLocation {
     }
 
     // >>>=== GETTERS & SETTERS ===<<<
+
+    public static List<FrontierLocation> getLocationList() {
+        return locationList;
+    }
+
+    public static void setLocationList(List<FrontierLocation> locationList) {
+        FrontierLocation.locationList = locationList;
+    }
 
     public double getSpawnX() {
         return spawnX;
@@ -281,6 +277,22 @@ public class FrontierLocation {
     }
     public ItemTable getItemTable(){
         return this.itemTable;
+    }
+
+    public List<Player> getPlayersInside() {
+        return playersInside;
+    }
+
+    public void setPlayersInside(List<Player> playersInside) {
+        this.playersInside = playersInside;
+    }
+
+    public boolean isMobsSpawned() {
+        return mobsSpawned;
+    }
+
+    public void setMobsSpawned(boolean mobsSpawned) {
+        this.mobsSpawned = mobsSpawned;
     }
 }
 

@@ -17,19 +17,14 @@ import droidco.west3.ironsight.Processors.LoadProcessor;
 import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class    BanditTask extends BukkitRunnable {
     private ArrayList<BanditTask> tasks = new ArrayList<>();
@@ -67,7 +62,9 @@ public class    BanditTask extends BukkitRunnable {
     private List<FrontierMob> miners = new ArrayList<>();
     private List<FrontierMob> animals = new ArrayList<>();
     private List<FrontierMob> raiders = new ArrayList<>();
-    private HashMap<String, FrontierLocation> locations;
+
+    List<FrontierLocation> locations;
+    HashMap<UUID, LivingEntity> npcEnts;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
 
@@ -75,8 +72,13 @@ public class    BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
+        b.setEscaping(false);
+        b.setJailRespawn(false);
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
+
+        locations = FrontierLocation.getLocationList();
+        npcEnts = NPC.getEntities();
 
         b.setDoingContract(false);
         b.loadContracts();
@@ -140,70 +142,67 @@ public class    BanditTask extends BukkitRunnable {
             if(seconds % 300 == 0){
                 p.sendMessage(BanditUtils.getRandomTip());
             }
-            //      ===--- DISPLAYS LOCATION BOSSBAR ---===
-            FrontierLocation.displayLocation(p);
-            //      ===--- DISPLAYS SCOREBOARD / STATS ---===
-            BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
             //      ===--- HANDLES PLAYER RESPAWN ---===
 
             if (b.isRespawning()) {
-                // SEND PLAYER TO PRISON
-                if (b.isJailedFlag()) {
-                    //REPSAWN IN PRISON
-                    b.setJailedFlag(false);
-                    FrontierLocation prison = FrontierLocation.getLocation("Prison");
-                    //Get the bukkit location of the respawn points from the Iron Sight Location (confusing)
-                    org.bukkit.Location respawn = new org.bukkit.Location(p.getWorld(), prison.getSpawnX(), prison.getSpawnY(), prison.getSpawnZ());
-                    p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
-                    p.teleport(respawn);
-                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
-                } else {
-                    //RESPAWNING IN A TOWN
-                    p.setWalkSpeed(0);
-                    p.setFlySpeed(0);
-                    p.setSprinting(false);
-                    if (p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:") != true) {
-                        p.openInventory(RespawnUI.openRespawnSelect(p));
-                    }
+                
+                //RESPAWNING IN A TOWN
+                p.setWalkSpeed(0);
+                p.setFlySpeed(0);
+                p.setSprinting(false);
+                if (p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:") != true) {
+                    p.openInventory(RespawnUI.openRespawnSelect(p));
                 }
-                b.setRespawning(false);
+
             }
+
+            //      ===--- DISPLAYS LOCATION BOSSBAR ---===
+            updatePlayerLocation(p);
+            despawnEmptyTownNPCs();
+            spawnNPCs(p,b);
+            //SPAWN NPCS
+
+            //      ===--- DISPLAYS SCOREBOARD / STATS ---===
+            BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
+
 
             //      ===--- LOCATION SPECIFIC ---===
             FrontierLocation currentLoc = b.getCurrentLocation();
-
             b.getCurrentLocation().addTitle(p);
+            for(FrontierLocation location : locations){
+                if(!location.getLocName().equalsIgnoreCase(b.getCurrentLocation().getLocName())){
+                    location.removeTitle(p);
+                    p.resetTitle();
+                }
+            }
+
             //      ===--- PRISON ---===
             if (b.isJailed()) {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
                     //Player is escaping! PUT LOGIC HERE
-                    b.setEscaping(true);
-                    if (!escapeFlag && !b.isRespawning()) {
-                        escapeFlag = true;
+                    if (!b.isEscaping()) {
+                        b.setEscaping(true);
                         PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
                         p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty");
                     }
                 } else {
                     //They are in prison!
-                    escapeFlag = false;
                     b.setEscaping(false);
+                }
+            }
+            if(currentLoc.getType().equals(LocationType.PRISON)){
+                if (b.isJailed()) {
+                    //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
+                    b.updateBounty(-1);
+                    if (b.getBounty() <= 0) {
+                        BanditUtils.releasePrisoner(p, b);
+                    }
                 }
             }
 
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
                 p.setLastDamage(0.0);
-                //SPAWN NPCS
-                if (!currentLoc.isNewArrival()) {
-                    currentLoc.setNewArrival(true);
-                    HashMap<String, NPC> npcs = NPC.getNPCs();
-                    for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
-                        NPC npc = entryNPC.getValue();
-                        npc.spawnNPC(p);
-
-                    }
-                }
-
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
                     //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
@@ -230,16 +229,6 @@ public class    BanditTask extends BukkitRunnable {
                 if (!currentLoc.isNewArrival()) {
                     currentLoc.setNewArrival(true);
                     LoadProcessor.spawnProcessors(p);
-                }
-            }
-
-            if(currentLoc.getType().equals(LocationType.PRISON)){
-                if (b.isJailed()) {
-                    //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
-                    b.updateBounty(-1);
-                    if (b.getBounty() <= 0) {
-                        BanditUtils.releasePrisoner(p, b);
-                    }
                 }
             }
             //      ===--- WANTED TIMER ---===
@@ -270,7 +259,7 @@ public class    BanditTask extends BukkitRunnable {
             }
             //      ===--- BLEED EFFECT ---===
             if (b.isBleeding()) {
-                p.setHealth(p.getHealth() - 1.5);
+                p.damage(1.5);
                 for (int i = 0; i < 13; i++) {
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
                 }
@@ -358,6 +347,51 @@ public class    BanditTask extends BukkitRunnable {
         int amount = GlobalUtils.getRandomNumber(4);
         for(int i=0; i < amount; i++){
             mob.spawnMob(p);
+        }
+    }
+    public void updatePlayerLocation(Player p) {
+        Bandit b = Bandit.getPlayer(p);
+        boolean wildMarker = true;
+        for(FrontierLocation location : locations){
+            if (location.isPlayerInside(p)) {
+                //location.addTitle(p);
+                b.setCurrentLocation(location);
+                if(!location.getPlayersInside().isEmpty()){
+
+                }
+                wildMarker = false;
+            }
+        }
+        if(wildMarker){
+            b.setCurrentLocation(FrontierLocation.getLocation("Wilderness"));
+        }
+    }
+    public void despawnEmptyTownNPCs(){
+        for(FrontierLocation location : locations){
+            if(location.getPlayersInside().isEmpty()){
+                if(location.isMobsSpawned()){
+                    HashMap<UUID, NPC> npcs = NPC.getNpcsById();
+                    for(Map.Entry<UUID,LivingEntity> npcEnt : npcEnts.entrySet()){
+                        if(location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())){
+                            npcEnt.getValue().remove();
+                            System.out.println(npcEnt.getValue().getCustomName()+ " NPC killed.");
+                        }
+                    }
+                    location.setMobsSpawned(false);
+                }
+            }
+        }
+    }
+    public void spawnNPCs(Player p, Bandit b){
+        if (!b.getCurrentLocation().isMobsSpawned()) {
+            b.getCurrentLocation().setMobsSpawned(true);
+            HashMap<String, NPC> npcs = NPC.getNPCs();
+            for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
+                NPC npc = entryNPC.getValue();
+                if(npc.getFrontierLocation().equals(b.getCurrentLocation())){
+                    npc.spawnNPC(p);
+                }
+            }
         }
     }
 }

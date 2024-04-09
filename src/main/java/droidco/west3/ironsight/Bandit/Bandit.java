@@ -46,8 +46,8 @@ public class Bandit
     private FrontierLocation trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
-private boolean summoningHorse;
-private FrontierHorse horseBeingSummoned;
+    private boolean summoningHorse;
+    private FrontierHorse horseBeingSummoned;
     private boolean isDepositing;
     private boolean isWithdrawing;
     private FrontierLocation currentFrontierLocation;
@@ -55,6 +55,7 @@ private FrontierHorse horseBeingSummoned;
     private Contract apprenticeContract;
     private Contract experiencedContract;
     private Contract activeContract;
+    private boolean jailRespawn;
     private static List<Bandit> playerList = new ArrayList<>();
     private List<Contract> contracts = new ArrayList<>();
     private List<FrontierHorse> horses = new ArrayList<>();
@@ -453,5 +454,13 @@ private FrontierHorse horseBeingSummoned;
 
     public Contract getExperiencedContract() {
         return experiencedContract;
+    }
+
+    public boolean isJailRespawn() {
+        return jailRespawn;
+    }
+
+    public void setJailRespawn(boolean jailRespawn) {
+        this.jailRespawn = jailRespawn;
     }
 }

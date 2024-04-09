@@ -1,10 +1,12 @@
 package droidco.west3.ironsight;
 
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
+import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
-import droidco.west3.ironsight.Globals.Events.BlockBreakingEvents;
+import droidco.west3.ironsight.BlockHarvesting.BlockBreakingEvents;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
 import droidco.west3.ironsight.Bandit.UI.RespawnUIEvents;
 import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
@@ -17,10 +19,10 @@ import droidco.west3.ironsight.Horse.Commands.CallHorseCommand;
 import droidco.west3.ironsight.Horse.HorseEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
-import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCEvents;
 import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -62,9 +64,7 @@ public final class IronSight extends JavaPlugin {
     public void onDisable() {
         System.out.println("Disabling IronSight");
         // Plugin shutdown logic
-        for(Player p : Bukkit.getOnlinePlayers()){
-            p.kickPlayer("Ironsight server meshing...");
-        }
+        savePlayers();
         killAllMobs();
         System.out.println("All mobs killed.");
         System.out.println("IronSight shutting down...");
@@ -76,7 +76,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
-        getServer().getPluginManager().registerEvents(new RespawnUIEvents(), this);
+        getServer().getPluginManager().registerEvents(new RespawnUIEvents(this), this);
         getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);
@@ -98,11 +98,15 @@ public final class IronSight extends JavaPlugin {
             mob.getValue().damage(100);
             System.out.println("Mob killed.");
         }
-        HashMap<UUID, LivingEntity> npcs = NPC.getEntities();
-        for(Map.Entry<UUID,LivingEntity> npc : npcs.entrySet()){
-            npc.getValue().damage(100);
-            System.out.println("NPC killed.");
-        }
+        String cmd = "minecraft:kill @e[type=minecraft:villager]";
 
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        Bukkit.dispatchCommand(console, cmd);
+    }
+    public void savePlayers(){
+        for(Player p : Bukkit.getOnlinePlayers()){
+            PlayerConnector.updatePlayer(Bandit.getPlayer(p),p);
+            p.kickPlayer("Ironsight server meshing...");
+        }
     }
 }

@@ -348,13 +348,13 @@ public class Contract
                 desc = new ArrayList<>();
                 desc.add("Arrive at "+ChatColor.GREEN +frontierLocation.getLocName());
                 desc.add("Process the drugs at a processor inside");
-                addCompletionStep("steptest",1,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
+                addCompletionStep("steptest",2,desc,requestedItem,"Ride to "+ ChatColor.GREEN +frontierLocation.getLocName());
             }
         }
         List<String> desc = new ArrayList<>();
         desc.add("Return to any "+ChatColor.YELLOW+"Contractor");
         desc.add("for reward.");
-        addCompletionStep("steptest",2,desc,null,"Ride to any town");
+        addCompletionStep("steptest",3,desc,null,"Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
         this.reward = amount * CustomItem.getCustomItem(ChatColor.stripColor(requestedItem.getItemMeta().getDisplayName())).getSalePrice();
         String listing = "";

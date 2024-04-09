@@ -6,13 +6,16 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.potion.PotionEffectType;
 
 public class CombatEvents implements Listener
 {
@@ -49,31 +52,44 @@ public class CombatEvents implements Listener
     }
 
     @EventHandler
+    public void playerDamage(EntityDamageEvent e){
+        if(e.getEntity() instanceof Player){
+            Player p = (Player) e.getEntity();
+            Bandit b = Bandit.getPlayer(p);
+            if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
+                //PLAYER DIED
+                e.setCancelled(true);
+                p.setHealth(20);
+                p.removePotionEffect(PotionEffectType.SLOW);
+                if(b.isCombatBlocked()){
+                    b.setCombatBlocked(false);
+                }
+                if(b.isWanted()){
+                    b.setWanted(false);
+                }
+                if(b.isBleeding()){
+                    b.setBleeding(false);
+                }
+                if(b.isBrokenLegs()){
+                    b.setBrokenLegs(false);
+                }
 
-    public void playerDies(PlayerDeathEvent e){
-            Player p = e.getEntity();
-            Bandit b = Bandit.getPlayer(e.getEntity());
-            if(b.isCombatBlocked()){
-                b.setCombatBlocked(false);
+                //SEND TO JAIL
+                if(b.getBounty() >= 100){
+                    b.setJailed(true);
+                    FrontierLocation prison = FrontierLocation.getLocation("Prison");
+                    p.setRespawnLocation(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
+                    b.setJailStartTime(System.currentTimeMillis());
+                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
+                    p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
+                    p.teleport(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
+                }else{
+                    b.setJailed(false);
+                    p.sendTitle(ChatColor.GRAY + "You " + ChatColor.DARK_RED + "Died!", ChatColor.GRAY + "Choose a town to respawn");
+                    b.setRespawning(true);
+                }
+
             }
-            if(b.isWanted()){
-                b.setWanted(false);
-            }
-            if(b.isBleeding()){
-                b.setBleeding(false);
-            }
-            if(b.isBrokenLegs()){
-                b.setBrokenLegs(false);
-            }
-            if(b.getBounty() > 60){
-                //Send em to prison
-                b.setJailed(true);
-                FrontierLocation prison = FrontierLocation.getLocation("Prison");
-                p.setRespawnLocation(new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ()));
-                b.setJailStartTime(System.currentTimeMillis());
-            }else{
-                b.setJailed(false);
-                //b.setBounty(0);
-            }
+        }
     }
 }

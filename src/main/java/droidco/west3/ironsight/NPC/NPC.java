@@ -27,9 +27,11 @@ public class NPC {
     private boolean isLegal;
     private boolean isOfficer;
     private FrontierLocation frontierLocation;
+    private UUID npcId;
 
     private static HashMap<String, NPC> shoppingPlayers = new HashMap<>();
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
+    private static HashMap<UUID, NPC> npcsById = new HashMap<>();
 
     public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer, FrontierLocation frontierLocation) {
 
@@ -71,7 +73,12 @@ public class NPC {
                 npc.setVillagerType(Villager.Type.SNOW);
             }
         }
+        this.npcId = npc.getUniqueId();
         entities.put(npc.getUniqueId(), npc);
+        npcsById.put(npc.getUniqueId(), this);
+    }
+    public NPC getNPCByUUID(UUID id){
+        return npcsById.get(id);
     }
     public static NPC getNPC(String displayName) {
         return npcs.get(displayName);
@@ -167,5 +174,21 @@ public class NPC {
 
     public void setOfficer(boolean officer) {
         isOfficer = officer;
+    }
+
+    public FrontierLocation getFrontierLocation() {
+        return frontierLocation;
+    }
+
+    public void setFrontierLocation(FrontierLocation frontierLocation) {
+        this.frontierLocation = frontierLocation;
+    }
+
+    public static HashMap<UUID, NPC> getNpcsById() {
+        return npcsById;
+    }
+
+    public static void setNpcsById(HashMap<UUID, NPC> npcsById) {
+        NPC.npcsById = npcsById;
     }
 }

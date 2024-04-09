@@ -207,10 +207,17 @@ public class NPCEvents implements Listener {
                 purchaseItem(b,p,CustomItem.getCustomItem("Old Miner's Pick"),NPC.getNPC("Shopkeeper"));
             }
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Explorer's Pick").getMaterial()) == 0) {
-                purchaseItem(b,p,CustomItem.getCustomItem("Brown Stew"),NPC.getNPC("Shopkeeper"));
+                purchaseItem(b,p,CustomItem.getCustomItem("Explorer's Pick"),NPC.getNPC("Shopkeeper"));
             }
             if (e.getCurrentItem().getType().compareTo(ItemIcon.getIcon("open_geode").getItem().getType()) == 0) {
-                openGeode(75,p,b);
+                if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("geode").getItemStack(),1)){
+                    p.getInventory().remove(CustomItem.getCustomItem("geode").getItemStack());
+                    openGeode(75,p,b);
+                }else{
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.RED+"No geodes to open!");
+                }
+
             }
 
         }
@@ -222,13 +229,13 @@ public class NPCEvents implements Listener {
             if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Hermit Crab").getMaterial()) ) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Hermit Crab"),NPC.getNPC("Shopkeeper"));
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Wooden Fishing Rod").getMaterial()) ) {
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Wooden Fishing Rod").getItemStack().getItemMeta().getDisplayName())) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Wooden Fishing Rod"),NPC.getNPC("Shopkeeper"));
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Steel Lined Rod").getMaterial()) ) {
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Steel Lined Rod").getItemStack().getItemMeta().getDisplayName()) ) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Steel Lined Rod"),NPC.getNPC("Shopkeeper"));
             }
-            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Expedition Rod").getMaterial()) ) {
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Expedition Rod").getItemStack().getItemMeta().getDisplayName()) ) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Expedition Rod"),NPC.getNPC("Shopkeeper"));
             }
         }
@@ -298,7 +305,7 @@ public class NPCEvents implements Listener {
                         p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
                     }
                     else {
-                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have deposited "+ d + "g!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have deposited "+ChatColor.GREEN+ d + "g!");
                         b.updateWallet(-1 * d);
                         b.updateBank(d);
                     }
@@ -310,7 +317,7 @@ public class NPCEvents implements Listener {
                         p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.RED+ ": You don't have enough funds!");
                     }
                     else {
-                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have withdrew "+ d + "g!");
+                        p.sendMessage(NPC.getNPC("Bank Teller").getDisplayName()+ChatColor.GRAY+ ": You have withdrew "+ChatColor.GREEN + d + "g!");
                         b.updateBank(-1 * d);
                         b.updateWallet(d);
                     }
@@ -487,6 +494,7 @@ public class NPCEvents implements Listener {
     }
     public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc )
     {
+        p.sendMessage("Purchase price: "+item.getPurchasePrice());
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
