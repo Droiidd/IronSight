@@ -1,8 +1,10 @@
 package droidco.west3.ironsight;
 
 
+import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
+import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.BlockHarvesting.BlockBreakingEvents;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
@@ -62,9 +64,7 @@ public final class IronSight extends JavaPlugin {
     public void onDisable() {
         System.out.println("Disabling IronSight");
         // Plugin shutdown logic
-        for(Player p : Bukkit.getOnlinePlayers()){
-            p.kickPlayer("Ironsight server meshing...");
-        }
+        savePlayers();
         killAllMobs();
         System.out.println("All mobs killed.");
         System.out.println("IronSight shutting down...");
@@ -102,5 +102,11 @@ public final class IronSight extends JavaPlugin {
 
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         Bukkit.dispatchCommand(console, cmd);
+    }
+    public void savePlayers(){
+        for(Player p : Bukkit.getOnlinePlayers()){
+            PlayerConnector.updatePlayer(Bandit.getPlayer(p),p);
+            p.kickPlayer("Ironsight server meshing...");
+        }
     }
 }

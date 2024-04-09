@@ -123,12 +123,12 @@ public class BlockBreakingEvents implements Listener {
         tmp.setAmount(amount);
         block.getWorld().dropItemNaturally(block.getLocation(),tmp);
     }
-    public void minePrisonOre(Bandit b, Player p, Block block, int bountyDecrese,CustomItem item)
+    public void minePrisonOre(Bandit b, Player p, Block block, int bountyDecrease,CustomItem item)
     {
-        b.updateBounty(-bountyDecrese);
+        b.updateBounty(bountyDecrease);
         breakCustomBlock(p,block,BlockType.MINERALS,item,0);
         p.spigot().sendMessage(
                 ChatMessageType.ACTION_BAR,
-                new TextComponent(ChatColor.GRAY + "Ore mined."+ChatColor.GREEN+"-"+bountyDecrese));
+                new TextComponent(ChatColor.GRAY + "Ore mined. "+ChatColor.GREEN+""+bountyDecrease+" bounty!"));
     }
 }
