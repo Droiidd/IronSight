@@ -13,13 +13,25 @@ import droidco.west3.ironsight.Items.Looting.ItemTable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+
+import java.net.http.WebSocket;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ArrayList;
 
@@ -364,6 +376,7 @@ public class NPCEvents implements Listener {
     }
     public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
     {
+
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
