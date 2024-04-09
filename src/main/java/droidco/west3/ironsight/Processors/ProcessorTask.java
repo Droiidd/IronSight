@@ -76,9 +76,7 @@ public class ProcessorTask extends BukkitRunnable {
         }
 
         if (!p.isOnline()) {
-            this.cancel();
-            tasks.remove(this);
-            processor.setProcessing(false);
+            cancelProcess();
             return;
         }
 
@@ -128,26 +126,26 @@ public class ProcessorTask extends BukkitRunnable {
         p.playSound(p.getLocation(), Sound.ENTITY_ALLAY_ITEM_THROWN, 1, 1);
         GlobalUtils.displayParticles(procLocation, Particle.SMOKE_NORMAL, Particle.VILLAGER_HAPPY, 10);
         clearBar();
-        this.cancel();
         tasks.remove(this);
         processor.setProcessing(false);
-
+        this.cancel();
     }
 
     public void cancelProcess() {
-        if (p.getPlayer().isOnline())
+        if (p.getPlayer().isOnline()) {
             p.sendMessage(ChatColor.RED + "Process of " + input.getItemMeta().getDisplayName() + " cancelled.");
 
-        for (int i = 0; i < unprocAmount; i++) {
-            p.getInventory().addItem(input);
+            for (int i = 0; i < unprocAmount; i++) {
+                p.getInventory().addItem(input);
+            }
         }
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         String command = "minecraft:kill @e[type=armor_stand]";
         Bukkit.dispatchCommand(console, command);
         clearBar();
-        this.cancel();
         tasks.remove(this);
         processor.setProcessing(false);
+        this.cancel();
     }
 
     private void updatePercentageBar(double percent) {
