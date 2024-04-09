@@ -269,6 +269,64 @@ public class GameContentLoader {
         geodeMap.put("Gold Ore", new Quantity(1,8));
 
         ItemTable geodeTable = new ItemTable(geodeMap, "Geode");
+
+        //      ===--- FISH TABLES ---===
+
+        //LOWER GUADLUPE
+        HashMap<String, Quantity> guadalupeMap = new HashMap<>();
+        guadalupeMap.put("Reed", ones);
+        guadalupeMap.put("Seaweed", ones);
+        guadalupeMap.put("Cactus Pronged Chub", ones);
+        guadalupeMap.put("Poor Mans Crappie", ones);
+        guadalupeMap.put("Gray Stoned Herring", ones);
+        guadalupeMap.put("Sunken Catfish", ones);
+
+        ItemTable guadalupeTable = new ItemTable(guadalupeMap, "Guadalupe Fish");
+
+        //THREE FORKS DELTA
+        HashMap<String, Quantity> deltaMap = new HashMap<>();
+        deltaMap.put("Reed", ones);
+        deltaMap.put("Seaweed", ones);
+        deltaMap.put("Cactus Pronged Chub", ones);
+        deltaMap.put("Poor Mans Crappie", ones);
+        deltaMap.put("Gray Stoned Herring", ones);
+        deltaMap.put("Alligator", ones);
+
+        ItemTable deltaTable = new ItemTable(deltaMap, "Three Forks Fish");
+
+        //PEARL RIVER
+        HashMap<String, Quantity> pearlMap = new HashMap<>();
+        pearlMap.put("Reed", ones);
+        pearlMap.put("Seaweed", ones);
+        pearlMap.put("Cactus Pronged Chub", ones);
+        pearlMap.put("Poor Mans Crappie", ones);
+        pearlMap.put("Gray Stoned Herring", ones);
+        pearlMap.put("Arctic Salmon", ones);
+        pearlMap.put("Pearl River Trout", ones);
+
+        ItemTable pearlTable = new ItemTable(pearlMap, "Pearl River Fish");
+
+        //SLOUGH CREEK
+        HashMap<String, Quantity> sloughMap = new HashMap<>();
+        sloughMap.put("Reed", ones);
+        sloughMap.put("Seaweed", ones);
+        sloughMap.put("Cactus Pronged Chub", ones);
+        sloughMap.put("Poor Mans Crappie", ones);
+        sloughMap.put("Gray Stoned Herring", ones);
+        sloughMap.put("Southern Salmon", ones);
+        sloughMap.put("Gold Stoned Herring", ones);
+
+        ItemTable sloughTable = new ItemTable(sloughMap, "Slough Creek Fish");
+        //GLOBAL FISH
+        HashMap<String, Quantity> globalFishMap = new HashMap<>();
+        globalFishMap.put("Reed", ones);
+        globalFishMap.put("Seaweed", ones);
+        globalFishMap.put("Cactus Pronged Chub", ones);
+        globalFishMap.put("Poor Mans Crappie", ones);
+        globalFishMap.put("Gray Stoned Herring", ones);
+
+        new ItemTable(globalFishMap, "Global Fish");
+
     }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
