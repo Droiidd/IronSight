@@ -56,19 +56,7 @@ public class RespawnUIEvents implements Listener {
     }
     @EventHandler
     public void respawnHandler(PlayerRespawnEvent e){
-        Player p = e.getPlayer();
-        Bandit b = Bandit.getPlayer(p);
-        if(b.isJailed()){
-            p.setRespawnLocation(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
-            b.setRespawning(false);
-                    // SEND PLAYER TO PRISON
-            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
-            p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
-            p.teleport(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
-        }else{
-            p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
-            b.setRespawning(true);
-        }
+
     }
 
     public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit b, Player p){
@@ -79,7 +67,6 @@ public class RespawnUIEvents implements Listener {
         p.setFlySpeed(0.2f);
         p.teleport(respawn);
         b.setRespawning(false);
-        //p.playSound(p.getLocation(), Sound.ITEM);
     }
 
 }

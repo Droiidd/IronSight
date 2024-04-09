@@ -5,6 +5,7 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -72,7 +73,7 @@ public class GeneralEvents implements Listener {
         ItemStack inHand = p.getInventory().getItemInMainHand();
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
-                    "Bandage")) {
+                    CustomItem.getCustomItem("Bandage").getItemStack().getItemMeta().getDisplayName())) {
                 //They are using a bandage
                 if (b.isBleeding()) {
                     p.playSound(p.getLocation(), Sound.ENTITY_LEASH_KNOT_PLACE, 1, 1);
@@ -83,7 +84,7 @@ public class GeneralEvents implements Listener {
                 }
             }
             if(inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
-                    "Splint")){
+                    CustomItem.getCustomItem("Splint").getItemStack().getItemMeta().getDisplayName())){
                 if(b.isBrokenLegs()){
                     p.playSound(p.getLocation(), Sound.ITEM_AXE_STRIP, 1, 0);
                     b.setBrokenLegs(false);
