@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Bandit.Tasks;
+package droidco.west3.ironsight.BlockHarvesting;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BlockType;
@@ -85,6 +85,8 @@ public class BlockHarvestTask extends BukkitRunnable {
                 int clusterChance = GlobalUtils.getRandomNumber(101);
                 if(clusterChance < 5){
                     block.setType(getCluster(this.originalBlock) != null ? getCluster(this.originalBlock) : Material.RAW_IRON);
+                }else{
+                    block.setType(this.originalBlock);
                 }
                 GlobalUtils.displayParticles(block.getLocation(), Particle.CRIT, Particle.CLOUD, 8);
             }

@@ -1,11 +1,14 @@
-package droidco.west3.ironsight.Globals.Events;
+package droidco.west3.ironsight.BlockHarvesting;
 
 import droidco.west3.ironsight.Bandit.Bandit;
-import droidco.west3.ironsight.Bandit.Tasks.BlockHarvestTask;
+import droidco.west3.ironsight.BlockHarvesting.BlockHarvestTask;
 import droidco.west3.ironsight.Globals.Utils.BlockType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -33,28 +36,22 @@ public class BlockBreakingEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         if(b.isJailed()){
             if (block.getType() == Material.IRON_ORE) {
-                b.updateBounty(-2);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),0);
+                minePrisonOre(b,p,block,-2,CustomItem.getCustomItem("Iron Ore"));
             }
             if (block.getType() == Material.COPPER_ORE) {
-                b.updateBounty(-4);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),0);
+                minePrisonOre(b,p,block,-4,CustomItem.getCustomItem("Copper Ore"));
             }
             if (block.getType() == Material.GOLD_ORE) {
-                b.updateBounty(-8);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),0);
+                minePrisonOre(b,p,block,-8,CustomItem.getCustomItem("Gold Ore"));
             }
             if (block.getType() == Material.RAW_IRON_BLOCK) {
-                b.updateBounty(-18);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),0);
+                minePrisonOre(b,p,block,-18,CustomItem.getCustomItem("Iron Ore"));
             }
             if (block.getType() == Material.RAW_COPPER_BLOCK) {
-                b.updateBounty(-36);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),0);
+                minePrisonOre(b,p,block,-36,CustomItem.getCustomItem("Copper Ore"));
             }
             if (block.getType() == Material.RAW_GOLD_BLOCK) {
-                b.updateBounty(-72);
-                breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),0);
+                minePrisonOre(b,p,block,-50,CustomItem.getCustomItem("Gold Ore"));
             }
         }
 
@@ -125,5 +122,13 @@ public class BlockBreakingEvents implements Listener {
         ItemStack tmp = item.getItemStack();
         tmp.setAmount(amount);
         block.getWorld().dropItemNaturally(block.getLocation(),tmp);
+    }
+    public void minePrisonOre(Bandit b, Player p, Block block, int bountyDecrese,CustomItem item)
+    {
+        b.updateBounty(-bountyDecrese);
+        breakCustomBlock(p,block,BlockType.MINERALS,item,0);
+        p.spigot().sendMessage(
+                ChatMessageType.ACTION_BAR,
+                new TextComponent(ChatColor.GRAY + "Ore mined."+ChatColor.GREEN+"-"+bountyDecrese));
     }
 }

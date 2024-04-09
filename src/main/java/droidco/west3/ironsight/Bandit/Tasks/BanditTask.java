@@ -190,6 +190,15 @@ public class    BanditTask extends BukkitRunnable {
                     b.setEscaping(false);
                 }
             }
+            if(currentLoc.getType().equals(LocationType.PRISON)){
+                if (b.isJailed()) {
+                    //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
+                    b.updateBounty(-1);
+                    if (b.getBounty() <= 0) {
+                        BanditUtils.releasePrisoner(p, b);
+                    }
+                }
+            }
 
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
@@ -222,16 +231,6 @@ public class    BanditTask extends BukkitRunnable {
                     LoadProcessor.spawnProcessors(p);
                 }
             }
-
-            if(currentLoc.getType().equals(LocationType.PRISON)){
-                if (b.isJailed()) {
-                    //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
-                    b.updateBounty(-1);
-                    if (b.getBounty() <= 0) {
-                        BanditUtils.releasePrisoner(p, b);
-                    }
-                }
-            }
             //      ===--- WANTED TIMER ---===
             if (b.isWanted()) {
                 wantedSec--;
@@ -260,7 +259,7 @@ public class    BanditTask extends BukkitRunnable {
             }
             //      ===--- BLEED EFFECT ---===
             if (b.isBleeding()) {
-                p.setHealth(p.getHealth() - 1.5);
+                p.damage(1.5);
                 for (int i = 0; i < 13; i++) {
                     p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
                 }

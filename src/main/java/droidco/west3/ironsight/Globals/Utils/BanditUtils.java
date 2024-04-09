@@ -30,7 +30,7 @@ public class BanditUtils {
         b.setJailed(false);
         b.setEscaping(false);
         b.setJailedFlag(false);
-        p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " jail!", "Good luck...");
+        p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " Prison!", "Good luck...");
         b.setRespawning(true);
     }
 

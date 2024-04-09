@@ -4,7 +4,7 @@ package droidco.west3.ironsight;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
-import droidco.west3.ironsight.Globals.Events.BlockBreakingEvents;
+import droidco.west3.ironsight.BlockHarvesting.BlockBreakingEvents;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
 import droidco.west3.ironsight.Bandit.UI.RespawnUIEvents;
 import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
@@ -17,10 +17,10 @@ import droidco.west3.ironsight.Horse.Commands.CallHorseCommand;
 import droidco.west3.ironsight.Horse.HorseEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
-import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCEvents;
 import droidco.west3.ironsight.Tracker.TrackerEvents;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -98,5 +98,9 @@ public final class IronSight extends JavaPlugin {
             mob.getValue().damage(100);
             System.out.println("Mob killed.");
         }
+        String cmd = "minecraft:kill @e[type=minecraft:villager]";
+
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        Bukkit.dispatchCommand(console, cmd);
     }
 }

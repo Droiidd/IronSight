@@ -160,7 +160,7 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
             case TOWN -> {
                 return BarColor.PINK;
             }
-            case ILLEGAL, OIL_FIELD -> {
+            case ILLEGAL, OIL_FIELD,PRISON -> {
                 return BarColor.RED;
             }
             case NATURAL, WILDERNESS -> {

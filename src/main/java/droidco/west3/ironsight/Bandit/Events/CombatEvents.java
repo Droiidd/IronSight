@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.potion.PotionEffectType;
 
 public class CombatEvents implements Listener
 {
@@ -58,6 +59,8 @@ public class CombatEvents implements Listener
             if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
                 //PLAYER DIED
                 e.setCancelled(true);
+                p.setHealth(20);
+                p.removePotionEffect(PotionEffectType.SLOW);
                 if(b.isCombatBlocked()){
                     b.setCombatBlocked(false);
                 }
@@ -82,6 +85,7 @@ public class CombatEvents implements Listener
                     p.teleport(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
                 }else{
                     b.setJailed(false);
+                    p.sendTitle(ChatColor.GRAY + "You " + ChatColor.DARK_RED + "Died!", ChatColor.GRAY + "Choose a town to respawn");
                     b.setRespawning(true);
                 }
 

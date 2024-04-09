@@ -54,10 +54,6 @@ public class RespawnUIEvents implements Listener {
             e.setCancelled(true);
         }
     }
-    @EventHandler
-    public void respawnHandler(PlayerRespawnEvent e){
-
-    }
 
     public void handleRespawnActions(String locTitle, String welcomeMsg, org.bukkit.Location respawn, Bandit b, Player p){
       //ADD A RESPAWN SOUND
