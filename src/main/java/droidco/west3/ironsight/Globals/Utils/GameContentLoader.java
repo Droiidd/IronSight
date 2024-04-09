@@ -31,10 +31,6 @@ import java.util.List;
 
 
 public class GameContentLoader {
-    public static void loadCustomMobs()
-    {
-
-    }
     public static void loadCustomItems()
     {
         System.out.println("Loading custom items");
@@ -172,7 +168,9 @@ public class GameContentLoader {
 
         System.out.println("custom items loaded");
 
-
+        new CustomItem("Standard",1,true,false,"Get's you where you need",Material.HORSE_SPAWN_EGG,0.0,2100.0);
+        new CustomItem("Thoroughbred",1,true,false,"Fastest steed you can find",Material.HORSE_SPAWN_EGG,0.0,35250.0);
+        new CustomItem("Donkey",1,true,false,"Slow but lots of storage",Material.DONKEY_SPAWN_EGG,0.0,48500.0);
     }
     public static void loadItemTables(){
         //add "Health Potions
@@ -465,6 +463,8 @@ public class GameContentLoader {
         ItemIcon openAccountMenu = new ItemIcon("Open Account", "open_account_menu", "Open an item vault account", Material.CHEST);
         ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
 
+        new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
+            new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
         System.out.println("Icons loaded");
     }
 
@@ -491,6 +491,7 @@ public class GameContentLoader {
         new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
     }
 }

@@ -221,7 +221,7 @@ public class PlayerConnector {
         System.out.println("Updating horse " +horse.getHorseName());
             String sql = "UPDATE horse " +
                     "set bandit_id = \'"+p.getUniqueId().toString() + "\', "+
-                    "horse_type = \'"+horse.getHorseTypeString()+"\', "+
+                    "horse_type = \'"+GlobalUtils.getHorseTypeString(horse.getHorseType())+"\', "+
                     "horse_name = \'"+ horse.getHorseName() +"\'"+
                     "WHERE horse_name = \'"+horse.getHorseName()+"\' AND "+
                     "bandit_id = \'"+p.getUniqueId().toString()+"\'   ";
@@ -238,7 +238,7 @@ public class PlayerConnector {
                     PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                     insertStmt.setString(1, p.getUniqueId().toString());
                     insertStmt.setString(2, horse.getHorseName());
-                    insertStmt.setString(3, horse.getHorseTypeString());
+                    insertStmt.setString(3, GlobalUtils.getHorseTypeString(horse.getHorseType()));
 
 
                         int insertVal = insertStmt.executeUpdate();

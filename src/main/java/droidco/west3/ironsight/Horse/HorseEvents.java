@@ -96,6 +96,10 @@ public class HorseEvents implements Listener {
             String invTitle = horse.getHorseName()+"'s saddle-pack";
             if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
                 targetHorse = horse;
+            }else if(e.getView().getTitle().equalsIgnoreCase(horse.getHorseName()+"'s saddle-pack storage")){
+                if(e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)){
+                    e.setCancelled(true);
+                }
             }
         }
         if(targetHorse != null){

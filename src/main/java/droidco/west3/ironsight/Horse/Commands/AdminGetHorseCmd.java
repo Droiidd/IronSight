@@ -26,11 +26,11 @@ public class AdminGetHorseCmd implements CommandExecutor
             }
             else{
                 switch(strings[0]){
-                    case "default":
-                        checkNewPlayerHorse(p, strings[1] != null ? strings[1] : "Default name", FrontierHorseType.DEFAULT);
+                    case "standard":
+                        checkNewPlayerHorse(p, strings[1] != null ? strings[1] : "Default name", FrontierHorseType.STANDARD);
                         break;
-                    case "speedy":
-                        checkNewPlayerHorse(p,  strings[1] != null ? strings[1] : "Default name", FrontierHorseType.SPEEDY);
+                    case "thoroughbred":
+                        checkNewPlayerHorse(p,  strings[1] != null ? strings[1] : "Default name", FrontierHorseType.THOROUGHBRED);
                         break;
                     case "donkey":
                         checkNewPlayerHorse(p,  strings[1] != null ? strings[1] : "Default name", FrontierHorseType.DONKEY);

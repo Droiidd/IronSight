@@ -21,20 +21,6 @@ import java.util.ArrayList;
 
 public class FishingEvents implements Listener {
 
-    public void handleCaughtFish(){
-
-    }
-    public void caughtFishEffects(Player p) {
-        p.spigot().sendMessage(
-                ChatMessageType.ACTION_BAR,
-                new TextComponent(ChatColor.AQUA + "Fish On!"));
-
-        GlobalUtils.displayParticles(p.getLocation(), Particle.GLOW_SQUID_INK, Particle.VILLAGER_HAPPY, 10);
-        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0);
-        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_PUFFER_FISH_DEATH, 1, 0);
-        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_TROPICAL_FISH_FLOP, 1, 0);
-    }
-
     @EventHandler
     public void onPlayerFish(PlayerFishEvent e){
         Player p = e.getPlayer();
@@ -86,6 +72,16 @@ public class FishingEvents implements Listener {
                 successfulFish(p,fishAmt,"Global Fish");
             }
         }
+    }
+    public void caughtFishEffects(Player p) {
+        p.spigot().sendMessage(
+                ChatMessageType.ACTION_BAR,
+                new TextComponent(String.valueOf(ChatColor.BOLD)+ ChatColor.AQUA + "Fish On!"));
+
+        GlobalUtils.displayParticles(p.getLocation(), Particle.GLOW_SQUID_INK, Particle.VILLAGER_HAPPY, 10);
+        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0);
+        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_PUFFER_FISH_DEATH, 1, 0);
+        p.getLocation().getWorld().playSound(p.getLocation(), Sound.ENTITY_TROPICAL_FISH_FLOP, 1, 0);
     }
     public void successfulFish(Player p, int fishAmt, String lootTableName)
     {
