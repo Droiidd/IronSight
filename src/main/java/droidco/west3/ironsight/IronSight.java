@@ -2,6 +2,7 @@ package droidco.west3.ironsight;
 
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Commands.DropGoldCmd;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
