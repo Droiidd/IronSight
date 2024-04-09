@@ -5,7 +5,7 @@ import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.Looting.ItemTable;
+import droidco.west3.ironsight.Items.ItemTable;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
