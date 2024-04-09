@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,10 @@ public class Bandit
     private static List<Bandit> playerList = new ArrayList<>();
     private List<Contract> contracts = new ArrayList<>();
     private List<FrontierHorse> horses = new ArrayList<>();
+
+    private int vaultSize = 0;
+    private List<ItemStack> itemVault = new ArrayList<>(vaultSize);
+
     //private final IronSight plugin;
 
     private int wantedKills;
@@ -89,10 +94,27 @@ public class Bandit
         //this.plugin = plugin;
         this.onlinePlayer = null;
     }
+
+    public List<ItemStack> getItemVault() {
+        return itemVault;
+    }
+
+    public void setItemVault(List<ItemStack> itemVault) {
+        this.itemVault = itemVault;
+    }
+
+    public int getVaultSize() {
+        return vaultSize;
+    }
+
+    public void setVaultSize(int vaultSize) {
+        this.vaultSize = vaultSize;
+    }
+
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int contractorLvl, int contractorXp,
-                  long jailStartTime,int contractorTitle)
+                  long jailStartTime, int contractorTitle)
     {
         this.doingContract = false;
         this.pId = pId;

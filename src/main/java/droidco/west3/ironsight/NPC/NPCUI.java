@@ -175,10 +175,14 @@ public class NPCUI {
     public static Inventory vaultKeeperUI(Player p) {
         Inventory vaultKeeperUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Vault Keeper");
         Bandit iPlayer = Bandit.getPlayer(p);
+        vaultKeeperUI.setItem(11, ItemIcon.getIcon("open_vault").getItem());
+        vaultKeeperUI.setItem(13, ItemIcon.getIcon("open_account_menu").getItem());
+        vaultKeeperUI.setItem(15, ItemIcon.getIcon("upgrade_vault").getItem());
 
         return vaultKeeperUI;
 
     }
+
 
 
     public static Inventory chiefUI(Player p) {

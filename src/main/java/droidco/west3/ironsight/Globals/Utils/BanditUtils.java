@@ -1,10 +1,13 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.*;
 import org.checkerframework.checker.units.qual.A;
 
@@ -140,6 +143,34 @@ public class BanditUtils {
 
         int tip = GlobalUtils.getRandomNumber(tips.size());
         return tips.get(tip);
+    }
+
+    public static Inventory newVaultUI(Player p) {
+        Bandit b = Bandit.getPlayer(p);
+        Inventory newVaultUI = Bukkit.createInventory(p, 27, p.getDisplayName() + ": " + ChatColor.DARK_AQUA + "Open a Vault Account");
+        newVaultUI.setItem(11, ItemIcon.getIcon("open_account").getItem());
+        newVaultUI.setItem(15, ItemIcon.getIcon("close_vault").getItem());
+        return newVaultUI;
+    }
+    public static Inventory vaultUI(Player p) {
+        Bandit b = Bandit.getPlayer(p);
+        Inventory vaultUI = Bukkit.createInventory(p, b.getVaultSize(), p.getDisplayName() + ChatColor.DARK_AQUA+": Vault");
+        List<ItemStack> items = b.getItemVault();
+        if (!items.isEmpty()) {
+            for (int i = 0; i < items.size(); i++) {
+                vaultUI.setItem(i, items.get(i));
+            }
+        }
+
+        return vaultUI(p);
+    }
+
+    public static Inventory vaultUpgradeUI(Player p) {
+        Bandit b = Bandit.getPlayer(p);
+        Inventory vaultUpgradeUI = Bukkit.createInventory(p, 27, p.getDisplayName() + ChatColor.DARK_AQUA + ": Upgrade Vault");
+        vaultUpgradeUI.setItem(11, ItemIcon.getIcon("upgrade_vault_confirm").getItem());
+        vaultUpgradeUI.setItem(15, ItemIcon.getIcon("close_vault").getItem());
+        return vaultUpgradeUI(p);
     }
 }
 

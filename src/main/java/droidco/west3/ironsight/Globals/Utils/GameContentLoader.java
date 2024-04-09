@@ -398,6 +398,14 @@ public class GameContentLoader {
             ItemIcon deposit = new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD_BLOCK );
             ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.REDSTONE_BLOCK );
             ItemIcon geode = new ItemIcon("Open Geode","open_geode","Click to crack open a geode", Material.IRON_PICKAXE);
+                //      ===--- VAULTKEEPER ITEMS ---===
+            ItemIcon openVault = new ItemIcon("Open Vault", "open_vault", "Open your item vault", Material.ENDER_CHEST);
+            ItemIcon upgradeVault = new ItemIcon("Upgrade Vault", "upgrade_vault", "Upgrade your item vault", Material.LIME_BANNER);
+            ItemIcon emptySlot = new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
+        ItemIcon doUpgrade = new ItemIcon("Upgrade Vault", "upgrade_vault_confirm", "50,000g for 9 more slots", Material.EMERALD_BLOCK);
+        ItemIcon go_back = new ItemIcon("Upgrade Vault", "close_vault", "Close menu", Material.REDSTONE_BLOCK);
+        ItemIcon openAccountMenu = new ItemIcon("Open Account", "open_account_menu", "Open an item vault account", Material.CHEST);
+        ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
 
         System.out.println("Icons loaded");
     }
@@ -425,5 +433,6 @@ public class GameContentLoader {
         new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
     }
 }

@@ -2,6 +2,7 @@ package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
@@ -282,6 +283,34 @@ public class NPCEvents implements Listener {
             }
             if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Winchester 1873").getMaterial()) ) {
                 purchaseFirearm(b,p,CustomItem.getCustomItem("Winchester 1873"),NPC.getNPC("Arms Dealer"),"winchesterillegal");
+            }
+        }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Vault Keeper")){
+            e.setCancelled(true);
+            switch (e.getCurrentItem().getType()) {
+                case ENDER_CHEST -> {
+                    if (b.getVaultSize() != 0) {
+                        p.openInventory(BanditUtils.vaultUI(p));
+                    }
+                    else {
+                        p.closeInventory();
+                        p.sendMessage(NPC.getNPC("Vault Keeper").getDisplayName()+": " + ChatColor.RED+ "You don't have an item vault!");
+
+                    }
+                }
+                case CHEST -> {
+                    p.openInventory(BanditUtils.newVaultUI(p));
+                }
+                case LIME_BANNER -> {
+                    if (b.getVaultSize() != 0) {
+                        p.openInventory(BanditUtils.vaultUpgradeUI(p));
+                    }
+                    else {
+                        p.closeInventory();
+                        p.sendMessage(NPC.getNPC("Vault Keeper").getDisplayName()+": " + ChatColor.RED+ "You don't have an item vault!");
+
+                    }
+                }
             }
         }
     }
