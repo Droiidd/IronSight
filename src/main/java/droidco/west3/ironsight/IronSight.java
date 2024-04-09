@@ -76,7 +76,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);
-        getServer().getPluginManager().registerEvents(new RespawnUIEvents(), this);
+        getServer().getPluginManager().registerEvents(new RespawnUIEvents(this), this);
         getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
         getServer().getPluginManager().registerEvents(new MasterListEvents(), this);

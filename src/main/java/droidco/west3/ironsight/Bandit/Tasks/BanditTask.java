@@ -72,6 +72,8 @@ public class    BanditTask extends BukkitRunnable {
         this.b = b;
         this.p = p;
         this.wildernessFlag = false;
+        b.setEscaping(false);
+        b.setJailRespawn(false);
         tasks.add(this);
         this.runTaskTimer(plugin, 0, 10);
 
@@ -143,22 +145,15 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- HANDLES PLAYER RESPAWN ---===
 
             if (b.isRespawning()) {
-                // SEND PLAYER TO PRISON
-                if (b.isJailedFlag()) {
-                    //REPSAWN IN PRISON
-                    b.setJailedFlag(false);
-                    p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
-                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
-                } else {
-                    //RESPAWNING IN A TOWN
-                    p.setWalkSpeed(0);
-                    p.setFlySpeed(0);
-                    p.setSprinting(false);
-                    if (p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:") != true) {
-                        p.openInventory(RespawnUI.openRespawnSelect(p));
-                    }
+                
+                //RESPAWNING IN A TOWN
+                p.setWalkSpeed(0);
+                p.setFlySpeed(0);
+                p.setSprinting(false);
+                if (p.getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Choose Town:") != true) {
+                    p.openInventory(RespawnUI.openRespawnSelect(p));
                 }
-                b.setRespawning(false);
+
             }
 
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
@@ -185,15 +180,13 @@ public class    BanditTask extends BukkitRunnable {
             if (b.isJailed()) {
                 if (!currentLoc.getType().equals(LocationType.PRISON)) {
                     //Player is escaping! PUT LOGIC HERE
-                    b.setEscaping(true);
-                    if (!escapeFlag && !b.isRespawning()) {
-                        escapeFlag = true;
+                    if (!b.isEscaping()) {
+                        b.setEscaping(true);
                         PrisonEscapeTask escapee = new PrisonEscapeTask(plugin, p);
                         p.sendTitle(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Escapee!", ChatColor.GRAY + "Return to jail or gain bounty");
                     }
                 } else {
                     //They are in prison!
-                    escapeFlag = false;
                     b.setEscaping(false);
                 }
             }

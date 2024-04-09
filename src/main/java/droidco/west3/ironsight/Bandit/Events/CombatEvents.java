@@ -68,8 +68,10 @@ public class CombatEvents implements Listener
             if(b.getBounty() > 60){
                 //Send em to prison
                 b.setJailed(true);
+                b.setJailRespawn(true);
+                b.setJailedFlag(true);
                 FrontierLocation prison = FrontierLocation.getLocation("Prison");
-                p.setRespawnLocation(new org.bukkit.Location(p.getWorld(),prison.getSpawnX(),prison.getSpawnY(),prison.getSpawnZ()));
+                p.setRespawnLocation(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
                 b.setJailStartTime(System.currentTimeMillis());
             }else{
                 b.setJailed(false);

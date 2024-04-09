@@ -7,6 +7,8 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Bandit.Tasks.BanditTask;
 import droidco.west3.ironsight.Database.PlayerConnector;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +29,8 @@ public class JoinServerEvents implements Listener{
     {
         Player p = e.getPlayer();
         Bandit b = PlayerConnector.fetchAllPlayerData(p);
+        p.getWorld().setGameRule(GameRule.DO_IMMEDIATE_RESPAWN,true);
+
         if(b == null){
             System.out.println("New player!");
             p.sendMessage("New player!");
