@@ -132,14 +132,26 @@ public class GlobalUtils {
     }
     public static FrontierHorseType getHorseTypeFromStr(String type ){
         switch(type){
-            case "speedy" -> {
-                return FrontierHorseType.SPEEDY;
+            case "thoroughbred" -> {
+                return FrontierHorseType.THOROUGHBRED;
             }
-            case "default" -> {
-                return FrontierHorseType.DEFAULT;
+            case "standard" -> {
+                return FrontierHorseType.STANDARD;
             }
             case "donkey" -> {
                 return FrontierHorseType.DONKEY;
+            }
+        }
+        return null;
+    }
+    public static String getHorseTypeString(FrontierHorseType horseType){
+        switch(horseType){
+            case DONKEY -> {
+                return "donkey";
+            }case THOROUGHBRED -> {
+                return "thoroughbred";
+            }case STANDARD -> {
+                return "standard";
             }
         }
         return null;

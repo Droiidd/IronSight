@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Horse;
 
+import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
@@ -49,7 +50,7 @@ public class FrontierHorse {
                 donkey.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
                 horses.put(iD,this);
                 summonedHorses.put(iD, donkey);
-            }case SPEEDY,DEFAULT -> {
+            }case THOROUGHBRED,STANDARD -> {
                 horse = p.getWorld().spawn(p.getLocation(), Horse.class);
                 iD = horse.getUniqueId();
                 horse.setOwner(p);
@@ -61,10 +62,10 @@ public class FrontierHorse {
                 horses.put(iD,this);
                 summonedHorses.put(iD, horse);
 
-                if(horseType.equals(FrontierHorseType.DEFAULT)){
+                if(horseType.equals(FrontierHorseType.STANDARD)){
                     horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
                     horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
-                }else if(horseType.equals(FrontierHorseType.SPEEDY)){
+                }else if(horseType.equals(FrontierHorseType.THOROUGHBRED)){
                     horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.45);
                     horse.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
                     horse.setStyle(Horse.Style.WHITEFIELD);
@@ -112,33 +113,28 @@ public class FrontierHorse {
     public FrontierHorseType getHorseType() {
         return this.horseType;
     }
-    public String getHorseTypeString(){
-        switch(this.horseType){
-            case DONKEY -> {
-                return "donkey";
-            }case SPEEDY -> {
-                return "speedy";
-            }case DEFAULT -> {
-                return "default";
-            }
-        }
-        return null;
-    }
+
 
     public void openHorseInventory(Player p) {
         switch (horseType){
             case DONKEY -> {
-                Inventory inv = Bukkit.createInventory(p, 27, horseName + "'s saddle-pack storage");
-                inv.setContents(inventory);
-                p.openInventory(inv);
-            }
-            case SPEEDY -> {
                 Inventory inv = Bukkit.createInventory(p, 18, horseName + "'s saddle-pack storage");
                 inv.setContents(inventory);
                 p.openInventory(inv);
-            }case DEFAULT -> {
+            }
+            case THOROUGHBRED -> {
                 Inventory inv = Bukkit.createInventory(p, 9, horseName + "'s saddle-pack storage");
                 inv.setContents(inventory);
+                for(int i =1;i<inv.getSize();i++){
+                    inv.setItem(i,ItemIcon.getIcon("empty_horse_slot").getItem());
+                }
+                p.openInventory(inv);
+            }case STANDARD -> {
+                Inventory inv = Bukkit.createInventory(p, 9, horseName + "'s saddle-pack storage");
+                inv.setContents(inventory);
+                for(int i =4;i<inv.getSize();i++){
+                    inv.setItem(i, ItemIcon.getIcon("empty_horse_slot").getItem());
+                }
                 p.openInventory(inv);
             }
         }
