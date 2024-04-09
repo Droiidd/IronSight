@@ -356,9 +356,6 @@ public class    BanditTask extends BukkitRunnable {
             if (location.isPlayerInside(p)) {
                 //location.addTitle(p);
                 b.setCurrentLocation(location);
-                if(!location.getPlayersInside().isEmpty()){
-
-                }
                 wildMarker = false;
             }
         }
