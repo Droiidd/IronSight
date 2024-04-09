@@ -25,7 +25,7 @@ public class FrontierLocation {
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
 private static List<FrontierLocation> locationList = new ArrayList<>();
     private boolean newArrival;
-    private boolean lastToLeave;
+    private boolean mobsSpawned;
     private List<Player> playersInside = new ArrayList<>();
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
@@ -37,7 +37,7 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
         this.welcomeMessage = welcomeMessage;
         this.type = type;
         this.newArrival = false;
-        this.lastToLeave = false;
+        this.mobsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -56,6 +56,7 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
         this.welcomeMessage = welcomeMessage;
         this.type = type;
         this.newArrival = false;
+        this.mobsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -284,6 +285,14 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
 
     public void setPlayersInside(List<Player> playersInside) {
         this.playersInside = playersInside;
+    }
+
+    public boolean isMobsSpawned() {
+        return mobsSpawned;
+    }
+
+    public void setMobsSpawned(boolean mobsSpawned) {
+        this.mobsSpawned = mobsSpawned;
     }
 }
 

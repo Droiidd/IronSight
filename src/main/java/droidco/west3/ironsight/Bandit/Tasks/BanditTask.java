@@ -18,15 +18,13 @@ import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class    BanditTask extends BukkitRunnable {
     private ArrayList<BanditTask> tasks = new ArrayList<>();
@@ -66,6 +64,7 @@ public class    BanditTask extends BukkitRunnable {
     private List<FrontierMob> raiders = new ArrayList<>();
 
     List<FrontierLocation> locations;
+    HashMap<UUID, LivingEntity> npcEnts;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
 
@@ -77,6 +76,7 @@ public class    BanditTask extends BukkitRunnable {
         this.runTaskTimer(plugin, 0, 10);
 
         locations = FrontierLocation.getLocationList();
+        npcEnts = NPC.getEntities();
 
         b.setDoingContract(false);
         b.loadContracts();
@@ -163,6 +163,10 @@ public class    BanditTask extends BukkitRunnable {
 
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
             updatePlayerLocation(p);
+            despawnEmptyTownNPCs();
+            spawnNPCs(p,b);
+            //SPAWN NPCS
+
             //      ===--- DISPLAYS SCOREBOARD / STATS ---===
             BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
 
@@ -197,17 +201,6 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
                 p.setLastDamage(0.0);
-                //SPAWN NPCS
-                if (!currentLoc.isNewArrival()) {
-                    currentLoc.setNewArrival(true);
-                    HashMap<String, NPC> npcs = NPC.getNPCs();
-                    for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
-                        NPC npc = entryNPC.getValue();
-                        npc.spawnNPC(p);
-
-                    }
-                }
-
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
                     //DISPLAY HOW LONG THEY HAVE TO LEAVE BEFORE KILLING THEM
@@ -372,15 +365,41 @@ public class    BanditTask extends BukkitRunnable {
                 //location.addTitle(p);
                 b.setCurrentLocation(location);
                 if(!location.getPlayersInside().isEmpty()){
-                    for(Player activePlayer : location.getPlayersInside()){
-                        Bukkit.broadcastMessage(location.getLocName()+": "+ activePlayer.getDisplayName());
-                    }
+
                 }
                 wildMarker = false;
             }
         }
         if(wildMarker){
             b.setCurrentLocation(FrontierLocation.getLocation("Wilderness"));
+        }
+    }
+    public void despawnEmptyTownNPCs(){
+        for(FrontierLocation location : locations){
+            if(location.getPlayersInside().isEmpty()){
+                if(location.isMobsSpawned()){
+                    HashMap<UUID, NPC> npcs = NPC.getNpcsById();
+                    for(Map.Entry<UUID,LivingEntity> npcEnt : npcEnts.entrySet()){
+                        if(location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())){
+                            npcEnt.getValue().remove();
+                            System.out.println(npcEnt.getValue().getCustomName()+ " NPC killed.");
+                        }
+                    }
+                    location.setMobsSpawned(false);
+                }
+            }
+        }
+    }
+    public void spawnNPCs(Player p, Bandit b){
+        if (!b.getCurrentLocation().isMobsSpawned()) {
+            b.getCurrentLocation().setMobsSpawned(true);
+            HashMap<String, NPC> npcs = NPC.getNPCs();
+            for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
+                NPC npc = entryNPC.getValue();
+                if(npc.getFrontierLocation().equals(b.getCurrentLocation())){
+                    npc.spawnNPC(p);
+                }
+            }
         }
     }
 }

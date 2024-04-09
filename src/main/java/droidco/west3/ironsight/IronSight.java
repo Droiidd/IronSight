@@ -98,11 +98,5 @@ public final class IronSight extends JavaPlugin {
             mob.getValue().damage(100);
             System.out.println("Mob killed.");
         }
-        HashMap<UUID, LivingEntity> npcs = NPC.getEntities();
-        for(Map.Entry<UUID,LivingEntity> npc : npcs.entrySet()){
-            npc.getValue().damage(100);
-            System.out.println("NPC killed.");
-        }
-
     }
 }
