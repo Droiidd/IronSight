@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class FishingEvents implements Listener {
 
+
     @EventHandler
     public void onPlayerFish(PlayerFishEvent e){
         Player p = e.getPlayer();
@@ -51,26 +52,25 @@ public class FishingEvents implements Listener {
                 fishAmt = 2;
             }
         }
-        if(hasBait && e.getCaught() != null){
-            if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
-                e.getCaught().remove();
-                successfulFish(p,fishAmt,"Pearl River Fish");
-            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
-                e.getCaught().remove();
-                successfulFish(p,fishAmt,"Three Forks Fish");
-            }
-            else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe River").getLocName())){
-                e.getCaught().remove();
-                successfulFish(p,fishAmt,"Guadalupe Fish");
-            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
-                e.getCaught().remove();
-                successfulFish(p,fishAmt,"Slough Creek Fish");
-            }else if(!b.getCurrentLocation().getType().equals(LocationType.RIVER) ||b.getCurrentLocation().getLocName().equalsIgnoreCase("Wilderness") ){
-                //FISHING IN THE MIDDLE OF NOWHERE
-                //NO RARE FISH
-                e.getCaught().remove();
-                successfulFish(p,fishAmt,"Global Fish");
-            }
+
+        if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
+            e.getCaught().remove();
+            successfulFish(p,fishAmt,"Pearl River Fish");
+        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
+            e.getCaught().remove();
+            successfulFish(p,fishAmt,"Three Forks Fish");
+        }
+        else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe Rier").getLocName())){
+            e.getCaught().remove();
+            successfulFish(p,fishAmt,"Guadalupe Fish");
+        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
+            e.getCaught().remove();
+            successfulFish(p,fishAmt,"Slough Creek Fish");
+        }else if(b.getCurrentLocation().getType() != LocationType.RIVER){
+            //FISHING IN THE MIDDLE OF NOWHERE
+            //NO RARE FISH
+            e.getCaught().remove();
+            successfulFish(p,fishAmt,"Global Fish");
         }
     }
     public void caughtFishEffects(Player p) {
