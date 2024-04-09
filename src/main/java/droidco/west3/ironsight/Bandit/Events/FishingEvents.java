@@ -42,13 +42,16 @@ public class FishingEvents implements Listener {
         ItemStack hermitBait = CustomItem.getCustomItem("Hermit Crab").getItemStack();
         ItemStack slugBait = CustomItem.getCustomItem("Sea Slug").getItemStack();
         int fishAmt = 1;
+        boolean hasBait = false;
 
         //HANDLE BAIT REMOVING:
         if(p.getInventory().containsAtLeast(hermitBait,1)){
             p.getInventory().removeItem(hermitBait);
+            hasBait = true;
         }
         else if(p.getInventory().containsAtLeast(slugBait,1)){
             p.getInventory().removeItem(slugBait);
+            hasBait = true;
         }
         else{
             e.setCancelled(true);
@@ -62,35 +65,34 @@ public class FishingEvents implements Listener {
                 fishAmt = 2;
             }
         }
-
-        if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Pearl River Fish");
-        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Three Forks Fish");
+        if(hasBait && e.getCaught() != null){
+            if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Pearl River Fish");
+            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Three Forks Fish");
+            }
+            else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe River").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Guadalupe Fish");
+            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Slough Creek Fish");
+            }else if(!b.getCurrentLocation().getType().equals(LocationType.RIVER) ||b.getCurrentLocation().getLocName().equalsIgnoreCase("Wilderness") ){
+                //FISHING IN THE MIDDLE OF NOWHERE
+                //NO RARE FISH
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Global Fish");
+            }
         }
-        else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe Rier").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Guadalupe Fish");
-        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Slough Creek Fish");
-        }else if(b.getCurrentLocation().getType() != LocationType.RIVER){
-            //FISHING IN THE MIDDLE OF NOWHERE
-            //NO RARE FISH
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Global Fish");
-        }
-
-
-
     }
     public void successfulFish(Player p, int fishAmt, String lootTableName)
     {
         caughtFishEffects(p);
-        ArrayList<ItemStack> fishList = ItemTable.getTable(lootTableName).getNumItems(1);
-        ItemStack caughtFish = fishList.get(0);
+        ArrayList<ItemStack> fishList = ItemTable.getTable(lootTableName).getNumItems(10);
+        int randFish = GlobalUtils.getRandomNumber(fishList.size());
+        ItemStack caughtFish = fishList.get(randFish);
         caughtFish.setAmount(fishAmt);
         p.getWorld().dropItemNaturally(p.getLocation(),caughtFish);
     }

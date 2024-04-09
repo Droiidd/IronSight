@@ -120,7 +120,7 @@ public class GameContentLoader {
 
         new CustomItem("Crystalized Geode",8,true,false,"Crystals explode out of the sides",Material.MUSIC_DISC_11,0.0,0.0);
         CustomItem riverdiamond = new CustomItem("River Diamond",7,true,false, "The root of many wars",Material.DIAMOND,555.0,0.0);
-        CustomItem barronsemerald = new CustomItem("Barron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
+        CustomItem baronsemerald = new CustomItem("Baron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
         CustomItem voidopal = new CustomItem("Void Opal",8,true,false, "Stare into the depths of the universe",Material.ECHO_SHARD,635.0,0.0);
 
         //ARMOR
@@ -208,7 +208,7 @@ public class GameContentLoader {
         mines.put("Rabbit Stew", ones);
         mines.put("Splint", ones);
         mines.put("Old Miner's Pick", ones);
-        mines.put("Mole's Breath Spores", ones);
+        mines.put("Moles Breath Spores", ones);
         ItemTable mines_table = new ItemTable(mines, "Mines");
 
         //add farmhand set
@@ -219,13 +219,13 @@ public class GameContentLoader {
         drugbase.put("Brown Stew", ones);
         drugbase.put("Bandage", ones);
         drugbase.put("Splint", ones);
-        drugbase.put("Slug", ones);
+        drugbase.put("Sea Slug", ones);
         drugbase.put("Fermented Liquor", ones);
         ItemTable drug_base_table = new ItemTable(drugbase, "Drug Base");
 
         //add gold, huntsman's jacket/trousers, Winchester 1873, Colt Navy
         HashMap<String, Quantity> scavtown = new HashMap<>();
-        scavtown.put("Slug", ones);
+        scavtown.put("Sea Slug", ones);
         scavtown.put("Shotgun Ammo", ones);
         scavtown.put("Pistol Ammo", ones);
         scavtown.put("Rifle Ammo", ones);
@@ -248,7 +248,7 @@ public class GameContentLoader {
         lt_milcrate.put("Shotgun Ammo", new Quantity(18, 28));
         lt_milcrate.put("Pistol Ammo", new Quantity(18, 28));
         lt_milcrate.put("Rifle Ammo", new Quantity(18, 28));
-        lt_milcrate.put("Slugs", new Quantity(8, 18));
+        lt_milcrate.put("Sea Slug", new Quantity(8, 18));
         lt_milcrate.put("Fermented Liquor", new Quantity(6, 15));
         lt_milcrate.put("Amethyst Bud", new Quantity(1, 5));
         lt_milcrate.put("Smoked Salmon", new Quantity(9, 19));
@@ -424,7 +424,7 @@ public class GameContentLoader {
 
             ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.IRON_PICKAXE);
                 ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.IRON_ORE);
-                ItemIcon barron = new ItemIcon("Barron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
+                ItemIcon baron = new ItemIcon("Baron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines","half_dome_tracker", "Find the Half Dome Mines", Material.STONE);
 
                 ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);
