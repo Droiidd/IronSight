@@ -42,7 +42,7 @@ public class ProcessorEvents implements Listener {
                         //PLAYER HAS DRUGS
                         if (processor.isProcessing()) {
                             //THERE IS A PLAYER PROCESSING ALREADY
-                            p.sendMessage(ChatColor.RED + "Another player is using this processor!");
+                            p.sendMessage(ChatColor.RED + "This processor is already in use!");
                             p.closeInventory();
                             return;
                         } else {
@@ -56,7 +56,7 @@ public class ProcessorEvents implements Listener {
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
                                 for (int i = 0; i < entities.size(); i++) {
                                     if (entities.get(i) instanceof Villager) {
-                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Smokeleaf Processor 1")) {
+                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + "Smokeleaf Processor 1")) {
                                             entities.get(i).remove();
                                         }
                                     }
@@ -96,7 +96,7 @@ public class ProcessorEvents implements Listener {
                         //PLAYER HAS DRUGS
                         if (processor.isProcessing()) {
                             //THERE IS A PLAYER PROCESSING ALREADY
-                            p.sendMessage(ChatColor.RED + "Another player is using this processor!");
+                            p.sendMessage(ChatColor.RED + "This processor is already in use!");
                             p.closeInventory();
                             return;
                         } else {
@@ -110,7 +110,7 @@ public class ProcessorEvents implements Listener {
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
                                 for (int i = 0; i < entities.size(); i++) {
                                     if (entities.get(i) instanceof Villager) {
-                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Smokeleaf Processor 2")) {
+                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + "Smokeleaf Processor 2")) {
                                             entities.get(i).remove();
                                         }
                                     }
@@ -153,7 +153,7 @@ public class ProcessorEvents implements Listener {
                         //PLAYER HAS DRUGS
                         if (processor.isProcessing()) {
                             //THERE IS A PLAYER PROCESSING ALREADY
-                            p.sendMessage(ChatColor.RED + "Another player is using this processor!");
+                            p.sendMessage(ChatColor.RED + "This processor is already in use!");
                             p.closeInventory();
                             return;
                         } else {
@@ -166,7 +166,7 @@ public class ProcessorEvents implements Listener {
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
                                 for (int i = 0; i < entities.size(); i++) {
                                     if (entities.get(i) instanceof Villager) {
-                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Smokeleaf Processor 3")) {
+                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + "Smokeleaf Processor 3")) {
                                             entities.get(i).remove();
                                         }
                                     }

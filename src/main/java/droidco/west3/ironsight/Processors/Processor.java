@@ -2,13 +2,16 @@ package droidco.west3.ironsight.Processors;
 
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Processor {
 
     private static final HashMap<String, Processor> utilsMap = new HashMap<>();
+    private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     private final Location location1;
     private final Location location2;
     private final Location location3;
