@@ -95,12 +95,13 @@ public class FrontierMob {
                 entities.put(mobId,wolf);
             }
             case RANGER -> {
-                Pillager raider = p.getWorld().spawn(spawnLoc, Pillager.class);
+                Illager raider = p.getWorld().spawn(spawnLoc, Illager.class);
                 mobId = raider.getUniqueId();
                 raider.setCustomName(ChatColor.GRAY + "Raider");
                 raider.setCustomNameVisible(true);
                 raider.setCanJoinRaid(false);
                 raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
+
                 int chance = GlobalUtils.getRandomNumber(101);
                 if (chance % 7 == 0) {
                     raider.getEquipment().setItemInMainHand(CustomItem.getCustomItem("Flame Bow").getItemStack());

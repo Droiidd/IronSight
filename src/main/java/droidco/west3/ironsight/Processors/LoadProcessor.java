@@ -12,7 +12,6 @@ import org.bukkit.entity.Villager;
 
 public class LoadProcessor {
 
-        private final String jackFruitProcName = ChatColor.RED + String.valueOf(ChatColor.BOLD) + "Jack-Fruit Processor";
         private static final String smokeLeafProcName1 = ChatColor.RED  + "Smokeleaf Processor 1";
         private static final String smokeLeafProcName2 = ChatColor.RED  + "Smokeleaf Processor 2";
         private static final String smokeLeafProcName3 = ChatColor.RED  + "Smokeleaf Processor 3";

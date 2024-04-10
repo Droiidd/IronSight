@@ -51,7 +51,7 @@ public class GameContentLoader {
         CustomItem tracker = new CustomItem("Tracker",1,true,false, "Track different locations",Material.COMPASS,0.0,10.0);
         CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0);
         CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0);
-        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.ENDER_PEARL,0.0,0.0);
+        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.GREEN_DYE,0.0,0.0);
         CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
