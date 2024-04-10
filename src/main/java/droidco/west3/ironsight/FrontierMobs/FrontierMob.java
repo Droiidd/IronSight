@@ -95,7 +95,7 @@ public class FrontierMob {
                 entities.put(mobId,wolf);
             }
             case RANGER -> {
-                Pillager raider = p.getWorld().spawn(spawnLoc, Pillager.class);
+                Illager raider = p.getWorld().spawn(spawnLoc, Illager.class);
                 mobId = raider.getUniqueId();
                 raider.setCustomName(ChatColor.RED + "Ranger");
                 raider.setCustomNameVisible(true);
