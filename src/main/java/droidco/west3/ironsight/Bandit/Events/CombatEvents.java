@@ -73,6 +73,8 @@ public class CombatEvents implements Listener
                 if(b.isBrokenLegs()){
                     b.setBrokenLegs(false);
                 }
+                p.playSound(p.getLocation(),Sound.ITEM_TOTEM_USE,1 ,0);
+                p.playSound(p.getLocation(),Sound.ENTITY_IRON_GOLEM_DEATH,1 ,2);
 
                 //SEND TO JAIL
                 if(b.getBounty() >= 100){

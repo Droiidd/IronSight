@@ -4,6 +4,7 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Globals.Utils.Hologram;
 import droidco.west3.ironsight.IronSight;
+import droidco.west3.ironsight.Items.CustomItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -65,7 +66,7 @@ public class ProcessorTask extends BukkitRunnable {
         }
 
         double percent = Math.floor((currentTime * 50 / processTime) * 50.0) / 50.0;
-        if (seconds == processTime) {
+        if (seconds >= processTime) {
             finishProcess();
             return;
         }
@@ -80,12 +81,11 @@ public class ProcessorTask extends BukkitRunnable {
             return;
         }
 
-        if (tick % 5 == 0 && p.getLocation().distance(procLocation) > 4) {
+        if (tick % 5 == 0 && p.getLocation().distance(procLocation) > 6) {
             cancelProcess();
             p.sendMessage(ChatColor.GRAY + String.valueOf(ChatColor.ITALIC) + "Out of range...");
             return;
         }
-
         updatePercentageBar(percent);
         tick++;
     }
@@ -113,18 +113,12 @@ public class ProcessorTask extends BukkitRunnable {
     }
 
     private void finishProcess() {
-
-//        if (!p.addItem(output)) {
-//            cancelProcess();
-//            p.sendMessage(ChatColor.GRAY + "Inventory full...");
-//            return;
-//        }
         Bandit b = Bandit.getPlayer(p);
         b.updateBounty(25);
-
-        p.sendTitle("", ChatColor.WHITE + "Finished processing " + input.getItemMeta().getDisplayName(), 8, 12, 8);
+        p.getInventory().addItem(CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        p.sendTitle("", ChatColor.AQUA + "Finished processing " + input.getItemMeta().getDisplayName());
         p.playSound(p.getLocation(), Sound.ENTITY_ALLAY_ITEM_THROWN, 1, 1);
-        GlobalUtils.displayParticles(procLocation, Particle.SMOKE_NORMAL, Particle.VILLAGER_HAPPY, 10);
+        GlobalUtils.displayParticles(procLocation, Particle.SMOKE_NORMAL, Particle.VILLAGER_HAPPY, 3);
         clearBar();
         tasks.remove(this);
         processor.setProcessing(false);
