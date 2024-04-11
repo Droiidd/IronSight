@@ -26,9 +26,17 @@ public class GlobalUtils {
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextInt(sizeOfNumberPool);
     }
+    public static double getRandomNumberDoub(int sizeOfNumberPool){
+        Random rand = new Random(System.currentTimeMillis());
+        return rand.nextDouble(sizeOfNumberPool);
+    }
     public static int getRandomRange(int low, int high){
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextInt(high-low)+low;
+    }
+    public static double getRandomRangeDoub(int low, int high){
+        Random rand = new Random(System.currentTimeMillis());
+        return rand.nextDouble(high-low)+low;
     }
     public static double getRandomCord(double min, double max){
         double val = 0.0;
@@ -166,14 +174,10 @@ public class GlobalUtils {
     }
     public static void displayParticles(Location blockLoc, Particle p1, Particle p2, int amount) {
         for (int i = 0; i < amount; i++) {
-            blockLoc.getWorld().spawnParticle(p1, blockLoc.getX() + 0.85, blockLoc.getY() + 0.85, blockLoc.getZ() + 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() + 0.85, blockLoc.getY() + 0.8, blockLoc.getZ() - 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p1, blockLoc.getX() + 0.85, blockLoc.getY() - 0.85, blockLoc.getZ() + 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() + 0.85, blockLoc.getY() - 0.8, blockLoc.getZ() - 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p1, blockLoc.getX() - 0.85, blockLoc.getY() + 0.85, blockLoc.getZ() + 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() - 0.85, blockLoc.getY() + 0.8, blockLoc.getZ() - 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p1, blockLoc.getX() - 0.85, blockLoc.getY() - 0.8, blockLoc.getZ() + 0.85, 0);
-            blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() - 0.85, blockLoc.getY() - 0.85, blockLoc.getZ() - 0.85, 0);
+            double rand = getRandomRangeDoub(0,1);
+            blockLoc.getWorld().spawnParticle(p1, blockLoc.getX() + rand, blockLoc.getY() + rand, blockLoc.getZ() + rand, 0);
+            rand = getRandomRangeDoub(0,1);
+            blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() + rand, blockLoc.getY() + rand, blockLoc.getZ() - rand, 0);
         }
     }
 

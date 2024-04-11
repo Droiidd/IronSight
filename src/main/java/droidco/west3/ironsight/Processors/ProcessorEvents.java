@@ -17,9 +17,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.List;
 
 public class ProcessorEvents implements Listener {
-    private static final String smokeLeafProcName1 = ChatColor.RED    + "Smokeleaf Processor 1";
-    private static final String smokeLeafProcName2 = ChatColor.RED   + "Smokeleaf Processor 2";
-    private static final String smokeLeafProcName3 = ChatColor.RED  + "Smokeleaf Processor 3";
     private IronSight plugin;
     public ProcessorEvents(IronSight plugin){
         this.plugin = plugin;
@@ -29,9 +26,10 @@ public class ProcessorEvents implements Listener {
         Player p = (Player) e.getWhoClicked();
         // >>>===--- SMOKE LEAF PROCESSOR 1 ---===<<<
         for(var processor : Processor.getProcessors().entrySet()) {
-            if(e.getView().getTitle().equalsIgnoreCase(ChatColor.stripColor(processor.getValue().getProcessorCode()))) {
+            String view = ChatColor.stripColor(e.getView().getTitle());
+            if(view.equalsIgnoreCase(ChatColor.stripColor(processor.getValue().getProcessorCode()))) {
                 e.setCancelled(true);
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Unprocessed Smokelef").getItemStack().getItemMeta().getDisplayName())) {
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack().getItemMeta().getDisplayName())) {
                     if (!p.getInventory().containsAtLeast(CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(), 8)) {
                         p.closeInventory();
                         p.sendMessage(ChatColor.GRAY + "You have no " + ChatColor.RED + "smokeleaf!");

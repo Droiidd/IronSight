@@ -387,6 +387,7 @@ public class    BanditTask extends BukkitRunnable {
                 if(location.isMobsSpawned()){
                     HashMap<String, Processor> procs = Processor.getProcessors();
                     for(Map.Entry<UUID,LivingEntity> procEnt : procEnts.entrySet()){
+                        p.sendMessage("attempting to kill Processor");
                         if(location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())){
                             procEnt.getValue().remove();
                             System.out.println(procEnt.getValue().getCustomName()+ " NPC killed.");
