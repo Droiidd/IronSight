@@ -490,9 +490,9 @@ public class GameContentLoader {
     }
     public static void loadProcessors() {
 
-        Processor proc1 = new Processor("Smoke leaf 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
-        Processor proc2 = new Processor("Smoke leaf 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
-        Processor proc3 = new Processor("Smoke leaf 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
+        Processor proc1 = new Processor("Smoke leaf 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc2 = new Processor("Smoke leaf 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc3 = new Processor("Smoke leaf 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
 
         for(var proc : Processor.getProcessors().entrySet()){
             proc.getValue().addCoordinate(-53,110,-2920);

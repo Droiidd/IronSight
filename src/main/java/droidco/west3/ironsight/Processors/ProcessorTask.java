@@ -32,13 +32,15 @@ public class ProcessorTask extends BukkitRunnable {
     private final Hologram hologram;
     private final String processorType;
     private double seconds = 0;
+    private ItemStack output;
 
-    public ProcessorTask(String processorType, Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, double value, int unprocAmount, Location procLocation) {
+    public ProcessorTask(String processorType, Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, ItemStack output, double value, int unprocAmount, Location procLocation) {
         this.processor = processor;
         this.plugin = plugin;
         this.p = p;
         this.processorType = processorType;
         this.input = input;
+        this.output = output;
         this.value = value;
         this.currentTime = 0;
         this.unprocAmount = unprocAmount;
@@ -115,7 +117,7 @@ public class ProcessorTask extends BukkitRunnable {
     private void finishProcess() {
         Bandit b = Bandit.getPlayer(p);
         b.updateBounty(25);
-        p.getInventory().addItem(CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        p.getInventory().addItem(output);
         p.sendTitle("", ChatColor.AQUA + "Finished processing " + input.getItemMeta().getDisplayName());
         p.playSound(p.getLocation(), Sound.ENTITY_ALLAY_ITEM_THROWN, 1, 1);
         GlobalUtils.displayParticles(procLocation, Particle.SMOKE_NORMAL, Particle.VILLAGER_HAPPY, 3);
