@@ -19,6 +19,7 @@ import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
 import droidco.west3.ironsight.Horse.Commands.AdminGetHorseCmd;
 import droidco.west3.ironsight.Horse.Commands.CallHorseCommand;
 import droidco.west3.ironsight.Horse.HorseEvents;
+import droidco.west3.ironsight.Items.Looting.LootingEvents;
 import droidco.west3.ironsight.Items.MasterList.MasterListCmd;
 import droidco.west3.ironsight.Items.MasterList.MasterListEvents;
 import droidco.west3.ironsight.NPC.NPCEvents;
@@ -87,6 +88,7 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NPCEvents(this), this);
         getServer().getPluginManager().registerEvents(new HorseEvents(), this);
         getServer().getPluginManager().registerEvents(new FishingEvents(), this);
+        getServer().getPluginManager().registerEvents(new LootingEvents(this), this);
         getServer().getPluginManager().registerEvents(new ProcessorEvents(this), this);
         getServer().getPluginManager().registerEvents(new VaultEvents(), this);
     }

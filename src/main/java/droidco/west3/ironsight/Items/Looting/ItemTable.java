@@ -1,5 +1,6 @@
-package droidco.west3.ironsight.Items;
+package droidco.west3.ironsight.Items.Looting;
 
+import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;

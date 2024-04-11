@@ -1,4 +1,4 @@
-package droidco.west3.ironsight.Items;
+package droidco.west3.ironsight.Items.Looting;
 
 public class Quantity {
     private int low;

@@ -9,7 +9,7 @@ import droidco.west3.ironsight.Horse.FrontierHorseType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.Items.ItemTable;
+import droidco.west3.ironsight.Items.Looting.ItemTable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -20,6 +20,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 
 public class NPCEvents implements Listener {
 
@@ -394,9 +396,10 @@ public class NPCEvents implements Listener {
     {
         if(b.getWallet() >= geodeCost){
             b.updateWallet(-1* geodeCost);
-            ItemStack item = ItemTable.getTable("Geode").getItem(3).getItemStack();
-            p.getInventory().addItem(item);
-            p.sendMessage(ChatColor.GRAY+"Geode opened... "+ChatColor.WHITE+"+"+item.getAmount()+ item.getItemMeta().getDisplayName());
+            ArrayList<ItemStack> contents = ItemTable.getTable("Geode").getNumItems(10);
+            int geodeChoice = GlobalUtils.getRandomNumber(contents.size());
+            p.getInventory().addItem(contents.get(geodeChoice));
+            p.sendMessage(ChatColor.GRAY+"Geode opened... "+ChatColor.WHITE+"+"+contents.get(geodeChoice).getAmount()+ contents.get(geodeChoice).getItemMeta().getDisplayName());
         }else{
             p.sendMessage( ChatColor.GRAY+ ": Not enough funds!");
             p.closeInventory();

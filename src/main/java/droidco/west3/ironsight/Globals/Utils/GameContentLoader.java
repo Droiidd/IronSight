@@ -1,36 +1,27 @@
 package droidco.west3.ironsight.Globals.Utils;
 
-import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
-import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
-import droidco.west3.ironsight.FrontierMobs.FrontierMob;
-import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.Items.ItemTable;
+import droidco.west3.ironsight.Items.Looting.ItemTable;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
-import droidco.west3.ironsight.Items.Quantity;
+import droidco.west3.ironsight.Items.Looting.Quantity;
 import droidco.west3.ironsight.Processors.Processor;
 import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCType;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 
 
 public class GameContentLoader {

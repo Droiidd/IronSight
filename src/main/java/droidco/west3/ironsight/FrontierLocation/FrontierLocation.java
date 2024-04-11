@@ -1,7 +1,6 @@
 package droidco.west3.ironsight.FrontierLocation;
 
-import droidco.west3.ironsight.Bandit.Bandit;
-import droidco.west3.ironsight.Items.ItemTable;
+import droidco.west3.ironsight.Items.Looting.ItemTable;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FrontierLocation {
     private String locName;
