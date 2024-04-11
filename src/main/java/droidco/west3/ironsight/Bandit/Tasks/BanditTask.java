@@ -2,8 +2,6 @@ package droidco.west3.ironsight.Bandit.Tasks;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
-import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -13,13 +11,11 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.NPC.NPC;
-import droidco.west3.ironsight.Processors.LoadProcessor;
 import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -160,6 +156,13 @@ public class    BanditTask extends BukkitRunnable {
             despawnEmptyTownNPCs();
             despawnEmptyCampProcessors();
             //SPAWN NPCS
+            if (!p.isOnline()) {
+                if (b.isCombatBlocked()) {
+                    p.damage(100);
+                }
+                this.cancel();
+                tasks.remove(this);
+            }
 
             //      ===--- DISPLAYS SCOREBOARD / STATS ---===
             BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
