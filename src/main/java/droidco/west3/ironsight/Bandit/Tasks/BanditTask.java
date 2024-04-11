@@ -379,6 +379,22 @@ public class    BanditTask extends BukkitRunnable {
             }
         }
     }
+    public void despawnEmptyCampProcessors(){
+        for(FrontierLocation location : locations){
+            if(location.getPlayersInside().isEmpty()){
+                if(location.isMobsSpawned()){
+                    HashMap<UUID, NPC> npcs = NPC.getNpcsById();
+                    for(Map.Entry<UUID,LivingEntity> npcEnt : npcEnts.entrySet()){
+                        if(location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())){
+                            npcEnt.getValue().remove();
+                            System.out.println(npcEnt.getValue().getCustomName()+ " NPC killed.");
+                        }
+                    }
+                    location.setMobsSpawned(false);
+                }
+            }
+        }
+    }
     public void spawnNPCs(Player p, Bandit b){
         if (!b.getCurrentLocation().isMobsSpawned()) {
             b.getCurrentLocation().setMobsSpawned(true);
