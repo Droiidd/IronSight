@@ -29,7 +29,7 @@ public class TrackerEvents implements Listener {
     public void trackerMenuSelect(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Bandit b = Bandit.getPlayer(p);
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Tracker")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_RED + "Tracker")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case DARK_OAK_HANGING_SIGN -> {
@@ -78,7 +78,7 @@ public class TrackerEvents implements Listener {
                     break;
                 }
                 case OAK_DOOR -> {
-                    p.openInventory(TrackerUI.openScavTownsUi(p));
+                    //p.openInventory(TrackerUI.openScavTownsUi(p));
                     break;
                 }
                 case COAL -> {
@@ -93,7 +93,7 @@ public class TrackerEvents implements Listener {
 
             }
 
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Towns")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Towns")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case WHITE_BANNER -> {
@@ -115,7 +115,7 @@ public class TrackerEvents implements Listener {
 
             }
 
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Players")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Players")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ZOMBIE_HEAD -> {
@@ -129,10 +129,10 @@ public class TrackerEvents implements Listener {
                     break;
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Contracts")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY+ "Contracts")) {
             e.setCancelled(true);
 
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Merchants")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD + "Merchants")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case FISHING_ROD -> {
@@ -164,7 +164,7 @@ public class TrackerEvents implements Listener {
                     p.closeInventory();
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "NPCs")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "NPCs")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case RAIL -> {
@@ -187,7 +187,7 @@ public class TrackerEvents implements Listener {
                 }
 
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Locations")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Locations")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case IRON_PICKAXE -> {
@@ -207,7 +207,7 @@ public class TrackerEvents implements Listener {
                     break;
                 }
                 case OAK_DOOR -> {
-                    p.openInventory(TrackerUI.openScavTownsUi(p));
+                    //p.openInventory(TrackerUI.openScavTownsUi(p));
                     break;
                 }
                 case COAL -> {
@@ -219,7 +219,7 @@ public class TrackerEvents implements Listener {
                     break;
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Mines")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD + "Mines")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case IRON_ORE -> {
@@ -238,7 +238,7 @@ public class TrackerEvents implements Listener {
                     break;
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Rivers")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.BLUE + "Rivers")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
             if(targetType.equals(ItemIcon.getIcon("pearl_river_tracker").getItem().getType())){
@@ -257,7 +257,7 @@ public class TrackerEvents implements Listener {
                 b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
                 p.closeInventory();
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Forest Reserves")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Forest Reserves")) {
             e.setCancelled(true);
 
             switch (e.getCurrentItem().getType()) {
@@ -278,7 +278,7 @@ public class TrackerEvents implements Listener {
                     p.closeInventory();
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Bandit Camps")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Bandit Camps")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
 //            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker").getItem().getType())){
@@ -290,7 +290,7 @@ public class TrackerEvents implements Listener {
                 b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
                 p.closeInventory();
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Scav Towns")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Scav Towns")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ACACIA_DOOR -> {
@@ -306,14 +306,14 @@ public class TrackerEvents implements Listener {
                     p.closeInventory();
                 }
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Oil Fields")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.BLACK + "Oil Fields")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
             if(targetType.equals(ItemIcon.getIcon("north_moraine_oil_field_tracker").getItem().getType())){
                 b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
                 p.closeInventory();
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_BLUE + "Drug Fields")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Drug Fields")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case KELP -> {
