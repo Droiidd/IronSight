@@ -364,7 +364,7 @@ public class GameContentLoader {
         FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
         FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1330,-1100,-2100,2955);
         FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1876,-1681,1160,341);
-        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,-1009,-947,-2857,-2778);
+        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,1014,947,-2857,-2778);
 
         FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
         System.out.println("Locations loaded");
