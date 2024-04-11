@@ -78,7 +78,6 @@ public class    BanditTask extends BukkitRunnable {
         this.runTaskTimer(plugin, 0, 10);
 
         locations = FrontierLocation.getLocationList();
-        npcEnts = NPC.getEntities();
 
         b.setDoingContract(false);
         b.loadContracts();
@@ -159,6 +158,7 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
             updatePlayerLocation(p);
             despawnEmptyTownNPCs();
+            despawnEmptyCampProcessors();
             spawnNPCs(p,b);
             //SPAWN NPCS
 
@@ -364,6 +364,7 @@ public class    BanditTask extends BukkitRunnable {
         }
     }
     public void despawnEmptyTownNPCs(){
+        npcEnts = NPC.getEntities();
         for(FrontierLocation location : locations){
             if(location.getPlayersInside().isEmpty()){
                 if(location.isMobsSpawned()){
@@ -380,14 +381,15 @@ public class    BanditTask extends BukkitRunnable {
         }
     }
     public void despawnEmptyCampProcessors(){
+        HashMap<UUID, LivingEntity> procEnts = Processor.getEntities();
         for(FrontierLocation location : locations){
             if(location.getPlayersInside().isEmpty()){
                 if(location.isMobsSpawned()){
-                    HashMap<UUID, NPC> npcs = NPC.getNpcsById();
-                    for(Map.Entry<UUID,LivingEntity> npcEnt : npcEnts.entrySet()){
-                        if(location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())){
-                            npcEnt.getValue().remove();
-                            System.out.println(npcEnt.getValue().getCustomName()+ " NPC killed.");
+                    HashMap<String, Processor> procs = Processor.getProcessors();
+                    for(Map.Entry<UUID,LivingEntity> procEnt : procEnts.entrySet()){
+                        if(location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())){
+                            procEnt.getValue().remove();
+                            System.out.println(procEnt.getValue().getCustomName()+ " NPC killed.");
                         }
                     }
                     location.setMobsSpawned(false);
@@ -403,6 +405,17 @@ public class    BanditTask extends BukkitRunnable {
                 NPC npc = entryNPC.getValue();
                 if(npc.getFrontierLocation().equals(b.getCurrentLocation())){
                     npc.spawnNPC(p);
+                }
+            }
+        }
+    }
+    public void spawnProcessors(Player p, Bandit b){
+        if (!b.getCurrentLocation().isMobsSpawned()) {
+            b.getCurrentLocation().setMobsSpawned(true);
+            HashMap<String, Processor> procs = Processor.getProcessors();
+            for (Map.Entry<String, Processor> proc : procs.entrySet()) {
+                if(proc.getValue().getLocation().equals(b.getCurrentLocation())){
+                    proc.getValue().randomizeLocAndSpawn(p);
                 }
             }
         }
