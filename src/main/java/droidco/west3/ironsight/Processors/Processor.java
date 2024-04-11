@@ -63,36 +63,37 @@ public class Processor {
 
     public void randomizeLocAndSpawn(Player p) {
         boolean findingPosition = true;
-        boolean isSpawned = false;
+        boolean duplicatePosition = false;
+       // boolean isSpawned = false;
         while(findingPosition){
             int coordChoice = GlobalUtils.getRandomNumber(coordList.size());
             ProcessorCoordinate targetCoord = coordList.get(coordChoice);
             if(!targetCoord.equals(this.defaultPosition) && targetCoord != null){
                 p.sendMessage("Found spawnable area!");
-                p.sendMessage(processorsById.size()+" .");
                 if(processorsById.size() > 0){
                     for(var proc : processorsById.entrySet()){
-                        if(!isSpawned){
-                            if( proc.getValue().getDefaultPosition() == null){
-                                p.sendMessage("targeted null; location!");
-                                this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
-                                this.defaultPosition = targetCoord;
-                                findingPosition = false;
-                                isSpawned = true;
-                                p.sendMessage("Spawning NPC");
-                                createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
-                            }else{
-                                if(!proc.getValue().getDefaultPosition().equals(targetCoord)){
-                                    p.sendMessage("Found unique location!");
-                                    this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
-                                    this.defaultPosition = targetCoord;
-                                    findingPosition = false;
-                                    isSpawned = true;
-                                    p.sendMessage("Spawning NPC");
-                                    createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
-                                }
+                       // if(!isSpawned){
+
+                        if(proc.getValue().defaultPosition != null){
+                            if(proc.getValue().getDefaultPosition().equals(targetCoord)){
+                                duplicatePosition = true;
                             }
                         }
+
+                       // }
+                    }
+                    if(!duplicatePosition){
+                        p.sendMessage("Found unique location!");
+                        if(defaultLocation != null){
+                            GlobalUtils.displayParticles(defaultLocation,Particle.CLOUD,Particle.EXPLOSION_HUGE,3);
+                        }
+                        this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                        this.defaultPosition = targetCoord;
+                        findingPosition = false;
+                        //isSpawned = true;
+                        p.sendMessage("Spawning NPC");
+
+                        createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
                     }
                 }
             }

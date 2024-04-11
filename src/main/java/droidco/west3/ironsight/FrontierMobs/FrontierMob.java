@@ -40,7 +40,7 @@ public class FrontierMob {
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000000, 2, false, false));
-                miner.setCustomName(ChatColor.GRAY + "Undead Miner");
+                miner.setCustomName(ChatColor.DARK_RED + "Undead Miner");
                 miner.setCustomNameVisible(true);
 
                 miner.getEquipment().setBoots(CustomItem.getCustomItem("Huntsmen Boots").getItemStack());
@@ -57,7 +57,7 @@ public class FrontierMob {
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000000, 2, false, false));
-                miner.setCustomName(ChatColor.GRAY + "Berserker Miner");
+                miner.setCustomName(ChatColor.DARK_RED + "Berserker Miner");
                 miner.setCustomNameVisible(true);
 
                 this.mobId = miner.getUniqueId();
@@ -67,7 +67,7 @@ public class FrontierMob {
                 Stray miner = p.getWorld().spawn(spawnLoc,Stray.class);
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000000, 1, false, false));
                 miner.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000000, 1, false, false));
-                miner.setCustomName(ChatColor.GRAY + "Corroded Miner");
+                miner.setCustomName(ChatColor.DARK_RED + "Corroded Miner");
                 miner.setCustomNameVisible(true);
                 miner.getEquipment().setChestplate(CustomItem.getCustomItem("Huntsmen Jacket").getItemStack());
                 miner.getEquipment().setLeggings(CustomItem.getCustomItem("Huntsmen Trousers").getItemStack());
@@ -86,18 +86,18 @@ public class FrontierMob {
                 mobId = wolf.getUniqueId();
                 wolf.setAngry(true);
                 //wolf.setAware(true);
-                wolf.setCustomName(ChatColor.GRAY + "Rabid Hound");
+                wolf.setCustomName(ChatColor.DARK_RED + "Rabid Hound");
                 wolf.setCustomNameVisible(true);
-                wolf.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
-                wolf.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1, false, false));
-                wolf.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 3, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 3, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2, false, false));
                 mobs.put(mobId,this);
                 entities.put(mobId,wolf);
             }
             case RANGER -> {
-                Illager raider = p.getWorld().spawn(spawnLoc, Illager.class);
+                Pillager raider = p.getWorld().spawn(spawnLoc, Pillager.class);
                 mobId = raider.getUniqueId();
-                raider.setCustomName(ChatColor.GRAY + "Raider");
+                raider.setCustomName(ChatColor.RED + "Ranger");
                 raider.setCustomNameVisible(true);
                 raider.setCanJoinRaid(false);
                 raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
@@ -114,7 +114,7 @@ public class FrontierMob {
             case RAIDER -> {
                 Vindicator raider = p.getWorld().spawn(spawnLoc, Vindicator.class);
                 mobId = raider.getUniqueId();
-                raider.setCustomName(ChatColor.GRAY + "Raider");
+                raider.setCustomName(ChatColor.DARK_RED + "Raider");
                 raider.setCustomNameVisible(true);
                 raider.setCanJoinRaid(false);
                 raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
@@ -124,7 +124,7 @@ public class FrontierMob {
             case RAIDER_BRUTE -> {
                 PiglinBrute raider = p.getWorld().spawn(spawnLoc, PiglinBrute.class);
                 mobId = raider.getUniqueId();
-                raider.setCustomName(ChatColor.GRAY + "Brute Raider");
+                raider.setCustomName(ChatColor.DARK_RED + "Brute Raider");
                 raider.setCustomNameVisible(true);
                 raider.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1, false, false));
                 raider.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1, false, false));
@@ -147,7 +147,7 @@ public class FrontierMob {
                 Hoglin animal = p.getWorld().spawn(spawnLoc, Hoglin.class);
                 mobId = animal.getUniqueId();
                 animal.setAdult();
-                animal.setCustomName(ChatColor.GRAY + "Brute Raider");
+                animal.setCustomName(ChatColor.DARK_RED + "Brute Raider");
                 animal.setCustomNameVisible(true);
                 animal.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 2, false, false));
                 animal.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
