@@ -61,19 +61,33 @@ public class Processor {
 
 
     public void randomizeLocAndSpawn(Player p) {
-        boolean positionTaken = true;
-        while(positionTaken){
+        boolean findingPosition = true;
+        while(findingPosition){
             int coordChoice = GlobalUtils.getRandomNumber(coordList.size());
             ProcessorCoordinate targetCoord = coordList.get(coordChoice);
-            if(!targetCoord.equals(this.defaultPosition)){
-                for(var proc : processorsById.entrySet()){
-                    if(!proc.getValue().getDefaultPosition().equals(targetCoord)){
-                        Location newSpawn = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
-                        this.defaultLocation = newSpawn;
-                        positionTaken = false;
-                        createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+            if(!targetCoord.equals(this.defaultPosition) && targetCoord != null){
+                p.sendMessage("Found spawnable area!");
+                if(processorsById.size() > 0){
+                    for(var proc : processorsById.entrySet()){
+                        if(!proc.getValue().getDefaultPosition().equals(targetCoord)||proc.getValue().defaultPosition == null){
+                            p.sendMessage("Found unique location!");
+                            this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                            this.defaultPosition = targetCoord;
+                            findingPosition = false;
+                            p.sendMessage("Spawning NPC");
+                            createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+                        }
                     }
+                }else{
+                    //No other Processors yet
+                    p.sendMessage("Found unique location!");
+                    this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                    this.defaultPosition = targetCoord;
+                    findingPosition = false;
+                    p.sendMessage("Spawning NPC");
+                    createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
                 }
+
             }
         }
     }
