@@ -14,8 +14,7 @@ public class TrackerUI {
         Bandit b = Bandit.getPlayer(p);
         trackerUi.setItem(12, ItemIcon.getIcon("town_tracker").getItem());
         //trackerUi.setItem(11, ItemIcon.getIcon("santa_fe_tracker").getItem());
-        //trackerUi.setItem(12, ItemIcon.getIcon("contract_tracker").getItem());
-        //trackerUi.setItem(14, ItemIcon.getIcon("merchant_tracker").getItem());
+        trackerUi.setItem(14, ItemIcon.getIcon("merchant_tracker").getItem());
         trackerUi.setItem(15, ItemIcon.getIcon("npc_tracker").getItem());
         //trackerUi.setItem(16, ItemIcon.getIcon("location_tracker").getItem());
         trackerUi.setItem(21, ItemIcon.getIcon("mine_tracker").getItem());
@@ -56,12 +55,12 @@ public class TrackerUI {
         merchantsUi.setItem(10, ItemIcon.getIcon("fisherman_tracker").getItem());
         merchantsUi.setItem(11, ItemIcon.getIcon("pharmacist_tracker").getItem());
         merchantsUi.setItem(12, ItemIcon.getIcon("arms_dealer_tracker").getItem());
-        merchantsUi.setItem(14, ItemIcon.getIcon("illegal_arms_dealer_tracker").getItem());
+        merchantsUi.setItem(14, ItemIcon.getIcon("illegal_arms_tracker").getItem());
         merchantsUi.setItem(15, ItemIcon.getIcon("armorer_tracker").getItem());
         merchantsUi.setItem(16, ItemIcon.getIcon("illegal_armorer_tracker").getItem());
-        merchantsUi.setItem(14, ItemIcon.getIcon("general_store_tracker").getItem());
-        merchantsUi.setItem(15, ItemIcon.getIcon("geologist_tracker").getItem());
-        merchantsUi.setItem(16, ItemIcon.getIcon("stable_manager_tracker").getItem());
+        merchantsUi.setItem(17, ItemIcon.getIcon("shopkeeper_tracker").getItem());
+        merchantsUi.setItem(18, ItemIcon.getIcon("geologist_tracker").getItem());
+        merchantsUi.setItem(19, ItemIcon.getIcon("stable_manager_tracker").getItem());
         return merchantsUi;
     }
     public static Inventory openNPCsUi(Player p) {
@@ -70,10 +69,9 @@ public class TrackerUI {
         NPCsUi.setItem(10, ItemIcon.getIcon("conductor_tracker").getItem());
         NPCsUi.setItem(11, ItemIcon.getIcon("ferry_captain_tracker").getItem());
         NPCsUi.setItem(12, ItemIcon.getIcon("bank_teller_tracker").getItem());
-        NPCsUi.setItem(14, ItemIcon.getIcon("vault_manager_tracker").getItem());
+        NPCsUi.setItem(14, ItemIcon.getIcon("vault_keeper_tracker").getItem());
         NPCsUi.setItem(15, ItemIcon.getIcon("contractor_tracker").getItem());
         NPCsUi.setItem(16, ItemIcon.getIcon("chief_of_police_tracker").getItem());
-        NPCsUi.setItem(14, ItemIcon.getIcon("general_store_tracker").getItem());
         return NPCsUi;
     }
 
@@ -86,7 +84,7 @@ public class TrackerUI {
         locationsUi.setItem(14, ItemIcon.getIcon("bandit_camp_tracker").getItem());
         locationsUi.setItem(15, ItemIcon.getIcon("scav_town_tracker").getItem());
         locationsUi.setItem(16, ItemIcon.getIcon("oil_field_tracker").getItem());
-        locationsUi.setItem(14, ItemIcon.getIcon("drug_field_tracker").getItem());
+        locationsUi.setItem(17, ItemIcon.getIcon("drug_field_tracker").getItem());
         return locationsUi;
     }
 

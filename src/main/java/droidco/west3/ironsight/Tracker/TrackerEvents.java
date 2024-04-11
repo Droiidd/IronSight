@@ -4,7 +4,9 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,11 +41,6 @@ public class TrackerEvents implements Listener {
 
                 case PLAYER_HEAD -> {
                     p.openInventory(TrackerUI.openPlayersUi(p));
-                    break;
-                }
-
-                case BOOK -> {
-                    // p.openInventory(TrackerUIs.openContractsUi(p));
                     break;
                 }
 
@@ -97,18 +94,26 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case WHITE_BANNER -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Santa Fe"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Santa Fe").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Santa Fe"));
+
                     p.closeInventory();
                     break;
 
                 }
                 case YELLOW_BANNER -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("New Orleans"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("New Orleans").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("New Orleans"));
                     p.closeInventory();
                     break;
                 }
                 case BLUE_BANNER -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Republic of Texas"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Republic of Texas").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Republic of Texas"));
+
                     p.closeInventory();
                     break;
                 }
@@ -120,6 +125,7 @@ public class TrackerEvents implements Listener {
             switch (e.getCurrentItem().getType()) {
                 case ZOMBIE_HEAD -> {
                     b.setIsTrackingLocation(false);
+                    b.setIsTrackingNPC(false);
                     Player target = BanditUtils.getNearest(p, 14000.0);
                     if (target == null) {
                         p.sendMessage("No wanted player found nearby");
@@ -136,31 +142,66 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case FISHING_ROD -> {
-                    //something
+                    NPC npc = NPC.getNPC("Fisherman");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Fisherman");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case PAPER -> {
+                    NPC npc = NPC.getNPC("Pharmacist");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Pharmacist");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case STONE_AXE -> {
+                    NPC npc = NPC.getNPC("Arms Dealer");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Arms Dealer");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case IRON_AXE -> {
+                    NPC npc = NPC.getNPC("Illegal Arms Dealer");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Illegal Arms Dealer");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case LEATHER_CHESTPLATE -> {
+                    NPC npc = NPC.getNPC("Armorer");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Armorer");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
-                case NETHERITE_CHESTPLATE -> {
+                case NETHERITE_CHESTPLATE -> {NPC npc = NPC.getNPC("Illegal Armorer");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Illegal Armorer");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
+
                     p.closeInventory();
                 }
-                case COOKED_BEEF -> {
+                case COOKED_BEEF -> {NPC npc = NPC.getNPC("Shopkeeper");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Shopkeeper");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
+
                     p.closeInventory();
                 }
                 case STONE -> {
+                    NPC npc = NPC.getNPC("Geologist");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Geologist");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case SADDLE -> {
+                    NPC npc = NPC.getNPC("Stable Manager");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Stable Manager");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
             }
@@ -168,21 +209,45 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case RAIL -> {
+                    NPC npc = NPC.getNPC("Conductor");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Conductor");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case BIRCH_BOAT -> {
+                    NPC npc = NPC.getNPC("Ferry Captain");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Ferry Captain");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case GOLD_INGOT -> {
+                    NPC npc = NPC.getNPC("Bank Teller");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Bank Teller");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case DIAMOND -> {
+                    NPC npc = NPC.getNPC("Vault Keeper");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Vault Keeper");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
-                case FILLED_MAP -> {
+                case BOOK -> {
+                    NPC npc = NPC.getNPC("Contractor");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Contractor");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
                 case PIGLIN_HEAD -> {
+                    NPC npc = NPC.getNPC("Chief of Police");
+                    b.setIsTrackingNPC(true);
+                    b.setTrackedNPC("Chief of Police");
+                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
                     p.closeInventory();
                 }
 
@@ -223,17 +288,23 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case IRON_ORE -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Black Spur Mines"));
                     p.closeInventory();
                     break;
                 }
                 case TERRACOTTA -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Barron's Canyon"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Barron's Canyon").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Barron's Canyon"));
                     p.closeInventory();
                     break;
                 }
                 case STONE -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Half Dome Mines"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Half Dome Mines").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Half Dome Mines"));
                     p.closeInventory();
                     break;
                 }
@@ -242,19 +313,27 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
             if(targetType.equals(ItemIcon.getIcon("pearl_river_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("Pearl River"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("Pearl River").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Pearl River"));
                 p.closeInventory();
             }
             else if(targetType.equals(ItemIcon.getIcon("slough_creek_river_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek River"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("Slough Creek River").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Slough Creek River"));
                 p.closeInventory();
             }
             else if(targetType.equals(ItemIcon.getIcon("three_forks_delta_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("Three Forks Delta").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Three Forks Delta"));
                 p.closeInventory();
             }
             else if(targetType.equals(ItemIcon.getIcon("lower_guadalupe_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("Lower Guadalupe River").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Lower Guadalupe River"));
                 p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Forest Reserves")) {
@@ -262,19 +341,28 @@ public class TrackerEvents implements Listener {
 
             switch (e.getCurrentItem().getType()) {
                 case OAK_SAPLING -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Grizzly Ridge"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Grizzly Ridge").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Grizzly Ridge"));
+
                     p.closeInventory();
                 }
                 case BIRCH_SAPLING -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Marston Glacier"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Marston Glacier").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Marston Glacier"));
                     p.closeInventory();
                 }
                 case ACACIA_SAPLING -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Hawk Ridge Forest"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Hawk Ridge Forest").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Hawk Ridge Forest"));
                     p.closeInventory();
                 }
                 case QUARTZ -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Sentinel Rock"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Sentinel Rock").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Sentinel Rock"));
                     p.closeInventory();
                 }
             }
@@ -283,26 +371,35 @@ public class TrackerEvents implements Listener {
             Material targetType = e.getCurrentItem().getType();
 //            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker").getItem().getType())){
 //                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
+//                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Red Ash Camp"));
 //                p.closeInventory();
 //            }
             //else
             if(targetType.equals(ItemIcon.getIcon("storm_point_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("Storm Point"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("Storm Point").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Storm Point"));
                 p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Scav Towns")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case ACACIA_DOOR -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Florence Peak"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Florence Peak").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Florence Peak"));
                     p.closeInventory();
                 }
                 case SPRUCE_DOOR -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Washington Column"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Washington Column").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Washington Column"));
                     p.closeInventory();
                 }
                 case BIRCH_DOOR -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Sierra Gorge"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Sierra Gorge").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Sierra Gorge"));
                     p.closeInventory();
                 }
             }
@@ -310,14 +407,18 @@ public class TrackerEvents implements Listener {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
             if(targetType.equals(ItemIcon.getIcon("north_moraine_oil_field_tracker").getItem().getType())){
-                b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
+                b.setIsTrackingNPC(false);
+                b.setTrackingLocation(FrontierLocation.getLocation("North Moraine Oil Field").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("North Moraine Oil Field"));
                 p.closeInventory();
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Drug Fields")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case KELP -> {
-                    b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Field"));
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Field").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Smokeleaf Field"));
                     p.closeInventory();
                 }
             }

@@ -1,8 +1,11 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Items.CustomItem;
+import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +21,13 @@ public class VaultEvents implements Listener {
     @EventHandler
 
     public void vaultClick(InventoryClickEvent e) {
-
+        Player p = (Player) e.getWhoClicked();
+        Bandit b = Bandit.getPlayer(p);
+        if (e.getView().getTitle().equalsIgnoreCase(p.getDisplayName() + ": " + ChatColor.DARK_AQUA + "Vault")) {
+            if (e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)) {
+                e.setCancelled(true);
+            }
+        }
     }
 
     @EventHandler

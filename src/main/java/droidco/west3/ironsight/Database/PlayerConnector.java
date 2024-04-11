@@ -15,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerConnector {
@@ -38,6 +39,8 @@ public class PlayerConnector {
                     ItemStack[] horseInv = horse.getHorseInv();
                     saveInventory(p,horseInv,horse.getHorseName(),conn);
                 }
+
+                saveInventory(p, b.getItemVault().toArray(new ItemStack[0]), "Vault", conn);
                 //ALWAYS CLOSE THE CONNECTION!
                 conn.close();
             }catch (Exception exception) {
@@ -49,6 +52,7 @@ public class PlayerConnector {
     public static Bandit fetchAllPlayerData(Player p) {
         System.out.println("Connecting");
         Connection conn = null;
+        Bandit b = Bandit.getPlayer(p);
         try {
             // below two lines are used for connectivity.
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -58,10 +62,14 @@ public class PlayerConnector {
             System.out.println("CONNECTED!!!");
             boolean successfulLoad = fetchPlayerData(conn,p);
             fetchPlayerHorses(conn,p);
+
             conn.close();
 
             if(successfulLoad){
                 return Bandit.getPlayer(p);
+            }
+            if (b.getVaultLevel() > 0) {
+                fetchPlayerVault(conn, p);
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -110,6 +118,27 @@ public class PlayerConnector {
             }
         }
     }
+
+    public static void fetchPlayerVault(Connection conn ,Player p){
+        Bandit b = Bandit.getPlayer(p);
+            try{
+                String itemSql = "select * from custom_item where bandit_id = \'" + p.getUniqueId().toString()+"\' AND "+ "storage_type = \'Vault\'";
+
+                Statement st = conn.createStatement();
+                ResultSet rsItem = st.executeQuery(itemSql);
+                while (rsItem.next()){
+                    String banditId = rsItem.getString("bandit_id");
+                    String storageType = rsItem.getString("storage_type");
+                    String itemContents = rsItem.getString("item_contents");
+
+                    ItemStack[] items = itemStackArrayFromBase64(itemContents);
+                    b.setItemVault(Arrays.asList(items));
+                }
+                st.close();
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
