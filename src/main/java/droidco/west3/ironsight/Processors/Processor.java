@@ -7,6 +7,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,28 +22,22 @@ public class Processor {
     private static List<ProcessorCoordinate> coordList = new ArrayList<>();
     private boolean isProcessing;
     private Location defaultLocation;
+    private Location previousLocation;
+    private ProcessorCoordinate defaultPosition;
     private FrontierLocation location;
     private ProcessorType type;
     private String processorCode;
-    public Processor(String processorCode, ProcessorType type, FrontierLocation location) {
+    private ItemStack unprocDrug;
+    private ItemStack procDrug;
+    public Processor(String processorCode, ProcessorType type, FrontierLocation location,ItemStack unprocDrug,ItemStack procDrug) {
         this.processorCode = processorCode;
         this.location = location;
         this.type = type;
+        this.previousLocation = null;
+        this.unprocDrug = unprocDrug;
+        this.procDrug = procDrug;
         processorsById.put(processorCode, this);
         utilsList.add(this);
-    }
-
-
-    public static Processor getProcessor(String procName) {
-        return processorsById.getOrDefault(procName, null);
-    }
-
-    public Location getDefaultLocation() {
-        return defaultLocation;
-    }
-
-    public void setDefaultLocation(Location location) {
-        this.defaultLocation = location;
     }
     public void createVillager(String villagerName, Location loc) {
         Villager vil = loc.getWorld().spawn(loc, Villager.class);
@@ -56,39 +51,39 @@ public class Processor {
         String command = "minecraft:kill @e[type=minecraft:armor_stand]";
         Bukkit.dispatchCommand(console, command);
     }
-    public void initializeLocations(Player p){
 
-    }
     public static HashMap<String, Processor> getProcessors(){
         return processorsById;
     }
 
 
-    public void randomizeDefaultLocation(Location previousLocation) {
-        if (previousLocation.equals(location1)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location2;
-            } else {
-                defaultLocation = location3;
+    public void randomizeLocAndSpawn(Player p) {
+        boolean positionTaken = true;
+        while(positionTaken){
+            int coordChoice = GlobalUtils.getRandomNumber(coordList.size());
+            ProcessorCoordinate targetCoord = coordList.get(coordChoice);
+            if(!targetCoord.equals(this.defaultPosition)){
+                for(var proc : processorsById.entrySet()){
+                    if(!proc.getValue().getDefaultPosition().equals(targetCoord)){
+                        Location newSpawn = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                        this.defaultLocation = newSpawn;
+                        positionTaken = false;
+                        createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+                    }
+                }
             }
         }
-        if (previousLocation.equals(location2)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location1;
-            } else {
-                defaultLocation = location3;
-            }
-        }
-        if (previousLocation.equals(location3)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location2;
-            } else {
-                defaultLocation = location1;
-            }
-        }
+    }
+    public static Processor getProcessor(String procName) {
+        return processorsById.getOrDefault(ChatColor.stripColor(procName), null);
+    }
+
+    public Location getDefaultLocation() {
+        return defaultLocation;
+    }
+
+    public void setDefaultLocation(Location location) {
+        this.defaultLocation = location;
     }
 
     public void addCoordinate(int x,int y,int z){
@@ -102,16 +97,51 @@ public class Processor {
         this.isProcessing = bool;
     }
 
-    public Location getLocation1() {
-        return location1;
+    public ProcessorCoordinate getDefaultPosition() {
+        return defaultPosition;
     }
 
-    public Location getLocation2() {
-        return location2;
+    public void setDefaultPosition(ProcessorCoordinate defaultPosition) {
+        this.defaultPosition = defaultPosition;
     }
 
-    public Location getLocation3() {
-        return location3;
+    public FrontierLocation getLocation() {
+        return location;
     }
 
+    public void setLocation(FrontierLocation location) {
+        this.location = location;
+    }
+
+    public ProcessorType getType() {
+        return type;
+    }
+
+    public void setType(ProcessorType type) {
+        this.type = type;
+    }
+
+    public String getProcessorCode() {
+        return processorCode;
+    }
+
+    public void setProcessorCode(String processorCode) {
+        this.processorCode = processorCode;
+    }
+
+    public ItemStack getUnprocDrug() {
+        return unprocDrug;
+    }
+
+    public void setUnprocDrug(ItemStack unprocDrug) {
+        this.unprocDrug = unprocDrug;
+    }
+
+    public ItemStack getProcDrug() {
+        return procDrug;
+    }
+
+    public void setProcDrug(ItemStack procDrug) {
+        this.procDrug = procDrug;
+    }
 }
