@@ -410,22 +410,22 @@ public class GameContentLoader {
             ItemIcon illegalArms = new ItemIcon("Illegal Arms Dealer","illegal_arms_tracker", "Illegal Arms Dealer", Material.IRON_AXE);
             ItemIcon armorer = new ItemIcon("Armorer", "armorer_tracker","Find Armorer", Material.LEATHER_CHESTPLATE);
             ItemIcon illegalArmor = new ItemIcon("Illegal Armorer","illegal_armorer_tracker", "Find Illegal Armorer", Material.NETHERITE_CHESTPLATE);
-            ItemIcon generalStore = new ItemIcon("General Store","general_store_tracker", "Find General Store", Material.COOKED_BEEF);
+            ItemIcon generalStore = new ItemIcon("Shopkeeper","shopkeeper_tracker", "Find Shopkeeper", Material.COOKED_BEEF);
             ItemIcon geologist = new ItemIcon("Geologist", "geologist_tracker","Find Geologist", Material.STONE);
             ItemIcon stableManager = new ItemIcon("Stable Manager", "stable_manager_tracker","Find Stable Manager", Material.SADDLE);
         ItemIcon npc =  new ItemIcon("NPCs", "npc_tracker","Find NPCs", Material.BOOKSHELF);
             ItemIcon conductor = new ItemIcon("Conductor", "conductor_tracker","Find Conductor", Material.RAIL);
             ItemIcon ferryCaptain = new ItemIcon("Ferry Captain","ferry_captain_tracker", "Find Ferry Captain", Material.BIRCH_BOAT);
             ItemIcon bankTeller = new ItemIcon("Bank Teller","bank_teller_tracker", "Find Bank Teller", Material.GOLD_INGOT);
-            ItemIcon itemVault = new ItemIcon("Vault Manager","vault_manager_tracker", "Find Vault Manager", Material.DIAMOND);
-            ItemIcon contractor = new ItemIcon("Contractor", "contractor_tracker","Find Contractor", Material.FILLED_MAP);
-            ItemIcon chief = new ItemIcon("Chief of Police","chief_of_police_tracker", "Find Chief", Material.PIGLIN_HEAD);
+            ItemIcon itemVault = new ItemIcon("Vault Keeper","vault_keeper_tracker", "Find Vault Keeper", Material.DIAMOND);
+            ItemIcon contractor = new ItemIcon("Contractor", "contractor_tracker","Find Contractor", Material.BOOK);
+            ItemIcon chief = new ItemIcon("Chief of Police","chief_of_police_tracker", "Find the Chief", Material.PIGLIN_HEAD);
         //      ===--- TRACKER LOCATION ---===
             ItemIcon locations = new ItemIcon("Locations","location_tracker", "Find locations", Material.COMPASS);
 
             ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.IRON_PICKAXE);
                 ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.IRON_ORE);
-                ItemIcon baron = new ItemIcon("Baron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
+                ItemIcon baron = new ItemIcon("Barron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines","half_dome_tracker", "Find the Half Dome Mines", Material.STONE);
 
                 ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);

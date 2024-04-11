@@ -8,6 +8,7 @@ import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Horse.FrontierHorse;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -44,7 +45,7 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
-    private FrontierLocation trackingLocation;
+    private Location trackingLocation;
     private boolean isTrackingLocation;
     private boolean isTrackingPlayer;
     private boolean summoningHorse;
@@ -68,6 +69,13 @@ public class Bandit
     //private final IronSight plugin;
 
     private int wantedKills;
+
+    private FrontierLocation trackingFrontierLocation;
+
+    private boolean isTrackingNPC;
+
+    private String trackedNPC;
+
     private static HashMap<String, Bandit> bandits = new HashMap<>();
     //private List<ironHorse> horses;
 
@@ -425,14 +433,15 @@ public class Bandit
         return bounty;
     }
 
+
     public void setBounty(int bounty) {
         this.bounty = bounty;
     }
-    public FrontierLocation getTrackingLocation() {
+    public Location getTrackingLocation() {
         return trackingLocation;
     }
 
-    public void setTrackingLocation(FrontierLocation trackingLocation) {
+    public void setTrackingLocation(Location trackingLocation) {
         setIsTrackingPlayer(false);
         this.trackingLocation = trackingLocation;
         setIsTrackingLocation(true);
@@ -493,6 +502,30 @@ public class Bandit
 
     public void setVaultLevel(int vaultLevel) {
         this.vaultLevel = vaultLevel;
+    }
+
+    public FrontierLocation getTrackingFrontierLocation() {
+        return trackingFrontierLocation;
+    }
+
+    public void setTrackingFrontierLocation(FrontierLocation trackingFrontierLocation) {
+        this.trackingFrontierLocation = trackingFrontierLocation;
+    }
+
+    public boolean isTrackingNPC() {
+        return isTrackingNPC;
+    }
+
+    public void setIsTrackingNPC(boolean trackingNPC) {
+        isTrackingNPC = trackingNPC;
+    }
+
+    public String getTrackedNPC() {
+        return trackedNPC;
+    }
+
+    public void setTrackedNPC(String trackedNPC) {
+        this.trackedNPC = trackedNPC;
     }
 }
 
