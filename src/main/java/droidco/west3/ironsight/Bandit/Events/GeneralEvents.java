@@ -30,6 +30,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.BrewerInventory;
@@ -94,6 +95,27 @@ public class GeneralEvents implements Listener {
             }
         }
 
+    }
+    @EventHandler
+    public void onGoldPickUp(PlayerPickupItemEvent e) {
+        Player p = e.getPlayer();
+        //Ensuring its a gold coin and not something else
+        ItemStack pickedUpGold = e.getItem().getItemStack();
+        Double namedGold = GlobalUtils.getGoldStrToD(pickedUpGold, p);
+
+        if (pickedUpGold.getType().equals(Material.GOLD_NUGGET)) {
+            if (namedGold == -1.0) {
+                e.setCancelled(false);
+            } else if (namedGold > 0.0) {
+                //remove the coin to avoid duping money
+                e.getItem().remove();
+                e.setCancelled(true);
+                //Confirm pick up and give the player their money
+                p.sendMessage(ChatColor.GRAY + "You picked up " + ChatColor.GOLD + namedGold + "g");
+                Bandit b = Bandit.getPlayer(p);
+                b.updateWallet(namedGold);
+            }
+        }
     }
     @EventHandler
     public void onPlayerBleed(EntityDamageByEntityEvent e){

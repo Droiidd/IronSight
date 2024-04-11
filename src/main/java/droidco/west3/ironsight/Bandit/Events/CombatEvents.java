@@ -4,8 +4,10 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -15,39 +17,64 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CombatEvents implements Listener
 {
     @EventHandler
     public void startCombatTimers(EntityDamageByEntityEvent e){
-        if(e.getEntity().getType().equals(EntityType.VILLAGER)){
-            e.setCancelled(true);
-        }
-        if(e.getEntity() instanceof Player p){
-            //p.sendMessage("You are combat logged!");
+        boolean playerInTown = false;
+        List<EntityType> bannedTypes = new ArrayList<>();
+        bannedTypes.add(EntityType.VILLAGER);
+        bannedTypes.add(EntityType.ARMOR_STAND);
+        bannedTypes.add(EntityType.ITEM_FRAME);
+        bannedTypes.add(EntityType.GLOW_ITEM_FRAME);
+        if(e.getDamager() instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
-            b.setCombatBlockFlag(true);
-            if(!b.isCombatBlocked()){
-                b.setCombatBlocked(true);
-                p.sendMessage(ChatColor.GRAY+"You are "+ChatColor.RED+"combat blocked "+ChatColor.GRAY+"don't log-out!");
-
+            if(b.getCurrentLocation().getType().equals(LocationType.TOWN)){
+                playerInTown = true;
+                bannedTypes.add(EntityType.PLAYER);
+                bannedTypes.add(EntityType.HORSE);
+                bannedTypes.add(EntityType.CAMEL);
+                bannedTypes.add(EntityType.DONKEY);
             }
-        }else if(e.getDamager() instanceof Player p){
-            Bandit b = Bandit.getPlayer(p);
-            b.setCombatBlockFlag(true);
-            if(!b.getCurrentLocation().getType().equals(LocationType.TOWN)){
+        }
+
+        // CANCEL ALL PVP
+        for(EntityType type : bannedTypes){
+
+            if(e.getEntity().getType().equals(type)){
+                e.setCancelled(true);
+            }
+        }
+        if(!playerInTown){
+            if((e.getEntity() instanceof Player p) && e.getDamager() instanceof Player damager){
+
+                //SET VICTIM COMBAT LOGGER
+                Bandit b = Bandit.getPlayer(p);
+                b.setCombatBlockFlag(true);
                 if(!b.isCombatBlocked()){
                     b.setCombatBlocked(true);
                     p.sendMessage(ChatColor.GRAY+"You are "+ChatColor.RED+"combat blocked "+ChatColor.GRAY+"don't log-out!");
 
                 }
-                if(!b.isWanted()){
-                    b.setWanted(true);
-                    Bukkit.getServer().broadcastMessage(b.getTitle() +ChatColor.RESET+p.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
-                }
-            }
+                //SET DAMAGER COMBAT LOGGER
+                Bandit b2 = Bandit.getPlayer(damager);
+                b2.setCombatBlockFlag(true);
+                    if(!b2.isCombatBlocked()){
+                        b2.setCombatBlocked(true);
+                        p.sendMessage(ChatColor.GRAY+"You are "+ChatColor.RED+"combat blocked "+ChatColor.GRAY+"don't log-out!");
 
+                    }
+                    if(!b2.isWanted()){
+                        b2.setWanted(true);
+                        Bukkit.getServer().broadcastMessage(b2.getTitle() +ChatColor.RESET+damager.getDisplayName()+" has gone "+ChatColor.DARK_RED+"rogue!");
+                    }
+            }
         }
     }
 
@@ -75,6 +102,11 @@ public class CombatEvents implements Listener
                 }
                 p.playSound(p.getLocation(),Sound.ITEM_TOTEM_USE,1 ,0);
                 p.playSound(p.getLocation(),Sound.ENTITY_IRON_GOLEM_DEATH,1 ,2);
+                if (b.getWallet() > 0.0) {
+
+                    p.getWorld().dropItem(p.getLocation(), new CustomItem(b.getWallet()+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
+                }
+                b.updateWallet(0);
 
                 //SEND TO JAIL
                 if(b.getBounty() >= 100){

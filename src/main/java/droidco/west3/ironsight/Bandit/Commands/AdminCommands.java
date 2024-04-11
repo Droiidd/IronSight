@@ -16,7 +16,7 @@ public class AdminCommands implements CommandExecutor {
                 //Player entered commands with no args
                 //show options
                 p.sendMessage("Iron Sight Command options:");
-                p.sendMessage("/is gold add *amount* -> adds funds to players bank");
+                p.sendMessage("/dropgold *amount*");
 
             }
             else{

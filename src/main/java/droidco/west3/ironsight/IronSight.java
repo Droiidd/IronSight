@@ -2,6 +2,7 @@ package droidco.west3.ironsight;
 
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Commands.DropGoldCmd;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
@@ -99,6 +100,7 @@ public final class IronSight extends JavaPlugin {
         getCommand("masterlist").setExecutor(new MasterListCmd());
         getCommand("gethorse").setExecutor(new AdminGetHorseCmd());
         getCommand("call").setExecutor(new CallHorseCommand());
+        getCommand("dropgold").setExecutor(new DropGoldCmd());
     }
     public void killAllMobs()
     {

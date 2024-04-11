@@ -18,4 +18,8 @@ commands:
       - list
   call:
   gethorse:
+  dropgold:
+    aliases:
+      -dm
+      -drop
 

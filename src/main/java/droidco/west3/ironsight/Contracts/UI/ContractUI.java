@@ -89,7 +89,7 @@ public class ContractUI {
         ItemStack skull = new ItemStack(type, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         ArrayList<String> skullLore = new ArrayList<>();
-        skullLore.add(ChatColor.RED + "Coontractor Lvl: "+ChatColor.GRAY+ b.getContractorLvl()+" ");
+        skullLore.add(ChatColor.RED + "Contractor Lvl: "+ChatColor.GRAY+ b.getContractorLvl()+" ");
         skullLore.add(ChatColor.AQUA+"Contractor Lvl XP: "+ChatColor.GRAY+b.getContractorXp());
         meta.setLore(skullLore);
         meta.setOwner(p.getDisplayName());

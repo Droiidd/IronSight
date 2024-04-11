@@ -180,6 +180,21 @@ public class GlobalUtils {
             blockLoc.getWorld().spawnParticle(p2, blockLoc.getX() + rand, blockLoc.getY() + rand, blockLoc.getZ() - rand, 0);
         }
     }
+    public static Double getGoldStrToD(ItemStack goldItem, Player p) {
+        String amount = ChatColor.stripColor(goldItem.getItemMeta().getDisplayName());
+        String numberOnly = amount.replaceAll("[^0-9]", "");
+        Double depositGold = (GlobalUtils.StrToDNoMsg(numberOnly)) / 10;
+        return depositGold;
+    }
+    public static Double StrToDNoMsg(String s) {
+        try {
+            Double amount = Double.parseDouble(s);
+            return amount;
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+        return -1.0;
+    }
 
 
 
