@@ -15,6 +15,8 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Quantity;
+import droidco.west3.ironsight.Processors.Processor;
+import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCType;
@@ -23,6 +25,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
@@ -485,4 +488,24 @@ public class GameContentLoader {
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
     }
+    public static void loadProcessors() {
+
+        Processor proc1 = new Processor("Smoke leaf 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
+        Processor proc2 = new Processor("Smoke leaf 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
+        Processor proc3 = new Processor("Smoke leaf 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"));
+
+        for(var proc : Processor.getProcessors().entrySet()){
+            proc.getValue().addCoordinate(-53,110,-2920);
+            proc.getValue().addCoordinate(-50,106,-2936);
+            proc.getValue().addCoordinate(-63,112,-2934);
+            proc.getValue().addCoordinate(-46,107,-2964);
+            proc.getValue().addCoordinate(-46,111,-2959);
+            proc.getValue().addCoordinate(-43,119,-2968);
+            proc.getValue().addCoordinate(-14,108,-2933);
+            proc.getValue().addCoordinate(-15,112,-2936);
+            proc.getValue().addCoordinate(-18,117,-2935);
+        }
+        System.out.println("Processors successfully loaded!");
+    }
+
 }
