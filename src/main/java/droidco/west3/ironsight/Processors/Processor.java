@@ -35,6 +35,7 @@ public class Processor {
         this.location = location;
         this.type = type;
         this.defaultPosition = null;
+        this.defaultLocation = null;
         this.unprocDrug = unprocDrug;
         this.procDrug = procDrug;
         processorsById.put(processorCode, this);
@@ -67,16 +68,28 @@ public class Processor {
             ProcessorCoordinate targetCoord = coordList.get(coordChoice);
             if(!targetCoord.equals(this.defaultPosition) && targetCoord != null){
                 p.sendMessage("Found spawnable area!");
+                p.sendMessage(processorsById.size()+" .");
                 if(processorsById.size() > 0){
                     for(var proc : processorsById.entrySet()){
-                        if(!proc.getValue().getDefaultPosition().equals(targetCoord)||proc.getValue().defaultPosition == null){
-                            p.sendMessage("Found unique location!");
+                        p.sendMessage("filtering...");
+                        if( proc.getValue().getDefaultPosition() == null){
+                            p.sendMessage("targeted null; location!");
                             this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
                             this.defaultPosition = targetCoord;
                             findingPosition = false;
                             p.sendMessage("Spawning NPC");
                             createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+                        }else{
+                            if(!proc.getValue().getDefaultPosition().equals(targetCoord)){
+                                p.sendMessage("Found unique location!");
+                                this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                                this.defaultPosition = targetCoord;
+                                findingPosition = false;
+                                p.sendMessage("Spawning NPC");
+                                createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+                            }
                         }
+
                     }
                 }else{
                     //No other Processors yet
