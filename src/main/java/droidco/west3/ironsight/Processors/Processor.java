@@ -1,35 +1,40 @@
 package droidco.west3.ironsight.Processors;
 
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
-import org.bukkit.Location;
+import org.bukkit.*;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class Processor {
 
-    private static final HashMap<String, Processor> utilsMap = new HashMap<>();
+    private static HashMap<String, Processor> processorsById = new HashMap<>();
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
-    private final Location location1;
-    private final Location location2;
-    private final Location location3;
     private final ArrayList<Processor> utilsList = new ArrayList<>();
+    private static List<ProcessorCoordinate> coordList = new ArrayList<>();
     private boolean isProcessing;
     private Location defaultLocation;
-
-    public Processor(String processorType, Location location1, Location location2, Location location3) {
-        this.defaultLocation = location1;
-        this.location1 = location1;
-        this.location2 = location2;
-        this.location3 = location3;
-        utilsMap.put(processorType, this);
+    private FrontierLocation location;
+    private ProcessorType type;
+    private String processorCode;
+    public Processor(String processorCode, ProcessorType type, FrontierLocation location) {
+        this.processorCode = processorCode;
+        this.location = location;
+        this.type = type;
+        processorsById.put(processorCode, this);
         utilsList.add(this);
     }
 
+
     public static Processor getProcessor(String procName) {
-        return utilsMap.getOrDefault(procName, null);
+        return processorsById.getOrDefault(procName, null);
     }
 
     public Location getDefaultLocation() {
@@ -39,6 +44,25 @@ public class Processor {
     public void setDefaultLocation(Location location) {
         this.defaultLocation = location;
     }
+    public void createVillager(String villagerName, Location loc) {
+        Villager vil = loc.getWorld().spawn(loc, Villager.class);
+        vil.setCustomName(villagerName);
+        vil.setCustomNameVisible(true);
+        vil.setAI(false);
+        vil.setInvulnerable(true);
+        loc.getWorld().playSound(loc, Sound.BLOCK_BEACON_POWER_SELECT, 1, 0);
+        GlobalUtils.displayParticles(loc, Particle.CLOUD, Particle.GLOW, 15);
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        String command = "minecraft:kill @e[type=minecraft:armor_stand]";
+        Bukkit.dispatchCommand(console, command);
+    }
+    public void initializeLocations(Player p){
+
+    }
+    public static HashMap<String, Processor> getProcessors(){
+        return processorsById;
+    }
+
 
     public void randomizeDefaultLocation(Location previousLocation) {
         if (previousLocation.equals(location1)) {
@@ -67,6 +91,9 @@ public class Processor {
         }
     }
 
+    public void addCoordinate(int x,int y,int z){
+        coordList.add(new ProcessorCoordinate(x,y,z));
+    }
     public boolean isProcessing() {
         return isProcessing;
     }
