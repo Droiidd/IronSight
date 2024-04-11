@@ -3,7 +3,10 @@ package droidco.west3.ironsight;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
+<<<<<<< HEAD
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
+=======
+>>>>>>> 8209dd548f395fccfa93918ef0a32defb5c6dca8
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
 import droidco.west3.ironsight.Contracts.UI.ContractUiEvents;
 import droidco.west3.ironsight.Database.PlayerConnector;
@@ -88,7 +91,10 @@ public final class IronSight extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new HorseEvents(), this);
         getServer().getPluginManager().registerEvents(new FishingEvents(), this);
         getServer().getPluginManager().registerEvents(new ProcessorEvents(this), this);
+<<<<<<< HEAD
         getServer().getPluginManager().registerEvents(new VaultEvents(), this);
+=======
+>>>>>>> 8209dd548f395fccfa93918ef0a32defb5c6dca8
     }
     public void loadAllCommands() {
         getCommand("stats").setExecutor(new PlayerStatsCmd());
