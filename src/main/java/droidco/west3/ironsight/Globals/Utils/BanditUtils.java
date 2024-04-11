@@ -156,11 +156,10 @@ public class BanditUtils {
         Bandit b = Bandit.getPlayer(p);
         Inventory vaultUI = Bukkit.createInventory(p, 54, p.getDisplayName() + ": "+ChatColor.DARK_AQUA+"Vault");
         List<ItemStack> items = b.getItemVault();
-        p.sendMessage("Size: " + b.getVaultSize());
-        p.sendMessage("Level: " + b.getVaultLevel());
         for (int i = b.getVaultSize(); i < vaultUI.getSize();i++) {
             vaultUI.setItem(i,ItemIcon.getIcon("empty_slot").getItem());
         }
+
         if (!items.isEmpty()) {
             for (int i = 0; i < items.size(); i++) {
                     vaultUI.setItem(i, items.get(i));
