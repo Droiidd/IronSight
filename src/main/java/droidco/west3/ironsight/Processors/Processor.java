@@ -20,6 +20,7 @@ public class Processor {
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     private final ArrayList<Processor> utilsList = new ArrayList<>();
     private static List<ProcessorCoordinate> coordList = new ArrayList<>();
+    private UUID npcId;
     private boolean isProcessing;
     private Location defaultLocation;
     private Location previousLocation;
@@ -33,7 +34,7 @@ public class Processor {
         this.processorCode = processorCode;
         this.location = location;
         this.type = type;
-        this.previousLocation = null;
+        this.defaultPosition = null;
         this.unprocDrug = unprocDrug;
         this.procDrug = procDrug;
         processorsById.put(processorCode, this);
@@ -50,6 +51,8 @@ public class Processor {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         String command = "minecraft:kill @e[type=minecraft:armor_stand]";
         Bukkit.dispatchCommand(console, command);
+        this.npcId = vil.getUniqueId();
+        entities.put(npcId,vil);
     }
 
     public static HashMap<String, Processor> getProcessors(){
@@ -143,5 +146,8 @@ public class Processor {
 
     public void setProcDrug(ItemStack procDrug) {
         this.procDrug = procDrug;
+    }
+    public static HashMap<UUID, LivingEntity>  getEntities(){
+        return entities;
     }
 }

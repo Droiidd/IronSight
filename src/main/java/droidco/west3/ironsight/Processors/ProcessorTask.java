@@ -30,15 +30,13 @@ public class ProcessorTask extends BukkitRunnable {
     private final Location procLocation;
     private final IronSight plugin;
     private final Hologram hologram;
-    private final String processorType;
     private double seconds = 0;
     private ItemStack output;
 
-    public ProcessorTask(String processorType, Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, ItemStack output, double value, int unprocAmount, Location procLocation) {
+    public ProcessorTask(Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, ItemStack output, double value, int unprocAmount, Location procLocation) {
         this.processor = processor;
         this.plugin = plugin;
         this.p = p;
-        this.processorType = processorType;
         this.input = input;
         this.output = output;
         this.value = value;
