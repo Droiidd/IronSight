@@ -159,7 +159,6 @@ public class    BanditTask extends BukkitRunnable {
             updatePlayerLocation(p);
             despawnEmptyTownNPCs();
             despawnEmptyCampProcessors();
-            spawnNPCs(p,b);
             //SPAWN NPCS
 
             //      ===--- DISPLAYS SCOREBOARD / STATS ---===
@@ -202,6 +201,7 @@ public class    BanditTask extends BukkitRunnable {
 
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
+                spawnNPCs(p,b);
                 p.setLastDamage(0.0);
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
@@ -224,11 +224,11 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
+                spawnProcessors(p,b);
             }
             if(currentLoc.getLocName().equalsIgnoreCase("Storm Point")){
                 if (!currentLoc.isNewArrival()) {
                     currentLoc.setNewArrival(true);
-                    LoadProcessor.spawnProcessors(p);
                 }
             }
             //      ===--- WANTED TIMER ---===
@@ -411,6 +411,7 @@ public class    BanditTask extends BukkitRunnable {
     }
     public void spawnProcessors(Player p, Bandit b){
         if (!b.getCurrentLocation().isMobsSpawned()) {
+            p.sendMessage("Mobs not spawned");
             b.getCurrentLocation().setMobsSpawned(true);
             HashMap<String, Processor> procs = Processor.getProcessors();
             for (Map.Entry<String, Processor> proc : procs.entrySet()) {
