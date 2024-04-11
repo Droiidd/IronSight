@@ -15,13 +15,17 @@ import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCType;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class GameContentLoader {
