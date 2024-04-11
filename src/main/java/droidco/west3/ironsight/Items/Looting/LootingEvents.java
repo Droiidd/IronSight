@@ -34,17 +34,33 @@ public class LootingEvents implements Listener {
         Block block = e.getClickedBlock();
         //CHECK IF CHEST
         if (block.getType().equals(Material.CHEST)) {
-            if (b.getCurrentLocation().getType().equals(LocationType.ILLEGAL)) {
-                ArrayList<ItemStack> contents = ItemTable.getTable("Drug Base").getNumItems(5);
-                Chest chest = (Chest) block.getState();
-                for (ItemStack item : contents) {
-                    chest.getInventory().addItem(item);
-                }
-                new RespawnLootTask(plugin, 20, block.getLocation(), chest.getInventory().getContents());
-            }
+            spawnChestLoot(b,block,ItemTable.getTable("Drug Base"),LocationType.ILLEGAL,3);
+        }
+        if (block.getType().equals(Material.CHEST)) {
+            spawnChestLoot(b,block,ItemTable.getTable("Oil Field"),LocationType.OIL_FIELD,3);
+        }
+        if (block.getType().equals(Material.CHEST)) {
+            spawnChestLoot(b,block,ItemTable.getTable("Mines"),LocationType.MINE,3);
+        }
+        if (block.getType().equals(Material.CHEST)) {
+            spawnChestLoot(b,block,ItemTable.getTable("Scavenger Town"),LocationType.EVENT,3);
+        }
+        if (block.getType().equals(Material.CHEST)) {
+            spawnChestLoot(b,block,ItemTable.getTable("Hunting Grounds"),LocationType.NATURAL,3);
         }
 
 
+    }
+
+    public void spawnChestLoot(Bandit b, Block block, ItemTable table,LocationType locType,int quantity){
+        if (b.getCurrentLocation().getType().equals(locType)) {
+            ArrayList<ItemStack> contents = table.getNumItems(quantity);
+            Chest chest = (Chest) block.getState();
+            for (ItemStack item : contents) {
+                chest.getInventory().addItem(item);
+            }
+            new RespawnLootTask(plugin, 20, block.getLocation(), chest.getInventory().getContents());
+        }
     }
 
 }
