@@ -56,6 +56,7 @@ public class Bandit
     private Contract experiencedContract;
     private Contract activeContract;
     private boolean jailRespawn;
+    private boolean isOfficer;
     private static List<Bandit> playerList = new ArrayList<>();
     private List<Contract> contracts = new ArrayList<>();
     private List<FrontierHorse> horses = new ArrayList<>();
