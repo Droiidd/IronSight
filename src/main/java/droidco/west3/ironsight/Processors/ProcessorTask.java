@@ -102,6 +102,9 @@ public class ProcessorTask extends BukkitRunnable {
             for (int i = 0; i < unprocAmount; i++) {
                 p.getInventory().removeItem(input);
             }
+            Processor.getEntities().get(processor.getNpcId()).setCustomNameVisible(false);
+            Processor.getEntities().get(processor.getNpcId()).setCustomName("");
+
             return true;
         } else {
             p.sendMessage(ChatColor.RED + "You don't have any " + input.getItemMeta().getDisplayName() + " to process.");
@@ -119,6 +122,8 @@ public class ProcessorTask extends BukkitRunnable {
         p.sendTitle("", ChatColor.AQUA + "Finished processing " + input.getItemMeta().getDisplayName());
         p.playSound(p.getLocation(), Sound.ENTITY_ALLAY_ITEM_THROWN, 1, 1);
         GlobalUtils.displayParticles(procLocation, Particle.SMOKE_NORMAL, Particle.VILLAGER_HAPPY, 3);
+        Processor.getEntities().get(processor.getNpcId()).setCustomNameVisible(true);
+        Processor.getEntities().get(processor.getNpcId()).setCustomName(processor.getDisplayName());
         clearBar();
         tasks.remove(this);
         processor.setProcessing(false);
@@ -133,6 +138,8 @@ public class ProcessorTask extends BukkitRunnable {
                 p.getInventory().addItem(input);
             }
         }
+        Processor.getEntities().get(processor.getNpcId()).setCustomNameVisible(true);
+        Processor.getEntities().get(processor.getNpcId()).setCustomName(processor.getDisplayName());
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         String command = "minecraft:kill @e[type=armor_stand]";
         Bukkit.dispatchCommand(console, command);

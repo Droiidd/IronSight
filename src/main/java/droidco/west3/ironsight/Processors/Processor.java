@@ -30,6 +30,7 @@ public class Processor {
     private String processorCode;
     private ItemStack unprocDrug;
     private ItemStack procDrug;
+    private String displayName;
     public Processor(String processorCode, ProcessorType type, FrontierLocation location,ItemStack unprocDrug,ItemStack procDrug) {
         this.processorCode = processorCode;
         this.location = location;
@@ -38,6 +39,7 @@ public class Processor {
         this.defaultLocation = null;
         this.unprocDrug = unprocDrug;
         this.procDrug = procDrug;
+        this.displayName = String.valueOf(ChatColor.RED)+processorCode;
         processorsById.put(processorCode, this);
         utilsList.add(this);
     }
@@ -171,5 +173,21 @@ public class Processor {
     }
     public static HashMap<UUID, LivingEntity>  getEntities(){
         return entities;
+    }
+
+    public UUID getNpcId() {
+        return npcId;
+    }
+
+    public void setNpcId(UUID npcId) {
+        this.npcId = npcId;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }
