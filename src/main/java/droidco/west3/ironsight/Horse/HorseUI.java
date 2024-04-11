@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.Horse;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
@@ -24,6 +26,9 @@ public class HorseUI {
                 ItemStack horseItem = new ItemStack(Material.NAME_TAG);
                 ItemMeta meta = horseItem.getItemMeta();
                 meta.setDisplayName(horse.getHorseName());
+                List<String> lore = new ArrayList<>();
+                lore.add(ChatColor.GRAY+GlobalUtils.getHorseTypeString(horse.getHorseType()));
+                meta.setLore(lore);
                 horseItem.setItemMeta(meta);
                 playerHorses.setItem(count, horseItem);
                 count++;
@@ -32,7 +37,7 @@ public class HorseUI {
         for (int i = 3; i < 9; i++) {
             ItemStack item = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName("");
+            meta.setDisplayName(" ");
             item.setItemMeta(meta);
             playerHorses.setItem(i,item);
         }

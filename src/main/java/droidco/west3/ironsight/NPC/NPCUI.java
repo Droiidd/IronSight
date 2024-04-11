@@ -75,7 +75,7 @@ public class NPCUI {
         ItemStack exit = getExitButton();
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemStack smokeLeaf = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+        ItemStack smokeLeaf = CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack();
         smokeLeaf.setAmount(8);
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");
@@ -142,11 +142,12 @@ public class NPCUI {
     }
 
     public static Inventory stableManagerUI(Player p) {
-        Inventory stableManagerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Stable Manager");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Stable Manager");
+        shop.setItem(10,CustomItem.getCustomItem("Standard").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Thoroughbred").getItemForSale());
+        shop.setItem(16,CustomItem.getCustomItem("Donkey").getItemForSale());
 
-        return stableManagerUI;
-
+        return shop;
     }
 
     public static Inventory conductorUI(Player p) {

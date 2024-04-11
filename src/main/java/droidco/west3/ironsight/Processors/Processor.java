@@ -1,32 +1,108 @@
 package droidco.west3.ironsight.Processors;
 
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
-import org.bukkit.Location;
+import org.bukkit.*;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class Processor {
 
-    private static final HashMap<String, Processor> utilsMap = new HashMap<>();
-    private final Location location1;
-    private final Location location2;
-    private final Location location3;
+    private static HashMap<String, Processor> processorsById = new HashMap<>();
+    private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     private final ArrayList<Processor> utilsList = new ArrayList<>();
+    private static List<ProcessorCoordinate> coordList = new ArrayList<>();
+    private UUID npcId;
     private boolean isProcessing;
     private Location defaultLocation;
-
-    public Processor(String processorType, Location location1, Location location2, Location location3) {
-        this.defaultLocation = location1;
-        this.location1 = location1;
-        this.location2 = location2;
-        this.location3 = location3;
-        utilsMap.put(processorType, this);
+    private Location previousLocation;
+    private ProcessorCoordinate defaultPosition;
+    private FrontierLocation location;
+    private ProcessorType type;
+    private String processorCode;
+    private ItemStack unprocDrug;
+    private ItemStack procDrug;
+    private String displayName;
+    public Processor(String processorCode, ProcessorType type, FrontierLocation location,ItemStack unprocDrug,ItemStack procDrug) {
+        this.processorCode = processorCode;
+        this.location = location;
+        this.type = type;
+        this.defaultPosition = null;
+        this.defaultLocation = null;
+        this.unprocDrug = unprocDrug;
+        this.procDrug = procDrug;
+        this.displayName = String.valueOf(ChatColor.RED)+processorCode;
+        processorsById.put(processorCode, this);
         utilsList.add(this);
     }
+    public void createVillager(String villagerName, Location loc) {
+        Villager vil = loc.getWorld().spawn(loc, Villager.class);
+        vil.setCustomName(villagerName);
+        vil.setCustomNameVisible(true);
+        vil.setAI(false);
+        vil.setInvulnerable(true);
+        loc.getWorld().playSound(loc, Sound.BLOCK_BEACON_POWER_SELECT, 1, 0);
+        GlobalUtils.displayParticles(loc, Particle.CLOUD, Particle.GLOW, 15);
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        String command = "minecraft:kill @e[type=minecraft:armor_stand]";
+        Bukkit.dispatchCommand(console, command);
+        this.npcId = vil.getUniqueId();
+        entities.put(npcId,vil);
+    }
 
+    public static HashMap<String, Processor> getProcessors(){
+        return processorsById;
+    }
+
+
+    public void randomizeLocAndSpawn(Player p) {
+        boolean findingPosition = true;
+        boolean duplicatePosition = false;
+       // boolean isSpawned = false;
+        while(findingPosition){
+            int coordChoice = GlobalUtils.getRandomNumber(coordList.size());
+            ProcessorCoordinate targetCoord = coordList.get(coordChoice);
+            if(!targetCoord.equals(this.defaultPosition) && targetCoord != null){
+                p.sendMessage("Found spawnable area!");
+                if(processorsById.size() > 0){
+                    for(var proc : processorsById.entrySet()){
+                       // if(!isSpawned){
+
+                        if(proc.getValue().defaultPosition != null){
+                            if(proc.getValue().getDefaultPosition().equals(targetCoord)){
+                                duplicatePosition = true;
+                            }
+                        }
+
+                       // }
+                    }
+                    if(!duplicatePosition){
+                        p.sendMessage("Found unique location!");
+                        if(defaultLocation != null){
+                            GlobalUtils.displayParticles(defaultLocation,Particle.CLOUD,Particle.EXPLOSION_HUGE,3);
+                        }
+                        this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
+                        this.defaultPosition = targetCoord;
+                        findingPosition = false;
+                        //isSpawned = true;
+                        p.sendMessage("Spawning NPC");
+
+                        createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+                    }
+                }
+            }
+        }
+    }
     public static Processor getProcessor(String procName) {
-        return utilsMap.getOrDefault(procName, null);
+        return processorsById.getOrDefault(ChatColor.stripColor(procName), null);
     }
 
     public Location getDefaultLocation() {
@@ -37,33 +113,9 @@ public class Processor {
         this.defaultLocation = location;
     }
 
-    public void randomizeDefaultLocation(Location previousLocation) {
-        if (previousLocation.equals(location1)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location2;
-            } else {
-                defaultLocation = location3;
-            }
-        }
-        if (previousLocation.equals(location2)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location1;
-            } else {
-                defaultLocation = location3;
-            }
-        }
-        if (previousLocation.equals(location3)) {
-            int chance = GlobalUtils.getRandomNumber(101);
-            if (chance % 2 == 0) {
-                defaultLocation = location2;
-            } else {
-                defaultLocation = location1;
-            }
-        }
+    public void addCoordinate(int x,int y,int z){
+        coordList.add(new ProcessorCoordinate(x,y,z));
     }
-
     public boolean isProcessing() {
         return isProcessing;
     }
@@ -72,16 +124,70 @@ public class Processor {
         this.isProcessing = bool;
     }
 
-    public Location getLocation1() {
-        return location1;
+    public ProcessorCoordinate getDefaultPosition() {
+        return defaultPosition;
     }
 
-    public Location getLocation2() {
-        return location2;
+    public void setDefaultPosition(ProcessorCoordinate defaultPosition) {
+        this.defaultPosition = defaultPosition;
     }
 
-    public Location getLocation3() {
-        return location3;
+    public FrontierLocation getLocation() {
+        return location;
     }
 
+    public void setLocation(FrontierLocation location) {
+        this.location = location;
+    }
+
+    public ProcessorType getType() {
+        return type;
+    }
+
+    public void setType(ProcessorType type) {
+        this.type = type;
+    }
+
+    public String getProcessorCode() {
+        return processorCode;
+    }
+
+    public void setProcessorCode(String processorCode) {
+        this.processorCode = processorCode;
+    }
+
+    public ItemStack getUnprocDrug() {
+        return unprocDrug;
+    }
+
+    public void setUnprocDrug(ItemStack unprocDrug) {
+        this.unprocDrug = unprocDrug;
+    }
+
+    public ItemStack getProcDrug() {
+        return procDrug;
+    }
+
+    public void setProcDrug(ItemStack procDrug) {
+        this.procDrug = procDrug;
+    }
+    public static HashMap<UUID, LivingEntity>  getEntities(){
+        return entities;
+    }
+
+    public UUID getNpcId() {
+        return npcId;
+    }
+
+    public void setNpcId(UUID npcId) {
+        this.npcId = npcId;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 }

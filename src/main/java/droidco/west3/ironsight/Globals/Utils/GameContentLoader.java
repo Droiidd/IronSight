@@ -15,6 +15,8 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Quantity;
+import droidco.west3.ironsight.Processors.Processor;
+import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
 import droidco.west3.ironsight.NPC.NPCType;
@@ -23,6 +25,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
 import java.util.ArrayList;
@@ -31,10 +34,6 @@ import java.util.List;
 
 
 public class GameContentLoader {
-    public static void loadCustomMobs()
-    {
-
-    }
     public static void loadCustomItems()
     {
         System.out.println("Loading custom items");
@@ -55,7 +54,7 @@ public class GameContentLoader {
         CustomItem tracker = new CustomItem("Tracker",1,true,false, "Track different locations",Material.COMPASS,0.0,10.0);
         CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0);
         CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0);
-        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.ENDER_PEARL,0.0,0.0);
+        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.GREEN_DYE,0.0,0.0);
         CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
@@ -120,7 +119,7 @@ public class GameContentLoader {
 
         new CustomItem("Crystalized Geode",8,true,false,"Crystals explode out of the sides",Material.MUSIC_DISC_11,0.0,0.0);
         CustomItem riverdiamond = new CustomItem("River Diamond",7,true,false, "The root of many wars",Material.DIAMOND,555.0,0.0);
-        CustomItem barronsemerald = new CustomItem("Barron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
+        CustomItem baronsemerald = new CustomItem("Baron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
         CustomItem voidopal = new CustomItem("Void Opal",8,true,false, "Stare into the depths of the universe",Material.ECHO_SHARD,635.0,0.0);
 
         //ARMOR
@@ -172,7 +171,9 @@ public class GameContentLoader {
 
         System.out.println("custom items loaded");
 
-
+        new CustomItem("Standard",1,true,false,"Get's you where you need",Material.HORSE_SPAWN_EGG,0.0,2100.0);
+        new CustomItem("Thoroughbred",1,true,false,"Fastest steed you can find",Material.HORSE_SPAWN_EGG,0.0,35250.0);
+        new CustomItem("Donkey",1,true,false,"Slow but lots of storage",Material.DONKEY_SPAWN_EGG,0.0,48500.0);
     }
     public static void loadItemTables(){
         //add "Health Potions
@@ -208,7 +209,7 @@ public class GameContentLoader {
         mines.put("Rabbit Stew", ones);
         mines.put("Splint", ones);
         mines.put("Old Miner's Pick", ones);
-        mines.put("Mole's Breath Spores", ones);
+        mines.put("Moles Breath Spores", ones);
         ItemTable mines_table = new ItemTable(mines, "Mines");
 
         //add farmhand set
@@ -219,13 +220,13 @@ public class GameContentLoader {
         drugbase.put("Brown Stew", ones);
         drugbase.put("Bandage", ones);
         drugbase.put("Splint", ones);
-        drugbase.put("Slug", ones);
+        drugbase.put("Sea Slug", ones);
         drugbase.put("Fermented Liquor", ones);
         ItemTable drug_base_table = new ItemTable(drugbase, "Drug Base");
 
         //add gold, huntsman's jacket/trousers, Winchester 1873, Colt Navy
         HashMap<String, Quantity> scavtown = new HashMap<>();
-        scavtown.put("Slug", ones);
+        scavtown.put("Sea Slug", ones);
         scavtown.put("Shotgun Ammo", ones);
         scavtown.put("Pistol Ammo", ones);
         scavtown.put("Rifle Ammo", ones);
@@ -248,7 +249,7 @@ public class GameContentLoader {
         lt_milcrate.put("Shotgun Ammo", new Quantity(18, 28));
         lt_milcrate.put("Pistol Ammo", new Quantity(18, 28));
         lt_milcrate.put("Rifle Ammo", new Quantity(18, 28));
-        lt_milcrate.put("Slugs", new Quantity(8, 18));
+        lt_milcrate.put("Sea Slug", new Quantity(8, 18));
         lt_milcrate.put("Fermented Liquor", new Quantity(6, 15));
         lt_milcrate.put("Amethyst Bud", new Quantity(1, 5));
         lt_milcrate.put("Smoked Salmon", new Quantity(9, 19));
@@ -269,6 +270,64 @@ public class GameContentLoader {
         geodeMap.put("Gold Ore", new Quantity(1,8));
 
         ItemTable geodeTable = new ItemTable(geodeMap, "Geode");
+
+        //      ===--- FISH TABLES ---===
+
+        //LOWER GUADLUPE
+        HashMap<String, Quantity> guadalupeMap = new HashMap<>();
+        guadalupeMap.put("Reed", ones);
+        guadalupeMap.put("Seaweed", ones);
+        guadalupeMap.put("Cactus Pronged Chub", ones);
+        guadalupeMap.put("Poor Mans Crappie", ones);
+        guadalupeMap.put("Gray Stoned Herring", ones);
+        guadalupeMap.put("Sunken Catfish", ones);
+
+        ItemTable guadalupeTable = new ItemTable(guadalupeMap, "Guadalupe Fish");
+
+        //THREE FORKS DELTA
+        HashMap<String, Quantity> deltaMap = new HashMap<>();
+        deltaMap.put("Reed", ones);
+        deltaMap.put("Seaweed", ones);
+        deltaMap.put("Cactus Pronged Chub", ones);
+        deltaMap.put("Poor Mans Crappie", ones);
+        deltaMap.put("Gray Stoned Herring", ones);
+        deltaMap.put("Alligator", ones);
+
+        ItemTable deltaTable = new ItemTable(deltaMap, "Three Forks Fish");
+
+        //PEARL RIVER
+        HashMap<String, Quantity> pearlMap = new HashMap<>();
+        pearlMap.put("Reed", ones);
+        pearlMap.put("Seaweed", ones);
+        pearlMap.put("Cactus Pronged Chub", ones);
+        pearlMap.put("Poor Mans Crappie", ones);
+        pearlMap.put("Gray Stoned Herring", ones);
+        pearlMap.put("Arctic Salmon", ones);
+        pearlMap.put("Pearl River Trout", ones);
+
+        ItemTable pearlTable = new ItemTable(pearlMap, "Pearl River Fish");
+
+        //SLOUGH CREEK
+        HashMap<String, Quantity> sloughMap = new HashMap<>();
+        sloughMap.put("Reed", ones);
+        sloughMap.put("Seaweed", ones);
+        sloughMap.put("Cactus Pronged Chub", ones);
+        sloughMap.put("Poor Mans Crappie", ones);
+        sloughMap.put("Gray Stoned Herring", ones);
+        sloughMap.put("Southern Salmon", ones);
+        sloughMap.put("Gold Stoned Herring", ones);
+
+        ItemTable sloughTable = new ItemTable(sloughMap, "Slough Creek Fish");
+        //GLOBAL FISH
+        HashMap<String, Quantity> globalFishMap = new HashMap<>();
+        globalFishMap.put("Reed", ones);
+        globalFishMap.put("Seaweed", ones);
+        globalFishMap.put("Cactus Pronged Chub", ones);
+        globalFishMap.put("Poor Mans Crappie", ones);
+        globalFishMap.put("Gray Stoned Herring", ones);
+
+        new ItemTable(globalFishMap, "Global Fish");
+
     }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
@@ -305,7 +364,7 @@ public class GameContentLoader {
         FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
         FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1330,-1100,-2100,2955);
         FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1876,-1681,1160,341);
-        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,-1009,-947,-2857,-2778);
+        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,1014,947,-2857,-2778);
 
         FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
         System.out.println("Locations loaded");
@@ -366,7 +425,7 @@ public class GameContentLoader {
 
             ItemIcon mines = new ItemIcon("Mines","mine_tracker", "Find Mines", Material.IRON_PICKAXE);
                 ItemIcon blackSpur = new ItemIcon("Black Spur Mines","black_spur_mines_tracker", "Find the Black Spur Mines", Material.IRON_ORE);
-                ItemIcon barron = new ItemIcon("Barron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
+                ItemIcon baron = new ItemIcon("Baron's Canyon","barrons_canyon_tracker", "Find Barron's Canyon", Material.TERRACOTTA);
                 ItemIcon halfDome = new ItemIcon("Half Dome Mines","half_dome_tracker", "Find the Half Dome Mines", Material.STONE);
 
                 ItemIcon rivers = new ItemIcon("Rivers", "river_tracker","Find Rivers", Material.WATER_BUCKET);
@@ -407,6 +466,8 @@ public class GameContentLoader {
         ItemIcon openAccountMenu = new ItemIcon("Open Account", "open_account_menu", "Open an item vault account", Material.CHEST);
         ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
 
+        new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
+            new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
         System.out.println("Icons loaded");
     }
 
@@ -433,6 +494,27 @@ public class GameContentLoader {
         new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+}
+    public static void loadProcessors() {
+
+        Processor proc1 = new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc2 = new Processor("Smoke leaf processor 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc3 = new Processor("Smoke leaf processor 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+
+        for(var proc : Processor.getProcessors().entrySet()){
+            proc.getValue().addCoordinate(-53,108,-2920);
+            proc.getValue().addCoordinate(-50,106,-2936);
+            proc.getValue().addCoordinate(-63,112,-2934);
+            proc.getValue().addCoordinate(-46,107,-2964);
+            proc.getValue().addCoordinate(-46,111,-2959);
+            proc.getValue().addCoordinate(-43,119,-2968);
+            proc.getValue().addCoordinate(-14,106,-2933);
+            proc.getValue().addCoordinate(-15,112,-2936);
+            proc.getValue().addCoordinate(-18,117,-2935);
+        }
+        System.out.println("Processors successfully loaded!");
     }
+
 }

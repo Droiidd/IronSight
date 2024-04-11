@@ -2,8 +2,6 @@ package droidco.west3.ironsight.Bandit.Tasks;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
-import droidco.west3.ironsight.Contracts.Utils.ContractType;
-import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -13,13 +11,11 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Bandit.UI.RespawnUI;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.NPC.NPC;
-import droidco.west3.ironsight.Processors.LoadProcessor;
 import droidco.west3.ironsight.Processors.Processor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -78,7 +74,6 @@ public class    BanditTask extends BukkitRunnable {
         this.runTaskTimer(plugin, 0, 10);
 
         locations = FrontierLocation.getLocationList();
-        npcEnts = NPC.getEntities();
 
         b.setDoingContract(false);
         b.loadContracts();
@@ -159,8 +154,15 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- DISPLAYS LOCATION BOSSBAR ---===
             updatePlayerLocation(p);
             despawnEmptyTownNPCs();
-            spawnNPCs(p,b);
+            despawnEmptyCampProcessors();
             //SPAWN NPCS
+            if (!p.isOnline()) {
+                if (b.isCombatBlocked()) {
+                    p.damage(100);
+                }
+                this.cancel();
+                tasks.remove(this);
+            }
 
             //      ===--- DISPLAYS SCOREBOARD / STATS ---===
             BanditUtils.loadScoreBoard(p, b, combatLogTimer - combatLogCounter, wantedMin, wantedSec);
@@ -202,6 +204,7 @@ public class    BanditTask extends BukkitRunnable {
 
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
+                spawnNPCs(p,b);
                 p.setLastDamage(0.0);
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
@@ -224,11 +227,11 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
+                spawnProcessors(p,b);
             }
             if(currentLoc.getLocName().equalsIgnoreCase("Storm Point")){
                 if (!currentLoc.isNewArrival()) {
                     currentLoc.setNewArrival(true);
-                    LoadProcessor.spawnProcessors(p);
                 }
             }
             //      ===--- WANTED TIMER ---===
@@ -356,9 +359,6 @@ public class    BanditTask extends BukkitRunnable {
             if (location.isPlayerInside(p)) {
                 //location.addTitle(p);
                 b.setCurrentLocation(location);
-                if(!location.getPlayersInside().isEmpty()){
-
-                }
                 wildMarker = false;
             }
         }
@@ -367,6 +367,7 @@ public class    BanditTask extends BukkitRunnable {
         }
     }
     public void despawnEmptyTownNPCs(){
+        npcEnts = NPC.getEntities();
         for(FrontierLocation location : locations){
             if(location.getPlayersInside().isEmpty()){
                 if(location.isMobsSpawned()){
@@ -382,6 +383,24 @@ public class    BanditTask extends BukkitRunnable {
             }
         }
     }
+    public void despawnEmptyCampProcessors(){
+        HashMap<UUID, LivingEntity> procEnts = Processor.getEntities();
+        for(FrontierLocation location : locations){
+            if(location.getPlayersInside().isEmpty()){
+                if(location.isMobsSpawned()){
+                    HashMap<String, Processor> procs = Processor.getProcessors();
+                    for(Map.Entry<UUID,LivingEntity> procEnt : procEnts.entrySet()){
+                        p.sendMessage("attempting to kill Processor");
+                        if(location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())){
+                            procEnt.getValue().remove();
+                            System.out.println(procEnt.getValue().getCustomName()+ " NPC killed.");
+                        }
+                    }
+                    location.setMobsSpawned(false);
+                }
+            }
+        }
+    }
     public void spawnNPCs(Player p, Bandit b){
         if (!b.getCurrentLocation().isMobsSpawned()) {
             b.getCurrentLocation().setMobsSpawned(true);
@@ -390,6 +409,18 @@ public class    BanditTask extends BukkitRunnable {
                 NPC npc = entryNPC.getValue();
                 if(npc.getFrontierLocation().equals(b.getCurrentLocation())){
                     npc.spawnNPC(p);
+                }
+            }
+        }
+    }
+    public void spawnProcessors(Player p, Bandit b){
+        if (!b.getCurrentLocation().isMobsSpawned()) {
+            p.sendMessage("Mobs not spawned");
+            b.getCurrentLocation().setMobsSpawned(true);
+            HashMap<String, Processor> procs = Processor.getProcessors();
+            for (Map.Entry<String, Processor> proc : procs.entrySet()) {
+                if(proc.getValue().getLocation().equals(b.getCurrentLocation())){
+                    proc.getValue().randomizeLocAndSpawn(p);
                 }
             }
         }
