@@ -277,7 +277,6 @@ public class NPCEvents implements Listener {
                 purchaseHorse(b,p,CustomItem.getCustomItem("Donkey"),NPC.getNPC("Stable Manager"),FrontierHorseType.DONKEY);
             }
         }
-<<<<<<< HEAD
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Vault Keeper")){
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
@@ -306,8 +305,6 @@ public class NPCEvents implements Listener {
                 }
             }
         }
-=======
->>>>>>> 8209dd548f395fccfa93918ef0a32defb5c6dca8
     }
     @EventHandler
     public void bankInteraction(PlayerChatEvent e) {
