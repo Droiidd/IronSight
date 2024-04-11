@@ -132,13 +132,13 @@ public class NPCEvents implements Listener {
         if(e.getRightClicked().getType().equals(EntityType.VILLAGER)) {
             String clickedNPCname = ChatColor.stripColor(e.getRightClicked().getCustomName());
             switch (clickedNPCname) {
-                case "Smokeleaf Processor 1" -> {
+                case "Smoke leaf processor 1" -> {
                     p.openInventory(NPCUI.openSmokeleafProcessor(p, 1));
                 }
-                case "Smokeleaf Processor 2" -> {
+                case "Smoke leaf processor 2" -> {
                     p.openInventory(NPCUI.openSmokeleafProcessor(p, 2));
                 }
-                case "Smokeleaf Processor 3" -> {
+                case "Smoke leaf processor 3" -> {
                     p.openInventory(NPCUI.openSmokeleafProcessor(p, 3));
                 }
             }

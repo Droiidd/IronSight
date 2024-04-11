@@ -75,7 +75,7 @@ public class NPCUI {
         ItemStack exit = getExitButton();
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemStack smokeLeaf = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+        ItemStack smokeLeaf = CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack();
         smokeLeaf.setAmount(8);
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");

@@ -490,18 +490,18 @@ public class GameContentLoader {
     }
     public static void loadProcessors() {
 
-        Processor proc1 = new Processor("Smoke leaf 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
-        Processor proc2 = new Processor("Smoke leaf 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
-        Processor proc3 = new Processor("Smoke leaf 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc1 = new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc2 = new Processor("Smoke leaf processor 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        Processor proc3 = new Processor("Smoke leaf processor 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
 
         for(var proc : Processor.getProcessors().entrySet()){
-            proc.getValue().addCoordinate(-53,110,-2920);
+            proc.getValue().addCoordinate(-53,108,-2920);
             proc.getValue().addCoordinate(-50,106,-2936);
             proc.getValue().addCoordinate(-63,112,-2934);
             proc.getValue().addCoordinate(-46,107,-2964);
             proc.getValue().addCoordinate(-46,111,-2959);
             proc.getValue().addCoordinate(-43,119,-2968);
-            proc.getValue().addCoordinate(-14,108,-2933);
+            proc.getValue().addCoordinate(-14,106,-2933);
             proc.getValue().addCoordinate(-15,112,-2936);
             proc.getValue().addCoordinate(-18,117,-2935);
         }
