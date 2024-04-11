@@ -62,6 +62,7 @@ public class Bandit
     private List<FrontierHorse> horses = new ArrayList<>();
 
     private int vaultSize = 0;
+    private int vaultLevel = 0;
     private List<ItemStack> itemVault = new ArrayList<>(vaultSize);
 
     //private final IronSight plugin;
@@ -485,4 +486,13 @@ public class Bandit
     public void setJailRespawn(boolean jailRespawn) {
         this.jailRespawn = jailRespawn;
     }
+
+    public int getVaultLevel() {
+        return vaultLevel;
+    }
+
+    public void setVaultLevel(int vaultLevel) {
+        this.vaultLevel = vaultLevel;
+    }
 }
+

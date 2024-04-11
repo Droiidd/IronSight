@@ -402,7 +402,7 @@ public class GameContentLoader {
             ItemIcon openVault = new ItemIcon("Open Vault", "open_vault", "Open your item vault", Material.ENDER_CHEST);
             ItemIcon upgradeVault = new ItemIcon("Upgrade Vault", "upgrade_vault", "Upgrade your item vault", Material.LIME_BANNER);
             ItemIcon emptySlot = new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
-        ItemIcon doUpgrade = new ItemIcon("Upgrade Vault", "upgrade_vault_confirm", "50,000g for 9 more slots", Material.EMERALD_BLOCK);
+        ItemIcon doUpgrade = new ItemIcon("Upgrade Vault", "upgrade_vault_confirm", "50,000g for 6 more slots", Material.EMERALD_BLOCK);
         ItemIcon go_back = new ItemIcon("Upgrade Vault", "close_vault", "Close menu", Material.REDSTONE_BLOCK);
         ItemIcon openAccountMenu = new ItemIcon("Open Account", "open_account_menu", "Open an item vault account", Material.CHEST);
         ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
