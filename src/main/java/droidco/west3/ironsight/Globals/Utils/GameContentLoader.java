@@ -1,15 +1,20 @@
 package droidco.west3.ironsight.Globals.Utils;
 
+import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
+import droidco.west3.ironsight.FrontierMobs.FrontierMob;
+import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.Items.Looting.ItemTable;
+import droidco.west3.ironsight.Items.ItemTable;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
-import droidco.west3.ironsight.Items.Looting.Quantity;
+import droidco.west3.ironsight.Items.Quantity;
 import droidco.west3.ironsight.Processors.Processor;
 import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
@@ -23,7 +28,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.*;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -491,7 +496,7 @@ public class GameContentLoader {
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-}
+    }
     public static void loadProcessors() {
 
         Processor proc1 = new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
@@ -499,13 +504,13 @@ public class GameContentLoader {
         Processor proc3 = new Processor("Smoke leaf processor 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
 
         for(var proc : Processor.getProcessors().entrySet()){
-            proc.getValue().addCoordinate(-53,108,-2920);
+            proc.getValue().addCoordinate(-53,110,-2920);
             proc.getValue().addCoordinate(-50,106,-2936);
             proc.getValue().addCoordinate(-63,112,-2934);
             proc.getValue().addCoordinate(-46,107,-2964);
             proc.getValue().addCoordinate(-46,111,-2959);
             proc.getValue().addCoordinate(-43,119,-2968);
-            proc.getValue().addCoordinate(-14,106,-2933);
+            proc.getValue().addCoordinate(-14,108,-2933);
             proc.getValue().addCoordinate(-15,112,-2936);
             proc.getValue().addCoordinate(-18,117,-2935);
         }
