@@ -64,7 +64,7 @@ public class ProcessorEvents implements Listener {
                             } else {
                                 p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
                                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);
-                                new ProcessorTask("smokeleaf1", processor.getValue(), plugin, p, 60, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
+                                new ProcessorTask(processor.getValue(), plugin, p, 60, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
                                         90.0, 8, processor.getValue().getDefaultLocation());
                                 p.closeInventory();
                             }
@@ -74,65 +74,7 @@ public class ProcessorEvents implements Listener {
                 }else if(e.getCurrentItem().getType().equals(Material.BARRIER)) {
                     p.closeInventory();
                 }
-
-
             }
-
-
-        }
-
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Smoke Leaf Processor 1")) {
-            Processor processor = Processor.getProcessor("smokeleaf1");
-            e.setCancelled(true);
-            switch (e.getCurrentItem().getType()) {
-                case ENDER_PEARL:
-                    //Play grind stone sounds or brewing machine sounds
-                    //SET UP QUEUE FOR PROCESSING A SINGLE DRUG
-                    if (!p.getInventory().containsAtLeast(CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(), 8)) {
-                        p.closeInventory();
-                        p.sendMessage(ChatColor.GRAY + "You have no " + ChatColor.RED + "smokeleaf!");
-
-                    } else {
-                        //PLAYER HAS DRUGS
-                        if (processor.isProcessing()) {
-                            //THERE IS A PLAYER PROCESSING ALREADY
-                            p.sendMessage(ChatColor.RED + "This processor is already in use!");
-                            p.closeInventory();
-                            return;
-                        } else {
-                            //IT'S UNUSED!
-                            //
-
-                            int chance = GlobalUtils.getRandomNumber(101);
-                            if (chance < 8) {
-                                Bukkit.broadcastMessage(ChatColor.GRAY + "Smokeleaf Processor 1" + ChatColor.AQUA + " has changed locations!");
-                                //SPAWN LOC 1
-                                List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
-                                for (int i = 0; i < entities.size(); i++) {
-                                    if (entities.get(i) instanceof Villager) {
-                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + "Smokeleaf Processor 1")) {
-                                            entities.get(i).remove();
-                                        }
-                                    }
-                                }
-                                p.closeInventory();
-                                processor.randomizeLocAndSpawn(p);
-                            } else {
-                                p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
-                                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);
-                                new ProcessorTask("smokeleaf1", processor, plugin, p, 60, CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),
-                                        90.0, 8, processor.getDefaultLocation());
-                                p.closeInventory();
-                            }
-
-                        }
-                    }
-                    break;
-                case BARRIER:
-                    p.closeInventory();
-                    break;
-            }
-        }
         }
     }
 }
