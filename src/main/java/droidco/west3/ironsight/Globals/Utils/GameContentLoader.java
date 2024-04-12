@@ -399,6 +399,9 @@ public class GameContentLoader {
             ItemIcon withdraw = new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.REDSTONE_BLOCK );
             ItemIcon geode = new ItemIcon("Open Geode","open_geode","Click to crack open a geode", Material.IRON_PICKAXE);
 
+            // Officer Icons
+            ItemIcon joinup = new ItemIcon("Join Up", "join_up", "Enroll as an Officer of the Law", Material.ACACIA_BOAT);
+            ItemIcon resign = new ItemIcon("Resign", "resign_officer", "Resign from the force", Material.ACACIA_LOG);
         System.out.println("Icons loaded");
     }
 
@@ -425,5 +428,6 @@ public class GameContentLoader {
         new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Chief of Police", NPCType.CHIEF_OF_POLICE, 967, 93, -1911, ChatColor.DARK_AQUA, true, true, FrontierLocation.getLocation("Santa Fe"));
     }
 }

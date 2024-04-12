@@ -464,4 +464,16 @@ public class Bandit
     public void setJailRespawn(boolean jailRespawn) {
         this.jailRespawn = jailRespawn;
     }
+
+    public void setOfficer(boolean choice){
+        isOfficer = choice;
+        if (choice){
+        }
+        else{
+
+        }
+    }
+    public boolean isOfficer(){
+        return isOfficer;
+    }
 }
