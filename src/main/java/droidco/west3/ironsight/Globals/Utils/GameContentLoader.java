@@ -468,7 +468,11 @@ public class GameContentLoader {
         ItemIcon openAccountMenu = new ItemIcon("Open Account", "open_account_menu", "Open an item vault account", Material.CHEST);
         ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
 
-        new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
+            // Officer Icons
+            ItemIcon joinup = new ItemIcon("Join Up", "join_up", "Enroll as an Officer of the Law", Material.ACACIA_BOAT);
+            ItemIcon resign = new ItemIcon("Resign", "resign_officer", "Resign from the force", Material.ACACIA_LOG);
+
+            new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
             new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
         System.out.println("Icons loaded");
     }
@@ -499,6 +503,7 @@ public class GameContentLoader {
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Pharmacist",NPCType.PHARMACIST, 986, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Chief of Police", NPCType.CHIEF_OF_POLICE, 967, 93, -1911, ChatColor.DARK_AQUA, true, true, FrontierLocation.getLocation("Santa Fe"));
     }
     public static void loadProcessors() {
 

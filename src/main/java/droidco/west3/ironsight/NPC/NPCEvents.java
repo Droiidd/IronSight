@@ -372,6 +372,39 @@ public class NPCEvents implements Listener {
 
         }
     }
+    @EventHandler
+    public void chiefOPHandler(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Chief of Police")) {
+            Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null) {
+                switch (e.getCurrentItem().getType()) {
+                    case ACACIA_BOAT -> {
+                        if (b.isOfficer()){
+                            p.sendMessage(ChatColor.AQUA + "You are already an Officer.");
+                        }
+                        else{
+                            b.setOfficer(true);
+                            p.sendMessage(ChatColor.AQUA + "Welcome to the force!");
+                        }
+
+                    }
+                    case ACACIA_LOG -> {
+                        if (b.isOfficer()){
+                            b.setOfficer(false);
+                            p.sendMessage(ChatColor.AQUA + "See ya partner. Good luck out there...");
+                        }
+                        else {
+                            p.sendMessage(ChatColor.AQUA + "You are not an Officer.");
+                        }
+
+                    }
+                }
+                p.closeInventory();
+            }
+        }
+    }
 
     public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc)
     {
@@ -385,6 +418,9 @@ public class NPCEvents implements Listener {
             p.closeInventory();
             p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
         }
+
+
+
     }
     public void purchasePotion(Bandit b, Player p, CustomPotion item, NPC npc)
     {

@@ -194,7 +194,13 @@ public class NPCUI {
 
     public static Inventory chiefUI(Player p) {
         Inventory chiefUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Chief of Police");
-        Bandit iPlayer = Bandit.getPlayer(p);
+        if (Bandit.getPlayer(p).isOfficer()){
+            chiefUI.setItem(18, ItemIcon.getIcon("resign_officer").getItem());
+        }
+        else{
+            chiefUI.setItem(13, ItemIcon.getIcon("join_up").getItem());
+        }
+
 
         return chiefUI;
 

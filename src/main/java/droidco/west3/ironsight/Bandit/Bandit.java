@@ -532,5 +532,17 @@ public class Bandit
     public void setTrackedNPC(String trackedNPC) {
         this.trackedNPC = trackedNPC;
     }
+
+    public void setOfficer(boolean choice){
+        isOfficer = choice;
+        if (choice){
+        }
+        else{
+
+        }
+    }
+    public boolean isOfficer(){
+        return isOfficer;
+    }
 }
 
