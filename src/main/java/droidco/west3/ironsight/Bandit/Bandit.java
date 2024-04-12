@@ -97,6 +97,8 @@ public class Bandit
         this.wantedKills = 0;
         this.contractorLvl =0;
         this.contractorXp =0;
+        this.vaultSize=0;
+        this.vaultLevel=0;
 
         playerList.add(this);
         bandits.put(pId,this);
@@ -123,7 +125,7 @@ public class Bandit
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
                   boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int contractorLvl, int contractorXp,
-                  long jailStartTime, int contractorTitle)
+                  long jailStartTime, int contractorTitle, int vaultSize, int vaultLevel)
     {
         this.doingContract = false;
         this.pId = pId;
@@ -144,6 +146,8 @@ public class Bandit
         this.contractorXp = contractorXp;
         this.contractorLvl = contractorLvl;
         this.contractorTitle = contractorTitle;
+        this.vaultSize = vaultSize;
+        this.vaultLevel = vaultLevel;
 
         playerList.add(this);
         bandits.put(pId,this);
