@@ -43,12 +43,19 @@ public class CombatEvents implements Listener
                 bannedTypes.add(EntityType.DONKEY);
             }
         }
+        if(e.getDamager() instanceof Player p){
+            p.sendMessage("NO DAMAGE");
+        }
 
         // CANCEL ALL PVP
         for(EntityType type : bannedTypes){
 
             if(e.getEntity().getType().equals(type)){
+                if(e.getDamager() instanceof Player p){
+                    p.sendMessage("NO DAMAG!!!");
+                }
                 e.setCancelled(true);
+                e.setDamage(0);
             }
         }
         if(!playerInTown){

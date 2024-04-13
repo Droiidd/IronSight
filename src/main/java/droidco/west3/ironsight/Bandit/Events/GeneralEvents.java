@@ -21,17 +21,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -60,12 +55,19 @@ public class GeneralEvents implements Listener {
         }
     }
     @EventHandler
-    public void specialBlockHandling(EntityDamageEvent e){
-        if(e.getEntity().getType().equals(EntityType.ITEM_FRAME)){
+    public void specialBlockHandling(PlayerInteractEntityEvent e){
+        if(e.getRightClicked().getType().equals(EntityType.ITEM_FRAME)){
             e.setCancelled(true);
-        }else if(e.getEntity().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+        }else if(e.getRightClicked().getType().equals(EntityType.GLOW_ITEM_FRAME)){
             e.setCancelled(true);
         }
+        else if(e.getRightClicked().getType().equals(EntityType.ARMOR_STAND)){
+            e.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onItemFrameBreak(HangingBreakByEntityEvent e){
+        e.setCancelled(true);
     }
     @EventHandler
     public void onMedUse(PlayerInteractEvent e){
