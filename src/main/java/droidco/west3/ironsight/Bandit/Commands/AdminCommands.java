@@ -50,6 +50,8 @@ public class AdminCommands implements CommandExecutor {
                         break;
                     case "bounty2":
                         iP.setBounty(1);
+                    case "kills":
+                        iP.setWantedKills(1000);
 
                 }
             }

@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Officer.OfficerEvents;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
@@ -91,5 +92,14 @@ public class CombatEvents implements Listener
 
             }
         }
+    }
+
+    @EventHandler
+    public void playerDeath(PlayerDeathEvent e){
+        Bandit killer = Bandit.getPlayer(e.getEntity().getKiller());
+        Bandit dead = Bandit.getPlayer(e.getEntity());
+
+        OfficerEvents.wantedDeath(killer, dead);
+
     }
 }

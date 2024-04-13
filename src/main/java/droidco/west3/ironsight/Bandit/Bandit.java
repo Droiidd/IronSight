@@ -36,6 +36,7 @@ public class Bandit
     //private Team team;
     private int bounty;
 
+    private int wantedKills;
     private Player targetedPlayer;
     private int contractorLvl;
     private int contractorXp;
@@ -62,7 +63,6 @@ public class Bandit
     private List<FrontierHorse> horses = new ArrayList<>();
     //private final IronSight plugin;
 
-    private int wantedKills;
     private static HashMap<String, Bandit> bandits = new HashMap<>();
     //private List<ironHorse> horses;
 
@@ -84,7 +84,6 @@ public class Bandit
         this.wantedKills = 0;
         this.contractorLvl =0;
         this.contractorXp =0;
-
         playerList.add(this);
         bandits.put(pId,this);
         //this.plugin = plugin;
@@ -114,7 +113,6 @@ public class Bandit
         this.contractorXp = contractorXp;
         this.contractorLvl = contractorLvl;
         this.contractorTitle = contractorTitle;
-
         playerList.add(this);
         bandits.put(pId,this);
     }
@@ -444,6 +442,8 @@ public class Bandit
     public void setWantedKills(int wantedKills) {
         this.wantedKills = wantedKills;
     }
+    public void incrWantedKills(){this.wantedKills++;}
+    public void decWantedKills(){this.wantedKills--;}
 
     public Contract getRookieContract() {
         return rookieContract;
@@ -476,4 +476,5 @@ public class Bandit
     public boolean isOfficer(){
         return isOfficer;
     }
+
 }

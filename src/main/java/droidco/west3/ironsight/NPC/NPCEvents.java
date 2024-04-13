@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Officer.OfficerData;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
@@ -37,6 +38,9 @@ import org.bukkit.potion.PotionEffectType;
 import java.net.http.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+//import static droidco.west3.ironsight.Processors.LoadProcessor.smokeLeafProcName1;
 
 public class NPCEvents implements Listener {
     private static final String smokeLeafProcName1 = ChatColor.RED    + "Smokeleaf Processor 1";
@@ -328,35 +332,99 @@ public class NPCEvents implements Listener {
         }
     }
     @EventHandler
-    public void chiefOPHandler(InventoryClickEvent e){
+    public void officerArmsHandler(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Chief of Police")) {
+        Bandit b = Bandit.getPlayer(p);
+        String title = b.getRoleTitle();
+        List<String> titles = OfficerData.getTitles();
+        int titleNum = -1;
+        if (titles.contains(title)) {
+            titleNum = titles.indexOf(title);
+        }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Officer Arms Dealer")) {
+            if (e.getCurrentItem() != null) {
+                String itemName = "";
+                if(e.getCurrentItem().getType() == CustomItem.getCustomItem("Maynard Carbine .52").getMaterial()){
+                    if (titleNum >= 1){
+                        itemName = "Maynard Carbine .52";
+                    }
+                }
+                else if(e.getCurrentItem().getType() == CustomItem.getCustomItem("S&W Model 3").getMaterial()){
+                    if (titleNum >= 0){
+                        itemName = "S&W Model 3";
+                    }
+                }
+                else if(e.getCurrentItem().getType() == CustomItem.getCustomItem("Double Barreled Shotgun").getMaterial()){
+                    if (titleNum >= 1){
+                        itemName = "Double Barreled Shotgun";
+                    }
+                }
+                else if(e.getCurrentItem().getType() == CustomItem.getCustomItem("Springfield Trapdoor").getMaterial()){
+                    if (titleNum == 2){
+                        itemName = "Springfield Trapdoor";
+                    }
+                }
+                if (itemName.equals("")){
+                    p.sendMessage("You are not high rank enough for this.");
+                }
+                else {
+                    purchaseFirearm(b, p, CustomItem.getCustomItem(itemName), NPC.getNPC("Officer Arms Dealer"), itemName);
+                }
+            }
+
+        }
+        p.closeInventory();
+
+    }
+    @EventHandler
+    public void chiefOPHandler(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Chief of Police")) {
             Bandit b = Bandit.getPlayer(p);
             e.setCancelled(true);
             if (e.getCurrentItem() != null) {
-                switch (e.getCurrentItem().getType()) {
-                    case ACACIA_BOAT -> {
-                        if (b.isOfficer()){
-                            p.sendMessage(ChatColor.AQUA + "You are already an Officer.");
-                        }
-                        else{
-                            b.setOfficer(true);
-                            p.sendMessage(ChatColor.AQUA + "Welcome to the force!");
-                        }
-
+                Material mat = e.getCurrentItem().getType();
+                if (mat == ItemIcon.getIcon("join_up").getItem().getType()) {
+                    if (b.isOfficer()) {
+                        p.sendMessage(ChatColor.AQUA + "You are already an Officer.");
+                    } else {
+                        b.setOfficer(true);
+                        p.sendMessage(ChatColor.AQUA + "Welcome to the force!");
                     }
-                    case ACACIA_LOG -> {
-                        if (b.isOfficer()){
-                            b.setOfficer(false);
-                            p.sendMessage(ChatColor.AQUA + "See ya partner. Good luck out there...");
-                        }
-                        else {
-                            p.sendMessage(ChatColor.AQUA + "You are not an Officer.");
-                        }
-
+                } else if (mat == ItemIcon.getIcon("resign_officer").getItem().getType()) {
+                    if (b.isOfficer()) {
+                        b.setOfficer(false);
+                        b.setRoleTitle("");
+                        //Need to add bandit reset
+                        p.sendMessage(ChatColor.AQUA + "See ya partner. Good luck out there...");
+                    } else {
+                        p.sendMessage(ChatColor.AQUA + "You are not an Officer.");
                     }
                 }
+
+                String title = b.getRoleTitle();
+                List<String> titles = OfficerData.getTitles();
+
+                int titleNum = -1;
+                if (titles.contains(title)) {
+                    titleNum = titles.indexOf(title);
+                }
+                if (titleNum < 2 && mat == ItemIcon.getIcon(titles.get(titleNum + 1).toLowerCase()).getItem().getType()) {
+                    int gold[] = OfficerData.getGoldArray();
+                    int kills[] = OfficerData.getKillsArray();
+                    if (b.getBank() >= gold[titleNum + 1] && b.getWantedKills() >= kills[titleNum + 1]) {
+                        b.setBank(b.getBank() - gold[titleNum + 1]);
+                        b.setRoleTitle(titles.get(titleNum + 1));
+
+                        p.sendMessage(ChatColor.AQUA + "You're now a " + titles.get(titleNum + 1) + ".");
+                    }
+                    else{
+                        p.sendMessage(ChatColor.AQUA + "You're missing the gold and/or kills necessary for this badge.");
+                    }
+                }
+
                 p.closeInventory();
+                p.openInventory(NPCUI.chiefUI(p));
             }
         }
     }
@@ -543,12 +611,11 @@ public class NPCEvents implements Listener {
     }
     public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
     {
-
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
             String weapon = "shot give " + p.getDisplayName() + " " + gunName;
-
+            System.out.println(weapon);
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Bukkit.dispatchCommand(console, weapon);
         } else {
