@@ -351,7 +351,6 @@ public class NPCEvents implements Listener {
 
     public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc )
     {
-        p.sendMessage("Purchase price: "+item.getPurchasePrice());
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
@@ -363,7 +362,6 @@ public class NPCEvents implements Listener {
     }
     public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
     {
-
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
             p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());

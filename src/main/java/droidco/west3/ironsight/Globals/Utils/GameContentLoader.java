@@ -496,7 +496,7 @@ public class GameContentLoader {
         new NPC("Geologist", NPCType.GEOLOGIST, 1029, 92, -1900, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-    }
+}
     public static void loadProcessors() {
 
         Processor proc1 = new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
