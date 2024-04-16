@@ -1,9 +1,12 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -90,6 +93,14 @@ public class BanditUtils {
             wantedDis.setScore(7);
         }
         p.setScoreboard(sb);
+    }
+    public static void getFirearm(Player p, String gunName )
+    {
+            String weapon = "shot give " + p.getDisplayName() + " " + gunName;
+
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, weapon);
+
     }
 
     public static Player getNearest(Player p, Double range) {

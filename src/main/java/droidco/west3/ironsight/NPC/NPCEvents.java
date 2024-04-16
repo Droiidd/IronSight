@@ -58,7 +58,7 @@ public class NPCEvents implements Listener {
                         break;
                     }
                     case PHARMACIST -> {
-                        p.openInventory(NPCUI.pharmacistUI(p));
+                        p.openInventory(NPCUI.openPharmacistUI(p));
                         break;
                     }
                     case OFFICER_ARMS_DEALER -> {
