@@ -15,6 +15,7 @@ import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Looting.Quantity;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import droidco.west3.ironsight.Processors.Processor;
 import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
@@ -515,6 +516,13 @@ public class GameContentLoader {
             proc.getValue().addCoordinate(-18,117,-2935);
         }
         System.out.println("Processors successfully loaded!");
+    }
+    public static void loadPotions()
+    {
+        System.out.println("loading potions");
+        new CustomPotion("Whiskey","Makes the pain go away",0.0,150,4,135,99,38,600,PotionEffectType.DAMAGE_RESISTANCE,0);
+        new CustomPotion("Morphine","Slowly rejuvenates",0.0,175,4,20,151,163,600,PotionEffectType.REGENERATION,0);
+        new CustomPotion("Medicine","Grows new limbs",0.0,100,3,253,94,94,10,PotionEffectType.HEAL,1);
     }
 
 }

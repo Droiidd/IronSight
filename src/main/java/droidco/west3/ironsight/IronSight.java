@@ -56,6 +56,7 @@ public final class IronSight extends JavaPlugin {
         GameContentLoader.loadItemTables();
         GameContentLoader.loadNPCs();
         GameContentLoader.loadProcessors();
+        GameContentLoader.loadPotions();
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }
