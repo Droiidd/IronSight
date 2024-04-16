@@ -29,10 +29,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -65,6 +62,17 @@ public class GeneralEvents implements Listener {
         if(e.getEntity().getType().equals(EntityType.ITEM_FRAME)){
             e.setCancelled(true);
         }else if(e.getEntity().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+            e.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void specialEntityHandling(PlayerInteractAtEntityEvent e){
+        if(e.getRightClicked().getType().equals(EntityType.ITEM_FRAME)){
+            e.setCancelled(true);
+        }else if(e.getRightClicked().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+            e.setCancelled(true);
+        }
+        else if(e.getRightClicked().getType().equals(EntityType.ARMOR_STAND)){
             e.setCancelled(true);
         }
     }
