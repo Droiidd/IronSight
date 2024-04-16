@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.NPC;
 
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.Bandit.Bandit;
@@ -112,10 +113,12 @@ public class NPCUI {
 
     }
 
-    public static Inventory pharmacistUI(Player p) {
-        Inventory pharmacistUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Pharmacist");
-
-        return pharmacistUI;
+    public static Inventory openPharmacistUI(Player p) {
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Pharmacist");
+        shop.setItem(2, CustomPotion.getCustomPotion("Medicine").getPotionForSale());
+        shop.setItem(3, CustomPotion.getCustomPotion("Whiskey").getPotionForSale());
+        shop.setItem(4, CustomPotion.getCustomPotion("Morphine").getPotionForSale());
+        return shop;
 
     }
 

@@ -91,4 +91,108 @@ private int multiplier;
         item.setItemMeta(meta);
         return item;
     }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public int getAmountForSale() {
+        return amountForSale;
+    }
+
+    public void setAmountForSale(int amountForSale) {
+        this.amountForSale = amountForSale;
+    }
+
+    public PotionEffectType getEffect() {
+        return effect;
+    }
+
+    public void setEffect(PotionEffectType effect) {
+        this.effect = effect;
+    }
+
+    public int getrColor() {
+        return rColor;
+    }
+
+    public void setrColor(int rColor) {
+        this.rColor = rColor;
+    }
+
+    public int getgColor() {
+        return gColor;
+    }
+
+    public void setgColor(int gColor) {
+        this.gColor = gColor;
+    }
+
+    public int getbColor() {
+        return bColor;
+    }
+
+    public void setbColor(int bColor) {
+        this.bColor = bColor;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(int multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public static HashMap<String, CustomPotion> getItems() {
+        return items;
+    }
+
+    public static void setItems(HashMap<String, CustomPotion> items) {
+        CustomPotion.items = items;
+    }
 }

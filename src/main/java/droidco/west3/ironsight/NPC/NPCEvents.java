@@ -10,6 +10,7 @@ import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Looting.ItemTable;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -204,6 +205,19 @@ public class NPCEvents implements Listener {
             }
 
         }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Pharmacist")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Medicine")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Medicine"),NPC.getNPC("Pharmacist"));
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Whiskey")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Whiskey"),NPC.getNPC("Pharmacist"));
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Morphine")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Morphine"),NPC.getNPC("Pharmacist"));
+            }
+
+        }
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Fisherman")){
                 e.setCancelled(true);
                 if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Sea Slug").getMaterial()) ) {
@@ -360,6 +374,19 @@ public class NPCEvents implements Listener {
     }
 
     public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc)
+    {
+        int amount = item.getAmountForSale();
+        if (b.getWallet() >= item.getPurchasePrice() * amount) {
+            b.updateWallet(-1 * item.getPurchasePrice()*amount);
+            p.sendMessage(ChatColor.GREEN + "Purchased "+ChatColor.WHITE +amount+" "+item.getItemStack().getItemMeta().getDisplayName());
+            //item.getItemStack().setAmount(amount);
+            p.getInventory().addItem(item.getItemStack());
+        } else {
+            p.closeInventory();
+            p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
+        }
+    }
+    public void purchasePotion(Bandit b, Player p, CustomPotion item, NPC npc)
     {
         int amount = item.getAmountForSale();
         if (b.getWallet() >= item.getPurchasePrice() * amount) {
