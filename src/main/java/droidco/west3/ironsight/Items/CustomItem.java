@@ -24,8 +24,25 @@ CustomItem {
     private Material material;
     private Enchantment enchant;
     private int enchantMultiplier;
+    private int amountForSale;
     private static HashMap<String,CustomItem> items = new HashMap<>();
 
+    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
+                      double salePrice, double purchasePrice, int amountForSale) {
+        this.itemCode = itemName;
+        this.itemName = ChatColor.WHITE+itemName;
+        this.rarity = rarity;
+        this.rarityLore = getRarityString(rarity);
+        this.isLegal = isLegal;
+        this.isOfficer = isOfficer;
+        this.description = ChatColor.GRAY+description;
+        this.material = material;
+        this.salePrice = salePrice;
+        this.purchasePrice = purchasePrice;
+        this.amountForSale = amountForSale;
+        items.put(this.itemCode, this);
+       // ItemTable.addItem(this);
+    }
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
                       double salePrice, double purchasePrice) {
         this.itemCode = itemName;
@@ -39,10 +56,10 @@ CustomItem {
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
         items.put(this.itemCode, this);
-       // ItemTable.addItem(this);
+        // ItemTable.addItem(this);
     }
     public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
-                      double salePrice, double purchasePrice,Enchantment enchant, int enchantMultiplier) {
+                      double salePrice, double purchasePrice,int amountForSale, Enchantment enchant, int enchantMultiplier) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
         this.rarity = rarity;
@@ -53,6 +70,7 @@ CustomItem {
         this.material = material;
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
+        this.amountForSale = amountForSale;
         this.enchant = enchant;
         this.enchantMultiplier = enchantMultiplier;
         items.put(this.itemCode, this);
@@ -92,6 +110,7 @@ CustomItem {
         lore.add(ChatColor.GRAY+"Click to purchase!");
         lore.add(price);
         meta.setLore(lore);
+        item.setAmount(this.amountForSale);
         item.setItemMeta(meta);
         return item;
     }
@@ -112,6 +131,9 @@ CustomItem {
         }
         if(description.length() > 0){
             lore.add(description);
+        }
+        if(amountForSale != 0){
+            item.setAmount(amountForSale);
         }
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -213,5 +235,13 @@ CustomItem {
     public Material getMaterial(){return material;}
     public String getItemCode(){
         return this.itemCode;
+    }
+
+    public int getAmountForSale() {
+        return amountForSale;
+    }
+
+    public void setAmountForSale(int amountForSale) {
+        this.amountForSale = amountForSale;
     }
 }

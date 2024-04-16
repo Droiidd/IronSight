@@ -32,8 +32,28 @@ public class MasterItemListUI {
         HashMap<String,CustomItem> items = CustomItem.getItems();
         for (Map.Entry<String, CustomItem> item : items.entrySet()) {
             if(counter > 53){
-                itemUi.setItem(counter2,item.getValue().getItemStack());
-                counter2++;
+                if(counter2 < 53){
+                    itemUi.setItem(counter2,item.getValue().getItemStack());
+                    counter2++;
+                }
+            }
+            counter++;
+        }
+        itemUi.setItem(53,ItemIcon.getIcon("next_page").getItem());
+        return itemUi;
+
+    }
+    public static Inventory openMasterListPage3(Player p){
+        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"Master List 2");
+        int counter =0;
+        int counter2 = 0;
+        HashMap<String,CustomItem> items = CustomItem.getItems();
+        for (Map.Entry<String, CustomItem> item : items.entrySet()) {
+            if(counter > 53+53){
+                if(counter2 < 53+53){
+                    itemUi.setItem(counter2,item.getValue().getItemStack());
+                    counter2++;
+                }
             }
             counter++;
         }

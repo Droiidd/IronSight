@@ -10,11 +10,11 @@ import droidco.west3.ironsight.FrontierMobs.FrontierMobType;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
-import droidco.west3.ironsight.Items.ItemTable;
+import droidco.west3.ironsight.Items.Looting.ItemTable;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
-import droidco.west3.ironsight.Items.Quantity;
+import droidco.west3.ironsight.Items.Looting.Quantity;
 import droidco.west3.ironsight.Processors.Processor;
 import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
@@ -38,37 +38,37 @@ public class GameContentLoader {
     {
         System.out.println("Loading custom items");
         //COMMONS
-        CustomItem stew = new CustomItem("Brown Stew", 1, true, false, "What's in this..?", Material.MUSHROOM_STEW,0.0,2.0);
-        CustomItem charPot = new CustomItem("Charred Potato",1, true, false, "Cooked on the coals.",Material.BAKED_POTATO,0.0,4.0);
-        CustomItem cookFox = new CustomItem("Cooked Fox", 1, true, false, "Bigger drumstick than chicken!",Material.COOKED_CHICKEN,0.0,5.0);
-        CustomItem rabStew = new CustomItem("Rabbit Stew",2, true, false, "Delicious with bread",Material.RABBIT_STEW,0.0,3.0);
-        CustomItem cookedRab = new CustomItem("Cooked Rabbit",2,true,false, "Get's you through winter",Material.COOKED_RABBIT,0.0,5.0);
+        CustomItem stew = new CustomItem("Brown Stew", 1, true, false, "What's in this..?", Material.MUSHROOM_STEW,0.0,2.0,1);
+        CustomItem charPot = new CustomItem("Charred Potato",1, true, false, "Cooked on the coals.",Material.BAKED_POTATO,0.0,4.0,4);
+        CustomItem cookFox = new CustomItem("Cooked Fox", 1, true, false, "Bigger drumstick than chicken!",Material.COOKED_CHICKEN,0.0,5.0,4);
+        CustomItem rabStew = new CustomItem("Rabbit Stew",2, true, false, "Delicious with bread",Material.RABBIT_STEW,0.0,3.0,1);
+        CustomItem cookedRab = new CustomItem("Cooked Rabbit",2,true,false, "Get's you through winter",Material.COOKED_RABBIT,0.0,5.0,4);
         CustomItem seaweed = new CustomItem("Seaweed", 1,true,false, "Useless",Material.KELP_PLANT,2.0,0.0);
         CustomItem reed = new CustomItem("Reed",1,true,false, "Useless", Material.BAMBOO,2.0,0.0);
-        CustomItem brokenPick = new CustomItem("Broken Pick",2,true,false, "A good starter pick",Material.STONE_PICKAXE,0.0,200.0);
-        CustomItem shotAmmo = new CustomItem("Shotgun Ammo",2,true,false, "Buckshot only.",Material.WHEAT_SEEDS,0.0,20.0);
-        CustomItem pistolAmmo = new CustomItem("Pistol Ammo",1,true,false, "Load your favorite .22",Material.NETHER_WART,0.0,17.0);
-        CustomItem rifleAmmo = new CustomItem("Rifle Ammo",2,true,false, "Imported from China",Material.CLAY_BALL,0.0,24.0);
-        CustomItem bandage = new CustomItem("Bandage",2,true,false, "Used to heal bloody wounds",Material.PAPER,0.0,9.0);
-        CustomItem splint = new CustomItem("Splint",2,true,false, "Used to heal broken bones", Material.STICK,0.0,8.0);
-        CustomItem tracker = new CustomItem("Tracker",1,true,false, "Track different locations",Material.COMPASS,0.0,10.0);
-        CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0);
-        CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0);
+        CustomItem brokenPick = new CustomItem("Broken Pick",2,true,false, "A good starter pick",Material.STONE_PICKAXE,0.0,200.0,1);
+        CustomItem shotAmmo = new CustomItem("Shotgun Ammo",2,true,false, "Buckshot only.",Material.WHEAT_SEEDS,0.0,20.0,6);
+        CustomItem pistolAmmo = new CustomItem("Pistol Ammo",1,true,false, "Load your favorite .22",Material.NETHER_WART,0.0,17.0,8);
+        CustomItem rifleAmmo = new CustomItem("Rifle Ammo",2,true,false, "Imported from China",Material.CLAY_BALL,0.0,24.0,8);
+        CustomItem bandage = new CustomItem("Bandage",2,true,false, "Used to heal bloody wounds",Material.PAPER,0.0,9.0,6);
+        CustomItem splint = new CustomItem("Splint",2,true,false, "Used to heal broken bones", Material.STICK,0.0,8.0,4);
+        CustomItem tracker = new CustomItem("Tracker",1,true,false, "Track different locations",Material.COMPASS,0.0,10.0,1);
+        CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0,3);
+        CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0,1);
         CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.GREEN_DYE,0.0,0.0);
         CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
 
         //UNCOMMON
-        CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false, "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,10.0);
-        CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false, "Extra kick to any home brew",Material.DRAGON_BREATH,16.0,0.0);
+        CustomItem smokedSalmon = new CustomItem("Smoked Salmon",3,true,false, "Fresh caught, fresh smoked",Material.COOKED_SALMON,0.0,10.0,3);
+        CustomItem fermentedLiquor = new CustomItem("Fermented Liquor",4,true,false, "Extra kick to any home brew",Material.DRAGON_BREATH,16.0,0.0,2);
         CustomItem crappie = new CustomItem("Poor Mans Crappie",3,true,false, "Skinniest fish",Material.COD,10.0,0.0);
         CustomItem grayHerring = new CustomItem("Gray Stoned Herring",3,true,false, "The cheapest of Herring",Material.SALMON,13.0,0.0);
         CustomItem chub = new CustomItem("Cactus Pronged Chub",3,true,false, "Too spikey to eat",Material.TROPICAL_FISH,16.0,0.0);
         CustomItem boarCarcass = new CustomItem("Boar Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_MALL,55.0,0.0);
         CustomItem cowCarcass = new CustomItem("Cow Carcass",3,true,false, "Right click to skin",Material.MUSIC_DISC_STRAD,40.0,0.0);
         CustomItem gold = new CustomItem("Gold Ore",3, true, false, "Can be refined or sold",Material.RAW_GOLD,19.0,0.0);
-        CustomItem slug = new CustomItem("Sea Slug",3,true, false, "Reaks of the sea",Material.SPIDER_EYE,4.0,8.0);
+        CustomItem slug = new CustomItem("Sea Slug",3,true, false, "Reaks of the sea",Material.SPIDER_EYE,4.0,8.0,4);
         CustomItem boarmeat = new CustomItem("Boar Meat",3,true,false, "Closest thing to bacon",Material.PORKCHOP,7.0,0.0);
         CustomItem cowmeat = new CustomItem("Cow Meat",3,true,false, "Prime beef",Material.BEEF,9.0,0.0);
         CustomItem rabbitmeat = new CustomItem("Rabbit Meat",3,true,false, "Not too gamey",Material.RABBIT,6.0,0.0);
@@ -78,102 +78,102 @@ public class GameContentLoader {
         CustomItem rabbithide = new CustomItem("Rabbit Hide",4,true,false, "Good for small leather work",Material.LIGHT_GRAY_DYE,18.0,0.0);
         CustomItem foxfur = new CustomItem("Fox Fur",4,true,false, "Warmest fur on the market",Material.ORANGE_DYE,16.0,0.0);
         CustomItem geode = new CustomItem("Geode",4,true,false, "Bring to geologist to open",Material.FIREWORK_STAR,0.0,0.0);
-        CustomItem minerspick = new CustomItem("Old Miner's Pick",4,true,false, "Steeled with rust",Material.IRON_PICKAXE,0.0,530.0);
+        CustomItem minerspick = new CustomItem("Old Miner's Pick",4,true,false, "Steeled with rust",Material.IRON_PICKAXE,0.0,530.0,1);
         CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf",4,false,false, "Process to consume",Material.ENDER_PEARL,19.0,0.0);
         CustomItem spicebottle = new CustomItem("Spice Bottle",4,false,false, "Smell's like the future",Material.HONEY_BOTTLE,23.0,0.0);
         CustomItem oil = new CustomItem("Unrefined Oil",4,false,false, "Refine for higher sale value",Material.BUCKET,0.0,0.0);
-        CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0);
-        CustomItem doublespaderecipe = new CustomItem("Miner's Double Spade Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0);
-        CustomItem greenthumbrecipe = new CustomItem("Green Thumb Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0);
-        CustomItem fermentliquorrecipe = new CustomItem("Fermented Liquor Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,225.0,0.0);
+        CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
+        CustomItem doublespaderecipe = new CustomItem("Miner's Double Spade Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
+        CustomItem greenthumbrecipe = new CustomItem("Green Thumb Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
+        CustomItem fermentliquorrecipe = new CustomItem("Fermented Liquor Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,225.0,0.0,1);
 
         //RARE ITEMS
-        new CustomItem("Life Seeds",7,true,false,"Brews into a slow heal",Material.PUMPKIN_SEEDS, 0.0,0.0);
-        CustomItem frenziedStems = new CustomItem("Frenzied Stems",5,true,false, "Used on workers for productivity",Material.FIRE_CORAL,0.0,0.0);
-        CustomItem heartFruit = new CustomItem("Heart Fruit",5,true,false, "Still beating",Material.SWEET_BERRIES,0.0,0.0);
+        new CustomItem("Life Seeds",7,true,false,"Brews into a slow heal",Material.PUMPKIN_SEEDS, 0.0,0.0,1);
+        CustomItem frenziedStems = new CustomItem("Frenzied Stems",5,true,false, "Used on workers for productivity",Material.FIRE_CORAL,0.0,0.0,1);
+        CustomItem heartFruit = new CustomItem("Heart Fruit",5,true,false, "Still beating",Material.SWEET_BERRIES,0.0,0.0,1);
 
-        CustomItem amethystBud = new CustomItem("Amethyst Bud",6, true,false, "Like a blossoming rose",Material.AMETHYST_SHARD,85.0,0.0);
-        CustomItem mossyJade = new CustomItem("Mossy Jade",5,true,false, "Look's alive under light",Material.SLIME_BALL,65.0,0.0);
+        CustomItem amethystBud = new CustomItem("Amethyst Bud",6, true,false, "Like a blossoming rose",Material.AMETHYST_SHARD,85.0,0.0,1);
+        CustomItem mossyJade = new CustomItem("Mossy Jade",5,true,false, "Look's alive under light",Material.SLIME_BALL,65.0,0.0,1);
 
-        CustomItem hermitCrab = new CustomItem("Hermit Crab",5,true,false, "Fish love it",Material.NAUTILUS_SHELL,8.0,15.0);
-        CustomItem refinedOil = new CustomItem("Refined Oil",6,false,false, "Highly sought after",Material.LAVA_BUCKET,90.0,0.0);
-        CustomItem southernsalmon = new CustomItem("Southern Salmon",6,true,false, "Migrated south through southern tributaries",Material.MUSIC_DISC_FAR,175.0,0.0);
-        CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0);
+        CustomItem hermitCrab = new CustomItem("Hermit Crab",5,true,false, "Fish love it",Material.NAUTILUS_SHELL,8.0,15.0,3);
+        CustomItem refinedOil = new CustomItem("Refined Oil",6,false,false, "Highly sought after",Material.LAVA_BUCKET,90.0,0.0,1);
+        CustomItem southernsalmon = new CustomItem("Southern Salmon",6,true,false, "Migrated south through southern tributaries",Material.MUSIC_DISC_FAR,175.0,0.0,1);
+        CustomItem arcticsalmon = new CustomItem("Arctic Salmon",6,true,false, "Still in the frozen north",Material.MUSIC_DISC_13,180.0,0.0,1);
 
-        CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field", Material.TRIPWIRE_HOOK,0.0,0.0);
-        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,0.0,1950.0, Enchantment.LURE,1);
-        CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND_PICKAXE,0.0,1450.0, Enchantment.DIG_SPEED, 1);
+        CustomItem oilfieldkey = new CustomItem("Crate Key",6,false,false,"Unlocks crates at oil field", Material.TRIPWIRE_HOOK,0.0,0.0,1);
+        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod",6,true, false, "Double sided hook!", Material.FISHING_ROD,0.0,1950.0,1, Enchantment.LURE,1);
+        CustomItem explorerspick = new CustomItem("Explorer's Pick",6,true,false,"Aids in climbing glaciers",Material.DIAMOND_PICKAXE,0.0,1450.0,1, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY
-        CustomItem alligator = new CustomItem("Alligator",8,true,false, "Crikey!",Material.MUSIC_DISC_CHIRP,425.0,0.0);
-        CustomItem sunkenCatfish = new CustomItem("Sunken Catfish",8,true,false, "Evolved in the low-lands",Material.MUSIC_DISC_BLOCKS,400.0,0.0);
-        CustomItem goldstonnedherring = new CustomItem("Gold Stoned Herring",7,true,false, "The rare mutation of the gray herring",Material.MUSIC_DISC_MELLOHI,250.0,0.0);
-        CustomItem pearlrivertrout = new CustomItem("Pearl River Trout",7,true,false, "Alluring rainbow scales",Material.MUSIC_DISC_CAT,275.0,0.0);
-        CustomItem expaditionRod = new CustomItem("Expedition Rod",8,true, false, "A proper line.", Material.FISHING_ROD,0.0,5950.0, Enchantment.LURE,5);
+        CustomItem alligator = new CustomItem("Alligator",8,true,false, "Crikey!",Material.MUSIC_DISC_CHIRP,425.0,0.0,1);
+        CustomItem sunkenCatfish = new CustomItem("Sunken Catfish",8,true,false, "Evolved in the low-lands",Material.MUSIC_DISC_BLOCKS,400.0,0.0,1);
+        CustomItem goldstonnedherring = new CustomItem("Gold Stoned Herring",7,true,false, "The rare mutation of the gray herring",Material.MUSIC_DISC_MELLOHI,250.0,0.0,1);
+        CustomItem pearlrivertrout = new CustomItem("Pearl River Trout",7,true,false, "Alluring rainbow scales",Material.MUSIC_DISC_CAT,275.0,0.0,1);
+        CustomItem expaditionRod = new CustomItem("Expedition Rod",8,true, false, "A proper line.", Material.FISHING_ROD,0.0,5950.0,1, Enchantment.LURE,5);
 
-        CustomItem piratesBooty = new CustomItem("Pirates booty",8,true,false, "Richest dabloon",Material.SUNFLOWER,0.0,0.0);
-        CustomItem oilBarrel = new CustomItem("Oil Barrel",7,false,false, "A large amount of refined oil",Material.WATER_BUCKET,650.0,0.0);
-        CustomItem goldengamble = new CustomItem("Golden Gamble Petal",7,true,false, "Said to be lucky!",Material.HONEYCOMB,0.0,0.0);
-        CustomItem molesbreath = new CustomItem("Moles Breath Spores",7,true,false, "Moles use it to dig quicker",Material.FROGSPAWN,0.0,0.0);
-        CustomItem maltpetal = new CustomItem("Blue Malt Petal",7,true,false, "It smell makes dreams come true",Material.GLOW_INK_SAC,0.0,0.0);
+        CustomItem piratesBooty = new CustomItem("Pirates booty",8,true,false, "Richest dabloon",Material.SUNFLOWER,0.0,0.0,1);
+        CustomItem oilBarrel = new CustomItem("Oil Barrel",7,false,false, "A large amount of refined oil",Material.WATER_BUCKET,650.0,0.0,1);
+        CustomItem goldengamble = new CustomItem("Golden Gamble Petal",7,true,false, "Said to be lucky!",Material.HONEYCOMB,0.0,0.0,1);
+        CustomItem molesbreath = new CustomItem("Moles Breath Spores",7,true,false, "Moles use it to dig quicker",Material.FROGSPAWN,0.0,0.0,1);
+        CustomItem maltpetal = new CustomItem("Blue Malt Petal",7,true,false, "It smell makes dreams come true",Material.GLOW_INK_SAC,0.0,0.0,1);
 
-        new CustomItem("Crystalized Geode",8,true,false,"Crystals explode out of the sides",Material.MUSIC_DISC_11,0.0,0.0);
-        CustomItem riverdiamond = new CustomItem("River Diamond",7,true,false, "The root of many wars",Material.DIAMOND,555.0,0.0);
-        CustomItem baronsemerald = new CustomItem("Baron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0);
-        CustomItem voidopal = new CustomItem("Void Opal",8,true,false, "Stare into the depths of the universe",Material.ECHO_SHARD,635.0,0.0);
+        new CustomItem("Crystalized Geode",8,true,false,"Crystals explode out of the sides",Material.MUSIC_DISC_11,0.0,0.0,1);
+        CustomItem riverdiamond = new CustomItem("River Diamond",7,true,false, "The root of many wars",Material.DIAMOND,555.0,0.0,1);
+        CustomItem baronsemerald = new CustomItem("Baron's Emerald",7,true,false, "An old king was fond of these",Material.EMERALD,575.0,0.0,1);
+        CustomItem voidopal = new CustomItem("Void Opal",8,true,false, "Stare into the depths of the universe",Material.ECHO_SHARD,635.0,0.0,1);
 
         //ARMOR
-        CustomItem farmBoots = new CustomItem("Farm Hand Boots",1,true,false,"'Size too big",Material.LEATHER_BOOTS,0.0,350.0);
-        CustomItem farmLegs = new CustomItem("Farm Hand Chaps",2,true,false,"Stained with mud",Material.LEATHER_LEGGINGS,0.0,450.0);
-        CustomItem farmChest = new CustomItem("Farm Hand Shirt",2,true,false,"Couple 'a holes",Material.LEATHER_CHESTPLATE,0.0,500.0);
-        CustomItem farmHelm = new CustomItem("Farm Hand Hat",1,true,false,"Keeps the sun away",Material.LEATHER_HELMET,0.0,325.0);
+        CustomItem farmBoots = new CustomItem("Farm Hand Boots",1,true,false,"'Size too big",Material.LEATHER_BOOTS,0.0,350.0,1);
+        CustomItem farmLegs = new CustomItem("Farm Hand Chaps",2,true,false,"Stained with mud",Material.LEATHER_LEGGINGS,0.0,450.0,1);
+        CustomItem farmChest = new CustomItem("Farm Hand Shirt",2,true,false,"Couple 'a holes",Material.LEATHER_CHESTPLATE,0.0,500.0,1);
+        CustomItem farmHelm = new CustomItem("Farm Hand Hat",1,true,false,"Keeps the sun away",Material.LEATHER_HELMET,0.0,325.0,1);
 
-        CustomItem huntsmenBoots = new CustomItem("Huntsmen Boots",3,true,false,"Rusty Spurs",Material.IRON_BOOTS,0.0,924.0);
-        CustomItem huntsmenLegs = new CustomItem("Huntsmen Trousers",4,true,false,"Mostly fur",Material.IRON_LEGGINGS,0.0,1188.0);
-        CustomItem huntsmenChest = new CustomItem("Huntsmen Jacket",4,true,false,"Made with boar hide",Material.IRON_CHESTPLATE,0.0,1320.0);
-        CustomItem huntsmenHelm = new CustomItem("Huntsmen Hat",3,true,false,"Fox fur cap",Material.IRON_HELMET,0.0,858.0);
+        CustomItem huntsmenBoots = new CustomItem("Huntsmen Boots",3,true,false,"Rusty Spurs",Material.IRON_BOOTS,0.0,924.0,1);
+        CustomItem huntsmenLegs = new CustomItem("Huntsmen Trousers",4,true,false,"Mostly fur",Material.IRON_LEGGINGS,0.0,1188.0,1);
+        CustomItem huntsmenChest = new CustomItem("Huntsmen Jacket",4,true,false,"Made with boar hide",Material.IRON_CHESTPLATE,0.0,1320.0,1);
+        CustomItem huntsmenHelm = new CustomItem("Huntsmen Hat",3,true,false,"Fox fur cap",Material.IRON_HELMET,0.0,858.0,1);
 
-        CustomItem frontierBoots = new CustomItem("Frontier Boots",5,false,false,"Steeled leather",Material.IRON_BOOTS,0.0,2156.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierLegs = new CustomItem("Frontier Pants",6,false,false,"With knee pads!",Material.IRON_LEGGINGS,0.0,2772.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierChest = new CustomItem("Frontier Duster",6,false,false,"Made with beast hide",Material.IRON_CHESTPLATE,0.0,3080.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierHelm = new CustomItem("Frontier Hat",5,false,false,"Steeled leather hat",Material.IRON_HELMET,0.0,2002.0,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierBoots = new CustomItem("Frontier Boots",5,false,false,"Steeled leather",Material.IRON_BOOTS,0.0,2156.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierLegs = new CustomItem("Frontier Pants",6,false,false,"With knee pads!",Material.IRON_LEGGINGS,0.0,2772.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierChest = new CustomItem("Frontier Duster",6,false,false,"Made with beast hide",Material.IRON_CHESTPLATE,0.0,3080.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        CustomItem frontierHelm = new CustomItem("Frontier Hat",5,false,false,"Steeled leather hat",Material.IRON_HELMET,0.0,2002.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 
-        CustomItem journeyBoots = new CustomItem("Journeymen Boots",7,false,false,"Silver spurs",Material.NETHERITE_BOOTS,0.0,0.0);
-        CustomItem journeyLegs = new CustomItem("Journeymen Pants",8,false,false,"Plenty of pockets",Material.NETHERITE_LEGGINGS,0.0,0.0);
-        CustomItem journeyChest = new CustomItem("Journeymen Duster",8,false,false,"Plated with steel",Material.NETHERITE_CHESTPLATE,0.0,0.0);
-        CustomItem journeyHelm = new CustomItem("Journeymen Hat",7,false,false,"Soul of every Journeymen",Material.NETHERITE_HELMET,0.0,0.0);
+        CustomItem journeyBoots = new CustomItem("Journeymen Boots",7,false,false,"Silver spurs",Material.NETHERITE_BOOTS,0.0,0.0,1);
+        CustomItem journeyLegs = new CustomItem("Journeymen Pants",8,false,false,"Plenty of pockets",Material.NETHERITE_LEGGINGS,0.0,0.0,1);
+        CustomItem journeyChest = new CustomItem("Journeymen Duster",8,false,false,"Plated with steel",Material.NETHERITE_CHESTPLATE,0.0,0.0,1);
+        CustomItem journeyHelm = new CustomItem("Journeymen Hat",7,false,false,"Soul of every Journeymen",Material.NETHERITE_HELMET,0.0,0.0,1);
 
 
-        CustomItem sheriffBoots = new CustomItem("Sheriff Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,924.0);
-        CustomItem sheriffLegs = new CustomItem("Sheriff Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,1188.0);
-        CustomItem sheriffChest = new CustomItem("Sheriff Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,1320.0);
-        CustomItem sheriffHelm = new CustomItem("Sheriff Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,858.0);
+        CustomItem sheriffBoots = new CustomItem("Sheriff Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,924.0,1);
+        CustomItem sheriffLegs = new CustomItem("Sheriff Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,1188.0,1);
+        CustomItem sheriffChest = new CustomItem("Sheriff Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,1320.0,1);
+        CustomItem sheriffHelm = new CustomItem("Sheriff Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,858.0,1);
 
-        CustomItem deputyBoots = new CustomItem("Deputy Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,2730.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyLegs = new CustomItem("Deputy Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,3510.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyChest = new CustomItem("Deputy Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,3900.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyHelm = new CustomItem("Deputy Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,2335.0,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyBoots = new CustomItem("Deputy Boots",3,true,true,"",Material.CHAINMAIL_BOOTS,0.0,2730.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyLegs = new CustomItem("Deputy Pants",4,true,true,"",Material.CHAINMAIL_LEGGINGS,0.0,3510.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyChest = new CustomItem("Deputy Jacket",4,true,true,"",Material.CHAINMAIL_CHESTPLATE,0.0,3900.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        CustomItem deputyHelm = new CustomItem("Deputy Hat",3,true,true,"",Material.CHAINMAIL_HELMET,0.0,2335.0,1,Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 
-        CustomItem marshallBoots = new CustomItem("Marshall Boots",3,true,true,"Freshly shined",Material.DIAMOND_BOOTS,0.0,5950.0);
-        CustomItem marshallLegs = new CustomItem("Marshall Pants",4,true,true,"",Material.DIAMOND_LEGGINGS,0.0,7650.0);
-        CustomItem marshallChest = new CustomItem("Marshall Jacket",4,true,true,"Boys in blue!",Material.DIAMOND_CHESTPLATE,0.0,8500.0);
-        CustomItem marshallHelm = new CustomItem("Marshall Hat",3,true,true,"The true officer.",Material.DIAMOND_HELMET,0.0,5525.0);
+        CustomItem marshallBoots = new CustomItem("Marshall Boots",3,true,true,"Freshly shined",Material.DIAMOND_BOOTS,0.0,5950.0,1);
+        CustomItem marshallLegs = new CustomItem("Marshall Pants",4,true,true,"",Material.DIAMOND_LEGGINGS,0.0,7650.0,1);
+        CustomItem marshallChest = new CustomItem("Marshall Jacket",4,true,true,"Boys in blue!",Material.DIAMOND_CHESTPLATE,0.0,8500.0,1);
+        CustomItem marshallHelm = new CustomItem("Marshall Hat",3,true,true,"The true officer.",Material.DIAMOND_HELMET,0.0,5525.0,1);
 
-        CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_FIRE,2);
-        CustomItem bow2 = new CustomItem("Hard Bow",8,false,false,"",Material.BOW,0.0,0.0,Enchantment.ARROW_DAMAGE,6);
+        CustomItem bow = new CustomItem("Flame Bow",8,false,false,"",Material.BOW,0.0,0.0,1,Enchantment.ARROW_FIRE,2);
+        CustomItem bow2 = new CustomItem("Hard Bow",8,false,false,"",Material.BOW,0.0,0.0,1,Enchantment.ARROW_DAMAGE,6);
 
-        new CustomItem("Colt Patterson",2,true,false,"",Material.STONE_SHOVEL,0.0,650.0);
-        new CustomItem("Sharps Rifle",7,true,false,"",Material.STONE_AXE,0.0,2450.0);
-        new CustomItem("66 Winchester",5,true,false,"",Material.DIAMOND_HOE,0.0,1800.0);
-        new CustomItem("Henry Model 3",5,true,false,"",Material.STONE_HOE,0.0,2800.0);
+        new CustomItem("Colt Patterson",2,true,false,"",Material.STONE_SHOVEL,0.0,650.0,1);
+        new CustomItem("Sharps Rifle",7,true,false,"",Material.STONE_AXE,0.0,2450.0,1);
+        new CustomItem("66 Winchester",5,true,false,"",Material.DIAMOND_HOE,0.0,1800.0,1);
+        new CustomItem("Henry Model 3",5,true,false,"",Material.STONE_HOE,0.0,2800.0,1);
 
-        new CustomItem("Winchester 1873",6,false,false,"",Material.IRON_AXE,0.0,2950.0);
+        new CustomItem("Winchester 1873",6,false,false,"",Material.IRON_AXE,0.0,2950.0,1);
 
         System.out.println("custom items loaded");
 
-        new CustomItem("Standard",1,true,false,"Get's you where you need",Material.HORSE_SPAWN_EGG,0.0,2100.0);
-        new CustomItem("Thoroughbred",1,true,false,"Fastest steed you can find",Material.HORSE_SPAWN_EGG,0.0,35250.0);
-        new CustomItem("Donkey",1,true,false,"Slow but lots of storage",Material.DONKEY_SPAWN_EGG,0.0,48500.0);
+        new CustomItem("Standard",1,true,false,"Get's you where you need",Material.HORSE_SPAWN_EGG,0.0,2100.0,1);
+        new CustomItem("Thoroughbred",1,true,false,"Fastest steed you can find",Material.HORSE_SPAWN_EGG,0.0,35250.0,1);
+        new CustomItem("Donkey",1,true,false,"Slow but lots of storage",Material.DONKEY_SPAWN_EGG,0.0,48500.0,1);
     }
     public static void loadItemTables(){
         //add "Health Potions
@@ -484,7 +484,7 @@ public class GameContentLoader {
         System.out.println("Brewing load complete.");
     }
 
-    public static void loadNPCs() {
+    public static void loadNPCs(){
         System.out.println("Loading NPCs");
 
         NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));

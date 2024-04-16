@@ -120,12 +120,12 @@ public class    BanditTask extends BukkitRunnable {
                     if (b.isTrackingNPC()) {
                         p.spigot().sendMessage(
                                 ChatMessageType.ACTION_BAR,
-                                new TextComponent(b.getTrackedNPC() +" "+ String.valueOf(distanceMsg) + ChatColor.WHITE + " blocks away!"));
+                                new TextComponent(b.getTrackedNPC() +" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
                     }
                     else {
                         p.spigot().sendMessage(
                                 ChatMessageType.ACTION_BAR,
-                                new TextComponent(b.getTrackingFrontierLocation().getLocName() + " " + String.valueOf(distanceMsg) + ChatColor.WHITE + " blocks away!"));
+                                new TextComponent(b.getTrackingFrontierLocation().getLocName() + " " + String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
                     }
                 } else {
                     if (b.getTargetedPlayer() != null) {
