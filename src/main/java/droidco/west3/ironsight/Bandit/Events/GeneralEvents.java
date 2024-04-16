@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
@@ -72,6 +73,11 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         ItemStack inHand = p.getInventory().getItemInMainHand();
+        if(e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
+            if(p.hasPotionEffect(PotionEffectType.SPEED)){
+               p.removePotionEffect(PotionEffectType.SPEED);
+            }
+        }
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
                     CustomItem.getCustomItem("Bandage").getItemStack().getItemMeta().getDisplayName())) {

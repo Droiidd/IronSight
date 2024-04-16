@@ -2,6 +2,7 @@ package droidco.west3.ironsight;
 
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Commands.DropGoldCmd;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
@@ -55,6 +56,7 @@ public final class IronSight extends JavaPlugin {
         GameContentLoader.loadItemTables();
         GameContentLoader.loadNPCs();
         GameContentLoader.loadProcessors();
+        GameContentLoader.loadPotions();
         System.out.println("Contracts loaded!");
         System.out.println("Iron Sight successfully loaded!");
     }

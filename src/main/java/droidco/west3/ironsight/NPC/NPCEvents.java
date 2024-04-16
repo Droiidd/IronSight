@@ -10,6 +10,7 @@ import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Looting.ItemTable;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -57,7 +58,7 @@ public class NPCEvents implements Listener {
                         break;
                     }
                     case PHARMACIST -> {
-                        p.openInventory(NPCUI.pharmacistUI(p));
+                        p.openInventory(NPCUI.openPharmacistUI(p));
                         break;
                     }
                     case OFFICER_ARMS_DEALER -> {
@@ -204,6 +205,19 @@ public class NPCEvents implements Listener {
             }
 
         }
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Pharmacist")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Medicine")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Medicine"),NPC.getNPC("Pharmacist"));
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Whiskey")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Whiskey"),NPC.getNPC("Pharmacist"));
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Morphine")) {
+                purchasePotion(b,p,CustomPotion.getCustomPotion("Morphine"),NPC.getNPC("Pharmacist"));
+            }
+
+        }
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Fisherman")){
                 e.setCancelled(true);
                 if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Sea Slug").getMaterial()) ) {
@@ -265,6 +279,14 @@ public class NPCEvents implements Listener {
             }
             if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Winchester 1873").getMaterial()) ) {
                 purchaseFirearm(b,p,CustomItem.getCustomItem("Winchester 1873"),NPC.getNPC("Arms Dealer"),"winchesterillegal");
+            }if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Rifle Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Rifle Ammo"),NPC.getNPC("Arms Dealer"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Pistol Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Pistol Ammo"),NPC.getNPC("Arms Dealer"));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Shotgun Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Shotgun Ammo"),NPC.getNPC("Arms Dealer"));
             }
         }
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Stable Manager")){
@@ -351,11 +373,26 @@ public class NPCEvents implements Listener {
         }
     }
 
-    public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc )
+    public void purchaseItem(Bandit b, Player p, CustomItem item, NPC npc)
     {
-        if (b.getWallet() >= item.getPurchasePrice()) {
-            b.updateWallet(-1 * item.getPurchasePrice());
-            p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
+        int amount = item.getAmountForSale();
+        if (b.getWallet() >= item.getPurchasePrice() * amount) {
+            b.updateWallet(-1 * item.getPurchasePrice()*amount);
+            p.sendMessage(ChatColor.GREEN + "Purchased "+ChatColor.WHITE +amount+" "+item.getItemStack().getItemMeta().getDisplayName());
+            //item.getItemStack().setAmount(amount);
+            p.getInventory().addItem(item.getItemStack());
+        } else {
+            p.closeInventory();
+            p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
+        }
+    }
+    public void purchasePotion(Bandit b, Player p, CustomPotion item, NPC npc)
+    {
+        int amount = item.getAmountForSale();
+        if (b.getWallet() >= item.getPurchasePrice() * amount) {
+            b.updateWallet(-1 * item.getPurchasePrice()*amount);
+            p.sendMessage(ChatColor.GREEN + "Purchased "+ChatColor.WHITE +amount+" "+item.getItemStack().getItemMeta().getDisplayName());
+            //item.getItemStack().setAmount(amount);
             p.getInventory().addItem(item.getItemStack());
         } else {
             p.closeInventory();
@@ -364,9 +401,10 @@ public class NPCEvents implements Listener {
     }
     public void purchaseFirearm(Bandit b, Player p, CustomItem item, NPC npc, String gunName )
     {
+
         if (b.getWallet() >= item.getPurchasePrice()) {
             b.updateWallet(-1 * item.getPurchasePrice());
-            p.sendMessage(ChatColor.GREEN + "Purchased "+item.getItemStack().getItemMeta().getDisplayName());
+            p.sendMessage(ChatColor.GREEN + "Purchased x"+item.getItemStack().getItemMeta().getDisplayName());
             String weapon = "shot give " + p.getDisplayName() + " " + gunName;
 
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();

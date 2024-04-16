@@ -15,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerConnector {
@@ -38,6 +40,8 @@ public class PlayerConnector {
                     ItemStack[] horseInv = horse.getHorseInv();
                     saveInventory(p,horseInv,horse.getHorseName(),conn);
                 }
+
+                saveInventory(p, b.getItemVault().toArray(new ItemStack[0]), "Vault", conn);
                 //ALWAYS CLOSE THE CONNECTION!
                 conn.close();
             }catch (Exception exception) {
@@ -49,6 +53,7 @@ public class PlayerConnector {
     public static Bandit fetchAllPlayerData(Player p) {
         System.out.println("Connecting");
         Connection conn = null;
+
         try {
             // below two lines are used for connectivity.
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -58,11 +63,20 @@ public class PlayerConnector {
             System.out.println("CONNECTED!!!");
             boolean successfulLoad = fetchPlayerData(conn,p);
             fetchPlayerHorses(conn,p);
-            conn.close();
+
+
 
             if(successfulLoad){
+                Bandit b = Bandit.getPlayer(p);
+                fetchPlayerVault(conn, p);
+                conn.close();
                 return Bandit.getPlayer(p);
             }
+            else {
+                conn.close();
+            }
+
+
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -110,6 +124,29 @@ public class PlayerConnector {
             }
         }
     }
+
+    public static void fetchPlayerVault(Connection conn ,Player p){
+        Bandit b = Bandit.getPlayer(p);
+            try{
+                String itemSql = "select * from custom_item where bandit_id = \'" + p.getUniqueId().toString()+"\' AND "+ "storage_type = \'Vault\'";
+
+                Statement st = conn.createStatement();
+                ResultSet rsItem = st.executeQuery(itemSql);
+                while (rsItem.next()){
+                    String banditId = rsItem.getString("bandit_id");
+                    String storageType = rsItem.getString("storage_type");
+                    String itemContents = rsItem.getString("item_contents");
+
+                    ItemStack[] items = itemStackArrayFromBase64(itemContents);
+                    b.setItemVault(Arrays.asList(items));
+                }
+                System.out.println("added vault items");
+                st.close();
+            }catch (Exception e){
+                System.out.println(e);
+                System.out.println("failed getting vault items");
+            }
+        }
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
@@ -151,8 +188,11 @@ public class PlayerConnector {
                 int contractorLvl = rs.getInt("contractorLvl");
                 int contractorTitle = rs.getInt("contractor_title");
                 long jailStartTime = rs.getLong("jailStartTime");
+                int vaultSize = rs.getInt("vault_size");
+                int vaultLevel = rs.getInt("vault_level");
 
-                new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp,jailStartTime,contractorTitle);
+
+                new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp,jailStartTime,contractorTitle, vaultSize, vaultLevel);
                 return true;
             }
             st.close();
@@ -176,8 +216,11 @@ public class PlayerConnector {
                 "contractorXp = "+b.getContractorXp()+", "+
                 "wantedKills = "+b.getWantedKills()+", "+
                 "contractor_title = "+b.getContractorTitle()+", "+
-                "jailStartTime = "+b.getJailStartTime()+" "+
+                "jailStartTime = "+b.getJailStartTime()+", "+
+                "vault_size = "+b.getVaultSize()+", "+
+                "vault_level = "+b.getVaultLevel()+" "+
                 "Where bandit.pId = '"+b.getpId()+"'";
+
 
         PreparedStatement prepedStmt = conn.prepareStatement(sql);
 
@@ -189,7 +232,7 @@ public class PlayerConnector {
             //Update was not successful
             System.out.println("Could not update player, inserting new columnn.");
             try{
-                String sqlInsert = "insert into bandit (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl, wantedKills,contractor_title,jailStartTime) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                String sqlInsert = "insert into bandit (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl, wantedKills, contractor_title, jailStartTime, vault_size, vault_level) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
                 PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                 insertStmt.setString(1, b.getpId());
                 insertStmt.setDouble(2,b.getWallet());
@@ -206,6 +249,8 @@ public class PlayerConnector {
                 insertStmt.setInt(12,b.getWantedKills());
                 insertStmt.setInt(13,b.getContractorTitle());
                 insertStmt.setLong(14,b.getJailStartTime());
+                insertStmt.setInt(15,b.getVaultSize());
+                insertStmt.setInt(16,b.getVaultLevel());
 
                 int insertVal = insertStmt.executeUpdate();
                 System.out.println("Player inserted.");
@@ -263,7 +308,7 @@ public class PlayerConnector {
             dataOutput.close();
             String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
             try{
-                String sqlInsert = "insert into custom_item (bandit_id, item_id,storage_type, item_contents) values (?,?,?,?);";
+                String sqlInsert = "insert into custom_item (bandit_id, item_id, storage_type, item_contents) values (?,?,?,?);";
                 PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                 insertStmt.setString(1, p.getUniqueId().toString());
                 insertStmt.setString(2, storageType);

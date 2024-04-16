@@ -113,12 +113,20 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- COMPASS TRACKER ---===
             if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
-                    p.setCompassTarget(FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p));
-                    Double distance = FrontierLocation.getLocation(b.getTrackingLocation().getLocName()).getCenterLocation(p).distance(p.getLocation());
+                    p.setCompassTarget(b.getTrackingLocation());
+                    Double distance = b.getTrackingLocation().distance(p.getLocation());
                     int distanceMsg = distance.intValue();
-                    p.spigot().sendMessage(
-                            ChatMessageType.ACTION_BAR,
-                            new TextComponent(b.getTrackingLocation().getLocName()+" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                    String trackingLocName = null;
+                    if (b.isTrackingNPC()) {
+                        p.spigot().sendMessage(
+                                ChatMessageType.ACTION_BAR,
+                                new TextComponent(b.getTrackedNPC() +" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                    }
+                    else {
+                        p.spigot().sendMessage(
+                                ChatMessageType.ACTION_BAR,
+                                new TextComponent(b.getTrackingFrontierLocation().getLocName() + " " + String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                    }
                 } else {
                     if (b.getTargetedPlayer() != null) {
                         if (b.getTargetedPlayer().isOnline()) {

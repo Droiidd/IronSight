@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.NPC;
 
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.Bandit.Bandit;
@@ -40,6 +41,9 @@ public class NPCUI {
         shop.setItem(12,CustomItem.getCustomItem("Henry Model 3").getItemForSale());
         shop.setItem(13,CustomItem.getCustomItem("Sharps Rifle").getItemForSale());
         shop.setItem(14,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
+        shop.setItem(20,CustomItem.getCustomItem("Rifle Ammo").getItemForSale());
+        shop.setItem(21,CustomItem.getCustomItem("Shotgun Ammo").getItemForSale());
+        shop.setItem(22,CustomItem.getCustomItem("Pistol Ammo").getItemForSale());
         return shop;
 
     }
@@ -109,10 +113,12 @@ public class NPCUI {
 
     }
 
-    public static Inventory pharmacistUI(Player p) {
-        Inventory pharmacistUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Pharmacist");
-
-        return pharmacistUI;
+    public static Inventory openPharmacistUI(Player p) {
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Pharmacist");
+        shop.setItem(2, CustomPotion.getCustomPotion("Medicine").getPotionForSale());
+        shop.setItem(3, CustomPotion.getCustomPotion("Whiskey").getPotionForSale());
+        shop.setItem(4, CustomPotion.getCustomPotion("Morphine").getPotionForSale());
+        return shop;
 
     }
 

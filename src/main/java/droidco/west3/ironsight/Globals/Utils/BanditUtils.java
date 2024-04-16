@@ -1,9 +1,12 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -91,6 +94,14 @@ public class BanditUtils {
         }
         p.setScoreboard(sb);
     }
+    public static void getFirearm(Player p, String gunName )
+    {
+            String weapon = "shot give " + p.getDisplayName() + " " + gunName;
+
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, weapon);
+
+    }
 
     public static Player getNearest(Player p, Double range) {
         double distance = Double.POSITIVE_INFINITY;
@@ -156,11 +167,10 @@ public class BanditUtils {
         Bandit b = Bandit.getPlayer(p);
         Inventory vaultUI = Bukkit.createInventory(p, 54, p.getDisplayName() + ": "+ChatColor.DARK_AQUA+"Vault");
         List<ItemStack> items = b.getItemVault();
-        p.sendMessage("Size: " + b.getVaultSize());
-        p.sendMessage("Level: " + b.getVaultLevel());
         for (int i = b.getVaultSize(); i < vaultUI.getSize();i++) {
             vaultUI.setItem(i,ItemIcon.getIcon("empty_slot").getItem());
         }
+
         if (!items.isEmpty()) {
             for (int i = 0; i < items.size(); i++) {
                     vaultUI.setItem(i, items.get(i));
