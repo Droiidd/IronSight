@@ -28,7 +28,7 @@ public class DropGoldCmd implements CommandExecutor {
                     if(b.getWallet() > amt){
                         b.updateWallet(-amt);
                         p.sendMessage(ChatColor.GRAY+"You dropped "+ChatColor.GREEN+amt+"g");
-                        p.getWorld().dropItemNaturally(new Location(p.getWorld(),p.getLocation().getX(),p.getLocation().getY(),p.getLocation().getZ()), new CustomItem(amt+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
+                        p.getWorld().dropItemNaturally(new Location(p.getWorld(),p.getLocation().getX()+3,p.getLocation().getY(),p.getLocation().getZ()), new CustomItem(amt+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
                     }else{
                         p.sendMessage(ChatColor.RED+"Not enough funds");
                     }

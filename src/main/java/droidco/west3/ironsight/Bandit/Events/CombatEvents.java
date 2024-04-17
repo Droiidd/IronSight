@@ -101,7 +101,6 @@ public class CombatEvents implements Listener
                 p.playSound(p.getLocation(),Sound.ITEM_TOTEM_USE,1 ,0);
                 p.playSound(p.getLocation(),Sound.ENTITY_IRON_GOLEM_DEATH,1 ,2);
                 if (b.getWallet() > 0.0) {
-
                     p.getWorld().dropItem(p.getLocation(), new CustomItem(b.getWallet()+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
                 }
                 b.setWallet(0);
