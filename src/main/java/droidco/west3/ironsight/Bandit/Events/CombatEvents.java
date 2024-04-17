@@ -88,6 +88,8 @@ public class CombatEvents implements Listener
                 e.setCancelled(true);
                 p.setHealth(20);
                 p.removePotionEffect(PotionEffectType.SLOW);
+                p.getInventory().clear();
+                BanditUtils.getStarterItems(p);
                 if(b.isCombatBlocked()){
                     b.setCombatBlocked(false);
                 }
