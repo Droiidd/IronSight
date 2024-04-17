@@ -33,9 +33,9 @@ public class ItemIcon
         item.setItemMeta(iMeta);
         return item;
     }
-    public static ItemIcon getIcon(String iconName){
-        if(icons.containsKey(iconName)){
-            return icons.get(iconName);
+    public static ItemIcon getIcon(String iconCode){
+        if(icons.containsKey(iconCode)){
+            return icons.get(iconCode);
         }
         return null;
     }

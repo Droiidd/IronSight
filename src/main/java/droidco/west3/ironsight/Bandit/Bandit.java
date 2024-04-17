@@ -38,6 +38,7 @@ public class Bandit
     //private Team team;
     private int bounty;
 
+    private int wantedKills;
     private Player targetedPlayer;
     private int contractorLvl;
     private int contractorXp;
@@ -480,6 +481,8 @@ public class Bandit
     public void setWantedKills(int wantedKills) {
         this.wantedKills = wantedKills;
     }
+    public void incrWantedKills(){this.wantedKills++;}
+    public void decWantedKills(){this.wantedKills--;}
 
     public Contract getRookieContract() {
         return rookieContract;

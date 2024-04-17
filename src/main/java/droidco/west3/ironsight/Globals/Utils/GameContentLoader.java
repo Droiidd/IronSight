@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Globals.Utils;
 
+import droidco.west3.ironsight.Bandit.Officer.OfficerData;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldCrate;
 import droidco.west3.ironsight.Contracts.OilField.OilFieldTask;
@@ -170,6 +171,11 @@ public class GameContentLoader {
 
         new CustomItem("Winchester 1873",6,false,false,"",Material.IRON_AXE,0.0,2950.0,1);
 
+        //Officer Guns
+        new CustomItem("Maynard Carbine .52", 6, true, true, "", Material.WOODEN_HOE, 0, 0);
+        new CustomItem("S&W Model 3", 4, true, true, "", Material.WOODEN_SHOVEL, 0, 0);
+        new CustomItem("Double Barreled Shotgun", 6, true, true, "", Material.WOODEN_AXE, 0, 0);
+        new CustomItem("Springfield Trapdoor", 8, true, true, "", Material.WOODEN_PICKAXE, 0, 0);
         System.out.println("custom items loaded");
 
         new CustomItem("Standard",1,true,false,"Get's you where you need",Material.HORSE_SPAWN_EGG,0.0,2100.0,1);
@@ -469,11 +475,15 @@ public class GameContentLoader {
         ItemIcon openAccount = new ItemIcon("Open Account", "open_account", "Open an item vault account for 25,000g", Material.EMERALD_BLOCK);
 
             // Officer Icons
+            new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
+            new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
+            // Officer Icons
             ItemIcon joinup = new ItemIcon("Join Up", "join_up", "Enroll as an Officer of the Law", Material.ACACIA_BOAT);
             ItemIcon resign = new ItemIcon("Resign", "resign_officer", "Resign from the force", Material.ACACIA_LOG);
 
-            new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
-            new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
+            ItemIcon sheriff = new ItemIcon(ChatColor.DARK_RED + "Sheriff", "sheriff", "Sheriff Badge: " + OfficerData.getSheriff_kills() + " Kills, " + OfficerData.getSheriff_gold() + " Gold", Material.ACACIA_DOOR);
+            ItemIcon deputy = new ItemIcon(ChatColor.DARK_RED + "Deputy", "deputy", "Deputy Badge: " + OfficerData.getDeputy_kills() + " Kills, " + OfficerData.getDeputy_gold() + " Gold", Material.ACACIA_BUTTON);
+            ItemIcon marshall = new ItemIcon(ChatColor.DARK_RED + "Marshall", "marshall", "Marshall Badge: " + OfficerData.getMarshall_kills() + " Kills, " + OfficerData.getMarshall_gold() + " Gold", Material.ACACIA_PLANKS);
         System.out.println("Icons loaded");
     }
 
@@ -504,6 +514,8 @@ public class GameContentLoader {
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Pharmacist",NPCType.PHARMACIST, 986, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Chief of Police", NPCType.CHIEF_OF_POLICE, 967, 93, -1911, ChatColor.DARK_AQUA, true, true, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Chief of Police", NPCType.CHIEF_OF_POLICE, 967, 93, -1911, ChatColor.DARK_AQUA, true, true, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Officer Arms Dealer", NPCType.OFFICER_ARMS_DEALER, 967, 97, -1911, ChatColor.DARK_AQUA, true, true, FrontierLocation.getLocation("Santa Fe"));
     }
     public static void loadProcessors() {
 

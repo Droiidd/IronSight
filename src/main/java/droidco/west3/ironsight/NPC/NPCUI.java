@@ -51,7 +51,10 @@ public class NPCUI {
     public static Inventory officerArmsUI(Player p) {
         Inventory officerArmsUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Officer Arms Dealer");
 
-
+        officerArmsUI.setItem(10,CustomItem.getCustomItem("Maynard Carbine .52").getItemForSale());
+        officerArmsUI.setItem(11,CustomItem.getCustomItem("S&W Model 3").getItemForSale());
+        officerArmsUI.setItem(12,CustomItem.getCustomItem("Double Barreled Shotgun").getItemForSale());
+        officerArmsUI.setItem(13,CustomItem.getCustomItem("Springfield Trapdoor").getItemForSale());
         return officerArmsUI;
 
     }
@@ -194,8 +197,32 @@ public class NPCUI {
 
     public static Inventory chiefUI(Player p) {
         Inventory chiefUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Chief of Police");
+        Bandit b = Bandit.getPlayer(p);
         if (Bandit.getPlayer(p).isOfficer()){
             chiefUI.setItem(18, ItemIcon.getIcon("resign_officer").getItem());
+            ItemStack sheriff = ItemIcon.getIcon("sheriff").getItem();
+            ItemStack deputy = ItemIcon.getIcon("deputy").getItem();
+            ItemStack marshall = ItemIcon.getIcon("marshall").getItem();
+            ItemStack icons[] = {sheriff, deputy, marshall};
+            int title = 0;
+            String role = b.getRoleTitle();
+            if (role.equals("Sheriff")) title = 1;
+            if (role.equals("Deputy")) title = 2;
+            if (role.equals("Marshall")) title = 3;
+
+            while (title > 0){
+                    ItemMeta iconMeta = icons[title-1].getItemMeta();
+                    String name = iconMeta.getDisplayName();
+                    name = name.replaceAll("[^a-zA-Z]", "");
+                    iconMeta.setDisplayName(ChatColor.GREEN + name);
+                    icons[title-1].setItemMeta(iconMeta);
+                    title--;
+            }
+
+
+            chiefUI.setItem(12, icons[0]);
+            chiefUI.setItem(13, icons[1]);
+            chiefUI.setItem(14, icons[2]);
         }
         else{
             chiefUI.setItem(13, ItemIcon.getIcon("join_up").getItem());

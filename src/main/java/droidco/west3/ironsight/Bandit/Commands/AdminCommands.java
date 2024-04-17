@@ -128,6 +128,8 @@ public class AdminCommands implements CommandExecutor {
 
 
                         }
+                    case "kills":
+                        iP.setWantedKills(1000);
 
                 }
             }
