@@ -3,12 +3,14 @@ package droidco.west3.ironsight.Globals.Utils;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.*;
@@ -29,6 +31,37 @@ public class BanditUtils {
         p.sendMessage("Contractor XP: " + b.getContractorXp());
         p.sendMessage("Wanted Kills: " + b.getWantedKills());
 
+    }
+    public static void getStarterItems(Player p){
+        ItemStack morphFull = CustomPotion.getCustomPotion("Morphine").getItemStack();
+        morphFull.setAmount(2);
+        ItemStack whisFull = CustomPotion.getCustomPotion("Whiskey").getItemStack();
+        whisFull.setAmount(2);
+        ItemStack medFull = CustomPotion.getCustomPotion("Medicine").getItemStack();
+        medFull.setAmount(5);
+        ItemStack salmon = CustomItem.getCustomItem("Smoked Salmon").getItemStack();
+        salmon.setAmount(10);
+
+        ItemStack pistol = CustomItem.getCustomItem("Pistol Ammo").getItemStack();
+        pistol.setAmount(24);
+        ItemStack splint = CustomItem.getCustomItem("Splint").getItemStack();
+        pistol.setAmount(4);
+        ItemStack bandage = CustomItem.getCustomItem("Bandage").getItemStack();
+        pistol.setAmount(4);
+
+        p.getInventory().addItem(morphFull);
+        p.getInventory().addItem(medFull);
+        p.getInventory().addItem(whisFull);
+        p.getInventory().addItem(salmon);
+        p.getInventory().addItem(pistol);
+        p.getInventory().addItem(bandage);
+        p.getInventory().addItem(splint);
+        p.getInventory().addItem(CustomItem.getCustomItem("Tracker").getItemStack());
+        p.getInventory().setBoots(CustomItem.getCustomItem("Farm Hand Boots").getItemStack());
+        p.getInventory().setLeggings(CustomItem.getCustomItem("Farm Hand Chaps").getItemStack());
+        p.getInventory().setChestplate(CustomItem.getCustomItem("Farm Hand Shirt").getItemStack());
+        p.getInventory().setHelmet(CustomItem.getCustomItem("Farm Hand Hat").getItemStack());
+        BanditUtils.getFirearm(p,"coltnavy");
     }
 
     public static void releasePrisoner(Player p, Bandit b) {

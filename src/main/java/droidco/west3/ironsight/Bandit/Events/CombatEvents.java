@@ -84,6 +84,8 @@ public class CombatEvents implements Listener
                 //PLAYER DIED
                 e.setCancelled(true);
                 p.removePotionEffect(PotionEffectType.SLOW);
+                p.getInventory().clear();
+                BanditUtils.getStarterItems(p);
                 if(b.isCombatBlocked()){
                     b.setCombatBlocked(false);
                 }

@@ -361,13 +361,14 @@ public class GameContentLoader {
 
         FrontierLocation blackspur = new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
 
-        FrontierLocation sloughcreekR = new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2545,2698,38,1243);
+        FrontierLocation sloughcreekR = new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2542,2766,445,69);
         FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
-        FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1330,-1100,-2100,2955);
-        FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1876,-1681,1160,341);
+        FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1304,-1145,-2989,2144);
+        FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1887,-1708,1177,365);
         new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,1014,947,-2857,-2778);
 
         FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
+        new FrontierLocation("Sierra Gorge Camp","Scavenger Town",LocationType.EVENT,2834,2543,819,466);
         System.out.println("Locations loaded");
     }
     public static void loadIcons()
