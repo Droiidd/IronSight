@@ -85,7 +85,6 @@ public class CombatEvents implements Listener
                 e.setCancelled(true);
                 p.removePotionEffect(PotionEffectType.SLOW);
                 p.getInventory().clear();
-                BanditUtils.getStarterItems(p);
                 if(b.isCombatBlocked()){
                     b.setCombatBlocked(false);
                 }
@@ -109,7 +108,7 @@ public class CombatEvents implements Listener
                 p.setFireTicks(0);
                 p.setHealth(20);
                 p.setFoodLevel(20);
-                Bukkit.broadcastMessage(ChatColor.WHITE+p.getDisplayName()+ChatColor.GRAY+"has "+ChatColor.DARK_RED+"died!");
+                Bukkit.broadcastMessage(ChatColor.WHITE+p.getDisplayName()+ChatColor.GRAY+" has "+ChatColor.DARK_RED+"died!");
 
 
                 //SEND TO JAIL
@@ -121,10 +120,12 @@ public class CombatEvents implements Listener
                     p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, 1);
                     p.sendTitle(ChatColor.GRAY + "You are now in" + ChatColor.DARK_RED + " Prison!", ChatColor.GRAY + "Mine to 0 bounty to leave.");
                     p.teleport(FrontierLocation.getLocation("Prison").getSpawnLocation(p));
+                    BanditUtils.getPrisonItems(p);
                 }else{
                     b.setJailed(false);
                     p.sendTitle(ChatColor.GRAY + "You " + ChatColor.DARK_RED + "Died!", ChatColor.GRAY + "Choose a town to respawn");
                     b.setRespawning(true);
+                    BanditUtils.getStarterItems(p);
                 }
 
             }

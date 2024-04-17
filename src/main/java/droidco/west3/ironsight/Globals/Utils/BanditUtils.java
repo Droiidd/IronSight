@@ -45,9 +45,9 @@ public class BanditUtils {
         ItemStack pistol = CustomItem.getCustomItem("Pistol Ammo").getItemStack();
         pistol.setAmount(24);
         ItemStack splint = CustomItem.getCustomItem("Splint").getItemStack();
-        pistol.setAmount(4);
+        splint.setAmount(4);
         ItemStack bandage = CustomItem.getCustomItem("Bandage").getItemStack();
-        pistol.setAmount(4);
+        bandage.setAmount(4);
 
         p.getInventory().addItem(morphFull);
         p.getInventory().addItem(medFull);
@@ -58,6 +58,24 @@ public class BanditUtils {
         p.getInventory().addItem(splint);
         p.getInventory().addItem(CustomItem.getCustomItem("Tracker").getItemStack());
         p.getInventory().setBoots(CustomItem.getCustomItem("Farm Hand Boots").getItemStack());
+        p.getInventory().setLeggings(CustomItem.getCustomItem("Farm Hand Chaps").getItemStack());
+        p.getInventory().setChestplate(CustomItem.getCustomItem("Farm Hand Shirt").getItemStack());
+        p.getInventory().setHelmet(CustomItem.getCustomItem("Farm Hand Hat").getItemStack());
+        BanditUtils.getFirearm(p,"coltnavy");
+    }
+    public static void getPrisonItems(Player p){
+
+        ItemStack salmon = CustomItem.getCustomItem("Smoked Salmon").getItemStack();
+        salmon.setAmount(10);
+
+        ItemStack splint = CustomItem.getCustomItem("Splint").getItemStack();
+        splint.setAmount(4);
+
+
+        p.getInventory().addItem(salmon);
+        p.getInventory().addItem(CustomItem.getCustomItem("Explorer's Pick").getItemStack());
+        p.getInventory().addItem(splint);
+        p.getInventory().addItem(CustomItem.getCustomItem("Tracker").getItemStack());
         p.getInventory().setLeggings(CustomItem.getCustomItem("Farm Hand Chaps").getItemStack());
         p.getInventory().setChestplate(CustomItem.getCustomItem("Farm Hand Shirt").getItemStack());
         p.getInventory().setHelmet(CustomItem.getCustomItem("Farm Hand Hat").getItemStack());

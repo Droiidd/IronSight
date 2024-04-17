@@ -151,7 +151,6 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- HANDLES PLAYER RESPAWN ---===
 
             if (b.isRespawning()) {
-                
                 //RESPAWNING IN A TOWN
                 p.setWalkSpeed(0);
                 p.setFlySpeed(0);
