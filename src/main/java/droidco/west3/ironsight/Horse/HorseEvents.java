@@ -92,34 +92,35 @@ public class HorseEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         FrontierHorse targetHorse = null;
         List<FrontierHorse> horses = b.getHorses();
-        for(FrontierHorse horse : horses){
-            String invTitle = horse.getHorseName()+"'s saddle-pack";
-            if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
-                targetHorse = horse;
-            }else if(e.getView().getTitle().equalsIgnoreCase(horse.getHorseName()+"'s saddle-pack storage")){
-                if(e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)){
-                    e.setCancelled(true);
+        if(e.getCurrentItem() != null) {
+            for(FrontierHorse horse : horses){
+                String invTitle = horse.getHorseName()+"'s saddle-pack";
+                if(invTitle.equalsIgnoreCase(e.getView().getTitle())){
+                    targetHorse = horse;
+                }else if(e.getView().getTitle().equalsIgnoreCase(horse.getHorseName()+"'s saddle-pack storage")){
+                    if(e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)){
+                        e.setCancelled(true);
+                    }
+                }
+            }
+            if(targetHorse != null){
+                e.setCancelled(true);
+                switch(e.getCurrentItem().getType()){
+                    case HAY_BLOCK -> {
+                        FrontierHorse.getSummonedHorse(targetHorse.getHorseId()).remove();
+                        targetHorse.setSummoned(false);
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GRAY+"Sent "+ChatColor.GREEN+targetHorse.getHorseName()+ChatColor.GRAY+" back to the stable");
+                    }
+                    case BARRIER -> {
+                        p.closeInventory();
+                    }
+                    case CHEST -> {
+                        targetHorse.openHorseInventory(p);
+                    }
                 }
             }
         }
-        if(targetHorse != null){
-            e.setCancelled(true);
-            switch(e.getCurrentItem().getType()){
-                case HAY_BLOCK -> {
-                    FrontierHorse.getSummonedHorse(targetHorse.getHorseId()).remove();
-                    targetHorse.setSummoned(false);
-                    p.closeInventory();
-                    p.sendMessage(ChatColor.GRAY+"Sent "+ChatColor.GREEN+targetHorse.getHorseName()+ChatColor.GRAY+" back to the stable");
-                }
-                case BARRIER -> {
-                    p.closeInventory();
-                }
-                case CHEST -> {
-                    targetHorse.openHorseInventory(p);
-                }
-            }
-        }
-
     }
     @EventHandler
     public void saveHorseInventory(InventoryCloseEvent e){
