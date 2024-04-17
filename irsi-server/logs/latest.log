@@ -219,3 +219,19 @@
 [14:51:43] [Server thread/INFO]: Could not update new player
 [14:51:43] [Server thread/INFO]: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Starter' for key 'PRIMARY'
 [14:51:43] [Server thread/INFO]: Elightning left the game
+[14:52:13] [Server thread/INFO]: Stopping the server
+[14:52:13] [Server thread/INFO]: Stopping server
+[14:52:13] [Server thread/INFO]: [IronSight] Disabling IronSight v1.0-SNAPSHOT
+[14:52:13] [Server thread/INFO]: Disabling IronSight
+[14:52:13] [Server thread/INFO]: No entity was found
+[14:52:13] [Server thread/INFO]: All mobs killed.
+[14:52:13] [Server thread/INFO]: IronSight shutting down...
+[14:52:13] [Server thread/INFO]: Saving players
+[14:52:13] [Server thread/INFO]: Saving worlds
+[14:52:14] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[14:52:15] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_nether]'/minecraft:the_nether
+[14:52:16] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
+[14:52:16] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[14:52:16] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[14:52:16] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[14:52:16] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
