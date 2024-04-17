@@ -39,7 +39,7 @@ public class GeneralEvents implements Listener {
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){
             float fall = p.getFallDistance();
-            if(fall > 9) {
+            if(fall > 9 && p.getHealth() > 0 && (p.getHealth() - e.getDamage()) > 0) {
                 Bandit b = Bandit.getPlayer(p);
                 if(b.isBrokenLegs()){
                     //Players legs are already broken, damage harder
@@ -49,7 +49,7 @@ public class GeneralEvents implements Listener {
                     //Player broke their legs!
                     b.setBrokenLegs(true);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 3));
-                    p.sendMessage("You broke your legs!");
+                    p.sendMessage(ChatColor.RED+"You broke your legs!");
                 }
             }
         }
