@@ -17,6 +17,8 @@ commands:
     aliases:
       - list
   call:
+    aliases:
+      - horse
   gethorse:
   dropgold:
     aliases:

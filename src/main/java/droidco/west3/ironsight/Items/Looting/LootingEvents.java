@@ -33,20 +33,22 @@ public class LootingEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         Block block = e.getClickedBlock();
         //CHECK IF CHEST
-        if (block.getType().equals(Material.CHEST)) {
-            spawnChestLoot(b,block,ItemTable.getTable("Drug Base"),LocationType.ILLEGAL,3);
-        }
-        if (block.getType().equals(Material.CHEST)) {
-            spawnChestLoot(b,block,ItemTable.getTable("Oil Field"),LocationType.OIL_FIELD,3);
-        }
-        if (block.getType().equals(Material.CHEST)) {
-            spawnChestLoot(b,block,ItemTable.getTable("Mines"),LocationType.MINE,3);
-        }
-        if (block.getType().equals(Material.CHEST)) {
-            spawnChestLoot(b,block,ItemTable.getTable("Scavenger Town"),LocationType.EVENT,3);
-        }
-        if (block.getType().equals(Material.CHEST)) {
-            spawnChestLoot(b,block,ItemTable.getTable("Hunting Grounds"),LocationType.NATURAL,3);
+        if(block != null){
+            if (block.getType().equals(Material.CHEST)) {
+                spawnChestLoot(b,block,ItemTable.getTable("Drug Base"),LocationType.ILLEGAL,3);
+            }
+            if (block.getType().equals(Material.CHEST)) {
+                spawnChestLoot(b,block,ItemTable.getTable("Oil Field"),LocationType.OIL_FIELD,3);
+            }
+            if (block.getType().equals(Material.CHEST)) {
+                spawnChestLoot(b,block,ItemTable.getTable("Mines"),LocationType.MINE,3);
+            }
+            if (block.getType().equals(Material.CHEST)) {
+                spawnChestLoot(b,block,ItemTable.getTable("Scavenger Town"),LocationType.EVENT,3);
+            }
+            if (block.getType().equals(Material.CHEST)) {
+                spawnChestLoot(b,block,ItemTable.getTable("Hunting Grounds"),LocationType.NATURAL,3);
+            }
         }
 
 

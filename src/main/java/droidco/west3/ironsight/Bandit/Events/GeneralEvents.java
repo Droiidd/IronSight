@@ -22,10 +22,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -149,18 +146,28 @@ public class GeneralEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         e.setFormat(b.getTitle()+ChatColor.RESET+e.getFormat());
     }
+    @EventHandler
+    public void breakGlassEvent(ProjectileHitEvent e){
+        if(e.getEntityType().equals(EntityType.SNOWBALL)){
+            if(e.getHitBlock() != null){
+                switch(e.getHitBlock().getType()){
+                    case LIGHT_GRAY_STAINED_GLASS_PANE,GRAY_STAINED_GLASS_PANE ->{
+                        e.getHitBlock().setType(Material.FIRE);
+                        e.getHitBlock().getLocation().getWorld().playSound(e.getHitBlock().getLocation(),Sound.BLOCK_GLASS_BREAK,1,1);
+                    }
+                }
+            }
+        }
+    }
 
     // >>>===--- ENVIRONMENT EVENTS ---===<<<
     @EventHandler
-    public void onBarrelClick(PlayerInteractEvent e) {
+    public void disableUsableBlockClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
         if(block != null){
             switch(block.getType()){
-                case BARREL,OAK_TRAPDOOR,SPRUCE_TRAPDOOR,ARMOR_STAND,ITEM_FRAME,GLOW_ITEM_FRAME,
-                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR,OAK_SIGN,
-                        DARK_OAK_SIGN,SPRUCE_SIGN,BIRCH_SIGN,DISPENSER,STONECUTTER
-                        ->{
+                case BREWING_STAND, TRAPPED_CHEST ->{
                     e.setCancelled(true);
                 }
                 case CHEST -> {
@@ -168,6 +175,9 @@ public class GeneralEvents implements Listener {
                     if(b.getCurrentLocation().getType().compareTo(LocationType.TOWN)==0){
                         e.setCancelled(true);
                     }
+                }
+                default -> {
+                    e.setCancelled(true);
                 }
             }
         }
