@@ -278,7 +278,7 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- SUMMONING HORSE ---===
             if(b.isSummoningHorse()){
                 horseTimer ++;
-                p.sendMessage(ChatColor.GRAY+"Horse arrives in "+(horseFullCallTime-horseTimer)+" seconds.");
+                p.sendMessage(ChatColor.GRAY+"Horse arrives in "+ChatColor.AQUA+ (horseFullCallTime-horseTimer)+ChatColor.GRAY+ " seconds.");
                 if(horseTimer == horseFullCallTime){
                     b.setSummoningHorse(false);
                     horseTimer = 0;
@@ -288,6 +288,7 @@ public class    BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
                     p.sendMessage(ChatColor.AQUA +b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    b.getHorseBeingSummoned().setSummoned(true);
                     p.sendMessage(ChatColor.GRAY+"Shift + right-click to open it's inventory.");
                 }
             }
