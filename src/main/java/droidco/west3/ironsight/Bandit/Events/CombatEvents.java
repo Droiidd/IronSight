@@ -5,10 +5,7 @@ import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Items.CustomItem;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -86,7 +83,6 @@ public class CombatEvents implements Listener
             if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
                 //PLAYER DIED
                 e.setCancelled(true);
-                p.setHealth(20);
                 p.removePotionEffect(PotionEffectType.SLOW);
                 if(b.isCombatBlocked()){
                     b.setCombatBlocked(false);
@@ -106,7 +102,13 @@ public class CombatEvents implements Listener
 
                     p.getWorld().dropItem(p.getLocation(), new CustomItem(b.getWallet()+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
                 }
-                b.updateWallet(0);
+                b.setWallet(0);
+                p.teleport(new Location(p.getWorld(), 1056,317,-1957));
+                p.setVisualFire(false);
+                p.setFireTicks(0);
+                p.setHealth(20);
+                p.setFoodLevel(20);
+
 
                 //SEND TO JAIL
                 if(b.getBounty() >= 100){
