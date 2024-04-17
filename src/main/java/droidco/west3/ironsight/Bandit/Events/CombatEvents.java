@@ -110,6 +110,7 @@ public class CombatEvents implements Listener
                 p.setFireTicks(0);
                 p.setHealth(20);
                 p.setFoodLevel(20);
+                Bukkit.broadcastMessage(ChatColor.WHITE+p.getDisplayName()+ChatColor.GRAY+"has "+ChatColor.DARK_RED+"died!");
 
 
                 //SEND TO JAIL

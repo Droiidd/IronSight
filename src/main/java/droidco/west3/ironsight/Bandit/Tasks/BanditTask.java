@@ -107,6 +107,9 @@ public class    BanditTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        if(b.getCurrentLocation() != null){
+            b.getCurrentLocation().addTitle(p);
+        }
         if(tick % 3 == 0){
             seconds++;
             mobSec++;

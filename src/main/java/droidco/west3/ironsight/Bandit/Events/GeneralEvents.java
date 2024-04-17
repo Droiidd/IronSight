@@ -168,12 +168,14 @@ public class GeneralEvents implements Listener {
         if(block != null){
             switch(block.getType()){
                 case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE ->{
-                    e.setCancelled(true);
+                    e.setCancelled(false);
                 }
                 case CHEST -> {
                     Bandit b = Bandit.getPlayer(p);
                     if(b.getCurrentLocation().getType().compareTo(LocationType.TOWN)==0){
                         e.setCancelled(true);
+                    }else{
+                        e.setCancelled(false);
                     }
                 }
                 default -> {

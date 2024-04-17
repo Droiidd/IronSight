@@ -39,13 +39,13 @@ public class RespawnUIEvents implements Listener {
                            ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",sfRespawn,b,p);
                    break;
                 }
-                case YELLOW_BANNER -> {
+                case BLUE_BANNER -> {
                     handleRespawnActions(ChatColor.YELLOW+"New Orleans",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",noRespawn,b,p);
                     break;
 
                 }
-                case BLUE_BANNER -> {
+                case YELLOW_BANNER -> {
                     handleRespawnActions(ChatColor.YELLOW+"Republic of Texas",
                             ChatColor.GRAY+"PvP is "+ChatColor.RED+"disabled!",rotRespawn,b,p);
                     break;
