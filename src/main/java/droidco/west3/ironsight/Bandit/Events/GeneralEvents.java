@@ -167,7 +167,7 @@ public class GeneralEvents implements Listener {
         Block block = e.getClickedBlock();
         if(block != null){
             switch(block.getType()){
-                case BREWING_STAND, TRAPPED_CHEST ->{
+                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE ->{
                     e.setCancelled(true);
                 }
                 case CHEST -> {
