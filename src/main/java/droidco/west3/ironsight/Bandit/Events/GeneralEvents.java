@@ -78,11 +78,6 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         ItemStack inHand = p.getInventory().getItemInMainHand();
-        if(e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
-            if(p.hasPotionEffect(PotionEffectType.SPEED)){
-               p.removePotionEffect(PotionEffectType.SPEED);
-            }
-        }
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
                     CustomItem.getCustomItem("Bandage").getItemStack().getItemMeta().getDisplayName())) {
@@ -167,7 +162,8 @@ public class GeneralEvents implements Listener {
         Block block = e.getClickedBlock();
         if(block != null){
             switch(block.getType()){
-                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE ->{
+                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
+                        RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK->{
                     e.setCancelled(false);
                 }
                 case CHEST -> {
