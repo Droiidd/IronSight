@@ -22,17 +22,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -45,7 +39,7 @@ public class GeneralEvents implements Listener {
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){
             float fall = p.getFallDistance();
-            if(fall > 9) {
+            if(fall > 9 && p.getHealth() > 0 && (p.getHealth() - e.getDamage()) > 0) {
                 Bandit b = Bandit.getPlayer(p);
                 if(b.isBrokenLegs()){
                     //Players legs are already broken, damage harder
@@ -55,7 +49,7 @@ public class GeneralEvents implements Listener {
                     //Player broke their legs!
                     b.setBrokenLegs(true);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 3));
-                    p.sendMessage("You broke your legs!");
+                    p.sendMessage(ChatColor.RED+"You broke your legs!");
                 }
             }
         }
@@ -69,15 +63,21 @@ public class GeneralEvents implements Listener {
         }
     }
     @EventHandler
+    public void specialEntityHandling(PlayerInteractAtEntityEvent e){
+        if(e.getRightClicked().getType().equals(EntityType.ITEM_FRAME)){
+            e.setCancelled(true);
+        }else if(e.getRightClicked().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+            e.setCancelled(true);
+        }
+        else if(e.getRightClicked().getType().equals(EntityType.ARMOR_STAND)){
+            e.setCancelled(true);
+        }
+    }
+    @EventHandler
     public void onMedUse(PlayerInteractEvent e){
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         ItemStack inHand = p.getInventory().getItemInMainHand();
-        if(e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
-            if(p.hasPotionEffect(PotionEffectType.SPEED)){
-               p.removePotionEffect(PotionEffectType.SPEED);
-            }
-        }
         if(inHand.hasItemMeta()){
             if (inHand.getItemMeta().getDisplayName().equalsIgnoreCase(
                     CustomItem.getCustomItem("Bandage").getItemStack().getItemMeta().getDisplayName())) {
@@ -141,25 +141,41 @@ public class GeneralEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         e.setFormat(b.getTitle()+ChatColor.RESET+e.getFormat());
     }
+    @EventHandler
+    public void breakGlassEvent(ProjectileHitEvent e){
+        if(e.getEntityType().equals(EntityType.SNOWBALL)){
+            if(e.getHitBlock() != null){
+                switch(e.getHitBlock().getType()){
+                    case LIGHT_GRAY_STAINED_GLASS_PANE,GRAY_STAINED_GLASS_PANE ->{
+                        e.getHitBlock().setType(Material.FIRE);
+                        e.getHitBlock().getLocation().getWorld().playSound(e.getHitBlock().getLocation(),Sound.BLOCK_GLASS_BREAK,1,1);
+                    }
+                }
+            }
+        }
+    }
 
     // >>>===--- ENVIRONMENT EVENTS ---===<<<
     @EventHandler
-    public void onBarrelClick(PlayerInteractEvent e) {
+    public void disableUsableBlockClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
         if(block != null){
             switch(block.getType()){
-                case BARREL,OAK_TRAPDOOR,SPRUCE_TRAPDOOR,ARMOR_STAND,ITEM_FRAME,GLOW_ITEM_FRAME,
-                        BLAST_FURNACE,HOPPER,FURNACE,LEVER,ANVIL,GRINDSTONE,JUNGLE_DOOR,OAK_SIGN,
-                        DARK_OAK_SIGN,SPRUCE_SIGN,BIRCH_SIGN,DISPENSER,STONECUTTER
-                        ->{
-                    e.setCancelled(true);
+                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
+                        RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK->{
+                    e.setCancelled(false);
                 }
                 case CHEST -> {
                     Bandit b = Bandit.getPlayer(p);
                     if(b.getCurrentLocation().getType().compareTo(LocationType.TOWN)==0){
                         e.setCancelled(true);
+                    }else{
+                        e.setCancelled(false);
                     }
+                }
+                default -> {
+                    e.setCancelled(true);
                 }
             }
         }

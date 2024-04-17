@@ -17,9 +17,14 @@ commands:
     aliases:
       - list
   call:
+    aliases:
+      - horse
   gethorse:
   dropgold:
     aliases:
-      -dm
-      -drop
+      - dm
+      - drop
+  suicide:
+    aliases:
+      - sd
 

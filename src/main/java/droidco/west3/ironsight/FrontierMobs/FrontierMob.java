@@ -89,7 +89,7 @@ public class FrontierMob {
                 wolf.setCustomName(ChatColor.DARK_RED + "Rabid Hound");
                 wolf.setCustomNameVisible(true);
                 wolf.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 3, false, false));
-                wolf.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 3, false, false));
+                wolf.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2, false, false));
                 wolf.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2, false, false));
                 mobs.put(mobId,this);
                 entities.put(mobId,wolf);

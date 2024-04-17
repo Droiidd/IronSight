@@ -308,12 +308,11 @@ public class PlayerConnector {
             dataOutput.close();
             String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
             try{
-                String sqlInsert = "insert into custom_item (bandit_id, item_id, storage_type, item_contents) values (?,?,?,?);";
+                String sqlInsert = "insert into custom_item (bandit_id, storage_type, item_contents) values (?,?,?);";
                 PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                 insertStmt.setString(1, p.getUniqueId().toString());
                 insertStmt.setString(2, storageType);
-                insertStmt.setString(3, storageType);
-                insertStmt.setString(4, serialized);
+                insertStmt.setString(3, serialized);
                 int insertVal = insertStmt.executeUpdate();
                 System.out.println("Inventory updated.");
             }catch (Exception exception) {

@@ -23,15 +23,18 @@ public class HorseUI {
         for(FrontierHorse horse : horses){
             //if (!horse.isSummoned()) {
                 //HORSE IS NOT SUMMONED THEREFORE IN STORAGE
-                ItemStack horseItem = new ItemStack(Material.NAME_TAG);
-                ItemMeta meta = horseItem.getItemMeta();
-                meta.setDisplayName(horse.getHorseName());
-                List<String> lore = new ArrayList<>();
-                lore.add(ChatColor.GRAY+GlobalUtils.getHorseTypeString(horse.getHorseType()));
-                meta.setLore(lore);
-                horseItem.setItemMeta(meta);
-                playerHorses.setItem(count, horseItem);
-                count++;
+                if(!horse.isSummoned()){
+                    ItemStack horseItem = new ItemStack(Material.NAME_TAG);
+                    ItemMeta meta = horseItem.getItemMeta();
+                    meta.setDisplayName(horse.getHorseName());
+                    List<String> lore = new ArrayList<>();
+                    lore.add(ChatColor.GRAY+GlobalUtils.getHorseTypeString(horse.getHorseType()));
+                    meta.setLore(lore);
+                    horseItem.setItemMeta(meta);
+                    playerHorses.setItem(count, horseItem);
+
+                }
+            count++;
             //}
         }
         for (int i = 3; i < 9; i++) {
