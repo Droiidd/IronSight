@@ -1,5 +1,6 @@
 package droidco.west3.ironsight.Horse;
 
+import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
@@ -128,6 +129,7 @@ public class FrontierHorse {
                 for(int i =1;i<inv.getSize();i++){
                     inv.setItem(i,ItemIcon.getIcon("empty_horse_slot").getItem());
                 }
+                inv.setItem(8, ItemIcon.getIcon("go_back").getItem());
                 p.openInventory(inv);
             }case STANDARD -> {
                 Inventory inv = Bukkit.createInventory(p, 9, horseName + "'s saddle-pack storage");
@@ -135,6 +137,7 @@ public class FrontierHorse {
                 for(int i =4;i<inv.getSize();i++){
                     inv.setItem(i, ItemIcon.getIcon("empty_horse_slot").getItem());
                 }
+                inv.setItem(8, ItemIcon.getIcon("go_back").getItem());
                 p.openInventory(inv);
             }
         }

@@ -101,6 +101,10 @@ public class HorseEvents implements Listener {
                     if(e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)){
                         e.setCancelled(true);
                     }
+                    else if (e.getCurrentItem().getType().equals(Material.MAGENTA_GLAZED_TERRACOTTA)){
+                        e.setCancelled(true);
+                        p.openInventory(HorseUI.openHorseMenu(p, horse));
+                    }
                 }
             }
             if(targetHorse != null){
@@ -139,6 +143,7 @@ public class HorseEvents implements Listener {
             targetHorse.setHorseInv(e.getInventory().getContents());
         }
     }
+
 
 
 }

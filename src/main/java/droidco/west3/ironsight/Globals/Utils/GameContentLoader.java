@@ -471,6 +471,7 @@ public class GameContentLoader {
         new ItemIcon(" ","empty_horse_slot","",Material.GRAY_STAINED_GLASS_PANE);
             new ItemIcon(" ","empty_slot","Upgrade for more storage",Material.GRAY_STAINED_GLASS_PANE);
         System.out.println("Icons loaded");
+        new ItemIcon("Back", "go_back", "", Material.MAGENTA_GLAZED_TERRACOTTA);
     }
 
     public static void loadBrewing(){
