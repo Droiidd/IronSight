@@ -130,5 +130,8 @@ public class BlockBreakingEvents implements Listener {
         p.spigot().sendMessage(
                 ChatMessageType.ACTION_BAR,
                 new TextComponent(ChatColor.GRAY + "Ore mined. "+ChatColor.GREEN+""+bountyDecrease+" bounty!"));
+        p.spigot().sendMessage(
+                ChatMessageType.ACTION_BAR,
+                new TextComponent(ChatColor.GREEN+""+bountyDecrease+" bounty!"));
     }
 }

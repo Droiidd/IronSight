@@ -77,6 +77,7 @@ public class Bandit
     private String trackedNPC;
 
     private static HashMap<String, Bandit> bandits = new HashMap<>();
+    private boolean justJoined;
     //private List<ironHorse> horses;
 
     public Bandit(String pId)
@@ -104,22 +105,6 @@ public class Bandit
         bandits.put(pId,this);
         //this.plugin = plugin;
         this.onlinePlayer = null;
-    }
-
-    public List<ItemStack> getItemVault() {
-        return itemVault;
-    }
-
-    public void setItemVault(List<ItemStack> itemVault) {
-        this.itemVault = itemVault;
-    }
-
-    public int getVaultSize() {
-        return vaultSize;
-    }
-
-    public void setVaultSize(int vaultSize) {
-        this.vaultSize = vaultSize;
     }
 
     public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
@@ -438,6 +423,7 @@ public class Bandit
     }
 
 
+
     public void setBounty(int bounty) {
         this.bounty = bounty;
     }
@@ -530,6 +516,30 @@ public class Bandit
 
     public void setTrackedNPC(String trackedNPC) {
         this.trackedNPC = trackedNPC;
+    }
+
+    public List<ItemStack> getItemVault() {
+        return itemVault;
+    }
+
+    public void setItemVault(List<ItemStack> itemVault) {
+        this.itemVault = itemVault;
+    }
+
+    public int getVaultSize() {
+        return vaultSize;
+    }
+
+    public void setVaultSize(int vaultSize) {
+        this.vaultSize = vaultSize;
+    }
+
+    public boolean isJustJoined() {
+        return justJoined;
+    }
+
+    public void setJustJoined(boolean justJoined) {
+        this.justJoined = justJoined;
     }
 }
 

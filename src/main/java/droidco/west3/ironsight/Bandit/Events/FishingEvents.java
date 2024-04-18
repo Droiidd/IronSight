@@ -28,21 +28,25 @@ public class FishingEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         ItemStack hermitBait = CustomItem.getCustomItem("Hermit Crab").getItemStack();
         ItemStack slugBait = CustomItem.getCustomItem("Sea Slug").getItemStack();
+        slugBait.setAmount(1);
+        hermitBait.setAmount(1);
         int fishAmt = 1;
         boolean hasBait = false;
 
         //HANDLE BAIT REMOVING:
-        if(p.getInventory().containsAtLeast(hermitBait,1)){
-            p.getInventory().removeItem(hermitBait);
-            hasBait = true;
-        }
-        else if(p.getInventory().containsAtLeast(slugBait,1)){
-            p.getInventory().removeItem(slugBait);
-            hasBait = true;
-        }
-        else{
-            e.setCancelled(true);
-            p.sendMessage(ChatColor.GRAY + "Seems I need bait...");
+        if(e.getState().equals(PlayerFishEvent.State.REEL_IN)){
+            if(p.getInventory().containsAtLeast(hermitBait,1)){
+                p.getInventory().removeItem(hermitBait);
+                hasBait = true;
+            }
+            else if(p.getInventory().containsAtLeast(slugBait,1)){
+                p.getInventory().removeItem(slugBait);
+                hasBait = true;
+            }
+            else{
+                e.setCancelled(true);
+                p.sendMessage(ChatColor.GRAY + "Seems I need bait...");
+            }
         }
         //HANDLE BETTER FISHING ROD ODDS:
         if(p.getInventory().getItemInMainHand().equals(CustomItem.getCustomItem("Expedition Rod").getItemStack())){
