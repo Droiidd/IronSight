@@ -33,48 +33,53 @@ public class FishingEvents implements Listener {
         int fishAmt = 1;
         boolean hasBait = false;
 
-        //HANDLE BAIT REMOVING:
-        if(e.getState().equals(PlayerFishEvent.State.REEL_IN)){
-            if(p.getInventory().containsAtLeast(hermitBait,1)){
-                p.getInventory().removeItem(hermitBait);
-                hasBait = true;
-            }
-            else if(p.getInventory().containsAtLeast(slugBait,1)){
-                p.getInventory().removeItem(slugBait);
-                hasBait = true;
-            }
-            else{
-                e.setCancelled(true);
-                p.sendMessage(ChatColor.GRAY + "Seems I need bait...");
-            }
-        }
-        //HANDLE BETTER FISHING ROD ODDS:
-        if(p.getInventory().getItemInMainHand().equals(CustomItem.getCustomItem("Expedition Rod").getItemStack())){
-            int rand = GlobalUtils.getRandomNumber(101);
-            if (rand < 20) {
-                //20 % chance to catch double the fish!
-                fishAmt = 2;
-            }
-        }
+        if(e.getCaught() != null) {
 
-        if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Pearl River Fish");
-        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Three Forks Fish");
-        }
-        else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe Rier").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Guadalupe Fish");
-        }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Slough Creek Fish");
-        }else if(b.getCurrentLocation().getType() != LocationType.RIVER){
-            //FISHING IN THE MIDDLE OF NOWHERE
-            //NO RARE FISH
-            e.getCaught().remove();
-            successfulFish(p,fishAmt,"Global Fish");
+            //HANDLE BAIT REMOVING:
+            if(e.getState().equals(PlayerFishEvent.State.REEL_IN)){
+                p.sendMessage("");
+
+                if(p.getInventory().containsAtLeast(hermitBait,1)){
+                    p.getInventory().removeItem(hermitBait);
+                    hasBait = true;
+                }
+                else if(p.getInventory().containsAtLeast(slugBait,1)){
+                    p.getInventory().removeItem(slugBait);
+                    hasBait = true;
+                }
+                else{
+                    e.setCancelled(true);
+                    p.sendMessage(ChatColor.GRAY + "Seems I need bait...");
+                }
+            }
+            //HANDLE BETTER FISHING ROD ODDS:
+            if(p.getInventory().getItemInMainHand().equals(CustomItem.getCustomItem("Expedition Rod").getItemStack())){
+                int rand = GlobalUtils.getRandomNumber(101);
+                if (rand < 20) {
+                    //20 % chance to catch double the fish!
+                    fishAmt = 2;
+                }
+            }
+
+            if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Pearl River").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Pearl River Fish");
+            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Three Forks Delta").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Three Forks Fish");
+            }
+            else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Lower Guadalupe Rier").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Guadalupe Fish");
+            }else if(b.getCurrentLocation().getLocName().equalsIgnoreCase(FrontierLocation.getLocation("Slough Creek River").getLocName())){
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Slough Creek Fish");
+            }else if(b.getCurrentLocation().getType() != LocationType.RIVER){
+                //FISHING IN THE MIDDLE OF NOWHERE
+                //NO RARE FISH
+                e.getCaught().remove();
+                successfulFish(p,fishAmt,"Global Fish");
+            }
         }
     }
     public void caughtFishEffects(Player p) {
