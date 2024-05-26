@@ -30,9 +30,9 @@ public class RespawnUIEvents implements Listener {
             FrontierLocation neworleans = FrontierLocation.getLocation("New Orleans");
             FrontierLocation texas = FrontierLocation.getLocation("Republic of Texas");
 
-            org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ());
-            org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ());
-            org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ());
+            org.bukkit.Location sfRespawn = new org.bukkit.Location(p.getWorld(),santafe.getSpawnX(),santafe.getSpawnY(),santafe.getSpawnZ(),180,0);
+            org.bukkit.Location noRespawn = new org.bukkit.Location(p.getWorld(),neworleans.getSpawnX(),neworleans.getSpawnY(),neworleans.getSpawnZ(),90,0);
+            org.bukkit.Location rotRespawn = new org.bukkit.Location(p.getWorld(),texas.getSpawnX(),texas.getSpawnY(),texas.getSpawnZ(),180,0);
             switch(e.getCurrentItem().getType()){
                 case WHITE_BANNER -> {
                    handleRespawnActions(ChatColor.YELLOW+"Santa Fe",

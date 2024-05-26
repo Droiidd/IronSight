@@ -6,9 +6,7 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.*;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -30,6 +28,10 @@ public class CombatEvents implements Listener
         bannedTypes.add(EntityType.ARMOR_STAND);
         bannedTypes.add(EntityType.ITEM_FRAME);
         bannedTypes.add(EntityType.GLOW_ITEM_FRAME);
+
+        if(e.getDamager() instanceof Snowball || e.getDamager() instanceof Arrow){
+            e.setCancelled(true);
+        }
         if(e.getDamager() instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
             if(b.getCurrentLocation().getType().equals(LocationType.TOWN)){
