@@ -40,10 +40,9 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
+        p.sendMessage(p.getUniqueId().toString());
         Bandit b = PlayerConnector.fetchAllPlayerData(p);
         p.getWorld().setGameRule(GameRule.DO_IMMEDIATE_RESPAWN,true);
-        b.setJustJoined(true);
-
         if(b == null){
             System.out.println("New player!");
             p.sendMessage("New player!");
@@ -52,22 +51,24 @@ public class JoinServerEvents implements Listener{
             horses.add( new FrontierHorse(p.getUniqueId().toString(),"Starter", FrontierHorseType.STANDARD));
             p.teleport(new Location(p.getWorld(),1055,94,-1950));
             p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
-        }
+        }else{
+            b.setJustJoined(true);
+            b.setOnlinePlayer(p);
+            BanditUtils.displayBasicStats(b, p);
+            BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
 
-        b.setOnlinePlayer(p);
-        BanditUtils.displayBasicStats(b, p);
-        BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
-
-        //check if the player is in prison, and can be released
-        if(b.isJailed()){
-            long currentTime = System.currentTimeMillis();
-            long elapsedTime = currentTime - b.getJailStartTime();
-            int elap = (int) elapsedTime / 1000;
-            if (elap >= b.getBounty()) {
-                //Player has waited enough time
-                BanditUtils.releasePrisoner(p,b);
+            //check if the player is in prison, and can be released
+            if(b.isJailed()){
+                long currentTime = System.currentTimeMillis();
+                long elapsedTime = currentTime - b.getJailStartTime();
+                int elap = (int) elapsedTime / 1000;
+                if (elap >= b.getBounty()) {
+                    //Player has waited enough time
+                    BanditUtils.releasePrisoner(p,b);
+                }
             }
         }
+
     }
 
     @EventHandler

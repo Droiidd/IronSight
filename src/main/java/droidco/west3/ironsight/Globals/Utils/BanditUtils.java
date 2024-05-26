@@ -84,6 +84,7 @@ public class BanditUtils {
         b.setJailedFlag(false);
         p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " Prison!", "Good luck...");
         b.setRespawning(true);
+        getStarterItems(p);
     }
 
     public static String getPlayerRoleTitle() {
