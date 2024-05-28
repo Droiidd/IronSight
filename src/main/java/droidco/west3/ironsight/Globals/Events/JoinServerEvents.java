@@ -47,6 +47,7 @@ public class JoinServerEvents implements Listener{
             System.out.println("New player!");
             p.sendMessage("New player!");
             b = new Bandit(p.getUniqueId().toString());
+            BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
             List<FrontierHorse> horses = b.getHorses();
             horses.add( new FrontierHorse(p.getUniqueId().toString(),"Starter", FrontierHorseType.STANDARD));
             p.teleport(new Location(p.getWorld(),1055,94,-1950));

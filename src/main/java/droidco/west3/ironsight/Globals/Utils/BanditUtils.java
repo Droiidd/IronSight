@@ -190,6 +190,8 @@ public class BanditUtils {
                 return String.valueOf(ChatColor.DARK_RED)+ "Raider";
             case 6:
                 return String.valueOf(ChatColor.YELLOW)+ "Explorer";
+            case 0:
+                return "";
         }
         return "";
     }

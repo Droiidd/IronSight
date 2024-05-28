@@ -134,6 +134,9 @@ public class ContractUiEvents implements Listener {
                     case SPYGLASS -> {
                         updateContractorTitle(10,p,b,6);
                     }
+                    case BARRIER -> {
+                        updateContractorTitle(0,p,b,0);
+                    }
                 }
             }
         }

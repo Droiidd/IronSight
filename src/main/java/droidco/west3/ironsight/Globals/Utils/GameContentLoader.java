@@ -393,6 +393,7 @@ public class GameContentLoader {
         ItemIcon medic = new ItemIcon("Medic","medic_prefix","Choose medic (Level 7)",Material.PAPER);
         ItemIcon raider = new ItemIcon("Raider","raider_prefix","Choose raider (Level 9)",Material.SKELETON_SKULL);
         ItemIcon explorer = new ItemIcon("Explorer","explorer_prefix","Choose explorer (Level 10)",Material.SPYGLASS);
+        new ItemIcon("Reset Title","reset_prefix","Click for blank title!",Material.Barrier);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","contractor_title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
         //      ===--- TRACKER UI ICONS ---===
