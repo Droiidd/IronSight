@@ -56,7 +56,7 @@ public class GameContentLoader {
         CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0,3);
         CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0,1);
         CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.GREEN_DYE,0.0,0.0);
-        CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
+        CustomItem unSpice = new CustomItem("Unprocessed Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
 
@@ -80,7 +80,7 @@ public class GameContentLoader {
         CustomItem foxfur = new CustomItem("Fox Fur",4,true,false, "Warmest fur on the market",Material.ORANGE_DYE,16.0,0.0);
         CustomItem geode = new CustomItem("Geode",4,true,false, "Bring to geologist to open",Material.FIREWORK_STAR,0.0,0.0);
         CustomItem minerspick = new CustomItem("Old Miner's Pick",4,true,false, "Steeled with rust",Material.IRON_PICKAXE,0.0,530.0,1);
-        CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf",4,false,false, "Process to consume",Material.ENDER_PEARL,19.0,0.0);
+        CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf",4,false,false, "Rolled in a tobacco leaf",Material.ENDER_PEARL,19.0,0.0);
         CustomItem spicebottle = new CustomItem("Spice Bottle",4,false,false, "Smell's like the future",Material.HONEY_BOTTLE,23.0,0.0);
         CustomItem oil = new CustomItem("Unrefined Oil",4,false,false, "Refine for higher sale value",Material.BUCKET,0.0,0.0);
         CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
@@ -393,7 +393,7 @@ public class GameContentLoader {
         ItemIcon medic = new ItemIcon("Medic","medic_prefix","Choose medic (Level 7)",Material.PAPER);
         ItemIcon raider = new ItemIcon("Raider","raider_prefix","Choose raider (Level 9)",Material.SKELETON_SKULL);
         ItemIcon explorer = new ItemIcon("Explorer","explorer_prefix","Choose explorer (Level 10)",Material.SPYGLASS);
-        new ItemIcon("Reset Title","reset_prefix","Click for blank title!",Material.Barrier);
+        new ItemIcon("Reset Title","reset_prefix","Click for blank title!",Material.BARRIER);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","contractor_title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
 
         //      ===--- TRACKER UI ICONS ---===

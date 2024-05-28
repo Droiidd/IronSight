@@ -62,7 +62,8 @@ public class BlockBreakingEvents implements Listener {
 
 
         if (block.getType() == Material.WITHER_ROSE) {
-            //breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem());
+            p.sendMessage("SPICE");
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
         }
 
         if (block.getType() == Material.LILY_OF_THE_VALLEY) {
@@ -103,7 +104,8 @@ public class BlockBreakingEvents implements Listener {
         if (block.getType() == Material.DEAD_BUSH) {
             //breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
         }
-        if (block.getType() == Material.SEA_PICKLE) {
+        if (block.getType() == Material.JUNGLE_SAPLING) {
+            p.sendMessage("SMOKELEAF");
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),1);
         }
 
