@@ -41,6 +41,7 @@ public class JoinServerEvents implements Listener{
             p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
         }
 
+        p.sendMessage("HIIII");
         b.setOnlinePlayer(p);
         BanditUtils.displayBasicStats(b, p);
         BanditTask playerLifeTracker = new BanditTask(plugin, b, p);

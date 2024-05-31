@@ -134,6 +134,9 @@ public class ContractUiEvents implements Listener {
                     case SPYGLASS -> {
                         updateContractorTitle(10,p,b,6);
                     }
+                    case BARRIER -> {
+                        updateContractorTitle(0,p,b,0);
+                    }
                 }
             }
         }
@@ -158,6 +161,7 @@ public class ContractUiEvents implements Listener {
     public void updateContractorTitle(int requiredLevel,Player p,Bandit b, int title)
     {
         if(b.getContractorLvl() >= requiredLevel){
+            p.sendMessage(ChatColor.GREEN+ "Title selected!");
             b.setContractorTitle(title);
         }
         else{
@@ -165,7 +169,6 @@ public class ContractUiEvents implements Listener {
             p.sendMessage(ChatColor.RED+ "Not a high enough level!");
         }
         p.closeInventory();
-        p.sendMessage(BanditUtils.getContractorTitle(b)+ ChatColor.GRAY+" title selected.");
     }
     public void checkLevelUp(Player p, Bandit b){
         if(b.getContractorXp() >= 10 && b.getContractorXp() < 20){

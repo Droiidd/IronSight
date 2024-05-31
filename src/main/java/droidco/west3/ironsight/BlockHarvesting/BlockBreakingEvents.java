@@ -28,8 +28,7 @@ public class BlockBreakingEvents implements Listener {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e) {
-        Player p = e.getPlayer();
+    public void onBreak(BlockBreakEvent e) {Player p = e.getPlayer();
         e.setCancelled(true);
         Block block = (Block) e.getBlock();
         e.setDropItems(false);
@@ -62,9 +61,11 @@ public class BlockBreakingEvents implements Listener {
 
 
         if (block.getType() == Material.WITHER_ROSE) {
-            //breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem());
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
         }
-
+        if (block.getType() == Material.JUNGLE_SAPLING) {
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),1);
+        }
         if (block.getType() == Material.LILY_OF_THE_VALLEY) {
             breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Life Seeds"),1);
         }
@@ -100,12 +101,7 @@ public class BlockBreakingEvents implements Listener {
         if (block.getType() == Material.RAW_GOLD_BLOCK) {
             breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),9);
         }
-        if (block.getType() == Material.DEAD_BUSH) {
-            //breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
-        }
-        if (block.getType() == Material.SEA_PICKLE) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),1);
-        }
+
 
 
     }

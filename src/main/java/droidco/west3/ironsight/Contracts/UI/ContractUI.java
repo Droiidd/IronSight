@@ -24,6 +24,7 @@ public class ContractUI {
     public static Inventory openContractorTitleSelectUi(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
         Bandit b = Bandit.getPlayer(p);
+        contractUi.setItem(4,ItemIcon.getIcon("remove_title").getItem());
         contractUi.setItem(11,ItemIcon.getIcon("cowboy_prefix").getItem());
         contractUi.setItem(12,ItemIcon.getIcon("tracker_prefix").getItem());
         contractUi.setItem(15,ItemIcon.getIcon("raider_prefix").getItem());

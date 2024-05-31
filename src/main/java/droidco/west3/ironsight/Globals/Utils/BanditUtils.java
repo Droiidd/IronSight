@@ -177,6 +177,8 @@ public class BanditUtils {
     }
     public static String getContractorTitle(Bandit b) {
         switch(b.getContractorTitle()){
+            case 0:
+                return "";
             case 1:
                 return String.valueOf(ChatColor.GRAY)+"Miner";
             case 2:

@@ -139,7 +139,7 @@ public class GeneralEvents implements Listener {
     public void globalChatEvents(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
-        e.setFormat(b.getTitle()+ChatColor.RESET+e.getFormat());
+        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+b.getContractorLvl()+"] "+ChatColor.RESET+e.getFormat());
     }
     @EventHandler
     public void breakGlassEvent(ProjectileHitEvent e){
@@ -149,6 +149,7 @@ public class GeneralEvents implements Listener {
                     case LIGHT_GRAY_STAINED_GLASS_PANE,GRAY_STAINED_GLASS_PANE ->{
                         e.getHitBlock().setType(Material.FIRE);
                         e.getHitBlock().getLocation().getWorld().playSound(e.getHitBlock().getLocation(),Sound.BLOCK_GLASS_BREAK,1,1);
+                        //start pane respawn timer
                     }
                 }
             }
@@ -163,7 +164,8 @@ public class GeneralEvents implements Listener {
         if(block != null){
             switch(block.getType()){
                 case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
-                        RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK->{
+                     RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK,JUNGLE_SAPLING,WITHER_ROSE,BLUE_ORCHID,TORCHFLOWER,WARPED_FUNGUS,SWEET_BERRY_BUSH,LILY_OF_THE_VALLEY
+                        ->{
                     e.setCancelled(false);
                 }
                 case CHEST -> {

@@ -56,7 +56,7 @@ public class GameContentLoader {
         CustomItem glassBottle = new CustomItem("Glass Bottle",2,true,false, "Used for brewing drinks",Material.GLASS_BOTTLE,0.0,15.0,3);
         CustomItem fishingRod = new CustomItem("Wooden Fishing Rod",2,true,false, "Basic stick and line",Material.FISHING_ROD,0.0,200.0,1);
         CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf",2,false,false, "Process to consume",Material.GREEN_DYE,0.0,0.0);
-        CustomItem unSpice = new CustomItem("Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
+        CustomItem unSpice = new CustomItem("Unprocessed Spice",2,false,false, "Process to consume",Material.HONEY_BOTTLE,0.0,0.0);
         CustomItem iron = new CustomItem("Iron Ore",2, true, false, "Can be refined or sold",Material.RAW_IRON,10.0,0.0);
         CustomItem copper = new CustomItem("Copper Ore",1, true, false, "Can be refined or sold",Material.RAW_COPPER,14.0,0.0);
 
@@ -387,6 +387,7 @@ public class GameContentLoader {
         ItemIcon nextPage = new ItemIcon("Next Page","next_page","Click to go to next page",Material.MAGENTA_GLAZED_TERRACOTTA);
         new ItemIcon("Previous Page","previous_page","Click to go to previous page",Material.MAGENTA_GLAZED_TERRACOTTA);
 
+
         ItemIcon miner = new ItemIcon("Miner","miner_prefix","Choose miner (Level 3)",Material.STONE_PICKAXE);
         ItemIcon cowboy = new ItemIcon("Cowboy","cowboy_prefix","Choose cowboy (Level 4)", Material.HAY_BLOCK);
         ItemIcon tracker = new ItemIcon("Tracker","tracker_prefix", "Choose tracker (Level 5)",Material.LEATHER_BOOTS);
@@ -394,6 +395,7 @@ public class GameContentLoader {
         ItemIcon raider = new ItemIcon("Raider","raider_prefix","Choose raider (Level 9)",Material.SKELETON_SKULL);
         ItemIcon explorer = new ItemIcon("Explorer","explorer_prefix","Choose explorer (Level 10)",Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title","contractor_title","Select your contractor title",Material.SPRUCE_HANGING_SIGN);
+        new ItemIcon("Remove Title","remove_title","Click to reset prefix",Material.BARRIER);
 
         //      ===--- TRACKER UI ICONS ---===
         ItemIcon town = new ItemIcon("Towns", "town_tracker", "Find town", Material.DARK_OAK_HANGING_SIGN);
