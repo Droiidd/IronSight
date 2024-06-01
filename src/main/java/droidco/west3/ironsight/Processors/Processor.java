@@ -20,6 +20,7 @@ public class Processor {
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     private final ArrayList<Processor> utilsList = new ArrayList<>();
     private static List<ProcessorCoordinate> coordList = new ArrayList<>();
+    private static HashMap<String, List<ProcessorCoordinate>> coordMap = new HashMap<>();
     private UUID npcId;
     private boolean isProcessing;
     private Location defaultLocation;
@@ -62,44 +63,52 @@ public class Processor {
         return processorsById;
     }
 
+    public void randomizeProcLocation(Player p) {
+        List<ProcessorCoordinate> tmpList = getCoordList(this.type);
+        int choice = GlobalUtils.getRandomNumber(tmpList.size());
+        ProcessorCoordinate coord = coord = tmpList.get(choice);
 
-    public void randomizeLocAndSpawn(Player p) {
-        boolean findingPosition = true;
-        boolean duplicatePosition = false;
-       // boolean isSpawned = false;
-        while(findingPosition){
-            int coordChoice = GlobalUtils.getRandomNumber(coordList.size());
-            ProcessorCoordinate targetCoord = coordList.get(coordChoice);
-            if(!targetCoord.equals(this.defaultPosition) && targetCoord != null){
-                p.sendMessage("Found spawnable area!");
-                if(processorsById.size() > 0){
-                    for(var proc : processorsById.entrySet()){
-                       // if(!isSpawned){
+        if(this.defaultPosition == null){
+            // PROCESSOR IS BEING INITIALIZED, REMOVE NEW LOCATION FROM POOL AFTER SELECTING
+            this.defaultLocation = new Location(p.getPlayer().getWorld(), coord.getX(),coord.getY(),coord.getZ());
+            this.defaultPosition = coord;
+            p.sendMessage("Spawning NPC");
+            p.sendMessage(coord.getX()+" "+coord.getY()+" "+coord.getZ()+". ");
+            createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+            // removing from pool
+            tmpList.remove(choice);
+            Processor.updateCoordMap( this.type,tmpList);
+        }else{
+            // PROCESSOR ALREADY HAS A LOCATION, RANDOMIZE, THEN RETURN IT TO THE POOL
+            // Saving to return to pool later
+            ProcessorCoordinate tmpCoord = this.defaultPosition;
 
-                        if(proc.getValue().defaultPosition != null){
-                            if(proc.getValue().getDefaultPosition().equals(targetCoord)){
-                                duplicatePosition = true;
-                            }
-                        }
-
-                       // }
-                    }
-                    if(!duplicatePosition){
-                        p.sendMessage("Found unique location!");
-                        if(defaultLocation != null){
-                            GlobalUtils.displayParticles(defaultLocation,Particle.CLOUD,Particle.EXPLOSION_HUGE,3);
-                        }
-                        this.defaultLocation = new Location(p.getPlayer().getWorld(), targetCoord.getX(),targetCoord.getY(),targetCoord.getZ());
-                        this.defaultPosition = targetCoord;
-                        findingPosition = false;
-                        //isSpawned = true;
-                        p.sendMessage("Spawning NPC");
-
-                        createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
-                    }
-                }
-            }
+            this.defaultLocation = new Location(p.getPlayer().getWorld(), coord.getX(),coord.getY(),coord.getZ());
+            this.defaultPosition = coord;
+            p.sendMessage("Spawning NPC@!Q");
+            p.sendMessage(coord.getX()+" "+coord.getY()+" "+coord.getZ()+". ");
+            createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
+            // removing from pool
+            tmpList.remove(choice);
+            // returning previous location to pool
+            tmpList.add(tmpCoord);
+            Processor.updateCoordMap( this.type,tmpList);
         }
+    }
+
+    public static HashMap<String, List<ProcessorCoordinate>> getCoordMap() {
+        return coordMap;
+    }
+
+    public static void setCoordMap(HashMap<String, List<ProcessorCoordinate>> coordMap) {
+        Processor.coordMap = coordMap;
+    }
+    public static void updateCoordMap(ProcessorType type, List<ProcessorCoordinate> coords) {
+        coordMap.replace(type.toString(), coords);
+    }
+
+    public static void addProcCoords(ProcessorType type, List<ProcessorCoordinate> coords) {
+        coordMap.put(type.toString(),coords);
     }
     public static Processor getProcessor(String procName) {
         return processorsById.getOrDefault(ChatColor.stripColor(procName), null);
@@ -113,9 +122,16 @@ public class Processor {
         this.defaultLocation = location;
     }
 
-    public void addCoordinate(int x,int y,int z){
-        coordList.add(new ProcessorCoordinate(x,y,z));
+
+
+    public static List<ProcessorCoordinate> getCoordList(ProcessorType type) {
+        return coordMap.get(type.toString());
     }
+
+    public static void setCoordList(List<ProcessorCoordinate> coordList) {
+        Processor.coordList = coordList;
+    }
+
     public boolean isProcessing() {
         return isProcessing;
     }

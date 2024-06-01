@@ -58,7 +58,7 @@ public class ProcessorEvents implements Listener {
                                     }
                                 }
                                 p.closeInventory();
-                                processor.getValue().randomizeLocAndSpawn(p);
+                                processor.getValue().randomizeProcLocation(p);
                             } else {
                                 p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
                                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);

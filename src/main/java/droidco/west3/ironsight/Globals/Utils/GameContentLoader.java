@@ -17,6 +17,7 @@ import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Items.Looting.Quantity;
 import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import droidco.west3.ironsight.Processors.Processor;
+import droidco.west3.ironsight.Processors.ProcessorCoordinate;
 import droidco.west3.ironsight.Processors.ProcessorType;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.NPC.NPC;
@@ -81,7 +82,7 @@ public class GameContentLoader {
         CustomItem geode = new CustomItem("Geode",4,true,false, "Bring to geologist to open",Material.FIREWORK_STAR,0.0,0.0);
         CustomItem minerspick = new CustomItem("Old Miner's Pick",4,true,false, "Steeled with rust",Material.IRON_PICKAXE,0.0,530.0,1);
         CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf",4,false,false, "Process to consume",Material.ENDER_PEARL,19.0,0.0);
-        CustomItem spicebottle = new CustomItem("Spice Bottle",4,false,false, "Smell's like the future",Material.HONEY_BOTTLE,23.0,0.0);
+        CustomItem spicebottle = new CustomItem("Spice",4,false,false, "Smell's like the future",Material.HONEY_BOTTLE,23.0,0.0);
         CustomItem oil = new CustomItem("Unrefined Oil",4,false,false, "Refine for higher sale value",Material.BUCKET,0.0,0.0);
         CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
         CustomItem doublespaderecipe = new CustomItem("Miner's Double Spade Brew Recipe",3,true,false, "Right click to view recipe",Material.FLOWER_BANNER_PATTERN,1500.0,0.0,1);
@@ -332,43 +333,44 @@ public class GameContentLoader {
     }
     public static void loadLocations(IronSight plugin){
         System.out.println("Loading all locations");
-        //Item tables
 
         //Locations
 
-        FrontierLocation stormpoint = new FrontierLocation("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
+        new FrontierLocation("Storm Point","Drug Base", LocationType.ILLEGAL, 26, -157, -2788, -3015);
+        new FrontierLocation("Red Ash Camp","Drug Base", LocationType.ILLEGAL, -1256,-1429,523,686);
 
         FrontierLocation northoil = new FrontierLocation("North Moraine Oil Field","Illegal area!",LocationType.ILLEGAL, 2827,3041,-2951,-3189);
         FrontierLocation southoil = new FrontierLocation("South Oil Field","Illegal area!",LocationType.ILLEGAL,778,602,1480,1720);
 
-        OilFieldCrate crate = new OilFieldCrate(1,northoil,2857,101,-3048);
-        OilFieldCrate crate2 = new OilFieldCrate(2,northoil,2911,101,-3037);
-        OilFieldCrate crate3 = new OilFieldCrate(3,northoil,2924,101,-3083);
-        OilFieldCrate crate4 = new OilFieldCrate(4,northoil,2936,101,-2988);
-        OilFieldCrate crate5 = new OilFieldCrate(5,northoil,2959,101,-3037);
-        OilFieldCrate crate6 = new OilFieldCrate(6,northoil,2992,101,-3087);
-        OilFieldCrate crate7 = new OilFieldCrate(7,northoil,2984,101,-3154);
+        new OilFieldCrate(1,northoil,2857,101,-3048);
+        new OilFieldCrate(2,northoil,2911,101,-3037);
+        new OilFieldCrate(3,northoil,2924,101,-3083);
+        new OilFieldCrate(4,northoil,2936,101,-2988);
+        new OilFieldCrate(5,northoil,2959,101,-3037);
+        new OilFieldCrate(6,northoil,2992,101,-3087);
+        new OilFieldCrate(7,northoil,2984,101,-3154);
 
-        OilFieldTask oil1 = new OilFieldTask(plugin, northoil);
+        new OilFieldTask(plugin, northoil);
         //OilFieldTask oil2 = new OilFieldTask(southoil);
-
-        FrontierLocation sloughcreek = new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
-        FrontierLocation neworleans = new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1230,-1403,-1834,-1664.0,-1253.0,86.0,-1667.0);
-        FrontierLocation santafe = new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
-        FrontierLocation texas = new FrontierLocation("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1034.0,72.0,2526.0);
-
-        FrontierLocation prison = new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 2079,1794,-799,-959,1987,94,-920);
-
-        FrontierLocation blackspur = new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
-
-        FrontierLocation sloughcreekR = new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2542,2766,445,69);
-        FrontierLocation pearlR = new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
-        FrontierLocation threeForks = new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1304,-1145,-2989,2144);
-        FrontierLocation guadalupe = new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1887,-1708,1177,365);
-        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,1014,947,-2857,-2778);
-
-        FrontierLocation wilderness = new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
+        //TOWNS
+        new FrontierLocation("New Orleans", "PvP disabled!",LocationType.TOWN,-1181,-1407,-1842,-1662,-1367.0,92.0,-1764.0);
+        new FrontierLocation("Santa Fe","PvP Disabled",LocationType.TOWN,1119,888,-1755,-2066,1055.0,94.0,-1955.0);
+        new FrontierLocation("Republic of Texas","PvP Disabled",LocationType.TOWN,-1197,-831,2628,2214,-1030.0,72.0,2520.0);
+        // MISC
+        new FrontierLocation("Slough Creek","Scav Town",LocationType.ILLEGAL,2589,2835,799,471);
+        new FrontierLocation("Prison","JaiL!",LocationType.PRISON, 2079,1794,-799,-959,1987,94,-920);
+        new FrontierLocation("Wilderness", "Yeehaw", LocationType.WILDERNESS, 0, 0, 0, 0);
         new FrontierLocation("Sierra Gorge Camp","Scavenger Town",LocationType.EVENT,2834,2543,819,466);
+        // MINES
+        new FrontierLocation("Black Spur Mines","Be weary of the depths",LocationType.MINE,1542,2248,-2102,-1775);
+        // RIVERSS
+        new FrontierLocation("Slough Creek River","Fishings good",LocationType.RIVER, 2542,2766,445,69);
+        new FrontierLocation("Pearl River","Ice cold rapids!",LocationType.RIVER,2599,2083,-2596,-2475);
+        new FrontierLocation("Three Forks Delta","A thick and nasty swamp",LocationType.RIVER,-1402,-1161,-2967,-2044);
+        new FrontierLocation("Lower Guadalupe River", "Sunk into the canyon long ago",LocationType.RIVER,-1847,-1740,1185,291);
+        // FIELDS
+        new FrontierLocation("Smokeleaf Field", "Grown in damp ground",LocationType.ILLEGAL,1014,947,-2857,-2778);
+        new FrontierLocation("Spice Field", "Harvested spice burns the earth",LocationType.ILLEGAL,-1550,-1447,636,725);
         System.out.println("Locations loaded");
     }
     public static void loadIcons()
@@ -504,21 +506,40 @@ public class GameContentLoader {
     }
     public static void loadProcessors() {
 
-        Processor proc1 = new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
-        Processor proc2 = new Processor("Smoke leaf processor 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
-        Processor proc3 = new Processor("Smoke leaf processor 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        new Processor("Smoke leaf processor 1", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        new Processor("Smoke leaf processor 2",ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
+        new Processor("Smoke leaf processor 3", ProcessorType.SMOKE_LEAF, FrontierLocation.getLocation("Storm Point"),CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack(),CustomItem.getCustomItem("Processed Smokeleaf").getItemStack());
 
-        for(var proc : Processor.getProcessors().entrySet()){
-            proc.getValue().addCoordinate(-53,108,-2920);
-            proc.getValue().addCoordinate(-50,106,-2936);
-            proc.getValue().addCoordinate(-63,112,-2934);
-            proc.getValue().addCoordinate(-46,107,-2964);
-            proc.getValue().addCoordinate(-46,111,-2959);
-            proc.getValue().addCoordinate(-43,119,-2968);
-            proc.getValue().addCoordinate(-14,106,-2933);
-            proc.getValue().addCoordinate(-15,112,-2936);
-            proc.getValue().addCoordinate(-18,117,-2935);
-        }
+        new Processor("Spice processor 1", ProcessorType.SPICE, FrontierLocation.getLocation("Red Ash Camp"),CustomItem.getCustomItem("Unprocessed Spice").getItemStack(),CustomItem.getCustomItem("Spice").getItemStack());
+        new Processor("Spice processor 2",ProcessorType.SPICE, FrontierLocation.getLocation("Red Ash Camp"),CustomItem.getCustomItem("Unprocessed Spice").getItemStack(),CustomItem.getCustomItem("Spice").getItemStack());
+        new Processor("Spice processor 3", ProcessorType.SPICE, FrontierLocation.getLocation("Red Ash Camp"),CustomItem.getCustomItem("Unprocessed Spice").getItemStack(),CustomItem.getCustomItem("Spice").getItemStack());
+
+
+                List<ProcessorCoordinate> smokeCords = new ArrayList<>();
+                smokeCords.add(new ProcessorCoordinate(-53,108,-2920));
+                smokeCords.add(new ProcessorCoordinate(-50,106,-2936));
+                smokeCords.add(new ProcessorCoordinate(-63,112,-2934));
+                smokeCords.add(new ProcessorCoordinate(-46,107,-2964));
+                smokeCords.add(new ProcessorCoordinate(-46,111,-2959));
+                smokeCords.add(new ProcessorCoordinate(-43,119,-2968));
+                smokeCords.add(new ProcessorCoordinate(-14,106,-2933));
+                smokeCords.add(new ProcessorCoordinate(-15,112,-2936));
+                smokeCords.add(new ProcessorCoordinate(-18,117,-2935));
+                Processor.addProcCoords(ProcessorType.SMOKE_LEAF,smokeCords);
+
+                List<ProcessorCoordinate> spiceCords = new ArrayList<>();
+                spiceCords.add(new ProcessorCoordinate(-1310,81,587));
+                spiceCords.add(new ProcessorCoordinate(-1307,69,585));
+                spiceCords.add(new ProcessorCoordinate(-1295,69,580));
+                spiceCords.add(new ProcessorCoordinate(-1294,75,568));
+                spiceCords.add(new ProcessorCoordinate(-1377,60,600));
+                spiceCords.add(new ProcessorCoordinate(-1383,53,596));
+                spiceCords.add(new ProcessorCoordinate(-1318,52,663));
+                spiceCords.add(new ProcessorCoordinate(-1334,52,678));
+                spiceCords.add(new ProcessorCoordinate(-1335,63,659));
+                spiceCords.add(new ProcessorCoordinate(-1373,55,584));
+                Processor.addProcCoords(ProcessorType.SPICE,spiceCords);
+
         System.out.println("Processors successfully loaded!");
     }
     public static void loadPotions()

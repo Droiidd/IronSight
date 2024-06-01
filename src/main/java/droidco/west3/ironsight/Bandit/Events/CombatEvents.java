@@ -76,7 +76,7 @@ public class CombatEvents implements Listener
     }
 
     @EventHandler
-    public void playerDamage(EntityDamageEvent e){
+    public void playerDeath(EntityDamageEvent e){
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             Bandit b = Bandit.getPlayer(p);
@@ -103,7 +103,9 @@ public class CombatEvents implements Listener
                     p.getWorld().dropItem(p.getLocation(), new CustomItem(b.getWallet()+"",1,true,false,"", Material.GOLD_NUGGET,0.0,0.0).getItemStack());
                 }
                 b.setWallet(0);
-                p.teleport(new Location(p.getWorld(), 1056,317,-1957));
+                 FrontierLocation sf = FrontierLocation.getLocation("Santa Fe");
+                p.teleport(new Location(p.getWorld(), sf.getSpawnX(),sf.getSpawnY(),sf.getSpawnZ()));
+
                 p.setVisualFire(false);
                 p.setFireTicks(0);
                 p.setHealth(20);

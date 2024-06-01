@@ -139,7 +139,7 @@ public class GeneralEvents implements Listener {
     public void globalChatEvents(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
-        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+b.getContractorLvl()+"] "+ChatColor.RESET+e.getFormat());
+        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(b)+b.getContractorLvl()+ChatColor.GRAY+"] "+ChatColor.GRAY +e.getFormat()+ChatColor.RESET);
     }
     @EventHandler
     public void breakGlassEvent(ProjectileHitEvent e){

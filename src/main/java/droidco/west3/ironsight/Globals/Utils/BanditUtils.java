@@ -76,7 +76,32 @@ public class BanditUtils {
         p.getInventory().addItem(salmon);
         p.getInventory().addItem(splint);
     }
-
+public static ChatColor getContractorLvlColor(Bandit b){
+        switch (b.getContractorLvl()){
+            case 0,1 ->{
+                return ChatColor.GRAY;
+            }
+            case 2,3,4 ->{
+                return ChatColor.YELLOW;
+            }
+            case 5,6,7 ->{
+                return ChatColor.GREEN;
+            }
+            case 8,9 ->{
+                return ChatColor.AQUA;
+            }
+            case 10,11 ->{
+                return ChatColor.LIGHT_PURPLE;
+            }
+            case 12 ->{
+                return ChatColor.RED;
+            }
+            case 13 ->{
+                return ChatColor.DARK_RED;
+            }
+        }
+            return ChatColor.GRAY;
+}
     public static void releasePrisoner(Player p, Bandit b) {
         b.setBounty(0);
         b.setJailed(false);
@@ -84,6 +109,7 @@ public class BanditUtils {
         b.setJailedFlag(false);
         p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " Prison!", "Good luck...");
         b.setRespawning(true);
+        getStarterItems(p);
     }
 
     public static String getPlayerRoleTitle() {

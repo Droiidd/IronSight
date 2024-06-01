@@ -19,10 +19,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.*;
 
-public class    BanditTask extends BukkitRunnable {
+public class BanditTask extends BukkitRunnable {
     private ArrayList<BanditTask> tasks = new ArrayList<>();
     private final IronSight plugin;
     private final Bandit b;
@@ -61,6 +62,7 @@ public class    BanditTask extends BukkitRunnable {
 
     List<FrontierLocation> locations;
     HashMap<UUID, LivingEntity> npcEnts;
+    HashMap<UUID, LivingEntity> procEnts;
 
     public BanditTask(IronSight plugin, Bandit b, Player p) {
 
@@ -102,19 +104,19 @@ public class    BanditTask extends BukkitRunnable {
         this.raiders.add(ranger);
         this.raiders.add(wolf);
         //this.raiders.add(raiderBrute);
-        Contract.assignPlayerContracts(p,b);
+        Contract.assignPlayerContracts(p, b);
     }
 
     @Override
     public void run() {
-        if(b.getCurrentLocation() != null){
+        if (b.getCurrentLocation() != null) {
             b.getCurrentLocation().addTitle(p);
         }
-        if(tick % 3 == 0){
+        if (tick % 3 == 0) {
             seconds++;
             mobSec++;
             //      ===--- COMPASS TRACKER ---===
-            if(p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)){
+            if (p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)) {
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
                     p.setCompassTarget(b.getTrackingLocation());
                     Double distance = b.getTrackingLocation().distance(p.getLocation());
@@ -123,9 +125,8 @@ public class    BanditTask extends BukkitRunnable {
                     if (b.isTrackingNPC()) {
                         p.spigot().sendMessage(
                                 ChatMessageType.ACTION_BAR,
-                                new TextComponent(b.getTrackedNPC() +" "+ String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
-                    }
-                    else {
+                                new TextComponent(b.getTrackedNPC() + " " + String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
+                    } else {
                         p.spigot().sendMessage(
                                 ChatMessageType.ACTION_BAR,
                                 new TextComponent(b.getTrackingFrontierLocation().getLocName() + " " + String.valueOf(distanceMsg) + ChatColor.GRAY + " blocks away!"));
@@ -145,7 +146,7 @@ public class    BanditTask extends BukkitRunnable {
                 }
             }
             //      ===--- HELPFUL TIPS ---===
-            if(seconds % 300 == 0){
+            if (seconds % 300 == 0) {
                 p.sendMessage(BanditUtils.getRandomTip());
             }
             //      ===--- HANDLES PLAYER RESPAWN ---===
@@ -181,8 +182,8 @@ public class    BanditTask extends BukkitRunnable {
             //      ===--- LOCATION SPECIFIC ---===
             FrontierLocation currentLoc = b.getCurrentLocation();
             b.getCurrentLocation().addTitle(p);
-            for(FrontierLocation location : locations){
-                if(!location.getLocName().equalsIgnoreCase(b.getCurrentLocation().getLocName())){
+            for (FrontierLocation location : locations) {
+                if (!location.getLocName().equalsIgnoreCase(b.getCurrentLocation().getLocName())) {
                     location.removeTitle(p);
                     p.resetTitle();
                 }
@@ -202,7 +203,7 @@ public class    BanditTask extends BukkitRunnable {
                     b.setEscaping(false);
                 }
             }
-            if(currentLoc.getType().equals(LocationType.PRISON)){
+            if (currentLoc.getType().equals(LocationType.PRISON)) {
                 if (b.isJailed()) {
                     //REMEMBER TO CHECK IF THEY'RE INSIDE A PRISON
                     b.updateBounty(-1);
@@ -214,7 +215,7 @@ public class    BanditTask extends BukkitRunnable {
 
             //      ===--- TOWNS ---===
             if (currentLoc.getType().equals(LocationType.TOWN)) {
-                spawnNPCs(p,b);
+                spawnNPCs(p, b);
                 p.setLastDamage(0.0);
                 //NO WANTED PLAYERS IN TOWN!!!
                 if (b.isWanted()) {
@@ -237,9 +238,9 @@ public class    BanditTask extends BukkitRunnable {
             if (currentLoc.getType().equals(LocationType.ILLEGAL) || currentLoc.getType().equals(LocationType.OIL_FIELD)) {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
-                spawnProcessors(p,b);
+                spawnProcessors(p, b);
             }
-            if(currentLoc.getLocName().equalsIgnoreCase("Storm Point")){
+            if (currentLoc.getLocName().equalsIgnoreCase("Storm Point")) {
                 if (!currentLoc.isNewArrival()) {
                     currentLoc.setNewArrival(true);
                 }
@@ -278,10 +279,10 @@ public class    BanditTask extends BukkitRunnable {
                 }
             }
             //      ===--- SUMMONING HORSE ---===
-            if(b.isSummoningHorse()){
-                horseTimer ++;
-                p.sendMessage(ChatColor.GRAY+"Horse arrives in "+ChatColor.AQUA+ (horseFullCallTime-horseTimer)+ChatColor.GRAY+ " seconds.");
-                if(horseTimer == horseFullCallTime){
+            if (b.isSummoningHorse()) {
+                horseTimer++;
+                p.sendMessage(ChatColor.GRAY + "Horse arrives in " + ChatColor.AQUA + (horseFullCallTime - horseTimer) + ChatColor.GRAY + " seconds.");
+                if (horseTimer == horseFullCallTime) {
                     b.setSummoningHorse(false);
                     horseTimer = 0;
                     b.getHorseBeingSummoned().summonHorse(p);
@@ -289,43 +290,41 @@ public class    BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
-                    p.sendMessage(ChatColor.AQUA +b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    p.sendMessage(ChatColor.AQUA + b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
                     b.getHorseBeingSummoned().setSummoned(true);
-                    p.sendMessage(ChatColor.GRAY+"Shift + right-click to open it's inventory.");
+                    p.sendMessage(ChatColor.GRAY + "Shift + right-click to open it's inventory.");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
 
             p.setLevel(contractTimer - contractCounter);
             if (contractTimer == contractCounter) {
-                Contract.assignPlayerContracts(p,b);
+                Contract.assignPlayerContracts(p, b);
                 p.sendMessage(ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
                 contractCounter = 0;
             }
             contractCounter++;
             //      ===--- MOB SPAWNING ---===
-            if(mobSec == mobRespawnTime){
+            if (mobSec == mobRespawnTime) {
                 //p.sendMessage("30 seconds passed.");
-                switch(currentLoc.getType()){
+                switch (currentLoc.getType()) {
                     case MINE -> {
                         //spawnGroupOfMobs(this.miners);
                     }
-                    case ILLEGAL,EVENT -> {
-                        spawnGroupOfMobs(this.raiders);
+                    case ILLEGAL, EVENT -> {
+                        //spawnGroupOfMobs(this.raiders);
                     }
                     case OIL_FIELD -> {
-                        spawnGroupOfMobs(this.raiders);
+                        //spawnGroupOfMobs(this.raiders);
                     }
                     case NATURAL -> {
-                        if(currentLoc.getLocName().equalsIgnoreCase("Florence Plains")){
+                        if (currentLoc.getLocName().equalsIgnoreCase("Florence Plains")) {
                             spawnSpecificMobs(fox);
-                        }else if(currentLoc.getLocName().equalsIgnoreCase("Marston Glacier")){
+                        } else if (currentLoc.getLocName().equalsIgnoreCase("Marston Glacier")) {
                             spawnSpecificMobs(rabbit);
-                        }
-                        else if(currentLoc.getLocName().equalsIgnoreCase("Grizzly Ridge")){
+                        } else if (currentLoc.getLocName().equalsIgnoreCase("Grizzly Ridge")) {
                             spawnSpecificMobs(cow);
-                        }
-                        else if(currentLoc.getLocName().equalsIgnoreCase("Three Forks Marshland")){
+                        } else if (currentLoc.getLocName().equalsIgnoreCase("Three Forks Marshland")) {
                             spawnSpecificMobs(boar);
                         }
                     }
@@ -333,10 +332,6 @@ public class    BanditTask extends BukkitRunnable {
                 mobSec = 0;
             }
         }
-
-
-
-//
 
         //END OF LOOP
         tick++;
@@ -349,44 +344,48 @@ public class    BanditTask extends BukkitRunnable {
             tasks.remove(this);
         }
     }
-    public void spawnGroupOfMobs(List<FrontierMob> mobList){
+
+    public void spawnGroupOfMobs(List<FrontierMob> mobList) {
         int selection = GlobalUtils.getRandomNumber(mobList.size());
-        int amount = GlobalUtils.getRandomRange(2,6);
-        for(int i=0; i < amount; i++){
+        int amount = GlobalUtils.getRandomRange(2, 6);
+        for (int i = 0; i < amount; i++) {
             mobList.get(selection).spawnMob(p);
             selection = GlobalUtils.getRandomNumber(mobList.size());
         }
     }
-    public void spawnSpecificMobs(FrontierMob mob){
+
+    public void spawnSpecificMobs(FrontierMob mob) {
         int amount = GlobalUtils.getRandomNumber(4);
-        for(int i=0; i < amount; i++){
+        for (int i = 0; i < amount; i++) {
             mob.spawnMob(p);
         }
     }
+
     public void updatePlayerLocation(Player p) {
         Bandit b = Bandit.getPlayer(p);
         boolean wildMarker = true;
-        for(FrontierLocation location : locations){
+        for (FrontierLocation location : locations) {
             if (location.isPlayerInside(p)) {
                 //location.addTitle(p);
                 b.setCurrentLocation(location);
                 wildMarker = false;
             }
         }
-        if(wildMarker){
+        if (wildMarker) {
             b.setCurrentLocation(FrontierLocation.getLocation("Wilderness"));
         }
     }
-    public void despawnEmptyTownNPCs(){
+
+    public void despawnEmptyTownNPCs() {
         npcEnts = NPC.getEntities();
-        for(FrontierLocation location : locations){
-            if(location.getPlayersInside().isEmpty()){
-                if(location.isMobsSpawned()){
+        for (FrontierLocation location : locations) {
+            if (location.getPlayersInside().isEmpty()) {
+                if (location.isMobsSpawned()) {
                     HashMap<UUID, NPC> npcs = NPC.getNpcsById();
-                    for(Map.Entry<UUID,LivingEntity> npcEnt : npcEnts.entrySet()){
-                        if(location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())){
+                    for (Map.Entry<UUID, LivingEntity> npcEnt : npcEnts.entrySet()) {
+                        if (location.getLocName().equalsIgnoreCase(npcs.get(npcEnt.getKey()).getFrontierLocation().getLocName())) {
                             npcEnt.getValue().remove();
-                            System.out.println(npcEnt.getValue().getCustomName()+ " NPC killed.");
+                            System.out.println(npcEnt.getValue().getCustomName() + " NPC killed.");
                         }
                     }
                     location.setMobsSpawned(false);
@@ -394,44 +393,47 @@ public class    BanditTask extends BukkitRunnable {
             }
         }
     }
-    public void despawnEmptyCampProcessors(){
-        HashMap<UUID, LivingEntity> procEnts = Processor.getEntities();
-        for(FrontierLocation location : locations){
-            if(location.getPlayersInside().isEmpty()){
-                if(location.isMobsSpawned()){
+
+    public void despawnEmptyCampProcessors() {
+        procEnts = Processor.getEntities();
+        for (FrontierLocation location : locations) {
+            if (location.getPlayersInside().isEmpty()) {
+                if (location.isProcsSpawned()) {
+                    p.sendMessage("Despawning processors!");
                     HashMap<String, Processor> procs = Processor.getProcessors();
-                    for(Map.Entry<UUID,LivingEntity> procEnt : procEnts.entrySet()){
-                        p.sendMessage("attempting to kill Processor");
-                        if(location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())){
+                    for (Map.Entry<UUID, LivingEntity> procEnt : procEnts.entrySet()) {
+                        if (location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())) {
                             procEnt.getValue().remove();
-                            System.out.println(procEnt.getValue().getCustomName()+ " NPC killed.");
+                            System.out.println(procEnt.getValue().getCustomName() + " NPC killed.");
                         }
                     }
-                    location.setMobsSpawned(false);
+                    location.setProcsSpawned(false);
                 }
             }
         }
     }
-    public void spawnNPCs(Player p, Bandit b){
+
+    public void spawnNPCs(Player p, Bandit b) {
         if (!b.getCurrentLocation().isMobsSpawned()) {
             b.getCurrentLocation().setMobsSpawned(true);
             HashMap<String, NPC> npcs = NPC.getNPCs();
             for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
                 NPC npc = entryNPC.getValue();
-                if(npc.getFrontierLocation().equals(b.getCurrentLocation())){
+                if (npc.getFrontierLocation().equals(b.getCurrentLocation())) {
                     npc.spawnNPC(p);
                 }
             }
         }
     }
-    public void spawnProcessors(Player p, Bandit b){
-        if (!b.getCurrentLocation().isMobsSpawned()) {
-            p.sendMessage("Mobs not spawned");
-            b.getCurrentLocation().setMobsSpawned(true);
+
+    public void spawnProcessors(Player p, Bandit b) {
+        if (!b.getCurrentLocation().isProcsSpawned()) {
+            p.sendMessage("Processors not spawned");
+            b.getCurrentLocation().setProcsSpawned(true);
             HashMap<String, Processor> procs = Processor.getProcessors();
             for (Map.Entry<String, Processor> proc : procs.entrySet()) {
-                if(proc.getValue().getLocation().equals(b.getCurrentLocation())){
-                    proc.getValue().randomizeLocAndSpawn(p);
+                if (proc.getValue().getLocation().equals(b.getCurrentLocation())) {
+                                proc.getValue().randomizeProcLocation(p);
                 }
             }
         }

@@ -24,6 +24,7 @@ public class FrontierLocation {
 private static List<FrontierLocation> locationList = new ArrayList<>();
     private boolean newArrival;
     private boolean mobsSpawned;
+    private boolean procsSpawned;
     private List<Player> playersInside = new ArrayList<>();
 
     public FrontierLocation(String locName, String welcomeMessage, LocationType type, double x1, double x2, double z1, double z2) {
@@ -36,6 +37,7 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
         this.type = type;
         this.newArrival = false;
         this.mobsSpawned = false;
+        this.procsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -55,6 +57,7 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
         this.type = type;
         this.newArrival = false;
         this.mobsSpawned = false;
+        this.procsSpawned = false;
 
         this.locTitle = getTitleBossBar(locName, getTitleColor(type));
 
@@ -179,6 +182,14 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
 
     public static void setLocationList(List<FrontierLocation> locationList) {
         FrontierLocation.locationList = locationList;
+    }
+
+    public boolean isProcsSpawned() {
+        return procsSpawned;
+    }
+
+    public void setProcsSpawned(boolean procsSpawned) {
+        this.procsSpawned = procsSpawned;
     }
 
     public double getSpawnX() {
