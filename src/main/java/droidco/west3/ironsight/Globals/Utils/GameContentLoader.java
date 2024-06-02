@@ -40,13 +40,13 @@ public class GameContentLoader {
     {
         System.out.println("Loading custom items");
         //COMMONS
-        CustomItem stew = new CustomItem("Brown Stew", 1, true, false, "What's in this..?", Material.MUSHROOM_STEW,0.0,2.0,1);
-        CustomItem charPot = new CustomItem("Charred Potato",1, true, false, "Cooked on the coals.",Material.BAKED_POTATO,0.0,4.0,4);
-        CustomItem cookFox = new CustomItem("Cooked Fox", 1, true, false, "Bigger drumstick than chicken!",Material.COOKED_CHICKEN,0.0,5.0,4);
-        CustomItem rabStew = new CustomItem("Rabbit Stew",2, true, false, "Delicious with bread",Material.RABBIT_STEW,0.0,3.0,1);
-        CustomItem cookedRab = new CustomItem("Cooked Rabbit",2,true,false, "Get's you through winter",Material.COOKED_RABBIT,0.0,5.0,4);
-        CustomItem seaweed = new CustomItem("Seaweed", 1,true,false, "Useless",Material.KELP_PLANT,2.0,0.0);
-        CustomItem reed = new CustomItem("Reed",1,true,false, "Useless", Material.BAMBOO,2.0,0.0);
+        new CustomItem("Brown Stew", 1, true, false, "What's in this..?", Material.MUSHROOM_STEW,0.0,2.0,1);
+        new CustomItem("Charred Potato",1, true, false, "Cooked on the coals.",Material.BAKED_POTATO,0.0,4.0,4);
+        new CustomItem("Cooked Fox", 1, true, false, "Bigger drumstick than chicken!",Material.COOKED_CHICKEN,0.0,5.0,4);
+        new CustomItem("Rabbit Stew",2, true, false, "Delicious with bread",Material.RABBIT_STEW,0.0,3.0,1);
+        new CustomItem("Cooked Rabbit",2,true,false, "Get's you through winter",Material.COOKED_RABBIT,0.0,5.0,4);
+        new CustomItem("Seaweed", 1,true,false, "Useless",Material.KELP_PLANT,2.0,0.0);
+        new CustomItem("Reed",1,true,false, "Useless", Material.BAMBOO,2.0,0.0);
         CustomItem brokenPick = new CustomItem("Broken Pick",2,true,false, "A good starter pick",Material.STONE_PICKAXE,0.0,200.0,1);
         CustomItem shotAmmo = new CustomItem("Shotgun Ammo",2,true,false, "Buckshot only.",Material.WHEAT_SEEDS,0.0,20.0,6);
         CustomItem pistolAmmo = new CustomItem("Pistol Ammo",1,true,false, "Load your favorite .22",Material.NETHER_WART,0.0,17.0,8);
@@ -493,9 +493,9 @@ public class GameContentLoader {
     public static void loadNPCs(){
         System.out.println("Loading NPCs");
 
-        NPC shopkeeper = new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-        NPC contractor = new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
-        NPC banker = new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Shopkeeper", NPCType.SHOPKEEPER, 964, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Contractor", NPCType.CONTRACTOR, 1055, 94, -1957, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+        new NPC("Bank Teller", NPCType.BANKER, 918, 93, -1925, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Arms Dealer", NPCType.ARMS_DEALER, 973, 94, -1951, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Fisherman", NPCType.FISHERMAN, 981, 91, -1819, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Armorer", NPCType.ARMORER, 980, 93, -1912, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
@@ -503,6 +503,29 @@ public class GameContentLoader {
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,1110,92,-2037, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Santa Fe"));
         new NPC("Vault Keeper",NPCType.VAULT_KEEPER, 918, 93, -1931, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
         new NPC("Pharmacist",NPCType.PHARMACIST, 986, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
+
+
+        new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1305,91,-1815, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Contractor", NPCType.CONTRACTOR, -1372,93,-1764, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Bank Teller", NPCType.BANKER, -1293,90,-1717, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Arms Dealer", NPCType.ARMS_DEALER, -1283,90,1699, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Fisherman", NPCType.FISHERMAN, -1253,90,-1727, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Armorer", NPCType.ARMORER, -1270,91,-1719, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Geologist", NPCType.GEOLOGIST, -1268,90,-1731, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Stable Manager",NPCType.STABLE_MANAGER,-1250,90,-1761, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("New Orleans"));
+        new NPC("Vault Keeper",NPCType.VAULT_KEEPER, -1288,90,-1737, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Pharmacist",NPCType.PHARMACIST, -1357,91,-1851, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+
+        new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1056,73,2568, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Contractor", NPCType.CONTRACTOR, -1030,72,2514, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Bank Teller", NPCType.BANKER, -1076,72,2519, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Arms Dealer", NPCType.ARMS_DEALER, -1054,73,2614, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Fisherman", NPCType.FISHERMAN, -1121,72,2340, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Armorer", NPCType.ARMORER, -1095,72,2565, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Geologist", NPCType.GEOLOGIST, -1055,72,2553, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Stable Manager",NPCType.STABLE_MANAGER,-1121,71,2552, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Vault Keeper",NPCType.VAULT_KEEPER, -1074,72,2519, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Pharmacist",NPCType.PHARMACIST, -1033,72,2554, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
     }
     public static void loadProcessors() {
 

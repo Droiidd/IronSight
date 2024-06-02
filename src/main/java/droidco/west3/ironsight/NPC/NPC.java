@@ -45,7 +45,7 @@ public class NPC {
         this.displayName = String.valueOf(nameColor) + displayName;
         System.out.println("Display: "+displayName);
         this.frontierLocation = frontierLocation;
-        npcs.put(displayName, this);
+        npcs.put(displayName+frontierLocation.getLocName(), this);
     }
 
     public void addShoppingPlayer(Player p) {

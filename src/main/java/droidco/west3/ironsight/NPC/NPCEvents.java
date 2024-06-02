@@ -2,6 +2,7 @@ package droidco.west3.ironsight.NPC;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.UI.ContractUI;
+import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Horse.FrontierHorse;
@@ -34,12 +35,14 @@ public class NPCEvents implements Listener {
     @EventHandler
     public void npcRightClick(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+
+
         if(e.getRightClicked().getType().equals(EntityType.VILLAGER)){
             String clickedNPCname = e.getRightClicked().getCustomName();
-            NPC clickedNPC = NPC.getNPC(ChatColor.stripColor(clickedNPCname));
+            NPC clickedNPC = NPC.getNPC(ChatColor.stripColor(clickedNPCname)+b.getCurrentLocation().getLocName());
             if(clickedNPC != null){
                 e.setCancelled(true);
-                Bandit b = Bandit.getPlayer(p);
                 switch (clickedNPC.getType()) {
                     case ARMORER -> {
                         p.openInventory(NPCUI.armorerUI(p));
@@ -59,55 +62,43 @@ public class NPCEvents implements Listener {
                     }
                     case PHARMACIST -> {
                         p.openInventory(NPCUI.openPharmacistUI(p));
-                        break;
                     }
                     case OFFICER_ARMS_DEALER -> {
                         p.openInventory(NPCUI.officerArmsUI(p));
-                        break;
                     }
                     case ARMS_DEALER -> {
                         p.openInventory(NPCUI.armsDealerUI(p));
-                        break;
                     }
                     case ILL_ARMS_DEALER -> {
                         p.openInventory(NPCUI.illegalArmsUI(p));
-                        break;
                     }
                     case GEOLOGIST -> {
                         p.openInventory(NPCUI.geologistUI(p));
-                        break;
                     }
                     case STABLE_MANAGER -> {
                         p.openInventory(NPCUI.stableManagerUI(p));
-                        break;
                     }
                     case CONDUCTOR -> {
                         p.openInventory(NPCUI.conductorUI(p));
-                        break;
                     }
                     case FERRY_CAPTAIN -> {
                         p.openInventory(NPCUI.ferryCaptainUI(p));
-                        break;
                     }
                     case BANKER -> {
                         p.openInventory(NPCUI.openBankerUI(p));
-                        break;
 
                     }
                     case VAULT_KEEPER -> {
                         p.openInventory(NPCUI.vaultKeeperUI(p));
-                        break;
                     }
                     case CONTRACTOR -> {
                         p.openInventory(ContractUI.openContractUi(p));
-                        break;
                     }
                     case CHIEF_OF_POLICE -> {
                         p.openInventory(NPCUI.chiefUI(p));
-                        break;
                     }
             }
-            }
+        }
         }
     }
     @EventHandler

@@ -38,6 +38,13 @@ public class GlobalUtils {
         Random rand = new Random(System.currentTimeMillis());
         return rand.nextDouble(high-low)+low;
     }
+    public static double getDistanceBetweenPoints(Player p, Location target){
+        int x1 = target.getBlockX();
+        int x2 = p.getLocation().getBlockX();
+        int y1 = target.getBlockY();
+        int y2 = p.getLocation().getBlockY();
+        return Math.sqrt((x2-x1)^2+(y2-y1)^2);
+    }
     public static double getRandomCord(double min, double max){
         double val = 0.0;
         if(max < min ){

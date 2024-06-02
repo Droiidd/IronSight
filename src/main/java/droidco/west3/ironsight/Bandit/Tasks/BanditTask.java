@@ -415,10 +415,12 @@ public class BanditTask extends BukkitRunnable {
 
     public void spawnNPCs(Player p, Bandit b) {
         if (!b.getCurrentLocation().isMobsSpawned()) {
+            p.sendMessage("NPC's not spaswned");
             b.getCurrentLocation().setMobsSpawned(true);
             HashMap<String, NPC> npcs = NPC.getNPCs();
             for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
                 NPC npc = entryNPC.getValue();
+                p.sendMessage(b.getCurrentLocation().getLocName()+" "+npc.getFrontierLocation().getLocName());
                 if (npc.getFrontierLocation().equals(b.getCurrentLocation())) {
                     npc.spawnNPC(p);
                 }

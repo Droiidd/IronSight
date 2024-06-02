@@ -163,7 +163,7 @@ public class GeneralEvents implements Listener {
         Block block = e.getClickedBlock();
         if(block != null){
             switch(block.getType()){
-                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
+                case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,BIRCH_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
                      RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK,JUNGLE_SAPLING,WITHER_ROSE,BLUE_ORCHID,TORCHFLOWER,WARPED_FUNGUS,SWEET_BERRY_BUSH,LILY_OF_THE_VALLEY
                         ->{
                     e.setCancelled(false);
