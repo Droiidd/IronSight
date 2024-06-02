@@ -273,7 +273,7 @@ public class TrackerEvents implements Listener {
                 }
                 case HONEY_BOTTLE -> {
                     b.setIsTrackingNPC(false);
-                    b.setTrackingLocation(FrontierLocation.getLocation("Spiece Field").getCenterLocation(p));
+                    b.setTrackingLocation(FrontierLocation.getLocation("Spice Field").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("Spice Field"));
                     p.closeInventory();
                 }
