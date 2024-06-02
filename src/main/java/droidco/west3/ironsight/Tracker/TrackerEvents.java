@@ -39,63 +39,39 @@ public class TrackerEvents implements Listener {
     public void trackerMenuSelect(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Bandit b = Bandit.getPlayer(p);
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_RED + "Tracker")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_RED +String.valueOf(ChatColor.BOLD)+ "Tracker Menu")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case DARK_OAK_HANGING_SIGN -> {
                     p.openInventory(TrackerUI.openTownsUi(p));
-                    break;
                 }
-
                 case PLAYER_HEAD -> {
                     p.openInventory(TrackerUI.openPlayersUi(p));
-                    break;
                 }
-
                 case BELL -> {
                     p.openInventory(TrackerUI.openMerchantsUi(p));
-                    break;
                 }
-
                 case BOOKSHELF -> {
                     p.openInventory(TrackerUI.openNPCsUi(p));
-                    break;
                 }
-
                 case COMPASS -> {
                     p.openInventory(TrackerUI.openLocationsUi(p));
-                    break;
                 }
                 case IRON_PICKAXE -> {
                     p.openInventory(TrackerUI.openMinesUi(p));
-                    break;
                 }
                 case WATER_BUCKET -> {
                     p.openInventory(TrackerUI.openRiversUi(p));
-                    break;
                 }
                 case OAK_SAPLING -> {
                     p.openInventory(TrackerUI.openForestReservesUi(p));
-                    break;
                 }
                 case SKELETON_SKULL -> {
                     p.openInventory(TrackerUI.openBanditCampsUi(p));
-                    break;
-                }
-                case OAK_DOOR -> {
-                    //p.openInventory(TrackerUI.openScavTownsUi(p));
-                    break;
-                }
-                case COAL -> {
-                    p.openInventory(TrackerUI.openOilFieldsUi(p));
-                    break;
                 }
                 case KELP -> {
                     p.openInventory(TrackerUI.openDrugFieldsUi(p));
-                    break;
                 }
-
-
             }
 
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Towns")) {
@@ -105,25 +81,19 @@ public class TrackerEvents implements Listener {
                     b.setIsTrackingNPC(false);
                     b.setTrackingLocation(FrontierLocation.getLocation("Santa Fe").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("Santa Fe"));
-
                     p.closeInventory();
-                    break;
-
                 }
                 case YELLOW_BANNER -> {
                     b.setIsTrackingNPC(false);
                     b.setTrackingLocation(FrontierLocation.getLocation("New Orleans").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("New Orleans"));
                     p.closeInventory();
-                    break;
                 }
                 case BLUE_BANNER -> {
                     b.setIsTrackingNPC(false);
                     b.setTrackingLocation(FrontierLocation.getLocation("Republic of Texas").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("Republic of Texas"));
-
                     p.closeInventory();
-                    break;
                 }
 
             }
@@ -144,7 +114,7 @@ public class TrackerEvents implements Listener {
                 }
             }
 
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD + "Merchants")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Merchants")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case FISHING_ROD -> {
@@ -156,23 +126,8 @@ public class TrackerEvents implements Listener {
                 case STONE_AXE -> {
                     trackNPC(p, b, NPCType.ARMS_DEALER);
                 }
-                case IRON_AXE -> {
-//                    NPC npc = NPC.getNPC("Illegal Arms Dealer");
-//                    b.setIsTrackingNPC(true);
-//                    b.setTrackedNPC("Illegal Arms Dealer");
-//                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
-//                    p.closeInventory();
-                }
                 case LEATHER_CHESTPLATE -> {
                     trackNPC(p, b, NPCType.ARMORER);
-                }
-                case NETHERITE_CHESTPLATE -> {
-//                    NPC npc = NPC.getNPC("Illegal Armorer");
-//                    b.setIsTrackingNPC(true);
-//                    b.setTrackedNPC("Illegal Armorer");
-//                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
-//
-//                    p.closeInventory();
                 }
                 case COOKED_BEEF -> {
                     trackNPC(p, b, NPCType.SHOPKEEPER);
@@ -187,71 +142,17 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "NPCs")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case RAIL -> {
-//                    NPC npc = NPC.getNPC("Conductor");
-//                    b.setIsTrackingNPC(true);
-//                    b.setTrackedNPC("Conductor");
-//                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
-//                    p.closeInventory();
-                }
-                case BIRCH_BOAT -> {
-//                    NPC npc = NPC.getNPC("Ferry Captain");
-//                    b.setIsTrackingNPC(true);
-//                    b.setTrackedNPC("Ferry Captain");
-//                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
-//                    p.closeInventory();
-                }
                 case GOLD_INGOT -> {
                     trackNPC(p, b, NPCType.BANKER);
                 }
-                case DIAMOND -> {
+                case ENDER_CHEST -> {
                     trackNPC(p, b, NPCType.VAULT_KEEPER);
                 }
                 case BOOK -> {
                     trackNPC(p, b, NPCType.CONTRACTOR);
                 }
-                case PIGLIN_HEAD -> {
-//                    NPC npc = NPC.getNPC("Chief of Police");
-//                    b.setIsTrackingNPC(true);
-//                    b.setTrackedNPC("Chief of Police");
-//                    b.setTrackingLocation(new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
-//                    p.closeInventory();
-                }
-
             }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Locations")) {
-            e.setCancelled(true);
-            switch (e.getCurrentItem().getType()) {
-                case IRON_PICKAXE -> {
-                    p.openInventory(TrackerUI.openMinesUi(p));
-                    break;
-                }
-                case WATER_BUCKET -> {
-                    p.openInventory(TrackerUI.openRiversUi(p));
-                    break;
-                }
-                case OAK_SAPLING -> {
-                    p.openInventory(TrackerUI.openForestReservesUi(p));
-                    break;
-                }
-                case SKELETON_SKULL -> {
-                    p.openInventory(TrackerUI.openBanditCampsUi(p));
-                    break;
-                }
-                case OAK_DOOR -> {
-                    //p.openInventory(TrackerUI.openScavTownsUi(p));
-                    break;
-                }
-                case COAL -> {
-                    p.openInventory(TrackerUI.openOilFieldsUi(p));
-                    break;
-                }
-                case SPRUCE_SAPLING -> {
-                    p.openInventory(TrackerUI.openDrugFieldsUi(p));
-                    break;
-                }
-            }
-        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD + "Mines")) {
+        } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Mines")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
                 case IRON_ORE -> {
@@ -259,21 +160,6 @@ public class TrackerEvents implements Listener {
                     b.setTrackingLocation(FrontierLocation.getLocation("Black Spur Mines").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("Black Spur Mines"));
                     p.closeInventory();
-                    break;
-                }
-                case TERRACOTTA -> {
-                    b.setIsTrackingNPC(false);
-                    b.setTrackingLocation(FrontierLocation.getLocation("Barron's Canyon").getCenterLocation(p));
-                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Barron's Canyon"));
-                    p.closeInventory();
-                    break;
-                }
-                case STONE -> {
-                    b.setIsTrackingNPC(false);
-                    b.setTrackingLocation(FrontierLocation.getLocation("Half Dome Mines").getCenterLocation(p));
-                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Half Dome Mines"));
-                    p.closeInventory();
-                    break;
                 }
             }
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.BLUE + "Rivers")) {
@@ -333,11 +219,11 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Bandit Camps")) {
             e.setCancelled(true);
             Material targetType = e.getCurrentItem().getType();
-//            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker").getItem().getType())){
-//                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp"));
-//                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Red Ash Camp"));
-//                p.closeInventory();
-//            }
+            if(targetType.equals(ItemIcon.getIcon("red_ash_camp_tracker").getItem().getType())){
+                b.setTrackingLocation(FrontierLocation.getLocation("Red Ash Camp").getCenterLocation(p));
+                b.setTrackingFrontierLocation(FrontierLocation.getLocation("Red Ash Camp"));
+                p.closeInventory();
+            }
             //else
             if (targetType.equals(ItemIcon.getIcon("storm_point_tracker").getItem().getType())) {
                 b.setIsTrackingNPC(false);
@@ -379,10 +265,16 @@ public class TrackerEvents implements Listener {
         } else if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Drug Fields")) {
             e.setCancelled(true);
             switch (e.getCurrentItem().getType()) {
-                case KELP -> {
+                case ENDER_PEARL -> {
                     b.setIsTrackingNPC(false);
                     b.setTrackingLocation(FrontierLocation.getLocation("Smokeleaf Field").getCenterLocation(p));
                     b.setTrackingFrontierLocation(FrontierLocation.getLocation("Smokeleaf Field"));
+                    p.closeInventory();
+                }
+                case HONEY_BOTTLE -> {
+                    b.setIsTrackingNPC(false);
+                    b.setTrackingLocation(FrontierLocation.getLocation("Spiece Field").getCenterLocation(p));
+                    b.setTrackingFrontierLocation(FrontierLocation.getLocation("Spice Field"));
                     p.closeInventory();
                 }
             }

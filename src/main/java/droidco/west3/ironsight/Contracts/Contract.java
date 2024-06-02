@@ -297,7 +297,11 @@ public class Contract
                 }
             }
             case DRUG_RUNNER -> {
-                requestedItem = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+                if(frontierLocation.getLocName().equalsIgnoreCase("Red Ash Camp")){
+                    requestedItem = CustomItem.getCustomItem("Spice").getItemStack();
+                }else if(frontierLocation.getLocName().equalsIgnoreCase("Storm Point")){
+                    requestedItem = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
+                }
             }
         }
 
@@ -316,13 +320,26 @@ public class Contract
         }else{
             if(amount < 29){
                 //EASY
-                difficulty = Difficulty.Rookie;
+                if(deliveryType.equals(DeliveryType.DRUG_RUNNER)){
+                   difficulty = Difficulty.Apprentice;
+                }else{
+                   difficulty = Difficulty.Rookie;
+                }
+
             }else if(amount < 44 && amount >= 29){
                 //MEDIUM
-                difficulty = Difficulty.Apprentice;
+                if(deliveryType.equals(DeliveryType.DRUG_RUNNER)){
+                   difficulty = Difficulty.Experienced;
+                }else{
+                   difficulty = Difficulty.Apprentice;;
+                }
             }else{
                 //HARD?
-                difficulty = Difficulty.Experienced;
+                if(deliveryType.equals(DeliveryType.DRUG_RUNNER)){
+                   difficulty = Difficulty.Master;
+                }else{
+                   difficulty = Difficulty.Experienced;;
+                }
             }
         }
         //      COMPLETION STEPS

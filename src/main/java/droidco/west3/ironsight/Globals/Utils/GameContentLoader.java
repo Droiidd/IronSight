@@ -400,6 +400,7 @@ public class GameContentLoader {
         new ItemIcon("Remove Title","remove_title","Click to reset prefix",Material.BARRIER);
 
         //      ===--- TRACKER UI ICONS ---===
+        new ItemIcon("Spice Field","spice_field_tracker","Directions to Spice Field",Material.HONEY_BOTTLE);
         ItemIcon town = new ItemIcon("Towns", "town_tracker", "Find town", Material.DARK_OAK_HANGING_SIGN);
             ItemIcon santaFe = new ItemIcon("Santa Fe","santa_fe_tracker", "Directions to Santa Fe", Material.WHITE_BANNER);
             ItemIcon newOrleans = new ItemIcon("New Orleans","new_orleans_tracker", "Directions to New Orleans", Material.YELLOW_BANNER);
@@ -423,7 +424,7 @@ public class GameContentLoader {
             ItemIcon conductor = new ItemIcon("Conductor", "conductor_tracker","Find Conductor", Material.RAIL);
             ItemIcon ferryCaptain = new ItemIcon("Ferry Captain","ferry_captain_tracker", "Find Ferry Captain", Material.BIRCH_BOAT);
             ItemIcon bankTeller = new ItemIcon("Bank Teller","bank_teller_tracker", "Find Bank Teller", Material.GOLD_INGOT);
-            ItemIcon itemVault = new ItemIcon("Vault Keeper","vault_keeper_tracker", "Find Vault Keeper", Material.DIAMOND);
+            ItemIcon itemVault = new ItemIcon("Vault Keeper","vault_keeper_tracker", "Find Vault Keeper", Material.ENDER_CHEST);
             ItemIcon contractor = new ItemIcon("Contractor", "contractor_tracker","Find Contractor", Material.BOOK);
             ItemIcon chief = new ItemIcon("Chief of Police","chief_of_police_tracker", "Find the Chief", Material.PIGLIN_HEAD);
         //      ===--- TRACKER LOCATION ---===
@@ -455,8 +456,8 @@ public class GameContentLoader {
                 ItemIcon sierra = new ItemIcon("Sierra Gorge","sierra_gorge_tracker", "Find Sierra Gorge", Material.BIRCH_DOOR);
             ItemIcon oilFields = new ItemIcon("Oil Fields","oil_field_tracker", "Find Oil Fields", Material.COAL);
                 ItemIcon northMoraine = new ItemIcon("North Moraine Oil Field","north_moraine_oil_field_tracker", "Find North Moraine Oil Field", Material.BUCKET);
-            ItemIcon drugFields = new ItemIcon("Drug Fields","drug_field_tracker", "Find Drug Fields", Material.KELP);
-                ItemIcon smokeLeaf = new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.KELP);
+            new ItemIcon("Drug Fields","drug_field_tracker", "Find Drug Fields", Material.KELP);
+                new ItemIcon("Smokeleaf Drug Field", "smokeleaf_field_tracker","Find Smokeleaf Drug Field", Material.ENDER_PEARL);
 
                 new ItemIcon("Complete Contract","complete_contract","Click if all steps are complete", Material.EMERALD_BLOCK);
                 //      ===--- BANKER ITEMS ---===
