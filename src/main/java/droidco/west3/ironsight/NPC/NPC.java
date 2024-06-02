@@ -10,11 +10,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class NPC {
     private String displayName;
+    private String keyName;
 
     private NPCType type;
 
@@ -43,16 +43,16 @@ public class NPC {
         this.isLegal = isLegal;
         this.isOfficer = isOfficer;
         this.displayName = String.valueOf(nameColor) + displayName;
-        System.out.println("Display: "+displayName);
+        System.out.println("Display: " + displayName);
         this.frontierLocation = frontierLocation;
-        npcs.put(displayName+frontierLocation.getLocName(), this);
+        this.keyName = displayName + frontierLocation.getLocName();
+        npcs.put(displayName + frontierLocation.getLocName(), this);
     }
 
     public void addShoppingPlayer(Player p) {
         if (shoppingPlayers.containsKey(p.getUniqueId().toString())) {
             shoppingPlayers.replace(p.getUniqueId().toString(), this);
-        }
-        else {
+        } else {
             shoppingPlayers.put(p.getUniqueId().toString(), this);
         }
     }
@@ -63,7 +63,7 @@ public class NPC {
         npc.setCustomName(displayName);
         npc.setCustomNameVisible(true);
         npc.setInvulnerable(true);
-        switch (this.type){
+        switch (this.type) {
             case BANKER -> {
                 npc.setProfession(Villager.Profession.CARTOGRAPHER);
                 npc.setVillagerType(Villager.Type.SAVANNA);
@@ -77,9 +77,21 @@ public class NPC {
         entities.put(npc.getUniqueId(), npc);
         npcsById.put(npc.getUniqueId(), this);
     }
-    public NPC getNPCByUUID(UUID id){
+
+    public static List<NPC> getNPCsByType(NPCType type) {
+        List<NPC> list = new ArrayList<>();
+        for (Map.Entry<String, NPC> npc : npcs.entrySet()) {
+            if(npc.getValue().getType() == type) {
+                list.add(npc.getValue());
+            }
+        }
+        return list;
+    }
+
+    public NPC getNPCByUUID(UUID id) {
         return npcsById.get(id);
     }
+
     public static NPC getNPC(String displayName) {
         return npcs.get(displayName);
     }
@@ -94,6 +106,14 @@ public class NPC {
 
     public static HashMap<String, NPC> getNPCs() {
         return npcs;
+    }
+
+    public String getKeyName() {
+        return keyName;
+    }
+
+    public void setKeyName(String keyName) {
+        this.keyName = keyName;
     }
 
     public String getDisplayName() {
