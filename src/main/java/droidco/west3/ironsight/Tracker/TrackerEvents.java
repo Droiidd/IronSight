@@ -394,9 +394,11 @@ public class TrackerEvents implements Listener {
         List<Double> distances = new ArrayList<>();
         HashMap<Double, NPC> npcDistanceMap = new HashMap<>();
         for (NPC npc : npcs) {
-            double distance = GlobalUtils.getDistanceBetweenPoints(p, new Location(p.getWorld(), npc.getX(), npc.getY(), npc.getZ()));
+
+            double distance = GlobalUtils.getDistanceBetweenPoints(p, npc.getX(), npc.getZ());
             npcDistanceMap.put(distance, npc);
             distances.add(distance);
+            p.sendMessage(npc.getKeyName());
         }
         double least = Collections.min(distances);
 

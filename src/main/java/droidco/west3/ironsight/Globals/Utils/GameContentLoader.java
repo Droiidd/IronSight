@@ -505,16 +505,16 @@ public class GameContentLoader {
         new NPC("Pharmacist",NPCType.PHARMACIST, 986, 93, -1909, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Santa Fe"));
 
 
-        new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1305,91,-1815, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1305,90,-1712, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
         new NPC("Contractor", NPCType.CONTRACTOR, -1372,93,-1764, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
-        new NPC("Bank Teller", NPCType.BANKER, -1293,90,-1717, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
-        new NPC("Arms Dealer", NPCType.ARMS_DEALER, -1283,90,1699, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Bank Teller", NPCType.BANKER, -1293,90,-1738, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Arms Dealer", NPCType.ARMS_DEALER, -1283,90,-1699, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
         new NPC("Fisherman", NPCType.FISHERMAN, -1253,90,-1727, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
         new NPC("Armorer", NPCType.ARMORER, -1270,91,-1719, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
         new NPC("Geologist", NPCType.GEOLOGIST, -1268,90,-1731, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
         new NPC("Stable Manager",NPCType.STABLE_MANAGER,-1250,90,-1761, ChatColor.DARK_AQUA,true,false,FrontierLocation.getLocation("New Orleans"));
-        new NPC("Vault Keeper",NPCType.VAULT_KEEPER, -1288,90,-1737, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
-        new NPC("Pharmacist",NPCType.PHARMACIST, -1357,91,-1851, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Vault Keeper",NPCType.VAULT_KEEPER, -1288,90,-1738, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
+        new NPC("Pharmacist",NPCType.PHARMACIST, -1294,90,-1724, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("New Orleans"));
 
         new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1056,73,2568, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Contractor", NPCType.CONTRACTOR, -1030,72,2514, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
