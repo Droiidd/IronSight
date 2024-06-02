@@ -399,7 +399,6 @@ public class BanditTask extends BukkitRunnable {
         for (FrontierLocation location : locations) {
             if (location.getPlayersInside().isEmpty()) {
                 if (location.isProcsSpawned()) {
-                    p.sendMessage("Despawning processors!");
                     HashMap<String, Processor> procs = Processor.getProcessors();
                     for (Map.Entry<UUID, LivingEntity> procEnt : procEnts.entrySet()) {
                         if (location.getLocName().equalsIgnoreCase(procs.get(ChatColor.stripColor(procEnt.getValue().getCustomName())).getLocation().getLocName())) {
@@ -415,12 +414,10 @@ public class BanditTask extends BukkitRunnable {
 
     public void spawnNPCs(Player p, Bandit b) {
         if (!b.getCurrentLocation().isMobsSpawned()) {
-            p.sendMessage("NPC's not spaswned");
             b.getCurrentLocation().setMobsSpawned(true);
             HashMap<String, NPC> npcs = NPC.getNPCs();
             for (Map.Entry<String, NPC> entryNPC : npcs.entrySet()) {
                 NPC npc = entryNPC.getValue();
-                p.sendMessage(b.getCurrentLocation().getLocName()+" "+npc.getFrontierLocation().getLocName());
                 if (npc.getFrontierLocation().equals(b.getCurrentLocation())) {
                     npc.spawnNPC(p);
                 }
@@ -430,12 +427,11 @@ public class BanditTask extends BukkitRunnable {
 
     public void spawnProcessors(Player p, Bandit b) {
         if (!b.getCurrentLocation().isProcsSpawned()) {
-            p.sendMessage("Processors not spawned");
             b.getCurrentLocation().setProcsSpawned(true);
             HashMap<String, Processor> procs = Processor.getProcessors();
             for (Map.Entry<String, Processor> proc : procs.entrySet()) {
                 if (proc.getValue().getLocation().equals(b.getCurrentLocation())) {
-                                proc.getValue().randomizeProcLocation(p);
+                    proc.getValue().randomizeProcLocation(p);
                 }
             }
         }

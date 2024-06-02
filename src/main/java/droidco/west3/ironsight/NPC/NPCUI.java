@@ -94,6 +94,26 @@ public class NPCUI {
         }
         return processor;
     }
+    public static Inventory openSpiceProcessor(Player p, int processorNumber) {
+        Inventory processor = Bukkit.createInventory(p, 18, ChatColor.RED + "Spice Processor "+processorNumber);
+        ItemStack exit = getExitButton();
+
+        ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack drug = CustomItem.getCustomItem("Unprocessed Spice").getItemStack();
+        drug.setAmount(8);
+        ItemMeta meta = blank.getItemMeta();
+        meta.setDisplayName("");
+        for (int i = 0; i < 18; i++) {
+            if (i == 0) {
+                processor.setItem(0, exit);
+            } else if (i == 13) {
+                processor.setItem(13, drug);
+            } else {
+                processor.setItem(i, blank);
+            }
+        }
+        return processor;
+    }
     public static ItemStack getExitButton() {
         ItemStack exit = new ItemStack(Material.BARRIER);
         ItemMeta exitMeta = exit.getItemMeta();

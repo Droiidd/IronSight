@@ -117,6 +117,15 @@ public class NPCEvents implements Listener {
                 case "Smoke leaf processor 3" -> {
                     p.openInventory(NPCUI.openSmokeleafProcessor(p, 3));
                 }
+                case "Spice processor 1" -> {
+                    p.openInventory(NPCUI.openSpiceProcessor(p, 1));
+                }
+                case "Spice processor 2" -> {
+                    p.openInventory(NPCUI.openSpiceProcessor(p, 2));
+                }
+                case "Spice processor 3" -> {
+                    p.openInventory(NPCUI.openSpiceProcessor(p, 3));
+                }
             }
         }
     }
