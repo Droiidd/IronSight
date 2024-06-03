@@ -81,7 +81,7 @@ public final class IronSight extends JavaPlugin {
 
     public void loadAllEvents()
     {
-        getServer().getPluginManager().registerEvents(new GeneralEvents(), this);
+        getServer().getPluginManager().registerEvents(new GeneralEvents(this), this);
         getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
         getServer().getPluginManager().registerEvents(new CombatEvents(), this);
         getServer().getPluginManager().registerEvents(new ContractUiEvents(),this);

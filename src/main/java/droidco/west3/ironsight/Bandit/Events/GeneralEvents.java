@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Bandit.Events;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Bandit.Tasks.BrokenWindowTask;
 import droidco.west3.ironsight.FrontierLocation.LocationType;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
@@ -35,6 +36,10 @@ import org.bukkit.potion.PotionEffectType;
 
 
 public class GeneralEvents implements Listener {
+    private IronSight plugin;
+    public GeneralEvents(IronSight plugin) {
+        this.plugin = plugin;
+    }
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){
@@ -145,12 +150,12 @@ public class GeneralEvents implements Listener {
     }
     @EventHandler
     public void breakGlassEvent(ProjectileHitEvent e){
-        if(e.getEntityType().equals(EntityType.SNOWBALL)){
+        if(e.getEntityType().equals(EntityType.SNOWBALL) || e.getEntityType().equals(EntityType.ARROW)){
             if(e.getHitBlock() != null){
                 switch(e.getHitBlock().getType()){
-                    case LIGHT_GRAY_STAINED_GLASS_PANE,GRAY_STAINED_GLASS_PANE ->{
-                        e.getHitBlock().setType(Material.FIRE);
+                    case LIGHT_GRAY_STAINED_GLASS_PANE,GRAY_STAINED_GLASS_PANE,GLASS_PANE,WHITE_STAINED_GLASS,BLACK_STAINED_GLASS,BLACK_STAINED_GLASS_PANE,LIGHT_GRAY_STAINED_GLASS,GRAY_STAINED_GLASS ->{
                         e.getHitBlock().getLocation().getWorld().playSound(e.getHitBlock().getLocation(),Sound.BLOCK_GLASS_BREAK,1,1);
+                        new BrokenWindowTask(plugin,e.getHitBlock());
                         //start pane respawn timer
                     }
                 }
