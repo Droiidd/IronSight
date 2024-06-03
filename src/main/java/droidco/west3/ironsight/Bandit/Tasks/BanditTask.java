@@ -239,6 +239,7 @@ public class BanditTask extends BukkitRunnable {
                 //Increase players bounty in illegal area
                 b.updateBounty(2);
                 spawnProcessors(p, b);
+                spawnNPCs(p,b);
             }
             if (currentLoc.getLocName().equalsIgnoreCase("Storm Point")) {
                 if (!currentLoc.isNewArrival()) {

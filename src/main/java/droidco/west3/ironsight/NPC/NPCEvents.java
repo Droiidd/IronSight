@@ -65,13 +65,13 @@ public class NPCEvents implements Listener {
                         p.openInventory(NPCUI.openPharmacistUI(p));
                     }
                     case OFFICER_ARMS_DEALER -> {
-                        p.openInventory(NPCUI.officerArmsUI(p));
+                        //p.openInventory(NPCUI.officerArmsUI(p));
                     }
                     case ARMS_DEALER -> {
                         p.openInventory(NPCUI.armsDealerUI(p));
                     }
                     case ILL_ARMS_DEALER -> {
-                        p.openInventory(NPCUI.illegalArmsUI(p));
+                        p.openInventory(NPCUI.illegalArmsDealerUI(p));
                     }
                     case GEOLOGIST -> {
                         p.openInventory(NPCUI.geologistUI(p));
@@ -269,6 +269,33 @@ public class NPCEvents implements Listener {
                 purchaseItem(b,p,CustomItem.getCustomItem("Huntsmen Hat"),NPC.getNPC("Shopkeeper"+b.getCurrentLocation().getLocName()));
             }
         }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Illegal Armorer")){
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Frontier Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Frontier Boots"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Frontier Duster").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Frontier Duster"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Frontier Pants").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Frontier Pants"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Frontier Hat").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Frontier Hat"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Journeymen Boots").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Journeymen Boots"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Journeymen Pants").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Journeymen Pants"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Journeymen Duster").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Journeymen Duster"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Journeymen Hat").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Journeymen Hat"),NPC.getNPC("Illegal Armorer"+b.getCurrentLocation().getLocName()));
+            }
+        }
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Arms Dealer")){
             e.setCancelled(true);
             if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Colt Patterson").getMaterial()) ) {
@@ -293,6 +320,29 @@ public class NPCEvents implements Listener {
             }
             if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Shotgun Ammo").getMaterial()) ) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Shotgun Ammo"),NPC.getNPC("Arms Dealer"+b.getCurrentLocation().getLocName()));
+            }
+        }
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Illegal Arms Dealer")){
+            e.setCancelled(true);
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Colt Navy").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Colt Navy"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()),"coltnavy");
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Navy 1851 OKH").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Navy 1851 OKH"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()),"Navy 1851");
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Sawed-Off Shotgun").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Sawed-Off Shotgun"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()),"sawed");
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Winchester 1873").getMaterial()) ) {
+                purchaseFirearm(b,p,CustomItem.getCustomItem("Winchester 1873"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()),"winchesterillegal");
+            }if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Rifle Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Rifle Ammo"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Pistol Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Pistol Ammo"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()));
+            }
+            if (e.getCurrentItem().getType().equals(CustomItem.getCustomItem("Shotgun Ammo").getMaterial()) ) {
+                purchaseItem(b,p,CustomItem.getCustomItem("Shotgun Ammo"),NPC.getNPC("Illegal Arms Dealer"+b.getCurrentLocation().getLocName()));
             }
         }
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA+"Stable Manager")){

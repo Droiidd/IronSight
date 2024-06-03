@@ -140,10 +140,10 @@ public class GameContentLoader {
         new CustomItem("Frontier Duster", 6, false, false, "Made with beast hide", Material.IRON_CHESTPLATE, 0.0, 3080.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         new CustomItem("Frontier Hat", 5, false, false, "Steeled leather hat", Material.IRON_HELMET, 0.0, 2002.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 
-        new CustomItem("Journeymen Boots", 7, false, false, "Silver spurs", Material.NETHERITE_BOOTS, 0.0, 0.0, 1);
-        new CustomItem("Journeymen Pants", 8, false, false, "Plenty of pockets", Material.NETHERITE_LEGGINGS, 0.0, 0.0, 1);
-        new CustomItem("Journeymen Duster", 8, false, false, "Plated with steel", Material.NETHERITE_CHESTPLATE, 0.0, 0.0, 1);
-        new CustomItem("Journeymen Hat", 7, false, false, "Soul of every Journeymen", Material.NETHERITE_HELMET, 0.0, 0.0, 1);
+        new CustomItem("Journeymen Boots", 7, false, false, "Silver spurs", Material.NETHERITE_BOOTS, 0.0, 3000.0, 1);
+        new CustomItem("Journeymen Pants", 8, false, false, "Plenty of pockets", Material.NETHERITE_LEGGINGS, 0.0, 5000.0, 1);
+        new CustomItem("Journeymen Duster", 8, false, false, "Plated with steel", Material.NETHERITE_CHESTPLATE, 0.0, 5000.0, 1);
+        new CustomItem("Journeymen Hat", 7, false, false, "Soul of every Journeymen", Material.NETHERITE_HELMET, 0.0, 3000.0, 1);
 
 
         new CustomItem("Sheriff Boots", 3, true, true, "", Material.CHAINMAIL_BOOTS, 0.0, 924.0, 1);
@@ -537,6 +537,13 @@ public class GameContentLoader {
         new NPC("Stable Manager", NPCType.STABLE_MANAGER, -1121, 71, 2552, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Vault Keeper", NPCType.VAULT_KEEPER, -1074, 72, 2521, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Pharmacist", NPCType.PHARMACIST, -1033, 72, 2554, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+
+    new NPC("Illegal Armorer", NPCType.ILLEGAL_ARMORER, -46, 109, -2901, ChatColor.DARK_AQUA, false, false, FrontierLocation.getLocation("Storm Point"));
+    new NPC("Illegal Arms Dealer", NPCType.ILL_ARMS_DEALER, -17, 105, -2907, ChatColor.DARK_AQUA, false, false, FrontierLocation.getLocation("Storm Point"));
+
+    new NPC("Illegal Armorer", NPCType.ILLEGAL_ARMORER, -1392, 53, 577, ChatColor.DARK_AQUA, false, false, FrontierLocation.getLocation("Red Ash Camp"));
+    new NPC("Illegal Arms Dealer", NPCType.ILL_ARMS_DEALER, -1316, 70, 679, ChatColor.DARK_AQUA, false, false, FrontierLocation.getLocation("Red Ash Camp"));
+
     }
 
     public static void loadProcessors() {

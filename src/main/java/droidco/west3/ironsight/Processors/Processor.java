@@ -83,8 +83,6 @@ public class Processor {
 
             this.defaultLocation = new Location(p.getPlayer().getWorld(), coord.getX(),coord.getY(),coord.getZ());
             this.defaultPosition = coord;
-            p.sendMessage("Spawning NPC@!Q");
-            p.sendMessage(coord.getX()+" "+coord.getY()+" "+coord.getZ()+". ");
             createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
             // removing from pool
             tmpList.remove(choice);

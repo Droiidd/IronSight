@@ -48,31 +48,29 @@ public class NPCUI {
     }
     public static Inventory illegalArmsDealerUI(Player p) {
         Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Illegal Arms Dealer");
-        shop.setItem(0,CustomItem.getCustomItem("Colt Navy").getItemForSale());
-        shop.setItem(2,CustomItem.getCustomItem("Sawed-Off Shotgun").getItemForSale());
-        shop.setItem(4,CustomItem.getCustomItem("Navy 1851 OKH").getItemForSale());
-        shop.setItem(6,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
+        shop.setItem(1,CustomItem.getCustomItem("Colt Navy").getItemForSale());
+        shop.setItem(3,CustomItem.getCustomItem("Sawed-Off Shotgun").getItemForSale());
+        shop.setItem(5,CustomItem.getCustomItem("Navy 1851 OKH").getItemForSale());
+        shop.setItem(7,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
         shop.setItem(10,CustomItem.getCustomItem("Rifle Ammo").getItemForSale());
         shop.setItem(13,CustomItem.getCustomItem("Shotgun Ammo").getItemForSale());
         shop.setItem(16,CustomItem.getCustomItem("Pistol Ammo").getItemForSale());
         return shop;
     }
-
-    public static Inventory officerArmsUI(Player p) {
-        Inventory officerArmsUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Officer Arms Dealer");
-
-
-        return officerArmsUI;
-
+    public static Inventory illegalArmorerUI(Player p) {
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Illegal Armorer");
+        shop.setItem(0,CustomItem.getCustomItem("Frontier Hat").getItemForSale());
+        shop.setItem(1,CustomItem.getCustomItem("Frontier Duster").getItemForSale());
+        shop.setItem(2,CustomItem.getCustomItem("Frontier Pants").getItemForSale());
+        shop.setItem(3,CustomItem.getCustomItem("Frontier Boots").getItemForSale());
+        shop.setItem(9,CustomItem.getCustomItem("Journeymen Hat").getItemForSale());
+        shop.setItem(10,CustomItem.getCustomItem("Journeymen Duster").getItemForSale());
+        shop.setItem(11,CustomItem.getCustomItem("Journeymen Pants").getItemForSale());
+        shop.setItem(12,CustomItem.getCustomItem("Journeymen Boots").getItemForSale());
+        return shop;
     }
 
-    public static Inventory illegalArmsUI(Player p) {
-        Inventory illegalArmsUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Black Market Arms");
-        Bandit iPlayer = Bandit.getPlayer(p);
 
-        return illegalArmsUI;
-
-    }
 
     public static Inventory geologistUI(Player p) {
         Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Geologist");
@@ -166,14 +164,6 @@ public class NPCUI {
         shop.setItem(13,CustomItem.getCustomItem("Huntsmen Boots").getItemForSale());
 
         return shop;
-
-    }
-
-    public static Inventory illegalArmorerUI(Player p) {
-        Inventory illegalArmorerUI = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Black Market Armor");
-        Bandit iPlayer = Bandit.getPlayer(p);
-
-        return illegalArmorerUI;
 
     }
 
