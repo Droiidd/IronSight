@@ -93,7 +93,12 @@ public class NPCEvents implements Listener {
                         p.openInventory(NPCUI.vaultKeeperUI(p));
                     }
                     case CONTRACTOR -> {
-                        p.openInventory(ContractUI.openContractOptionsUi(p));
+                        if(b.getActiveContract() == null){
+                           p.openInventory(ContractUI.openContractOptionsUi(p));
+                        }else{
+                            p.openInventory(ContractUI.openContractorInfo(p));
+                        }
+
                     }
                     case CHIEF_OF_POLICE -> {
                         p.openInventory(NPCUI.chiefUI(p));

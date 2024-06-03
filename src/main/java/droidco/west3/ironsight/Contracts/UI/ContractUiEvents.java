@@ -35,6 +35,14 @@ public class ContractUiEvents implements Listener {
                     selected = b.getExperiencedContract();
                     setActiveContract(b,p,selected);
                 }
+            }
+        }
+        else if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Info:")){
+            Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
+            //In the contract UI menu
+            //Find what they clicked on
+            if(e.getCurrentItem().getType() != null){
                 switch(e.getCurrentItem().getType()){
                     case EMERALD_BLOCK -> {
                         p.closeInventory();
@@ -62,17 +70,6 @@ public class ContractUiEvents implements Listener {
                             p.sendMessage(ChatColor.RED+"Select a contract first!");
                         }
                     }
-
-                }
-            }
-        }
-        else if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Info:")){
-            Bandit b = Bandit.getPlayer(p);
-            e.setCancelled(true);
-            //In the contract UI menu
-            //Find what they clicked on
-            if(e.getCurrentItem().getType() != null){
-                switch(e.getCurrentItem().getType()){
                   case SPRUCE_HANGING_SIGN -> {
                         //They want to change their Contractor Title
                         p.openInventory(ContractUI.openContractorTitleSelectUi(p));

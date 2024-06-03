@@ -109,6 +109,7 @@ public static ChatColor getContractorLvlColor(Bandit b){
         b.setJailedFlag(false);
         p.sendTitle(ChatColor.GRAY + "You are released from" + ChatColor.RED + " Prison!", "Good luck...");
         b.setRespawning(true);
+        p.getInventory().clear();
         getStarterItems(p);
     }
 

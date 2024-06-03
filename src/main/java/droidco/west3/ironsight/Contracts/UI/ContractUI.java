@@ -17,53 +17,59 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ContractUI {
 
-    public static Inventory openContractorTitleSelectUi(Player p){
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY+"Contractor Title Select:");
+    public static Inventory openContractorTitleSelectUi(Player p) {
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Contractor Title Select:");
         Bandit b = Bandit.getPlayer(p);
-        contractUi.setItem(4,ItemIcon.getIcon("remove_title").getItem());
-        contractUi.setItem(11,ItemIcon.getIcon("cowboy_prefix").getItem());
-        contractUi.setItem(12,ItemIcon.getIcon("tracker_prefix").getItem());
-        contractUi.setItem(15,ItemIcon.getIcon("raider_prefix").getItem());
-        contractUi.setItem(10,ItemIcon.getIcon("miner_prefix").getItem());
-        contractUi.setItem(14,ItemIcon.getIcon("medic_prefix").getItem());
-        contractUi.setItem(16,ItemIcon.getIcon("explorer_prefix").getItem());
+        contractUi.setItem(4, ItemIcon.getIcon("remove_title").getItem());
+        contractUi.setItem(11, ItemIcon.getIcon("cowboy_prefix").getItem());
+        contractUi.setItem(12, ItemIcon.getIcon("tracker_prefix").getItem());
+        contractUi.setItem(15, ItemIcon.getIcon("raider_prefix").getItem());
+        contractUi.setItem(10, ItemIcon.getIcon("miner_prefix").getItem());
+        contractUi.setItem(14, ItemIcon.getIcon("medic_prefix").getItem());
+        contractUi.setItem(16, ItemIcon.getIcon("explorer_prefix").getItem());
         return contractUi;
     }
-    public static Inventory openContractOptionsUi(Player p){
+
+    public static Inventory openContractOptionsUi(Player p) {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)");
         Bandit b = Bandit.getPlayer(p);
 
         contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.Rookie));
-        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(),Difficulty.Apprentice));
-        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(),Difficulty.Experienced));
+        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(), Difficulty.Apprentice));
+        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(), Difficulty.Experienced));
 
-        contractUi.setItem(2,ItemIcon.getIcon("rookie_slot").getItem());
-        contractUi.setItem(4,ItemIcon.getIcon("apprentice_slot").getItem());
-        contractUi.setItem(6,ItemIcon.getIcon("experienced_slot").getItem());
-        contractUi.setItem(22,ItemIcon.getIcon("complete_contract").getItem());
+        contractUi.setItem(2, ItemIcon.getIcon("rookie_slot").getItem());
+        contractUi.setItem(4, ItemIcon.getIcon("apprentice_slot").getItem());
+        contractUi.setItem(6, ItemIcon.getIcon("experienced_slot").getItem());
+
         return contractUi;
     }
-    public static Inventory openContractorInfo(Player p){
+
+    public static Inventory openContractorInfo(Player p) {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Contractor Info:");
         Bandit b = Bandit.getPlayer(p);
-        contractUi.setItem(0,ItemIcon.getIcon("close_menu").getItem());
-        contractUi.setItem(11,ItemIcon.getIcon("contractor_title").getItem());
-        contractUi.setItem(4,getContractorIcon(p));
-        contractUi.setItem(15,getActiveContractIcon());
+        contractUi.setItem(0, ItemIcon.getIcon("close_menu").getItem());
+        contractUi.setItem(11, ItemIcon.getIcon("contractor_title").getItem());
+        contractUi.setItem(4, getContractorIcon(p));
+        contractUi.setItem(15, getActiveContractIcon(p, b));
+        contractUi.setItem(22, ItemIcon.getIcon("complete_contract").getItem());
         return contractUi;
     }
-    public static Inventory openContractorRewardUi(Player p){
+
+    public static Inventory openContractorRewardUi(Player p) {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "");
         Bandit b = Bandit.getPlayer(p);
 
-        contractUi.setItem(1,ItemIcon.getIcon("previous_page").getItem());
+        contractUi.setItem(1, ItemIcon.getIcon("previous_page").getItem());
         return contractUi;
     }
-    public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){
+
+    public static ItemStack getContractSlot(Contract selected, Difficulty difficulty) {
         //Basic item set up
 
         //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
@@ -82,11 +88,11 @@ public class ContractUI {
         //LORE
         contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
                 ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
-        contractLore.add(ChatColor.GRAY+"Location: "+selected.getLocation().getLocName());
-        if(selected.getContractType().equals(ContractType.Delivery)){
-            contractLore.add(String.valueOf(ChatColor.GRAY)+ selected.getRequestedAmount()+" "+ selected.getRequestedItem().getItemMeta().getDisplayName());
+        contractLore.add(ChatColor.GRAY + "Location: " + selected.getLocation().getLocName());
+        if (selected.getContractType().equals(ContractType.Delivery)) {
+            contractLore.add(String.valueOf(ChatColor.GRAY) + selected.getRequestedAmount() + " " + selected.getRequestedItem().getItemMeta().getDisplayName());
         }
-        contractLore.add(ChatColor.GRAY +"Reward: "+selected.getReward()+" g");
+        contractLore.add(ChatColor.GRAY + "Reward: " + selected.getReward() + " g");
         //This displays the contracts type
         //contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
         contractMeta.setLore(contractLore);
@@ -103,27 +109,58 @@ public class ContractUI {
         ItemStack skull = new ItemStack(type, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         ArrayList<String> skullLore = new ArrayList<>();
-        skullLore.add(ChatColor.RED + "Contractor Lvl: "+ChatColor.GRAY+ b.getContractorLvl()+" ");
-        skullLore.add(ChatColor.AQUA+"Contractor Lvl XP: "+ChatColor.GRAY+b.getContractorXp());
+        skullLore.add(ChatColor.RED + "Contractor Lvl: " + ChatColor.GRAY + b.getContractorLvl() + " ");
+        skullLore.add(ChatColor.AQUA + "Contractor Lvl XP: " + ChatColor.GRAY + b.getContractorXp());
         meta.setLore(skullLore);
         meta.setOwner(p.getDisplayName());
         meta.setDisplayName(ChatColor.WHITE + "Contractor Info:");
         skull.setItemMeta(meta);
         return skull;
     }
-    public static ItemStack getActiveContractIcon(){
+
+    public static ItemStack getActiveContractIcon(Player p, Bandit b) {
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta iMeta = item.getItemMeta();
-        iMeta.setDisplayName(ChatColor.WHITE+"View Active Contract");
+        iMeta.setDisplayName(ChatColor.WHITE + "View Active Contract");
+        if (b.getActiveContract() != null) {
+
+            List<ItemStack> items = Arrays.stream(p.getInventory().getContents()).toList();
+            int totalAmountReqItems = 0;
+            for (ItemStack invItem : items) {
+                if (invItem != null) {
+                    if (invItem.getType() == b.getActiveContract().getRequestedItem().getType()) {
+
+                        int amount = invItem.getAmount();
+                        totalAmountReqItems += amount;
+                    }
+                }
+            }
+            double percentage = ((double) totalAmountReqItems / (double) b.getActiveContract().getRequestedAmount())*100;
+            List<String> lore = new ArrayList<>();
+            ChatColor color;
+            if(percentage <= 30) {
+                color = ChatColor.RED;
+            }else if(percentage <= 70) {
+                color = ChatColor.YELLOW;
+            }else{
+                color = ChatColor.GREEN;
+            }
+            lore.add(ChatColor.GRAY +"Completion: " +color+ Math.floor(percentage) + "%");
+            lore.add(ChatColor.GRAY +""+totalAmountReqItems+ " / "+b.getActiveContract().getRequestedAmount()+ " " + b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
+            iMeta.setLore(lore);
+        }
         item.setItemMeta(iMeta);
+        //p.getInventory().containsAtLeast(b.getActiveContract().getRequestedItem(),b.getActiveContract().getRequestedAmount());
         return item;
     }
-    public static ItemStack getResignContractIcon(){
+
+    public static ItemStack getResignContractIcon() {
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta iMeta = item.getItemMeta();
-        iMeta.setDisplayName(ChatColor.WHITE+"Resign Active Contract");
+        iMeta.setDisplayName(ChatColor.WHITE + "Resign Active Contract");
         item.setItemMeta(iMeta);
         return item;
     }
+
 
 }
