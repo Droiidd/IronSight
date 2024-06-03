@@ -161,19 +161,30 @@ public class Bandit
         testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
         Contract testC1 = new Contract( ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
         Contract testC2 = new Contract( ContractType.Delivery, testLocs ,2, DeliveryType.FISHER);
-        List<FrontierLocation> test4Locs = new ArrayList<>();
-        test4Locs.add(FrontierLocation.getLocation("Black Spur Mines"));
-        List<FrontierLocation> test2Locs = new ArrayList<>();
-        test2Locs.add(FrontierLocation.getLocation("Storm Point"));
-        Contract testC4 = new Contract(ContractType.Delivery, test2Locs ,2, DeliveryType.DRUG_RUNNER);
-        List<FrontierLocation> test3Locs = new ArrayList<>();
-        test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
-        Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
+        List<FrontierLocation> miningLoc = new ArrayList<>();
+        miningLoc.add(FrontierLocation.getLocation("Black Spur Mines"));
+        Contract miner = new Contract(ContractType.Delivery, miningLoc, 1,DeliveryType.MINER);
+        Contract miner2 = new Contract(ContractType.Delivery, miningLoc, 1,DeliveryType.MINER);
+
+        List<FrontierLocation> smokeLocs = new ArrayList<>();
+        smokeLocs.add(FrontierLocation.getLocation("Storm Point"));
+        Contract smokeRunner = new Contract(ContractType.Delivery, smokeLocs ,2, DeliveryType.DRUG_RUNNER);
+
+        List<FrontierLocation> spiceLoc = new ArrayList<>();
+        spiceLoc.add(FrontierLocation.getLocation("Red Ash Camp"));
+        Contract spiceRunner = new Contract(ContractType.Delivery, spiceLoc ,2, DeliveryType.DRUG_RUNNER);
+//        List<FrontierLocation> test3Locs = new ArrayList<>();
+//        test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
+//        Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
 
         contracts.add(testC1);
         contracts.add(testC2);
-        contracts.add(testC3);
-        contracts.add(testC4);
+        //contracts.add(testC3);
+        contracts.add(smokeRunner);
+        contracts.add(spiceRunner);
+        contracts.add(miner);
+        contracts.add(miner2);
+
     }
     public void setOnlinePlayer(Player p)
     {

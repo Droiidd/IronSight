@@ -18,12 +18,12 @@ public class ContractUiEvents implements Listener {
     public void navContractMenu(InventoryClickEvent e)
     {
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)")){
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)")){
             Bandit b = Bandit.getPlayer(p);
             e.setCancelled(true);
             //In the contract UI menu
             //Find what they clicked on
-            if(e.getCurrentItem().getType() != null){
+            if(e.getCurrentItem() != null){
                 Contract selected = null;
                 if(e.getCurrentItem().getType().equals(b.getRookieContract().getContractIcon().getType())){
                     selected = b.getRookieContract();
@@ -35,12 +35,15 @@ public class ContractUiEvents implements Listener {
                     selected = b.getExperiencedContract();
                     setActiveContract(b,p,selected);
                 }
+            }
+        }
+        else if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Info:")){
+            Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
+            //In the contract UI menu
+            //Find what they clicked on
+            if(e.getCurrentItem() != null){
                 switch(e.getCurrentItem().getType()){
-
-                    case SPRUCE_HANGING_SIGN -> {
-                        //They want to change their Contractor Title
-                        p.openInventory(ContractUI.openContractorTitleSelectUi(p));
-                    }
                     case EMERALD_BLOCK -> {
                         p.closeInventory();
                         if(b.isDoingContract()){
@@ -56,6 +59,7 @@ public class ContractUiEvents implements Listener {
                                         checkLevelUp(p,b);
                                         Contract.assignPlayerContracts(p,b);
                                         b.setDoingContract(false);
+                                        b.updateWallet(active.getReward());
                                         b.setActiveContract(null);
                                     }else{
                                         p.sendMessage(ChatColor.RED+ "You need more "+active.getRequestedItem().getItemMeta().getDisplayName());
@@ -67,17 +71,23 @@ public class ContractUiEvents implements Listener {
                             p.sendMessage(ChatColor.RED+"Select a contract first!");
                         }
                     }
+                  case SPRUCE_HANGING_SIGN -> {
+                        //They want to change their Contractor Title
+                        p.openInventory(ContractUI.openContractorTitleSelectUi(p));
+                    }
                     case COMPASS -> {
                         //They want to view their active contract information
                         Contract active = b.getActiveContract();
                         if(active == null){
-                            p.closeInventory();
                             p.sendMessage(ChatColor.RED+"No active contract!");
                         }
                         else {
                             //p.sendMessage(active.getContractName());
                             p.openInventory(ActiveContractUI.openActiveContractUi(p,active));
                         }
+                    }
+                    case BARRIER -> {
+                      p.closeInventory();
                     }
                     //Case Skull:
                     //Can view what you get from leveling up??
@@ -134,6 +144,9 @@ public class ContractUiEvents implements Listener {
                     case SPYGLASS -> {
                         updateContractorTitle(10,p,b,6);
                     }
+                    case BARRIER -> {
+                        updateContractorTitle(0,p,b,0);
+                    }
                 }
             }
         }
@@ -158,6 +171,7 @@ public class ContractUiEvents implements Listener {
     public void updateContractorTitle(int requiredLevel,Player p,Bandit b, int title)
     {
         if(b.getContractorLvl() >= requiredLevel){
+            p.sendMessage(ChatColor.GREEN+ "Title selected!");
             b.setContractorTitle(title);
         }
         else{
@@ -165,7 +179,6 @@ public class ContractUiEvents implements Listener {
             p.sendMessage(ChatColor.RED+ "Not a high enough level!");
         }
         p.closeInventory();
-        p.sendMessage(BanditUtils.getContractorTitle(b)+ ChatColor.GRAY+" title selected.");
     }
     public void checkLevelUp(Player p, Bandit b){
         if(b.getContractorXp() >= 10 && b.getContractorXp() < 20){

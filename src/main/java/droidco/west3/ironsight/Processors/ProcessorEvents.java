@@ -45,8 +45,8 @@ public class ProcessorEvents implements Listener {
                             //IT'S UNUSED!
                             //
 
-                            int chance = GlobalUtils.getRandomNumber(101);
-                            if (chance < 5) {
+                            int chance = GlobalUtils.getRandomNumber(1001);
+                            if (chance < 8) {
                                 Bukkit.broadcastMessage(ChatColor.RED + processor.getValue().getProcessorCode()+ChatColor.GRAY+" has " + ChatColor.AQUA + " changed locations!");
                                 //SPAWN LOC 1
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
@@ -58,7 +58,47 @@ public class ProcessorEvents implements Listener {
                                     }
                                 }
                                 p.closeInventory();
-                                processor.getValue().randomizeLocAndSpawn(p);
+                                processor.getValue().randomizeProcLocation(p);
+                            } else {
+                                p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
+                                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);
+                                new ProcessorTask(processor.getValue(), plugin, p, 60, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
+                                        90.0, 8, processor.getValue().getDefaultLocation());
+                                p.closeInventory();
+                            }
+
+                        }
+                    }
+                }else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(CustomItem.getCustomItem("Unprocessed Spice").getItemStack().getItemMeta().getDisplayName())) {
+                    if (!p.getInventory().containsAtLeast(CustomItem.getCustomItem("Unprocessed Spice").getItemStack(), 8)) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GRAY + "You have no " + ChatColor.RED + "spice!");
+
+                    } else {
+                        //PLAYER HAS DRUGS
+                        if (processor.getValue().isProcessing()) {
+                            //THERE IS A PLAYER PROCESSING ALREADY
+                            p.sendMessage(ChatColor.RED + "This processor is already in use!");
+                            p.closeInventory();
+                            return;
+                        } else {
+                            //IT'S UNUSED!
+                            //
+
+                            int chance = GlobalUtils.getRandomNumber(1001);
+                            if (chance < 8) {
+                                Bukkit.broadcastMessage(ChatColor.RED + processor.getValue().getProcessorCode()+ChatColor.GRAY+" has " + ChatColor.AQUA + " changed locations!");
+                                //SPAWN LOC 1
+                                List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
+                                for (int i = 0; i < entities.size(); i++) {
+                                    if (entities.get(i) instanceof Villager) {
+                                        if (entities.get(i).getCustomName().equalsIgnoreCase(ChatColor.RED + processor.getValue().getProcessorCode())) {
+                                            entities.get(i).remove();
+                                        }
+                                    }
+                                }
+                                p.closeInventory();
+                                processor.getValue().randomizeProcLocation(p);
                             } else {
                                 p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
                                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);

@@ -16,15 +16,11 @@ public class ContractMenuCmd implements CommandExecutor {
         if(commandSender instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
             if(strings.length == 0){
-                if(b.getActiveContract() != null){
-                    p.openInventory(ActiveContractUI.openActiveContractUi(p,b.getActiveContract()));
-                }else{
-                    p.sendMessage(ChatColor.RED+"No Contract selected! "+ChatColor.GRAY+"Go to a contractor first and start one to view "+ChatColor.AQUA+" active contracts");
-                }
+                p.openInventory(ContractUI.openContractorInfo(p));
             }else if(strings[0].equalsIgnoreCase("reset")){
                 Contract.assignPlayerContracts(p,b);
             }else if(strings[0].equalsIgnoreCase("menu")){
-                    p.openInventory(ContractUI.openContractUi(p));
+                    p.openInventory(ContractUI.openContractorInfo(p));
             }
         }
         return true;
