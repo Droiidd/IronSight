@@ -32,7 +32,8 @@ public class BanditUtils {
         p.sendMessage("Wanted Kills: " + b.getWantedKills());
 
     }
-    public static void getStarterItems(Player p){
+
+    public static void getStarterItems(Player p) {
         ItemStack morphFull = CustomPotion.getCustomPotion("Morphine").getItemStack();
         morphFull.setAmount(2);
         ItemStack whisFull = CustomPotion.getCustomPotion("Whiskey").getItemStack();
@@ -49,7 +50,7 @@ public class BanditUtils {
         ItemStack bandage = CustomItem.getCustomItem("Bandage").getItemStack();
         bandage.setAmount(4);
 
-        BanditUtils.getFirearm(p,"coltnavy");
+        BanditUtils.getFirearm(p, "coltnavy");
         p.getInventory().addItem(medFull);
         p.getInventory().addItem(whisFull);
         p.getInventory().addItem(morphFull);
@@ -64,7 +65,8 @@ public class BanditUtils {
         p.getInventory().setHelmet(CustomItem.getCustomItem("Farm Hand Hat").getItemStack());
 
     }
-    public static void getPrisonItems(Player p){
+
+    public static void getPrisonItems(Player p) {
 
         ItemStack salmon = CustomItem.getCustomItem("Smoked Salmon").getItemStack();
         salmon.setAmount(10);
@@ -76,32 +78,34 @@ public class BanditUtils {
         p.getInventory().addItem(salmon);
         p.getInventory().addItem(splint);
     }
-public static ChatColor getContractorLvlColor(Bandit b){
-        switch (b.getContractorLvl()){
-            case 0,1 ->{
+
+    public static ChatColor getContractorLvlColor(Bandit b) {
+        switch (b.getContractorLvl()) {
+            case 0, 1 -> {
                 return ChatColor.GRAY;
             }
-            case 2,3,4 ->{
+            case 2, 3, 4 -> {
                 return ChatColor.YELLOW;
             }
-            case 5,6,7 ->{
+            case 5, 6, 7 -> {
                 return ChatColor.GREEN;
             }
-            case 8,9 ->{
+            case 8, 9 -> {
                 return ChatColor.AQUA;
             }
-            case 10,11 ->{
+            case 10, 11 -> {
                 return ChatColor.LIGHT_PURPLE;
             }
-            case 12 ->{
+            case 12 -> {
                 return ChatColor.RED;
             }
-            case 13 ->{
+            case 13 -> {
                 return ChatColor.DARK_RED;
             }
         }
-            return ChatColor.GRAY;
-}
+        return ChatColor.GRAY;
+    }
+
     public static void releasePrisoner(Player p, Bandit b) {
         b.setBounty(0);
         b.setJailed(false);
@@ -130,6 +134,8 @@ public static ChatColor getContractorLvlColor(Bandit b){
         String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
         String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
         String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
+        String contractorLvl = ChatColor.AQUA + "Contractor Level: " + ChatColor.RESET + b.getContractorLvl();
+
 
         //Wanted timer
         List<Integer> singleDigits = new ArrayList<>();
@@ -154,25 +160,37 @@ public static ChatColor getContractorLvlColor(Bandit b){
         Score combatDis = objective.getScore(combatBlock);
         Score seperatorDis = objective.getScore(seperator);
         Score bountyDis = objective.getScore(bounty);
+        Score contractorDis = objective.getScore(contractorLvl);
+        if (b.getActiveContract() != null) {
+            String activeContract = ChatColor.GREEN + "Active Contract"  + ChatColor.RESET+":";
+            String contractListing = "\""+b.getActiveContract().getListingName()+ChatColor.RESET+ "\"";
+            Score activeContractDis = objective.getScore(activeContract);
+            Score contractListingDis = objective.getScore(contractListing);
+            contractListingDis.setScore(7);
+            activeContractDis.setScore(8);
+        }
+
 
         walletDis.setScore(2);
         bankDis.setScore(3);
         bountyDis.setScore(4);
         seperatorDis.setScore(5);
+        contractorDis.setScore(6);
+
         if (b.isCombatBlocked()) {
-            combatDis.setScore(6);
+            combatDis.setScore(8);
         }
         if (b.isWanted()) {
-            wantedDis.setScore(7);
+            wantedDis.setScore(9);
         }
         p.setScoreboard(sb);
     }
-    public static void getFirearm(Player p, String gunName )
-    {
-            String weapon = "shot give " + p.getDisplayName() + " " + gunName;
 
-            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-            Bukkit.dispatchCommand(console, weapon);
+    public static void getFirearm(Player p, String gunName) {
+        String weapon = "shot give " + p.getDisplayName() + " " + gunName;
+
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        Bukkit.dispatchCommand(console, weapon);
 
     }
 
@@ -202,41 +220,42 @@ public static ChatColor getContractorLvlColor(Bandit b){
         return null;
 
     }
+
     public static String getContractorTitle(Bandit b) {
-        switch(b.getContractorTitle()){
+        switch (b.getContractorTitle()) {
             case 0:
                 return "";
             case 1:
-                return String.valueOf(ChatColor.GRAY)+"Miner";
+                return String.valueOf(ChatColor.GRAY) + "Miner";
             case 2:
-                return String.valueOf(ChatColor.GRAY)+"Cowboy";
+                return String.valueOf(ChatColor.GRAY) + "Cowboy";
             case 3:
-                return String.valueOf(ChatColor.DARK_GREEN)+"Tracker";
+                return String.valueOf(ChatColor.DARK_GREEN) + "Tracker";
             case 4:
-                return String.valueOf(ChatColor.GREEN)+"Medic";
+                return String.valueOf(ChatColor.GREEN) + "Medic";
             case 5:
-                return String.valueOf(ChatColor.DARK_RED)+ "Raider";
+                return String.valueOf(ChatColor.DARK_RED) + "Raider";
             case 6:
-                return String.valueOf(ChatColor.YELLOW)+ "Explorer";
+                return String.valueOf(ChatColor.YELLOW) + "Explorer";
         }
         return "";
     }
-    public static String getRandomTip()
-    {
-        ArrayList<String> tips = new ArrayList<>();
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Don't forget to send your horse back to the stable when you arrive at your destination");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Do /c to open your contractor profile or view active contracts");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Contracts reset every hour!");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Track unknown locations or NPC's with the tracker item");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Every named river has a unique signature fish");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Start a contract to earn gold!");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Contracts are the quickest way to earn money");
 
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Go to a contractor NPC to view available contracts");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Locate a contractor NPC to start a contract");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Earn more rewards by leveling up your contractor level");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Do /call or /horse to summon your steed");
-        tips.add(ChatColor.AQUA+"TIP: "+ChatColor.GRAY+"Something look off or is too confusing? Report to Droiid!");
+    public static String getRandomTip() {
+        ArrayList<String> tips = new ArrayList<>();
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Don't forget to send your horse back to the stable when you arrive at your destination");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /c to open your contractor profile or view active contracts");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts reset every hour!");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Track unknown locations or NPC's with the tracker item");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Every named river has a unique signature fish");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Start a contract to earn gold!");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts are the quickest way to earn money");
+
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Go to a contractor NPC to view available contracts");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Locate a contractor NPC to start a contract");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Earn more rewards by leveling up your contractor level");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /call or /horse to summon your steed");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Something look off or is too confusing? Report to Droiid!");
 
 
         int tip = GlobalUtils.getRandomNumber(tips.size());
@@ -250,17 +269,18 @@ public static ChatColor getContractorLvlColor(Bandit b){
         newVaultUI.setItem(15, ItemIcon.getIcon("close_vault").getItem());
         return newVaultUI;
     }
+
     public static Inventory vaultUI(Player p) {
         Bandit b = Bandit.getPlayer(p);
-        Inventory vaultUI = Bukkit.createInventory(p, 54, p.getDisplayName() + ": "+ChatColor.DARK_AQUA+"Vault");
+        Inventory vaultUI = Bukkit.createInventory(p, 54, p.getDisplayName() + ": " + ChatColor.DARK_AQUA + "Vault");
         List<ItemStack> items = b.getItemVault();
-        for (int i = b.getVaultSize(); i < vaultUI.getSize();i++) {
-            vaultUI.setItem(i,ItemIcon.getIcon("empty_slot").getItem());
+        for (int i = b.getVaultSize(); i < vaultUI.getSize(); i++) {
+            vaultUI.setItem(i, ItemIcon.getIcon("empty_slot").getItem());
         }
 
         if (!items.isEmpty()) {
             for (int i = 0; i < items.size(); i++) {
-                    vaultUI.setItem(i, items.get(i));
+                vaultUI.setItem(i, items.get(i));
             }
         }
 

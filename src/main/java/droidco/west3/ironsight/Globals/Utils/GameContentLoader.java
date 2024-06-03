@@ -221,7 +221,9 @@ public class GameContentLoader {
         //add farmhand set
         HashMap<String, Quantity> drugbase = new HashMap<>();
         drugbase.put("Glass Bottle", ones);
-        drugbase.put("Rifle Ammo", ones);
+        oilfield.put("Rifle Ammo", new Quantity(4, 8));
+        oilfield.put("Shotgun Ammo", new Quantity(2, 4));
+        oilfield.put("Pistol Ammo", new Quantity(4, 8));
         drugbase.put("Cooked Rabbit", ones);
         drugbase.put("Brown Stew", ones);
         drugbase.put("Bandage", ones);
