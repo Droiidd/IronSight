@@ -134,7 +134,7 @@ public class BanditUtils {
         String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
         String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
         String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
-        String contractorLvl = ChatColor.AQUA + "Contractor Level: " + ChatColor.RESET + b.getContractorLvl();
+        String contractorLvl = ChatColor.AQUA + "Contractor "+ChatColor.GRAY+"[" + BanditUtils.getContractorLvlColor(b) + b.getContractorLvl()+ChatColor.GRAY+"]";
 
 
         //Wanted timer

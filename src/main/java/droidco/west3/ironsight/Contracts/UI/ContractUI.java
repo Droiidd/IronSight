@@ -135,18 +135,22 @@ public class ContractUI {
                     }
                 }
             }
-            double percentage = ((double) totalAmountReqItems / (double) b.getActiveContract().getRequestedAmount())*100;
+            double percentage = ((double) totalAmountReqItems / (double) b.getActiveContract().getRequestedAmount()) * 100;
             List<String> lore = new ArrayList<>();
             ChatColor color;
-            if(percentage <= 30) {
+            if (percentage <= 30) {
                 color = ChatColor.RED;
-            }else if(percentage <= 70) {
+            } else if (percentage <= 70) {
                 color = ChatColor.YELLOW;
-            }else{
+            } else {
                 color = ChatColor.GREEN;
             }
-            lore.add(ChatColor.GRAY +"Completion: " +color+ Math.floor(percentage) + "%");
-            lore.add(ChatColor.GRAY +""+totalAmountReqItems+ " / "+b.getActiveContract().getRequestedAmount()+ " " + b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
+            if (percentage <= 100) {
+                lore.add(ChatColor.GRAY + "Completion: " + color + Math.floor(percentage) + "%");
+            } else {
+                lore.add(ChatColor.GREEN + "Complete!"+ChatColor.GRAY +" Return to contractor.");
+            }
+            lore.add(ChatColor.GRAY + "" + totalAmountReqItems + " / " + b.getActiveContract().getRequestedAmount() + " " + b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
             iMeta.setLore(lore);
         }
         item.setItemMeta(iMeta);

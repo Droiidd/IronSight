@@ -23,7 +23,7 @@ public class ContractUiEvents implements Listener {
             e.setCancelled(true);
             //In the contract UI menu
             //Find what they clicked on
-            if(e.getCurrentItem().getType() != null){
+            if(e.getCurrentItem() != null){
                 Contract selected = null;
                 if(e.getCurrentItem().getType().equals(b.getRookieContract().getContractIcon().getType())){
                     selected = b.getRookieContract();
@@ -42,7 +42,7 @@ public class ContractUiEvents implements Listener {
             e.setCancelled(true);
             //In the contract UI menu
             //Find what they clicked on
-            if(e.getCurrentItem().getType() != null){
+            if(e.getCurrentItem() != null){
                 switch(e.getCurrentItem().getType()){
                     case EMERALD_BLOCK -> {
                         p.closeInventory();
@@ -59,6 +59,7 @@ public class ContractUiEvents implements Listener {
                                         checkLevelUp(p,b);
                                         Contract.assignPlayerContracts(p,b);
                                         b.setDoingContract(false);
+                                        b.updateWallet(active.getReward());
                                         b.setActiveContract(null);
                                     }else{
                                         p.sendMessage(ChatColor.RED+ "You need more "+active.getRequestedItem().getItemMeta().getDisplayName());

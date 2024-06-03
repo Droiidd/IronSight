@@ -412,20 +412,20 @@ public class GameContentLoader {
 
         //      ===--- TRACKER UI ICONS ---===
         new ItemIcon("Spice Field", "spice_field_tracker", "Directions to Spice Field", Material.HONEY_BOTTLE);
-        ItemIcon town = new ItemIcon("Towns", "town_tracker", "Find town", Material.DARK_OAK_HANGING_SIGN);
-        ItemIcon santaFe = new ItemIcon("Santa Fe", "santa_fe_tracker", "Directions to Santa Fe", Material.WHITE_BANNER);
-        ItemIcon newOrleans = new ItemIcon("New Orleans", "new_orleans_tracker", "Directions to New Orleans", Material.YELLOW_BANNER);
-        ItemIcon texas = new ItemIcon("Republic of Texas", "republic_of_texas_tracker", "Directions to the Republic of Texas", Material.BLUE_BANNER);
-        ItemIcon player = new ItemIcon("Players", "player_tracker", "Find players", Material.PLAYER_HEAD);
-        ItemIcon wantedPlayer = new ItemIcon("Nearest Wanted Player", "wanted_tracker", "Nearest wanted player", Material.ZOMBIE_HEAD);
-        ItemIcon contracts = new ItemIcon("Contracts", "contract_tracker", "Contract location", Material.BOOK);
+        new ItemIcon("Towns", "town_tracker", "Find town", Material.DARK_OAK_HANGING_SIGN);
+        new ItemIcon("Santa Fe", "santa_fe_tracker", "Directions to Santa Fe", Material.WHITE_BANNER);
+        new ItemIcon("New Orleans", "new_orleans_tracker", "Directions to New Orleans", Material.YELLOW_BANNER);
+        new ItemIcon("Republic of Texas", "republic_of_texas_tracker", "Directions to the Republic of Texas", Material.BLUE_BANNER);
+        new ItemIcon("Players", "player_tracker", "Find players", Material.PLAYER_HEAD);
+        new ItemIcon("Nearest Wanted Player", "wanted_tracker", "Nearest wanted player", Material.ZOMBIE_HEAD);
+        new ItemIcon("Contracts", "contract_tracker", "Contract location", Material.BOOK);
         // contract icons ???
         //      ===--- TRACKER NPC ---===
-        ItemIcon merchants = new ItemIcon("Merchants", "merchant_tracker", "Find Merchants", Material.BELL);
-        ItemIcon fisherman = new ItemIcon("Fisherman", "fisherman_tracker", "Find Fisherman", Material.FISHING_ROD);
-        ItemIcon pharmacist = new ItemIcon("Pharmacist", "pharmacist_tracker", "Find Pharmacist", Material.PAPER);
-        ItemIcon armsDealer = new ItemIcon("Arms Dealer", "arms_dealer_tracker", "Find Arms Dealer", Material.STONE_AXE);
-        ItemIcon illegalArms = new ItemIcon("Illegal Arms Dealer", "illegal_arms_tracker", "Illegal Arms Dealer", Material.IRON_AXE);
+        new ItemIcon("Merchants", "merchant_tracker", "Find Merchants", Material.BELL);
+        new ItemIcon("Fisherman", "fisherman_tracker", "Find Fisherman", Material.FISHING_ROD);
+        new ItemIcon("Pharmacist", "pharmacist_tracker", "Find Pharmacist", Material.PAPER);
+        new ItemIcon("Arms Dealer", "arms_dealer_tracker", "Find Arms Dealer", Material.STONE_AXE);
+        new ItemIcon("Illegal Arms Dealer", "illegal_arms_tracker", "Illegal Arms Dealer", Material.IRON_AXE);
         ItemIcon armorer = new ItemIcon("Armorer", "armorer_tracker", "Find Armorer", Material.LEATHER_CHESTPLATE);
         ItemIcon illegalArmor = new ItemIcon("Illegal Armorer", "illegal_armorer_tracker", "Find Illegal Armorer", Material.NETHERITE_CHESTPLATE);
         ItemIcon generalStore = new ItemIcon("Shopkeeper", "shopkeeper_tracker", "Find Shopkeeper", Material.COOKED_BEEF);
