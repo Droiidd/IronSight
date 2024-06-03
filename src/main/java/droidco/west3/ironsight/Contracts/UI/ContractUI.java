@@ -33,21 +33,34 @@ public class ContractUI {
         contractUi.setItem(16,ItemIcon.getIcon("explorer_prefix").getItem());
         return contractUi;
     }
-    public static Inventory openContractUi(Player p){
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)");
+    public static Inventory openContractOptionsUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)");
         Bandit b = Bandit.getPlayer(p);
 
-//        p.sendMessage(b.getRookieContract().getContractName());
-//        p.sendMessage(b.getApprenticeContract().getContractName());
-//        p.sendMessage(b.getExperiencedContract().getContractName());
-
-        contractUi.setItem(2,ItemIcon.getIcon("contractor_title").getItem());
-        contractUi.setItem(4,getContractorIcon(p));
-        contractUi.setItem(7,getActiveContractIcon());
         contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.Rookie));
         contractUi.setItem(13, getContractSlot(b.getApprenticeContract(),Difficulty.Apprentice));
         contractUi.setItem(15, getContractSlot(b.getExperiencedContract(),Difficulty.Experienced));
+
+        contractUi.setItem(2,ItemIcon.getIcon("rookie_slot").getItem());
+        contractUi.setItem(4,ItemIcon.getIcon("apprentice_slot").getItem());
+        contractUi.setItem(6,ItemIcon.getIcon("experienced_slot").getItem());
         contractUi.setItem(22,ItemIcon.getIcon("complete_contract").getItem());
+        return contractUi;
+    }
+    public static Inventory openContractorInfo(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Contractor Info:");
+        Bandit b = Bandit.getPlayer(p);
+        contractUi.setItem(0,ItemIcon.getIcon("close_menu").getItem());
+        contractUi.setItem(11,ItemIcon.getIcon("contractor_title").getItem());
+        contractUi.setItem(4,getContractorIcon(p));
+        contractUi.setItem(15,getActiveContractIcon());
+        return contractUi;
+    }
+    public static Inventory openContractorRewardUi(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "");
+        Bandit b = Bandit.getPlayer(p);
+
+        contractUi.setItem(1,ItemIcon.getIcon("previous_page").getItem());
         return contractUi;
     }
     public static ItemStack getContractSlot(Contract selected, Difficulty difficulty){

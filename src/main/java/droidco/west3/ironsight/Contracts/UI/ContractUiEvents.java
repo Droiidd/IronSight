@@ -18,7 +18,7 @@ public class ContractUiEvents implements Listener {
     public void navContractMenu(InventoryClickEvent e)
     {
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Available Contracts: (Click to start!)")){
+        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)")){
             Bandit b = Bandit.getPlayer(p);
             e.setCancelled(true);
             //In the contract UI menu
@@ -36,11 +36,6 @@ public class ContractUiEvents implements Listener {
                     setActiveContract(b,p,selected);
                 }
                 switch(e.getCurrentItem().getType()){
-
-                    case SPRUCE_HANGING_SIGN -> {
-                        //They want to change their Contractor Title
-                        p.openInventory(ContractUI.openContractorTitleSelectUi(p));
-                    }
                     case EMERALD_BLOCK -> {
                         p.closeInventory();
                         if(b.isDoingContract()){
@@ -67,17 +62,34 @@ public class ContractUiEvents implements Listener {
                             p.sendMessage(ChatColor.RED+"Select a contract first!");
                         }
                     }
+
+                }
+            }
+        }
+        else if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Contractor Info:")){
+            Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
+            //In the contract UI menu
+            //Find what they clicked on
+            if(e.getCurrentItem().getType() != null){
+                switch(e.getCurrentItem().getType()){
+                  case SPRUCE_HANGING_SIGN -> {
+                        //They want to change their Contractor Title
+                        p.openInventory(ContractUI.openContractorTitleSelectUi(p));
+                    }
                     case COMPASS -> {
                         //They want to view their active contract information
                         Contract active = b.getActiveContract();
                         if(active == null){
-                            p.closeInventory();
                             p.sendMessage(ChatColor.RED+"No active contract!");
                         }
                         else {
                             //p.sendMessage(active.getContractName());
                             p.openInventory(ActiveContractUI.openActiveContractUi(p,active));
                         }
+                    }
+                    case BARRIER -> {
+                      p.closeInventory();
                     }
                     //Case Skull:
                     //Can view what you get from leveling up??

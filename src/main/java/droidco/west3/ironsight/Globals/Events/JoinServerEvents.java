@@ -28,23 +28,24 @@ public class JoinServerEvents implements Listener{
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)
     {
-         Player p = e.getPlayer();
-        p.sendMessage(p.getUniqueId().toString());
+        Player p = e.getPlayer();
         Bandit b = PlayerConnector.fetchAllPlayerData(p);
         p.getWorld().setGameRule(GameRule.DO_IMMEDIATE_RESPAWN,true);
-        p.sendMessage(ChatColor.GRAY+"Right click with your "+ChatColor.AQUA+"tracker "+ ChatColor.GRAY+"in hand to navigate to a location.");
+        p.sendMessage(ChatColor.WHITE+"===--- "+ ChatColor.DARK_RED+"WELCOME TO IRON SIGHT"+ChatColor.WHITE+" ---===");
+        p.sendMessage(ChatColor.WHITE+"->"+ChatColor.GRAY+" Earn "+ChatColor.GREEN+"gold "+ChatColor.GRAY+" by completing contracts!");
+        p.sendMessage(ChatColor.WHITE+ "->"+ChatColor.GRAY+" Navigate to a contractor to view available quests.");
+        p.sendMessage(ChatColor.WHITE+"->"+ChatColor.GRAY+ " Right click with your "+ChatColor.AQUA+"tracker "+ ChatColor.GRAY+"in hand to navigate to a location.");
+
         if(b == null){
-            System.out.println("New player!");
-            p.sendMessage("New player!");
             b = new Bandit(p.getUniqueId().toString());
             BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
             List<FrontierHorse> horses = b.getHorses();
             horses.add( new FrontierHorse(p.getUniqueId().toString(),"Starter", FrontierHorseType.STANDARD));
             p.teleport(new Location(p.getWorld(),1055,94,-1950));
             p.setRespawnLocation(new Location(p.getWorld(),1055,94,-1950));
+            BanditUtils.getStarterItems(p);
         }else{
             b.setOnlinePlayer(p);
-            BanditUtils.displayBasicStats(b, p);
             BanditTask playerLifeTracker = new BanditTask(plugin, b, p);
 
             //check if the player is in prison, and can be released

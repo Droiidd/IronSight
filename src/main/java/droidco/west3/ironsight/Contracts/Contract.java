@@ -224,7 +224,12 @@ public class Contract
                 }
             }
             case DRUG_RUNNER -> {
-                amount = GlobalUtils.getRandomRange(22,46);
+                if(rareRequest){
+                    amount = GlobalUtils.getRandomRange(44,92);
+                }else{
+                    amount = GlobalUtils.getRandomRange(22,46);
+                }
+
             }
             case MINER -> {
                 if(rareRequest){
@@ -377,9 +382,20 @@ public class Contract
         String listing = "";
         if(rareRequest){
             listing += (String.valueOf(ChatColor.LIGHT_PURPLE)+ "Rare ");
-        }else{
-            listing += (String.valueOf(ChatColor.WHITE)+ "Normal ");
         }
+        switch (deliveryType){
+            case FISHER -> {
+                listing += (String.valueOf(ChatColor.WHITE)+ "Fishing Guild ");
+            }
+            case MINER -> {
+                listing += (String.valueOf(ChatColor.WHITE)+ "Mining Guild ");
+            }
+            case DRUG_RUNNER -> {
+                listing += (String.valueOf(ChatColor.RED)+ "Drug Runner ");
+            }
+        }
+
+
         if(bulkOrder){
             listing += (String.valueOf(ChatColor.WHITE)+String.valueOf(ChatColor.BOLD)+ "Bulk ");;
         }

@@ -72,8 +72,6 @@ public class Processor {
             // PROCESSOR IS BEING INITIALIZED, REMOVE NEW LOCATION FROM POOL AFTER SELECTING
             this.defaultLocation = new Location(p.getPlayer().getWorld(), coord.getX(),coord.getY(),coord.getZ());
             this.defaultPosition = coord;
-            p.sendMessage("Spawning NPC");
-            p.sendMessage(coord.getX()+" "+coord.getY()+" "+coord.getZ()+". ");
             createVillager(String.valueOf(ChatColor.RED)+this.processorCode,this.defaultLocation);
             // removing from pool
             tmpList.remove(choice);
