@@ -45,8 +45,8 @@ public class ProcessorEvents implements Listener {
                             //IT'S UNUSED!
                             //
 
-                            int chance = GlobalUtils.getRandomNumber(101);
-                            if (chance < 5) {
+                            int chance = GlobalUtils.getRandomNumber(1001);
+                            if (chance < 8) {
                                 Bukkit.broadcastMessage(ChatColor.RED + processor.getValue().getProcessorCode()+ChatColor.GRAY+" has " + ChatColor.AQUA + " changed locations!");
                                 //SPAWN LOC 1
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
@@ -85,8 +85,8 @@ public class ProcessorEvents implements Listener {
                             //IT'S UNUSED!
                             //
 
-                            int chance = GlobalUtils.getRandomNumber(101);
-                            if (chance < 5) {
+                            int chance = GlobalUtils.getRandomNumber(1001);
+                            if (chance < 8) {
                                 Bukkit.broadcastMessage(ChatColor.RED + processor.getValue().getProcessorCode()+ChatColor.GRAY+" has " + ChatColor.AQUA + " changed locations!");
                                 //SPAWN LOC 1
                                 List<Entity> entities = p.getNearbyEntities(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());

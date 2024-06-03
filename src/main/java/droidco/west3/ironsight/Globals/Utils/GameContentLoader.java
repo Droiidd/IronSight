@@ -113,56 +113,56 @@ public class GameContentLoader {
         CustomItem pearlrivertrout = new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 275.0, 0.0, 1);
         CustomItem expaditionRod = new CustomItem("Expedition Rod", 8, true, false, "A proper line.", Material.FISHING_ROD, 0.0, 5950.0, 1, Enchantment.LURE, 5);
 
-        CustomItem piratesBooty = new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
-        CustomItem oilBarrel = new CustomItem("Oil Barrel", 7, false, false, "A large amount of refined oil", Material.WATER_BUCKET, 650.0, 0.0, 1);
-        CustomItem goldengamble = new CustomItem("Golden Gamble Petal", 7, true, false, "Said to be lucky!", Material.HONEYCOMB, 0.0, 0.0, 1);
-        CustomItem molesbreath = new CustomItem("Moles Breath Spores", 7, true, false, "Moles use it to dig quicker", Material.FROGSPAWN, 0.0, 0.0, 1);
-        CustomItem maltpetal = new CustomItem("Blue Malt Petal", 7, true, false, "It smell makes dreams come true", Material.GLOW_INK_SAC, 0.0, 0.0, 1);
+            new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
+        new CustomItem("Oil Barrel", 7, false, false, "A large amount of refined oil", Material.WATER_BUCKET, 650.0, 0.0, 1);
+        new CustomItem("Golden Gamble Petal", 7, true, false, "Said to be lucky!", Material.HONEYCOMB, 0.0, 0.0, 1);
+        new CustomItem("Moles Breath Spores", 7, true, false, "Moles use it to dig quicker", Material.FROGSPAWN, 0.0, 0.0, 1);
+        new CustomItem("Blue Malt Petal", 7, true, false, "It smell makes dreams come true", Material.GLOW_INK_SAC, 0.0, 0.0, 1);
 
         new CustomItem("Crystalized Geode", 8, true, false, "Crystals explode out of the sides", Material.MUSIC_DISC_11, 0.0, 0.0, 1);
-        CustomItem riverdiamond = new CustomItem("River Diamond", 7, true, false, "The root of many wars", Material.DIAMOND, 555.0, 0.0, 1);
-        CustomItem baronsemerald = new CustomItem("Baron's Emerald", 7, true, false, "An old king was fond of these", Material.EMERALD, 575.0, 0.0, 1);
-        CustomItem voidopal = new CustomItem("Void Opal", 8, true, false, "Stare into the depths of the universe", Material.ECHO_SHARD, 635.0, 0.0, 1);
+        new CustomItem("River Diamond", 7, true, false, "The root of many wars", Material.DIAMOND, 555.0, 0.0, 1);
+        new CustomItem("Baron's Emerald", 7, true, false, "An old king was fond of these", Material.EMERALD, 575.0, 0.0, 1);
+        new CustomItem("Void Opal", 8, true, false, "Stare into the depths of the universe", Material.ECHO_SHARD, 635.0, 0.0, 1);
 
         //ARMOR
-        CustomItem farmBoots = new CustomItem("Farm Hand Boots", 1, true, false, "'Size too big", Material.LEATHER_BOOTS, 0.0, 350.0, 1);
-        CustomItem farmLegs = new CustomItem("Farm Hand Chaps", 2, true, false, "Stained with mud", Material.LEATHER_LEGGINGS, 0.0, 450.0, 1);
-        CustomItem farmChest = new CustomItem("Farm Hand Shirt", 2, true, false, "Couple 'a holes", Material.LEATHER_CHESTPLATE, 0.0, 500.0, 1);
-        CustomItem farmHelm = new CustomItem("Farm Hand Hat", 1, true, false, "Keeps the sun away", Material.LEATHER_HELMET, 0.0, 325.0, 1);
+        new CustomItem("Farm Hand Boots", 1, true, false, "'Size too big", Material.LEATHER_BOOTS, 0.0, 350.0, 1);
+        new CustomItem("Farm Hand Chaps", 2, true, false, "Stained with mud", Material.LEATHER_LEGGINGS, 0.0, 450.0, 1);
+        new CustomItem("Farm Hand Shirt", 2, true, false, "Couple 'a holes", Material.LEATHER_CHESTPLATE, 0.0, 500.0, 1);
+        new CustomItem("Farm Hand Hat", 1, true, false, "Keeps the sun away", Material.LEATHER_HELMET, 0.0, 325.0, 1);
 
-        CustomItem huntsmenBoots = new CustomItem("Huntsmen Boots", 3, true, false, "Rusty Spurs", Material.IRON_BOOTS, 0.0, 924.0, 1);
-        CustomItem huntsmenLegs = new CustomItem("Huntsmen Trousers", 4, true, false, "Mostly fur", Material.IRON_LEGGINGS, 0.0, 1188.0, 1);
-        CustomItem huntsmenChest = new CustomItem("Huntsmen Jacket", 4, true, false, "Made with boar hide", Material.IRON_CHESTPLATE, 0.0, 1320.0, 1);
-        CustomItem huntsmenHelm = new CustomItem("Huntsmen Hat", 3, true, false, "Fox fur cap", Material.IRON_HELMET, 0.0, 858.0, 1);
+        new CustomItem("Huntsmen Boots", 3, true, false, "Rusty Spurs", Material.IRON_BOOTS, 0.0, 924.0, 1);
+        new CustomItem("Huntsmen Trousers", 4, true, false, "Mostly fur", Material.IRON_LEGGINGS, 0.0, 1188.0, 1);
+        new CustomItem("Huntsmen Jacket", 4, true, false, "Made with boar hide", Material.IRON_CHESTPLATE, 0.0, 1320.0, 1);
+        new CustomItem("Huntsmen Hat", 3, true, false, "Fox fur cap", Material.IRON_HELMET, 0.0, 858.0, 1);
 
-        CustomItem frontierBoots = new CustomItem("Frontier Boots", 5, false, false, "Steeled leather", Material.IRON_BOOTS, 0.0, 2156.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierLegs = new CustomItem("Frontier Pants", 6, false, false, "With knee pads!", Material.IRON_LEGGINGS, 0.0, 2772.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierChest = new CustomItem("Frontier Duster", 6, false, false, "Made with beast hide", Material.IRON_CHESTPLATE, 0.0, 3080.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        CustomItem frontierHelm = new CustomItem("Frontier Hat", 5, false, false, "Steeled leather hat", Material.IRON_HELMET, 0.0, 2002.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        new CustomItem("Frontier Boots", 5, false, false, "Steeled leather", Material.IRON_BOOTS, 0.0, 2156.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        new CustomItem("Frontier Pants", 6, false, false, "With knee pads!", Material.IRON_LEGGINGS, 0.0, 2772.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        new CustomItem("Frontier Duster", 6, false, false, "Made with beast hide", Material.IRON_CHESTPLATE, 0.0, 3080.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        new CustomItem("Frontier Hat", 5, false, false, "Steeled leather hat", Material.IRON_HELMET, 0.0, 2002.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 
-        CustomItem journeyBoots = new CustomItem("Journeymen Boots", 7, false, false, "Silver spurs", Material.NETHERITE_BOOTS, 0.0, 0.0, 1);
-        CustomItem journeyLegs = new CustomItem("Journeymen Pants", 8, false, false, "Plenty of pockets", Material.NETHERITE_LEGGINGS, 0.0, 0.0, 1);
-        CustomItem journeyChest = new CustomItem("Journeymen Duster", 8, false, false, "Plated with steel", Material.NETHERITE_CHESTPLATE, 0.0, 0.0, 1);
-        CustomItem journeyHelm = new CustomItem("Journeymen Hat", 7, false, false, "Soul of every Journeymen", Material.NETHERITE_HELMET, 0.0, 0.0, 1);
+        new CustomItem("Journeymen Boots", 7, false, false, "Silver spurs", Material.NETHERITE_BOOTS, 0.0, 0.0, 1);
+        new CustomItem("Journeymen Pants", 8, false, false, "Plenty of pockets", Material.NETHERITE_LEGGINGS, 0.0, 0.0, 1);
+        new CustomItem("Journeymen Duster", 8, false, false, "Plated with steel", Material.NETHERITE_CHESTPLATE, 0.0, 0.0, 1);
+        new CustomItem("Journeymen Hat", 7, false, false, "Soul of every Journeymen", Material.NETHERITE_HELMET, 0.0, 0.0, 1);
 
 
-        CustomItem sheriffBoots = new CustomItem("Sheriff Boots", 3, true, true, "", Material.CHAINMAIL_BOOTS, 0.0, 924.0, 1);
-        CustomItem sheriffLegs = new CustomItem("Sheriff Pants", 4, true, true, "", Material.CHAINMAIL_LEGGINGS, 0.0, 1188.0, 1);
-        CustomItem sheriffChest = new CustomItem("Sheriff Jacket", 4, true, true, "", Material.CHAINMAIL_CHESTPLATE, 0.0, 1320.0, 1);
-        CustomItem sheriffHelm = new CustomItem("Sheriff Hat", 3, true, true, "", Material.CHAINMAIL_HELMET, 0.0, 858.0, 1);
+        new CustomItem("Sheriff Boots", 3, true, true, "", Material.CHAINMAIL_BOOTS, 0.0, 924.0, 1);
+        new CustomItem("Sheriff Pants", 4, true, true, "", Material.CHAINMAIL_LEGGINGS, 0.0, 1188.0, 1);
+        new CustomItem("Sheriff Jacket", 4, true, true, "", Material.CHAINMAIL_CHESTPLATE, 0.0, 1320.0, 1);
+        new CustomItem("Sheriff Hat", 3, true, true, "", Material.CHAINMAIL_HELMET, 0.0, 858.0, 1);
 
-        CustomItem deputyBoots = new CustomItem("Deputy Boots", 3, true, true, "", Material.CHAINMAIL_BOOTS, 0.0, 2730.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyLegs = new CustomItem("Deputy Pants", 4, true, true, "", Material.CHAINMAIL_LEGGINGS, 0.0, 3510.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyChest = new CustomItem("Deputy Jacket", 4, true, true, "", Material.CHAINMAIL_CHESTPLATE, 0.0, 3900.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        CustomItem deputyHelm = new CustomItem("Deputy Hat", 3, true, true, "", Material.CHAINMAIL_HELMET, 0.0, 2335.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        new CustomItem("Deputy Boots", 3, true, true, "", Material.CHAINMAIL_BOOTS, 0.0, 2730.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        new CustomItem("Deputy Pants", 4, true, true, "", Material.CHAINMAIL_LEGGINGS, 0.0, 3510.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        new CustomItem("Deputy Jacket", 4, true, true, "", Material.CHAINMAIL_CHESTPLATE, 0.0, 3900.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        new CustomItem("Deputy Hat", 3, true, true, "", Material.CHAINMAIL_HELMET, 0.0, 2335.0, 1, Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 
-        CustomItem marshallBoots = new CustomItem("Marshall Boots", 3, true, true, "Freshly shined", Material.DIAMOND_BOOTS, 0.0, 5950.0, 1);
-        CustomItem marshallLegs = new CustomItem("Marshall Pants", 4, true, true, "", Material.DIAMOND_LEGGINGS, 0.0, 7650.0, 1);
-        CustomItem marshallChest = new CustomItem("Marshall Jacket", 4, true, true, "Boys in blue!", Material.DIAMOND_CHESTPLATE, 0.0, 8500.0, 1);
-        CustomItem marshallHelm = new CustomItem("Marshall Hat", 3, true, true, "The true officer.", Material.DIAMOND_HELMET, 0.0, 5525.0, 1);
+        new CustomItem("Marshall Boots", 3, true, true, "Freshly shined", Material.DIAMOND_BOOTS, 0.0, 5950.0, 1);
+        new CustomItem("Marshall Pants", 4, true, true, "", Material.DIAMOND_LEGGINGS, 0.0, 7650.0, 1);
+        new CustomItem("Marshall Jacket", 4, true, true, "Boys in blue!", Material.DIAMOND_CHESTPLATE, 0.0, 8500.0, 1);
+        new CustomItem("Marshall Hat", 3, true, true, "The true officer.", Material.DIAMOND_HELMET, 0.0, 5525.0, 1);
 
-        CustomItem bow = new CustomItem("Flame Bow", 8, false, false, "", Material.BOW, 0.0, 0.0, 1, Enchantment.ARROW_FIRE, 2);
-        CustomItem bow2 = new CustomItem("Hard Bow", 8, false, false, "", Material.BOW, 0.0, 0.0, 1, Enchantment.ARROW_DAMAGE, 6);
+        new CustomItem("Flame Bow", 8, false, false, "", Material.BOW, 0.0, 0.0, 1, Enchantment.ARROW_FIRE, 2);
+        new CustomItem("Hard Bow", 8, false, false, "", Material.BOW, 0.0, 0.0, 1, Enchantment.ARROW_DAMAGE, 6);
 
         new CustomItem("Colt Patterson", 2, true, false, "", Material.STONE_SHOVEL, 0.0, 650.0, 1);
         new CustomItem("Sharps Rifle", 7, true, false, "", Material.STONE_AXE, 0.0, 2450.0, 1);
@@ -170,6 +170,9 @@ public class GameContentLoader {
         new CustomItem("Henry Model 3", 5, true, false, "", Material.STONE_HOE, 0.0, 2800.0, 1);
 
         new CustomItem("Winchester 1873", 6, false, false, "", Material.IRON_AXE, 0.0, 2950.0, 1);
+        new CustomItem("Colt Navy",4,false,false,"",Material.IRON_SHOVEL,0.0,1780,1);
+        new CustomItem("Sawed-Off Shotgun",8,false,false,"",Material.IRON_HOE,0.0,3650,1);
+        new CustomItem("Navy 1851 OKH",7,false,false,"",Material.DIAMOND_SHOVEL,0.0,3650,1);
 
         System.out.println("custom items loaded");
 
@@ -526,13 +529,13 @@ public class GameContentLoader {
 
         new NPC("Shopkeeper", NPCType.SHOPKEEPER, -1056, 73, 2568, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Contractor", NPCType.CONTRACTOR, -1030, 72, 2514, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
-        new NPC("Bank Teller", NPCType.BANKER, -1076, 72, 2519, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Bank Teller", NPCType.BANKER, -1076, 72, 2521, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Arms Dealer", NPCType.ARMS_DEALER, -1054, 73, 2614, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Fisherman", NPCType.FISHERMAN, -1121, 72, 2340, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Armorer", NPCType.ARMORER, -1095, 72, 2565, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Geologist", NPCType.GEOLOGIST, -1055, 72, 2553, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Stable Manager", NPCType.STABLE_MANAGER, -1121, 71, 2552, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
-        new NPC("Vault Keeper", NPCType.VAULT_KEEPER, -1074, 72, 2519, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
+        new NPC("Vault Keeper", NPCType.VAULT_KEEPER, -1074, 72, 2521, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
         new NPC("Pharmacist", NPCType.PHARMACIST, -1033, 72, 2554, ChatColor.DARK_AQUA, true, false, FrontierLocation.getLocation("Republic of Texas"));
     }
 

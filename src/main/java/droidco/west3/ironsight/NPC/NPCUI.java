@@ -36,16 +36,26 @@ public class NPCUI {
 
     public static Inventory armsDealerUI(Player p) {
         Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Arms Dealer");
-        shop.setItem(10,CustomItem.getCustomItem("Colt Patterson").getItemForSale());
-        shop.setItem(11,CustomItem.getCustomItem("66 Winchester").getItemForSale());
-        shop.setItem(12,CustomItem.getCustomItem("Henry Model 3").getItemForSale());
-        shop.setItem(13,CustomItem.getCustomItem("Sharps Rifle").getItemForSale());
-        shop.setItem(14,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
-        shop.setItem(20,CustomItem.getCustomItem("Rifle Ammo").getItemForSale());
-        shop.setItem(21,CustomItem.getCustomItem("Shotgun Ammo").getItemForSale());
-        shop.setItem(22,CustomItem.getCustomItem("Pistol Ammo").getItemForSale());
+        shop.setItem(0,CustomItem.getCustomItem("Colt Patterson").getItemForSale());
+        shop.setItem(2,CustomItem.getCustomItem("66 Winchester").getItemForSale());
+        shop.setItem(4,CustomItem.getCustomItem("Henry Model 3").getItemForSale());
+        shop.setItem(6,CustomItem.getCustomItem("Sharps Rifle").getItemForSale());
+        shop.setItem(10,CustomItem.getCustomItem("Rifle Ammo").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Shotgun Ammo").getItemForSale());
+        shop.setItem(16,CustomItem.getCustomItem("Pistol Ammo").getItemForSale());
         return shop;
 
+    }
+    public static Inventory illegalArmsDealerUI(Player p) {
+        Inventory shop = Bukkit.createInventory(p, 27, ChatColor.DARK_AQUA + "Illegal Arms Dealer");
+        shop.setItem(0,CustomItem.getCustomItem("Colt Navy").getItemForSale());
+        shop.setItem(2,CustomItem.getCustomItem("Sawed-Off Shotgun").getItemForSale());
+        shop.setItem(4,CustomItem.getCustomItem("Navy 1851 OKH").getItemForSale());
+        shop.setItem(6,CustomItem.getCustomItem("Winchester 1873").getItemForSale());
+        shop.setItem(10,CustomItem.getCustomItem("Rifle Ammo").getItemForSale());
+        shop.setItem(13,CustomItem.getCustomItem("Shotgun Ammo").getItemForSale());
+        shop.setItem(16,CustomItem.getCustomItem("Pistol Ammo").getItemForSale());
+        return shop;
     }
 
     public static Inventory officerArmsUI(Player p) {
