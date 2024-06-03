@@ -82,7 +82,7 @@ public class GameContentLoader {
         CustomItem geode = new CustomItem("Geode", 4, true, false, "Bring to geologist to open", Material.FIREWORK_STAR, 0.0, 0.0);
         CustomItem minerspick = new CustomItem("Old Miner's Pick", 4, true, false, "Steeled with rust", Material.IRON_PICKAXE, 0.0, 530.0, 1);
         CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf", 4, false, false, "Process to consume", Material.ENDER_PEARL, 19.0, 0.0);
-        CustomItem spicebottle = new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 23.0, 0.0);
+        CustomItem spicebottle = new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 68.0, 0.0);
         CustomItem oil = new CustomItem("Unrefined Oil", 4, false, false, "Refine for higher sale value", Material.BUCKET, 0.0, 0.0);
         CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
         CustomItem doublespaderecipe = new CustomItem("Miner's Double Spade Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
