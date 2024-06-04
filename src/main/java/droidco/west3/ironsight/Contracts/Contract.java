@@ -289,7 +289,7 @@ public class Contract
                     gems.add(CustomItem.getCustomItem("Mossy Jade").getItemStack());
                     gems.add(CustomItem.getCustomItem("River Diamond").getItemStack());
                     gems.add(CustomItem.getCustomItem("Void Opal").getItemStack());
-                    gems.add(CustomItem.getCustomItem("Barron's Emerald").getItemStack());
+                    gems.add(CustomItem.getCustomItem("Baron's Emerald").getItemStack());
                     int gemChoice = GlobalUtils.getRandomNumber(gems.size());
                     requestedItem = gems.get(gemChoice);
                 }else{

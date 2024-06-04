@@ -5,6 +5,7 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -89,9 +90,11 @@ public class ContractUiEvents implements Listener {
                         }
                     }
                     case BARRIER -> {
-                      p.closeInventory();
+                        p.closeInventory();
                     }
-                    //Case Skull:
+                    case PLAYER_HEAD -> {
+                        p.openInventory(ContractUI.openLvlRewardMenu(p));
+                    }
                     //Can view what you get from leveling up??
                 }
             }
@@ -107,6 +110,10 @@ public class ContractUiEvents implements Listener {
             //Find what they clicked on
             switch(e.getCurrentItem().getType()){
                 case BARRIER -> {
+
+                    p.openInventory(ContractUI.openContractorInfo(p));
+                }
+                case TNT -> {
                     //DEACTIVATE CONTRACT
                     p.closeInventory();
                     p.sendMessage("Resigned current contract.");
@@ -126,7 +133,7 @@ public class ContractUiEvents implements Listener {
             e.setCancelled(true);
             //In the contract UI menu
             //Find what they clicked on
-            if(e.getCurrentItem().getType() != null){
+            if(e.getCurrentItem() != null){
                 switch(e.getCurrentItem().getType()) {
                     case STONE_PICKAXE -> {
                         updateContractorTitle(3,p,b,1);
@@ -146,10 +153,21 @@ public class ContractUiEvents implements Listener {
                     case SPYGLASS -> {
                         updateContractorTitle(10,p,b,6);
                     }
-                    case BARRIER -> {
+                    case PLAYER_HEAD -> {
                         updateContractorTitle(0,p,b,0);
                     }
+                    case BARRIER -> {
+                        p.openInventory(ContractUI.openContractorInfo(p));
+                    }
                 }
+            }
+        }else if(e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Level Up Perks:")){
+            Bandit b = Bandit.getPlayer(p);
+            e.setCancelled(true);
+            //In the contract UI menu
+            //Find what they clicked on
+            if(e.getCurrentItem() != null && e.getCurrentItem().getType().equals(Material.BARRIER)){
+                p.openInventory(ContractUI.openContractorInfo(p));
             }
         }
     }

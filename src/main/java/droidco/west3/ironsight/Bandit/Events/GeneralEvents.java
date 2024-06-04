@@ -145,7 +145,7 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         p.setDisplayName(ChatColor.GRAY + p.getDisplayName()+ChatColor.RESET);
-        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(b)+b.getContractorLvl()+ChatColor.GRAY+"] "+ChatColor.RESET +e.getFormat());
+        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(b.getContractorLvl())+b.getContractorLvl()+ChatColor.GRAY+"] "+ChatColor.RESET +e.getFormat());
 
     }
     @EventHandler

@@ -404,7 +404,8 @@ public class GameContentLoader {
         ItemIcon raider = new ItemIcon("Raider", "raider_prefix", "Choose raider (Level 9)", Material.SKELETON_SKULL);
         ItemIcon explorer = new ItemIcon("Explorer", "explorer_prefix", "Choose explorer (Level 10)", Material.SPYGLASS);
         ItemIcon contractorTitle = new ItemIcon("Contractor Title", "contractor_title", "Select your prefix", Material.SPRUCE_HANGING_SIGN);
-        new ItemIcon("Remove Title", "remove_title", "Click to reset prefix", Material.BARRIER);
+        new ItemIcon("Remove Title", "remove_title", "Click to reset prefix", Material.PLAYER_HEAD);
+        new ItemIcon(String.valueOf(ChatColor.BOLD)+"Back", "back_button", "return to previous page", Material.BARRIER);
 
         new ItemIcon(String.valueOf(ChatColor.GREEN)+ "Rookie Difficulty","rookie_slot","",Material.PLAYER_HEAD);
         new ItemIcon(String.valueOf(ChatColor.YELLOW)+"Apprentice Difficulty","apprentice_slot","",Material.SKELETON_SKULL);
