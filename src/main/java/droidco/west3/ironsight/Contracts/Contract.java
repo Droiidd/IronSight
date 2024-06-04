@@ -61,17 +61,17 @@ public class Contract
         switch(difficulty){
             case Rookie -> {
                 //this.rewardXp = 25;
-                this.rewardXp = 11;
+                this.rewardXp = 17;
             }
             case Apprentice -> {
                 //this.rewardXp = 45;
-                this.rewardXp = 19;
+                this.rewardXp = 38;
             }
             case Experienced -> {
                 this.rewardXp = 60;
             }
             case Master -> {
-                this.rewardXp = 100;
+                this.rewardXp = 82;
             }
         }
     }

@@ -12,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.List;
+
 public class ContractUiEvents implements Listener {
 //Nav for navigation :#
     @EventHandler
@@ -181,34 +183,13 @@ public class ContractUiEvents implements Listener {
         p.closeInventory();
     }
     public void checkLevelUp(Player p, Bandit b){
-        if(b.getContractorXp() >= 10 && b.getContractorXp() < 20){
-            levelUpContractor(p,b,1);
-        }else if(b.getContractorXp() >= 20 && b.getContractorXp() < 30){
-            levelUpContractor(p,b,2);
-
-        }else if(b.getContractorXp() >= 30 && b.getContractorXp() < 40){
-            levelUpContractor(p,b,3);
-        }
-        else if(b.getContractorXp() >= 40 && b.getContractorXp() < 50){
-
-            levelUpContractor(p,b,4);
-        }
-        else if(b.getContractorXp() >= 50 && b.getContractorXp() < 60){
-
-            levelUpContractor(p,b,5);
-        }
-        else if(b.getContractorXp() >= 60 && b.getContractorXp() < 70){
-            levelUpContractor(p,b,6);
-        }
-        else if(b.getContractorXp() >= 70 && b.getContractorXp() < 80){
-            levelUpContractor(p,b,7);
-        }
-        else if(b.getContractorXp() >= 80 && b.getContractorXp() < 90){
-            levelUpContractor(p,b,8);
-        }
-        else if(b.getContractorXp() >= 90 && b.getContractorXp() < 100){
-            levelUpContractor(p,b,9);
-        }
+       List<Integer> reqs = BanditUtils.getLevelXpRequirementList();
+       for(int i = 0; i<reqs.size(); i++){
+           if(b.getContractorLvl() < i && b.getContractorXp() >= reqs.get(i)){
+               //Level up player!
+               levelUpContractor(p,b,i);
+           }
+       }
     }
     public void levelUpContractor(Player p,Bandit b, int level){
         if(b.getContractorLvl() != level){

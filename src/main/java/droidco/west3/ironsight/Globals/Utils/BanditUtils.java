@@ -193,6 +193,32 @@ public class BanditUtils {
         Bukkit.dispatchCommand(console, weapon);
 
     }
+    public static List<Integer> getLevelXpRequirementList()
+    {
+        List<Integer> reqs = new ArrayList<>();
+        // The index of the list is the level, the value at the index is the XP requirement:
+        // index 0 requires 0 XP | index 4 requires 400 XP
+        reqs.add(0);
+        reqs.add(120);
+        reqs.add(360);
+        reqs.add(670);
+        reqs.add(1070);
+        reqs.add(1590);
+        reqs.add(2190);
+        reqs.add(2870);
+        reqs.add(3630);
+        reqs.add(4740);
+        reqs.add(5390);
+        reqs.add(6470);
+        reqs.add(7750);
+        reqs.add(9150);
+        return reqs;
+    }
+    public static int getXpRequiredForLevel(Bandit b){
+        List<Integer> reqs = getLevelXpRequirementList();
+        return reqs.get(b.getContractorLvl());
+    }
+
 
     public static Player getNearest(Player p, Double range) {
         double distance = Double.POSITIVE_INFINITY;

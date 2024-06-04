@@ -4,6 +4,7 @@ import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.Bukkit;
@@ -110,7 +111,7 @@ public class ContractUI {
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         ArrayList<String> skullLore = new ArrayList<>();
         skullLore.add(ChatColor.RED + "Contractor Lvl: " + ChatColor.GRAY + b.getContractorLvl() + " ");
-        skullLore.add(ChatColor.AQUA + "Contractor Lvl XP: " + ChatColor.GRAY + b.getContractorXp());
+        skullLore.add(ChatColor.AQUA + "Next Level: " + ChatColor.GRAY + b.getContractorXp() +"xp / "+ BanditUtils.getXpRequiredForLevel(b)+"xp");
         meta.setLore(skullLore);
         meta.setOwner(p.getDisplayName());
         meta.setDisplayName(ChatColor.WHITE + "Contractor Info:");

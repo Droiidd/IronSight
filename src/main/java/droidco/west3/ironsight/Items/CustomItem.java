@@ -106,7 +106,8 @@ CustomItem {
         ItemStack item = getItemStack();
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
-        String price = String.valueOf(ChatColor.GRAY)+this.purchasePrice +"g";
+        double totalPrice = this.purchasePrice * this.amountForSale;
+        String price = String.valueOf(ChatColor.GRAY)+totalPrice +"g";
         lore.add(ChatColor.GRAY+"Click to purchase!");
         lore.add(price);
         meta.setLore(lore);
