@@ -316,7 +316,7 @@ public class Contract {
 
         //      SELECT DIFFICULTY BASED OFF REQUEST AMOUNT
         if (rareRequest) {
-            if (amount < 16) {
+            if (amount < 10) {
                 //MEDIUM
                 difficulty = Difficulty.Apprentice;
             } else {

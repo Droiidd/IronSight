@@ -44,7 +44,7 @@ public class FishingEvents implements Listener {
                 }
 
             }
-        } else if (p.getInventory().containsAtLeast(slugBait, 1) && e.getState().equals(PlayerFishEvent.State.BITE)) {
+        } else if (p.getInventory().containsAtLeast(slugBait, 1)) {
             if (e.getState().equals(PlayerFishEvent.State.BITE)) {
 
                 slugBait.setAmount(1);
