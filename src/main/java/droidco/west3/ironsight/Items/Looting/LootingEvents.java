@@ -61,7 +61,7 @@ public class LootingEvents implements Listener {
             for (ItemStack item : contents) {
                 chest.getInventory().addItem(item);
             }
-            new RespawnLootTask(plugin, 20, block.getLocation(), chest.getInventory().getContents());
+            new RespawnLootTask(plugin, 900, block.getLocation(), chest.getInventory().getContents());
         }
     }
 

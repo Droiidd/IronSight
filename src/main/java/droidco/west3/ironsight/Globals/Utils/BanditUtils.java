@@ -269,19 +269,19 @@ public class BanditUtils {
 
     public static String getRandomTip() {
         ArrayList<String> tips = new ArrayList<>();
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Don't forget to send your horse back to the stable when you arrive at your destination");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /c to open your contractor profile or view active contracts");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts reset every hour!");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Track unknown locations or NPC's with the tracker item");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Every named river has a unique signature fish");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Start a contract to earn gold!");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts are the quickest way to earn money");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Don't forget to send your horse back to the stable when you arrive at your destination");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Do /c to open your contractor profile or view active contracts");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Contracts reset every hour!");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Track unknown locations or NPC's with the tracker item");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Every named river has a unique signature fish");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Start a contract to earn gold!");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Contracts are the quickest way to earn money");
 
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Go to a contractor NPC to view available contracts");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Locate a contractor NPC to start a contract");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Earn more rewards by leveling up your contractor level");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /call or /horse to summon your steed");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Something look off or is too confusing? Report to Droiid!");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Go to a contractor NPC to view available contracts");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Locate a contractor NPC to start a contract");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Earn more rewards by leveling up your contractor level");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Do /call or /horse to summon your steed");
+        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.WHITE + "Something look off or is too confusing? Report to Droiid!");
 
 
         int tip = GlobalUtils.getRandomNumber(tips.size());

@@ -62,56 +62,55 @@ public class GameContentLoader {
         CustomItem copper = new CustomItem("Copper Ore", 1, true, false, "Can be refined or sold", Material.RAW_COPPER, 14.0, 0.0);
 
         //UNCOMMON
-        CustomItem smokedSalmon = new CustomItem("Smoked Salmon", 3, true, false, "Fresh caught, fresh smoked", Material.COOKED_SALMON, 0.0, 10.0, 3);
-        CustomItem fermentedLiquor = new CustomItem("Fermented Liquor", 4, true, false, "Extra kick to any home brew", Material.DRAGON_BREATH, 16.0, 0.0, 2);
-        CustomItem crappie = new CustomItem("Poor Mans Crappie", 3, true, false, "Skinniest fish", Material.COD, 10.0, 0.0);
-        CustomItem grayHerring = new CustomItem("Gray Stoned Herring", 3, true, false, "The cheapest of Herring", Material.SALMON, 13.0, 0.0);
-        CustomItem chub = new CustomItem("Cactus Pronged Chub", 3, true, false, "Too spikey to eat", Material.TROPICAL_FISH, 16.0, 0.0);
-        CustomItem boarCarcass = new CustomItem("Boar Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_MALL, 55.0, 0.0);
-        CustomItem cowCarcass = new CustomItem("Cow Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_STRAD, 40.0, 0.0);
-        CustomItem gold = new CustomItem("Gold Ore", 3, true, false, "Can be refined or sold", Material.RAW_GOLD, 19.0, 0.0);
-        CustomItem slug = new CustomItem("Sea Slug", 3, true, false, "Reaks of the sea", Material.SPIDER_EYE, 4.0, 8.0, 4);
-        CustomItem boarmeat = new CustomItem("Boar Meat", 3, true, false, "Closest thing to bacon", Material.PORKCHOP, 7.0, 0.0);
-        CustomItem cowmeat = new CustomItem("Cow Meat", 3, true, false, "Prime beef", Material.BEEF, 9.0, 0.0);
-        CustomItem rabbitmeat = new CustomItem("Rabbit Meat", 3, true, false, "Not too gamey", Material.RABBIT, 6.0, 0.0);
-        CustomItem foxmeat = new CustomItem("Fox Meat", 4, true, false, "Better than chicken!", Material.CHICKEN, 4.0, 0.0);
-        CustomItem boarhide = new CustomItem("Boar Hide", 4, true, false, "Extermely tough hide", Material.RABBIT_HIDE, 10.0, 0.0);
-        CustomItem cowhide = new CustomItem("Cow Hide", 4, true, false, "Good for boots", Material.LEATHER, 13.0, 0.0);
-        CustomItem rabbithide = new CustomItem("Rabbit Hide", 4, true, false, "Good for small leather work", Material.LIGHT_GRAY_DYE, 18.0, 0.0);
-        CustomItem foxfur = new CustomItem("Fox Fur", 4, true, false, "Warmest fur on the market", Material.ORANGE_DYE, 16.0, 0.0);
-        CustomItem geode = new CustomItem("Geode", 4, true, false, "Bring to geologist to open", Material.FIREWORK_STAR, 0.0, 0.0);
-        CustomItem minerspick = new CustomItem("Old Miner's Pick", 4, true, false, "Steeled with rust", Material.IRON_PICKAXE, 0.0, 530.0, 1);
-        CustomItem procsmokeleaf = new CustomItem("Processed Smokeleaf", 4, false, false, "Process to consume", Material.ENDER_PEARL, 19.0, 0.0);
-        CustomItem spicebottle = new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 68.0, 0.0);
-        CustomItem oil = new CustomItem("Unrefined Oil", 4, false, false, "Refine for higher sale value", Material.BUCKET, 0.0, 0.0);
-        CustomItem frenzyrecipe = new CustomItem("Miner's Frenzy Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
-        CustomItem doublespaderecipe = new CustomItem("Miner's Double Spade Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
-        CustomItem greenthumbrecipe = new CustomItem("Green Thumb Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
-        CustomItem fermentliquorrecipe = new CustomItem("Fermented Liquor Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 225.0, 0.0, 1);
+        new CustomItem("Smoked Salmon", 3, true, false, "Fresh caught, fresh smoked", Material.COOKED_SALMON, 0.0, 10.0, 3);
+        new CustomItem("Fermented Liquor", 4, true, false, "Extra kick to any home brew", Material.DRAGON_BREATH, 16.0, 0.0, 2);
+        new CustomItem("Poor Mans Crappie", 3, true, false, "Skinniest fish", Material.COD, 10.0, 0.0);
+        new CustomItem("Gray Stoned Herring", 3, true, false, "The cheapest of Herring", Material.SALMON, 13.0, 0.0);
+        new CustomItem("Cactus Pronged Chub", 3, true, false, "Too spikey to eat", Material.TROPICAL_FISH, 16.0, 0.0);
+        new CustomItem("Boar Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_MALL, 55.0, 0.0);
+        new CustomItem("Cow Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_STRAD, 40.0, 0.0);
+        new CustomItem("Gold Ore", 3, true, false, "Can be refined or sold", Material.RAW_GOLD, 19.0, 0.0);
+        new CustomItem("Sea Slug", 3, true, false, "Reaks of the sea", Material.SPIDER_EYE, 4.0, 8.0, 4);
+        new CustomItem("Boar Meat", 3, true, false, "Closest thing to bacon", Material.PORKCHOP, 7.0, 0.0);
+        new CustomItem("Cow Meat", 3, true, false, "Prime beef", Material.BEEF, 9.0, 0.0);
+        new CustomItem("Rabbit Meat", 3, true, false, "Not too gamey", Material.RABBIT, 6.0, 0.0);
+        new CustomItem("Fox Meat", 4, true, false, "Better than chicken!", Material.CHICKEN, 4.0, 0.0);
+        new CustomItem("Boar Hide", 4, true, false, "Extermely tough hide", Material.RABBIT_HIDE, 10.0, 0.0);
+        new CustomItem("Cow Hide", 4, true, false, "Good for boots", Material.LEATHER, 13.0, 0.0);
+        new CustomItem("Rabbit Hide", 4, true, false, "Good for small leather work", Material.LIGHT_GRAY_DYE, 18.0, 0.0);
+        new CustomItem("Fox Fur", 4, true, false, "Warmest fur on the market", Material.ORANGE_DYE, 16.0, 0.0);
+        new CustomItem("Old Miner's Pick", 4, true, false, "Steeled with rust", Material.IRON_PICKAXE, 0.0, 530.0, 1);
+        new CustomItem("Processed Smokeleaf", 4, false, false, "Process to consume", Material.ENDER_PEARL, 19.0, 0.0);
+        new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 68.0, 0.0);
+        new CustomItem("Unrefined Oil", 4, false, false, "Refine for higher sale value", Material.BUCKET, 0.0, 0.0);
+        new CustomItem("Miner's Frenzy Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
+        new CustomItem("Miner's Double Spade Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
+        new CustomItem("Green Thumb Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
+        new CustomItem("Fermented Liquor Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 225.0, 0.0, 1);
 
         //RARE ITEMS
         new CustomItem("Life Seeds", 7, true, false, "Brews into a slow heal", Material.PUMPKIN_SEEDS, 0.0, 0.0, 1);
-        CustomItem frenziedStems = new CustomItem("Frenzied Stems", 5, true, false, "Used on workers for productivity", Material.FIRE_CORAL, 0.0, 0.0, 1);
-        CustomItem heartFruit = new CustomItem("Heart Fruit", 5, true, false, "Still beating", Material.SWEET_BERRIES, 0.0, 0.0, 1);
+        new CustomItem("Frenzied Stems", 5, true, false, "Used on workers for productivity", Material.FIRE_CORAL, 0.0, 0.0, 1);
+        new CustomItem("Heart Fruit", 5, true, false, "Still beating", Material.SWEET_BERRIES, 0.0, 0.0, 1);
 
-        CustomItem amethystBud = new CustomItem("Amethyst Bud", 6, true, false, "Like a blossoming rose", Material.AMETHYST_SHARD, 85.0, 0.0, 1);
-        CustomItem mossyJade = new CustomItem("Mossy Jade", 5, true, false, "Look's alive under light", Material.SLIME_BALL, 65.0, 0.0, 1);
+        new CustomItem("Amethyst Bud", 6, true, false, "Like a blossoming rose", Material.AMETHYST_SHARD, 85.0, 0.0, 1);
+        new CustomItem("Mossy Jade", 5, true, false, "Look's alive under light", Material.SLIME_BALL, 65.0, 0.0, 1);
 
-        CustomItem hermitCrab = new CustomItem("Hermit Crab", 5, true, false, "Fish love it", Material.NAUTILUS_SHELL, 8.0, 15.0, 3);
-        CustomItem refinedOil = new CustomItem("Refined Oil", 6, false, false, "Highly sought after", Material.LAVA_BUCKET, 90.0, 0.0, 1);
-        CustomItem southernsalmon = new CustomItem("Southern Salmon", 6, true, false, "Migrated south through southern tributaries", Material.MUSIC_DISC_FAR, 175.0, 0.0, 1);
-        CustomItem arcticsalmon = new CustomItem("Arctic Salmon", 6, true, false, "Still in the frozen north", Material.MUSIC_DISC_13, 180.0, 0.0, 1);
+        new CustomItem("Hermit Crab", 5, true, false, "Fish love it", Material.NAUTILUS_SHELL, 8.0, 15.0, 3);
+        new CustomItem("Refined Oil", 6, false, false, "Highly sought after", Material.LAVA_BUCKET, 90.0, 0.0, 1);
+        new CustomItem("Southern Salmon", 6, true, false, "Migrated south through southern tributaries", Material.MUSIC_DISC_FAR, 175.0, 0.0, 1);
+        new CustomItem("Arctic Salmon", 6, true, false, "Still in the frozen north", Material.MUSIC_DISC_13, 180.0, 0.0, 1);
 
-        CustomItem oilfieldkey = new CustomItem("Crate Key", 6, false, false, "Unlocks crates at oil field", Material.TRIPWIRE_HOOK, 0.0, 0.0, 1);
-        CustomItem steelLinedRod = new CustomItem("Steel Lined Rod", 6, true, false, "Double sided hook!", Material.FISHING_ROD, 0.0, 1950.0, 1, Enchantment.LURE, 1);
-        CustomItem explorerspick = new CustomItem("Explorer's Pick", 6, true, false, "Aids in climbing glaciers", Material.DIAMOND_PICKAXE, 0.0, 1450.0, 1, Enchantment.DIG_SPEED, 1);
+        new CustomItem("Crate Key", 6, false, false, "Unlocks crates at oil field", Material.TRIPWIRE_HOOK, 0.0, 0.0, 1);
+        new CustomItem("Steel Lined Rod", 6, true, false, "Double sided hook!", Material.FISHING_ROD, 0.0, 1950.0, 1, Enchantment.LURE, 1);
+        new CustomItem("Explorer's Pick", 6, true, false, "Aids in climbing glaciers", Material.DIAMOND_PICKAXE, 0.0, 1450.0, 1, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY
-        CustomItem alligator = new CustomItem("Alligator", 8, true, false, "Crikey!", Material.MUSIC_DISC_CHIRP, 425.0, 0.0, 1);
-        CustomItem sunkenCatfish = new CustomItem("Sunken Catfish", 8, true, false, "Evolved in the low-lands", Material.MUSIC_DISC_BLOCKS, 400.0, 0.0, 1);
-        CustomItem goldstonnedherring = new CustomItem("Gold Stoned Herring", 7, true, false, "The rare mutation of the gray herring", Material.MUSIC_DISC_MELLOHI, 250.0, 0.0, 1);
-        CustomItem pearlrivertrout = new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 275.0, 0.0, 1);
-        CustomItem expaditionRod = new CustomItem("Expedition Rod", 8, true, false, "A proper line.", Material.FISHING_ROD, 0.0, 5950.0, 1, Enchantment.LURE, 5);
+        new CustomItem("Alligator", 8, true, false, "Crikey!", Material.MUSIC_DISC_CHIRP, 425.0, 0.0, 1);
+        new CustomItem("Sunken Catfish", 8, true, false, "Evolved in the low-lands", Material.MUSIC_DISC_BLOCKS, 400.0, 0.0, 1);
+        new CustomItem("Gold Stoned Herring", 7, true, false, "The rare mutation of the gray herring", Material.MUSIC_DISC_MELLOHI, 250.0, 0.0, 1);
+        new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 275.0, 0.0, 1);
+        new CustomItem("Expedition Rod", 8, true, false, "A proper line.", Material.FISHING_ROD, 0.0, 5950.0, 1, Enchantment.LURE, 5);
 
             new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
         new CustomItem("Oil Barrel", 7, false, false, "A large amount of refined oil", Material.WATER_BUCKET, 650.0, 0.0, 1);
@@ -389,21 +388,21 @@ public class GameContentLoader {
         ItemIcon texasRespawn = new ItemIcon("Republic Of Texas", "republic_of_texas_respawn", "Click to respawn here", Material.YELLOW_BANNER);
 
         //      ===--- CONTRACT UI ICONS ---===
-        ItemIcon contractLoc = new ItemIcon(String.valueOf(ChatColor.BOLD) + "Locations:", "contract_location", "Go here to complete.", Material.COMPASS);
-        ItemIcon contractReq = new ItemIcon(String.valueOf(ChatColor.BOLD) + "Request:", "contract_req", "Requested items:", Material.DIAMOND);
-        ItemIcon contractDesc = new ItemIcon(String.valueOf(ChatColor.BOLD) + "Description", "contract_desc", "What to do:", Material.MOJANG_BANNER_PATTERN);
+        new ItemIcon(String.valueOf(ChatColor.BOLD) + "Locations:", "contract_location", "Go here to complete.", Material.COMPASS);
+        new ItemIcon(String.valueOf(ChatColor.BOLD) + "Request:", "contract_req", "Requested items:", Material.DIAMOND);
+        new ItemIcon(String.valueOf(ChatColor.BOLD) + "Description", "contract_desc", "What to do:", Material.MOJANG_BANNER_PATTERN);
 
-        ItemIcon nextPage = new ItemIcon("Next Page", "next_page", "Click to go to next page", Material.MAGENTA_GLAZED_TERRACOTTA);
+        new ItemIcon("Next Page", "next_page", "Click to go to next page", Material.MAGENTA_GLAZED_TERRACOTTA);
         new ItemIcon("Previous Page", "previous_page", "Click to go to previous page", Material.MAGENTA_GLAZED_TERRACOTTA);
 
 
-        ItemIcon miner = new ItemIcon("Miner", "miner_prefix", "Choose miner (Level 3)", Material.STONE_PICKAXE);
-        ItemIcon cowboy = new ItemIcon("Cowboy", "cowboy_prefix", "Choose cowboy (Level 4)", Material.HAY_BLOCK);
-        ItemIcon tracker = new ItemIcon("Tracker", "tracker_prefix", "Choose tracker (Level 5)", Material.LEATHER_BOOTS);
-        ItemIcon medic = new ItemIcon("Medic", "medic_prefix", "Choose medic (Level 7)", Material.PAPER);
-        ItemIcon raider = new ItemIcon("Raider", "raider_prefix", "Choose raider (Level 9)", Material.SKELETON_SKULL);
-        ItemIcon explorer = new ItemIcon("Explorer", "explorer_prefix", "Choose explorer (Level 10)", Material.SPYGLASS);
-        ItemIcon contractorTitle = new ItemIcon("Contractor Title", "contractor_title", "Select your prefix", Material.SPRUCE_HANGING_SIGN);
+        new ItemIcon("Miner", "miner_prefix", "Choose miner (Level 3)", Material.STONE_PICKAXE);
+        new ItemIcon("Cowboy", "cowboy_prefix", "Choose cowboy (Level 4)", Material.HAY_BLOCK);
+        new ItemIcon("Tracker", "tracker_prefix", "Choose tracker (Level 5)", Material.LEATHER_BOOTS);
+        new ItemIcon("Medic", "medic_prefix", "Choose medic (Level 7)", Material.PAPER);
+        new ItemIcon("Raider", "raider_prefix", "Choose raider (Level 9)", Material.SKELETON_SKULL);
+        new ItemIcon("Explorer", "explorer_prefix", "Choose explorer (Level 10)", Material.SPYGLASS);
+        new ItemIcon("Contractor Title", "contractor_title", "Select your prefix", Material.SPRUCE_HANGING_SIGN);
         new ItemIcon("Remove Title", "remove_title", "Click to reset prefix", Material.PLAYER_HEAD);
         new ItemIcon(String.valueOf(ChatColor.BOLD)+"Back", "back_button", "return to previous page", Material.BARRIER);
 
@@ -427,18 +426,18 @@ public class GameContentLoader {
         new ItemIcon("Pharmacist", "pharmacist_tracker", "Find Pharmacist", Material.PAPER);
         new ItemIcon("Arms Dealer", "arms_dealer_tracker", "Find Arms Dealer", Material.STONE_AXE);
         new ItemIcon("Illegal Arms Dealer", "illegal_arms_tracker", "Illegal Arms Dealer", Material.IRON_AXE);
-        ItemIcon armorer = new ItemIcon("Armorer", "armorer_tracker", "Find Armorer", Material.LEATHER_CHESTPLATE);
-        ItemIcon illegalArmor = new ItemIcon("Illegal Armorer", "illegal_armorer_tracker", "Find Illegal Armorer", Material.NETHERITE_CHESTPLATE);
-        ItemIcon generalStore = new ItemIcon("Shopkeeper", "shopkeeper_tracker", "Find Shopkeeper", Material.COOKED_BEEF);
-        ItemIcon geologist = new ItemIcon("Geologist", "geologist_tracker", "Find Geologist", Material.STONE);
-        ItemIcon stableManager = new ItemIcon("Stable Manager", "stable_manager_tracker", "Find Stable Manager", Material.SADDLE);
-        ItemIcon npc = new ItemIcon("NPCs", "npc_tracker", "Find NPCs", Material.BOOKSHELF);
-        ItemIcon conductor = new ItemIcon("Conductor", "conductor_tracker", "Find Conductor", Material.RAIL);
-        ItemIcon ferryCaptain = new ItemIcon("Ferry Captain", "ferry_captain_tracker", "Find Ferry Captain", Material.BIRCH_BOAT);
-        ItemIcon bankTeller = new ItemIcon("Bank Teller", "bank_teller_tracker", "Find Bank Teller", Material.GOLD_INGOT);
-        ItemIcon itemVault = new ItemIcon("Vault Keeper", "vault_keeper_tracker", "Find Vault Keeper", Material.ENDER_CHEST);
-        ItemIcon contractor = new ItemIcon("Contractor", "contractor_tracker", "Find Contractor", Material.BOOK);
-        ItemIcon chief = new ItemIcon("Chief of Police", "chief_of_police_tracker", "Find the Chief", Material.PIGLIN_HEAD);
+        new ItemIcon("Armorer", "armorer_tracker", "Find Armorer", Material.LEATHER_CHESTPLATE);
+        new ItemIcon("Illegal Armorer", "illegal_armorer_tracker", "Find Illegal Armorer", Material.NETHERITE_CHESTPLATE);
+        new ItemIcon("Shopkeeper", "shopkeeper_tracker", "Find Shopkeeper", Material.COOKED_BEEF);
+        new ItemIcon("Geologist", "geologist_tracker", "Find Geologist", Material.STONE);
+        new ItemIcon("Stable Manager", "stable_manager_tracker", "Find Stable Manager", Material.SADDLE);
+        new ItemIcon("NPCs", "npc_tracker", "Find NPCs", Material.BOOKSHELF);
+        new ItemIcon("Conductor", "conductor_tracker", "Find Conductor", Material.RAIL);
+        new ItemIcon("Ferry Captain", "ferry_captain_tracker", "Find Ferry Captain", Material.BIRCH_BOAT);
+        new ItemIcon("Bank Teller", "bank_teller_tracker", "Find Bank Teller", Material.GOLD_INGOT);
+        new ItemIcon("Vault Keeper", "vault_keeper_tracker", "Find Vault Keeper", Material.ENDER_CHEST);
+        new ItemIcon("Contractor", "contractor_tracker", "Find Contractor", Material.BOOK);
+        new ItemIcon("Chief of Police", "chief_of_police_tracker", "Find the Chief", Material.PIGLIN_HEAD);
 
         //      ===--- TRACKER LOCATION ---===
         new ItemIcon("Locations", "location_tracker", "Find locations", Material.COMPASS);

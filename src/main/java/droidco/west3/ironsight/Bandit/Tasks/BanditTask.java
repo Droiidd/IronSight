@@ -36,7 +36,7 @@ public class BanditTask extends BukkitRunnable {
     private int horseFullCallTime = 10;
     private int wantedMin = 2;
     private int wantedSec = 0;
-    private final int contractTimer = 600;
+    private final int contractTimer = 1800;
     private int contractCounter = 0;
     private int horseTimer = 0;
     private int wantedTownCounter = 0;
