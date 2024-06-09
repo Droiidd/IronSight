@@ -329,7 +329,8 @@ public class PlayerConnector {
         public static void saveActiveContract(Player p, Connection conn) throws SQLException {
 
         Bandit b = Bandit.getPlayer(p);
-        System.out.println("Updating available contract ");
+        if(b.getActiveContract() != null){
+            System.out.println("Updating available contract ");
             String sql = "UPDATE available_contract " +
                     "set bandit_id = \'"+p.getUniqueId().toString() + "\', "+
                     "requested_item = \'"+String.valueOf(ChatColor.stripColor(b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName()))+ "\', "+
@@ -370,6 +371,19 @@ public class PlayerConnector {
                             System.out.println("contract inserted.");
                         }
             }
+        }else{
+            System.out.println("Available contract is null");
+            String sqlInsert = "delete from available_contract where bandit_id = \'"+p.getUniqueId().toString()+ "\' AND is_active = 1";
+                    PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
+                        int insertVal = insertStmt.executeUpdate();
+                        if(insertVal > 0){
+                            //Success
+                            System.out.println("contracts wiped.");
+                        }
+
+
+        }
+
         }
     public static void saveInventory(Player p, ItemStack[] items,String storageType, Connection conn) throws SQLException {
 //        delete

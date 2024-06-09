@@ -27,4 +27,5 @@ commands:
   suicide:
     aliases:
       - sd
+  play:
 

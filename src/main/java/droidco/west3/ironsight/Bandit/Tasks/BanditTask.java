@@ -300,16 +300,20 @@ public class BanditTask extends BukkitRunnable {
             p.setLevel(contractTimer - contractCounter);
             if((contractTimer-contractCounter) == 300){
                 // 5 MINUTES REMAIN
-                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.RED+" reset!");
             }else if((contractTimer-contractCounter) == 60){
                 // 1 MINUTES REMAIN
-                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
-            } else if((contractTimer-contractCounter)<30&&(contractTimer-contractCounter)!=0){
-                p.sendMessage(ChatColor.AQUA+"[Alert] "+ ChatColor.GRAY+ ""+(contractTimer-contractCounter)+ " seconds until contracts" + ChatColor.GREEN+" reset!");
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "One minute until contracts" + ChatColor.RED+" reset!");
+            }
+            else if((contractTimer-contractCounter) == 30){
+                // 1 MINUTES REMAIN
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "30 Seconds until contracts" + ChatColor.RED+" reset!");
+            }else if((contractTimer-contractCounter)<=10&&(contractTimer-contractCounter)!=0){
+                p.sendMessage(ChatColor.RED+"[Alert] "+ ChatColor.GRAY+ ""+(contractTimer-contractCounter)+ " seconds until contracts" + ChatColor.RED+" reset!");
             }
             if (contractTimer == contractCounter) {
                 Contract.assignPlayerContracts(p, b);
-                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY + "Contracts" + ChatColor.RED + " reset!");
                 contractCounter = 0;
             }
             contractCounter++;
