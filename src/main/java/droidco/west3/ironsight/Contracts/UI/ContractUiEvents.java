@@ -57,12 +57,13 @@ public class ContractUiEvents implements Listener {
                                         for(int i =0;i<active.getRequestedAmount();i++){
                                             p.getInventory().removeItem(active.getRequestedItem());
                                         }
+                                        p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+"contract complete. +"+active.getRewardXp()+ChatColor.AQUA+ " XP"+ChatColor.GRAY+ "+ "+active.getReward()+"g");
                                         p.sendTitle(ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Contract Complete!", ChatColor.GRAY + "+"+active.getReward()+"g   +"+active.getRewardXp()+ChatColor.AQUA+ " XP");
+                                        b.updateWallet(active.getReward());
                                         b.updateContractorXp(active.getRewardXp());
                                         checkLevelUp(p,b);
                                         Contract.assignPlayerContracts(p,b);
                                         b.setDoingContract(false);
-                                        b.updateWallet(active.getReward());
                                         b.setActiveContract(null);
                                     }else{
                                         p.sendMessage(ChatColor.RED+ "You need more "+active.getRequestedItem().getItemMeta().getDisplayName());

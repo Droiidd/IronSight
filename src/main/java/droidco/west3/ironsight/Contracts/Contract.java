@@ -229,7 +229,7 @@ public class Contract {
             }
             case DRUG_RUNNER -> {
                 if (rareRequest) {
-                    amount = GlobalUtils.getRandomRange(44, 92);
+                    amount = GlobalUtils.getRandomRange(30, 63);
                 } else {
                     amount = GlobalUtils.getRandomRange(22, 46);
                 }
