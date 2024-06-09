@@ -55,7 +55,8 @@ public class Contract {
 
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
-    public Contract(CustomItem requestedItem, int requestedAmount,String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
+
+    public Contract(CustomItem requestedItem, int requestedAmount, String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
         this.requestedItem = requestedItem.getItemStack();
         this.requestedAmount = requestedAmount;
         this.listingName = listingName;
@@ -393,6 +394,7 @@ public class Contract {
         desc.add("for reward.");
         addCompletionStep("steptest", 3, desc, null, "Ride to any town");
         System.out.println(requestedItem.getItemMeta().getDisplayName());
+
         this.reward = amount * CustomItem.getCustomItem(ChatColor.stripColor(requestedItem.getItemMeta().getDisplayName())).getSalePrice();
         String listing = "";
 

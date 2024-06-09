@@ -113,9 +113,9 @@ public class ContractUI {
         ItemStack skull = new ItemStack(type, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         ArrayList<String> skullLore = new ArrayList<>();
-        skullLore.add(ChatColor.AQUA + "Level " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + b.getContractorLvl() + ChatColor.GRAY + "]");
+        skullLore.add(ChatColor.AQUA + "Level " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + ChatColor.GRAY + "]");
         int nextLvl = b.getContractorLvl() + 1;
-        skullLore.add(ChatColor.GREEN + "Next Level " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(nextLvl) + nextLvl + ChatColor.GRAY + "] " + b.getContractorXp() + " / " + BanditUtils.getXpRequiredForLevel(b) + " XP");
+        skullLore.add(ChatColor.GREEN + "Next Level " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(nextLvl) + ChatColor.GRAY + "] " + b.getContractorXp() + " / " + BanditUtils.getXpRequiredForLevel(b) + " XP");
         meta.setLore(skullLore);
         meta.setOwner(p.getDisplayName());
         meta.setDisplayName(ChatColor.WHITE + "Contractor Info:");
@@ -177,16 +177,16 @@ public class ContractUI {
         menu.setItem(0, ItemIcon.getIcon("back_button").getItem());
         menu.setItem(9, rewardIcon(Material.LIGHT_GRAY_WOOL,0,"One Contract Slot",null,null,null));
         menu.setItem(10, rewardIcon(Material.LIGHT_GRAY_WOOL,1,null,null,null,null));
-        menu.setItem(11, rewardIcon(Material.YELLOW_WOOL,2,"10% bonus to all contracts",null,null,null));
+        menu.setItem(11, rewardIcon(Material.YELLOW_WOOL,2,"5% bonus to all contracts",null,null,null));
         menu.setItem(12, rewardIcon(Material.YELLOW_WOOL,3,"Unlock Miner Prefix",null,null,null));
-        menu.setItem(13, rewardIcon(Material.YELLOW_WOOL,4,"Unlock Cowboy Prefix","Thoroughbred horse available for purchase","10% bonus to all contracts (stacked)",null));
-        menu.setItem(14, rewardIcon(Material.LIME_WOOL,5,"Unlock Tracker Prefix","Animal hide sells for 10% more gold",null,null));
-        menu.setItem(15, rewardIcon(Material.LIME_WOOL,6,"Morphine potion is now craftable","Donkey available for purchase",null,null));
+        menu.setItem(13, rewardIcon(Material.YELLOW_WOOL,4,"Unlock Cowboy Prefix","Animal hide sells for 10% more gold",null,null));
+        menu.setItem(14, rewardIcon(Material.LIME_WOOL,5,"Unlock Tracker Prefix","10% bonus to all contracts (stacked)",null,null));
+        menu.setItem(15, rewardIcon(Material.LIME_WOOL,6,"Morphine potion is now craftable","Thoroughbred horse available for purchase",null,null));
         menu.setItem(16, rewardIcon(Material.LIME_WOOL,7,"Unlock Second Contract Slot","Miner's Frenzy Brew is now craftable",null,null));
-        menu.setItem(17, rewardIcon(Material.LIGHT_BLUE_WOOL,8,"Camel available for purchase","Whiskey potion is now craftable",null,null));
-        menu.setItem(18, rewardIcon(Material.LIGHT_BLUE_WOOL,9,"Unlock Raider Prefix","Double spade brew is now craftable","5% bonus to all contracts (stacked)",null));
-        menu.setItem(19, rewardIcon(Material.MAGENTA_WOOL,10,"Unlock Explorer Prefix","2.5% chance to mine double the ore",null,null));
-        menu.setItem(20, rewardIcon(Material.MAGENTA_WOOL,11,"Unlock Farmer Prefix","Green thumb brew is now craftable","2.5% chance to harvest double the crops",null));
+        menu.setItem(17, rewardIcon(Material.LIGHT_BLUE_WOOL,8,"Donkey available for purchase","Whiskey potion is now craftable",null,null));
+        menu.setItem(18, rewardIcon(Material.LIGHT_BLUE_WOOL,9,"Unlock Raider Prefix","Double spade brew is now craftable","10% bonus to all contracts (stacked)",null));
+        menu.setItem(19, rewardIcon(Material.MAGENTA_WOOL,10,"Unlock Explorer Prefix","3% chance to mine double the ore","Camel available for purchase",null));
+        menu.setItem(20, rewardIcon(Material.MAGENTA_WOOL,11,"Unlock Farmer Prefix","Green thumb brew is now craftable","3% chance to harvest double the crops",null));
         menu.setItem(21, rewardIcon(Material.RED_WOOL,12,"Unlock Medic Prefix","Medicine potion is now craftable","1% chance not to consume potions","5% bonus to all contracts (stacked)"));
         menu.setItem(22, rewardIcon(Material.RED_GLAZED_TERRACOTTA,13,"Unlock third contract slot","4% chance not to consume pots","10% chance not to consume ammo",null));
 
@@ -198,7 +198,7 @@ public class ContractUI {
         ItemMeta iMeta = item.getItemMeta();
         List<Integer> reqs = BanditUtils.getLevelXpRequirementList();
         int xpForLvl = reqs.get(level);
-        iMeta.setDisplayName(ChatColor.AQUA+"Level "+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(level)+level+ChatColor.GRAY+"] : "+xpForLvl+" XP");
+        iMeta.setDisplayName(ChatColor.AQUA+"Level "+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(level)+ChatColor.GRAY+"] : "+xpForLvl+" XP");
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY+"Rewards:");
         if(reward1 != null) {

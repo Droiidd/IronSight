@@ -79,31 +79,31 @@ public class BanditUtils {
         p.getInventory().addItem(splint);
     }
 
-    public static ChatColor getContractorLvlColor(int level) {
+    public static String getContractorLvlColor(int level) {
         switch (level) {
             case 0, 1 -> {
-                return ChatColor.GRAY;
+                return String.valueOf(ChatColor.GRAY)+level;
             }
             case 2, 3, 4 -> {
-                return ChatColor.YELLOW;
+                return String.valueOf(ChatColor.YELLOW)+level+String.valueOf(ChatColor.GRAY);
             }
             case 5, 6, 7 -> {
-                return ChatColor.GREEN;
+                return String.valueOf(ChatColor.GREEN)+level+String.valueOf(ChatColor.GRAY);
             }
             case 8, 9 -> {
-                return ChatColor.AQUA;
+                return String.valueOf(ChatColor.AQUA)+level+String.valueOf(ChatColor.GRAY);
             }
             case 10, 11 -> {
-                return ChatColor.LIGHT_PURPLE;
+                return String.valueOf(ChatColor.LIGHT_PURPLE)+level+String.valueOf(ChatColor.GRAY);
             }
             case 12 -> {
-                return ChatColor.RED;
+                return String.valueOf(ChatColor.RED)+level+String.valueOf(ChatColor.GRAY);
             }
             case 13 -> {
-                return ChatColor.DARK_RED;
+                return String.valueOf(ChatColor.DARK_RED)+level+String.valueOf(ChatColor.GRAY);
             }
         }
-        return ChatColor.GRAY;
+        return "";
     }
 
     public static void releasePrisoner(Player p, Bandit b) {
@@ -134,7 +134,7 @@ public class BanditUtils {
         String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
         String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
         String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
-        String contractorLvl = ChatColor.AQUA + "Contractor " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + b.getContractorLvl() + ChatColor.GRAY + "]";
+        String contractorLvl = ChatColor.AQUA + "Contractor " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + ChatColor.GRAY + "]";
 
 
         //Wanted timer
