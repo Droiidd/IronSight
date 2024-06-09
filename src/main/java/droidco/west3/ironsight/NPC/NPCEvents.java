@@ -96,7 +96,7 @@ public class NPCEvents implements Listener {
                         if(b.getActiveContract() == null){
                            p.openInventory(ContractUI.openContractOptionsUi(p));
                         }else{
-                            p.openInventory(ContractUI.openContractorInfo(p));
+                            p.openInventory(ContractUI.openContractorInfo(p,true));
                         }
 
                     }

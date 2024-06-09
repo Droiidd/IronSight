@@ -52,14 +52,16 @@ public class ContractUI {
         return contractUi;
     }
 
-    public static Inventory openContractorInfo(Player p) {
+    public static Inventory openContractorInfo(Player p,boolean atContractor) {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Contractor Info:");
         Bandit b = Bandit.getPlayer(p);
         contractUi.setItem(0, ItemIcon.getIcon("close_menu").getItem());
         contractUi.setItem(11, ItemIcon.getIcon("contractor_title").getItem());
         contractUi.setItem(4, getContractorIcon(p));
         contractUi.setItem(15, getActiveContractIcon(p, b));
+        if(atContractor) {
         contractUi.setItem(22, ItemIcon.getIcon("complete_contract").getItem());
+        }
         return contractUi;
     }
 

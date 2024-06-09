@@ -16,11 +16,11 @@ public class ContractMenuCmd implements CommandExecutor {
         if(commandSender instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
             if(strings.length == 0){
-                p.openInventory(ContractUI.openContractorInfo(p));
+                p.openInventory(ContractUI.openContractorInfo(p,false));
             }else if(strings[0].equalsIgnoreCase("reset")){
                 Contract.assignPlayerContracts(p,b);
             }else if(strings[0].equalsIgnoreCase("menu")){
-                    p.openInventory(ContractUI.openContractorInfo(p));
+                    p.openInventory(ContractUI.openContractorInfo(p,false));
             }
         }
         return true;

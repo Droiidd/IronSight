@@ -112,7 +112,7 @@ public class ContractUiEvents implements Listener {
             switch(e.getCurrentItem().getType()){
                 case BARRIER -> {
 
-                    p.openInventory(ContractUI.openContractorInfo(p));
+                    p.openInventory(ContractUI.openContractorInfo(p,false));
                 }
                 case TNT -> {
                     //DEACTIVATE CONTRACT
@@ -158,7 +158,7 @@ public class ContractUiEvents implements Listener {
                         updateContractorTitle(0,p,b,0);
                     }
                     case BARRIER -> {
-                        p.openInventory(ContractUI.openContractorInfo(p));
+                        p.openInventory(ContractUI.openContractorInfo(p,false));
                     }
                 }
             }
@@ -168,7 +168,7 @@ public class ContractUiEvents implements Listener {
             //In the contract UI menu
             //Find what they clicked on
             if(e.getCurrentItem() != null && e.getCurrentItem().getType().equals(Material.BARRIER)){
-                p.openInventory(ContractUI.openContractorInfo(p));
+                p.openInventory(ContractUI.openContractorInfo(p,false));
             }
         }
     }
