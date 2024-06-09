@@ -256,7 +256,7 @@ public class BanditTask extends BukkitRunnable {
                 if (wantedMin == -1) {
                     //Timer is complete!
                     wantedMin = 2;
-                    p.sendMessage(ChatColor.GRAY + "You are no longer " + ChatColor.DARK_RED + "wanted.");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "You are no longer " + ChatColor.DARK_RED + "wanted.");
                     b.setWanted(false);
                 }
             }
@@ -268,7 +268,7 @@ public class BanditTask extends BukkitRunnable {
                 }
                 if (combatLogCounter == combatLogTimer) {
                     b.setCombatBlocked(false);
-                    p.sendMessage(ChatColor.GRAY + "You are" + ChatColor.GREEN + " safe " + ChatColor.GRAY + "to log off");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "You are" + ChatColor.GREEN + " safe " + ChatColor.GRAY + "to log off");
                 }
                 combatLogCounter++;
             }
@@ -282,7 +282,7 @@ public class BanditTask extends BukkitRunnable {
             //      ===--- SUMMONING HORSE ---===
             if (b.isSummoningHorse()) {
                 horseTimer++;
-                p.sendMessage(ChatColor.GRAY + "Horse arrives in " + ChatColor.AQUA + (horseFullCallTime - horseTimer) + ChatColor.GRAY + " seconds.");
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "Horse arrives in " + ChatColor.AQUA + (horseFullCallTime - horseTimer) + ChatColor.GRAY + " seconds.");
                 if (horseTimer == horseFullCallTime) {
                     b.setSummoningHorse(false);
                     horseTimer = 0;
@@ -291,26 +291,26 @@ public class BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
-                    p.sendMessage(ChatColor.AQUA + b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.AQUA + b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
                     b.getHorseBeingSummoned().setSummoned(true);
-                    p.sendMessage(ChatColor.GRAY + "Shift + right-click to open it's inventory.");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "Shift + right-click to open it's inventory.");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
 
             p.setLevel(contractTimer - contractCounter);
-            if(contractCounter == (contractTimer-(60*5))){
+            if((contractTimer-contractCounter) == 300){
                 // 5 MINUTES REMAIN
-                p.sendMessage(ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
-            }else if(contractCounter == (contractTimer-(60))){
-                // 5 MINUTES REMAIN
-                p.sendMessage(ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
-            } else if(contractCounter <= (contractTimer-(30))){
-                p.sendMessage(ChatColor.GRAY+ ""+(contractCounter-contractTimer)+ " seconds until contracts" + ChatColor.GREEN+" reset!");
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
+            }else if((contractTimer-contractCounter) == 60){
+                // 1 MINUTES REMAIN
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
+            } else if((contractTimer-contractCounter)<30){
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ ChatColor.GRAY+ ""+(contractTimer-contractCounter)+ " seconds until contracts" + ChatColor.GREEN+" reset!");
             }
             if (contractTimer == contractCounter) {
                 Contract.assignPlayerContracts(p, b);
-                p.sendMessage(ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
                 contractCounter = 0;
             }
             contractCounter++;

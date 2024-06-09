@@ -203,7 +203,12 @@ public class NPCEvents implements Listener {
                 if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("geode").getItemStack(),1)){
                     p.getInventory().remove(CustomItem.getCustomItem("geode").getItemStack());
                     openGeode(75,p,b);
-                }else{
+                }
+                else if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("geode").getItemStack(),1)){
+                    p.getInventory().remove(CustomItem.getCustomItem("geode").getItemStack());
+                    openGeode(75,p,b);
+                }
+                else{
                     p.closeInventory();
                     p.sendMessage(ChatColor.RED+"No geodes to open!");
                 }

@@ -70,6 +70,7 @@ public class GameContentLoader {
         new CustomItem("Boar Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_MALL, 55.0, 0.0);
         new CustomItem("Cow Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_STRAD, 40.0, 0.0);
         new CustomItem("Gold Ore", 3, true, false, "Can be refined or sold", Material.RAW_GOLD, 69.0, 0.0);
+        new CustomItem("Geode", 4, true, false, "Bring to geologist to open", Material.FIREWORK_STAR, 0.0, 0.0);
         new CustomItem("Sea Slug", 3, true, false, "Reaks of the sea", Material.SPIDER_EYE, 4.0, 8.0, 4);
         new CustomItem("Boar Meat", 3, true, false, "Closest thing to bacon", Material.PORKCHOP, 7.0, 0.0);
         new CustomItem("Cow Meat", 3, true, false, "Prime beef", Material.BEEF, 9.0, 0.0);
@@ -112,7 +113,7 @@ public class GameContentLoader {
         new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 575.0, 0.0, 1);
         new CustomItem("Expedition Rod", 8, true, false, "A proper line.", Material.FISHING_ROD, 0.0, 5950.0, 1, Enchantment.LURE, 5);
 
-            new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
+        new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
         new CustomItem("Oil Barrel", 7, false, false, "A large amount of refined oil", Material.WATER_BUCKET, 650.0, 0.0, 1);
         new CustomItem("Golden Gamble Petal", 7, true, false, "Said to be lucky!", Material.HONEYCOMB, 0.0, 0.0, 1);
         new CustomItem("Moles Breath Spores", 7, true, false, "Moles use it to dig quicker", Material.FROGSPAWN, 0.0, 0.0, 1);
@@ -394,6 +395,7 @@ public class GameContentLoader {
 
         new ItemIcon("Next Page", "next_page", "Click to go to next page", Material.MAGENTA_GLAZED_TERRACOTTA);
         new ItemIcon("Previous Page", "previous_page", "Click to go to previous page", Material.MAGENTA_GLAZED_TERRACOTTA);
+        new ItemIcon("Open Geode","open_geode","Click to crack any geode open!",Material.MUSIC_DISC_11);
 
 
         new ItemIcon("Miner", "miner_prefix", "Choose miner (Level 3)", Material.STONE_PICKAXE);
@@ -475,7 +477,7 @@ public class GameContentLoader {
         //      ===--- BANKER ITEMS ---===
         new ItemIcon("Deposit", "bank_deposit", "Make a deposit", Material.EMERALD_BLOCK);
         new ItemIcon("Withdraw", "bank_withdraw", "Make a withdrawal", Material.REDSTONE_BLOCK);
-        new ItemIcon("Open Geode", "open_geode", "Click to crack open a geode", Material.IRON_PICKAXE);
+        //new ItemIcon("Open Geode", "open_geode", "Click to crack open a geode", Material.IRON_PICKAXE);
         //      ===--- VAULTKEEPER ITEMS ---===
         new ItemIcon("Open Vault", "open_vault", "Open your item vault", Material.ENDER_CHEST);
         new ItemIcon("Upgrade Vault", "upgrade_vault", "Upgrade your item vault", Material.LIME_BANNER);
