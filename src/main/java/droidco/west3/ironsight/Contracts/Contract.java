@@ -55,14 +55,16 @@ public class Contract {
 
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
-    public Contract(ItemStack requestedItem, int requestedAmount,String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
-        this.requestedItem = requestedItem;
+    public Contract(CustomItem requestedItem, int requestedAmount,String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
+        this.requestedItem = requestedItem.getItemStack();
         this.requestedAmount = requestedAmount;
         this.listingName = listingName;
         this.contractType = type;
         this.deliveryType = deliveryType;
         this.frontierLocation = frontierLocation;
         this.difficulty = difficulty;
+        setRewardXp();
+        this.reward = (requestedItem.getSalePrice() * requestedAmount);
     }
 
     public void setRewardXp() {

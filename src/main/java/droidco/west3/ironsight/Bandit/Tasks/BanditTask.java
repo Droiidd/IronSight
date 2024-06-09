@@ -77,7 +77,6 @@ public class BanditTask extends BukkitRunnable {
 
         locations = FrontierLocation.getLocationList();
 
-        b.setDoingContract(false);
         b.loadContracts();
 
         this.undeadMiner = new FrontierMob(FrontierMobType.UNDEAD_MINER);

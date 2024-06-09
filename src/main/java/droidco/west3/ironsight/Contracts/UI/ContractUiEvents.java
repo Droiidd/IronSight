@@ -49,6 +49,7 @@ public class ContractUiEvents implements Listener {
                 switch(e.getCurrentItem().getType()){
                     case EMERALD_BLOCK -> {
                         p.closeInventory();
+                        p.sendMessage(b.isDoingContract()+"");
                         if(b.isDoingContract()){
                             Contract active = b.getActiveContract();
                             switch (active.getContractType()){
@@ -57,7 +58,7 @@ public class ContractUiEvents implements Listener {
                                         for(int i =0;i<active.getRequestedAmount();i++){
                                             p.getInventory().removeItem(active.getRequestedItem());
                                         }
-                                        p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+"contract complete. +"+active.getRewardXp()+ChatColor.AQUA+ " XP"+ChatColor.GRAY+ "+ "+active.getReward()+"g");
+                                        p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+"Contract complete! +"+active.getRewardXp()+ChatColor.AQUA+ " XP"+ChatColor.GRAY+ "+ "+active.getReward()+"g");
                                         p.sendTitle(ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Contract Complete!", ChatColor.GRAY + "+"+active.getReward()+"g   +"+active.getRewardXp()+ChatColor.AQUA+ " XP");
                                         b.updateWallet(active.getReward());
                                         b.updateContractorXp(active.getRewardXp());

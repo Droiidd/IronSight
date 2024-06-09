@@ -168,7 +168,9 @@ public class PlayerConnector {
                     String frontierLocation = rsItem.getString("frontier_location");
                     boolean isActive = rsItem.getBoolean("is_active");
                     if(isActive){
-                        b.setActiveContract(new Contract(CustomItem.getCustomItem(requestedItem).getItemStack(), requestedAmt, listingName, BanditUtils.getContractorTypeFromStr(contractType),BanditUtils.getDeliveryTypeFromStr(deliveryType), FrontierLocation.getLocation(frontierLocation),BanditUtils.getDifficultyFromStr(difficulty)));
+                        b.setActiveContract(new Contract(CustomItem.getCustomItem(requestedItem), requestedAmt, listingName, BanditUtils.getContractorTypeFromStr(contractType),BanditUtils.getDeliveryTypeFromStr(deliveryType), FrontierLocation.getLocation(frontierLocation),BanditUtils.getDifficultyFromStr(difficulty)));
+                        b.setDoingContract(true);
+                        System.out.println("LOADED ACTIVE "+listingName);
                     }
                 }
                 System.out.println("added vault items");
