@@ -41,9 +41,9 @@ public class ContractUI {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)");
         Bandit b = Bandit.getPlayer(p);
 
-        contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.Rookie));
-        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(), Difficulty.Apprentice));
-        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(), Difficulty.Experienced));
+        contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.ROOKIE));
+        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(), Difficulty.APPRENTICE));
+        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(), Difficulty.EXPERIENCED));
 
         contractUi.setItem(2, ItemIcon.getIcon("rookie_slot").getItem());
         contractUi.setItem(4, ItemIcon.getIcon("apprentice_slot").getItem());
@@ -93,7 +93,7 @@ public class ContractUI {
         contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
                 ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
         contractLore.add(ChatColor.GRAY + "Location: " + selected.getLocation().getLocName());
-        if (selected.getContractType().equals(ContractType.Delivery)) {
+        if (selected.getContractType().equals(ContractType.DELIVERY)) {
             contractLore.add(String.valueOf(ChatColor.GRAY) + selected.getRequestedAmount() + " " + selected.getRequestedItem().getItemMeta().getDisplayName());
         }
         contractLore.add(ChatColor.GRAY + "Reward: " + selected.getReward() + " g");

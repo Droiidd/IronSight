@@ -52,7 +52,7 @@ public class ContractUiEvents implements Listener {
                         if(b.isDoingContract()){
                             Contract active = b.getActiveContract();
                             switch (active.getContractType()){
-                                case Delivery -> {
+                                case DELIVERY -> {
                                     if(p.getInventory().containsAtLeast(active.getRequestedItem(),active.getRequestedAmount())){
                                         for(int i =0;i<active.getRequestedAmount();i++){
                                             p.getInventory().removeItem(active.getRequestedItem());

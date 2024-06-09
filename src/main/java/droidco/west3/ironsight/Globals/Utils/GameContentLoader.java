@@ -421,9 +421,9 @@ public class GameContentLoader {
         new ItemIcon("Remove Title", "remove_title", "Click to reset prefix", Material.PLAYER_HEAD);
         new ItemIcon(String.valueOf(ChatColor.BOLD)+"Back", "back_button", "return to previous page", Material.BARRIER);
 
-        new ItemIcon(String.valueOf(ChatColor.GREEN)+ "Rookie Difficulty","rookie_slot","",Material.PLAYER_HEAD);
-        new ItemIcon(String.valueOf(ChatColor.YELLOW)+"Apprentice Difficulty","apprentice_slot","",Material.SKELETON_SKULL);
-        new ItemIcon(String.valueOf(ChatColor.RED)+"Experienced Difficulty","experienced_slot","",Material.WITHER_SKELETON_SKULL);
+        new ItemIcon(String.valueOf(ChatColor.GREEN)+ "ROOKIE Difficulty","rookie_slot","",Material.PLAYER_HEAD);
+        new ItemIcon(String.valueOf(ChatColor.YELLOW)+"APPRENTICE Difficulty","apprentice_slot","",Material.SKELETON_SKULL);
+        new ItemIcon(String.valueOf(ChatColor.RED)+"EXPERIENCED Difficulty","experienced_slot","",Material.WITHER_SKELETON_SKULL);
 
         //      ===--- TRACKER UI ICONS ---===
         new ItemIcon("Spice Field", "spice_field_tracker", "Directions to Spice Field", Material.HONEY_BOTTLE);

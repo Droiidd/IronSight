@@ -6,7 +6,6 @@ import droidco.west3.ironsight.Contracts.Utils.*;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.CustomItem;
-import droidco.west3.ironsight.Items.ItemIcon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -56,21 +55,30 @@ public class Contract {
 
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
+    public Contract(ItemStack requestedItem, int requestedAmount,String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
+        this.requestedItem = requestedItem;
+        this.requestedAmount = requestedAmount;
+        this.listingName = listingName;
+        this.contractType = type;
+        this.deliveryType = deliveryType;
+        this.frontierLocation = frontierLocation;
+        this.difficulty = difficulty;
+    }
 
     public void setRewardXp() {
         switch (difficulty) {
-            case Rookie -> {
+            case ROOKIE -> {
                 //this.rewardXp = 25;
                 this.rewardXp = 17;
             }
-            case Apprentice -> {
+            case APPRENTICE -> {
                 //this.rewardXp = 45;
                 this.rewardXp = 38;
             }
-            case Experienced -> {
+            case EXPERIENCED -> {
                 this.rewardXp = 60;
             }
-            case Master -> {
+            case MASTER -> {
                 this.rewardXp = 82;
             }
         }
@@ -92,19 +100,19 @@ public class Contract {
 
         //GET CONTRACTS
         System.out.println("INITIALIZING ROOKIES");
-        List<Contract> rookieContracts = initializeContracts(Difficulty.Rookie, contractPool);
+        List<Contract> rookieContracts = initializeContracts(Difficulty.ROOKIE, contractPool);
         Contract rookie = ContractUtils.getSingleContract(rookieContracts);
         contractPool.remove(rookie);
         b.setRookieContract(rookie);
 
         System.out.println("INITIALIZING APPRENTICE");
-        List<Contract> apprenticeContracts = initializeContracts(Difficulty.Apprentice, contractPool);
+        List<Contract> apprenticeContracts = initializeContracts(Difficulty.APPRENTICE, contractPool);
         Contract apprentice = ContractUtils.getSingleContract(apprenticeContracts);
         contractPool.remove(apprentice);
         b.setApprenticeContract(apprentice);
 
         System.out.println("INITIALIZING EXPERIENCED");
-        List<Contract> experiencedContracts = initializeContracts(Difficulty.Experienced, contractPool);
+        List<Contract> experiencedContracts = initializeContracts(Difficulty.EXPERIENCED, contractPool);
         Contract experienced = ContractUtils.getSingleContract(experiencedContracts);
         contractPool.remove(experienced);
         b.setExperiencedContract(experienced);
@@ -167,13 +175,13 @@ public class Contract {
             that.
          */
         switch (this.contractType) {
-            case Delivery -> {
+            case DELIVERY -> {
                 generateNewDelivery();
             }
-            case Bounty -> {
+            case BOUNTY -> {
                 //generateNewHunter();
             }
-            case OilField -> {
+            case OIL_FIELD -> {
                 generateNewOilField(20);
             }
         }
@@ -185,10 +193,10 @@ public class Contract {
         this.steps = new ArrayList<>();
         int odds = GlobalUtils.getRandomNumber(101);
         if (odds <= 20) {
-            this.difficulty = Difficulty.Master;
+            this.difficulty = Difficulty.MASTER;
             this.reward = 3150.0;
         } else {
-            this.difficulty = Difficulty.Experienced;
+            this.difficulty = Difficulty.EXPERIENCED;
             this.reward = 2500.0;
         }
         this.listingName = ChatColor.WHITE + contractName + " - " + ContractUtils.getDifficultyScale(difficulty);
@@ -319,35 +327,35 @@ public class Contract {
 
             if (amount < 10) {
                 //MEDIUM
-                difficulty = Difficulty.Apprentice;
+                difficulty = Difficulty.APPRENTICE;
             } else {
                 //HARD
-                difficulty = Difficulty.Experienced;
+                difficulty = Difficulty.EXPERIENCED;
             }
 
         } else {
             if (amount < 29) {
                 //EASY
                 if (deliveryType.equals(DeliveryType.DRUG_RUNNER)) {
-                    difficulty = Difficulty.Apprentice;
+                    difficulty = Difficulty.APPRENTICE;
                 } else {
-                    difficulty = Difficulty.Rookie;
+                    difficulty = Difficulty.ROOKIE;
                 }
 
             } else if (amount < 44 && amount >= 29) {
                 //MEDIUM
                 if (deliveryType.equals(DeliveryType.DRUG_RUNNER)) {
-                    difficulty = Difficulty.Experienced;
+                    difficulty = Difficulty.EXPERIENCED;
                 } else {
-                    difficulty = Difficulty.Apprentice;
+                    difficulty = Difficulty.APPRENTICE;
                     ;
                 }
             } else {
                 //HARD?
                 if (deliveryType.equals(DeliveryType.DRUG_RUNNER)) {
-                    difficulty = Difficulty.Master;
+                    difficulty = Difficulty.MASTER;
                 } else {
-                    difficulty = Difficulty.Experienced;
+                    difficulty = Difficulty.EXPERIENCED;
                     ;
                 }
             }
@@ -470,7 +478,7 @@ public class Contract {
 
     public int getReinforcementMultiplier() {
         double multiplier = 1.0;
-        if (difficulty == Difficulty.Master) {
+        if (difficulty == Difficulty.MASTER) {
             multiplier = 1.5;
         }
         int val = (int) Math.round(reinforcementCount * multiplier);
@@ -479,7 +487,7 @@ public class Contract {
 
     public void startContract(Player p) {
         switch (this.contractType) {
-            case OilField -> {
+            case OIL_FIELD -> {
                 p.getInventory().addItem(CustomItem.getCustomItem("Crate Key").getItemStack());
             }
         }

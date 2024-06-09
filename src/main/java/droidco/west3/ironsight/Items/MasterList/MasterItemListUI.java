@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class MasterItemListUI {
     public static Inventory openMasterListPage1(Player p){
-        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"Master List 1");
+        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"MASTER List 1");
         int counter =0;
         HashMap<String, CustomItem> items = CustomItem.getItems();
         for (Map.Entry<String, CustomItem> item : items.entrySet()) {
@@ -26,7 +26,7 @@ public class MasterItemListUI {
 
     }
     public static Inventory openMasterListPage2(Player p){
-        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"Master List 2");
+        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"MASTER List 2");
         int counter =0;
         int counter2 = 0;
         HashMap<String,CustomItem> items = CustomItem.getItems();
@@ -44,7 +44,7 @@ public class MasterItemListUI {
 
     }
     public static Inventory openMasterListPage3(Player p){
-        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"Master List 2");
+        Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"MASTER List 2");
         int counter =0;
         int counter2 = 0;
         HashMap<String,CustomItem> items = CustomItem.getItems();

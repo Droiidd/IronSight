@@ -1,20 +1,20 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.CustomPotion;
-import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.*;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +134,7 @@ public class BanditUtils {
         String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
         String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
         String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
-        String contractorLvl = ChatColor.AQUA + "Contractor "+ChatColor.GRAY+"[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + b.getContractorLvl()+ChatColor.GRAY+"]";
+        String contractorLvl = ChatColor.AQUA + "Contractor " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + b.getContractorLvl() + ChatColor.GRAY + "]";
 
 
         //Wanted timer
@@ -162,8 +162,8 @@ public class BanditUtils {
         Score bountyDis = objective.getScore(bounty);
         Score contractorDis = objective.getScore(contractorLvl);
         if (b.getActiveContract() != null) {
-            String activeContract = ChatColor.GREEN + "Active Contract"  + ChatColor.RESET+":";
-            String contractListing = "\""+b.getActiveContract().getListingName()+ChatColor.RESET+ "\"";
+            String activeContract = ChatColor.GREEN + "Active Contract" + ChatColor.RESET + ":";
+            String contractListing = "\"" + b.getActiveContract().getListingName() + ChatColor.RESET + "\"";
             Score activeContractDis = objective.getScore(activeContract);
             Score contractListingDis = objective.getScore(contractListing);
             contractListingDis.setScore(7);
@@ -193,8 +193,8 @@ public class BanditUtils {
         Bukkit.dispatchCommand(console, weapon);
 
     }
-    public static List<Integer> getLevelXpRequirementList()
-    {
+
+    public static List<Integer> getLevelXpRequirementList() {
         List<Integer> reqs = new ArrayList<>();
         // The index of the list is the level, the value at the index is the XP requirement:
         // index 0 requires 0 XP | index 4 requires 400 XP
@@ -214,7 +214,8 @@ public class BanditUtils {
         reqs.add(9150);
         return reqs;
     }
-    public static int getXpRequiredForLevel(Bandit b){
+
+    public static int getXpRequiredForLevel(Bandit b) {
         List<Integer> reqs = getLevelXpRequirementList();
         return reqs.get(b.getContractorLvl());
     }
@@ -245,6 +246,54 @@ public class BanditUtils {
 
         return null;
 
+    }
+
+    public static ContractType getContractorTypeFromStr(String str) {
+        switch (str) {
+            case "DELIVERY" -> {
+                return ContractType.DELIVERY;
+            }
+            case "OIL_FIELD" -> {
+                return ContractType.OIL_FIELD;
+            }
+        }
+        return null;
+    }
+
+    public static DeliveryType getDeliveryTypeFromStr(String str) {
+        switch (str) {
+            case "MINER" -> {
+                return DeliveryType.MINER;
+            }
+            case "HUNTER" -> {
+                return DeliveryType.HUNTER;
+            }
+            case "DRUG_RUNNER" -> {
+                return DeliveryType.DRUG_RUNNER;
+            }
+            case "FISHER" -> {
+                return DeliveryType.FISHER;
+            }
+        }
+        return null;
+    }
+
+    public static Difficulty getDifficultyFromStr(String str) {
+        switch (str) {
+            case "ROOKIE" -> {
+                return Difficulty.ROOKIE;
+            }
+            case "APPRENTICE" -> {
+                return Difficulty.APPRENTICE;
+            }
+            case "EXPERIENCED" -> {
+                return Difficulty.EXPERIENCED;
+            }
+            case "MASTER" -> {
+                return Difficulty.MASTER;
+            }
+        }
+        return null;
     }
 
     public static String getContractorTitle(Bandit b) {

@@ -1,30 +1,25 @@
 package droidco.west3.ironsight.Contracts.Utils;
 
 import droidco.west3.ironsight.Contracts.Contract;
-import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ContractUtils
 {
     public static String getDifficultyScale(Difficulty difficulty){
         switch(difficulty){
-            case Rookie -> {
+            case ROOKIE -> {
                 return String.valueOf(ChatColor.GREEN) +"Difficulty: I";
             }
-            case Apprentice -> {
+            case APPRENTICE -> {
                 return String.valueOf(ChatColor.YELLOW) +"Difficulty: II";
             }
-            case Experienced -> {
+            case EXPERIENCED -> {
                 return String.valueOf(ChatColor.RED) +"Difficulty: III";
             }
-            case Master -> {
+            case MASTER -> {
                 return String.valueOf(ChatColor.DARK_RED) +"Difficulty: IV";
             }
         }
@@ -32,14 +27,14 @@ public class ContractUtils
     }
     public static String getTypeString(ContractType type){
         switch(type){
-            case OilField -> {
+            case OIL_FIELD -> {
                 return "Oil Field Raid";
             }
-            case Bounty -> {
+            case BOUNTY -> {
                 return "Bounty Hunter";
             }
-            case Delivery -> {
-                return "Delivery";
+            case DELIVERY -> {
+                return "DELIVERY";
             }
         }
         return "";

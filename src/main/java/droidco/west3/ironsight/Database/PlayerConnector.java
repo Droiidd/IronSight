@@ -2,11 +2,13 @@ package droidco.west3.ironsight.Database;
 
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
+import droidco.west3.ironsight.Globals.Utils.BanditUtils;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Horse.FrontierHorse;
+import droidco.west3.ironsight.Items.CustomItem;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -16,7 +18,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class PlayerConnector {
                     ItemStack[] horseInv = horse.getHorseInv();
                     saveInventory(p,horseInv,horse.getHorseName(),conn);
                 }
+                saveActiveContract(p,conn);
 
                 saveInventory(p, b.getItemVault().toArray(new ItemStack[0]), "Vault", conn);
                 //ALWAYS CLOSE THE CONNECTION!
@@ -70,6 +72,7 @@ public class PlayerConnector {
             if(successfulLoad){
                 Bandit b = Bandit.getPlayer(p);
                 fetchPlayerVault(conn, p);
+                fetchAvailableContract(conn,p);
                 conn.close();
                 return Bandit.getPlayer(p);
             }
@@ -147,7 +150,34 @@ public class PlayerConnector {
                 System.out.println(e);
                 System.out.println("failed getting vault items");
             }
-        }
+    }
+    public static void fetchAvailableContract(Connection conn ,Player p){
+        Bandit b = Bandit.getPlayer(p);
+            try{
+                String itemSql = "select * from available_contract where bandit_id = \'" + p.getUniqueId().toString()+"\'";
+                Statement st = conn.createStatement();
+                ResultSet rsItem = st.executeQuery(itemSql);
+                while (rsItem.next()){
+                    String banditId = rsItem.getString("bandit_id");
+                    String contractType = rsItem.getString("contract_type");
+                    String deliveryType = rsItem.getString("delivery_type");
+                    String difficulty = rsItem.getString("difficulty");
+                    String requestedItem = rsItem.getString("requested_item");
+                    int requestedAmt = rsItem.getInt("requested_amt");
+                    String listingName = rsItem.getString("listing_name");
+                    String frontierLocation = rsItem.getString("frontier_location");
+                    boolean isActive = rsItem.getBoolean("is_active");
+                    if(isActive){
+                        b.setActiveContract(new Contract(CustomItem.getCustomItem(requestedItem).getItemStack(), requestedAmt, listingName, BanditUtils.getContractorTypeFromStr(contractType),BanditUtils.getDeliveryTypeFromStr(deliveryType), FrontierLocation.getLocation(frontierLocation),BanditUtils.getDifficultyFromStr(difficulty)));
+                    }
+                }
+                System.out.println("added vault items");
+                st.close();
+            }catch (Exception e){
+                System.out.println(e);
+                System.out.println("failed getting vault items");
+            }
+    }
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
@@ -294,28 +324,28 @@ public class PlayerConnector {
                         }
             }
         }
-        public static void saveContracts(Player p,Connection conn) throws SQLException {
+        public static void saveActiveContract(Player p, Connection conn) throws SQLException {
 
         Bandit b = Bandit.getPlayer(p);
-        System.out.println("Updating contract ");
+        System.out.println("Updating available contract ");
             String sql = "UPDATE available_contract " +
                     "set bandit_id = \'"+p.getUniqueId().toString() + "\', "+
                     "requested_item = \'"+String.valueOf(ChatColor.stripColor(b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName()))+ "\', "+
-                    "requested_amt = \'"+ b.getActiveContract().getRequestedAmount() +"\'"+
-                    "contract_type = \'"+ b.getActiveContract().getContractType().toString() +"\'"+
-                    "listing_name = \'"+ b.getActiveContract().getListingName() +"\'"+
-                    "frontier_location = \'"+ b.getActiveContract().getLocation().getLocName() +"\'"+
-                    "difficulty = \'"+ b.getActiveContract().getDifficulty() +"\'"+
-                    "is_active = \'"+ true +"\'"+
+                    "requested_amt = \'"+ b.getActiveContract().getRequestedAmount() +"\',"+
+                    "contract_type = \'"+ b.getActiveContract().getContractType().toString() +"\',"+
+                    "listing_name = \'"+ b.getActiveContract().getListingName() +"\',"+
+                    "frontier_location = \'"+ b.getActiveContract().getLocation().getLocName() +"\',"+
+                    "difficulty = \'"+ b.getActiveContract().getDifficulty() +"\',"+
+                    "is_active = \'"+ 1 +"\',"+
                     "delivery_type = \'"+  b.getActiveContract().getDeliveryType().toString() +"\'"+
 
-                    "WHERE bandit_id = \'"+p.getUniqueId().toString()+"";
+                    "WHERE bandit_id = \'"+p.getUniqueId().toString()+"\'";
             PreparedStatement prepedStmt = conn.prepareStatement(sql);
 
             int updateVal = prepedStmt.executeUpdate();
             if(updateVal > 0){
                 //Success
-                System.out.println("Contract updated.");
+                System.out.println("Available Contract updated.");
             }else{
                 //Update was not successful
                 System.out.println("Could not update contract, inserting new columnn.");
