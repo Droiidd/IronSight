@@ -32,7 +32,7 @@ public class CombatEvents implements Listener
         bannedTypes.add(EntityType.GLOW_ITEM_FRAME);
         if(e.getDamager() instanceof Player p){
             Bandit b = Bandit.getPlayer(p);
-            if(b.getCurrentLocation().getType().equals(LocationType.TOWN)){
+            if(b.getCurrentLocation().getType().equals(LocationType.TOWN) || b.getCurrentLocation().getType().equals(LocationType.PRISON) ){
                 playerInTown = true;
                 bannedTypes.add(EntityType.PLAYER);
                 bannedTypes.add(EntityType.HORSE);
