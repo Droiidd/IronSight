@@ -189,6 +189,7 @@ public class NPCEvents implements Listener {
             }
         }
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Geologist")) {
+            NPC npc =  NPC.getNPC("Geologist"+b.getCurrentLocation().getLocName());
             e.setCancelled(true);
             if (e.getCurrentItem().getType().compareTo(CustomItem.getCustomItem("Broken Pick").getMaterial()) == 0) {
                 purchaseItem(b,p,CustomItem.getCustomItem("Broken Pick"),NPC.getNPC("Geologist"+b.getCurrentLocation().getLocName()));
@@ -200,13 +201,13 @@ public class NPCEvents implements Listener {
                 purchaseItem(b,p,CustomItem.getCustomItem("Explorer's Pick"),NPC.getNPC("Geologist"+b.getCurrentLocation().getLocName()));
             }
             if (e.getCurrentItem().getType().compareTo(ItemIcon.getIcon("open_geode").getItem().getType()) == 0) {
-                if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("geode").getItemStack(),1)){
-                    p.getInventory().remove(CustomItem.getCustomItem("geode").getItemStack());
-                    openGeode(75,p,b);
+                if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("Geode").getItemStack(),1)){
+                    p.getInventory().remove(CustomItem.getCustomItem("Geode").getItemStack());
+                    openGeode(75,p,b,"Geode",npc);
                 }
-                else if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("geode").getItemStack(),1)){
-                    p.getInventory().remove(CustomItem.getCustomItem("geode").getItemStack());
-                    openGeode(75,p,b);
+                else if(p.getInventory().containsAtLeast(CustomItem.getCustomItem("Crystalized Geode").getItemStack(),1)){
+                    p.getInventory().remove(CustomItem.getCustomItem("Geode").getItemStack());
+                    openGeode(75,p,b,"Crystalized Geode",npc);
                 }
                 else{
                     p.closeInventory();
@@ -491,16 +492,17 @@ public class NPCEvents implements Listener {
             p.sendMessage( npc.getDisplayName()+ ChatColor.GRAY+ ": Not enough funds!");
         }
     }
-    public void openGeode(double geodeCost, Player p, Bandit b)
+    public void openGeode(double geodeCost, Player p, Bandit b, String geodeType,NPC npc)
     {
         if(b.getWallet() >= geodeCost){
             b.updateWallet(-1* geodeCost);
-            ArrayList<ItemStack> contents = ItemTable.getTable("Geode").getNumItems(10);
+            ArrayList<ItemStack> contents = ItemTable.getTable(geodeType).getNumItems(10);
             int geodeChoice = GlobalUtils.getRandomNumber(contents.size());
             p.getInventory().addItem(contents.get(geodeChoice));
-            p.sendMessage(ChatColor.GRAY+"Geode opened... "+ChatColor.WHITE+"+"+contents.get(geodeChoice).getAmount()+ contents.get(geodeChoice).getItemMeta().getDisplayName());
+            p.getInventory().removeItem(CustomItem.getCustomItem(geodeType).getItemStack());
+            p.sendMessage(ChatColor.GRAY+"Geode opened... "+ChatColor.WHITE+"+ "+contents.get(geodeChoice).getAmount()+" "+ contents.get(geodeChoice).getItemMeta().getDisplayName());
         }else{
-            p.sendMessage( ChatColor.GRAY+ ": Not enough funds!");
+            p.sendMessage( npc.getDisplayName()+ChatColor.GRAY+ ": Not enough funds!");
             p.closeInventory();
         }
 

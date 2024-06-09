@@ -305,7 +305,7 @@ public class BanditTask extends BukkitRunnable {
             }else if((contractTimer-contractCounter) == 60){
                 // 1 MINUTES REMAIN
                 p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.GREEN+" reset!");
-            } else if((contractTimer-contractCounter)<30){
+            } else if((contractTimer-contractCounter)<30&&(contractTimer-contractCounter)!=0){
                 p.sendMessage(ChatColor.AQUA+"[Alert] "+ ChatColor.GRAY+ ""+(contractTimer-contractCounter)+ " seconds until contracts" + ChatColor.GREEN+" reset!");
             }
             if (contractTimer == contractCounter) {

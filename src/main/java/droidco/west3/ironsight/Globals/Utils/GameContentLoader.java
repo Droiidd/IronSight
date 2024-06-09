@@ -279,6 +279,19 @@ public class GameContentLoader {
 
         ItemTable geodeTable = new ItemTable(geodeMap, "Geode");
 
+        //      ===--- CRYSTALIZED GEODES ---===
+        HashMap<String, Quantity> cGeodeMap = new HashMap<>();
+        cGeodeMap.put("Amethyst Bud", new Quantity(1, 3));
+        cGeodeMap.put("Mossy Jade", new Quantity(1, 3));
+        cGeodeMap.put("Baron's Emerald", new Quantity(1, 2));
+        cGeodeMap.put("River Diamond", ones);
+        cGeodeMap.put("Void Opal", ones);
+        cGeodeMap.put("Iron Ore", new Quantity(4,16));
+        cGeodeMap.put("Copper Ore", new Quantity(4,16));
+        cGeodeMap.put("Gold Ore", new Quantity(4,16));
+
+        ItemTable cGeodeTable = new ItemTable(cGeodeMap, "Crystalized Geode");
+
         //      ===--- FISH TABLES ---===
 
         //LOWER GUADLUPE
