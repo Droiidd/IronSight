@@ -4,6 +4,7 @@ import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.Contracts.Contract;
 import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Horse.FrontierHorse;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -33,7 +34,7 @@ public class PlayerConnector {
                         conn = DriverManager.getConnection(url, user, pass);
                 System.out.println("CONNECTED!!!");
                 savePlayer(b,conn);
-                resetInventories(p,conn);
+                //resetInventories(p,conn);
                 List<FrontierHorse> horses = b.getHorses();
                 for(FrontierHorse horse : horses){
                     saveHorse(p,horse,conn);
@@ -290,6 +291,51 @@ public class PlayerConnector {
                         if(insertVal > 0){
                             //Success
                             System.out.println(horse.getHorseName()+" inserted.");
+                        }
+            }
+        }
+        public static void saveContracts(Player p,Connection conn) throws SQLException {
+
+        Bandit b = Bandit.getPlayer(p);
+        System.out.println("Updating contract ");
+            String sql = "UPDATE available_contract " +
+                    "set bandit_id = \'"+p.getUniqueId().toString() + "\', "+
+                    "requested_item = \'"+String.valueOf(ChatColor.stripColor(b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName()))+ "\', "+
+                    "requested_amt = \'"+ b.getActiveContract().getRequestedAmount() +"\'"+
+                    "contract_type = \'"+ b.getActiveContract().getContractType().toString() +"\'"+
+                    "listing_name = \'"+ b.getActiveContract().getListingName() +"\'"+
+                    "frontier_location = \'"+ b.getActiveContract().getLocation().getLocName() +"\'"+
+                    "difficulty = \'"+ b.getActiveContract().getDifficulty() +"\'"+
+                    "is_active = \'"+ true +"\'"+
+                    "delivery_type = \'"+  b.getActiveContract().getDeliveryType().toString() +"\'"+
+
+                    "WHERE bandit_id = \'"+p.getUniqueId().toString()+"";
+            PreparedStatement prepedStmt = conn.prepareStatement(sql);
+
+            int updateVal = prepedStmt.executeUpdate();
+            if(updateVal > 0){
+                //Success
+                System.out.println("Contract updated.");
+            }else{
+                //Update was not successful
+                System.out.println("Could not update contract, inserting new columnn.");
+                    String sqlInsert = "insert into available_contract (requested_item,requested_amt,listing_name,contract_type,bandit_id,delivery_type,frontier_location,difficulty,is_active) values (?,?,?,?,?,?,?,?,?);";
+                    PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
+                    insertStmt.setString(1, b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
+                    insertStmt.setInt(2, b.getActiveContract().getRequestedAmount());
+                    insertStmt.setString(3, b.getActiveContract().getListingName());
+                    insertStmt.setString(4, b.getActiveContract().getContractType().toString());
+                    insertStmt.setString(5, p.getUniqueId().toString());
+                    insertStmt.setString(6, b.getActiveContract().getDeliveryType().toString());
+                    insertStmt.setString(7, b.getActiveContract().getLocation().getLocName());
+                    insertStmt.setString(8, b.getActiveContract().getDifficulty().toString());
+                    insertStmt.setBoolean(9, true);
+
+
+                        int insertVal = insertStmt.executeUpdate();
+                        if(insertVal > 0){
+                            //Success
+                            System.out.println("contract inserted.");
                         }
             }
         }

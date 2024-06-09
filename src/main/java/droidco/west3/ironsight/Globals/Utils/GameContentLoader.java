@@ -47,29 +47,29 @@ public class GameContentLoader {
         new CustomItem("Cooked Rabbit", 2, true, false, "Get's you through winter", Material.COOKED_RABBIT, 0.0, 5.0, 4);
         new CustomItem("Seaweed", 1, true, false, "Useless", Material.KELP_PLANT, 2.0, 0.0);
         new CustomItem("Reed", 1, true, false, "Useless", Material.BAMBOO, 2.0, 0.0);
-        CustomItem brokenPick = new CustomItem("Broken Pick", 2, true, false, "A good starter pick", Material.STONE_PICKAXE, 0.0, 200.0, 1);
-        CustomItem shotAmmo = new CustomItem("Shotgun Ammo", 2, true, false, "Buckshot only.", Material.WHEAT_SEEDS, 0.0, 20.0, 6);
-        CustomItem pistolAmmo = new CustomItem("Pistol Ammo", 1, true, false, "Load your favorite .22", Material.NETHER_WART, 0.0, 17.0, 8);
-        CustomItem rifleAmmo = new CustomItem("Rifle Ammo", 2, true, false, "Imported from China", Material.CLAY_BALL, 0.0, 24.0, 8);
-        CustomItem bandage = new CustomItem("Bandage", 2, true, false, "Used to heal bloody wounds", Material.PAPER, 0.0, 9.0, 6);
-        CustomItem splint = new CustomItem("Splint", 2, true, false, "Used to heal broken bones", Material.STICK, 0.0, 8.0, 4);
-        CustomItem tracker = new CustomItem("Tracker", 1, true, false, "Track different locations", Material.COMPASS, 0.0, 10.0, 1);
-        CustomItem glassBottle = new CustomItem("Glass Bottle", 2, true, false, "Used for brewing drinks", Material.GLASS_BOTTLE, 0.0, 15.0, 3);
-        CustomItem fishingRod = new CustomItem("Wooden Fishing Rod", 2, true, false, "Basic stick and line", Material.FISHING_ROD, 0.0, 200.0, 1);
-        CustomItem unSmokeLeaf = new CustomItem("Unprocessed Smokeleaf", 2, false, false, "Process to consume", Material.GREEN_DYE, 0.0, 0.0);
-        CustomItem unSpice = new CustomItem("Unprocessed Spice", 2, false, false, "Process to consume", Material.GLOWSTONE_DUST, 0.0, 0.0);
-        CustomItem iron = new CustomItem("Iron Ore", 2, true, false, "Can be refined or sold", Material.RAW_IRON, 10.0, 0.0);
-        CustomItem copper = new CustomItem("Copper Ore", 1, true, false, "Can be refined or sold", Material.RAW_COPPER, 14.0, 0.0);
+        new CustomItem("Broken Pick", 2, true, false, "A good starter pick", Material.STONE_PICKAXE, 0.0, 200.0, 1);
+        new CustomItem("Shotgun Ammo", 2, true, false, "Buckshot only.", Material.WHEAT_SEEDS, 0.0, 20.0, 6);
+        new CustomItem("Pistol Ammo", 1, true, false, "Load your favorite .22", Material.NETHER_WART, 0.0, 17.0, 8);
+        new CustomItem("Rifle Ammo", 2, true, false, "Imported from China", Material.CLAY_BALL, 0.0, 24.0, 8);
+        new CustomItem("Bandage", 2, true, false, "Used to heal bloody wounds", Material.PAPER, 0.0, 9.0, 6);
+        new CustomItem("Splint", 2, true, false, "Used to heal broken bones", Material.STICK, 0.0, 8.0, 4);
+        new CustomItem("Tracker", 1, true, false, "Track different locations", Material.COMPASS, 0.0, 10.0, 1);
+        new CustomItem("Glass Bottle", 2, true, false, "Used for brewing drinks", Material.GLASS_BOTTLE, 0.0, 15.0, 3);
+        new CustomItem("Wooden Fishing Rod", 2, true, false, "Basic stick and line", Material.FISHING_ROD, 0.0, 200.0, 1);
+        new CustomItem("Unprocessed Smokeleaf", 2, false, false, "Process to consume", Material.GREEN_DYE, 0.0, 0.0);
+        new CustomItem("Unprocessed Spice", 2, false, false, "Process to consume", Material.GLOWSTONE_DUST, 0.0, 0.0);
+        new CustomItem("Iron Ore", 2, true, false, "Can be refined or sold", Material.RAW_IRON, 30.0, 0.0);
+        new CustomItem("Copper Ore", 1, true, false, "Can be refined or sold", Material.RAW_COPPER, 44.0, 0.0);
 
         //UNCOMMON
         new CustomItem("Smoked Salmon", 3, true, false, "Fresh caught, fresh smoked", Material.COOKED_SALMON, 0.0, 10.0, 3);
         new CustomItem("Fermented Liquor", 4, true, false, "Extra kick to any home brew", Material.DRAGON_BREATH, 16.0, 0.0, 2);
-        new CustomItem("Poor Mans Crappie", 3, true, false, "Skinniest fish", Material.COD, 10.0, 0.0);
-        new CustomItem("Gray Stoned Herring", 3, true, false, "The cheapest of Herring", Material.SALMON, 13.0, 0.0);
-        new CustomItem("Cactus Pronged Chub", 3, true, false, "Too spikey to eat", Material.TROPICAL_FISH, 16.0, 0.0);
+        new CustomItem("Poor Mans Crappie", 3, true, false, "Skinniest fish", Material.COD, 30.0, 0.0);
+        new CustomItem("Gray Stoned Herring", 3, true, false, "The cheapest of Herring", Material.SALMON, 43.0, 0.0);
+        new CustomItem("Cactus Pronged Chub", 3, true, false, "Too spikey to eat", Material.TROPICAL_FISH, 46.0, 0.0);
         new CustomItem("Boar Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_MALL, 55.0, 0.0);
         new CustomItem("Cow Carcass", 3, true, false, "Right click to skin", Material.MUSIC_DISC_STRAD, 40.0, 0.0);
-        new CustomItem("Gold Ore", 3, true, false, "Can be refined or sold", Material.RAW_GOLD, 19.0, 0.0);
+        new CustomItem("Gold Ore", 3, true, false, "Can be refined or sold", Material.RAW_GOLD, 69.0, 0.0);
         new CustomItem("Sea Slug", 3, true, false, "Reaks of the sea", Material.SPIDER_EYE, 4.0, 8.0, 4);
         new CustomItem("Boar Meat", 3, true, false, "Closest thing to bacon", Material.PORKCHOP, 7.0, 0.0);
         new CustomItem("Cow Meat", 3, true, false, "Prime beef", Material.BEEF, 9.0, 0.0);
@@ -80,8 +80,8 @@ public class GameContentLoader {
         new CustomItem("Rabbit Hide", 4, true, false, "Good for small leather work", Material.LIGHT_GRAY_DYE, 18.0, 0.0);
         new CustomItem("Fox Fur", 4, true, false, "Warmest fur on the market", Material.ORANGE_DYE, 16.0, 0.0);
         new CustomItem("Old Miner's Pick", 4, true, false, "Steeled with rust", Material.IRON_PICKAXE, 0.0, 530.0, 1);
-        new CustomItem("Processed Smokeleaf", 4, false, false, "Process to consume", Material.ENDER_PEARL, 19.0, 0.0);
-        new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 68.0, 0.0);
+        new CustomItem("Processed Smokeleaf", 4, false, false, "Process to consume", Material.ENDER_PEARL, 47.0, 0.0);
+        new CustomItem("Spice", 4, false, false, "Smell's like the future", Material.HONEY_BOTTLE, 65, 0.0);
         new CustomItem("Unrefined Oil", 4, false, false, "Refine for higher sale value", Material.BUCKET, 0.0, 0.0);
         new CustomItem("Miner's Frenzy Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
         new CustomItem("Miner's Double Spade Brew Recipe", 3, true, false, "Right click to view recipe", Material.FLOWER_BANNER_PATTERN, 1500.0, 0.0, 1);
@@ -93,23 +93,23 @@ public class GameContentLoader {
         new CustomItem("Frenzied Stems", 5, true, false, "Used on workers for productivity", Material.FIRE_CORAL, 0.0, 0.0, 1);
         new CustomItem("Heart Fruit", 5, true, false, "Still beating", Material.SWEET_BERRIES, 0.0, 0.0, 1);
 
-        new CustomItem("Amethyst Bud", 6, true, false, "Like a blossoming rose", Material.AMETHYST_SHARD, 85.0, 0.0, 1);
-        new CustomItem("Mossy Jade", 5, true, false, "Look's alive under light", Material.SLIME_BALL, 65.0, 0.0, 1);
+        new CustomItem("Amethyst Bud", 6, true, false, "Like a blossoming rose", Material.AMETHYST_SHARD, 385.0, 0.0, 1);
+        new CustomItem("Mossy Jade", 5, true, false, "Look's alive under light", Material.SLIME_BALL, 265.0, 0.0, 1);
 
         new CustomItem("Hermit Crab", 5, true, false, "Fish love it", Material.NAUTILUS_SHELL, 8.0, 15.0, 3);
         new CustomItem("Refined Oil", 6, false, false, "Highly sought after", Material.LAVA_BUCKET, 90.0, 0.0, 1);
-        new CustomItem("Southern Salmon", 6, true, false, "Migrated south through southern tributaries", Material.MUSIC_DISC_FAR, 175.0, 0.0, 1);
-        new CustomItem("Arctic Salmon", 6, true, false, "Still in the frozen north", Material.MUSIC_DISC_13, 180.0, 0.0, 1);
+        new CustomItem("Southern Salmon", 6, true, false, "Migrated south through southern tributaries", Material.MUSIC_DISC_FAR, 375.0, 0.0, 1);
+        new CustomItem("Arctic Salmon", 6, true, false, "Still in the frozen north", Material.MUSIC_DISC_13, 380.0, 0.0, 1);
 
         new CustomItem("Crate Key", 6, false, false, "Unlocks crates at oil field", Material.TRIPWIRE_HOOK, 0.0, 0.0, 1);
         new CustomItem("Steel Lined Rod", 6, true, false, "Double sided hook!", Material.FISHING_ROD, 0.0, 1950.0, 1, Enchantment.LURE, 1);
         new CustomItem("Explorer's Pick", 6, true, false, "Aids in climbing glaciers", Material.DIAMOND_PICKAXE, 0.0, 1450.0, 1, Enchantment.DIG_SPEED, 1);
 
         //LEGENDARY
-        new CustomItem("Alligator", 8, true, false, "Crikey!", Material.MUSIC_DISC_CHIRP, 425.0, 0.0, 1);
-        new CustomItem("Sunken Catfish", 8, true, false, "Evolved in the low-lands", Material.MUSIC_DISC_BLOCKS, 400.0, 0.0, 1);
-        new CustomItem("Gold Stoned Herring", 7, true, false, "The rare mutation of the gray herring", Material.MUSIC_DISC_MELLOHI, 250.0, 0.0, 1);
-        new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 275.0, 0.0, 1);
+        new CustomItem("Alligator", 8, true, false, "Crikey!", Material.MUSIC_DISC_CHIRP, 825.0, 0.0, 1);
+        new CustomItem("Sunken Catfish", 8, true, false, "Evolved in the low-lands", Material.MUSIC_DISC_BLOCKS, 750.0, 0.0, 1);
+        new CustomItem("Gold Stoned Herring", 7, true, false, "The rare mutation of the gray herring", Material.MUSIC_DISC_MELLOHI, 550.0, 0.0, 1);
+        new CustomItem("Pearl River Trout", 7, true, false, "Alluring rainbow scales", Material.MUSIC_DISC_CAT, 575.0, 0.0, 1);
         new CustomItem("Expedition Rod", 8, true, false, "A proper line.", Material.FISHING_ROD, 0.0, 5950.0, 1, Enchantment.LURE, 5);
 
             new CustomItem("Pirates booty", 8, true, false, "Richest dabloon", Material.SUNFLOWER, 0.0, 0.0, 1);
@@ -119,9 +119,9 @@ public class GameContentLoader {
         new CustomItem("Blue Malt Petal", 7, true, false, "It smell makes dreams come true", Material.GLOW_INK_SAC, 0.0, 0.0, 1);
 
         new CustomItem("Crystalized Geode", 8, true, false, "Crystals explode out of the sides", Material.MUSIC_DISC_11, 0.0, 0.0, 1);
-        new CustomItem("River Diamond", 7, true, false, "The root of many wars", Material.DIAMOND, 555.0, 0.0, 1);
-        new CustomItem("Baron's Emerald", 7, true, false, "An old king was fond of these", Material.EMERALD, 575.0, 0.0, 1);
-        new CustomItem("Void Opal", 8, true, false, "Stare into the depths of the universe", Material.ECHO_SHARD, 635.0, 0.0, 1);
+        new CustomItem("River Diamond", 7, true, false, "The root of many wars", Material.DIAMOND, 1355.0, 0.0, 1);
+        new CustomItem("Baron's Emerald", 7, true, false, "An old king was fond of these", Material.EMERALD, 1375.0, 0.0, 1);
+        new CustomItem("Void Opal", 8, true, false, "Stare into the depths of the universe", Material.ECHO_SHARD, 1435.0, 0.0, 1);
 
         //ARMOR
         new CustomItem("Farm Hand Boots", 1, true, false, "'Size too big", Material.LEATHER_BOOTS, 0.0, 350.0, 1);

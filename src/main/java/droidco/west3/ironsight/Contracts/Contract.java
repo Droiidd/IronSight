@@ -316,6 +316,7 @@ public class Contract {
 
         //      SELECT DIFFICULTY BASED OFF REQUEST AMOUNT
         if (rareRequest) {
+
             if (amount < 10) {
                 //MEDIUM
                 difficulty = Difficulty.Apprentice;
@@ -581,7 +582,16 @@ public class Contract {
         return this.reward;
     }
 
+
     public String getListingName() {
         return listingName;
+    }
+
+    public DeliveryType getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(DeliveryType deliveryType) {
+        this.deliveryType = deliveryType;
     }
 }

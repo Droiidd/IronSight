@@ -109,9 +109,9 @@ public class BlockBreakingEvents implements Listener {
         BlockHarvestTask changeBlock = new BlockHarvestTask(plugin, p, block, type);
         if(type.equals(BlockType.MINERALS)){
             int geodeOdds = GlobalUtils.getRandomNumber(1001);
-            if (geodeOdds < 1){
+            if (geodeOdds < 25){
                 item = CustomItem.getCustomItem("Crystalized Geode");
-            } else if(geodeOdds < 10){
+            } else if(geodeOdds < 125){
                 item = CustomItem.getCustomItem("Geode");
             }
         }
