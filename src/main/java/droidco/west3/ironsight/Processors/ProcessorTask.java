@@ -21,7 +21,6 @@ public class ProcessorTask extends BukkitRunnable {
     public static ArrayList<ProcessorTask> tasks = new ArrayList<>();
     private final Player p;
     private final ItemStack input;
-    private final double value;
     private final Processor processor;
     private int tick = 0;
     private final double processTime;
@@ -32,17 +31,18 @@ public class ProcessorTask extends BukkitRunnable {
     private final Hologram hologram;
     private double seconds = 0;
     private ItemStack output;
+    private int outputAmt;
 
-    public ProcessorTask(Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, ItemStack output, double value, int unprocAmount, Location procLocation) {
+    public ProcessorTask(Processor processor, IronSight plugin, Player p, double processTime, ItemStack input, ItemStack output, int unprocAmount, Location procLocation,int outputAmt) {
         this.processor = processor;
         this.plugin = plugin;
         this.p = p;
         this.input = input;
         this.output = output;
-        this.value = value;
         this.currentTime = 0;
         this.unprocAmount = unprocAmount;
         this.procLocation = procLocation;
+        this.outputAmt = outputAmt;
         hologram = new Hologram(plugin, procLocation, "");
 //        this.itemBeingProcessed = (input.hasItemMeta() && input.getItemMeta().hasDisplayName())
 //                ? ChatColor.stripColor(input.getItemMeta().getDisplayName())
@@ -118,6 +118,7 @@ public class ProcessorTask extends BukkitRunnable {
     private void finishProcess() {
         Bandit b = Bandit.getPlayer(p);
         b.updateBounty(25);
+        output.setAmount(outputAmt);
         p.getInventory().addItem(output);
         p.sendTitle("", ChatColor.AQUA + "Finished processing " + input.getItemMeta().getDisplayName());
         p.playSound(p.getLocation(), Sound.ENTITY_ALLAY_ITEM_THROWN, 1, 1);
