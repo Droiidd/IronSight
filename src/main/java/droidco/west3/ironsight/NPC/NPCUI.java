@@ -88,7 +88,7 @@ public class NPCUI {
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
         ItemStack drug = ItemIcon.getIcon("process_smokeleaf").getItem();
-        drug.setAmount(24);;
+        drug.setAmount(12);;
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");
         for (int i = 0; i < 18; i++) {
@@ -108,7 +108,7 @@ public class NPCUI {
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
         ItemStack drug = ItemIcon.getIcon("process_spice").getItem();
-        drug.setAmount(24);
+        drug.setAmount(16);
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");
         for (int i = 0; i < 18; i++) {

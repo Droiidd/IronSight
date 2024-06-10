@@ -503,8 +503,8 @@ public class GameContentLoader {
         new ItemIcon(" ", "empty_horse_slot", "", Material.GRAY_STAINED_GLASS_PANE);
         new ItemIcon(" ", "empty_slot", "Upgrade for more storage", Material.GRAY_STAINED_GLASS_PANE);
 
-        new ItemIcon("Process Smokeleaf","process_smokeleaf","Input: 18, Output: 3",Material.KELP);
-        new ItemIcon("Process Spice","process_spice","Input: 24, Output: 3",Material.GLOWSTONE_DUST);
+        new ItemIcon("Process Smokeleaf","process_smokeleaf","Input: 12, Output: 3",Material.KELP);
+        new ItemIcon("Process Spice","process_spice","Input: 16, Output: 3",Material.GLOWSTONE_DUST);
         System.out.println("Icons loaded");
     }
 

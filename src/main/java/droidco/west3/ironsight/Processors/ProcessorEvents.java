@@ -63,8 +63,8 @@ public class ProcessorEvents implements Listener {
                             } else {
                                 p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
                                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);
-                                new ProcessorTask(processor.getValue(), plugin, p, 180, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
-                                        18, processor.getValue().getDefaultLocation(),3);
+                                new ProcessorTask(processor.getValue(), plugin, p, 90, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
+                                        12, processor.getValue().getDefaultLocation(),3);
                                 p.closeInventory();
                             }
 
@@ -103,8 +103,8 @@ public class ProcessorEvents implements Listener {
                             } else {
                                 p.playSound(p.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
                                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_WORK_CLERIC, 1, 1);
-                                new ProcessorTask(processor.getValue(), plugin, p, 60, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
-                                        8, processor.getValue().getDefaultLocation(),3);
+                                new ProcessorTask(processor.getValue(), plugin, p, 90, processor.getValue().getUnprocDrug(),processor.getValue().getProcDrug(),
+                                        16, processor.getValue().getDefaultLocation(),3);
                                 p.closeInventory();
                             }
 
