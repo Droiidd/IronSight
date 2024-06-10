@@ -8,6 +8,7 @@ import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -57,6 +59,37 @@ public class GeneralEvents implements Listener {
                     p.sendMessage(ChatColor.RED+"You broke your legs!");
                 }
             }
+        }
+    }
+    @EventHandler
+    public void drinkPotion(PlayerItemConsumeEvent e){
+        ItemStack item = e.getItem();
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+
+        int chance = GlobalUtils.getRandomNumber(101);
+        int odds = 0;
+        if(b.getContractorLvl() == 12){
+odds = 1;
+        }else if(b.getContractorLvl() == 13){
+         odds = 3;
+        }
+        if(chance < odds){
+            p.sendMessage(ChatColor.LIGHT_PURPLE+"[Potion] "+ ChatColor.GRAY+"Quenched your thirst in one sip!");
+           if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Medicine")){
+            ItemStack pot = CustomPotion.getCustomPotion("Medicine").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }else if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Morphine")){
+            ItemStack pot = CustomPotion.getCustomPotion("Morphine").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }
+        else if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Whiskey")){
+            ItemStack pot = CustomPotion.getCustomPotion("Whiskey").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }
         }
     }
     @EventHandler

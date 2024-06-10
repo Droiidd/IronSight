@@ -22,7 +22,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class BlockBreakingEvents implements Listener {
     private IronSight plugin;
-    private int dropMultiplier = 1;
+    private int plantDropMultiplier = 1;
+    private int oreDropMultiplier = 1;
     public BlockBreakingEvents(IronSight plugin) {
         this.plugin = plugin;
     }
@@ -56,50 +57,62 @@ public class BlockBreakingEvents implements Listener {
 
 
         if (p.hasPotionEffect(PotionEffectType.LUCK)) {
-            dropMultiplier = 2;
+            plantDropMultiplier = 2;
+        }
+        if(b.getContractorLvl() >= 10){
+            int chance = GlobalUtils.getRandomNumber(101);
+            if(chance < 3){
+                oreDropMultiplier = oreDropMultiplier * 2;
+            }
+        }
+        if(b.getContractorLvl() >= 11){
+            int chance = GlobalUtils.getRandomNumber(101);
+            if(chance < 3){
+                plantDropMultiplier = plantDropMultiplier * 2;
+            }
         }
 
 
         if (block.getType() == Material.WITHER_ROSE) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Spice"),plantDropMultiplier);
         }
         if (block.getType() == Material.JUNGLE_SAPLING) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Unprocessed Smokeleaf"),plantDropMultiplier);
         }
         if (block.getType() == Material.LILY_OF_THE_VALLEY) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Life Seeds"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Life Seeds"),plantDropMultiplier);
         }
 
         if (block.getType() == Material.BLUE_ORCHID) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Blue malt Petal"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Blue malt Petal"),plantDropMultiplier);
         }
 
         if (block.getType() == Material.SWEET_BERRY_BUSH) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Heart Fruit"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Heart Fruit"),plantDropMultiplier);
         }
         if (block.getType() == Material.TORCHFLOWER) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Frenzied Stems"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Frenzied Stems"),plantDropMultiplier);
         }
         if (block.getType() == Material.WARPED_FUNGUS) {
-            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Moles Breath"),1);
+            breakCustomBlock(p,block,BlockType.FOLIAGE,CustomItem.getCustomItem("Moles Breath"),plantDropMultiplier);
         }
         if (block.getType() == Material.IRON_ORE) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),1);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),oreDropMultiplier);
         }
         if (block.getType() == Material.COPPER_ORE) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),1);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),oreDropMultiplier);
         }
         if (block.getType() == Material.GOLD_ORE) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),1);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),oreDropMultiplier);
         }
         if (block.getType() == Material.RAW_IRON_BLOCK) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),9);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Iron Ore"),9*oreDropMultiplier);
         }
         if (block.getType() == Material.RAW_COPPER_BLOCK) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),9);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Copper Ore"),9*oreDropMultiplier);
         }
         if (block.getType() == Material.RAW_GOLD_BLOCK) {
-            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),9);
+            breakCustomBlock(p,block,BlockType.MINERALS,CustomItem.getCustomItem("Gold Ore"),9*oreDropMultiplier);
         }
 
 

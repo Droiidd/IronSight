@@ -220,13 +220,13 @@ public class NPCEvents implements Listener {
         }
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_AQUA + "Pharmacist")) {
             e.setCancelled(true);
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Medicine")) {
+            if (ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()).equalsIgnoreCase("Medicine")) {
                 purchasePotion(b, p, CustomPotion.getCustomPotion("Medicine"), NPC.getNPC("Pharmacist" + b.getCurrentLocation().getLocName()));
             }
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Whiskey")) {
+            if (ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()).equalsIgnoreCase("Whiskey")) {
                 purchasePotion(b, p, CustomPotion.getCustomPotion("Whiskey"), NPC.getNPC("Pharmacist" + b.getCurrentLocation().getLocName()));
             }
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Morphine")) {
+            if (ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()).equalsIgnoreCase("Morphine")) {
                 purchasePotion(b, p, CustomPotion.getCustomPotion("Morphine"), NPC.getNPC("Pharmacist" + b.getCurrentLocation().getLocName()));
             }
 
@@ -485,15 +485,15 @@ public class NPCEvents implements Listener {
             case THOROUGHBRED -> {
                 if (b.getContractorLvl() > 6) {
                     availForPurchase = true;
-                }else{
-                    p.sendMessage(npc.getDisplayName() + ChatColor.GRAY + ": Level ["+BanditUtils.getContractorLvlColor(6)+"] or higher required!");
+                } else {
+                    p.sendMessage(npc.getDisplayName() + ChatColor.GRAY + ": Level [" + BanditUtils.getContractorLvlColor(6) + "] or higher required!");
                 }
             }
             case DONKEY -> {
                 if (b.getContractorLvl() > 8) {
                     availForPurchase = true;
-                }else{
-
+                } else {
+                    p.sendMessage(npc.getDisplayName() + ChatColor.GRAY + ": Level [" + BanditUtils.getContractorLvlColor(8) + "] or higher required!");
                 }
             }
         }
