@@ -73,6 +73,7 @@ public class Bandit
     private String trackedNPC;
 
     private static HashMap<String, Bandit> bandits = new HashMap<>();
+    private static List<Contract> activeContracts = new ArrayList<>();
     //private List<ironHorse> horses;
 
     public Bandit(String pId)
@@ -537,6 +538,16 @@ public class Bandit
 
     public void setTrackedNPC(String trackedNPC) {
         this.trackedNPC = trackedNPC;
+    }
+
+    public static List<Contract> getActiveContracts() {
+        return activeContracts;
+    }
+    public void addActiveContract(Contract contract){
+        activeContracts.add(contract);
+    }
+    public void removeActiveContract(Contract contract){
+        activeContracts.remove(contract);
     }
 }
 

@@ -5,6 +5,7 @@ import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
 import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
+import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Bandit.Bandit;
 import org.bukkit.Bukkit;
@@ -41,9 +42,9 @@ public class ContractUI {
         Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Select a Contract: (Click to start!)");
         Bandit b = Bandit.getPlayer(p);
 
-        contractUi.setItem(11, getContractSlot(b.getRookieContract(), Difficulty.ROOKIE));
-        contractUi.setItem(13, getContractSlot(b.getApprenticeContract(), Difficulty.APPRENTICE));
-        contractUi.setItem(15, getContractSlot(b.getExperiencedContract(), Difficulty.EXPERIENCED));
+        contractUi.setItem(11, GlobalUtils.getContractSlot(b.getRookieContract(), Difficulty.ROOKIE));
+        contractUi.setItem(13, GlobalUtils.getContractSlot(b.getApprenticeContract(), Difficulty.APPRENTICE));
+        contractUi.setItem(15, GlobalUtils.getContractSlot(b.getExperiencedContract(), Difficulty.EXPERIENCED));
 
         contractUi.setItem(2, ItemIcon.getIcon("rookie_slot").getItem());
         contractUi.setItem(4, ItemIcon.getIcon("apprentice_slot").getItem());
@@ -65,44 +66,20 @@ public class ContractUI {
         return contractUi;
     }
 
-    public static Inventory openContractorRewardUi(Player p) {
-        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "");
+    public static Inventory openActiveContractSelectMenu(Player p){
+        Inventory contractUi = Bukkit.createInventory(p, 27, ChatColor.DARK_GRAY + "Active Contracts:");
         Bandit b = Bandit.getPlayer(p);
+        contractUi.setItem(0, ItemIcon.getIcon("back_button").getItem());
 
-        contractUi.setItem(1, ItemIcon.getIcon("previous_page").getItem());
+        contractUi.setItem(11, ItemIcon.getIcon("contractor_title").getItem());
+        contractUi.setItem(4, getContractorIcon(p));
+        contractUi.setItem(15, getActiveContractIcon(p, b));
+
         return contractUi;
+
     }
 
-    public static ItemStack getContractSlot(Contract selected, Difficulty difficulty) {
-        //Basic item set up
 
-        //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
-        /*
-        NAME
-        ---
-        Location
-        Reward
-        TargetName / Requested Goods (If applicable)
-         */
-        ItemStack contract = selected.getContractIcon();
-        ItemMeta contractMeta = contract.getItemMeta();
-        ArrayList<String> contractLore = new ArrayList<>();
-        //Setting up the strings for the lore
-
-        //LORE
-        contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
-                ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
-        contractLore.add(ChatColor.GRAY + "Location: " + selected.getLocation().getLocName());
-        if (selected.getContractType().equals(ContractType.DELIVERY)) {
-            contractLore.add(String.valueOf(ChatColor.GRAY) + selected.getRequestedAmount() + " " + selected.getRequestedItem().getItemMeta().getDisplayName());
-        }
-        contractLore.add(ChatColor.GRAY + "Reward: " + selected.getReward() + " g");
-        //This displays the contracts type
-        //contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
-        contractMeta.setLore(contractLore);
-        contract.setItemMeta(contractMeta);
-        return contract;
-    }
 
     public static ItemStack getContractorIcon(Player p) {
         Bandit b = Bandit.getPlayer(p);

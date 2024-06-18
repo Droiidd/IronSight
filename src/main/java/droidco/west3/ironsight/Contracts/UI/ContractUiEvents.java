@@ -128,7 +128,7 @@ public class ContractUiEvents implements Listener {
     @EventHandler
     public void navActiveContractMenu(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Active Contract info:")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.DARK_GRAY + "Active Contract 1")) {
             Bandit b = Bandit.getPlayer(p);
             //In the contract UI menu
             //Find what they clicked on
@@ -143,6 +143,7 @@ public class ContractUiEvents implements Listener {
                     p.sendMessage("Resigned current contract.");
                     b.setActiveContract(null);
                     b.setDoingContract(false);
+                    b.removeActiveContract();
                 }
             }
             e.setCancelled(true);
@@ -197,10 +198,11 @@ public class ContractUiEvents implements Listener {
     }
 
     public void setActiveContract(Bandit b, Player p, Contract selected) {
-        if (!b.isDoingContract()) {
+        if (b.getContracts().isEmpty() && b.getContractorLvl() < 7 ) {
             //Check what slot they chose.
             if (selected != null) {
                 b.setActiveContract(selected);
+                b.addActiveContract(selected);
                 b.setDoingContract(true);
                 p.closeInventory();
                 b.getActiveContract().startContract(p);
@@ -209,7 +211,7 @@ public class ContractUiEvents implements Listener {
         } else {
             //They are doing a contract!
             p.closeInventory();
-            p.sendMessage(ChatColor.RED + "Already doing a contract!");
+            p.sendMessage(ChatColor.RED + "Active contract slots full!" +ChatColor.GRAY+" Unlock more active contract slots by leveling up.");
         }
     }
 

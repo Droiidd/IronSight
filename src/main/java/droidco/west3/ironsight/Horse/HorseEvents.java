@@ -9,17 +9,20 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class HorseEvents implements Listener {
@@ -138,6 +141,21 @@ public class HorseEvents implements Listener {
         if(targetHorse != null){
             targetHorse.setHorseInv(e.getInventory().getContents());
         }
+    }
+    @EventHandler
+    public void onHorseDeath(EntityDeathEvent e){
+        if(e.getEntityType().equals(EntityType.HORSE)){
+            FrontierHorse horse = FrontierHorse.getHorse(e.getEntity().getUniqueId());
+            List<ItemStack> items = Arrays.asList(horse.getHorseInv());
+            e.getDrops().clear();
+            for(ItemStack item : items){
+                    e.getDrops().add(item);
+            }
+            
+
+
+        }
+
     }
 
 
