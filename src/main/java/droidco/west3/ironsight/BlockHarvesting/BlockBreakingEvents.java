@@ -36,22 +36,22 @@ public class BlockBreakingEvents implements Listener {
         Bandit b = Bandit.getPlayer(p);
         if(b.isJailed()){
             if (block.getType() == Material.IRON_ORE) {
-                minePrisonOre(b,p,block,-20,CustomItem.getCustomItem("Iron Ore"));
+                minePrisonOre(b,p,block,4-40,CustomItem.getCustomItem("Iron Ore"));
             }
             if (block.getType() == Material.COPPER_ORE) {
-                minePrisonOre(b,p,block,-40,CustomItem.getCustomItem("Copper Ore"));
+                minePrisonOre(b,p,block,-80,CustomItem.getCustomItem("Copper Ore"));
             }
             if (block.getType() == Material.GOLD_ORE) {
-                minePrisonOre(b,p,block,-80,CustomItem.getCustomItem("Gold Ore"));
+                minePrisonOre(b,p,block,-160,CustomItem.getCustomItem("Gold Ore"));
             }
             if (block.getType() == Material.RAW_IRON_BLOCK) {
-                minePrisonOre(b,p,block,-180,CustomItem.getCustomItem("Iron Ore"));
+                minePrisonOre(b,p,block,-300,CustomItem.getCustomItem("Iron Ore"));
             }
             if (block.getType() == Material.RAW_COPPER_BLOCK) {
-                minePrisonOre(b,p,block,-360,CustomItem.getCustomItem("Copper Ore"));
+                minePrisonOre(b,p,block,-500,CustomItem.getCustomItem("Copper Ore"));
             }
             if (block.getType() == Material.RAW_GOLD_BLOCK) {
-                minePrisonOre(b,p,block,-500,CustomItem.getCustomItem("Gold Ore"));
+                minePrisonOre(b,p,block,-700,CustomItem.getCustomItem("Gold Ore"));
             }
         }
 

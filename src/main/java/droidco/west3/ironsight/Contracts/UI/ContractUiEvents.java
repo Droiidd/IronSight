@@ -143,7 +143,7 @@ public class ContractUiEvents implements Listener {
                     p.sendMessage("Resigned current contract.");
                     b.setActiveContract(null);
                     b.setDoingContract(false);
-                    b.removeActiveContract();
+                    b.removeActiveContract(b.getActiveContract());
                 }
             }
             e.setCancelled(true);

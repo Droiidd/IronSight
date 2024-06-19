@@ -36,7 +36,7 @@ public class BanditTask extends BukkitRunnable {
     private int horseFullCallTime = 10;
     private int wantedMin = 2;
     private int wantedSec = 0;
-    private final int contractTimer = 600;
+    private final int contractTimer = 3600;
     private int contractCounter = 0;
     private int horseTimer = 0;
     private int wantedTownCounter = 0;
@@ -272,12 +272,12 @@ public class BanditTask extends BukkitRunnable {
                 combatLogCounter++;
             }
             //      ===--- BLEED EFFECT ---===
-            if (b.isBleeding()) {
-                p.damage(1.5);
-                for (int i = 0; i < 13; i++) {
-                    p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
-                }
-            }
+//            if (b.isBleeding()) {
+//                p.damage(1.5);
+//                for (int i = 0; i < 13; i++) {
+//                    p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
+//                }
+//            }
             //      ===--- SUMMONING HORSE ---===
             if (b.isSummoningHorse()) {
                 horseTimer++;

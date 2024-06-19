@@ -74,19 +74,24 @@ public class CombatEvents implements Listener
             }
         }
     }
-
     @EventHandler
-    public void playerDeath(EntityDamageEvent e){
-        if(e.getEntity() instanceof Player){
-            Player p = (Player) e.getEntity();
-            Bandit b = Bandit.getPlayer(p);
-            if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
-                e.setCancelled(true);
-                handlePlayerDeath(p,b);
-
-            }
-        }
+    public void deathEvent(PlayerDeathEvent e){
+        Player p = e.getEntity();
+        Bandit b = Bandit.getPlayer(p);
+        handlePlayerDeath(p,b);
     }
+//    @EventHandler
+//    public void playerDeath(EntityDamageEvent e){
+//        if(e.getEntity() instanceof Player){
+//            Player p = (Player) e.getEntity();
+//            Bandit b = Bandit.getPlayer(p);
+//            if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
+//                e.setCancelled(true);
+//                handlePlayerDeath(p,b);
+//
+//            }
+//        }
+//    }
 
     public void handlePlayerDeath(Player p, Bandit b){
         //PLAYER DIED
