@@ -376,6 +376,7 @@ public class GameContentLoader {
         new FrontierLocation("New Orleans", "PvP disabled!", LocationType.TOWN, -1181, -1407, -1842, -1662, -1367.0, 92.0, -1764.0);
         new FrontierLocation("Santa Fe", "PvP Disabled", LocationType.TOWN, 1119, 888, -1755, -2066, 1055.0, 94.0, -1955.0);
         new FrontierLocation("Republic of Texas", "PvP Disabled", LocationType.TOWN, -1197, -831, 2628, 2214, -1030.0, 72.0, 2520.0);
+        new FrontierLocation("Red Gail Canyon Lobby", "PvP Disabled!",LocationType.TOWN,10058,9943,9919,10075);
         // MISC
         new FrontierLocation("Slough Creek", "Scav Town", LocationType.ILLEGAL, 2589, 2835, 799, 471);
         new FrontierLocation("Prison", "JaiL!", LocationType.PRISON, 2079, 1794, -799, -959, 1987, 94, -920);

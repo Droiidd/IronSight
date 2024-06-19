@@ -81,8 +81,16 @@ public class CombatEvents implements Listener
             Player p = (Player) e.getEntity();
             Bandit b = Bandit.getPlayer(p);
             if(p.getHealth() <= 0.0 || (p.getHealth() - e.getDamage()) <= 0.0){
-                //PLAYER DIED
                 e.setCancelled(true);
+                handlePlayerDeath(p,b);
+
+            }
+        }
+    }
+
+    public void handlePlayerDeath(Player p, Bandit b){
+        //PLAYER DIED
+
                 p.removePotionEffect(PotionEffectType.SLOW);
                 p.getInventory().clear();
                 if(b.isCombatBlocked()){
@@ -129,8 +137,5 @@ public class CombatEvents implements Listener
                     b.setRespawning(true);
                     BanditUtils.getStarterItems(p);
                 }
-
-            }
-        }
     }
 }

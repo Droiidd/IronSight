@@ -199,6 +199,12 @@ public class Bandit
         }
         return null;
     }
+    public static Bandit getPlayerById(String uuid){
+        if(bandits.containsKey(uuid)){
+            return bandits.get(uuid);
+        }
+        return null;
+    }
 
     public String getRoleTitle() {
         return roleTitle;
