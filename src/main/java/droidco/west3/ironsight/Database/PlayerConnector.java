@@ -121,8 +121,13 @@ public class PlayerConnector {
                 String itemContents = rs.getString("vault_items");
 
                 Bandit b = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp, jailStartTime, contractorTitle, vaultSize, vaultLevel);
-                ItemStack[] items = itemStackArrayFromBase64(itemContents);
+                if(itemContents.equalsIgnoreCase("0")){
+                    System.out.println("No vault for "+b.getpId());
+                }else{
+                    ItemStack[] items = itemStackArrayFromBase64(itemContents);
                 b.setItemVault(Arrays.asList(items));
+                }
+
                 return true;
             }
             st.close();
@@ -204,7 +209,10 @@ public class PlayerConnector {
             }
             dataOutput.close();
             String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
-            String sql = "UPDATE bandit " +
+            if(serialized != null) {
+        serialized = "0";
+            }
+                String sql = "UPDATE bandit " +
                 "set wallet = " + b.getWallet() + ", " +
                 "bank = " + b.getBank() + ", " +
                 "isBleeding = " + GlobalUtils.boolToInt(b.isBleeding()) + ", " +
@@ -422,7 +430,8 @@ public class PlayerConnector {
     }
 
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
-        try {
+        if(data != null){
+            try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
             BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
             ItemStack[] items = new ItemStack[dataInput.readInt()];
@@ -437,5 +446,7 @@ public class PlayerConnector {
         } catch (ClassNotFoundException e) {
             throw new IOException("Unable to decode class type.", e);
         }
+        }
+        return null;
     }
 }
