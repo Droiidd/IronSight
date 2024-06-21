@@ -116,9 +116,7 @@ public class CombatEvents implements Listener {
             p.getWorld().dropItem(p.getLocation(), new CustomItem(b.getWallet() + "", 1, true, false, "", Material.GOLD_NUGGET, 0.0, 0.0).getItemStack());
         }
         b.setWallet(0);
-        FrontierLocation sf = FrontierLocation.getLocation("Santa Fe");
-        p.teleport(new Location(p.getWorld(), sf.getSpawnX(), sf.getSpawnY(), sf.getSpawnZ()));
-        p.setGameMode(GameMode.SPECTATOR);
+
 
         p.setVisualFire(false);
         p.setFireTicks(0);
@@ -142,6 +140,10 @@ public class CombatEvents implements Listener {
             p.sendTitle(ChatColor.GRAY + "You " + ChatColor.DARK_RED + "Died!", ChatColor.GRAY + "Choose a town to respawn");
             b.setRespawning(true);
             BanditUtils.getStarterItems(p);
+
+            FrontierLocation sf = FrontierLocation.getLocation("Santa Fe");
+            p.teleport(new Location(p.getWorld(), sf.getSpawnX(), sf.getSpawnY(), sf.getSpawnZ()));
+            p.setGameMode(GameMode.SPECTATOR);
         }
     }
 }
