@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.Horse;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Database.PlayerConnector;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -159,6 +160,8 @@ public class HorseEvents implements Listener {
                 }
                 Bandit b = Bandit.getPlayerById(horse.getOwnerId());
                 b.getHorses().remove(horse);
+                PlayerConnector connector = new PlayerConnector();
+                connector.removeHorse(horse.getOwnerId(),horse);
             }
         }
     }

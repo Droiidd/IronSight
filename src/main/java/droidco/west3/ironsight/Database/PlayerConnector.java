@@ -26,6 +26,8 @@ public class PlayerConnector {
     private static final String pass = DbConst.LoginInfo.password;
     private static final String url = DbConst.LoginInfo.jdbcURL;
 
+    // UPDATE FULL PLAYER
+
     public static void updatePlayer(Bandit b, Player p) {
         System.out.println("Connecting");
         Connection conn = null;
@@ -39,15 +41,13 @@ public class PlayerConnector {
             //resetInventories(p,conn);
             List<FrontierHorse> horses = b.getHorses();
             for (FrontierHorse horse : horses) {
+                System.out.println(horse.getHorseName());
                 saveHorse(p, horse, conn);
-                ItemStack[] horseInv = horse.getHorseInv();
-                saveInventory(p, horseInv, horse.getHorseName(), conn);
             }
             List<Contract> contracts = b.getContracts();
             for (int i = 0; i < contracts.size(); i++) {
                 saveActiveContract(p, conn, contracts.get(i), i);
             }
-            saveInventory(p, b.getItemVault().toArray(new ItemStack[0]), "Vault", conn);
             //ALWAYS CLOSE THE CONNECTION!
             conn.close();
         } catch (Exception exception) {
@@ -56,7 +56,7 @@ public class PlayerConnector {
         }
     }
 
-    public static Bandit fetchAllPlayerData(Player p) {
+    public static Bandit pullAllPlayerData(Player p) {
         System.out.println("Connecting");
         Connection conn = null;
 
@@ -73,7 +73,6 @@ public class PlayerConnector {
 
             if (successfulLoad) {
                 Bandit b = Bandit.getPlayer(p);
-                fetchPlayerVault(conn, p);
                 fetchAvailableContract(conn, p);
                 conn.close();
                 return Bandit.getPlayer(p);
@@ -89,6 +88,50 @@ public class PlayerConnector {
         return null;
     }
 
+
+    //          ===--- FETCH DATA ---===
+
+
+     public static boolean fetchPlayerData(Connection conn, Player p) {
+        try {
+
+            String sql = "select * from bandit where bandit.pId = '" + p.getUniqueId().toString() + "'";
+
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (!rs.next()) {
+                //It could not read a line
+            } else {
+                String pId = rs.getString("pId");
+                double wallet = rs.getDouble("wallet");
+                double bank = rs.getDouble("bank");
+                boolean isBleeding = rs.getBoolean("isBleeding");
+                boolean brokenLegs = rs.getBoolean("brokenLegs");
+                boolean isWanted = rs.getBoolean("isWanted");
+                boolean isJailed = rs.getBoolean("isJailed");
+                boolean isCmbtBlocked = rs.getBoolean("isCombatBlocked");
+                int bounty = rs.getInt("bounty");
+                int wantedKills = rs.getInt("wantedKills");
+                int contractorXp = rs.getInt("contractorXp");
+                int contractorLvl = rs.getInt("contractorLvl");
+                int contractorTitle = rs.getInt("contractor_title");
+                long jailStartTime = rs.getLong("jailStartTime");
+                int vaultSize = rs.getInt("vault_size");
+                int vaultLevel = rs.getInt("vault_level");
+                String itemContents = rs.getString("vault_items");
+
+                Bandit b = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp, jailStartTime, contractorTitle, vaultSize, vaultLevel);
+                ItemStack[] items = itemStackArrayFromBase64(itemContents);
+                b.setItemVault(Arrays.asList(items));
+                return true;
+            }
+            st.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public static void fetchPlayerHorses(Connection conn, Player p) {
         try {
             String sql = "select * from horse where bandit_id = \'" + p.getUniqueId().toString() + "\'";
@@ -101,56 +144,16 @@ public class PlayerConnector {
                 String banditId = rs.getString("bandit_id");
                 String horseName = rs.getString("horse_name");
                 String horseType = rs.getString("horse_type");
-                b.getHorses().add(new FrontierHorse(banditId, horseName, GlobalUtils.getHorseTypeFromStr(horseType)));
+                String itemContents = rs.getString("item_storage");
+                ItemStack[] items = itemStackArrayFromBase64(itemContents);
+                FrontierHorse horse = new FrontierHorse(banditId, horseName, GlobalUtils.getHorseTypeFromStr(horseType));
+                horse.setHorseInv(items);
+                b.getHorses().add(horse);
                 p.sendMessage("loaded horse: " + horseName);
             }
             st.close();
         } catch (Exception e) {
             System.out.println(e);
-        }
-        Bandit b = Bandit.getPlayer(p);
-        List<FrontierHorse> horses = b.getHorses();
-        for (FrontierHorse horse : horses) {
-            try {
-                String itemSql = "select * from custom_item where bandit_id = \'" + p.getUniqueId().toString() + "\' AND " + "storage_type = \'" + horse.getHorseName() + "\'";
-
-                Statement st = conn.createStatement();
-                ResultSet rsItem = st.executeQuery(itemSql);
-                while (rsItem.next()) {
-                    String banditId = rsItem.getString("bandit_id");
-                    String storageType = rsItem.getString("storage_type");
-                    String itemContents = rsItem.getString("item_contents");
-
-                    ItemStack[] items = itemStackArrayFromBase64(itemContents);
-                    horse.setHorseInv(items);
-                }
-                st.close();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    public static void fetchPlayerVault(Connection conn, Player p) {
-        Bandit b = Bandit.getPlayer(p);
-        try {
-            String itemSql = "select * from custom_item where bandit_id = \'" + p.getUniqueId().toString() + "\' AND " + "storage_type = \'Vault\'";
-
-            Statement st = conn.createStatement();
-            ResultSet rsItem = st.executeQuery(itemSql);
-            while (rsItem.next()) {
-                String banditId = rsItem.getString("bandit_id");
-                String storageType = rsItem.getString("storage_type");
-                String itemContents = rsItem.getString("item_contents");
-
-                ItemStack[] items = itemStackArrayFromBase64(itemContents);
-                b.setItemVault(Arrays.asList(items));
-            }
-            System.out.println("added vault items");
-            st.close();
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("failed getting vault items");
         }
     }
 
@@ -185,64 +188,23 @@ public class PlayerConnector {
         }
     }
 
-    public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
-        try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-            ItemStack[] items = new ItemStack[dataInput.readInt()];
 
-            // Read the serialized inventory
-            for (int i = 0; i < items.length; i++) {
-                items[i] = (ItemStack) dataInput.readObject();
-            }
-
-            dataInput.close();
-            return items;
-        } catch (ClassNotFoundException e) {
-            throw new IOException("Unable to decode class type.", e);
-        }
-    }
-
-    public static boolean fetchPlayerData(Connection conn, Player p) {
-        try {
-
-            String sql = "select * from bandit where bandit.pId = '" + p.getUniqueId().toString() + "'";
-
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            if (!rs.next()) {
-                //It could not read a line
-            } else {
-                String pId = rs.getString("pId");
-                double wallet = rs.getDouble("wallet");
-                double bank = rs.getDouble("bank");
-                boolean isBleeding = rs.getBoolean("isBleeding");
-                boolean brokenLegs = rs.getBoolean("brokenLegs");
-                boolean isWanted = rs.getBoolean("isWanted");
-                boolean isJailed = rs.getBoolean("isJailed");
-                boolean isCmbtBlocked = rs.getBoolean("isCombatBlocked");
-                int bounty = rs.getInt("bounty");
-                int wantedKills = rs.getInt("wantedKills");
-                int contractorXp = rs.getInt("contractorXp");
-                int contractorLvl = rs.getInt("contractorLvl");
-                int contractorTitle = rs.getInt("contractor_title");
-                long jailStartTime = rs.getLong("jailStartTime");
-                int vaultSize = rs.getInt("vault_size");
-                int vaultLevel = rs.getInt("vault_level");
+    //         ===--- SAVING DATA ---===
 
 
-                new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp, jailStartTime, contractorTitle, vaultSize, vaultLevel);
-                return true;
-            }
-            st.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return false;
-    }
 
     public static void savePlayer(Bandit b, Connection conn) throws SQLException {
-        String sql = "UPDATE bandit " +
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            List<ItemStack> items = b.getItemVault();
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+            dataOutput.writeInt(items.size());
+            for (ItemStack item : items) {
+                dataOutput.writeObject(item);
+            }
+            dataOutput.close();
+            String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
+            String sql = "UPDATE bandit " +
                 "set wallet = " + b.getWallet() + ", " +
                 "bank = " + b.getBank() + ", " +
                 "isBleeding = " + GlobalUtils.boolToInt(b.isBleeding()) + ", " +
@@ -257,7 +219,8 @@ public class PlayerConnector {
                 "contractor_title = " + b.getContractorTitle() + ", " +
                 "jailStartTime = " + b.getJailStartTime() + ", " +
                 "vault_size = " + b.getVaultSize() + ", " +
-                "vault_level = " + b.getVaultLevel() + " " +
+                "vault_level = " + b.getVaultLevel() + ", " +
+                "vault_items = " + serialized + " " +
                 "Where bandit.pId = '" + b.getpId() + "'";
 
 
@@ -271,7 +234,7 @@ public class PlayerConnector {
             //Update was not successful
             System.out.println("Could not update player, inserting new columnn.");
             try {
-                String sqlInsert = "insert into bandit (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl, wantedKills, contractor_title, jailStartTime, vault_size, vault_level) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                String sqlInsert = "insert into bandit (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl, wantedKills, contractor_title, jailStartTime, vault_size, vault_level, vault_items) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
                 PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
                 insertStmt.setString(1, b.getpId());
                 insertStmt.setDouble(2, b.getWallet());
@@ -290,6 +253,7 @@ public class PlayerConnector {
                 insertStmt.setLong(14, b.getJailStartTime());
                 insertStmt.setInt(15, b.getVaultSize());
                 insertStmt.setInt(16, b.getVaultLevel());
+                insertStmt.setString(17,serialized);
 
                 int insertVal = insertStmt.executeUpdate();
                 System.out.println("Player inserted.");
@@ -298,15 +262,30 @@ public class PlayerConnector {
                 System.out.println(exception);
             }
         }
-    }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 
     public static void saveHorse(Player p, FrontierHorse horse, Connection conn) throws SQLException {
         System.out.println("Updating horse " + horse.getHorseName());
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            List<ItemStack> items = Arrays.asList(horse.getHorseInv());
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+            dataOutput.writeInt(items.size());
+            for (ItemStack item : items) {
+                dataOutput.writeObject(item);
+            }
+            dataOutput.close();
+            String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
+
         String sql = "UPDATE horse " +
                 "set bandit_id = \'" + p.getUniqueId().toString() + "\', " +
                 "horse_type = \'" + GlobalUtils.getHorseTypeString(horse.getHorseType()) + "\', " +
-                "horse_name = \'" + horse.getHorseName() + "\'" +
+                "horse_name = \'" + horse.getHorseName() + "\'," +
+                "item_storage = \'" + serialized + "\'" +
                 "WHERE horse_name = \'" + horse.getHorseName() + "\' AND " +
                 "bandit_id = \'" + p.getUniqueId().toString() + "\'   ";
         PreparedStatement prepedStmt = conn.prepareStatement(sql);
@@ -318,18 +297,21 @@ public class PlayerConnector {
         } else {
             //Update was not successful
             System.out.println("Could not update " + horse.getHorseName() + ", inserting new columnn.");
-            String sqlInsert = "insert into horse (bandit_id,horse_name,horse_type) values (?,?,?);";
+            String sqlInsert = "insert into horse (bandit_id,horse_name,horse_type,item_storage) values (?,?,?,?);";
             PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
             insertStmt.setString(1, p.getUniqueId().toString());
             insertStmt.setString(2, horse.getHorseName());
             insertStmt.setString(3, GlobalUtils.getHorseTypeString(horse.getHorseType()));
-
+            insertStmt.setString(4, serialized);
 
             int insertVal = insertStmt.executeUpdate();
             if (insertVal > 0) {
                 //Success
                 System.out.println(horse.getHorseName() + " inserted.");
             }
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -395,46 +377,65 @@ public class PlayerConnector {
 
     }
 
-    public static void saveInventory(Player p, ItemStack[] items, String storageType, Connection conn) throws SQLException {
-//        delete
-//        from custom_item
-//        where db_592480.custom_item.bandit_id = '';
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    //          ===--- MISC METHODS ---===
+
+
+
+    public static void removeHorse(String id, FrontierHorse horse) {
+        Connection conn = null;
+
+        // below two lines are used for connectivity.
         try {
-            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
-            dataOutput.writeInt(items.length);
-            for (ItemStack item : items) {
-                dataOutput.writeObject(item);
-            }
-            dataOutput.close();
-            String serialized = Base64Coder.encodeLines(outputStream.toByteArray());
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, pass);
             try {
-                String sqlInsert = "insert into custom_item (bandit_id, storage_type, item_contents) values (?,?,?);";
-                PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
-                insertStmt.setString(1, p.getUniqueId().toString());
-                insertStmt.setString(2, storageType);
-                insertStmt.setString(3, serialized);
-                int insertVal = insertStmt.executeUpdate();
-                System.out.println("Inventory updated.");
-            } catch (Exception exception) {
-                System.out.println("Inventory update failed.");
-                System.out.println(exception);
+                String itemSql = "\n" +
+                        "delete from horse where horse_name = \'" + horse.getHorseName() + "\'" +
+                        " and bandit_id = \'" + id + "\';";
+                System.out.println(itemSql);
+                Statement st = conn.createStatement();
+                boolean rsItem = st.execute(itemSql);
+
+                System.out.println("Removed player horse!");
+                st.close();
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("failed removing horse");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            System.out.println("Could not update new player");
+            System.out.println(exception);
         }
     }
 
     public static void resetInventories(Player p, Connection conn) throws SQLException {
         try {
-            String sqlInsert = "delete from custom_item where custom_item.bandit_id = \'" + p.getUniqueId().toString() + "\'";
+            String sqlInsert = "delete from bandit where pId = \'" + p.getUniqueId().toString() + "\'";
             PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
             int insertVal = insertStmt.executeUpdate();
             System.out.println("Inventory refreshed.");
         } catch (Exception exception) {
             System.out.println("Inventory refresh update failed.");
             System.out.println(exception);
+        }
+    }
+
+    public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            ItemStack[] items = new ItemStack[dataInput.readInt()];
+
+            // Read the serialized inventory
+            for (int i = 0; i < items.length; i++) {
+                items[i] = (ItemStack) dataInput.readObject();
+            }
+
+            dataInput.close();
+            return items;
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Unable to decode class type.", e);
         }
     }
 }

@@ -29,7 +29,7 @@ public class JoinServerEvents implements Listener{
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-        Bandit b = PlayerConnector.fetchAllPlayerData(p);
+        Bandit b = PlayerConnector.pullAllPlayerData(p);
         p.getWorld().setGameRule(GameRule.DO_IMMEDIATE_RESPAWN,true);
         p.sendMessage(ChatColor.WHITE+"===--- "+ ChatColor.DARK_RED+"WELCOME TO IRON SIGHT"+ChatColor.WHITE+" ---===");
         p.sendMessage(ChatColor.WHITE+"->"+ChatColor.GRAY+" Earn "+ChatColor.GREEN+"gold "+ChatColor.GRAY+" by completing contracts!");
