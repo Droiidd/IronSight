@@ -1,5 +1,5 @@
 # Iron Sight Planning Doc
-
+[![Build](https://github.com/Droiidd/IronSight/actions/workflows/gradle.yml/badge.svg)](https://github.com/Droiidd/IronSight/actions/workflows/gradle.yml)
 ## Table of Contents
 
 ---
