@@ -6,6 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.papermc.paperweight.userdev") version "1.7.1"
     id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
+    id("com.diffplug.spotless") version "7.0.0.BETA1"
 }
 
 group = "droidco.west3"
@@ -42,6 +43,28 @@ tasks.withType<JavaCompile> {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
         options.release.set(targetJavaVersion)
     }
+}
+
+spotless {
+    java {
+        importOrder()
+        cleanthat()
+        googleJavaFormat() //there's also eclipse(), prettier(), and clangFormat(), this just feels best to me
+        formatAnnotations()
+    }
+    kotlinGradle {
+        ktfmt().googleStyle()
+    }
+}
+
+tasks.register<Copy>("hook") {
+    from(".github/hooks")
+    into(".git/hooks")
+    fileMode = 755
+}
+
+tasks.runServer {
+    dependsOn("hook")
 }
 
 bukkitPluginYaml {

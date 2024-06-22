@@ -1,0 +1,15 @@
+#!/bin/sh
+# From gist at https://gist.github.com/chadmaughan/5889802
+
+echo '[git hook] executing gradle spotlessApply before commit'
+
+# stash any unstaged changes
+git stash -q --keep-index
+
+# run the spotlessCheck with the gradle wrapper
+./gradlew spotlessApply
+
+# unstash the unstashed changes
+git stash pop -q
+
+echo '[git hook] gradle spotlessApply finished '
