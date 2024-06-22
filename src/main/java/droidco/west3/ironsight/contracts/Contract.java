@@ -13,6 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Contract {
     private final List<ItemStack> requestedItemsNormal = new ArrayList<>();
     private final List<ItemStack> requestedItemsRare = new ArrayList<>();

@@ -23,6 +23,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.*;
+
 public class BanditTask extends BukkitRunnable {
     private final IronSight plugin;
     private final Bandit b;

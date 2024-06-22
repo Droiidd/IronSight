@@ -8,6 +8,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
+import java.util.*;
+
 public class NPC {
     private static HashMap<String, NPC> npcs = new HashMap<>();
     private static HashMap<String, NPC> shoppingPlayers = new HashMap<>();

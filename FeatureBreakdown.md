@@ -4,11 +4,15 @@
 
 This document will give you a look into roughly how each feature is going to work
 in-game.
+
 ## Main Classes
+
 ### WestPlayer class
+
 Keeps track of all west 3.0 player stats such as bank account amount, item bank content,
 List of their horses, bounty etc.
 Variables:
+
 - UUID :: playerId
 - double :: bank
 - double :: wallet
@@ -30,6 +34,7 @@ Variables:
 Getters and Setters
 
 ### Horse class
+
 Horses can be summoned from anywhere and take 1 minute to arrive. The worse horse
 can store 1 item, better horses have more slots, or they are very fast. The most slots
 a horse will have is 7 (Maybe less). A player can have 3 horses. When you shift right
@@ -47,6 +52,7 @@ have to buy a new one.
 Getters and Setters
 
 Commands
+
 - call //Calls horse to frontierLocation (Opens menu to choose horses)
 - gethorse (ADMIN COMMAND)
 
@@ -65,12 +71,14 @@ etc. This is all achieved with safezones
 - boolean :: isTown
 
 Methods
+
 - boolean :: isPlayerInside(Player p)
 - void :: displayLocTitle()
 - void :: displayWelcomeMessage()
 - boolean :: isTown()
 
 ### Team class
+
 Teams can have up to 3 players. You'll be able to online teammates. If you complete
 a contract, your teammates also get cut - 30% of your total earnings.
 Team names cannot be longer than 6 Letters.
@@ -83,6 +91,7 @@ Team names cannot be longer than 6 Letters.
 - List<ItemStack> :: teamBank
 
 Methods
+
 - Getters and setters
 - boolean isLeader(string playerId)
 
@@ -104,10 +113,11 @@ Commands
 
 ``/team list`` :: Lists all teams
 
-### Officer interface / class 
+### Officer interface / class
 
-Officers are going to be a main class that can be reused for 3 subclass officers. A Deputy, Sheriff and Marshall. 
-The only different between the 3, is going to be their display name, and OffixcerTypeID, which differentiates them in hierarchal order.
+Officers are going to be a main class that can be reused for 3 subclass officers. A Deputy, Sheriff and Marshall.
+The only different between the 3, is going to be their display name, and OffixcerTypeID, which differentiates them in
+hierarchal order.
 So 1 is the sheriff, which is the lowest, 2 is deputy, 3 is marshall the highest. This way we can easily
 differentiate between teh ranks when we need to know if the player is able to use a certain item, or get a certain
 contract.
@@ -118,8 +128,9 @@ contract.
 
 ### Scoreboard
 
-A scoreboard is going to be essentially a big display of all your rankings and statistics to easily keep track of 
-everything. You'll use getter methods to grab the team name, officer role, bank, wallet etc. (If applicable). Then display
+A scoreboard is going to be essentially a big display of all your rankings and statistics to easily keep track of
+everything. You'll use getter methods to grab the team name, officer role, bank, wallet etc. (If applicable). Then
+display
 it all on the scoreboard and refresh every tick thd player is in the game.
 
 ### Western Item
