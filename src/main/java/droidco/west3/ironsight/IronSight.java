@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public final class IronSight extends JavaPlugin {
+public class IronSight extends JavaPlugin {
 
     //Allows bukkit scheduling, i.e offsetting actions by one tick
     public static IronSight instance;

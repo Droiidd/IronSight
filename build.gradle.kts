@@ -15,10 +15,6 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven {
-        name = "spigotmc-repo"
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    }
-    maven {
         name = "Paper"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
@@ -27,9 +23,31 @@ repositories {
 dependencies {
     paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
     implementation("com.mysql:mysql-connector-j:8.3.0")
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.80.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 
-val targetJavaVersion: Int = 17
+configurations.testImplementation {
+    exclude("io.papermc.paper", "paper-server")
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+
+    maxHeapSize = "1G"
+
+    testLogging {
+        events("passed")
+    }
+}
+
+tasks.shadowJar {
+    if(System.getenv("GITHUB_ACTIONS") != "true") {
+        dependsOn("hook")
+    }
+}
+
+val targetJavaVersion: Int = 21
 java {
     val javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
