@@ -8,6 +8,7 @@ import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.Potions.BrewingRecipe;
+import droidco.west3.ironsight.Items.Potions.CustomPotion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -60,10 +62,44 @@ public class GeneralEvents implements Listener {
         }
     }
     @EventHandler
+    public void drinkPotion(PlayerItemConsumeEvent e){
+        ItemStack item = e.getItem();
+        Player p = e.getPlayer();
+        Bandit b = Bandit.getPlayer(p);
+
+        int chance = GlobalUtils.getRandomNumber(101);
+        int odds = 0;
+        if(b.getContractorLvl() == 12){
+odds = 1;
+        }else if(b.getContractorLvl() == 13){
+         odds = 3;
+        }
+        if(chance < odds){
+            p.sendMessage(ChatColor.LIGHT_PURPLE+"[Potion] "+ ChatColor.GRAY+"Quenched your thirst in one sip!");
+           if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Medicine")){
+            ItemStack pot = CustomPotion.getCustomPotion("Medicine").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }else if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Morphine")){
+            ItemStack pot = CustomPotion.getCustomPotion("Morphine").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }
+        else if(ChatColor.stripColor(item.getItemMeta().getDisplayName()).equals("Whiskey")){
+            ItemStack pot = CustomPotion.getCustomPotion("Whiskey").getItemStack();
+            pot.setAmount(1);
+            e.getPlayer().getInventory().addItem(pot);
+        }
+        }
+    }
+    @EventHandler
     public void specialBlockHandling(EntityDamageEvent e){
         if(e.getEntity().getType().equals(EntityType.ITEM_FRAME)){
             e.setCancelled(true);
         }else if(e.getEntity().getType().equals(EntityType.GLOW_ITEM_FRAME)){
+            e.setCancelled(true);
+        }
+        else if(e.getEntity().getType().equals(EntityType.PAINTING)){
             e.setCancelled(true);
         }
     }
@@ -145,7 +181,7 @@ public class GeneralEvents implements Listener {
         Player p = e.getPlayer();
         Bandit b = Bandit.getPlayer(p);
         p.setDisplayName(ChatColor.GRAY + p.getDisplayName()+ChatColor.RESET);
-        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(b)+b.getContractorLvl()+ChatColor.GRAY+"] "+ChatColor.RESET +e.getFormat());
+        e.setFormat(b.getTitle()+ChatColor.GRAY+"["+BanditUtils.getContractorLvlColor(b.getContractorLvl())+b.getContractorLvl()+ChatColor.GRAY+"] "+ChatColor.RESET +e.getFormat());
 
     }
     @EventHandler
@@ -168,7 +204,8 @@ public class GeneralEvents implements Listener {
     public void disableUsableBlockClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         Block block = e.getClickedBlock();
-        if(block != null){
+
+        if(block != null && !p.isOp()){
             switch(block.getType()){
                 case BREWING_STAND, TRAPPED_CHEST,SPRUCE_DOOR,BIRCH_DOOR,OAK_DOOR,SPRUCE_FENCE_GATE,OAK_FENCE_GATE,DARK_OAK_FENCE_GATE,IRON_ORE,RAW_IRON_BLOCK,
                      RAW_GOLD_BLOCK,GOLD_ORE,COPPER_ORE,RAW_COPPER_BLOCK,JUNGLE_SAPLING,WITHER_ROSE,BLUE_ORCHID,TORCHFLOWER,WARPED_FUNGUS,SWEET_BERRY_BUSH,LILY_OF_THE_VALLEY

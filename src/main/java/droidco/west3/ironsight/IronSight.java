@@ -2,9 +2,8 @@ package droidco.west3.ironsight;
 
 
 import droidco.west3.ironsight.Bandit.Bandit;
-import droidco.west3.ironsight.Bandit.Commands.SuicideCmd;
+import droidco.west3.ironsight.Bandit.Commands.*;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
-import droidco.west3.ironsight.Bandit.Commands.DropGoldCmd;
 import droidco.west3.ironsight.Bandit.Events.FishingEvents;
 import droidco.west3.ironsight.Bandit.Events.VaultEvents;
 import droidco.west3.ironsight.Contracts.ContractMenuCmd;
@@ -14,8 +13,6 @@ import droidco.west3.ironsight.FrontierMobs.FrontierMob;
 import droidco.west3.ironsight.BlockHarvesting.BlockBreakingEvents;
 import droidco.west3.ironsight.Globals.Utils.GameContentLoader;
 import droidco.west3.ironsight.Bandit.UI.RespawnUIEvents;
-import droidco.west3.ironsight.Bandit.Commands.AdminCommands;
-import droidco.west3.ironsight.Bandit.Commands.PlayerStatsCmd;
 import droidco.west3.ironsight.Globals.Events.JoinServerEvents;
 import droidco.west3.ironsight.Bandit.Events.CombatEvents;
 import droidco.west3.ironsight.Bandit.Events.GeneralEvents;
@@ -105,6 +102,7 @@ public final class IronSight extends JavaPlugin {
         getCommand("call").setExecutor(new CallHorseCommand());
         getCommand("dropgold").setExecutor(new DropGoldCmd());
         getCommand("suicide").setExecutor(new SuicideCmd());
+        getCommand("play").setExecutor(new PlayCmd());
     }
     public void killAllMobs()
     {

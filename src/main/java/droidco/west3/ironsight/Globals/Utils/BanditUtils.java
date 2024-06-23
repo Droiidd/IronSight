@@ -1,20 +1,20 @@
 package droidco.west3.ironsight.Globals.Utils;
 
 import droidco.west3.ironsight.Bandit.Bandit;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Items.CustomItem;
 import droidco.west3.ironsight.Items.ItemIcon;
 import droidco.west3.ironsight.Items.Potions.CustomPotion;
-import droidco.west3.ironsight.NPC.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.*;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,31 +79,31 @@ public class BanditUtils {
         p.getInventory().addItem(splint);
     }
 
-    public static ChatColor getContractorLvlColor(Bandit b) {
-        switch (b.getContractorLvl()) {
+    public static String getContractorLvlColor(int level) {
+        switch (level) {
             case 0, 1 -> {
-                return ChatColor.GRAY;
+                return String.valueOf(ChatColor.GRAY)+level;
             }
             case 2, 3, 4 -> {
-                return ChatColor.YELLOW;
+                return String.valueOf(ChatColor.YELLOW)+level+String.valueOf(ChatColor.GRAY);
             }
             case 5, 6, 7 -> {
-                return ChatColor.GREEN;
+                return String.valueOf(ChatColor.GREEN)+level+String.valueOf(ChatColor.GRAY);
             }
             case 8, 9 -> {
-                return ChatColor.AQUA;
+                return String.valueOf(ChatColor.AQUA)+level+String.valueOf(ChatColor.GRAY);
             }
             case 10, 11 -> {
-                return ChatColor.LIGHT_PURPLE;
+                return String.valueOf(ChatColor.LIGHT_PURPLE)+level+String.valueOf(ChatColor.GRAY);
             }
             case 12 -> {
-                return ChatColor.RED;
+                return String.valueOf(ChatColor.RED)+level+String.valueOf(ChatColor.GRAY);
             }
             case 13 -> {
-                return ChatColor.DARK_RED;
+                return String.valueOf(ChatColor.DARK_RED)+level+String.valueOf(ChatColor.GRAY);
             }
         }
-        return ChatColor.GRAY;
+        return "";
     }
 
     public static void releasePrisoner(Player p, Bandit b) {
@@ -134,7 +134,7 @@ public class BanditUtils {
         String wallet = ChatColor.GREEN + "Wallet: " + ChatColor.RESET + b.getWallet() + ChatColor.GOLD + "g";
         String bank = ChatColor.GREEN + "Bank: " + ChatColor.RESET + b.getBank() + ChatColor.GOLD + "g";
         String bounty = ChatColor.RED + "Bounty: " + ChatColor.RESET + b.getBounty();
-        String contractorLvl = ChatColor.AQUA + "Contractor "+ChatColor.GRAY+"[" + BanditUtils.getContractorLvlColor(b) + b.getContractorLvl()+ChatColor.GRAY+"]";
+        String contractorLvl = ChatColor.AQUA + "Contractor " + ChatColor.GRAY + "[" + BanditUtils.getContractorLvlColor(b.getContractorLvl()) + ChatColor.GRAY + "]";
 
 
         //Wanted timer
@@ -162,8 +162,8 @@ public class BanditUtils {
         Score bountyDis = objective.getScore(bounty);
         Score contractorDis = objective.getScore(contractorLvl);
         if (b.getActiveContract() != null) {
-            String activeContract = ChatColor.GREEN + "Active Contract"  + ChatColor.RESET+":";
-            String contractListing = "\""+b.getActiveContract().getListingName()+ChatColor.RESET+ "\"";
+            String activeContract = ChatColor.GREEN + "Active Contract" + ChatColor.RESET + ":";
+            String contractListing = "\"" + b.getActiveContract().getListingName() + ChatColor.RESET + "\"";
             Score activeContractDis = objective.getScore(activeContract);
             Score contractListingDis = objective.getScore(contractListing);
             contractListingDis.setScore(7);
@@ -194,6 +194,33 @@ public class BanditUtils {
 
     }
 
+    public static List<Integer> getLevelXpRequirementList() {
+        List<Integer> reqs = new ArrayList<>();
+        // The index of the list is the level, the value at the index is the XP requirement:
+        // index 0 requires 0 XP | index 4 requires 400 XP
+        reqs.add(0);
+        reqs.add(120);
+        reqs.add(360);
+        reqs.add(670);
+        reqs.add(1070);
+        reqs.add(1590);
+        reqs.add(2190);
+        reqs.add(2870);
+        reqs.add(3630);
+        reqs.add(4740);
+        reqs.add(5390);
+        reqs.add(6470);
+        reqs.add(7750);
+        reqs.add(9150);
+        return reqs;
+    }
+
+    public static int getXpRequiredForLevel(Bandit b) {
+        List<Integer> reqs = getLevelXpRequirementList();
+        return reqs.get(b.getContractorLvl());
+    }
+
+
     public static Player getNearest(Player p, Double range) {
         double distance = Double.POSITIVE_INFINITY;
         Player target = null;
@@ -221,6 +248,54 @@ public class BanditUtils {
 
     }
 
+    public static ContractType getContractorTypeFromStr(String str) {
+        switch (str) {
+            case "DELIVERY" -> {
+                return ContractType.DELIVERY;
+            }
+            case "OIL_FIELD" -> {
+                return ContractType.OIL_FIELD;
+            }
+        }
+        return null;
+    }
+
+    public static DeliveryType getDeliveryTypeFromStr(String str) {
+        switch (str) {
+            case "MINER" -> {
+                return DeliveryType.MINER;
+            }
+            case "HUNTER" -> {
+                return DeliveryType.HUNTER;
+            }
+            case "DRUG_RUNNER" -> {
+                return DeliveryType.DRUG_RUNNER;
+            }
+            case "FISHER" -> {
+                return DeliveryType.FISHER;
+            }
+        }
+        return null;
+    }
+
+    public static Difficulty getDifficultyFromStr(String str) {
+        switch (str) {
+            case "ROOKIE" -> {
+                return Difficulty.ROOKIE;
+            }
+            case "APPRENTICE" -> {
+                return Difficulty.APPRENTICE;
+            }
+            case "EXPERIENCED" -> {
+                return Difficulty.EXPERIENCED;
+            }
+            case "MASTER" -> {
+                return Difficulty.MASTER;
+            }
+        }
+        return null;
+    }
+
     public static String getContractorTitle(Bandit b) {
         switch (b.getContractorTitle()) {
             case 0:
@@ -243,19 +318,19 @@ public class BanditUtils {
 
     public static String getRandomTip() {
         ArrayList<String> tips = new ArrayList<>();
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Don't forget to send your horse back to the stable when you arrive at your destination");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /c to open your contractor profile or view active contracts");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts reset every hour!");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Track unknown locations or NPC's with the tracker item");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Every named river has a unique signature fish");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Start a contract to earn gold!");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Contracts are the quickest way to earn money");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Don't forget to send your horse back to the stable when you arrive at your destination");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Do /c to open your contractor profile or view active contracts");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Contracts reset every hour!");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Track unknown locations or NPC's with the tracker item");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Every named river has a unique signature fish");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Start a contract to earn gold!");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Contracts are the quickest way to earn money");
 
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Go to a contractor NPC to view available contracts");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Locate a contractor NPC to start a contract");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Earn more rewards by leveling up your contractor level");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Do /call or /horse to summon your steed");
-        tips.add(ChatColor.AQUA + "TIP: " + ChatColor.GRAY + "Something look off or is too confusing? Report to Droiid!");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Go to a contractor NPC to view available contracts");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Locate a contractor NPC to start a contract");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Earn more rewards by leveling up your contractor level");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Do /call or /horse to summon your steed");
+        tips.add(ChatColor.AQUA + "[Tip] " + ChatColor.WHITE + "Something look off or is too confusing? Report to Droiid!");
 
 
         int tip = GlobalUtils.getRandomNumber(tips.size());

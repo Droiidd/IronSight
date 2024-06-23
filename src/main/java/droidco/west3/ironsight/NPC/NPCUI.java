@@ -87,15 +87,15 @@ public class NPCUI {
         ItemStack exit = getExitButton();
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemStack smokeLeaf = CustomItem.getCustomItem("Unprocessed Smokeleaf").getItemStack();
-        smokeLeaf.setAmount(8);
+        ItemStack drug = ItemIcon.getIcon("process_smokeleaf").getItem();
+        drug.setAmount(12);;
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");
         for (int i = 0; i < 18; i++) {
             if (i == 0) {
                 processor.setItem(0, exit);
             } else if (i == 13) {
-                processor.setItem(13, smokeLeaf);
+                processor.setItem(13, drug);
             } else {
                 processor.setItem(i, blank);
             }
@@ -107,8 +107,8 @@ public class NPCUI {
         ItemStack exit = getExitButton();
 
         ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemStack drug = CustomItem.getCustomItem("Unprocessed Spice").getItemStack();
-        drug.setAmount(8);
+        ItemStack drug = ItemIcon.getIcon("process_spice").getItem();
+        drug.setAmount(16);
         ItemMeta meta = blank.getItemMeta();
         meta.setDisplayName("");
         for (int i = 0; i < 18; i++) {

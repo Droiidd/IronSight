@@ -17,7 +17,7 @@ public class BlockHarvestTask extends BukkitRunnable {
     private ArrayList<BlockHarvestTask> tasks = new ArrayList<>();
     private final IronSight plugin;
     private int tick = 0;
-    private final int maxTime = 30;
+    private final int maxTime = 900;
 
     private int timeElapsed = 0;
     private Bandit b;

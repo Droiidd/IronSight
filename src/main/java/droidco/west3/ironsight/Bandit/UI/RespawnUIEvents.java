@@ -3,10 +3,7 @@ package droidco.west3.ironsight.Bandit.UI;
 import droidco.west3.ironsight.Bandit.Bandit;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.IronSight;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,6 +60,7 @@ public class RespawnUIEvents implements Listener {
         p.setFlySpeed(0.2f);
         p.teleport(respawn);
         b.setRespawning(false);
+        p.setGameMode(GameMode.SURVIVAL);
     }
 
 }

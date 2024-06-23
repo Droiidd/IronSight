@@ -36,7 +36,7 @@ public class BanditTask extends BukkitRunnable {
     private int horseFullCallTime = 10;
     private int wantedMin = 2;
     private int wantedSec = 0;
-    private final int contractTimer = 600;
+    private final int contractTimer = 3600;
     private int contractCounter = 0;
     private int horseTimer = 0;
     private int wantedTownCounter = 0;
@@ -77,7 +77,6 @@ public class BanditTask extends BukkitRunnable {
 
         locations = FrontierLocation.getLocationList();
 
-        b.setDoingContract(false);
         b.loadContracts();
 
         this.undeadMiner = new FrontierMob(FrontierMobType.UNDEAD_MINER);
@@ -256,7 +255,7 @@ public class BanditTask extends BukkitRunnable {
                 if (wantedMin == -1) {
                     //Timer is complete!
                     wantedMin = 2;
-                    p.sendMessage(ChatColor.GRAY + "You are no longer " + ChatColor.DARK_RED + "wanted.");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "You are no longer " + ChatColor.DARK_RED + "wanted.");
                     b.setWanted(false);
                 }
             }
@@ -268,21 +267,21 @@ public class BanditTask extends BukkitRunnable {
                 }
                 if (combatLogCounter == combatLogTimer) {
                     b.setCombatBlocked(false);
-                    p.sendMessage(ChatColor.GRAY + "You are" + ChatColor.GREEN + " safe " + ChatColor.GRAY + "to log off");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "You are" + ChatColor.GREEN + " safe " + ChatColor.GRAY + "to log off");
                 }
                 combatLogCounter++;
             }
             //      ===--- BLEED EFFECT ---===
-            if (b.isBleeding()) {
-                p.damage(1.5);
-                for (int i = 0; i < 13; i++) {
-                    p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
-                }
-            }
+//            if (b.isBleeding()) {
+//                p.damage(1.5);
+//                for (int i = 0; i < 13; i++) {
+//                    p.spawnParticle(Particle.BLOCK_DUST, p.getLocation().add(0.5, 0.5, 0.5), 1, 1, 1, 1, 1, new ItemStack(Material.RED_WOOL));
+//                }
+//            }
             //      ===--- SUMMONING HORSE ---===
             if (b.isSummoningHorse()) {
                 horseTimer++;
-                p.sendMessage(ChatColor.GRAY + "Horse arrives in " + ChatColor.AQUA + (horseFullCallTime - horseTimer) + ChatColor.GRAY + " seconds.");
+                p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "Horse arrives in " + ChatColor.AQUA + (horseFullCallTime - horseTimer) + ChatColor.GRAY + " seconds.");
                 if (horseTimer == horseFullCallTime) {
                     b.setSummoningHorse(false);
                     horseTimer = 0;
@@ -291,17 +290,30 @@ public class BanditTask extends BukkitRunnable {
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_AZALEA_LEAVES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_CAVE_VINES_PLACE, 1, 0);
                     p.getLocation().getWorld().playSound(p.getLocation(), Sound.BLOCK_BAMBOO_HIT, 1, 0);
-                    p.sendMessage(ChatColor.AQUA + b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.AQUA + b.getHorseBeingSummoned().getHorseName() + ChatColor.GRAY + " has arrived!");
                     b.getHorseBeingSummoned().setSummoned(true);
-                    p.sendMessage(ChatColor.GRAY + "Shift + right-click to open it's inventory.");
+                    p.sendMessage(ChatColor.AQUA+"[Alert] "+ChatColor.GRAY + "Shift + right-click to open it's inventory.");
                 }
             }
             //      ===--- CONRTACT RESET TIMER ---===
 
             p.setLevel(contractTimer - contractCounter);
+            if((contractTimer-contractCounter) == 300){
+                // 5 MINUTES REMAIN
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "Five minutes until contracts" + ChatColor.RED+" reset!");
+            }else if((contractTimer-contractCounter) == 60){
+                // 1 MINUTES REMAIN
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "One minute until contracts" + ChatColor.RED+" reset!");
+            }
+            else if((contractTimer-contractCounter) == 30){
+                // 1 MINUTES REMAIN
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY+ "30 Seconds until contracts" + ChatColor.RED+" reset!");
+            }else if((contractTimer-contractCounter)<=10&&(contractTimer-contractCounter)!=0){
+                p.sendMessage(ChatColor.RED+"[Alert] "+ ChatColor.GRAY+ ""+(contractTimer-contractCounter)+ " seconds until contracts" + ChatColor.RED+" reset!");
+            }
             if (contractTimer == contractCounter) {
                 Contract.assignPlayerContracts(p, b);
-                p.sendMessage(ChatColor.GREEN + "Contracts" + ChatColor.GRAY + " reset!");
+                p.sendMessage(ChatColor.RED+"[Alert] "+ChatColor.GRAY + "Contracts" + ChatColor.RED + " reset!");
                 contractCounter = 0;
             }
             contractCounter++;

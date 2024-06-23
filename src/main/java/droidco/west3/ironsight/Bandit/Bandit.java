@@ -5,12 +5,8 @@ import droidco.west3.ironsight.Contracts.Utils.ContractType;
 import droidco.west3.ironsight.Contracts.Utils.DeliveryType;
 import droidco.west3.ironsight.FrontierLocation.FrontierLocation;
 import droidco.west3.ironsight.Globals.Utils.BanditUtils;
-import droidco.west3.ironsight.Globals.Utils.GlobalUtils;
 import droidco.west3.ironsight.Horse.FrontierHorse;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -77,6 +73,7 @@ public class Bandit
     private String trackedNPC;
 
     private static HashMap<String, Bandit> bandits = new HashMap<>();
+    private static List<Contract> activeContracts = new ArrayList<>();
     //private List<ironHorse> horses;
 
     public Bandit(String pId)
@@ -159,20 +156,20 @@ public class Bandit
         testLocs.add(FrontierLocation.getLocation("Three Forks Delta"));
         testLocs.add(FrontierLocation.getLocation("Lower Guadalupe River"));
         testLocs.add(FrontierLocation.getLocation("Slough Creek River"));
-        Contract testC1 = new Contract( ContractType.Delivery, testLocs ,1, DeliveryType.FISHER);
-        Contract testC2 = new Contract( ContractType.Delivery, testLocs ,2, DeliveryType.FISHER);
+        Contract testC1 = new Contract( ContractType.DELIVERY, testLocs ,1, DeliveryType.FISHER);
+        Contract testC2 = new Contract( ContractType.DELIVERY, testLocs ,2, DeliveryType.FISHER);
         List<FrontierLocation> miningLoc = new ArrayList<>();
         miningLoc.add(FrontierLocation.getLocation("Black Spur Mines"));
-        Contract miner = new Contract(ContractType.Delivery, miningLoc, 1,DeliveryType.MINER);
-        Contract miner2 = new Contract(ContractType.Delivery, miningLoc, 1,DeliveryType.MINER);
+        Contract miner = new Contract(ContractType.DELIVERY, miningLoc, 1,DeliveryType.MINER);
+        Contract miner2 = new Contract(ContractType.DELIVERY, miningLoc, 1,DeliveryType.MINER);
 
         List<FrontierLocation> smokeLocs = new ArrayList<>();
         smokeLocs.add(FrontierLocation.getLocation("Storm Point"));
-        Contract smokeRunner = new Contract(ContractType.Delivery, smokeLocs ,2, DeliveryType.DRUG_RUNNER);
+        Contract smokeRunner = new Contract(ContractType.DELIVERY, smokeLocs ,2, DeliveryType.DRUG_RUNNER);
 
         List<FrontierLocation> spiceLoc = new ArrayList<>();
         spiceLoc.add(FrontierLocation.getLocation("Red Ash Camp"));
-        Contract spiceRunner = new Contract(ContractType.Delivery, spiceLoc ,2, DeliveryType.DRUG_RUNNER);
+        Contract spiceRunner = new Contract(ContractType.DELIVERY, spiceLoc ,2, DeliveryType.DRUG_RUNNER);
 //        List<FrontierLocation> test3Locs = new ArrayList<>();
 //        test3Locs.add(FrontierLocation.getLocation("North Moraine Oil Field"));
 //        Contract testC3 = new Contract(ContractType.OilField , test3Locs ,1);
@@ -199,6 +196,12 @@ public class Bandit
     public static Bandit getPlayer(Player p){
         if(bandits.containsKey(p.getUniqueId().toString())){
             return bandits.get(p.getUniqueId().toString());
+        }
+        return null;
+    }
+    public static Bandit getPlayerById(String uuid){
+        if(bandits.containsKey(uuid)){
+            return bandits.get(uuid);
         }
         return null;
     }
@@ -541,6 +544,16 @@ public class Bandit
 
     public void setTrackedNPC(String trackedNPC) {
         this.trackedNPC = trackedNPC;
+    }
+
+    public static List<Contract> getActiveContracts() {
+        return activeContracts;
+    }
+    public void addActiveContract(Contract contract){
+        activeContracts.add(contract);
+    }
+    public void removeActiveContract(Contract contract){
+        activeContracts.remove(contract);
     }
 }
 

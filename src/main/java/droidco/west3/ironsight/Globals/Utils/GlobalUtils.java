@@ -1,10 +1,15 @@
 package droidco.west3.ironsight.Globals.Utils;
 
+import droidco.west3.ironsight.Contracts.Contract;
+import droidco.west3.ironsight.Contracts.Utils.ContractType;
+import droidco.west3.ironsight.Contracts.Utils.ContractUtils;
+import droidco.west3.ironsight.Contracts.Utils.Difficulty;
 import droidco.west3.ironsight.Horse.FrontierHorseType;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
@@ -50,6 +55,36 @@ public class GlobalUtils {
         p.sendMessage(ChatColor.AQUA+ "DISTANCE: "+ Math.sqrt((num1*num1)+(num2*num2)));
         p.sendMessage("==============");
         return Math.sqrt((num1*num1)+(num2*num2));
+    }
+    public static ItemStack getContractSlot(Contract selected, Difficulty difficulty) {
+        //Basic item set up
+
+        //LORE STRUCTURE FOR CONTRACTS IS ALWAYS:
+        /*
+        NAME
+        ---
+        Location
+        Reward
+        TargetName / Requested Goods (If applicable)
+         */
+        ItemStack contract = selected.getContractIcon();
+        ItemMeta contractMeta = contract.getItemMeta();
+        ArrayList<String> contractLore = new ArrayList<>();
+        //Setting up the strings for the lore
+
+        //LORE
+        contractLore.add((ContractUtils.getDifficultyScale(difficulty).equalsIgnoreCase("IV") ?
+                ChatColor.RED + ContractUtils.getDifficultyScale(difficulty) : ContractUtils.getDifficultyScale(difficulty)));
+        contractLore.add(ChatColor.GRAY + "Location: " + selected.getLocation().getLocName());
+        if (selected.getContractType().equals(ContractType.DELIVERY)) {
+            contractLore.add(String.valueOf(ChatColor.GRAY) + selected.getRequestedAmount() + " " + selected.getRequestedItem().getItemMeta().getDisplayName());
+        }
+        contractLore.add(ChatColor.GRAY + "Reward: " + selected.getReward() + " g");
+        //This displays the contracts type
+        //contractLore.add(ChatColor.GRAY+ContractUtils.getTypeString(selected.getType()));
+        contractMeta.setLore(contractLore);
+        contract.setItemMeta(contractMeta);
+        return contract;
     }
     public static double getRandomCord(double min, double max){
         double val = 0.0;

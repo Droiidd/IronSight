@@ -51,7 +51,7 @@ public class ActiveContractUI
             contractUi.setItem(descColumn,descSlot);
         }
         contractUi.setItem(8,ContractUI.getResignContractIcon());
-        contractUi.setItem(0,ItemIcon.getIcon("previous_page").getItem());
+        contractUi.setItem(0,ItemIcon.getIcon("back_button").getItem());
         for(int i =0;i< contractUi.getSize();i++){
             if(contractUi.getItem(i) == null){
                 if(i % 9 == 2){
