@@ -7,6 +7,7 @@ import droidco.west3.ironsight.contracts.utils.Difficulty;
 import droidco.west3.ironsight.items.CustomItem;
 import droidco.west3.ironsight.items.ItemIcon;
 import droidco.west3.ironsight.items.potions.CustomPotion;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -19,6 +20,7 @@ import org.bukkit.scoreboard.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class BanditUtils {
     public static void displayBasicStats(Bandit b, Player p) {
         p.sendMessage("Iron Sight Player Stats:");

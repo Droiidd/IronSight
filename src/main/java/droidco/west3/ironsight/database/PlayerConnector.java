@@ -122,7 +122,7 @@ public class PlayerConnector {
 
                 Bandit b = new Bandit(pId, wallet, bank, isBleeding, isJailed, isWanted, isCmbtBlocked, brokenLegs, bounty, wantedKills, contractorLvl, contractorXp, jailStartTime, contractorTitle, vaultSize, vaultLevel);
                 if(itemContents.equalsIgnoreCase("0")){
-                    System.out.println("No vault for "+b.getpId());
+                    System.out.println("No vault for "+b.getPId());
                 }else{
                     ItemStack[] items = itemStackArrayFromBase64(itemContents);
                 b.setItemVault(Arrays.asList(items));
@@ -229,7 +229,7 @@ public class PlayerConnector {
                 "vault_size = " + b.getVaultSize() + ", " +
                 "vault_level = " + b.getVaultLevel() + ", " +
                 "vault_items = " + serialized + " " +
-                "Where bandit.pId = '" + b.getpId() + "'";
+                "Where bandit.pId = '" + b.getPId() + "'";
 
 
         PreparedStatement prepedStmt = conn.prepareStatement(sql);
@@ -244,7 +244,7 @@ public class PlayerConnector {
             try {
                 String sqlInsert = "insert into bandit (pId, wallet, bank, isBleeding, brokenLegs, isWanted, isJailed, isCombatBlocked, bounty, contractorXp, contractorLvl, wantedKills, contractor_title, jailStartTime, vault_size, vault_level, vault_items) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
                 PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
-                insertStmt.setString(1, b.getpId());
+                insertStmt.setString(1, b.getPId());
                 insertStmt.setDouble(2, b.getWallet());
                 insertStmt.setDouble(3, b.getBank());
                 insertStmt.setBoolean(4, b.isBleeding());
@@ -280,7 +280,7 @@ public class PlayerConnector {
         System.out.println("Updating horse " + horse.getHorseName());
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
-            List<ItemStack> items = Arrays.asList(horse.getHorseInv());
+            List<ItemStack> items = Arrays.asList(horse.getInventory());
             BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
             dataOutput.writeInt(items.size());
             for (ItemStack item : items) {

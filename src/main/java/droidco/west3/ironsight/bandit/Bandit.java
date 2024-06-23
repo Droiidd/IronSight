@@ -6,6 +6,8 @@ import droidco.west3.ironsight.contracts.utils.DeliveryType;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.globals.utils.BanditUtils;
 import droidco.west3.ironsight.horse.FrontierHorse;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,18 +16,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Getter @Setter
 public class Bandit
 {
     private String pId;
     private double wallet;
     private double bank;
     private final int maxHorseLimit = 3;
-    private boolean isBleeding;
+    private boolean bleeding;
     private boolean brokenLegs;
-    private boolean isWanted;
-    private boolean isJailed;
-    private boolean isJailedFlag;
-    private boolean isCombatBlocked;
+    private boolean wanted;
+    private boolean jailed;
+    private boolean jailedFlag;
+    private boolean combatBlocked;
     private boolean combatBlockFlag;
     private boolean doingContract;
     private boolean respawning;
@@ -41,14 +44,15 @@ public class Bandit
     private long jailStartTime;
     private String roleTitle;
     private Player onlinePlayer;
-    private Location trackingLocation;
+    private Location trackedLocation;
+    @Setter
     private boolean isTrackingLocation;
-    private boolean isTrackingPlayer;
+    private boolean trackingPlayer;
     private boolean summoningHorse;
     private FrontierHorse horseBeingSummoned;
-    private boolean isDepositing;
-    private boolean isWithdrawing;
-    private FrontierLocation currentFrontierLocation;
+    private boolean depositing;
+    private boolean withdrawing;
+    private FrontierLocation currentLocation;
     private Contract rookieContract;
     private Contract apprenticeContract;
     private Contract experiencedContract;
@@ -68,7 +72,7 @@ public class Bandit
 
     private FrontierLocation trackingFrontierLocation;
 
-    private boolean isTrackingNPC;
+    private boolean trackingNPC;
 
     private String trackedNPC;
 
@@ -81,12 +85,12 @@ public class Bandit
         this.pId = pId;
         this.wallet = 0.0;
         this.bank = 1000.0;
-        this.isBleeding = false;
-        this.isJailed = false;
-        this.isWanted = false;
-        this.isCombatBlocked = false;
+        this.bleeding = false;
+        this.jailed = false;
+        this.wanted = false;
+        this.combatBlocked = false;
         this.brokenLegs = false;
-        this.isJailedFlag = false;
+        this.jailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
         this.summoningHorse = false;
@@ -103,24 +107,8 @@ public class Bandit
         this.onlinePlayer = null;
     }
 
-    public List<ItemStack> getItemVault() {
-        return itemVault;
-    }
-
-    public void setItemVault(List<ItemStack> itemVault) {
-        this.itemVault = itemVault;
-    }
-
-    public int getVaultSize() {
-        return vaultSize;
-    }
-
-    public void setVaultSize(int vaultSize) {
-        this.vaultSize = vaultSize;
-    }
-
-    public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean isJailed,
-                  boolean isWanted, boolean isCombatBlocked, boolean brokenLegs, int bounty, int
+    public Bandit(String pId, double wallet, double bank, boolean isBleeding, boolean jailed,
+                  boolean isWanted, boolean combatBlocked, boolean brokenLegs, int bounty, int
                               wantedKills, int contractorLvl, int contractorXp,
                   long jailStartTime, int contractorTitle, int vaultSize, int vaultLevel)
     {
@@ -128,12 +116,12 @@ public class Bandit
         this.pId = pId;
         this.wallet = wallet;
         this.bank = bank;
-        this.isBleeding = isBleeding;
-        this.isJailed = isJailed;
-        this.isWanted = isWanted;
-        this.isCombatBlocked = isCombatBlocked;
+        this.bleeding = isBleeding;
+        this.jailed = jailed;
+        this.wanted = isWanted;
+        this.combatBlocked = combatBlocked;
         this.brokenLegs = brokenLegs;
-        this.isJailedFlag = false;
+        this.jailedFlag = false;
         this.respawning = false;
         this.roleTitle = BanditUtils.getPlayerRoleTitle();
         this.summoningHorse = false;
@@ -189,10 +177,7 @@ public class Bandit
             onlinePlayer = p;
         }
     }
-    public static List<Bandit> getPlayerList()
-    {
-        return playerList;
-    }
+
     public static Bandit getPlayer(Player p){
         if(bandits.containsKey(p.getUniqueId().toString())){
             return bandits.get(p.getUniqueId().toString());
@@ -206,144 +191,10 @@ public class Bandit
         return null;
     }
 
-    public String getRoleTitle() {
-        return roleTitle;
-    }
     public String getTitle(){
         return BanditUtils.getContractorTitle(this).equalsIgnoreCase("") ? roleTitle : BanditUtils.getContractorTitle(this)+" "+roleTitle;
     }
 
-    public FrontierHorse getHorseBeingSummoned() {
-        return horseBeingSummoned;
-    }
-
-    public void setHorseBeingSummoned(FrontierHorse horseBeingSummoned) {
-        this.horseBeingSummoned = horseBeingSummoned;
-    }
-
-    public void setRoleTitle(String roleTitle) {
-        this.roleTitle = roleTitle;
-    }
-
-    public int getContractorTitle() {
-        return contractorTitle;
-    }
-
-    public void updateContractorXp(int xp){
-        this.contractorXp += xp;
-    }
-
-    public List<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(List<Contract> contracts) {
-        this.contracts = contracts;
-    }
-
-    public int getMaxHorseLimit() {
-        return maxHorseLimit;
-    }
-
-    public boolean isSummoningHorse() {
-        return summoningHorse;
-    }
-
-    public void setSummoningHorse(boolean summoningHorse) {
-        this.summoningHorse = summoningHorse;
-    }
-
-    public long getJailStartTime() {
-        return jailStartTime;
-    }
-    public void setJailStartTime(long jailStartTime) {
-        this.jailStartTime = jailStartTime;
-    }
-    public boolean isRespawning() {
-        return respawning;
-    }
-
-    public void setRespawning(boolean respawning) {
-        this.respawning = respawning;
-    }
-
-    public void setContractorTitle(int contractorTitle) {
-        this.contractorTitle = contractorTitle;
-    }
-
-    public Contract getActiveContract() {
-        return activeContract;
-    }
-
-    public void setActiveContract(Contract activeContract) {
-        this.activeContract = activeContract;
-    }
-
-    public void setRookieContract(Contract rookieContract) {
-        this.rookieContract = rookieContract;
-    }
-
-    public boolean isDoingContract() {
-        return doingContract;
-    }
-
-    public boolean isEscaping() {
-        return escaping;
-    }
-
-    public boolean isDepositing() {
-        return isDepositing;
-    }
-
-    public void setDepositing(boolean depositing) {
-        isDepositing = depositing;
-    }
-
-    public boolean isWithdrawing() {
-        return isWithdrawing;
-    }
-
-    public void setWithdrawing(boolean withdrawing) {
-        isWithdrawing = withdrawing;
-    }
-
-    public List<FrontierHorse> getHorses() {
-        return horses;
-    }
-
-    public void setHorses(List<FrontierHorse> horses) {
-        this.horses = horses;
-    }
-
-    public void setEscaping(boolean escaping) {
-        this.escaping = escaping;
-    }
-
-    public void setDoingContract(boolean doingContract) {
-        this.doingContract = doingContract;
-    }
-
-    public Player getTargetedPlayer() {
-        return targetedPlayer;
-    }
-
-    public void setTargetedPlayer(Player targetedPlayer) {
-        this.targetedPlayer = targetedPlayer;
-    }
-
-    public void setApprenticeContract(Contract apprenticeContract) {
-        this.apprenticeContract = apprenticeContract;
-    }
-    public void setExperiencedContract(Contract experiencedContract) {
-        this.experiencedContract = experiencedContract;
-    }
-    public void setCurrentLocation(FrontierLocation locName){
-        this.currentFrontierLocation = locName;
-    }
-    public FrontierLocation getCurrentLocation()
-    {
-        return this.currentFrontierLocation;
-    }
     public void updateBank(double deposit){
         this.bank += deposit;
     }
@@ -351,204 +202,16 @@ public class Bandit
         this.wallet += deposit;
     }
     public void updateBounty(int increase){ this.bounty += increase; }
-
-    public boolean isJailedFlag() {
-        return isJailedFlag;
+    public void updateContractorXp(int xp) {
+        this.contractorXp += xp;
     }
 
-    public void setJailedFlag(boolean jailedFlag) {
-        isJailedFlag = jailedFlag;
+    public void setTrackedLocation(Location trackedLocation) {
+        setTrackingPlayer(false);
+        this.trackedLocation = trackedLocation;
+        setTrackingLocation(true);
     }
 
-    public String getpId() {
-        return pId;
-    }
-
-    public void setpId(String pId) {
-        this.pId = pId;
-    }
-
-    public double getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(double wallet) {
-        this.wallet = wallet;
-    }
-
-    public double getBank() {
-        return bank;
-    }
-
-    public void setBank(double bank) {
-        this.bank = bank;
-    }
-
-    public boolean isBleeding() {
-        return isBleeding;
-    }
-
-    public void setBleeding(boolean bleeding) {
-        isBleeding = bleeding;
-    }
-
-    public boolean isBrokenLegs() {
-        return brokenLegs;
-    }
-
-    public void setBrokenLegs(boolean brokenLegs) {
-        this.brokenLegs = brokenLegs;
-    }
-
-    public boolean isWanted() {
-        return isWanted;
-    }
-
-    public boolean isTrackingLocation() {
-        return isTrackingLocation;
-    }
-
-    public boolean isTrackingPlayer() {
-        return isTrackingPlayer;
-    }
-    public void setIsTrackingPlayer(boolean trackingPlayer) {
-        isTrackingPlayer = trackingPlayer;
-    }
-
-    public void setIsTrackingLocation(boolean trackingLocation) {
-        isTrackingLocation = trackingLocation;
-    }
-
-    public void setWanted(boolean wanted) {
-        isWanted = wanted;
-    }
-
-    public boolean isJailed() {
-        return isJailed;
-    }
-
-    public void setJailed(boolean jailed) {
-        isJailed = jailed;
-    }
-
-    public boolean isCombatBlockFlag() {
-        return combatBlockFlag;
-    }
-
-    public void setCombatBlockFlag(boolean combatBlockFlag) {
-        this.combatBlockFlag = combatBlockFlag;
-    }
-
-    public boolean isCombatBlocked() {
-        return isCombatBlocked;
-    }
-
-    public void setCombatBlocked(boolean combatBlocked) {
-        isCombatBlocked = combatBlocked;
-    }
-
-    public int getBounty() {
-        return bounty;
-    }
-
-
-    public void setBounty(int bounty) {
-        this.bounty = bounty;
-    }
-    public Location getTrackingLocation() {
-        return trackingLocation;
-    }
-
-    public void setTrackingLocation(Location trackingLocation) {
-        setIsTrackingPlayer(false);
-        this.trackingLocation = trackingLocation;
-        setIsTrackingLocation(true);
-    }
-
-    public int getContractorLvl() {
-        return contractorLvl;
-    }
-
-    public void setContractorLvl(int contractorLvl) {
-        this.contractorLvl = contractorLvl;
-    }
-
-    public int getContractorXp() {
-        return contractorXp;
-    }
-
-    public void setContractorXp(int contractorXp) {
-        this.contractorXp = contractorXp;
-    }
-
-    public Player getOnlinePlayer() {
-        return onlinePlayer;
-    }
-
-
-    public int getWantedKills() {
-        return wantedKills;
-    }
-
-    public void setWantedKills(int wantedKills) {
-        this.wantedKills = wantedKills;
-    }
-
-    public Contract getRookieContract() {
-        return rookieContract;
-    }
-
-    public Contract getApprenticeContract() {
-        return apprenticeContract;
-    }
-
-    public Contract getExperiencedContract() {
-        return experiencedContract;
-    }
-
-    public boolean isJailRespawn() {
-        return jailRespawn;
-    }
-
-    public void setJailRespawn(boolean jailRespawn) {
-        this.jailRespawn = jailRespawn;
-    }
-
-    public int getVaultLevel() {
-        return vaultLevel;
-    }
-
-    public void setVaultLevel(int vaultLevel) {
-        this.vaultLevel = vaultLevel;
-    }
-
-    public FrontierLocation getTrackingFrontierLocation() {
-        return trackingFrontierLocation;
-    }
-
-    public void setTrackingFrontierLocation(FrontierLocation trackingFrontierLocation) {
-        this.trackingFrontierLocation = trackingFrontierLocation;
-    }
-
-    public boolean isTrackingNPC() {
-        return isTrackingNPC;
-    }
-
-    public void setIsTrackingNPC(boolean trackingNPC) {
-        isTrackingNPC = trackingNPC;
-    }
-
-    public String getTrackedNPC() {
-        return trackedNPC;
-    }
-
-    public void setTrackedNPC(String trackedNPC) {
-        this.trackedNPC = trackedNPC;
-    }
-
-    public static List<Contract> getActiveContracts() {
-        return activeContracts;
-    }
     public void addActiveContract(Contract contract){
         activeContracts.add(contract);
     }

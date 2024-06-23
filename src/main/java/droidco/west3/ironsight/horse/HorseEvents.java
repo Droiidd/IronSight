@@ -144,7 +144,7 @@ public class HorseEvents implements Listener {
         if (e.getEntityType().equals(EntityType.HORSE)) {
             FrontierHorse horse = FrontierHorse.getHorse(e.getEntity().getUniqueId());
             if (horse != null) {
-                List<ItemStack> items = Arrays.asList(horse.getHorseInv());
+                List<ItemStack> items = Arrays.asList(horse.getInventory());
                 e.getDrops().clear();
                 for (ItemStack item : items) {
                     e.getDrops().add(item);

@@ -1,11 +1,13 @@
 package droidco.west3.ironsight.bandit.ui;
 
 import droidco.west3.ironsight.items.ItemIcon;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+@UtilityClass
 public class RespawnUI {
     public static Inventory openRespawnSelect(Player p){
         Inventory contractUi = Bukkit.createInventory(p, 9, ChatColor.DARK_GRAY+"Choose Town:");

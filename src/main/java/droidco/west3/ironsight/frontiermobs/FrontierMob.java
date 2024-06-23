@@ -4,6 +4,7 @@ import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.frontierlocation.LocationType;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.items.CustomItem;
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -14,13 +15,16 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.HashMap;
 import java.util.UUID;
 
+
 public class FrontierMob {
     private FrontierLocation location;
     private LocationType locationType;
     private FrontierMobType type;
     private UUID mobId;
     private LivingEntity entity;
+    @Getter
     private static HashMap<UUID, FrontierMob> mobs = new HashMap<>();
+    @Getter
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     public FrontierMob(FrontierMobType type)
     {
@@ -177,12 +181,5 @@ public class FrontierMob {
             }
         }
     }
-    public static HashMap<UUID,FrontierMob> getMobs(){
-        return mobs;
-    }
-    public static HashMap<UUID,LivingEntity> getEntities(){
-        return entities;
-    }
-
 
 }

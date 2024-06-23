@@ -3,6 +3,7 @@ package droidco.west3.ironsight.contracts.ui;
 import droidco.west3.ironsight.contracts.Contract;
 import droidco.west3.ironsight.contracts.utils.CompletionStep;
 import droidco.west3.ironsight.items.ItemIcon;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class ActiveContractUI
 {
     public static Inventory openActiveContractUi(Player p, Contract contract){

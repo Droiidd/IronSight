@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import droidco.west3.ironsight.IronSight;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.BrewingStand;
@@ -16,6 +18,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+@Getter @Setter
 public class BrewingRecipe {
     private static List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
     private ItemStack ingredient;
@@ -34,7 +37,7 @@ public class BrewingRecipe {
         recipes.add(this);
     }
 
-    public ItemStack Brew(){
+    public ItemStack brew(){
         {//Some lambda magic
             ItemStack potion = new ItemStack(Material.POTION);
             PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
@@ -50,9 +53,6 @@ public class BrewingRecipe {
             return potion;
 
         }
-    }
-    public boolean isPerfect() {
-        return perfect;
     }
     @Nullable
     public static BrewingRecipe getRecipe(BrewerInventory inventory)
@@ -70,9 +70,6 @@ public class BrewingRecipe {
             }
         }
         return null;
-    }
-    public ItemStack getIngredient(){
-        return ingredient;
     }
 
     public void startBrewing(BrewerInventory inventory)
@@ -104,7 +101,7 @@ public class BrewingRecipe {
                 boolean made = false;
                 for (int i = 0; i < 3; i++) {
                     if (contents[i] != null && contents[i].getType() == Material.POTION) {
-                        inventory.setItem(i, recipe.Brew());
+                        inventory.setItem(i, recipe.brew());
                         made = true;
                     }
                 }

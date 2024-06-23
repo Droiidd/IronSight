@@ -9,6 +9,7 @@ import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.items.CustomItem;
 import droidco.west3.ironsight.items.potions.BrewingRecipe;
 import droidco.west3.ironsight.items.potions.CustomPotion;
+import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -34,12 +35,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-
+@AllArgsConstructor
 public class GeneralEvents implements Listener {
     private IronSight plugin;
-    public GeneralEvents(IronSight plugin) {
-        this.plugin = plugin;
-    }
+
     @EventHandler
     public void onLegBreak(EntityDamageEvent e){
         if(e.getEntity() instanceof Player p){

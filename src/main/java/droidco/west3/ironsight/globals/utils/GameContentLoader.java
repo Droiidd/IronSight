@@ -14,6 +14,7 @@ import droidco.west3.ironsight.items.potions.CustomPotion;
 import droidco.west3.ironsight.processors.Processor;
 import droidco.west3.ironsight.processors.ProcessorCoordinate;
 import droidco.west3.ironsight.processors.ProcessorType;
+import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import droidco.west3.ironsight.npc.NPC;
 import droidco.west3.ironsight.npc.NPCType;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+@UtilityClass
 public class GameContentLoader {
     public static void loadCustomItems() {
         System.out.println("Loading custom items");

@@ -6,6 +6,8 @@ import droidco.west3.ironsight.contracts.utils.*;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.items.CustomItem;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
+@Getter @Setter
 public class Contract {
     private String contractName;
     private int rewardXp;
@@ -24,7 +27,7 @@ public class Contract {
     private int reinforcementCount;
     private ContractType contractType;
     private List<FrontierLocation> contractLocs;
-    private FrontierLocation frontierLocation;
+    private FrontierLocation location;
     private Difficulty difficulty;
     private DeliveryType deliveryType;
     private int rarity;
@@ -56,13 +59,13 @@ public class Contract {
         //This will load EXTRA data SPECIFIC to the COMPLETION TYPE
     }
 
-    public Contract(CustomItem requestedItem, int requestedAmount, String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation frontierLocation, Difficulty difficulty) {
+    public Contract(CustomItem requestedItem, int requestedAmount, String listingName, ContractType type, DeliveryType deliveryType, FrontierLocation location, Difficulty difficulty) {
         this.requestedItem = requestedItem.getItemStack();
         this.requestedAmount = requestedAmount;
         this.listingName = listingName;
         this.contractType = type;
         this.deliveryType = deliveryType;
-        this.frontierLocation = frontierLocation;
+        this.location = location;
         this.difficulty = difficulty;
         setRewardXp();
         this.reward = (requestedItem.getSalePrice() * requestedAmount);
@@ -170,7 +173,7 @@ public class Contract {
         list of possible locations, the most basic info.
         New contracts can then be generated from this type.
          */
-        this.frontierLocation = getRandomLocation();
+        this.location = getRandomLocation();
         /*
             After all the default random contract variables are set up,
             it's time to separate the contracts to load them by contract type
@@ -191,7 +194,7 @@ public class Contract {
     }
 
     public void generateNewOilField(int reinforcementCount) {
-        this.crates = OilFieldCrate.getCratesByLocation(frontierLocation);
+        this.crates = OilFieldCrate.getCratesByLocation(location);
         this.reinforcementCount = reinforcementCount;
         this.steps = new ArrayList<>();
         int odds = GlobalUtils.getRandomNumber(101);
@@ -206,11 +209,11 @@ public class Contract {
         List<String> desc = new ArrayList<>();
         desc.add("Arrive at oilfield. Find");
         desc.add("and unlock the main crate.");
-        addCompletionStep("steptest", 1, desc, null, "Ride to " + frontierLocation.getLocName());
+        addCompletionStep("steptest", 1, desc, null, "Ride to " + location.getLocName());
         List<String> desc2 = new ArrayList<>();
         desc2.add("Guard off all enemies.");
         desc2.add("Survive until crate unlocks.");
-        addCompletionStep("steptest2", 2, desc2, null, "Hold down " + frontierLocation.getLocName());
+        addCompletionStep("steptest2", 2, desc2, null, "Hold down " + location.getLocName());
 
         this.listingName = ChatColor.WHITE + "Oil Field Crate Heist";
         this.contractIcon = new ItemStack(Material.MILK_BUCKET);
@@ -262,22 +265,22 @@ public class Contract {
         }
         this.requestedAmount = amount;
         //      CHOOSE THE ITEM
-        this.frontierLocation = getRandomLocation();
+        this.location = getRandomLocation();
         switch (deliveryType) {
             case FISHER -> {
                 if (rareRequest) {
-                    if (frontierLocation.getLocName().equalsIgnoreCase("Three Forks Delta")) {
+                    if (location.getLocName().equalsIgnoreCase("Three Forks Delta")) {
                         requestedItem = CustomItem.getCustomItem("Alligator").getItemStack();
-                    } else if (frontierLocation.getLocName().equalsIgnoreCase("Pearl River")) {
+                    } else if (location.getLocName().equalsIgnoreCase("Pearl River")) {
                         int fishOdds = GlobalUtils.getRandomNumber(101);
                         if (fishOdds < 40) {
                             requestedItem = CustomItem.getCustomItem("Pearl River Trout").getItemStack();
                         } else {
                             requestedItem = CustomItem.getCustomItem("Arctic Salmon").getItemStack();
                         }
-                    } else if (frontierLocation.getLocName().equalsIgnoreCase("Lower Guadalupe River")) {
+                    } else if (location.getLocName().equalsIgnoreCase("Lower Guadalupe River")) {
                         requestedItem = CustomItem.getCustomItem("Sunken Catfish").getItemStack();
-                    } else if (frontierLocation.getLocName().equalsIgnoreCase("Slough Creek River")) {
+                    } else if (location.getLocName().equalsIgnoreCase("Slough Creek River")) {
                         int fishOdds = GlobalUtils.getRandomNumber(101);
                         if (fishOdds < 40) {
                             requestedItem = CustomItem.getCustomItem("Gold Stoned Herring").getItemStack();
@@ -315,9 +318,9 @@ public class Contract {
                 }
             }
             case DRUG_RUNNER -> {
-                if (frontierLocation.getLocName().equalsIgnoreCase("Red Ash Camp")) {
+                if (location.getLocName().equalsIgnoreCase("Red Ash Camp")) {
                     requestedItem = CustomItem.getCustomItem("Spice").getItemStack();
-                } else if (frontierLocation.getLocName().equalsIgnoreCase("Storm Point")) {
+                } else if (location.getLocName().equalsIgnoreCase("Storm Point")) {
                     requestedItem = CustomItem.getCustomItem("Processed Smokeleaf").getItemStack();
                 }
             }
@@ -368,15 +371,15 @@ public class Contract {
         switch (deliveryType) {
             case FISHER -> {
                 List<String> desc = new ArrayList<>();
-                desc.add("Arrive at " + ChatColor.GREEN + frontierLocation.getLocName());
+                desc.add("Arrive at " + ChatColor.GREEN + location.getLocName());
                 desc.add("Fish until you have requested amount");
-                addCompletionStep("steptest", 1, desc, requestedItem, "Ride to " + ChatColor.GREEN + frontierLocation.getLocName());
+                addCompletionStep("steptest", 1, desc, requestedItem, "Ride to " + ChatColor.GREEN + location.getLocName());
             }
             case MINER -> {
                 List<String> desc = new ArrayList<>();
-                desc.add("Arrive at " + ChatColor.GREEN + frontierLocation.getLocName());
+                desc.add("Arrive at " + ChatColor.GREEN + location.getLocName());
                 desc.add("Mine ores until you have requested amount");
-                addCompletionStep("steptest", 1, desc, requestedItem, "Ride to " + ChatColor.GREEN + frontierLocation.getLocName());
+                addCompletionStep("steptest", 1, desc, requestedItem, "Ride to " + ChatColor.GREEN + location.getLocName());
             }
             case DRUG_RUNNER -> {
                 List<String> desc = new ArrayList<>();
@@ -384,9 +387,9 @@ public class Contract {
                 desc.add("Harvest unprocessed drugs from field");
                 addCompletionStep("steptest", 1, desc, requestedItem, "Ride to " + ChatColor.GREEN + FrontierLocation.getLocation("Smokeleaf Field").getLocName());
                 desc = new ArrayList<>();
-                desc.add("Arrive at " + ChatColor.GREEN + frontierLocation.getLocName());
+                desc.add("Arrive at " + ChatColor.GREEN + location.getLocName());
                 desc.add("Process the drugs at a processor inside");
-                addCompletionStep("steptest", 2, desc, requestedItem, "Ride to " + ChatColor.GREEN + frontierLocation.getLocName());
+                addCompletionStep("steptest", 2, desc, requestedItem, "Ride to " + ChatColor.GREEN + location.getLocName());
             }
         }
         List<String> desc = new ArrayList<>();
@@ -496,114 +499,5 @@ public class Contract {
             }
         }
 
-    }
-
-    public ItemStack getContractIcon() {
-        return contractIcon;
-    }
-
-    public void setContractIcon(ItemStack contractIcon) {
-        this.contractIcon = contractIcon;
-    }
-
-    public int getRequestedAmount() {
-        return requestedAmount;
-    }
-
-    public void setRequestedAmount(int requestedAmount) {
-        this.requestedAmount = requestedAmount;
-    }
-
-    public void setReward(double reward) {
-        this.reward = reward;
-    }
-
-    public ItemStack getRequestedItem() {
-        return requestedItem;
-    }
-
-    public void setRequestedItem(ItemStack requestedItem) {
-        this.requestedItem = requestedItem;
-    }
-
-    public ContractType getContractType() {
-        return contractType;
-    }
-
-    public void setContractType(ContractType contractType) {
-        this.contractType = contractType;
-    }
-
-    public List<CompletionStep> getSteps() {
-        return steps;
-    }
-
-    public String getContractName() {
-        return contractName;
-    }
-
-    public void setContractName(String contractName) {
-        this.contractName = contractName;
-    }
-
-    public int getRewardXp() {
-        return rewardXp;
-    }
-
-    public void setRewardXp(int rewardXp) {
-        this.rewardXp = rewardXp;
-    }
-
-    public List<String> getDescription() {
-        return description;
-    }
-
-    public void setDescription(List<String> description) {
-        this.description = description;
-    }
-
-    public List<FrontierLocation> getContractLoc() {
-        return contractLocs;
-    }
-
-    public void setContractLoc(List<FrontierLocation> contractLoc) {
-        this.contractLocs = contractLoc;
-    }
-
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public int getRarity() {
-        return rarity;
-    }
-
-    public void setRarity(int rarity) {
-        this.rarity = rarity;
-    }
-
-    public FrontierLocation getLocation() {
-        return this.frontierLocation;
-    }
-
-    public double getReward() {
-        return this.reward;
-    }
-
-
-    public String getListingName() {
-        return listingName;
-    }
-
-    public DeliveryType getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(DeliveryType deliveryType) {
-        this.deliveryType = deliveryType;
     }
 }

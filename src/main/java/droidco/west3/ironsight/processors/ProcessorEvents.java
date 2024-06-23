@@ -4,6 +4,7 @@ import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.items.CustomItem;
 import droidco.west3.ironsight.items.ItemIcon;
+import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,11 +18,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ProcessorEvents implements Listener {
     private IronSight plugin;
-    public ProcessorEvents(IronSight plugin){
-        this.plugin = plugin;
-    }
     @EventHandler
     public void illegalSalesmenHandler(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();

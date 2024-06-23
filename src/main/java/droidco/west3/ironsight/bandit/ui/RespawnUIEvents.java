@@ -3,17 +3,16 @@ package droidco.west3.ironsight.bandit.ui;
 import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.IronSight;
+import lombok.AllArgsConstructor;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+@AllArgsConstructor
 public class RespawnUIEvents implements Listener {
     private IronSight plugin;
-    public RespawnUIEvents(IronSight plugin){
-        this.plugin = plugin;
-    }
 
                            @EventHandler
     public void respawnMenuSelect(InventoryClickEvent e){

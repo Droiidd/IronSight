@@ -2,10 +2,12 @@ package droidco.west3.ironsight.contracts.utils;
 
 import droidco.west3.ironsight.contracts.Contract;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
+import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 
 import java.util.List;
 
+@UtilityClass
 public class ContractUtils
 {
     public static String getDifficultyScale(Difficulty difficulty){

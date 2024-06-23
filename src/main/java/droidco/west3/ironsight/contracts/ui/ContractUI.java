@@ -5,6 +5,7 @@ import droidco.west3.ironsight.globals.utils.BanditUtils;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.items.ItemIcon;
 import droidco.west3.ironsight.bandit.Bandit;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@UtilityClass
 public class ContractUI {
 
     public static Inventory openContractorTitleSelectUi(Player p) {

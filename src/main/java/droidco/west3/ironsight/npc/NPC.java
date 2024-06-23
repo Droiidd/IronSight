@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.npc;
 
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -10,6 +12,7 @@ import org.bukkit.entity.Villager;
 
 import java.util.*;
 
+@Getter @Setter
 public class NPC {
     private String displayName;
     private String keyName;
@@ -22,8 +25,8 @@ public class NPC {
 
     private ChatColor nameColor;
 
-    private boolean isLegal;
-    private boolean isOfficer;
+    private boolean legal;
+    private boolean officer;
     private FrontierLocation frontierLocation;
     private UUID npcId;
 
@@ -31,15 +34,15 @@ public class NPC {
     private static HashMap<UUID, LivingEntity> entities = new HashMap<>();
     private static HashMap<UUID, NPC> npcsById = new HashMap<>();
 
-    public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean isLegal, boolean isOfficer, FrontierLocation frontierLocation) {
+    public NPC(String displayName, NPCType type, double x, double y, double z, ChatColor nameColor, boolean legal, boolean officer, FrontierLocation frontierLocation) {
 
         this.type = type;
         this.x = x;
         this.y = y;
         this.z = z;
         this.nameColor = nameColor;
-        this.isLegal = isLegal;
-        this.isOfficer = isOfficer;
+        this.legal = legal;
+        this.officer = officer;
         this.displayName = String.valueOf(nameColor) + displayName;
         System.out.println("Display: " + displayName);
         this.frontierLocation = frontierLocation;
@@ -106,18 +109,6 @@ public class NPC {
         return npcs;
     }
 
-    public String getKeyName() {
-        return keyName;
-    }
-
-    public void setKeyName(String keyName) {
-        this.keyName = keyName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
     public static HashMap<String, NPC> getShoppingPlayers() {
         return shoppingPlayers;
     }
@@ -126,80 +117,8 @@ public class NPC {
         NPC.shoppingPlayers = shoppingPlayers;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public NPCType getType() {
-        return type;
-    }
-
-    public void setType(NPCType type) {
-        this.type = type;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public void setZ(double z) {
-        this.z = z;
-    }
-
     public HashMap<String, NPC> getNpcs() {
         return npcs;
-    }
-
-    public void setNpcs(HashMap<String, NPC> npcs) {
-        this.npcs = npcs;
-    }
-
-    public ChatColor getNameColor() {
-        return nameColor;
-    }
-
-    public void setNameColor(ChatColor nameColor) {
-        this.nameColor = nameColor;
-    }
-
-    public boolean isLegal() {
-        return isLegal;
-    }
-
-    public void setLegal(boolean legal) {
-        isLegal = legal;
-    }
-
-    public boolean isOfficer() {
-        return isOfficer;
-    }
-
-    public void setOfficer(boolean officer) {
-        isOfficer = officer;
-    }
-
-    public FrontierLocation getFrontierLocation() {
-        return frontierLocation;
-    }
-
-    public void setFrontierLocation(FrontierLocation frontierLocation) {
-        this.frontierLocation = frontierLocation;
     }
 
     public static HashMap<UUID, NPC> getNpcsById() {

@@ -2,6 +2,7 @@ package droidco.west3.ironsight.items.masterlist;
 
 import droidco.west3.ironsight.items.CustomItem;
 import droidco.west3.ironsight.items.ItemIcon;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.HashMap;
 import java.util.Map;
 
+@UtilityClass
 public class MasterItemListUI {
     public static Inventory openMasterListPage1(Player p){
         Inventory itemUi = Bukkit.createInventory(p, 54, ChatColor.DARK_GRAY+"MASTER List 1");

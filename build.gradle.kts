@@ -27,6 +27,8 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
     implementation("com.mysql:mysql-connector-j:8.3.0")
+    compileOnly("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.80.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }

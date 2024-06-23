@@ -11,6 +11,7 @@ import droidco.west3.ironsight.items.CustomItem;
 import droidco.west3.ironsight.items.ItemIcon;
 import droidco.west3.ironsight.items.looting.ItemTable;
 import droidco.west3.ironsight.items.potions.CustomPotion;
+import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -24,13 +25,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
+@AllArgsConstructor
 public class NPCEvents implements Listener {
 
     private IronSight plugin;
-
-    public NPCEvents(IronSight plugin) {
-        plugin = plugin;
-    }
 
     @EventHandler
     public void npcRightClick(PlayerInteractEntityEvent e) {

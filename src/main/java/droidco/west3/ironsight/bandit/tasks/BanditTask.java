@@ -115,8 +115,8 @@ public class BanditTask extends BukkitRunnable {
             //      ===--- COMPASS TRACKER ---===
             if (p.getInventory().getItemInMainHand().getType().equals(Material.COMPASS)) {
                 if (b.isTrackingLocation() && !b.isTrackingPlayer()) {
-                    p.setCompassTarget(b.getTrackingLocation());
-                    Double distance = b.getTrackingLocation().distance(p.getLocation());
+                    p.setCompassTarget(b.getTrackedLocation());
+                    Double distance = b.getTrackedLocation().distance(p.getLocation());
                     int distanceMsg = distance.intValue();
                     String trackingLocName = null;
                     if (b.isTrackingNPC()) {

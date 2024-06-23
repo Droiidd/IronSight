@@ -3,6 +3,7 @@ package droidco.west3.ironsight.items.looting;
 import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.frontierlocation.LocationType;
 import droidco.west3.ironsight.IronSight;
+import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -14,13 +15,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
+@AllArgsConstructor
 public class LootingEvents implements Listener {
 
     private IronSight plugin;
-    public LootingEvents(IronSight plugin)
-    {
-        this.plugin = plugin;
-    }
 
 
     @EventHandler

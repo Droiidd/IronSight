@@ -7,6 +7,7 @@ import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.bandit.tasks.BanditTask;
 import droidco.west3.ironsight.database.PlayerConnector;
 import droidco.west3.ironsight.globals.utils.BanditUtils;
+import lombok.AllArgsConstructor;
 import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -18,11 +19,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class JoinServerEvents implements Listener{
-    IronSight plugin;
-    public JoinServerEvents(IronSight plugin){
-        this.plugin = plugin;
-    }
+    private IronSight plugin;
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)

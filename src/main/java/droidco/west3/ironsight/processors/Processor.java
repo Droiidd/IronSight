@@ -2,6 +2,8 @@ package droidco.west3.ironsight.processors;
 
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.LivingEntity;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+@Getter @Setter
 public class Processor {
 
     private static HashMap<String, Processor> processorsById = new HashMap<>();
@@ -22,7 +25,7 @@ public class Processor {
     private static List<ProcessorCoordinate> coordList = new ArrayList<>();
     private static HashMap<String, List<ProcessorCoordinate>> coordMap = new HashMap<>();
     private UUID npcId;
-    private boolean isProcessing;
+    private boolean processing;
     private Location defaultLocation;
     private Location previousLocation;
     private ProcessorCoordinate defaultPosition;
@@ -110,14 +113,6 @@ public class Processor {
         return processorsById.getOrDefault(ChatColor.stripColor(procName), null);
     }
 
-    public Location getDefaultLocation() {
-        return defaultLocation;
-    }
-
-    public void setDefaultLocation(Location location) {
-        this.defaultLocation = location;
-    }
-
 
 
     public static List<ProcessorCoordinate> getCoordList(ProcessorType type) {
@@ -128,78 +123,9 @@ public class Processor {
         Processor.coordList = coordList;
     }
 
-    public boolean isProcessing() {
-        return isProcessing;
-    }
 
-    public void setProcessing(boolean bool) {
-        this.isProcessing = bool;
-    }
-
-    public ProcessorCoordinate getDefaultPosition() {
-        return defaultPosition;
-    }
-
-    public void setDefaultPosition(ProcessorCoordinate defaultPosition) {
-        this.defaultPosition = defaultPosition;
-    }
-
-    public FrontierLocation getLocation() {
-        return location;
-    }
-
-    public void setLocation(FrontierLocation location) {
-        this.location = location;
-    }
-
-    public ProcessorType getType() {
-        return type;
-    }
-
-    public void setType(ProcessorType type) {
-        this.type = type;
-    }
-
-    public String getProcessorCode() {
-        return processorCode;
-    }
-
-    public void setProcessorCode(String processorCode) {
-        this.processorCode = processorCode;
-    }
-
-    public ItemStack getUnprocDrug() {
-        return unprocDrug;
-    }
-
-    public void setUnprocDrug(ItemStack unprocDrug) {
-        this.unprocDrug = unprocDrug;
-    }
-
-    public ItemStack getProcDrug() {
-        return procDrug;
-    }
-
-    public void setProcDrug(ItemStack procDrug) {
-        this.procDrug = procDrug;
-    }
     public static HashMap<UUID, LivingEntity>  getEntities(){
         return entities;
     }
 
-    public UUID getNpcId() {
-        return npcId;
-    }
-
-    public void setNpcId(UUID npcId) {
-        this.npcId = npcId;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 }

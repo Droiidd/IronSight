@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.horse;
 
 import droidco.west3.ironsight.items.ItemIcon;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
@@ -11,6 +13,7 @@ import org.bukkit.Bukkit;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Getter @Setter
 public class FrontierHorse {
     private final String ownerId;
     private final String horseName;
@@ -18,9 +21,9 @@ public class FrontierHorse {
     private Horse horse;
     private Donkey donkey;
     private SkeletonHorse skeleHorse;
-    private boolean isSummoned;
-    private UUID iD;
-    private boolean isInventoryLoaded;
+    private boolean summoned;
+    private UUID uuid;
+    private boolean inventoryLoaded;
     private ItemStack[] inventory = new ItemStack[0];
     private static HashMap<UUID,FrontierHorse> horses = new HashMap<>();
     private static HashMap<UUID, LivingEntity> summonedHorses = new HashMap<>();
@@ -30,15 +33,15 @@ public class FrontierHorse {
         this.horseName = horseName;
         this.ownerId = ownerId;
         this.horseType = horseType;
-        this.isSummoned = false;
-        this.isInventoryLoaded = false;
+        this.summoned = false;
+        this.inventoryLoaded = false;
     }
     public void summonHorse(Player p) {
-        isSummoned = true;
+        summoned = true;
         switch(horseType){
             case DONKEY -> {
                 donkey = p.getWorld().spawn(p.getLocation(), Donkey.class);
-                iD = donkey.getUniqueId();
+                uuid = donkey.getUniqueId();
                 donkey.setAdult();
                 donkey.setOwner(p);
                 donkey.setTamed(true);
@@ -48,19 +51,19 @@ public class FrontierHorse {
                 donkey.setCustomNameVisible(true);
                 donkey.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2);
                 donkey.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(15);
-                horses.put(iD,this);
-                summonedHorses.put(iD, donkey);
+                horses.put(uuid,this);
+                summonedHorses.put(uuid, donkey);
             }case THOROUGHBRED,STANDARD -> {
                 horse = p.getWorld().spawn(p.getLocation(), Horse.class);
-                iD = horse.getUniqueId();
+                uuid = horse.getUniqueId();
                 horse.setOwner(p);
                 horse.setAdult();
                 horse.setTamed(true);
                 horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                 horse.setCustomName(horseName);
                 horse.setCustomNameVisible(true);
-                horses.put(iD,this);
-                summonedHorses.put(iD, horse);
+                horses.put(uuid,this);
+                summonedHorses.put(uuid, horse);
 
                 if(horseType.equals(FrontierHorseType.STANDARD)){
                     horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
@@ -85,34 +88,6 @@ public class FrontierHorse {
         return horse.getUniqueId();
     }
 
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public boolean isInventoryLoaded() {
-        return isInventoryLoaded;
-    }
-
-    public String getHorseName() {
-        return horseName;
-    }
-
-    public boolean isSummoned() {
-        return isSummoned;
-    }
-
-    public void setSummoned(boolean status) {
-        this.isSummoned = status;
-    }
-
-    public UUID getHorseUUID() {
-        return iD;
-    }
-
-
-    public FrontierHorseType getHorseType() {
-        return this.horseType;
-    }
 
 
     public void openHorseInventory(Player p) {
@@ -140,12 +115,8 @@ public class FrontierHorse {
         }
     }
 
-    public ItemStack[] getHorseInv() {
-        return inventory;
-    }
-
     public void setHorseInv(ItemStack[] items) {
         inventory = items;
-        this.isInventoryLoaded = true;
+        this.inventoryLoaded = true;
     }
 }

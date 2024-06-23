@@ -1,6 +1,7 @@
 package droidco.west3.ironsight.npc;
 
 import droidco.west3.ironsight.items.potions.CustomPotion;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.items.ItemIcon;
@@ -11,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import droidco.west3.ironsight.items.CustomItem;
 import org.bukkit.inventory.meta.ItemMeta;
 
-
+@UtilityClass
 public class NPCUI {
 
     public static Inventory shopkeeperUI(Player p) {

@@ -2,6 +2,7 @@ package droidco.west3.ironsight.horse;
 
 import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
+import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
@@ -13,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class HorseUI {
     public static Inventory openAvailableHorses(Player p) {
         Inventory playerHorses = Bukkit.createInventory(p, 9, ChatColor.DARK_RED + ChatColor.stripColor(p.getDisplayName())  + ChatColor.DARK_GRAY + "'s horses");

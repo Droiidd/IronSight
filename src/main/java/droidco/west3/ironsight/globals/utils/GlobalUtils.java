@@ -5,6 +5,7 @@ import droidco.west3.ironsight.contracts.utils.ContractType;
 import droidco.west3.ironsight.contracts.utils.ContractUtils;
 import droidco.west3.ironsight.contracts.utils.Difficulty;
 import droidco.west3.ironsight.horse.FrontierHorseType;
+import lombok.experimental.UtilityClass;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+@UtilityClass
 public class GlobalUtils {
     public static Double checkStrToDErrMsg(String s, Player p) {
         try {

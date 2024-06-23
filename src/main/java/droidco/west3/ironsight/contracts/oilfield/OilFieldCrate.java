@@ -2,30 +2,33 @@ package droidco.west3.ironsight.contracts.oilfield;
 
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter @Setter
 public class OilFieldCrate {
     private int crateX;
     private int crateZ;
     private int crateY;
-    private FrontierLocation frontierLocation;
+    private FrontierLocation location;
     private int crateNumber;
     private String crateKey;
-    private boolean isUnlocked;
+    private boolean unlocked;
     private static HashMap<String,OilFieldCrate> crates = new HashMap<>();
-    public OilFieldCrate(int crateNumber, FrontierLocation frontierLocation, int crateX, int crateY, int crateZ){
+    public OilFieldCrate(int crateNumber, FrontierLocation location, int crateX, int crateY, int crateZ){
         this.crateNumber = crateNumber;
-        this.frontierLocation = frontierLocation;
+        this.location = location;
         this.crateX = crateX;
         this.crateY = crateY;
         this.crateZ = crateZ;
-        this.crateKey = frontierLocation.getLocName()+crateNumber;
+        this.crateKey = location.getLocName()+crateNumber;
         crates.put(crateKey,this);
-        this.isUnlocked = false;
+        this.unlocked = false;
     }
 
     public static List<OilFieldCrate> getCratesByLocation(FrontierLocation targetLoc){
@@ -33,7 +36,7 @@ public class OilFieldCrate {
         for (Map.Entry<String,OilFieldCrate> crate : crates.entrySet()) {
             String key = crate.getKey();
             OilFieldCrate val = crate.getValue();
-            if(val.frontierLocation.getLocName().equalsIgnoreCase(targetLoc.getLocName())){
+            if(val.location.getLocName().equalsIgnoreCase(targetLoc.getLocName())){
                 crateList.add(val);
             }
         }
@@ -45,57 +48,7 @@ public class OilFieldCrate {
         return crates.get(ran);
     }
 
-    public boolean isUnlocked() {
-        return isUnlocked;
-    }
 
-    public void setUnlocked(boolean unlocked) {
-        isUnlocked = unlocked;
-    }
-
-    public int getCrateX() {
-        return crateX;
-    }
-
-    public void setCrateX(int crateX) {
-        this.crateX = crateX;
-    }
-
-    public int getCrateZ() {
-        return crateZ;
-    }
-
-    public void setCrateZ(int crateZ) {
-        this.crateZ = crateZ;
-    }
-
-    public int getCrateY() {
-        return crateY;
-    }
-
-    public void setCrateY(int crateY) {
-        this.crateY = crateY;
-    }
-
-    public FrontierLocation getLocation() {
-        return frontierLocation;
-    }
-
-    public void setLocation(FrontierLocation frontierLocation) {
-        this.frontierLocation = frontierLocation;
-    }
-
-    public int getCrateNumber() {
-        return crateNumber;
-    }
-
-    public void setCrateNumber(int crateNumber) {
-        this.crateNumber = crateNumber;
-    }
-
-    public String getCrateKey() {
-        return crateKey;
-    }
     public HashMap<String, OilFieldCrate> getCrates() {
         return crates;
     }

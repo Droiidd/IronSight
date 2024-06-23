@@ -1,5 +1,7 @@
 package droidco.west3.ironsight.items;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Getter
+@Setter
 public class
 CustomItem {
     private String itemCode;
@@ -18,8 +22,8 @@ CustomItem {
     private String description;
     private double salePrice;
     private double purchasePrice;
-    private boolean isLegal;
-    private boolean isOfficer;
+    private boolean legal;
+    private boolean officer;
     private int rarity;
     private Material material;
     private Enchantment enchant;
@@ -27,14 +31,14 @@ CustomItem {
     private int amountForSale;
     private static HashMap<String,CustomItem> items = new HashMap<>();
 
-    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
+    public CustomItem(String itemName, int rarity, boolean legal, boolean officer, String description, Material material,
                       double salePrice, double purchasePrice, int amountForSale) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
         this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
-        this.isLegal = isLegal;
-        this.isOfficer = isOfficer;
+        this.legal = legal;
+        this.officer = officer;
         this.description = ChatColor.GRAY+description;
         this.material = material;
         this.salePrice = salePrice;
@@ -43,14 +47,14 @@ CustomItem {
         items.put(this.itemCode, this);
        // ItemTable.addItem(this);
     }
-    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
+    public CustomItem(String itemName, int rarity, boolean legal, boolean officer, String description, Material material,
                       double salePrice, double purchasePrice) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
         this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
-        this.isLegal = isLegal;
-        this.isOfficer = isOfficer;
+        this.legal = legal;
+        this.officer = officer;
         this.description = ChatColor.GRAY+description;
         this.material = material;
         this.salePrice = salePrice;
@@ -58,14 +62,14 @@ CustomItem {
         items.put(this.itemCode, this);
         // ItemTable.addItem(this);
     }
-    public CustomItem(String itemName, int rarity, boolean isLegal, boolean isOfficer,String description, Material material,
-                      double salePrice, double purchasePrice,int amountForSale, Enchantment enchant, int enchantMultiplier) {
+    public CustomItem(String itemName, int rarity, boolean legal, boolean officer, String description, Material material,
+                      double salePrice, double purchasePrice, int amountForSale, Enchantment enchant, int enchantMultiplier) {
         this.itemCode = itemName;
         this.itemName = ChatColor.WHITE+itemName;
         this.rarity = rarity;
         this.rarityLore = getRarityString(rarity);
-        this.isLegal = isLegal;
-        this.isOfficer = isOfficer;
+        this.legal = legal;
+        this.officer = officer;
         this.description = ChatColor.GRAY+description;
         this.material = material;
         this.salePrice = salePrice;
@@ -164,85 +168,16 @@ CustomItem {
     public String getLegalityTrait()
     {
         String trait;
-        if(!this.isLegal){
+        if(!this.legal){
             //IS NOT LEGAL
             trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.DARK_RED)+"Illegal";
             return trait;
         }
-        if(this.isOfficer){
+        if(this.officer){
             trait = String.valueOf(ChatColor.BOLD)+String.valueOf(ChatColor.BLUE)+"Officer";
             return trait;
         }
         return null;
     }
 
-    public boolean isLegal() {
-        return isLegal;
-    }
-
-    public void setLegal(boolean legal) {
-        isLegal = legal;
-    }
-
-    public boolean isOfficer() {
-        return isOfficer;
-    }
-
-    public void setOfficer(boolean officer) {
-        isOfficer = officer;
-    }
-    public int getRarity(){return rarity; }
-
-    public double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(double salePrice) {
-        this.salePrice = salePrice;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public void setRarity(int rarity) {
-        this.rarity = rarity;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    public Enchantment getEnchant() {
-        return enchant;
-    }
-
-    public void setEnchant(Enchantment enchant) {
-        this.enchant = enchant;
-    }
-
-    public int getEnchantMultiplier() {
-        return enchantMultiplier;
-    }
-
-    public void setEnchantMultiplier(int enchantMultiplier) {
-        this.enchantMultiplier = enchantMultiplier;
-    }
-
-    public Material getMaterial(){return material;}
-    public String getItemCode(){
-        return this.itemCode;
-    }
-
-    public int getAmountForSale() {
-        return amountForSale;
-    }
-
-    public void setAmountForSale(int amountForSale) {
-        this.amountForSale = amountForSale;
-    }
 }

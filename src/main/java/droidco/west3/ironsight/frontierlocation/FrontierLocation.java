@@ -1,6 +1,8 @@
 package droidco.west3.ironsight.frontierlocation;
 
 import droidco.west3.ironsight.items.looting.ItemTable;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -10,7 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+@Getter @Setter
 public class FrontierLocation {
     private String locName;
     private double x1, x2, z1, z2;
@@ -21,6 +23,7 @@ public class FrontierLocation {
     private LocationType type;
     private ItemTable itemTable;
     private static HashMap<String, FrontierLocation> locations = new HashMap<>();
+    @Getter
 private static List<FrontierLocation> locationList = new ArrayList<>();
     private boolean newArrival;
     private boolean mobsSpawned;
@@ -174,134 +177,14 @@ private static List<FrontierLocation> locationList = new ArrayList<>();
         return BarColor.GREEN;
     }
 
-    // >>>=== GETTERS & SETTERS ===<<<
-
-    public static List<FrontierLocation> getLocationList() {
-        return locationList;
-    }
-
     public static void setLocationList(List<FrontierLocation> locationList) {
         FrontierLocation.locationList = locationList;
-    }
-
-    public boolean isProcsSpawned() {
-        return procsSpawned;
-    }
-
-    public void setProcsSpawned(boolean procsSpawned) {
-        this.procsSpawned = procsSpawned;
-    }
-
-    public double getSpawnX() {
-        return spawnX;
-    }
-
-    public void setSpawnX(double spawnX) {
-        this.spawnX = spawnX;
-    }
-
-    public double getSpawnY() {
-        return spawnY;
-    }
-
-    public void setSpawnY(double spawnY) {
-        this.spawnY = spawnY;
-    }
-
-    public double getSpawnZ() {
-        return spawnZ;
-    }
-
-    public void setSpawnZ(double spawnZ) {
-        this.spawnZ = spawnZ;
-    }
-
-    public String getLocName() {
-        return locName;
-    }
-
-    public void setLocName(String locName) {
-        this.locName = locName;
-    }
-
-    public double getX1() {
-        return x1;
-    }
-
-    public void setX1(double x1) {
-        this.x1 = x1;
-    }
-
-    public double getX2() {
-        return x2;
-    }
-
-    public void setX2(double x2) {
-        this.x2 = x2;
-    }
-
-    public double getZ1() {
-        return z1;
-    }
-
-    public void setZ1(double z1) {
-        this.z1 = z1;
-    }
-
-    public double getZ2() {
-        return z2;
-    }
-
-    public void setZ2(double z2) {
-        this.z2 = z2;
-    }
-
-    public String getWelcomeMessage() {
-        return welcomeMessage;
-    }
-
-    public void setWelcomeMessage(String welcomeMessage) {
-        this.welcomeMessage = welcomeMessage;
-    }
-
-    public BossBar getLocTitle() {
-        return locTitle;
-    }
-
-    public LocationType getType() {
-        return type;
-    }
-
-    public void setType(LocationType type) {
-        this.type = type;
     }
 
     public org.bukkit.Location getCenterLocation(Player p) {
         double x3 = (this.x1 + this.x2) / 2;
         double z3 = (this.z1 + this.z2) / 2;
         return new org.bukkit.Location(p.getWorld(), x3, 100.0, z3);
-    }
-    public void setItemTable(ItemTable table) {
-        this.itemTable = table;
-    }
-    public ItemTable getItemTable(){
-        return this.itemTable;
-    }
-
-    public List<Player> getPlayersInside() {
-        return playersInside;
-    }
-
-    public void setPlayersInside(List<Player> playersInside) {
-        this.playersInside = playersInside;
-    }
-
-    public boolean isMobsSpawned() {
-        return mobsSpawned;
-    }
-
-    public void setMobsSpawned(boolean mobsSpawned) {
-        this.mobsSpawned = mobsSpawned;
     }
 }
 
