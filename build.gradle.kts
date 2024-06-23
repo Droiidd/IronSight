@@ -18,6 +18,10 @@ repositories {
         name = "spigotmc-repo"
         url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     }
+    maven {
+        name = "Paper"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
