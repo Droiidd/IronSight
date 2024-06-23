@@ -23,11 +23,27 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
     implementation("com.mysql:mysql-connector-j:8.3.0")
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.80.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+}
+
+configurations.testImplementation {
+    exclude("io.papermc.paper", "paper-server")
 }
 
 tasks { //use paper solely for gradle convenience when testing
     runServer {
         minecraftVersion("1.20.4")
+    }
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+
+    maxHeapSize = "1G"
+
+    testLogging {
+        events("passed")
     }
 }
 

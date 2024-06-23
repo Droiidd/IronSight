@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public final class IronSight extends JavaPlugin {
+public class IronSight extends JavaPlugin {
 
     @Override
     public void onEnable() {
