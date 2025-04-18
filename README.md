@@ -22,15 +22,14 @@ This is developed currently for Minecraft version 1.20.4!
 
 ---
 
-This source code generates a Minecraft java edition plugin.jar file, which if added to your server enabled the IronSight Gamemode.
-This is developed alongside the IronSightWeapons Plugin, which is a dependent weapon plugin.
+> This source code generates a Minecraft java edition plugin.jar file, which if added to your server enabled the IronSight Gamemode.
+> This is developed alongside the IronSightWeapons Plugin, which is a dependent weapon plugin.
+>
+> > **Dev Notes:**
+> The project currently is developed using Gradle as the compiler. If you don't have an IDE with everything downloaded, I suggest using Intelliji.
+> The project is native to intelliji.
 
-
-Dev Notes:
-The project currently is developed using Gradle as the compiler. If you don't have an IDE with everything downloaded, I suggest using Intelliji.
-The project is native to intelliji.
-
-If you are developing on Intelliji, follow these steps:
+### If you are developing on Intelliji, follow these steps:
 
 1. Install a plugin called "Minecraft development".
 
@@ -45,11 +44,11 @@ If you are developing on Intelliji, follow these steps:
    2. Inside the Gradle project box, type the exact
       file path to the Intelliji project 
       3. Ex. (It should be .../IronSight/IronSight)
-   4. Click apply + ok button
-   5. Then Run the created gradle configuration
+   4. Click apply + ok button 
+1. Then Run the created gradle configuration
 
 Once you have the repository opened, dependencies downloaded and configurations added, you can verify everything up correct by the following:
-
+### Verification
 1. In the file explorer for the project, open up the projects `build` file
 2. then the `libs` file
 3. Delete the current IronSight Snapshot.jar file (if there is one)
@@ -57,7 +56,9 @@ Once you have the repository opened, dependencies downloaded and configurations 
 5. A new build should appear in the libs folder
 
 You can drag and drop that Snapshot.jar file into any Server.Plugins folder and thats how you test your changes
+## Other setup
 
+---
 Download the following apps:
 
 - Filezilla (Connects to the server to send and take files) :: https://filezilla-project.org/download.php
