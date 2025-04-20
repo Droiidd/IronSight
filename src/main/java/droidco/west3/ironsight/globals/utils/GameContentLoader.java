@@ -1,8 +1,8 @@
 package droidco.west3.ironsight.globals.utils;
 
 import droidco.west3.ironsight.IronSight;
-import droidco.west3.ironsight.contracts.oilfield.OilFieldCrate;
-import droidco.west3.ironsight.contracts.oilfield.OilFieldTask;
+//import droidco.west3.ironsight.contracts.oilfield.OilFieldCrate;
+//import droidco.west3.ironsight.contracts.oilfield.OilFieldTask;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.frontierlocation.LocationType;
 import droidco.west3.ironsight.items.CustomItem;
@@ -967,15 +967,15 @@ public class GameContentLoader {
         new FrontierLocation(
             "South Oil Field", "Illegal area!", LocationType.ILLEGAL, 778, 602, 1480, 1720);
 
-    new OilFieldCrate(1, northoil, 2857, 101, -3048);
-    new OilFieldCrate(2, northoil, 2911, 101, -3037);
-    new OilFieldCrate(3, northoil, 2924, 101, -3083);
-    new OilFieldCrate(4, northoil, 2936, 101, -2988);
-    new OilFieldCrate(5, northoil, 2959, 101, -3037);
-    new OilFieldCrate(6, northoil, 2992, 101, -3087);
-    new OilFieldCrate(7, northoil, 2984, 101, -3154);
-
-    new OilFieldTask(plugin, northoil);
+//    new OilFieldCrate(1, northoil, 2857, 101, -3048);
+//    new OilFieldCrate(2, northoil, 2911, 101, -3037);
+//    new OilFieldCrate(3, northoil, 2924, 101, -3083);
+//    new OilFieldCrate(4, northoil, 2936, 101, -2988);
+//    new OilFieldCrate(5, northoil, 2959, 101, -3037);
+//    new OilFieldCrate(6, northoil, 2992, 101, -3087);
+//    new OilFieldCrate(7, northoil, 2984, 101, -3154);
+//
+//    new OilFieldTask(plugin, northoil);
     // OilFieldTask oil2 = new OilFieldTask(southoil);
     // TOWNS
     new FrontierLocation(

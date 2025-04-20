@@ -180,15 +180,15 @@ public class BanditUtils {
     Score seperatorDis = objective.getScore(seperator);
     Score bountyDis = objective.getScore(bounty);
     Score contractorDis = objective.getScore(contractorLvl);
-    if (b.getActiveContract() != null) {
-      String activeContract = ChatColor.GREEN + "Active Contract" + ChatColor.RESET + ":";
-      String contractListing =
-          "\"" + b.getActiveContract().getListingName() + ChatColor.RESET + "\"";
-      Score activeContractDis = objective.getScore(activeContract);
-      Score contractListingDis = objective.getScore(contractListing);
-      contractListingDis.setScore(7);
-      activeContractDis.setScore(8);
-    }
+//    if (b.getActiveContract() != null) {
+//      String activeContract = ChatColor.GREEN + "Active Contract" + ChatColor.RESET + ":";
+//      String contractListing =
+//          "\"" + b.getActiveContract().getListingName() + ChatColor.RESET + "\"";
+//      Score activeContractDis = objective.getScore(activeContract);
+//      Score contractListingDis = objective.getScore(contractListing);
+//      contractListingDis.setScore(7);
+//      activeContractDis.setScore(8);
+//    }
 
     walletDis.setScore(2);
     bankDis.setScore(3);

@@ -1,7 +1,7 @@
 package droidco.west3.ironsight.database;
 
 import droidco.west3.ironsight.bandit.Bandit;
-import droidco.west3.ironsight.contracts.Contract;
+//import droidco.west3.ironsight.contracts.Contract;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.globals.utils.BanditUtils;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
@@ -43,10 +43,10 @@ public class PlayerConnector {
         System.out.println(horse.getHorseName());
         saveHorse(p, horse, conn);
       }
-      List<Contract> contracts = b.getContracts();
-      for (int i = 0; i < contracts.size(); i++) {
-        saveActiveContract(p, conn, contracts.get(i), i);
-      }
+//      List<Contract> contracts = b.getContracts();
+//      for (int i = 0; i < contracts.size(); i++) {
+//        saveActiveContract(p, conn, contracts.get(i), i);
+//      }
       // ALWAYS CLOSE THE CONNECTION!
       conn.close();
     } catch (Exception exception) {
@@ -194,19 +194,19 @@ public class PlayerConnector {
         String frontierLocation = rsItem.getString("frontier_location");
         boolean isActive = rsItem.getBoolean("is_active");
         String slot = rsItem.getString("slot");
-        if (isActive) {
-          b.setActiveContract(
-              new Contract(
-                  CustomItem.getCustomItem(requestedItem),
-                  requestedAmt,
-                  listingName,
-                  BanditUtils.getContractorTypeFromStr(contractType),
-                  BanditUtils.getDeliveryTypeFromStr(deliveryType),
-                  FrontierLocation.getLocation(frontierLocation),
-                  BanditUtils.getDifficultyFromStr(difficulty)));
-          b.setDoingContract(true);
-          System.out.println("LOADED ACTIVE " + listingName);
-        }
+//        if (isActive) {
+//          b.setActiveContract(
+//              new Contract(
+//                  CustomItem.getCustomItem(requestedItem),
+//                  requestedAmt,
+//                  listingName,
+//                  BanditUtils.getContractorTypeFromStr(contractType),
+//                  BanditUtils.getDeliveryTypeFromStr(deliveryType),
+//                  FrontierLocation.getLocation(frontierLocation),
+//                  BanditUtils.getDifficultyFromStr(difficulty)));
+//          b.setDoingContract(true);
+//          System.out.println("LOADED ACTIVE " + listingName);
+//        }
       }
       System.out.println("added vault items");
       st.close();
@@ -391,92 +391,92 @@ public class PlayerConnector {
     }
   }
 
-  public static void saveActiveContract(Player p, Connection conn, Contract active, int slot)
-      throws SQLException {
-
-    Bandit b = Bandit.getPlayer(p);
-    if (b.getActiveContract() != null) {
-      System.out.println("Updating available contract ");
-      String sql =
-          "UPDATE available_contract "
-              + "set bandit_id = \'"
-              + p.getUniqueId().toString()
-              + "\', "
-              + "requested_item = \'"
-              + String.valueOf(
-                  ChatColor.stripColor(active.getRequestedItem().getItemMeta().getDisplayName()))
-              + "\', "
-              + "requested_amt = \'"
-              + active.getRequestedAmount()
-              + "\',"
-              + "contract_type = \'"
-              + active.getContractType().toString()
-              + "\',"
-              + "listing_name = \'"
-              + active.getListingName()
-              + "\',"
-              + "frontier_location = \'"
-              + active.getLocation().getLocName()
-              + "\',"
-              + "difficulty = \'"
-              + active.getDifficulty()
-              + "\',"
-              + "is_active = \'"
-              + 1
-              + "\',"
-              + "delivery_type = \'"
-              + active.getDeliveryType().toString()
-              + "\',"
-              + "slot = \'active_"
-              + slot
-              + "\'"
-              + "WHERE bandit_id = \'"
-              + p.getUniqueId().toString()
-              + "\'";
-      PreparedStatement prepedStmt = conn.prepareStatement(sql);
-
-      int updateVal = prepedStmt.executeUpdate();
-      if (updateVal > 0) {
-        // Success
-        System.out.println("Available Contract updated.");
-      } else {
-        // Update was not successful
-        System.out.println("Could not update contract, inserting new columnn.");
-        String sqlInsert =
-            "insert into available_contract (requested_item,requested_amt,listing_name,contract_type,bandit_id,delivery_type,frontier_location,difficulty,is_active,slot) values (?,?,?,?,?,?,?,?,?,?);";
-        PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
-        insertStmt.setString(
-            1, b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
-        insertStmt.setInt(2, b.getActiveContract().getRequestedAmount());
-        insertStmt.setString(3, b.getActiveContract().getListingName());
-        insertStmt.setString(4, b.getActiveContract().getContractType().toString());
-        insertStmt.setString(5, p.getUniqueId().toString());
-        insertStmt.setString(6, b.getActiveContract().getDeliveryType().toString());
-        insertStmt.setString(7, b.getActiveContract().getLocation().getLocName());
-        insertStmt.setString(8, b.getActiveContract().getDifficulty().toString());
-        insertStmt.setBoolean(9, true);
-        insertStmt.setString(10, "active_" + slot);
-
-        int insertVal = insertStmt.executeUpdate();
-        if (insertVal > 0) {
-          // Success
-          System.out.println("contract inserted.");
-        }
-      }
-    } else {
-      System.out.println("Available contract is null");
-      String sqlInsert =
-          "delete from available_contract where bandit_id = \'"
-              + p.getUniqueId().toString()
-              + "\' AND is_active = 1";
-      PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
-      int insertVal = insertStmt.executeUpdate();
-      if (insertVal > 0) {
-        // Success
-        System.out.println("contracts wiped.");
-      }
-    }
-  }
+//  public static void saveActiveContract(Player p, Connection conn, Contract active, int slot)
+//      throws SQLException {
+//
+//    Bandit b = Bandit.getPlayer(p);
+//    if (b.getActiveContract() != null) {
+//      System.out.println("Updating available contract ");
+//      String sql =
+//          "UPDATE available_contract "
+//              + "set bandit_id = \'"
+//              + p.getUniqueId().toString()
+//              + "\', "
+//              + "requested_item = \'"
+//              + String.valueOf(
+//                  ChatColor.stripColor(active.getRequestedItem().getItemMeta().getDisplayName()))
+//              + "\', "
+//              + "requested_amt = \'"
+//              + active.getRequestedAmount()
+//              + "\',"
+//              + "contract_type = \'"
+//              + active.getContractType().toString()
+//              + "\',"
+//              + "listing_name = \'"
+//              + active.getListingName()
+//              + "\',"
+//              + "frontier_location = \'"
+//              + active.getLocation().getLocName()
+//              + "\',"
+//              + "difficulty = \'"
+//              + active.getDifficulty()
+//              + "\',"
+//              + "is_active = \'"
+//              + 1
+//              + "\',"
+//              + "delivery_type = \'"
+//              + active.getDeliveryType().toString()
+//              + "\',"
+//              + "slot = \'active_"
+//              + slot
+//              + "\'"
+//              + "WHERE bandit_id = \'"
+//              + p.getUniqueId().toString()
+//              + "\'";
+//      PreparedStatement prepedStmt = conn.prepareStatement(sql);
+//
+//      int updateVal = prepedStmt.executeUpdate();
+//      if (updateVal > 0) {
+//        // Success
+//        System.out.println("Available Contract updated.");
+//      } else {
+//        // Update was not successful
+//        System.out.println("Could not update contract, inserting new columnn.");
+//        String sqlInsert =
+//            "insert into available_contract (requested_item,requested_amt,listing_name,contract_type,bandit_id,delivery_type,frontier_location,difficulty,is_active,slot) values (?,?,?,?,?,?,?,?,?,?);";
+//        PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
+//        insertStmt.setString(
+//            1, b.getActiveContract().getRequestedItem().getItemMeta().getDisplayName());
+//        insertStmt.setInt(2, b.getActiveContract().getRequestedAmount());
+//        insertStmt.setString(3, b.getActiveContract().getListingName());
+//        insertStmt.setString(4, b.getActiveContract().getContractType().toString());
+//        insertStmt.setString(5, p.getUniqueId().toString());
+//        insertStmt.setString(6, b.getActiveContract().getDeliveryType().toString());
+//        insertStmt.setString(7, b.getActiveContract().getLocation().getLocName());
+//        insertStmt.setString(8, b.getActiveContract().getDifficulty().toString());
+//        insertStmt.setBoolean(9, true);
+//        insertStmt.setString(10, "active_" + slot);
+//
+//        int insertVal = insertStmt.executeUpdate();
+//        if (insertVal > 0) {
+//          // Success
+//          System.out.println("contract inserted.");
+//        }
+//      }
+//    } else {
+//      System.out.println("Available contract is null");
+//      String sqlInsert =
+//          "delete from available_contract where bandit_id = \'"
+//              + p.getUniqueId().toString()
+//              + "\' AND is_active = 1";
+//      PreparedStatement insertStmt = conn.prepareStatement(sqlInsert);
+//      int insertVal = insertStmt.executeUpdate();
+//      if (insertVal > 0) {
+//        // Success
+//        System.out.println("contracts wiped.");
+//      }
+//    }
+//  }
 
   //          ===--- MISC METHODS ---===
 

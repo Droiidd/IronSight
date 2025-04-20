@@ -3,7 +3,7 @@ package droidco.west3.ironsight.bandit.tasks;
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.bandit.Bandit;
 import droidco.west3.ironsight.bandit.ui.RespawnUI;
-import droidco.west3.ironsight.contracts.Contract;
+//import droidco.west3.ironsight.contracts.Contract;
 import droidco.west3.ironsight.frontierlocation.FrontierLocation;
 import droidco.west3.ironsight.frontierlocation.LocationType;
 import droidco.west3.ironsight.frontiermobs.FrontierMob;
@@ -101,7 +101,7 @@ public class BanditTask extends BukkitRunnable {
     this.raiders.add(ranger);
     this.raiders.add(wolf);
     // this.raiders.add(raiderBrute);
-    Contract.assignPlayerContracts(p, b);
+    // Contract.assignPlayerContracts(p, b);
   }
 
   @Override
@@ -349,54 +349,54 @@ public class BanditTask extends BukkitRunnable {
         }
       }
       //      ===--- CONRTACT RESET TIMER ---===
-
-      p.setLevel(contractTimer - contractCounter);
-      if ((contractTimer - contractCounter) == 300) {
-        // 5 MINUTES REMAIN
-        p.sendMessage(
-            ChatColor.RED
-                + "[Alert] "
-                + ChatColor.GRAY
-                + "Five minutes until contracts"
-                + ChatColor.RED
-                + " reset!");
-      } else if ((contractTimer - contractCounter) == 60) {
-        // 1 MINUTES REMAIN
-        p.sendMessage(
-            ChatColor.RED
-                + "[Alert] "
-                + ChatColor.GRAY
-                + "One minute until contracts"
-                + ChatColor.RED
-                + " reset!");
-      } else if ((contractTimer - contractCounter) == 30) {
-        // 1 MINUTES REMAIN
-        p.sendMessage(
-            ChatColor.RED
-                + "[Alert] "
-                + ChatColor.GRAY
-                + "30 Seconds until contracts"
-                + ChatColor.RED
-                + " reset!");
-      } else if ((contractTimer - contractCounter) <= 10
-          && (contractTimer - contractCounter) != 0) {
-        p.sendMessage(
-            ChatColor.RED
-                + "[Alert] "
-                + ChatColor.GRAY
-                + ""
-                + (contractTimer - contractCounter)
-                + " seconds until contracts"
-                + ChatColor.RED
-                + " reset!");
-      }
-      if (contractTimer == contractCounter) {
-        Contract.assignPlayerContracts(p, b);
-        p.sendMessage(
-            ChatColor.RED + "[Alert] " + ChatColor.GRAY + "Contracts" + ChatColor.RED + " reset!");
-        contractCounter = 0;
-      }
-      contractCounter++;
+//
+//      p.setLevel(contractTimer - contractCounter);
+//      if ((contractTimer - contractCounter) == 300) {
+//        // 5 MINUTES REMAIN
+//        p.sendMessage(
+//            ChatColor.RED
+//                + "[Alert] "
+//                + ChatColor.GRAY
+//                + "Five minutes until contracts"
+//                + ChatColor.RED
+//                + " reset!");
+//      } else if ((contractTimer - contractCounter) == 60) {
+//        // 1 MINUTES REMAIN
+//        p.sendMessage(
+//            ChatColor.RED
+//                + "[Alert] "
+//                + ChatColor.GRAY
+//                + "One minute until contracts"
+//                + ChatColor.RED
+//                + " reset!");
+//      } else if ((contractTimer - contractCounter) == 30) {
+//        // 1 MINUTES REMAIN
+//        p.sendMessage(
+//            ChatColor.RED
+//                + "[Alert] "
+//                + ChatColor.GRAY
+//                + "30 Seconds until contracts"
+//                + ChatColor.RED
+//                + " reset!");
+//      } else if ((contractTimer - contractCounter) <= 10
+//          && (contractTimer - contractCounter) != 0) {
+//        p.sendMessage(
+//            ChatColor.RED
+//                + "[Alert] "
+//                + ChatColor.GRAY
+//                + ""
+//                + (contractTimer - contractCounter)
+//                + " seconds until contracts"
+//                + ChatColor.RED
+//                + " reset!");
+//      }
+//      if (contractTimer == contractCounter) {
+//        Contract.assignPlayerContracts(p, b);
+//        p.sendMessage(
+//            ChatColor.RED + "[Alert] " + ChatColor.GRAY + "Contracts" + ChatColor.RED + " reset!");
+//        contractCounter = 0;
+//      }
+//      contractCounter++;
       //      ===--- MOB SPAWNING ---===
       if (mobSec == mobRespawnTime) {
         // p.sendMessage("30 seconds passed.");

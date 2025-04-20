@@ -2,7 +2,7 @@ package droidco.west3.ironsight.npc;
 
 import droidco.west3.ironsight.IronSight;
 import droidco.west3.ironsight.bandit.Bandit;
-import droidco.west3.ironsight.contracts.ui.ContractUI;
+//import droidco.west3.ironsight.contracts.ui.ContractUI;
 import droidco.west3.ironsight.globals.utils.BanditUtils;
 import droidco.west3.ironsight.globals.utils.GlobalUtils;
 import droidco.west3.ironsight.horse.FrontierHorse;
@@ -88,13 +88,13 @@ public class NPCEvents implements Listener {
           case VAULT_KEEPER -> {
             p.openInventory(NPCUI.vaultKeeperUI(p));
           }
-          case CONTRACTOR -> {
-            if (b.getActiveContract() == null) {
-              p.openInventory(ContractUI.openContractOptionsUi(p));
-            } else {
-              p.openInventory(ContractUI.openContractorInfo(p, true));
-            }
-          }
+//          case CONTRACTOR -> {
+//            if (b.getActiveContract() == null) {
+//              p.openInventory(ContractUI.openContractOptionsUi(p));
+//            } else {
+//              p.openInventory(ContractUI.openContractorInfo(p, true));
+//            }
+//          }
           case CHIEF_OF_POLICE -> {
             p.openInventory(NPCUI.chiefUI(p));
           }

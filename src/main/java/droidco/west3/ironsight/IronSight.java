@@ -8,8 +8,8 @@ import droidco.west3.ironsight.bandit.events.GeneralEvents;
 import droidco.west3.ironsight.bandit.events.VaultEvents;
 import droidco.west3.ironsight.bandit.ui.RespawnUIEvents;
 import droidco.west3.ironsight.blockharvesting.BlockBreakingEvents;
-import droidco.west3.ironsight.contracts.ContractMenuCmd;
-import droidco.west3.ironsight.contracts.ui.ContractUiEvents;
+//import droidco.west3.ironsight.contracts.ContractMenuCmd;
+//import droidco.west3.ironsight.contracts.ui.ContractUiEvents;
 import droidco.west3.ironsight.database.PlayerConnector;
 import droidco.west3.ironsight.frontiermobs.FrontierMob;
 import droidco.west3.ironsight.globals.events.JoinServerEvents;
@@ -77,7 +77,7 @@ public class IronSight extends JavaPlugin {
     getServer().getPluginManager().registerEvents(new GeneralEvents(this), this);
     getServer().getPluginManager().registerEvents(new JoinServerEvents(this), this);
     getServer().getPluginManager().registerEvents(new CombatEvents(), this);
-    getServer().getPluginManager().registerEvents(new ContractUiEvents(), this);
+    //getServer().getPluginManager().registerEvents(new ContractUiEvents(), this);
     getServer().getPluginManager().registerEvents(new RespawnUIEvents(this), this);
     getServer().getPluginManager().registerEvents(new TrackerEvents(), this);
     getServer().getPluginManager().registerEvents(new BlockBreakingEvents(this), this);
@@ -93,7 +93,7 @@ public class IronSight extends JavaPlugin {
   public void loadAllCommands() {
     getCommand("stats").setExecutor(new PlayerStatsCmd());
     getCommand("ironsight").setExecutor(new AdminCommands());
-    getCommand("contract").setExecutor(new ContractMenuCmd());
+    //getCommand("contract").setExecutor(new ContractMenuCmd());
     getCommand("masterlist").setExecutor(new MasterListCmd());
     getCommand("gethorse").setExecutor(new AdminGetHorseCmd());
     getCommand("call").setExecutor(new CallHorseCommand());
